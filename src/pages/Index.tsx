@@ -1,16 +1,145 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useMemo } from "react";
+import { Search, SlidersHorizontal, ChevronDown } from "lucide-react";
+import { games, allCategories } from "@/data/games";
+import { GameCard } from "@/components/GameCard";
+import { Header } from "@/components/Header";
+import { CartPopup } from "@/components/CartPopup";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+type SortOption = "nome" | "preco_asc" | "preco_desc";
+
+const Index = () => {
+  const [busca, setBusca] = useState("");
+  const [categoria, setCategoria] = useState("todas");
+  const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
+  const [showFilters, setShowFilters] = useState(false);
+
+  const filteredGames = useMemo(() => {
+    let result = games;
+
+    if (busca) {
+      result = result.filter((g) => g.nome.toLowerCase().includes(busca.toLowerCase()));
+    }
+
+    if (categoria !== "todas") {
+      result = result.filter((g) => g.categorias.includes(categoria));
+    }
+
+    result = [...result].sort((a, b) => {
+      if (ordenacao === "preco_asc") return a.preco - b.preco;
+      if (ordenacao === "preco_desc") return b.preco - a.preco;
+      return a.nome.localeCompare(b.nome);
+    });
+
+    return result;
+  }, [busca, categoria, ordenacao]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen bg-background">
+      <Header />
+      <CartPopup />
+
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent" />
+        <div className="container mx-auto px-4 py-12 md:py-20 relative">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-3">
+            JOGOS <span className="text-primary">PIRATAS</span>
+          </h1>
+          <p className="text-muted-foreground text-lg max-w-lg mb-8">
+            Baixe os melhores jogos via torrent. Rápido, seguro e sempre atualizado.
+          </p>
+
+          {/* Search */}
+          <div className="flex gap-2 max-w-xl">
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Buscar jogos..."
+                value={busca}
+                onChange={(e) => setBusca(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              />
+            </div>
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className={`px-4 rounded-xl border transition-all flex items-center gap-2 ${
+                showFilters ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border hover:border-primary/40"
+              }`}
+            >
+              <SlidersHorizontal className="w-4 h-4" />
+              <span className="hidden sm:inline text-sm">Filtros</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Filters */}
+      {showFilters && (
+        <div className="border-b border-border bg-card/50">
+          <div className="container mx-auto px-4 py-4 flex flex-wrap gap-4">
+            {/* Category */}
+            <div className="space-y-1">
+              <label className="text-xs text-muted-foreground uppercase tracking-wider">Categoria</label>
+              <select
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
+                className="block bg-card border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                <option value="todas">Todas</option>
+                {allCategories.map((cat) => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Sort */}
+            <div className="space-y-1">
+              <label className="text-xs text-muted-foreground uppercase tracking-wider">Ordenar</label>
+              <select
+                value={ordenacao}
+                onChange={(e) => setOrdenacao(e.target.value as SortOption)}
+                className="block bg-card border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                <option value="nome">Nome (A-Z)</option>
+                <option value="preco_asc">Preço ↑</option>
+                <option value="preco_desc">Preço ↓</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Game Grid */}
+      <main className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-between mb-6">
+          <p className="text-muted-foreground text-sm">
+            {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
+          </p>
+        </div>
+
+        {filteredGames.length === 0 ? (
+          <div className="text-center py-20 text-muted-foreground">
+            <p className="text-xl mb-2">Nenhum jogo encontrado</p>
+            <p className="text-sm">Tente ajustar os filtros ou a busca</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {filteredGames.map((game) => (
+              <GameCard key={game.id} game={game} />
+            ))}
+          </div>
+        )}
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-card/50 py-8">
+        <div className="container mx-auto px-4 text-center text-muted-foreground text-sm">
+          <p>© 2024 Jogos Piratas — Todos os direitos reservados</p>
+        </div>
+      </footer>
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
