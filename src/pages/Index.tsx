@@ -1,9 +1,10 @@
 import { useState, useMemo } from "react";
-import { Search, SlidersHorizontal, ChevronDown } from "lucide-react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import { games, allCategories } from "@/data/games";
 import { GameCard } from "@/components/GameCard";
 import { Header } from "@/components/Header";
 import { CartPopup } from "@/components/CartPopup";
+import { HeroCarousel } from "@/components/HeroCarousel";
 
 type SortOption = "nome" | "preco_asc" | "preco_desc";
 
@@ -15,21 +16,13 @@ const Index = () => {
 
   const filteredGames = useMemo(() => {
     let result = games;
-
-    if (busca) {
-      result = result.filter((g) => g.nome.toLowerCase().includes(busca.toLowerCase()));
-    }
-
-    if (categoria !== "todas") {
-      result = result.filter((g) => g.categorias.includes(categoria));
-    }
-
+    if (busca) result = result.filter((g) => g.nome.toLowerCase().includes(busca.toLowerCase()));
+    if (categoria !== "todas") result = result.filter((g) => g.categorias.includes(categoria));
     result = [...result].sort((a, b) => {
       if (ordenacao === "preco_asc") return a.preco - b.preco;
       if (ordenacao === "preco_desc") return b.preco - a.preco;
       return a.nome.localeCompare(b.nome);
     });
-
     return result;
   }, [busca, categoria, ordenacao]);
 
@@ -38,18 +31,12 @@ const Index = () => {
       <Header />
       <CartPopup />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent" />
-        <div className="container mx-auto px-4 py-12 md:py-20 relative">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-3">
-            JOGOS <span className="text-primary">PIRATAS</span>
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-lg mb-8">
-            Baixe os melhores jogos via torrent. Rápido, seguro e sempre atualizado.
-          </p>
+      {/* Hero Carousel */}
+      <HeroCarousel />
 
-          {/* Search */}
+      {/* Search & Filters */}
+      <section className="border-b border-border bg-card/30">
+        <div className="container mx-auto px-4 py-5">
           <div className="flex gap-2 max-w-xl">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -63,52 +50,34 @@ const Index = () => {
             </div>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`px-4 rounded-xl border transition-all flex items-center gap-2 ${
-                showFilters ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border hover:border-primary/40"
-              }`}
+              className={`px-4 rounded-xl border transition-all flex items-center gap-2 ${showFilters ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border hover:border-primary/40"}`}
             >
               <SlidersHorizontal className="w-4 h-4" />
               <span className="hidden sm:inline text-sm">Filtros</span>
             </button>
           </div>
+
+          {showFilters && (
+            <div className="flex flex-wrap gap-4 mt-4">
+              <div className="space-y-1">
+                <label className="text-xs text-muted-foreground uppercase tracking-wider">Categoria</label>
+                <select value={categoria} onChange={(e) => setCategoria(e.target.value)} className="block bg-card border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                  <option value="todas">Todas</option>
+                  {allCategories.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
+                </select>
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs text-muted-foreground uppercase tracking-wider">Ordenar</label>
+                <select value={ordenacao} onChange={(e) => setOrdenacao(e.target.value as SortOption)} className="block bg-card border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                  <option value="nome">Nome (A-Z)</option>
+                  <option value="preco_asc">Preço ↑</option>
+                  <option value="preco_desc">Preço ↓</option>
+                </select>
+              </div>
+            </div>
+          )}
         </div>
       </section>
-
-      {/* Filters */}
-      {showFilters && (
-        <div className="border-b border-border bg-card/50">
-          <div className="container mx-auto px-4 py-4 flex flex-wrap gap-4">
-            {/* Category */}
-            <div className="space-y-1">
-              <label className="text-xs text-muted-foreground uppercase tracking-wider">Categoria</label>
-              <select
-                value={categoria}
-                onChange={(e) => setCategoria(e.target.value)}
-                className="block bg-card border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-              >
-                <option value="todas">Todas</option>
-                {allCategories.map((cat) => (
-                  <option key={cat} value={cat}>{cat}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Sort */}
-            <div className="space-y-1">
-              <label className="text-xs text-muted-foreground uppercase tracking-wider">Ordenar</label>
-              <select
-                value={ordenacao}
-                onChange={(e) => setOrdenacao(e.target.value as SortOption)}
-                className="block bg-card border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-              >
-                <option value="nome">Nome (A-Z)</option>
-                <option value="preco_asc">Preço ↑</option>
-                <option value="preco_desc">Preço ↓</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Game Grid */}
       <main className="container mx-auto px-4 py-8">
@@ -125,17 +94,15 @@ const Index = () => {
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {filteredGames.map((game) => (
-              <GameCard key={game.id} game={game} />
-            ))}
+            {filteredGames.map((game) => <GameCard key={game.id} game={game} />)}
           </div>
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-card/50 py-8">
-        <div className="container mx-auto px-4 text-center text-muted-foreground text-sm">
-          <p>© 2024 Jogos Piratas — Todos os direitos reservados</p>
+      <footer className="border-t border-border bg-card/50 py-6">
+        <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between text-muted-foreground text-xs gap-2">
+          <p>© 2025 Richard, Bruno e Isabela. Todos os direitos reservados.</p>
+          <p>Desenvolvido por Richard, Bruno e Isabela</p>
         </div>
       </footer>
     </div>
