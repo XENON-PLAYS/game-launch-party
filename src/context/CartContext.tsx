@@ -1,20 +1,18 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
-import { Game } from "@/data/games";
 
 interface CartItem {
-  id: number;
+  id: string;
   nome: string;
   preco: number;
   imagem: string;
-  tipo: "jogo" | "dlc";
 }
 
 interface CartContextType {
   items: CartItem[];
-  addItem: (game: Game) => void;
-  removeItem: (id: number) => void;
+  addItem: (game: { id: string; nome: string; preco: number; imagem: string | null }) => void;
+  removeItem: (id: string) => void;
   clearCart: () => void;
-  isInCart: (id: number) => boolean;
+  isInCart: (id: string) => boolean;
   total: number;
   count: number;
   isOpen: boolean;
@@ -27,22 +25,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const addItem = useCallback((game: Game) => {
+  const addItem = useCallback((game: { id: string; nome: string; preco: number; imagem: string | null }) => {
     setItems((prev) => {
       if (prev.find((i) => i.id === game.id)) return prev;
-      return [...prev, { id: game.id, nome: game.nome, preco: game.preco, imagem: game.imagem, tipo: "jogo" }];
+      return [...prev, { id: game.id, nome: game.nome, preco: game.preco, imagem: game.imagem || "" }];
     });
     setIsOpen(true);
   }, []);
 
-  const removeItem = useCallback((id: number) => {
+  const removeItem = useCallback((id: string) => {
     setItems((prev) => prev.filter((i) => i.id !== id));
   }, []);
 
   const clearCart = useCallback(() => setItems([]), []);
-
-  const isInCart = useCallback((id: number) => items.some((i) => i.id === id), [items]);
-
+  const isInCart = useCallback((id: string) => items.some((i) => i.id === id), [items]);
   const total = items.reduce((sum, i) => sum + i.preco, 0);
 
   return (
