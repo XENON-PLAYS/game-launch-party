@@ -8,7 +8,7 @@ import logo from "@/assets/logo.png";
 
 export function Header() {
   const { count, setIsOpen } = useCart();
-  const { user, logout, isAdmin } = useAuth();
+  const { user, profile, logout, isAdmin } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
