@@ -8,7 +8,7 @@ import logo from "@/assets/logo.png";
 
 export function Header() {
   const { count, setIsOpen } = useCart();
-  const { user, logout, isAdmin } = useAuth();
+  const { user, profile, logout, isAdmin } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -60,7 +60,7 @@ export function Header() {
               onClick={() => setMenuOpen(!menuOpen)}
               className="px-4 py-2 rounded-lg hover:bg-primary hover:shadow-[0_0_15px_hsl(1_76%_55%/0.5)] transition-all font-bold text-sm flex items-center gap-1 font-['Evogria']"
             >
-              {user ? user.nome : "Acessar"} <ChevronDown className="w-3.5 h-3.5" />
+              {user ? (profile?.display_name || user.email || "Usuário") : "Acessar"} <ChevronDown className="w-3.5 h-3.5" />
             </button>
             {menuOpen && (
               <div className="absolute right-0 top-full mt-3 bg-popover border border-border rounded-xl w-48 shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">

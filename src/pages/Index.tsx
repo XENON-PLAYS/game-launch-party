@@ -1,11 +1,13 @@
 import { useState, useMemo } from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
-import { games, allCategories } from "@/data/games";
 import { GameCard } from "@/components/GameCard";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
 import { CartPopup } from "@/components/CartPopup";
 import { HeroCarousel } from "@/components/HeroCarousel";
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type SortOption = "nome" | "preco_asc" | "preco_desc";
 
@@ -15,10 +17,22 @@ const Index = () => {
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
 
-  // Seções curadas
-  const emAlta = useMemo(() => games.filter((g) => ["Elden Ring", "God of War Ragnarök", "Cyberpunk 2077"].includes(g.nome)), []);
-  const recomendados = useMemo(() => games.filter((g) => ["Red Dead Redemption 2", "The Witcher 3: Wild Hunt", "Hogwarts Legacy"].includes(g.nome)), []);
-  const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 5), []);
+  const { data: games = [], isLoading } = useQuery({
+    queryKey: ["games"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("games").select("*").order("nome");
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const allCategories = useMemo(() => {
+    return Array.from(new Set(games.flatMap((g) => g.categorias))).sort();
+  }, [games]);
+
+  const emAlta = useMemo(() => games.filter((g) => ["Elden Ring", "God of War Ragnarök", "Cyberpunk 2077"].includes(g.nome)), [games]);
+  const recomendados = useMemo(() => games.filter((g) => ["Red Dead Redemption 2", "The Witcher 3: Wild Hunt", "Hogwarts Legacy"].includes(g.nome)), [games]);
+  const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 5), [games]);
 
   const isSearching = busca || categoria !== "todas";
 
@@ -32,14 +46,12 @@ const Index = () => {
       return a.nome.localeCompare(b.nome);
     });
     return result;
-  }, [busca, categoria, ordenacao]);
+  }, [busca, categoria, ordenacao, games]);
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Header />
       <CartPopup />
-
-      {/* Hero Carousel */}
       <HeroCarousel />
 
       {/* Search & Filters */}
@@ -48,23 +60,15 @@ const Index = () => {
           <div className="flex gap-2 max-w-xl">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Buscar jogos..."
-                value={busca}
-                onChange={(e) => setBusca(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
-              />
+              <input type="text" placeholder="Buscar jogos..." value={busca} onChange={(e) => setBusca(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" />
             </div>
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className={`px-4 rounded-xl border transition-all flex items-center gap-2 ${showFilters ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border hover:border-primary/40"}`}
-            >
+            <button onClick={() => setShowFilters(!showFilters)}
+              className={`px-4 rounded-xl border transition-all flex items-center gap-2 ${showFilters ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border hover:border-primary/40"}`}>
               <SlidersHorizontal className="w-4 h-4" />
               <span className="hidden sm:inline text-sm">Filtros</span>
             </button>
           </div>
-
           {showFilters && (
             <div className="flex flex-wrap gap-4 mt-4 animate-in fade-in slide-in-from-top-2 duration-200">
               <div className="space-y-1">
@@ -87,16 +91,19 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Content */}
       <main className="container mx-auto px-4 py-8 space-y-12">
-        {isSearching ? (
-          /* Search results */
+        {isLoading ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div key={i} className="bg-card rounded-xl overflow-hidden border border-border">
+                <Skeleton className="aspect-[3/4] w-full" />
+                <div className="p-3 space-y-2"><Skeleton className="h-4 w-3/4" /><Skeleton className="h-7 w-20" /></div>
+              </div>
+            ))}
+          </div>
+        ) : isSearching ? (
           <>
-            <div className="flex items-center justify-between">
-              <p className="text-muted-foreground text-sm">
-                {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
-              </p>
-            </div>
+            <p className="text-muted-foreground text-sm">{filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}</p>
             {filteredGames.length === 0 ? (
               <div className="text-center py-20 text-muted-foreground">
                 <p className="text-xl mb-2">Nenhum jogo encontrado</p>
@@ -109,13 +116,10 @@ const Index = () => {
             )}
           </>
         ) : (
-          /* Curated sections */
           <>
             <GameSection title="🔥 Em Alta" icon="flame" games={emAlta} />
             <GameSection title="⭐ Recomendados" icon="star" games={recomendados} />
             <GameSection title="🕐 Recentes" icon="clock" games={recentes} />
-
-            {/* Full catalog */}
             <section className="space-y-5">
               <div className="flex items-center gap-3">
                 <h2 className="text-2xl font-bold tracking-tight">Catálogo Completo</h2>

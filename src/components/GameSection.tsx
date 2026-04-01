@@ -1,6 +1,8 @@
-import { Game } from "@/data/games";
+import { Tables } from "@/integrations/supabase/types";
 import { GameCard } from "./GameCard";
 import { Flame, Star, Clock } from "lucide-react";
+
+type Game = Tables<"games">;
 
 interface GameSectionProps {
   title: string;
@@ -8,15 +10,10 @@ interface GameSectionProps {
   games: Game[];
 }
 
-const icons = {
-  flame: Flame,
-  star: Star,
-  clock: Clock,
-};
+const icons = { flame: Flame, star: Star, clock: Clock };
 
 export function GameSection({ title, icon, games }: GameSectionProps) {
   const Icon = icons[icon];
-
   if (games.length === 0) return null;
 
   return (
@@ -29,9 +26,7 @@ export function GameSection({ title, icon, games }: GameSectionProps) {
         <div className="flex-1 h-px bg-border ml-2" />
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {games.map((game) => (
-          <GameCard key={game.id} game={game} />
-        ))}
+        {games.map((game) => <GameCard key={game.id} game={game} />)}
       </div>
     </section>
   );
