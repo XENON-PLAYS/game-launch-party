@@ -1,73 +1,96 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
-interface User {
+interface Profile {
   id: string;
-  nome: string;
-  sobrenome: string;
-  email: string;
-  nivel: "user" | "admin";
+  user_id: string;
+  username: string | null;
+  display_name: string | null;
+  avatar_url: string | null;
+  bio: string | null;
+  is_vip: boolean;
 }
 
 interface AuthContextType {
-  user: User | null;
-  login: (email: string, senha: string) => boolean;
-  register: (data: { nome: string; sobrenome: string; email: string; telefone: string; senha: string }) => boolean;
-  logout: () => void;
+  user: SupabaseUser | null;
+  profile: Profile | null;
   isAdmin: boolean;
+  isLoading: boolean;
+  login: (email: string, password: string) => Promise<{ error: string | null }>;
+  register: (data: { email: string; password: string; displayName: string }) => Promise<{ error: string | null }>;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const ADMIN_EMAIL = "admin@jogospiratas.com";
-const ADMIN_PASS = "admin123";
-
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(() => {
-    const saved = localStorage.getItem("jp_user");
-    return saved ? JSON.parse(saved) : null;
-  });
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const login = useCallback((email: string, senha: string) => {
-    // Admin login
-    if (email === ADMIN_EMAIL && senha === ADMIN_PASS) {
-      const u: User = { id: "admin", nome: "Admin", sobrenome: "", email, nivel: "admin" };
+  const fetchProfile = useCallback(async (userId: string) => {
+    const { data } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("user_id", userId)
+      .single();
+    if (data) setProfile(data);
+
+    const { data: roleData } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId);
+    setIsAdmin(roleData?.some((r) => r.role === "admin") ?? false);
+  }, []);
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      const u = session?.user ?? null;
       setUser(u);
-      localStorage.setItem("jp_user", JSON.stringify(u));
-      return true;
-    }
-    // Check registered users
-    const users: User[] = JSON.parse(localStorage.getItem("jp_users") || "[]");
-    const found = users.find((u) => u.email === email);
-    if (found) {
-      setUser(found);
-      localStorage.setItem("jp_user", JSON.stringify(found));
-      return true;
-    }
-    return false;
+      if (u) {
+        setTimeout(() => fetchProfile(u.id), 0);
+      } else {
+        setProfile(null);
+        setIsAdmin(false);
+      }
+      setIsLoading(false);
+    });
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      const u = session?.user ?? null;
+      setUser(u);
+      if (u) fetchProfile(u.id);
+      setIsLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [fetchProfile]);
+
+  const login = useCallback(async (email: string, password: string) => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    return { error: error?.message ?? null };
   }, []);
 
-  const register = useCallback((data: { nome: string; sobrenome: string; email: string; telefone: string; senha: string }) => {
-    const users: User[] = JSON.parse(localStorage.getItem("jp_users") || "[]");
-    if (users.find((u) => u.email === data.email)) return false;
-    const newUser: User = {
-      id: crypto.randomUUID(),
-      nome: data.nome,
-      sobrenome: data.sobrenome,
+  const register = useCallback(async (data: { email: string; password: string; displayName: string }) => {
+    const { error } = await supabase.auth.signUp({
       email: data.email,
-      nivel: "user",
-    };
-    users.push(newUser);
-    localStorage.setItem("jp_users", JSON.stringify(users));
-    return true;
+      password: data.password,
+      options: {
+        data: { display_name: data.displayName },
+        emailRedirectTo: window.location.origin,
+      },
+    });
+    return { error: error?.message ?? null };
   }, []);
 
-  const logout = useCallback(() => {
-    setUser(null);
-    localStorage.removeItem("jp_user");
+  const logout = useCallback(async () => {
+    await supabase.auth.signOut();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, isAdmin: user?.nivel === "admin" }}>
+    <AuthContext.Provider value={{ user, profile, isAdmin, isLoading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
