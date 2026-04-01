@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import { ShoppingCart, Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield } from "lucide-react";
+import { ShoppingCart, Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
 
 export function Header() {
   const { count, setIsOpen } = useCart();
   const { user, logout, isAdmin } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -35,6 +37,15 @@ export function Header() {
 
         {/* Actions */}
         <div className="flex items-center gap-2">
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg hover:bg-secondary transition-all duration-300"
+            title={theme === "dark" ? "Tema claro" : "Tema escuro"}
+          >
+            {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-muted-foreground" />}
+          </button>
+
           {/* Cart */}
           <button onClick={() => setIsOpen(true)} className="relative p-2 rounded-lg hover:bg-secondary transition-colors">
             <ShoppingCart className="w-5 h-5" />
