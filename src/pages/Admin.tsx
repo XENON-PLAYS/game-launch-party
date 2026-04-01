@@ -2,13 +2,16 @@ import { useState, useMemo } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { Plus, Pencil, Trash2, Search, X, Store, LogOut, ChevronDown } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
-import { games as initialGames, Game, allCategories } from "@/data/games";
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Tables } from "@/integrations/supabase/types";
 
+type Game = Tables<"games">;
 type SortOption = "nome" | "preco_asc" | "preco_desc";
 
 const Admin = () => {
-  const { user, logout, isAdmin } = useAuth();
-  const [gamesList, setGamesList] = useState<Game[]>(initialGames);
+  const { user, logout, isAdmin, isLoading: authLoading } = useAuth();
+  const queryClient = useQueryClient();
   const [busca, setBusca] = useState("");
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [filtroCategoria, setFiltroCategoria] = useState("todas");
@@ -17,8 +20,18 @@ const Admin = () => {
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editGame, setEditGame] = useState<Partial<Game>>({});
 
+  const { data: games = [] } = useQuery({
+    queryKey: ["admin-games"],
+    queryFn: async () => {
+      const { data } = await supabase.from("games").select("*").order("nome");
+      return data ?? [];
+    },
+  });
+
+  const allCategories = useMemo(() => Array.from(new Set(games.flatMap((g) => g.categorias))).sort(), [games]);
+
   const filteredGames = useMemo(() => {
-    let result = gamesList;
+    let result = games;
     if (busca) result = result.filter((g) => g.nome.toLowerCase().includes(busca.toLowerCase()));
     if (filtroCategoria !== "todas") result = result.filter((g) => g.categorias.includes(filtroCategoria));
     result = [...result].sort((a, b) => {
@@ -27,31 +40,79 @@ const Admin = () => {
       return a.nome.localeCompare(b.nome);
     });
     return result;
-  }, [gamesList, busca, ordenacao, filtroCategoria]);
+  }, [games, busca, ordenacao, filtroCategoria]);
 
+  const saveMutation = useMutation({
+    mutationFn: async (game: Partial<Game>) => {
+      if (modalMode === "add") {
+        await supabase.from("games").insert({
+          nome: game.nome || "",
+          preco: game.preco || 0,
+          imagem: game.imagem,
+          categorias: game.categorias || [],
+          modos: game.modos || [],
+          idiomas: game.idiomas || [],
+          classificacao: game.classificacao,
+          descricao: game.descricao,
+          desenvolvedor: game.desenvolvedor,
+          distribuidor: game.distribuidor,
+          lancamento: game.lancamento,
+          destaques: game.destaques || [],
+          trailer_url: game.trailer_url,
+          requisitos_minimo: game.requisitos_minimo,
+          requisitos_recomendado: game.requisitos_recomendado,
+          tamanho: game.tamanho,
+        });
+      } else {
+        await supabase.from("games").update({
+          nome: game.nome,
+          preco: game.preco,
+          imagem: game.imagem,
+          categorias: game.categorias,
+          modos: game.modos,
+          idiomas: game.idiomas,
+          classificacao: game.classificacao,
+          descricao: game.descricao,
+          desenvolvedor: game.desenvolvedor,
+          distribuidor: game.distribuidor,
+          lancamento: game.lancamento,
+          destaques: game.destaques,
+          trailer_url: game.trailer_url,
+          requisitos_minimo: game.requisitos_minimo,
+          requisitos_recomendado: game.requisitos_recomendado,
+          tamanho: game.tamanho,
+        }).eq("id", game.id!);
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-games"] });
+      queryClient.invalidateQueries({ queryKey: ["games"] });
+      setModalOpen(false);
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      await supabase.from("games").delete().eq("id", id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-games"] });
+      queryClient.invalidateQueries({ queryKey: ["games"] });
+    },
+  });
+
+  if (authLoading) return null;
   if (!isAdmin) return <Navigate to="/login" replace />;
 
   const openAdd = () => { setEditGame({}); setModalMode("add"); setModalOpen(true); };
   const openEdit = (game: Game) => { setEditGame({ ...game }); setModalMode("edit"); setModalOpen(true); };
-  const deleteGame = (id: number, nome: string) => { if (confirm(`Eliminar "${nome}"?`)) setGamesList((p) => p.filter((g) => g.id !== id)); };
+  const deleteGame = (id: string, nome: string) => { if (confirm(`Eliminar "${nome}"?`)) deleteMutation.mutate(id); };
   const setField = (key: string, value: any) => setEditGame((p) => ({ ...p, [key]: value }));
   const formatPreco = (v: number) => (v === 0 ? "Gratuito" : `R$ ${v.toFixed(2).replace(".", ",")}`);
 
   const saveGame = (e: React.FormEvent) => {
     e.preventDefault();
-    if (modalMode === "add") {
-      const newGame: Game = {
-        id: Date.now(), nome: editGame.nome || "", preco: editGame.preco || 0, imagem: editGame.imagem || "",
-        categorias: editGame.categorias || [], modos: editGame.modos || [], idiomas: editGame.idiomas || [],
-        descricao: editGame.descricao, desenvolvedor: editGame.desenvolvedor, distribuidor: editGame.distribuidor,
-        lancamento: editGame.lancamento, classificacao: editGame.classificacao, destaques: editGame.destaques,
-        trailer: editGame.trailer, requisitos: editGame.requisitos,
-      };
-      setGamesList((prev) => [...prev, newGame]);
-    } else {
-      setGamesList((prev) => prev.map((g) => (g.id === editGame.id ? { ...g, ...editGame } as Game : g)));
-    }
-    setModalOpen(false);
+    saveMutation.mutate(editGame);
   };
 
   return (
@@ -83,14 +144,14 @@ const Admin = () => {
         <div className="flex flex-wrap gap-3 mb-6">
           <div className="relative flex-1 min-w-[200px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <input type="text" placeholder="Buscar por nome..." value={busca} onChange={(e) => setBusca(e.target.value)} className="w-full pl-10 pr-4 py-2.5 bg-card border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" />
+            <input type="text" placeholder="Buscar por nome..." value={busca} onChange={(e) => setBusca(e.target.value)} className="w-full pl-10 pr-4 py-2.5 bg-card border border-border rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50" />
           </div>
-          <select value={ordenacao} onChange={(e) => setOrdenacao(e.target.value as SortOption)} className="bg-card border border-border rounded-lg px-3 py-2.5 text-sm">
+          <select value={ordenacao} onChange={(e) => setOrdenacao(e.target.value as SortOption)} className="bg-card border border-border rounded-lg px-3 py-2.5 text-sm text-foreground">
             <option value="nome">Nome A-Z</option>
             <option value="preco_asc">Preço ↑</option>
             <option value="preco_desc">Preço ↓</option>
           </select>
-          <select value={filtroCategoria} onChange={(e) => setFiltroCategoria(e.target.value)} className="bg-card border border-border rounded-lg px-3 py-2.5 text-sm">
+          <select value={filtroCategoria} onChange={(e) => setFiltroCategoria(e.target.value)} className="bg-card border border-border rounded-lg px-3 py-2.5 text-sm text-foreground">
             <option value="todas">Todas Categorias</option>
             {allCategories.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
           </select>
@@ -107,7 +168,7 @@ const Admin = () => {
           {filteredGames.map((game) => (
             <div key={game.id} className="bg-card border border-border rounded-xl overflow-hidden group">
               <div className="aspect-[4/3] overflow-hidden">
-                <img src={game.imagem} alt={game.nome} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                <img src={game.imagem || ""} alt={game.nome} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
               </div>
               <div className="p-4 space-y-2">
                 <h3 className="font-bold text-sm truncate">{game.nome}</h3>
@@ -141,31 +202,19 @@ const Admin = () => {
               <div><label className="admin-label">Modos de Jogo</label><input value={editGame.modos?.join(", ") || ""} onChange={(e) => setField("modos", e.target.value.split(",").map((s) => s.trim()).filter(Boolean))} placeholder="Singleplayer, Multiplayer" className="admin-input" /></div>
               <div><label className="admin-label">Idiomas</label><input value={editGame.idiomas?.join(", ") || ""} onChange={(e) => setField("idiomas", e.target.value.split(",").map((s) => s.trim()).filter(Boolean))} placeholder="Português, Inglês" className="admin-input" /></div>
               <div><label className="admin-label">Classificação</label><input value={editGame.classificacao || ""} onChange={(e) => setField("classificacao", e.target.value)} placeholder="18+" className="admin-input" /></div>
-              <div><label className="admin-label">Trailer (YouTube)</label><input value={editGame.trailer || ""} onChange={(e) => setField("trailer", e.target.value)} className="admin-input" /></div>
+              <div><label className="admin-label">Trailer (YouTube embed URL)</label><input value={editGame.trailer_url || ""} onChange={(e) => setField("trailer_url", e.target.value)} className="admin-input" /></div>
               <div className="grid grid-cols-2 gap-4">
                 <div><label className="admin-label">Lançamento</label><input type="date" value={editGame.lancamento || ""} onChange={(e) => setField("lancamento", e.target.value)} className="admin-input" /></div>
                 <div><label className="admin-label">Desenvolvedor</label><input value={editGame.desenvolvedor || ""} onChange={(e) => setField("desenvolvedor", e.target.value)} className="admin-input" /></div>
               </div>
-              <div><label className="admin-label">Distribuidor</label><input value={editGame.distribuidor || ""} onChange={(e) => setField("distribuidor", e.target.value)} className="admin-input" /></div>
+              <div className="grid grid-cols-2 gap-4">
+                <div><label className="admin-label">Distribuidor</label><input value={editGame.distribuidor || ""} onChange={(e) => setField("distribuidor", e.target.value)} className="admin-input" /></div>
+                <div><label className="admin-label">Tamanho</label><input value={editGame.tamanho || ""} onChange={(e) => setField("tamanho", e.target.value)} placeholder="120 GB" className="admin-input" /></div>
+              </div>
               <div><label className="admin-label">Descrição</label><textarea rows={4} value={editGame.descricao || ""} onChange={(e) => setField("descricao", e.target.value)} className="admin-input resize-none" /></div>
               <div><label className="admin-label">Destaques (por linha)</label><textarea rows={3} value={editGame.destaques?.join("\n") || ""} onChange={(e) => setField("destaques", e.target.value.split("\n").filter(Boolean))} className="admin-input resize-none" /></div>
-
-              <h3 className="font-bold text-sm text-primary pt-2">Requisitos Mínimos</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {["sistema", "processador", "memoria", "placa", "armazenamento"].map((k) => (
-                  <input key={k} value={(editGame.requisitos?.minimo as any)?.[k] || ""} onChange={(e) => setField("requisitos", { ...editGame.requisitos, minimo: { ...editGame.requisitos?.minimo, [k]: e.target.value } })} placeholder={k.charAt(0).toUpperCase() + k.slice(1)} className="admin-input" />
-                ))}
-              </div>
-              <h3 className="font-bold text-sm text-primary pt-2">Requisitos Recomendados</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {["sistema", "processador", "memoria", "placa", "armazenamento"].map((k) => (
-                  <input key={k} value={(editGame.requisitos?.recomendado as any)?.[k] || ""} onChange={(e) => setField("requisitos", { ...editGame.requisitos, recomendado: { ...editGame.requisitos?.recomendado, [k]: e.target.value } })} placeholder={k.charAt(0).toUpperCase() + k.slice(1)} className="admin-input" />
-                ))}
-              </div>
-
               <div><label className="admin-label">URL da Imagem</label><input value={editGame.imagem || ""} onChange={(e) => setField("imagem", e.target.value)} className="admin-input" /></div>
               {editGame.imagem && <img src={editGame.imagem} alt="Preview" className="max-w-full rounded-lg border border-border" />}
-
               <div className="flex gap-3 pt-4">
                 <button type="button" onClick={() => setModalOpen(false)} className="flex-1 py-3 rounded-lg bg-secondary hover:bg-secondary/80 font-bold text-sm">Cancelar</button>
                 <button type="submit" className="flex-1 py-3 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm">Salvar Jogo</button>
@@ -174,12 +223,6 @@ const Admin = () => {
           </div>
         </div>
       )}
-
-      <footer className="border-t border-border bg-card/50 py-6 mt-8">
-        <div className="container mx-auto px-4 text-center text-muted-foreground text-xs">
-          <p>© 2025 Painel de Administração - Sistema de Jogos</p>
-        </div>
-      </footer>
     </div>
   );
 };
