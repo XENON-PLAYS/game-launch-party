@@ -116,12 +116,7 @@ export function Header() {
             
               <>
               {menuOpen && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  className="absolute right-0 top-full mt-4 bg-popover/95 backdrop-blur-xl border border-white/10 rounded-2xl w-64 shadow-2xl overflow-hidden z-50 p-2"
-                >
+                <div className="absolute right-0 top-full mt-4 bg-popover border border-border rounded-2xl w-64 shadow-2xl overflow-hidden z-50 p-2">
                   {user ? (
                     <div className="space-y-1">
                       <div className="px-4 py-3 border-b border-white/5 mb-1">
