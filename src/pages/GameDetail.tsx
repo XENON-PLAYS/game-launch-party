@@ -424,39 +424,39 @@ const GameDetail = () => {
         </section>
 
         {/* Social / Community Section */}
-        <section className="grid lg:grid-cols-2 gap-20">
-          <div className="space-y-8">
+        <section className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className="space-y-6">
             <div className="flex items-center gap-6">
-              <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
-                <Star className="w-8 h-8 text-primary" />
+              <div className="p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
+                <Star className="w-6 h-6 text-primary" />
               </div>
               <div className="space-y-1">
-                <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Avaliar</h2>
+                <h2 className="text-3xl font-bold tracking-tighter uppercase leading-none">Avaliar</h2>
                 <div className="flex items-center gap-3">
-                  <span className="w-16 h-1 bg-primary rounded-full" />
+                  <span className="w-12 h-1 bg-primary rounded-full" />
                   <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Sua opinião importa</span>
                 </div>
               </div>
             </div>
-            <div className="bg-card border border-border rounded-3xl p-8">
+            <div className="bg-card border border-border rounded-3xl p-6">
               <StarRating gameId={game.id} />
             </div>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div className="flex items-center gap-6">
-              <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
-                <MessageSquare className="w-8 h-8 text-primary" />
+              <div className="p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
+                <MessageSquare className="w-6 h-6 text-primary" />
               </div>
               <div className="space-y-1">
-                <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Comentários</h2>
+                <h2 className="text-3xl font-bold tracking-tighter uppercase leading-none">Comentários</h2>
                 <div className="flex items-center gap-3">
-                  <span className="w-16 h-1 bg-primary rounded-full" />
+                  <span className="w-12 h-1 bg-primary rounded-full" />
                   <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Comunidade Pirata</span>
                 </div>
               </div>
             </div>
-            <div className="bg-card border border-border rounded-3xl p-8">
+            <div className="bg-card border border-border rounded-3xl p-6">
               <GameComments gameId={game.id} />
             </div>
           </div>
