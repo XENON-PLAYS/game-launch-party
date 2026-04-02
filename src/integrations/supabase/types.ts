@@ -452,6 +452,18 @@ export type Database = {
       increment_link_clicks: { Args: { link_id: string }; Returns: undefined }
       slugify: { Args: { text: string }; Returns: string }
       unaccent: { Args: { "": string }; Returns: string }
+      update_own_profile: {
+        Args: {
+          _avatar_url?: string
+          _bio?: string
+          _display_name?: string
+          _status?: string
+          _theme?: string
+          _user_id: string
+          _username?: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
