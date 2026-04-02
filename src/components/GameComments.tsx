@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { MessageSquare, ThumbsUp, ThumbsDown, Reply, Trash2, Send, ShieldAlert, Flag } from "lucide-react";
 import { toast } from "sonner";
 
+import { motion } from "framer-motion";
+
 interface GameCommentsProps {
   gameId: string;
 }
