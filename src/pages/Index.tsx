@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { GameCard } from "@/components/GameCard";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
-import { CartPopup } from "@/components/CartPopup";
+
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";

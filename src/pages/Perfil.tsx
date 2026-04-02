@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { Header } from "@/components/Header";
-import { CartPopup } from "@/components/CartPopup";
+
 import { supabase } from "@/integrations/supabase/client";
 import { 
   Loader2, Camera, User, Check, AlertCircle, BadgeCheck, 
