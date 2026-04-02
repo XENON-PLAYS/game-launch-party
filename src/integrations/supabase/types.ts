@@ -20,21 +20,21 @@ export type Database = {
           download_link_id: string | null
           game_id: string
           id: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           created_at?: string
           download_link_id?: string | null
           game_id: string
           id?: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           created_at?: string
           download_link_id?: string | null
           game_id?: string
           id?: string
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: [
           {
