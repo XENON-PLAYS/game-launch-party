@@ -256,11 +256,11 @@ const Admin = () => {
               <div><label className="admin-label">Idiomas</label><input value={editGame.idiomas?.join(", ") || ""} onChange={(e) => setField("idiomas", e.target.value.split(",").map((s) => s.trim()).filter(Boolean))} placeholder="Português, Inglês" className="admin-input" /></div>
               <div><label className="admin-label">Classificação</label><input value={editGame.classificacao || ""} onChange={(e) => setField("classificacao", e.target.value)} placeholder="18+" className="admin-input" /></div>
               <div><label className="admin-label">Trailer (YouTube embed URL)</label><input value={editGame.trailer_url || ""} onChange={(e) => setField("trailer_url", e.target.value)} className="admin-input" /></div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div><label className="admin-label">Lançamento</label><input type="date" value={editGame.lancamento || ""} onChange={(e) => setField("lancamento", e.target.value)} className="admin-input" /></div>
                 <div><label className="admin-label">Desenvolvedor</label><input value={editGame.desenvolvedor || ""} onChange={(e) => setField("desenvolvedor", e.target.value)} className="admin-input" /></div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div><label className="admin-label">Distribuidor</label><input value={editGame.distribuidor || ""} onChange={(e) => setField("distribuidor", e.target.value)} className="admin-input" /></div>
                 <div><label className="admin-label">Tamanho</label><input value={editGame.tamanho || ""} onChange={(e) => setField("tamanho", e.target.value)} placeholder="120 GB" className="admin-input" /></div>
               </div>
