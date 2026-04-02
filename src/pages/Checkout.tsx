@@ -4,9 +4,10 @@ import { useAuth } from "@/context/AuthContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Shield, CreditCard, ArrowLeft, Loader2, Sparkles, Zap } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { Check, Shield, CreditCard, ArrowLeft, Sparkles } from "lucide-react";
+import { PRICING_CONFIG } from "@/config/pricing";
 import { toast } from "sonner";
+
 
 const Checkout = () => {
   const { profile, user } = useAuth();
@@ -54,28 +55,21 @@ const Checkout = () => {
     }
   }, [profile, planName, selectedPlan, navigate, searchParams]);
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     if (!profile || !planName) return;
     
-    setLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { planName, userId: user?.id, email: user?.email },
-      });
+    const key = planName.toLowerCase() as keyof typeof PRICING_CONFIG;
+    const checkoutUrl = PRICING_CONFIG[key];
 
-      if (error) throw error;
-      if (data?.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error("Não foi possível gerar o link de pagamento.");
-      }
-    } catch (error: any) {
-      console.error('Error:', error);
-      toast.error(error.message || "Ocorreu um erro ao iniciar o pagamento.");
-    } finally {
-      setLoading(false);
+    if (checkoutUrl) {
+      // Append user info to the Stripe link if needed, 
+      // but following user instruction to not alter values
+      window.location.href = checkoutUrl;
+    } else {
+      toast.error("Link de checkout não configurado para este plano.");
     }
   };
+
 
   if (!selectedPlan) return null;
 
@@ -166,17 +160,14 @@ const Checkout = () => {
 
               <button 
                 onClick={handleCheckout}
-                disabled={loading}
-                className="w-full py-6 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group"
+                className="w-full py-6 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20 active:scale-[0.98] flex items-center justify-center gap-3 group"
+
               >
-                {loading ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                ) : (
                   <>
                     <span>Finalizar Pagamento</span>
                     <Sparkles className="w-5 h-5 group-hover:animate-pulse" />
                   </>
-                )}
+
               </button>
 
               <div className="text-center space-y-4">
