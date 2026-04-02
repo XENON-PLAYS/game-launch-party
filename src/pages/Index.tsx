@@ -217,12 +217,12 @@ const Index = () => {
             <GameSection title="🕐 Novos Horizontes" icon="clock" games={recentes} />
             
             <section className="space-y-16">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 border-b border-border/40 pb-20">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 border-b-2 border-primary/20 pb-20">
                 <div className="space-y-4">
-                  <h2 className="text-responsive-h2 leading-none font-extrabold">Catálogo Premium</h2>
+                  <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Catálogo</span> <span className="text-foreground">Premium</span></h2>
                   <div className="flex items-center gap-8">
                     <span className="w-32 h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
-                    <span className="text-responsive-body">{games.length} experiências de alto nível disponíveis</span>
+                    <span className="text-responsive-body font-medium">{games.length} experiências de alto nível disponíveis</span>
                   </div>
                 </div>
                 
