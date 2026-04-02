@@ -194,14 +194,233 @@ const Perfil = () => {
 
   const isGifAvatar = profile?.avatar_url?.toLowerCase().endsWith(".gif");
 
+  const renderTabContent = () => {
+    if (loadingExtra) {
+      return (
+        <div className="flex justify-center py-12">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
+      );
+    }
+
+    switch (activeTab) {
+      case "settings":
+        return (
+          <div className="auth-fieldset p-8">
+            <h1 className="auth-title !text-left !mb-8 flex items-center gap-3">
+              <Edit3 className="w-6 h-6 text-primary" />
+              Configurações
+            </h1>
+            
+            <form onSubmit={handleUpdateProfile} className="space-y-6">
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="auth-label">Nome de Exibição</label>
+                  <input 
+                    type="text" 
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                    placeholder="Como você quer ser chamado"
+                    className="auth-input"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <label className="auth-label">Nome de Usuário (@)</label>
+                  <input 
+                    type="text" 
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="usuario_unico"
+                    className="auth-input"
+                  />
+                </div>
+
+                <div className="space-y-2 sm:col-span-2">
+                  <label className="auth-label">Bio (Sobre você)</label>
+                  <textarea 
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                    placeholder="Conte um pouco sobre você..."
+                    className="auth-input min-h-[100px] resize-none"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="auth-label">Preferência de Tema</label>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setThemePreference("dark")}
+                      className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${themePreference === 'dark' ? 'border-primary bg-primary/10' : 'border-border bg-secondary/50'}`}
+                    >
+                      <Moon className="w-4 h-4" /> Escuro
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setThemePreference("light")}
+                      className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${themePreference === 'light' ? 'border-primary bg-primary/10' : 'border-border bg-secondary/50'}`}
+                    >
+                      <Sun className="w-4 h-4" /> Claro
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="auth-label">Status Online</label>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setStatus("online")}
+                      className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${status === 'online' ? 'border-green-500 bg-green-500/10' : 'border-border bg-secondary/50'}`}
+                    >
+                      <Circle className="w-3 h-3 fill-green-500 text-green-500" /> Online
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setStatus("offline")}
+                      className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${status === 'offline' ? 'border-gray-500 bg-gray-500/10' : 'border-border bg-secondary/50'}`}
+                    >
+                      <Circle className="w-3 h-3 fill-gray-500 text-gray-500" /> Offline
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border">
+                <button 
+                  type="submit" 
+                  disabled={loading}
+                  className="auth-btn px-8 flex items-center justify-center gap-2 min-w-[150px]"
+                >
+                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                  Salvar Alterações
+                </button>
+              </div>
+            </form>
+          </div>
+        );
+      
+      case "favorites":
+        return (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold flex items-center gap-3">
+              <Heart className="w-6 h-6 text-red-500 fill-red-500" /> Meus Favoritos
+            </h2>
+            {favorites.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {favorites.map(f => (
+                  <GameCard key={f.id} game={f.games} />
+                ))}
+              </div>
+            ) : (
+              <div className="auth-fieldset p-12 text-center text-muted-foreground">
+                Ainda não há favoritos. Explore nossa biblioteca!
+              </div>
+            )}
+          </div>
+        );
+
+      case "history":
+        return (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold flex items-center gap-3">
+              <History className="w-6 h-6 text-blue-500" /> Histórico de Downloads
+            </h2>
+            {downloadHistory.length > 0 ? (
+              <div className="space-y-4">
+                {downloadHistory.map(h => (
+                  <div key={h.id} className="auth-fieldset !p-4 flex items-center gap-4">
+                    <img src={h.games.imagem} alt={h.games.nome} className="w-16 h-16 object-cover rounded-lg" />
+                    <div className="flex-1">
+                      <h4 className="font-bold text-lg">{h.games.nome}</h4>
+                      <p className="text-xs text-muted-foreground">
+                        {new Date(h.created_at).toLocaleString("pt-BR")}
+                      </p>
+                    </div>
+                    <Link to={`/jogo/${h.games.id}`} className="p-2 hover:bg-white/5 rounded-full transition-colors">
+                      <ExternalLink className="w-5 h-5" />
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="auth-fieldset p-12 text-center text-muted-foreground">
+                Nenhum download registrado.
+              </div>
+            )}
+          </div>
+        );
+
+      case "ranking":
+        return (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold flex items-center gap-3">
+              <Trophy className="w-6 h-6 text-yellow-500" /> Ranking Global
+            </h2>
+            <div className="auth-fieldset !p-0 overflow-hidden">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-white/5 text-left">
+                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider">Pos</th>
+                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider">Usuário</th>
+                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-right">Downloads</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {ranking.map((r, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                      <td className="px-6 py-4 font-bold text-lg">#{i + 1}</td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <img src={r.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=user"} className="w-8 h-8 rounded-full" />
+                          <div>
+                            <p className="font-medium flex items-center gap-1">
+                              {r.display_name}
+                              {r.is_vip && <BadgeCheck className="w-3 h-3 text-yellow-500" />}
+                            </p>
+                            <p className="text-xs text-muted-foreground">@{r.username}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-right font-mono font-bold text-primary">
+                        {r.download_count}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+
+      case "recommendations":
+        return (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold flex items-center gap-3">
+              <Sparkles className="w-6 h-6 text-purple-500" /> Recomendados para Você
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+              {recommendations.map(g => (
+                <GameCard key={g.id} game={g} />
+              ))}
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <CartPopup />
       
-      <main className="flex-1 container mx-auto px-4 py-12 max-w-4xl">
-        <div className="grid md:grid-cols-[300px_1fr] gap-8">
-          {/* Sidebar / Avatar */}
+      <main className="flex-1 container mx-auto px-4 py-12 max-w-6xl">
+        <div className="grid md:grid-cols-[280px_1fr] gap-8">
+          {/* Sidebar */}
           <div className="space-y-6">
             <div className="auth-fieldset flex flex-col items-center p-8">
               <div className="relative group">
@@ -246,90 +465,69 @@ const Perfil = () => {
               </div>
 
               <div className="text-center mt-4">
-                <h2 className="font-['SuperSenior'] text-xl truncate max-w-[200px]">
-                  {profile?.display_name || "Usuário"}
-                </h2>
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <h2 className="font-['SuperSenior'] text-xl truncate max-w-[180px]">
+                    {profile?.display_name || "Usuário"}
+                  </h2>
+                  <div className={`w-2.5 h-2.5 rounded-full ${status === 'online' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-gray-500'}`} />
+                </div>
                 <p className="text-muted-foreground text-sm font-['Evogria']">
                   @{profile?.username || "sem_usuario"}
                 </p>
-                {profile?.is_vip && (
-                  <span className="mt-2 inline-block bg-yellow-500/10 text-yellow-500 text-[10px] font-bold px-2 py-1 rounded border border-yellow-500/20 uppercase tracking-widest font-['Evogria']">
-                    Usuário VIP
-                  </span>
-                )}
+                
+                <div className="flex flex-wrap justify-center gap-2 mt-4">
+                  {profile?.is_vip && (
+                    <span className="bg-yellow-500/10 text-yellow-500 text-[9px] font-bold px-2 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest font-['Evogria']">
+                      VIP
+                    </span>
+                  )}
+                  {profile?.badges?.map((badge: string, idx: number) => (
+                    <span key={idx} className="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded border border-primary/20 uppercase tracking-widest font-['Evogria']">
+                      {badge}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
+            {/* Nav Menu */}
+            <div className="auth-fieldset !p-2 space-y-1">
+              {[
+                { id: "settings", icon: Edit3, label: "Configurações" },
+                { id: "favorites", icon: Heart, label: "Favoritos" },
+                { id: "history", icon: History, label: "Download History" },
+                { id: "ranking", icon: Trophy, label: "Ranking Global" },
+                { id: "recommendations", icon: Sparkles, label: "Sugestões" },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-['Evogria'] transition-all ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'hover:bg-white/5 text-muted-foreground'}`}
+                >
+                  <tab.icon className={`w-4 h-4 ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
             <div className="auth-fieldset p-6 space-y-4">
-              <h3 className="text-sm font-['Evogria'] border-b border-border pb-2">Informações da Conta</h3>
+              <h3 className="text-sm font-['Evogria'] border-b border-border pb-2">Informações</h3>
               <div className="space-y-2">
-                <p className="text-xs text-muted-foreground uppercase font-['Evogria']">Email</p>
-                <p className="text-sm font-medium">{user?.email}</p>
+                <p className="text-[10px] text-muted-foreground uppercase font-['Evogria']">Email</p>
+                <p className="text-xs font-medium truncate">{user?.email}</p>
               </div>
               <div className="space-y-2">
-                <p className="text-xs text-muted-foreground uppercase font-['Evogria']">Membro desde</p>
-                <p className="text-sm font-medium">
+                <p className="text-[10px] text-muted-foreground uppercase font-['Evogria']">Membro desde</p>
+                <p className="text-xs font-medium">
                   {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Form */}
+          {/* Main Content Area */}
           <div className="space-y-6">
-            <div className="auth-fieldset p-8">
-              <h1 className="auth-title !text-left !mb-8">Configurações do Perfil</h1>
-              
-              <form onSubmit={handleUpdateProfile} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="auth-label">Nome de Exibição</label>
-                    <input 
-                      type="text" 
-                      value={displayName}
-                      onChange={(e) => setDisplayName(e.target.value)}
-                      placeholder="Como você quer ser chamado"
-                      className="auth-input"
-                    />
-                    <p className="text-[10px] text-muted-foreground">O nome que aparece no topo do site e comentários.</p>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label className="auth-label">Nome de Usuário (@)</label>
-                    <input 
-                      type="text" 
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      placeholder="usuario_unico"
-                      className="auth-input"
-                    />
-                    <p className="text-[10px] text-muted-foreground">Seu identificador único na plataforma.</p>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-border">
-                  <button 
-                    type="submit" 
-                    disabled={loading}
-                    className="auth-btn px-8 flex items-center justify-center gap-2 min-w-[150px]"
-                  >
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
-                    Salvar Alterações
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            <div className="bg-primary/5 border border-primary/10 rounded-xl p-6 flex gap-4 items-start">
-              <AlertCircle className="w-6 h-6 text-primary shrink-0 mt-1" />
-              <div>
-                <h4 className="font-bold text-sm mb-1">Dica de Personalização</h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Você pode usar avatares animados (GIF) para deixar seu perfil mais dinâmico! 
-                  Lembre-se que o tamanho máximo permitido é de 5MB para garantir o melhor desempenho da plataforma.
-                </p>
-              </div>
-            </div>
+            {renderTabContent()}
           </div>
         </div>
       </main>
