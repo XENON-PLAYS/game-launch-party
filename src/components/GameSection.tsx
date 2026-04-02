@@ -25,13 +25,7 @@ export function GameSection({ title, icon, games }: GameSectionProps) {
 
   return (
     <section className="space-y-8 py-4">
-      <motion.div 
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="flex items-center justify-between gap-4"
-      >
+      <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4 group">
           <div className={`p-3 rounded-2xl ${config.bg} ${config.border} border group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-black/20`}>
             <Icon className={`w-6 h-6 ${config.color}`} />
