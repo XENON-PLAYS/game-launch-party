@@ -214,7 +214,7 @@ const Index = () => {
           <div className="space-y-60">
             <GameSection title="🔥 Mais Jogados" icon="flame" games={emAlta} />
             <GameSection title="⭐ Seleção de Elite" icon="star" games={recomendados} />
-            <GameSection title="🕐 Novos Horizontes" icon="clock" games={recentes} />
+            <GameSection title="🚀 Jogos da Nova Geração" icon="rocket" games={recentes} />
             
             <section className="space-y-16">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 border-b-2 border-primary/20 pb-20">
