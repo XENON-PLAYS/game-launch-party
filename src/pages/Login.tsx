@@ -112,7 +112,19 @@ const Login = () => {
                 )}
               </button>
             </div>
-            
+            <div className="mt-8 pt-6 border-t border-muted/20 flex flex-col gap-4">
+              <button 
+                type="button"
+                onClick={() => {
+                  setEmail("RICHARD_ADMIN@gmail.com");
+                  setSenha("Teste123@");
+                }}
+                className="text-[10px] text-muted-foreground/60 hover:text-primary uppercase tracking-widest font-bold transition-all text-center"
+              >
+                Preencher com Acesso Admin
+              </button>
+            </div>
+
             <div className="mt-10 text-center">
               <p className="text-muted-foreground text-xs uppercase tracking-widest font-bold">
                 Ainda não é membro?{" "}
