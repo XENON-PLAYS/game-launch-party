@@ -10,6 +10,9 @@ interface Profile {
   avatar_url: string | null;
   bio: string | null;
   is_vip: boolean;
+  theme: string;
+  status: string;
+  badges: string[];
 }
 
 interface AuthContextType {
