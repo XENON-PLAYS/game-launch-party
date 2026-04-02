@@ -179,49 +179,111 @@ export function GameComments({ gameId }: GameCommentsProps) {
           const commentReplies = replies.filter((r: any) => r.parent_id === comment.id);
           const profileData = comment.profiles as any;
           return (
-            <div key={comment.id} className="bg-card border border-border rounded-xl p-4 space-y-3">
+            <div key={comment.id} className="bg-card border border-border rounded-xl p-5 space-y-4 shadow-sm hover:border-primary/20 transition-all group">
               <div className="flex items-start justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-sm">
-                    {(profileData?.display_name || "U")[0].toUpperCase()}
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl overflow-hidden bg-primary/10 border border-primary/20 flex items-center justify-center relative">
+                    {profileData?.avatar_url ? (
+                      <img src={profileData.avatar_url} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-primary font-black uppercase text-lg">{(profileData?.display_name || "U")[0]}</span>
+                    )}
                   </div>
-                  <div>
-                    <span className="font-bold text-sm">{profileData?.display_name || "Usuário"}</span>
-                    <span className="text-xs text-muted-foreground ml-2">{formatDate(comment.created_at)}</span>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2">
+                      <span className="font-black text-sm uppercase tracking-tight">{profileData?.display_name || "Pirata Anônimo"}</span>
+                      {profileData?.is_vip && (
+                        <span className="bg-yellow-500/10 text-yellow-500 text-[8px] font-black px-1.5 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest">VIP</span>
+                      )}
+                      {profileData?.badges?.slice(0, 1).map((b: string, i: number) => (
+                        <span key={i} className="bg-primary/10 text-primary text-[8px] font-black px-1.5 py-0.5 rounded border border-primary/20 uppercase tracking-widest">{b}</span>
+                      ))}
+                    </div>
+                    <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest opacity-60">{formatDate(comment.created_at)}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1">
-                  <button onClick={() => setReplyTo(replyTo === comment.id ? null : comment.id)} className="p-1.5 rounded-lg hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground">
-                    <Reply className="w-4 h-4" />
-                  </button>
+                
+                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   {(comment.user_id === user?.id || isAdmin) && (
-                    <button onClick={() => deleteComment.mutate(comment.id)} className="p-1.5 rounded-lg hover:bg-destructive/10 transition-colors text-muted-foreground hover:text-destructive">
+                    <button 
+                      onClick={() => {
+                        if (confirm("Deseja apagar este comentário?")) deleteComment.mutate(comment.id);
+                      }} 
+                      className="p-2 rounded-xl hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-all"
+                      title="Excluir"
+                    >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   )}
+                  <button className="p-2 rounded-xl hover:bg-muted text-muted-foreground hover:text-orange-500 transition-all" title="Denunciar">
+                    <Flag className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
-              <p className="text-sm leading-relaxed">{comment.content}</p>
+
+              <p className="text-sm leading-relaxed text-foreground/90 pl-[52px]">
+                {comment.content}
+              </p>
+
+              <div className="flex items-center gap-4 pl-[52px] pt-2">
+                <div className="flex items-center gap-1 border border-border rounded-lg p-0.5">
+                  <button 
+                    onClick={() => toggleReaction.mutate({ commentId: comment.id, type: 'like' })}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all ${comment.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'like') ? 'bg-primary/10 text-primary' : 'hover:bg-muted text-muted-foreground'}`}
+                  >
+                    <ThumbsUp className={`w-3.5 h-3.5 ${comment.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'like') ? 'fill-primary' : ''}`} />
+                    <span className="text-[10px] font-black">{comment.likes || 0}</span>
+                  </button>
+                  <div className="w-px h-4 bg-border" />
+                  <button 
+                    onClick={() => toggleReaction.mutate({ commentId: comment.id, type: 'dislike' })}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all ${comment.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'dislike') ? 'bg-destructive/10 text-destructive' : 'hover:bg-muted text-muted-foreground'}`}
+                  >
+                    <ThumbsDown className={`w-3.5 h-3.5 ${comment.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'dislike') ? 'fill-destructive' : ''}`} />
+                    <span className="text-[10px] font-black">{comment.dislikes || 0}</span>
+                  </button>
+                </div>
+
+                <button 
+                  onClick={() => setReplyTo(replyTo === comment.id ? null : comment.id)} 
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border text-[10px] font-black uppercase tracking-widest transition-all ${replyTo === comment.id ? 'bg-primary text-primary-foreground border-primary' : 'hover:bg-muted text-muted-foreground'}`}
+                >
+                  <Reply className="w-3.5 h-3.5" />
+                  Responder
+                </button>
+              </div>
 
               {/* Replies */}
               {commentReplies.length > 0 && (
-                <div className="ml-6 space-y-3 border-l-2 border-border pl-4">
+                <div className="ml-[52px] space-y-4 border-l-2 border-border/50 pl-6 mt-6">
                   {commentReplies.map((reply: any) => {
                     const replyProfile = reply.profiles as any;
                     return (
-                      <div key={reply.id} className="space-y-1">
+                      <div key={reply.id} className="space-y-2 group/reply">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <span className="font-bold text-xs">{replyProfile?.display_name || "Usuário"}</span>
-                            <span className="text-xs text-muted-foreground">{formatDate(reply.created_at)}</span>
+                            <span className="font-black text-xs uppercase tracking-tight">{replyProfile?.display_name || "Pirata"}</span>
+                            {replyProfile?.is_vip && (
+                              <span className="bg-yellow-500/10 text-yellow-500 text-[8px] font-black px-1.5 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest">VIP</span>
+                            )}
+                            <span className="text-[10px] text-muted-foreground opacity-60">• {formatDate(reply.created_at)}</span>
                           </div>
                           {(reply.user_id === user?.id || isAdmin) && (
-                            <button onClick={() => deleteComment.mutate(reply.id)} className="p-1 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive">
+                            <button onClick={() => deleteComment.mutate(reply.id)} className="p-1 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive opacity-0 group-hover/reply:opacity-100 transition-opacity">
                               <Trash2 className="w-3 h-3" />
                             </button>
                           )}
                         </div>
-                        <p className="text-sm text-muted-foreground">{reply.content}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{reply.content}</p>
+                        
+                        <div className="flex items-center gap-3 pt-1">
+                          <button onClick={() => toggleReaction.mutate({ commentId: reply.id, type: 'like' })} className={`flex items-center gap-1 text-[10px] font-bold ${reply.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'like') ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}>
+                            <ThumbsUp className="w-3 h-3" /> {reply.likes || 0}
+                          </button>
+                          <button onClick={() => toggleReaction.mutate({ commentId: reply.id, type: 'dislike' })} className={`flex items-center gap-1 text-[10px] font-bold ${reply.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'dislike') ? 'text-destructive' : 'text-muted-foreground hover:text-destructive'}`}>
+                            <ThumbsDown className="w-3 h-3" /> {reply.dislikes || 0}
+                          </button>
+                        </div>
                       </div>
                     );
                   })}
@@ -230,19 +292,29 @@ export function GameComments({ gameId }: GameCommentsProps) {
 
               {/* Reply form */}
               {replyTo === comment.id && (
-                <div className="ml-6 flex gap-2">
-                  <input
-                    type="text"
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="ml-[52px] flex flex-col gap-3 p-4 bg-muted/30 rounded-2xl border border-border"
+                >
+                  <textarea
                     value={replyContent}
                     onChange={(e) => setReplyContent(e.target.value)}
-                    placeholder="Escreva uma resposta..."
-                    className="flex-1 px-3 py-2 bg-secondary border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    placeholder="Escreva sua resposta para a tripulação..."
+                    className="w-full px-4 py-3 bg-card border border-border rounded-xl text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 min-h-[80px] resize-none"
                     autoFocus
                   />
-                  <button onClick={() => handleReply(comment.id)} disabled={!replyContent.trim()} className="px-3 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 disabled:opacity-50">
-                    Responder
-                  </button>
-                </div>
+                  <div className="flex justify-end gap-2">
+                    <button onClick={() => setReplyTo(null)} className="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-muted-foreground hover:bg-muted transition-all">Cancelar</button>
+                    <button 
+                      onClick={() => handleReply(comment.id)} 
+                      disabled={!replyContent.trim() || postComment.isPending} 
+                      className="px-6 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-black uppercase tracking-widest hover:bg-primary/90 disabled:opacity-50 transition-all shadow-lg shadow-primary/20"
+                    >
+                      {postComment.isPending ? "Enviando..." : "Responder"}
+                    </button>
+                  </div>
+                </motion.div>
               )}
             </div>
           );
