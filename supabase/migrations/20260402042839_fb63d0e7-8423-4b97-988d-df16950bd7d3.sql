@@ -1,0 +1,4 @@
+ALTER TABLE games 
+ADD COLUMN IF NOT EXISTS hero_image TEXT,
+ADD COLUMN IF NOT EXISTS vertical_image TEXT,
+ADD COLUMN IF NOT EXISTS capsule_image TEXT;

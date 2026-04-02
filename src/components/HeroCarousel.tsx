@@ -84,7 +84,7 @@ export function HeroCarousel() {
             className="absolute inset-0"
           >
             <img 
-              src={game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
+              src={(game as any).hero_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
               alt="" 
               className="w-full h-full object-cover" 
               onError={handleImageError}
@@ -170,7 +170,7 @@ export function HeroCarousel() {
                   <div className="absolute -inset-4 bg-primary/20 rounded-[2.5rem] blur-2xl group-hover:bg-primary/30 transition-all duration-700" />
                   <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-3xl overflow-hidden border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] aspect-[3/4] relative">
                     <img 
-                      src={game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
+                      src={(game as any).vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
                       alt={game.nome} 
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover/poster:scale-105" 
                       onError={handleImageError}

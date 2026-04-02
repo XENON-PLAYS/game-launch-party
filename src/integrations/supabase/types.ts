@@ -237,6 +237,7 @@ export type Database = {
       }
       games: {
         Row: {
+          capsule_image: string | null
           categorias: string[]
           classificacao: string | null
           created_at: string
@@ -246,6 +247,7 @@ export type Database = {
           distribuidor: string | null
           download_count: number
           galeria: string[]
+          hero_image: string | null
           id: string
           idiomas: string[]
           imagem: string | null
@@ -259,8 +261,10 @@ export type Database = {
           tamanho: string | null
           trailer_url: string | null
           updated_at: string
+          vertical_image: string | null
         }
         Insert: {
+          capsule_image?: string | null
           categorias?: string[]
           classificacao?: string | null
           created_at?: string
@@ -270,6 +274,7 @@ export type Database = {
           distribuidor?: string | null
           download_count?: number
           galeria?: string[]
+          hero_image?: string | null
           id?: string
           idiomas?: string[]
           imagem?: string | null
@@ -283,8 +288,10 @@ export type Database = {
           tamanho?: string | null
           trailer_url?: string | null
           updated_at?: string
+          vertical_image?: string | null
         }
         Update: {
+          capsule_image?: string | null
           categorias?: string[]
           classificacao?: string | null
           created_at?: string
@@ -294,6 +301,7 @@ export type Database = {
           distribuidor?: string | null
           download_count?: number
           galeria?: string[]
+          hero_image?: string | null
           id?: string
           idiomas?: string[]
           imagem?: string | null
@@ -307,6 +315,7 @@ export type Database = {
           tamanho?: string | null
           trailer_url?: string | null
           updated_at?: string
+          vertical_image?: string | null
         }
         Relationships: []
       }
