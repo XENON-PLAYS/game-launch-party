@@ -48,6 +48,13 @@ export type Database = {
             foreignKeyName: "download_history_game_id_fkey"
             columns: ["game_id"]
             isOneToOne: false
+            referencedRelation: "game_stats"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "download_history_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
             referencedRelation: "games"
             referencedColumns: ["id"]
           },
@@ -86,6 +93,13 @@ export type Database = {
             foreignKeyName: "download_links_game_id_fkey"
             columns: ["game_id"]
             isOneToOne: false
+            referencedRelation: "game_stats"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "download_links_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
             referencedRelation: "games"
             referencedColumns: ["id"]
           },
@@ -111,6 +125,13 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "favorites_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "game_stats"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "favorites_game_id_fkey"
             columns: ["game_id"]
@@ -159,6 +180,13 @@ export type Database = {
             foreignKeyName: "game_comments_game_id_fkey"
             columns: ["game_id"]
             isOneToOne: false
+            referencedRelation: "game_stats"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_comments_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
             referencedRelation: "games"
             referencedColumns: ["id"]
           },
@@ -194,6 +222,13 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "game_ratings_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "game_stats"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "game_ratings_game_id_fkey"
             columns: ["game_id"]
@@ -314,6 +349,13 @@ export type Database = {
             foreignKeyName: "notifications_related_game_id_fkey"
             columns: ["related_game_id"]
             isOneToOne: false
+            referencedRelation: "game_stats"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_related_game_id_fkey"
+            columns: ["related_game_id"]
+            isOneToOne: false
             referencedRelation: "games"
             referencedColumns: ["id"]
           },
@@ -387,7 +429,21 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      game_stats: {
+        Row: {
+          avg_rating: number | null
+          categorias: string[] | null
+          created_at: string | null
+          download_count: number | null
+          id: string | null
+          imagem: string | null
+          lancamento: string | null
+          nome: string | null
+          preco: number | null
+          rating_count: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       get_user_ranking: {
