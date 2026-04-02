@@ -89,27 +89,27 @@ export function HeroCarousel() {
               ))}
             </div>
             
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl 2xl:text-8xl font-bold tracking-tighter leading-tight animate-fade-in">
+            <h2 className="text-responsive-h1 animate-fade-in uppercase">
               {game.nome}
             </h2>
             
-            <p className="text-muted-foreground text-base sm:text-lg lg:text-xl 2xl:text-2xl max-w-2xl line-clamp-3 md:line-clamp-none">
+            <p className="text-responsive-body text-muted-foreground max-w-4xl line-clamp-3 md:line-clamp-none">
               {game.descricao}
             </p>
             
-            <div className="flex flex-wrap items-center gap-6 md:gap-8 pt-4">
+            <div className="flex flex-wrap items-center gap-6 md:gap-10 pt-4 md:pt-8">
               <div className="space-y-1">
-                <span className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest font-bold">Preço</span>
-                <div className="text-3xl sm:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-primary flex items-baseline gap-1">
-                  {game.preco === 0 ? "GRÁTIS" : <><span className="text-lg sm:text-xl lg:text-2xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
+                <span className="text-responsive-small text-muted-foreground">Preço</span>
+                <div className="text-responsive-h2 text-primary flex items-baseline gap-1">
+                  {game.preco === 0 ? "GRÁTIS" : <><span className="text-xl md:text-2xl lg:text-3xl xl:text-4xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
                 </div>
               </div>
               <Link 
                 to={`/jogo/${game.slug || game.id}`} 
-                className="flex items-center gap-3 px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-base bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1 active:scale-95"
+                className="flex items-center gap-3 px-8 sm:px-12 py-3.5 sm:py-5 rounded-2xl font-bold text-sm sm:text-base lg:text-lg xl:text-xl bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-2xl shadow-primary/30 hover:-translate-y-1 active:scale-95"
               >
                 <span>VER DETALHES</span>
-                <Info className="w-5 h-5" />
+                <Info className="w-5 h-5 lg:w-6 lg:h-6" />
               </Link>
             </div>
           </div>

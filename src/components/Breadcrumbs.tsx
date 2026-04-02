@@ -12,8 +12,8 @@ interface BreadcrumbsProps {
 
 export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
   return (
-    <nav className="flex mb-8" aria-label="Breadcrumb">
-      <ol className="inline-flex items-center space-x-1 md:space-x-3">
+    <nav className="flex mb-8 overflow-hidden" aria-label="Breadcrumb">
+      <ol className="flex flex-wrap items-center gap-y-2">
         <li className="inline-flex items-center">
           <Link
             to="/"

@@ -34,9 +34,9 @@ const Index = () => {
     return Array.from(new Set(games.flatMap((g) => g.categorias))).sort();
   }, [games]);
 
-  const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 5), [games]);
-  const recomendados = useMemo(() => games.filter((g) => (g as any).avg_rating >= 4 || g.destaques.length > 0).slice(0, 5), [games]);
-  const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 5), [games]);
+  const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 10), [games]);
+  const recomendados = useMemo(() => games.filter((g) => (g as any).avg_rating >= 4 || g.destaques.length > 0).slice(0, 10), [games]);
+  const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 10), [games]);
 
   const isSearching = busca || categoria !== "todas";
 
@@ -59,59 +59,58 @@ const Index = () => {
       <SEO />
       <Header />
       
-      
       {!isSearching && <HeroCarousel />}
 
       {/* Search & Filters Area */}
-      <section className="bg-card border-b border-border py-6">
+      <section className="bg-card border-b border-border py-4 sm:py-6 md:py-8 lg:py-10">
         <div className="container-responsive">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="w-full md:max-w-xl relative group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+          <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-center justify-between">
+            <div className="w-full md:max-w-xl lg:max-w-2xl relative group">
+              <Search className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <input 
                 type="text" 
                 placeholder="Qual jogo você está procurando?" 
                 value={busca} 
                 onChange={(e) => setBusca(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-background border border-input rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" 
+                className="w-full pl-12 sm:pl-16 pr-6 py-3.5 sm:py-5 bg-background border border-input rounded-2xl text-sm sm:text-base lg:text-lg focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all shadow-xl shadow-black/5" 
               />
             </div>
             
-            <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 no-scrollbar">
+            <div className="flex gap-3 w-full md:w-auto">
               <button 
                 onClick={() => setShowFilters(!showFilters)}
-                className={`flex-1 md:flex-none px-4 py-3 rounded-xl border transition-all flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider ${
-                  showFilters ? "bg-primary text-primary-foreground border-primary" : "bg-background border-input hover:border-primary/50"
+                className={`flex-1 md:flex-none px-6 sm:px-8 py-3.5 sm:py-5 rounded-2xl border transition-all flex items-center justify-center gap-3 font-black text-xs sm:text-sm uppercase tracking-widest ${
+                  showFilters ? "bg-primary text-primary-foreground border-primary shadow-2xl shadow-primary/30" : "bg-background border-input hover:border-primary/50 shadow-xl shadow-black/5"
                 }`}
               >
-                <SlidersHorizontal className="w-4 h-4" />
+                <SlidersHorizontal className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>Filtros</span>
               </button>
             </div>
           </div>
 
           {showFilters && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
-              <div className="space-y-2">
-                <label className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Categorias</label>
-                <div className="flex flex-wrap gap-2">
-                  <button onClick={() => setCategoria("todas")} className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${categoria === "todas" ? "bg-primary text-primary-foreground border-primary" : "bg-background border-input"}`}>Todas</button>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 pt-8 sm:pt-12 border-t border-border mt-8">
+              <div className="space-y-4">
+                <label className="text-responsive-small text-muted-foreground opacity-70">Categorias</label>
+                <div className="flex flex-wrap gap-2 md:gap-3">
+                  <button onClick={() => setCategoria("todas")} className={`px-4 py-2 sm:px-6 sm:py-3 rounded-xl text-xs sm:text-sm font-bold border transition-all ${categoria === "todas" ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" : "bg-background border-input hover:border-primary/30"}`}>Todas</button>
                   {allCategories.map((cat) => (
-                    <button key={cat} onClick={() => setCategoria(cat)} className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${categoria === cat ? "bg-primary text-primary-foreground border-primary" : "bg-background border-input"}`}>{cat}</button>
+                    <button key={cat} onClick={() => setCategoria(cat)} className={`px-4 py-2 sm:px-6 sm:py-3 rounded-xl text-xs sm:text-sm font-bold border transition-all ${categoria === cat ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" : "bg-background border-input hover:border-primary/30"}`}>{cat}</button>
                   ))}
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Ordenar Por</label>
-                <div className="flex flex-wrap gap-2">
+              <div className="space-y-4">
+                <label className="text-responsive-small text-muted-foreground opacity-70">Ordenar Por</label>
+                <div className="flex flex-wrap gap-2 md:gap-3">
                   {[
                     { id: "nome", label: "Nome" },
                     { id: "preco_asc", label: "Menor Preço" },
                     { id: "preco_desc", label: "Maior Preço" },
                     { id: "lancamento", label: "Lançamento" }
                   ].map((opt) => (
-                    <button key={opt.id} onClick={() => setOrdenacao(opt.id as SortOption)} className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${ordenacao === opt.id ? "bg-primary text-primary-foreground border-primary" : "bg-background border-input"}`}>{opt.label}</button>
+                    <button key={opt.id} onClick={() => setOrdenacao(opt.id as SortOption)} className={`px-4 py-2 sm:px-6 sm:py-3 rounded-xl text-xs sm:text-sm font-bold border transition-all ${ordenacao === opt.id ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" : "bg-background border-input hover:border-primary/30"}`}>{opt.label}</button>
                   ))}
                 </div>
               </div>
@@ -119,9 +118,9 @@ const Index = () => {
               <div className="flex items-end">
                 <button 
                   onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
-                  className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest hover:text-primary transition-colors flex items-center gap-2 underline"
+                  className="text-responsive-small text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 underline decoration-2 underline-offset-4"
                 >
-                  Limpar filtros
+                  Limpar todos os filtros
                 </button>
               </div>
             </div>
@@ -129,10 +128,10 @@ const Index = () => {
         </div>
       </section>
 
-      <main className="container-responsive py-8 md:py-12 lg:py-20 space-y-12 md:space-y-20">
+      <main className="container-responsive py-8 sm:py-12 md:py-20 lg:py-32 space-y-20 md:space-y-32 lg:space-y-48">
         {isLoading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-6">
-            {Array.from({ length: 10 }).map((_, i) => (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-8 gap-4 sm:gap-6 lg:gap-8">
+            {Array.from({ length: 12 }).map((_, i) => (
               <div key={i} className="bg-card rounded-2xl overflow-hidden border border-border p-1">
                 <Skeleton className="aspect-[3/4] w-full rounded-xl" />
                 <div className="p-4 space-y-3">
@@ -146,74 +145,77 @@ const Index = () => {
             ))}
           </div>
         ) : isSearching ? (
-          <div className="space-y-8 md:space-y-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border pb-6 md:pb-8">
-              <div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter uppercase mb-2">Resultados</h2>
-                <p className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">
-                  {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
-                </p>
+          <div className="space-y-10 sm:space-y-16 lg:space-y-24">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-border pb-10 sm:pb-16">
+              <div className="space-y-4">
+                <h2 className="text-responsive-h2">Resultados da Busca</h2>
+                <div className="flex items-center gap-4">
+                  <span className="w-16 md:w-24 h-1.5 bg-primary rounded-full" />
+                  <p className="text-responsive-small text-muted-foreground opacity-80">
+                    {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                <span className="opacity-50">Ativo:</span>
-                {categoria !== "todas" && <span className="text-primary bg-primary/10 px-2 py-0.5 rounded">{categoria}</span>}
-                {busca && <span className="text-primary bg-primary/10 px-2 py-0.5 rounded">"{busca}"</span>}
+              <div className="flex flex-wrap gap-3">
+                <span className="text-responsive-small text-muted-foreground opacity-50 self-center">Filtros Ativos:</span>
+                {categoria !== "todas" && <span className="text-primary bg-primary/10 px-4 py-1.5 rounded-xl text-xs font-black border border-primary/20">{categoria}</span>}
+                {busca && <span className="text-primary bg-primary/10 px-4 py-1.5 rounded-xl text-xs font-black border border-primary/20">"{busca}"</span>}
               </div>
             </div>
 
             {filteredGames.length === 0 ? (
-              <div className="text-center py-32 space-y-6">
-                <div className="inline-flex p-6 rounded-full bg-white/5 border border-white/10 mb-4">
-                  <Search className="w-12 h-12 text-muted-foreground/30" />
+              <div className="text-center py-20 sm:py-40 space-y-8 max-w-2xl mx-auto">
+                <div className="inline-flex p-8 sm:p-12 rounded-full bg-primary/5 border border-primary/10 mb-6">
+                  <Search className="w-16 h-16 sm:w-24 sm:h-24 text-primary/30" />
                 </div>
-                <h3 className="text-3xl font-bold tracking-tighter uppercase">Nenhum tesouro encontrado</h3>
-                <p className="text-muted-foreground max-w-sm mx-auto">
-                  Não encontramos nenhum jogo com esses critérios. Tente navegar pelas categorias ou usar termos mais genéricos.
+                <h3 className="text-responsive-h3 uppercase">Nenhum tesouro encontrado</h3>
+                <p className="text-responsive-body text-muted-foreground">
+                  Não encontramos nenhum jogo com esses critérios. Tente navegar pelas categorias ou usar termos mais genéricos para descobrir novos horizontes.
                 </p>
                 <button 
                   onClick={() => { setBusca(""); setCategoria("todas"); }}
-                  className="px-8 py-3 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest text-xs hover:scale-105 transition-transform"
+                  className="px-10 py-5 bg-primary text-primary-foreground rounded-2xl font-black uppercase tracking-[0.2em] text-xs sm:text-sm hover:scale-105 transition-all shadow-2xl shadow-primary/20"
                 >
                   Ver todo o catálogo
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-8 gap-4 sm:gap-6 lg:gap-8">
                 {filteredGames.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             )}
           </div>
         ) : (
-          <div className="space-y-12 md:space-y-24">
+          <div className="space-y-24 md:space-y-40 lg:space-y-60">
             <GameSection title="🔥 Em Alta" icon="flame" games={emAlta} />
             <GameSection title="⭐ Recomendados" icon="star" games={recomendados} />
             <GameSection title="🕐 Recentes" icon="clock" games={recentes} />
             
-            <section className="space-y-8 md:space-y-10">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div className="space-y-2">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter uppercase leading-none">Catálogo Completo</h2>
-                  <div className="flex items-center gap-3">
-                    <span className="w-12 md:w-16 h-1 bg-primary rounded-full" />
-                    <span className="text-[9px] md:text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">{games.length} jogos disponíveis</span>
+            <section className="space-y-12 md:space-y-20 lg:space-y-32">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 border-b border-border pb-12 sm:pb-20">
+                <div className="space-y-4">
+                  <h2 className="text-responsive-h2 leading-none">Catálogo Completo</h2>
+                  <div className="flex items-center gap-6">
+                    <span className="w-20 md:w-32 h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
+                    <span className="text-responsive-small text-muted-foreground opacity-80">{games.length} jogos disponíveis na frota</span>
                   </div>
                 </div>
                 
-                <div className="flex gap-3">
+                <div className="flex gap-4">
                   <select 
                     value={ordenacao} 
                     onChange={(e) => setOrdenacao(e.target.value as SortOption)}
-                    className="bg-card border border-border rounded-xl px-4 py-2.5 text-[10px] md:text-xs font-bold uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                    className="bg-card border border-border rounded-2xl px-8 py-5 text-xs sm:text-sm lg:text-base font-black uppercase tracking-widest focus:outline-none focus:ring-8 focus:ring-primary/10 transition-all hover:border-primary/50 cursor-pointer shadow-2xl shadow-black/10"
                   >
                     <option value="nome">Nome (A-Z)</option>
                     <option value="preco_asc">Menor Preço</option>
                     <option value="preco_desc">Maior Preço</option>
-                    <option value="lancamento">Novidades</option>
+                    <option value="lancamento">Novidades da Frota</option>
                   </select>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-8 gap-4 sm:gap-6 lg:gap-8">
                 {games.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             </section>
@@ -221,52 +223,52 @@ const Index = () => {
         )}
       </main>
 
-      <footer className="border-t border-border bg-card py-12 md:py-20 mt-20">
+      <footer className="border-t border-border bg-card py-20 sm:py-32 md:py-48 mt-32 md:mt-60">
         <div className="container-responsive">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div className="space-y-6">
-              <Link to="/" className="flex items-center gap-4 group">
-                <img src={logo} alt="Jogos Piratas" className="w-12 h-12" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 sm:gap-20 lg:gap-12 mb-20 sm:mb-32">
+            <div className="space-y-10">
+              <Link to="/" className="flex items-center gap-5 group">
+                <img src={logo} alt="Jogos Piratas" className="w-16 h-16 sm:w-20 sm:h-20" />
                 <div className="flex flex-col">
-                  <span className="font-bold text-xl tracking-tighter leading-none">JOGOS</span>
-                  <span className="font-bold text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
+                  <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none">JOGOS</span>
+                  <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none text-primary">PIRATAS</span>
                 </div>
               </Link>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                A maior comunidade de compartilhamento de jogos. Descubra, jogue e compartilhe suas experiências.
+              <p className="text-responsive-body text-muted-foreground opacity-80 max-w-sm">
+                A maior comunidade de compartilhamento de jogos. Descubra novos horizontes, jogue com seus amigos e compartilhe suas experiências épicas nos sete mares.
               </p>
             </div>
             
-            <div className="space-y-6">
-              <h4 className="text-xs font-bold uppercase tracking-widest">Navegação</h4>
-              <ul className="space-y-4 text-sm text-muted-foreground">
-                <li><Link to="/" className="hover:text-primary transition-colors">Catálogo</Link></li>
-                <li><Link to="/" className="hover:text-primary transition-colors">Novidades</Link></li>
-                <li><Link to="/" className="hover:text-primary transition-colors">Em Alta</Link></li>
+            <div className="space-y-10">
+              <h4 className="text-responsive-small text-foreground">Navegação</h4>
+              <ul className="space-y-6 text-sm sm:text-base lg:text-lg text-muted-foreground">
+                <li><Link to="/" className="hover:text-primary transition-colors font-bold">Catálogo Completo</Link></li>
+                <li><Link to="/" className="hover:text-primary transition-colors font-bold">Novidades da Frota</Link></li>
+                <li><Link to="/" className="hover:text-primary transition-colors font-bold">Jogos em Alta</Link></li>
               </ul>
             </div>
             
-            <div className="space-y-6">
-              <h4 className="text-xs font-bold uppercase tracking-widest">Suporte</h4>
-              <ul className="space-y-4 text-sm text-muted-foreground">
-                <li><Link to="/" className="hover:text-primary transition-colors">FAQ</Link></li>
-                <li><Link to="/" className="hover:text-primary transition-colors">Termos de Uso</Link></li>
-                <li><Link to="/" className="hover:text-primary transition-colors">Privacidade</Link></li>
+            <div className="space-y-10">
+              <h4 className="text-responsive-small text-foreground">Suporte</h4>
+              <ul className="space-y-6 text-sm sm:text-base lg:text-lg text-muted-foreground">
+                <li><Link to="/" className="hover:text-primary transition-colors font-bold">Perguntas Frequentes</Link></li>
+                <li><Link to="/" className="hover:text-primary transition-colors font-bold">Termos de Navegação</Link></li>
+                <li><Link to="/" className="hover:text-primary transition-colors font-bold">Política de Privacidade</Link></li>
               </ul>
             </div>
 
-            <div className="space-y-6">
-              <h4 className="text-xs font-bold uppercase tracking-widest">Newsletter</h4>
-              <p className="text-sm text-muted-foreground">Receba avisos de novos tesouros no seu e-mail.</p>
-              <div className="flex gap-2">
-                <input type="email" placeholder="Seu e-mail..." className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-primary/50" />
-                <button className="bg-primary text-primary-foreground px-4 py-2 rounded-xl font-bold uppercase text-[10px] tracking-widest">OK</button>
+            <div className="space-y-10">
+              <h4 className="text-responsive-small text-foreground">Newsletter</h4>
+              <p className="text-responsive-body text-muted-foreground opacity-80">Receba avisos de novos tesouros diretamente no seu pombo correio.</p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <input type="email" placeholder="Seu e-mail..." className="bg-background border border-border rounded-2xl px-6 py-4 text-sm sm:text-base w-full focus:outline-none focus:ring-4 focus:ring-primary/20 shadow-xl shadow-black/5" />
+                <button className="bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-black uppercase text-xs sm:text-sm tracking-[0.2em] shadow-2xl shadow-primary/20 hover:scale-105 transition-all">OK</button>
               </div>
             </div>
           </div>
           
-          <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-muted-foreground text-[10px] font-bold uppercase tracking-[0.2em]">
-            <p>© 2025 Jogos Piratas. Todos os tesouros reservados.</p>
+          <div className="pt-16 border-t border-border flex flex-col md:flex-row justify-between items-center gap-10 text-responsive-small text-muted-foreground opacity-60">
+            <p>© 2025 Jogos Piratas. Todos os tesouros protegidos por canhões.</p>
           </div>
         </div>
       </footer>
