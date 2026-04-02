@@ -114,7 +114,7 @@ export function Header() {
               <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${menuOpen ? "rotate-180" : "opacity-50"}`} />
             </button>
             
-            <AnimatePresence>
+              <>
               {menuOpen && (
                 <motion.div 
                   initial={{ opacity: 0, y: 10, scale: 0.95 }}
