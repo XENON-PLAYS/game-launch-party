@@ -113,11 +113,20 @@ const Perfil = () => {
         .update({
           username: username,
           display_name: displayName,
+          bio: bio,
+          status: status,
+          theme: themePreference,
           updated_at: new Date().toISOString(),
         })
         .eq("user_id", user.id);
 
       if (error) throw error;
+      
+      // Update global theme if changed
+      if (themePreference !== currentTheme) {
+        setTheme(themePreference);
+      }
+      
       await refreshProfile();
       toast.success("Perfil atualizado com sucesso!");
     } catch (error: any) {
