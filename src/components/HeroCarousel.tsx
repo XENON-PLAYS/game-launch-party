@@ -92,7 +92,7 @@ export function HeroCarousel() {
                 </div>
               </div>
               <Link 
-                to={`/jogo/${game.id}`} 
+                to={`/jogo/${game.slug || game.id}`} 
                 className="flex items-center gap-3 px-10 py-4 rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1"
               >
                 <span>VER DETALHES</span>
@@ -102,7 +102,7 @@ export function HeroCarousel() {
           </div>
 
           <div className="hidden md:block">
-            <Link to={`/jogo/${game.id}`} className="block rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4]">
+            <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4]">
               <img 
                 src={game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
                 alt={game.nome} 
