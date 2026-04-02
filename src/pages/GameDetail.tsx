@@ -151,16 +151,24 @@ const GameDetail = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
+      <SEO 
+        title={game.nome}
+        description={game.descricao?.substring(0, 160) + (game.descricao?.length > 160 ? "..." : "")}
+        image={game.imagem}
+        keywords={`${game.nome}, download ${game.nome}, baixar ${game.nome}, ${game.categorias.join(", ")}, pc games`}
+      />
       <Header />
       
 
       {/* Hero Section */}
       <section className="bg-card border-b border-border py-12">
         <div className="container mx-auto px-4">
-          <Link to="/" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors mb-8 group">
-            <ArrowLeft className="w-4 h-4" />
-            <span>Voltar ao Catálogo</span>
-          </Link>
+          <Breadcrumbs 
+            items={[
+              { label: "Catálogo", path: "/" },
+              { label: game.nome }
+            ]} 
+          />
 
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Visuals */}
