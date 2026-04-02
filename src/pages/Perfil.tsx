@@ -74,20 +74,9 @@ const Perfil = () => {
           .order("created_at", { ascending: false });
         setFavorites(data || []);
       } else if (activeTab === "ranking") {
-        // Simple ranking: top users by download history count
-        const { data } = await supabase
-          .rpc('get_user_ranking'); 
-        
-        if (data) {
-          setRanking(data);
-        } else {
-          // Fallback if RPC doesn't exist yet
-          const { data: profilesData } = await supabase
-            .from("profiles")
-            .select("username, display_name, avatar_url, is_vip, badges")
-            .limit(10);
-          setRanking(profilesData || []);
-        }
+        const { data, error } = await supabase.rpc('get_user_ranking' as any);
+        if (error) throw error;
+        setRanking(data || []);
       } else if (activeTab === "recommendations") {
         const { data } = await supabase
           .from("games")
