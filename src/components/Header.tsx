@@ -111,7 +111,10 @@ export function Header() {
               <Link to="/cadastro" className="block text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>Registrar</Link>
             </>
           ) : (
-            <button onClick={() => { logout(); setMobileOpen(false); }} className="block text-muted-foreground hover:text-foreground">Sair</button>
+            <>
+              <Link to="/perfil" className="block text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>Meu Perfil</Link>
+              <button onClick={() => { logout(); setMobileOpen(false); }} className="block text-muted-foreground hover:text-foreground">Sair</button>
+            </>
           )}
         </div>
       )}
