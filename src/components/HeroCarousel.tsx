@@ -103,7 +103,7 @@ export function HeroCarousel() {
                   transition={{ delay: 0.3, duration: 0.8 }}
                   className="flex gap-2 flex-wrap"
                 >
-                  {game.categorias.map((c) => (
+                  {(game.categorias || []).map((c) => (
                     <span 
                       key={c} 
                       className="text-responsive-small"
