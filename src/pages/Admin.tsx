@@ -170,9 +170,40 @@ const Admin = () => {
   const setField = (key: string, value: any) => setEditGame((p) => ({ ...p, [key]: value }));
   const formatPreco = (v: number) => (v === 0 ? "Gratuito" : `R$ ${v.toFixed(2).replace(".", ",")}`);
 
-  const saveGame = (e: React.FormEvent) => {
+  const saveGame = async (e: React.FormEvent) => {
     e.preventDefault();
-    saveMutation.mutate(editGame);
+    
+    // Auto-generate slug if missing
+    if (!editGame.slug && editGame.nome) {
+      editGame.slug = editGame.nome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
+    }
+
+    try {
+      const { data: gameData, error } = modalMode === "add" 
+        ? await supabase.from("games").insert(editGame).select().single()
+        : await supabase.from("games").update(editGame).eq("id", editGame.id!).select().single();
+
+      if (error) throw error;
+
+      // Save links
+      if (gameData) {
+        // Simple logic: delete old links and insert new ones for simplicity in this demo
+        // In production, you'd want a more robust sync
+        await supabase.from("download_links").delete().eq("game_id", gameData.id);
+        if (links.length > 0) {
+          await supabase.from("download_links").insert(
+            links.map(l => ({ ...l, game_id: gameData.id, id: undefined }))
+          );
+        }
+      }
+
+      queryClient.invalidateQueries({ queryKey: ["admin-games"] });
+      queryClient.invalidateQueries({ queryKey: ["games"] });
+      setModalOpen(false);
+      toast.success("Jogo salvo com sucesso!");
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
 
   return (
