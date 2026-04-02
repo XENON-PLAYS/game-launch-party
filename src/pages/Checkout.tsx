@@ -60,7 +60,7 @@ const Checkout = () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { planName, userId: profile.id, email: user?.email },
+        body: { planName, userId: user?.id, email: user?.email },
       });
 
       if (error) throw error;
