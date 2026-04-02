@@ -61,5 +61,4 @@ export const SEO = ({
       <meta property="twitter:image" content={image} />
     </Helmet>
   );
-  );
 };
