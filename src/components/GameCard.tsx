@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Info, Plus } from "lucide-react";
+import { Info } from "lucide-react";
 import { Tables } from "@/integrations/supabase/types";
 import { motion } from "framer-motion";
 
@@ -16,58 +16,52 @@ export function GameCard({ game }: GameCardProps) {
 
   return (
     <motion.div 
-      whileHover={{ y: -12 }}
-      transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
-      className="group bg-card rounded-[2rem] overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-700 relative flex flex-col h-full shadow-2xl shadow-black/20 hover:shadow-primary/10"
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="group bg-card/60 backdrop-blur-sm rounded-xl overflow-hidden border border-border/50 hover:border-primary/40 transition-all duration-300 relative flex flex-col h-full shadow-md hover:shadow-xl"
     >
-      <Link to={`/jogo/${game.slug || game.id}`} className="block relative aspect-[3/4] overflow-hidden shrink-0 m-2 rounded-[1.5rem]">
+      <Link to={`/jogo/${game.slug || game.id}`} className="block relative aspect-[3/4] overflow-hidden shrink-0">
         <img 
           src={game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
           alt={game.nome} 
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[3000ms] ease-out" 
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
           loading="lazy" 
           onError={handleImageError}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
         
-        <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
           {(game.categorias || []).slice(0, 1).map((cat) => (
             <span 
               key={cat} 
-              className="text-[10px] uppercase font-bold px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-xl text-white border border-white/10 tracking-widest"
+              className="text-[10px] uppercase font-bold px-2.5 py-1 rounded bg-black/70 backdrop-blur-md text-white border border-white/10 tracking-wider"
             >
               {cat}
             </span>
           ))}
         </div>
-
-        <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-          <div className="bg-primary p-3 rounded-2xl shadow-2xl shadow-primary/40">
-            <Plus className="w-5 h-5 text-white" />
-          </div>
-        </div>
       </Link>
       
-      <div className="p-6 flex flex-col flex-grow">
-        <Link to={`/jogo/${game.slug || game.id}`} className="block group/title mb-4">
-          <h3 className="font-extrabold text-base lg:text-lg line-clamp-2 group-hover/title:text-primary transition-colors duration-300 leading-tight">
+      <div className="p-4 flex flex-col flex-grow">
+        <Link to={`/jogo/${game.slug || game.id}`} className="block group/title mb-2">
+          <h3 className="font-bold text-sm lg:text-base line-clamp-2 group-hover/title:text-primary transition-colors duration-200 leading-tight">
             {game.nome}
           </h3>
         </Link>
         
-        <div className="mt-auto pt-4 border-t border-border/40 flex items-center justify-between">
+        <div className="mt-auto pt-3 border-t border-border/30 flex items-center justify-between">
           <div className="flex flex-col">
-            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest leading-none mb-2 opacity-60">Investimento</span>
-            <span className="text-primary font-black text-xl lg:text-2xl leading-none">
+            <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-widest leading-none mb-1.5 opacity-60">Valor</span>
+            <span className="text-foreground font-bold text-base lg:text-lg leading-none">
               {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
             </span>
           </div>
           
           <Link 
             to={`/jogo/${game.slug || game.id}`} 
-            className="p-3 rounded-2xl bg-secondary hover:bg-primary hover:text-primary-foreground transition-all duration-500"
+            className="p-2.5 rounded-lg bg-secondary/80 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
           >
-            <Info className="w-5 h-5" />
+            <Info className="w-4 h-4" />
           </Link>
         </div>
       </div>

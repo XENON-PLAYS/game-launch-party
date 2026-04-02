@@ -25,40 +25,40 @@ export function GameSection({ title, icon, games }: GameSectionProps) {
 
   return (
     <motion.section 
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="space-y-12 py-12"
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="space-y-8 py-8 md:py-12"
     >
-      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 border-b border-border/50 pb-12">
-        <div className="flex items-center gap-6 group">
-          <div className={`p-5 rounded-3xl ${config.bg} ${config.border} border group-hover:scale-110 transition-transform duration-700 shadow-xl shadow-black/10`}>
-            <Icon className={`w-8 h-8 lg:w-10 lg:h-10 ${config.color}`} />
+      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 border-b border-border/30 pb-10">
+        <div className="flex items-center gap-5 group">
+          <div className={`p-4 rounded-2xl ${config.bg} ${config.border} border group-hover:scale-105 transition-transform duration-500 shadow-sm`}>
+            <Icon className={`w-6 h-6 lg:w-8 lg:h-8 ${config.color}`} />
           </div>
-          <div className="space-y-3">
-            <h2 className="text-responsive-h2 leading-none font-extrabold">{title}</h2>
-            <div className="flex items-center gap-4">
-              <span className="w-20 h-1.5 bg-primary rounded-full shadow-lg shadow-primary/20 opacity-80" />
-              <span className="text-responsive-small font-bold opacity-70">{games.length} Títulos de Elite</span>
+          <div className="space-y-1">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">{title}</h2>
+            <div className="flex items-center gap-3">
+              <span className="w-12 h-1 bg-primary/40 rounded-full" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-50">{games.length} Títulos Disponíveis</span>
             </div>
           </div>
         </div>
         
-        <button className="flex items-center gap-3 text-responsive-small text-muted-foreground hover:text-primary transition-all duration-500 group hover:translate-x-1 font-bold">
-          <span>VER COLEÇÃO COMPLETA</span>
-          <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        <button className="flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-all duration-300 group">
+          <span>VER TUDO</span>
+          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
       
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-8 gap-6 lg:gap-8 xl:gap-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6 lg:gap-8">
         {games.map((game, index) => (
           <motion.div
             key={game.id}
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.05 }}
+            transition={{ duration: 0.4, delay: index * 0.05 }}
           >
             <GameCard game={game} />
           </motion.div>
