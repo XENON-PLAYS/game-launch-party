@@ -171,7 +171,6 @@ export function Header() {
               {isAdmin && <Link to="/admin" className="block py-2 text-primary" onClick={() => setMobileOpen(false)}>Painel Admin</Link>}
               <div className="pt-4 border-t border-white/5 flex flex-col gap-4">
                 {!user ? (
-                  <>
                     <Link to="/login" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                       <LogIn className="w-4 h-4" /> Login
                     </Link>
