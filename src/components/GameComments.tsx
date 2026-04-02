@@ -56,12 +56,21 @@ export function GameComments({ gameId }: GameCommentsProps) {
   const postComment = useMutation({
     mutationFn: async ({ text, parentId }: { text: string; parentId?: string }) => {
       if (!user) return;
-      await supabase.from("game_comments").insert({
+      
+      // Anti-spam check (5 seconds)
+      const now = Date.now();
+      if (now - lastPostTime < 5000) {
+        throw new Error("Aguarde um pouco antes de postar novamente.");
+      }
+
+      const { error } = await supabase.from("game_comments").insert({
         user_id: user.id,
         game_id: gameId,
         content: text,
         parent_id: parentId || null,
       });
+      if (error) throw error;
+      setLastPostTime(now);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comments", gameId] });
@@ -69,7 +78,45 @@ export function GameComments({ gameId }: GameCommentsProps) {
       setContent("");
       setReplyContent("");
       setReplyTo(null);
+      toast.success("Comentário enviado!");
     },
+    onError: (err: any) => {
+      toast.error(err.message);
+    }
+  });
+
+  const toggleReaction = useMutation({
+    mutationFn: async ({ commentId, type }: { commentId: string; type: 'like' | 'dislike' }) => {
+      if (!user) return navigate("/login");
+
+      const { data: existing } = await supabase
+        .from("comment_reactions")
+        .select("*")
+        .eq("user_id", user.id)
+        .eq("comment_id", commentId)
+        .maybeSingle();
+
+      if (existing) {
+        if (existing.reaction_type === type) {
+          // Remove if clicking same type
+          await supabase.from("comment_reactions").delete().eq("id", existing.id);
+        } else {
+          // Update if clicking different type
+          await supabase.from("comment_reactions").update({ reaction_type: type }).eq("id", existing.id);
+        }
+      } else {
+        // Insert new
+        await supabase.from("comment_reactions").insert({
+          user_id: user.id,
+          comment_id: commentId,
+          reaction_type: type
+        });
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comments", gameId] });
+      queryClient.invalidateQueries({ queryKey: ["replies", gameId] });
+    }
   });
 
   const deleteComment = useMutation({
