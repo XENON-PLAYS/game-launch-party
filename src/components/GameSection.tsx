@@ -1,6 +1,7 @@
 import { Tables } from "@/integrations/supabase/types";
 import { GameCard } from "./GameCard";
-import { Flame, Star, Clock } from "lucide-react";
+import { Flame, Star, Clock, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 type Game = Tables<"games">;
 
@@ -10,23 +11,50 @@ interface GameSectionProps {
   games: Game[];
 }
 
-const icons = { flame: Flame, star: Star, clock: Clock };
+const icons = { 
+  flame: { icon: Flame, color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500/20" }, 
+  star: { icon: Star, color: "text-yellow-500", bg: "bg-yellow-500/10", border: "border-yellow-500/20" }, 
+  clock: { icon: Clock, color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" } 
+};
 
 export function GameSection({ title, icon, games }: GameSectionProps) {
-  const Icon = icons[icon];
+  const config = icons[icon];
+  const Icon = config.icon;
+  
   if (games.length === 0) return null;
 
   return (
-    <section className="space-y-5">
-      <div className="flex items-center gap-3">
-        <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
-          <Icon className="w-5 h-5 text-primary" />
+    <section className="space-y-8 py-4">
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="flex items-center justify-between gap-4"
+      >
+        <div className="flex items-center gap-4 group">
+          <div className={`p-3 rounded-2xl ${config.bg} ${config.border} border group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-black/20`}>
+            <Icon className={`w-6 h-6 ${config.color}`} />
+          </div>
+          <div className="space-y-0.5">
+            <h2 className="text-3xl font-bold tracking-tighter uppercase leading-none">{title}</h2>
+            <div className="flex items-center gap-2">
+              <span className="w-12 h-1 bg-primary rounded-full" />
+              <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">{games.length} títulos</span>
+            </div>
+          </div>
         </div>
-        <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
-        <div className="flex-1 h-px bg-border ml-2" />
-      </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {games.map((game) => <GameCard key={game.id} game={game} />)}
+        
+        <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors duration-300 group">
+          Ver todos
+          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </motion.div>
+      
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        {games.map((game, index) => (
+          <GameCard key={game.id} game={game} />
+        ))}
       </div>
     </section>
   );
