@@ -72,23 +72,11 @@ const VipPage = () => {
   const handleSubscribe = async (planName: string) => {
     if (!profile) {
       toast.error("Você precisa estar logado para assinar um plano.");
-      navigate("/login");
+      navigate("/login?redirect=/checkout?plan=" + planName);
       return;
     }
-
-    try {
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { planName, userId: profile.id, email: user?.email },
-      });
-
-      if (error) throw error;
-      if (data?.url) {
-        window.location.href = data.url;
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      toast.error("Ocorreu um erro ao iniciar o pagamento. Tente novamente mais tarde.");
-    }
+    
+    navigate(`/checkout?plan=${planName}`);
   };
 
   return (
