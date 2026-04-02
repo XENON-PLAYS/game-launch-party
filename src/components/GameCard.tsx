@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Download, ShoppingCart } from "lucide-react";
+import { Download } from "lucide-react";
 import { Tables } from "@/integrations/supabase/types";
 import { motion } from "framer-motion";
-import { useCart } from "@/context/CartContext";
+
 
 type Game = Tables<"games">;
 
@@ -11,7 +11,7 @@ interface GameCardProps {
 }
 
 export function GameCard({ game }: GameCardProps) {
-  const { addItem } = useCart();
+  
 
   return (
     <div className="group bg-card rounded-xl overflow-hidden border border-border hover:border-primary transition-all duration-300 relative">
@@ -48,22 +48,12 @@ export function GameCard({ game }: GameCardProps) {
           </div>
           
           <div className="flex gap-2">
-            <button 
-              onClick={(e) => {
-                e.preventDefault();
-                addItem(game);
-              }}
-              className="p-2 rounded-xl bg-secondary/50 hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-white/5"
-              title="Adicionar ao carrinho"
-            >
-              <ShoppingCart className="w-4 h-4" />
-            </button>
             <Link 
               to={`/jogo/${game.id}`} 
-              className="flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-xs bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-lg shadow-primary/20"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-xs bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-lg shadow-primary/20"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>VER</span>
+              <span>VER DETALHES</span>
             </Link>
           </div>
         </div>

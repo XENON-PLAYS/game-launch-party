@@ -3,12 +3,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { CartProvider } from "@/context/CartContext";
+
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Index from "./pages/Index.tsx";
 import GameDetail from "./pages/GameDetail.tsx";
-import Checkout from "./pages/Checkout.tsx";
+
 import Login from "./pages/Login.tsx";
 import Cadastro from "./pages/Cadastro.tsx";
 import Admin from "./pages/Admin.tsx";
@@ -23,7 +23,7 @@ const App = () => (
     <TooltipProvider>
       <ThemeProvider>
         <AuthProvider>
-          <CartProvider>
+          
             <Toaster />
             <Sonner />
             <BrowserRouter>
@@ -31,7 +31,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/jogo/:id" element={<GameDetail />} />
                 <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
-                <Route path="/checkout" element={<Checkout />} />
+                
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/admin" element={<Admin />} />
@@ -39,7 +39,7 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
-          </CartProvider>
+          
         </AuthProvider>
       </ThemeProvider>
     </TooltipProvider>

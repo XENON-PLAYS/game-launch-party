@@ -1,13 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingCart, Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search } from "lucide-react";
-import { useCart } from "@/context/CartContext";
+import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search } from "lucide-react";
+
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
 
 export function Header() {
-  const { count, setIsOpen } = useCart();
+  
   const { user, profile, logout, isAdmin } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -32,8 +32,8 @@ export function Header() {
             className="w-10 h-10 md:w-12 md:h-12" 
           />
           <div className="flex flex-col">
-            <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none">JOGOS</span>
-            <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
+            <span className="font-bold text-xl tracking-tighter leading-none">JOGOS</span>
+            <span className="font-bold text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
           </div>
         </Link>
 
@@ -65,15 +65,6 @@ export function Header() {
             {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-muted-foreground" />}
           </button>
 
-          {/* Cart */}
-          <button onClick={() => setIsOpen(true)} className="relative p-2.5 rounded-xl hover:bg-muted transition-colors">
-            <ShoppingCart className="w-5 h-5" />
-            {count > 0 && (
-              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold border-2 border-background">
-                {count}
-              </span>
-            )}
-          </button>
 
           {/* User Profile / Menu */}
           <div className="relative">

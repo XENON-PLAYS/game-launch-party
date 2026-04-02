@@ -119,7 +119,7 @@ const Admin = () => {
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 bg-popover/95 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <h1 className="flex items-center gap-2 text-lg font-bold font-['SuperSenior']">
+          <h1 className="flex items-center gap-2 text-lg font-bold">
             <span className="text-primary">⚙</span> Painel Admin
           </h1>
           <div className="relative">

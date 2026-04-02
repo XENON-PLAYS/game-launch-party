@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
-import { CartPopup } from "@/components/CartPopup";
+
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
@@ -10,13 +10,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
 
-import { useCart } from "@/context/CartContext";
+
 
 const GameDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { addItem } = useCart();
+  
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const { data: game, isLoading } = useQuery({
@@ -134,7 +134,7 @@ const GameDetail = () => {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       <Header />
-      <CartPopup />
+      
 
       {/* Hero Section */}
       <section className="bg-card border-b border-border py-12">
@@ -221,11 +221,14 @@ const GameDetail = () => {
 
                 <div className="flex items-center gap-3">
                   <button 
-                    onClick={() => addItem(game)}
+                    onClick={() => {
+                      const element = document.getElementById('download-section');
+                      element?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                     className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all duration-300"
                   >
-                    <span>Adicionar ao Carrinho</span>
-                    <ChevronRight className="w-4 h-4" />
+                    <span>Baixar Agora</span>
+                    <Download className="w-4 h-4" />
                   </button>
                   
                   <button
@@ -289,7 +292,7 @@ const GameDetail = () => {
         )}
 
         {/* Requirements & Download Section */}
-        <section className="grid lg:grid-cols-2 gap-16">
+        <section id="download-section" className="grid lg:grid-cols-2 gap-16">
           {/* Download Area */}
           <div className="space-y-10">
             <div className="flex items-center gap-6">

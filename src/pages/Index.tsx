@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { GameCard } from "@/components/GameCard";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
-import { CartPopup } from "@/components/CartPopup";
+
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
@@ -56,7 +56,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
       <Header />
-      <CartPopup />
+      
       
       {!isSearching && <HeroCarousel />}
 
@@ -226,8 +226,8 @@ const Index = () => {
               <Link to="/" className="flex items-center gap-4 group">
                 <img src={logo} alt="Jogos Piratas" className="w-12 h-12" />
                 <div className="flex flex-col">
-                  <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none">JOGOS</span>
-                  <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
+                  <span className="font-bold text-xl tracking-tighter leading-none">JOGOS</span>
+                  <span className="font-bold text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
                 </div>
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed">
