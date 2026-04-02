@@ -148,33 +148,55 @@ export function GameComments({ gameId }: GameCommentsProps) {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-2">
-        <MessageSquare className="w-5 h-5 text-primary" />
-        <h2 className="text-xl font-bold">Comentários ({comments.length})</h2>
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="p-3 rounded-2xl bg-primary/10 border border-primary/20">
+            <MessageSquare className="w-6 h-6 text-primary" />
+          </div>
+          <div className="flex flex-col">
+            <h2 className="text-2xl font-black uppercase tracking-tight">Taberna de Discussão</h2>
+            <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest opacity-60">{comments.length + replies.length} Mensagens na Garrafa</p>
+          </div>
+        </div>
       </div>
 
       {/* Post comment */}
-      <form onSubmit={handleSubmit} className="flex gap-2">
-        <input
-          type="text"
+      <motion.form 
+        onSubmit={handleSubmit} 
+        className="flex flex-col gap-4 p-6 bg-card border-2 border-border rounded-[2rem] shadow-xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder={user ? "Escreva um comentário..." : "Faça login para comentar"}
-          className="flex-1 px-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+          placeholder={user ? "O que você achou desse tesouro?" : "Faça login para compartilhar sua opinião..."}
+          className="w-full px-6 py-4 bg-muted/30 border border-border rounded-2xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all min-h-[120px] resize-none"
           disabled={!user}
         />
-        <button
-          type="submit"
-          disabled={!user || !content.trim()}
-          className="px-4 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
-        >
-          <Send className="w-4 h-4" />
-        </button>
-      </form>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-50">
+            <ShieldAlert className="w-3 h-3" />
+            <span>Respeite a tripulação. Evite spam.</span>
+          </div>
+          <button
+            type="submit"
+            disabled={!user || !content.trim() || postComment.isPending}
+            className="px-10 py-4 rounded-xl bg-primary text-primary-foreground font-black uppercase tracking-[0.2em] text-xs hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-3 shadow-lg shadow-primary/20 hover:-translate-y-1 active:scale-95"
+          >
+            {postComment.isPending ? "Postando..." : (
+              <>
+                <span>Lançar Comentário</span>
+                <Send className="w-4 h-4" />
+              </>
+            )}
+          </button>
+        </div>
+      </motion.form>
 
       {/* Comments list */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         {comments.map((comment: any) => {
           const commentReplies = replies.filter((r: any) => r.parent_id === comment.id);
           const profileData = comment.profiles as any;
