@@ -34,8 +34,8 @@ const Index = () => {
     return Array.from(new Set(games.flatMap((g) => g.categorias))).sort();
   }, [games]);
 
-  const emAlta = useMemo(() => games.filter((g) => ["Elden Ring", "God of War Ragnarök", "Cyberpunk 2077"].includes(g.nome)), [games]);
-  const recomendados = useMemo(() => games.filter((g) => ["Red Dead Redemption 2", "The Witcher 3: Wild Hunt", "Hogwarts Legacy"].includes(g.nome)), [games]);
+  const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 5), [games]);
+  const recomendados = useMemo(() => games.filter((g) => (g as any).avg_rating >= 4 || g.destaques.length > 0).slice(0, 5), [games]);
   const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 5), [games]);
 
   const isSearching = busca || categoria !== "todas";
