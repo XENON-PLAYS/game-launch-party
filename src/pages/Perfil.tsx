@@ -103,8 +103,8 @@ const Perfil = () => {
 
       if (updateError) throw updateError;
 
+      await refreshProfile();
       toast.success("Avatar atualizado!");
-      window.location.reload();
     } catch (error: any) {
       toast.error(error.message || "Erro ao fazer upload");
     } finally {

@@ -90,8 +90,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await supabase.auth.signOut();
   }, []);
 
+  const refreshProfile = useCallback(async () => {
+    if (user) await fetchProfile(user.id);
+  }, [user, fetchProfile]);
+
   return (
-    <AuthContext.Provider value={{ user, profile, isAdmin, isLoading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, profile, isAdmin, isLoading, login, register, logout, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   );
