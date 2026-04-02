@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import imageCompression from "browser-image-compression";
 
 const Perfil = () => {
-  const { user, profile, isLoading: authLoading } = useAuth();
+  const { user, profile, isLoading: authLoading, refreshProfile } = useAuth();
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
