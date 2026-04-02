@@ -140,9 +140,9 @@ const Index = () => {
         </div>
       </section>
 
-      <main className="container-responsive py-24 space-y-40">
+      <main className="container-responsive py-12 md:py-24 space-y-20 md:space-y-40">
         {isLoading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
             {Array.from({ length: 12 }).map((_, i) => (
               <div key={i} className="bg-card rounded-2xl overflow-hidden border border-border/50 p-2">
                 <Skeleton className="aspect-[3/4] w-full rounded-xl" />
@@ -160,37 +160,37 @@ const Index = () => {
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="space-y-16"
+            className="space-y-10 md:space-y-16"
           >
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 border-b-2 border-primary/20 pb-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-10 border-b-2 border-primary/20 pb-10 md:pb-16">
               <div className="space-y-4">
                 <h2 className="text-responsive-h2"><span className="text-primary">Catálogo</span> <span className="text-foreground">Filtrado</span></h2>
                 <div className="flex items-center gap-4">
-                  <span className="w-24 h-1.5 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                  <p className="text-responsive-body font-medium">
+                  <span className="w-16 md:w-24 h-1.5 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                  <p className="text-sm md:text-responsive-body font-medium">
                     {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
                   </p>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-3">
-                <span className="text-xs font-bold text-muted-foreground opacity-60 self-center uppercase tracking-widest">Filtros:</span>
-                {categoria !== "todas" && <span className="text-primary bg-primary/10 px-4 py-2 rounded-full text-[10px] font-black border border-primary/20 uppercase tracking-widest">{categoria}</span>}
-                {busca && <span className="text-primary bg-primary/10 px-4 py-2 rounded-full text-[10px] font-black border border-primary/20 uppercase tracking-widest">"{busca}"</span>}
+              <div className="flex flex-wrap gap-2 md:gap-3">
+                <span className="text-[10px] md:text-xs font-bold text-muted-foreground opacity-60 self-center uppercase tracking-widest">Filtros:</span>
+                {categoria !== "todas" && <span className="text-primary bg-primary/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[9px] md:text-[10px] font-black border border-primary/20 uppercase tracking-widest">{categoria}</span>}
+                {busca && <span className="text-primary bg-primary/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[9px] md:text-[10px] font-black border border-primary/20 uppercase tracking-widest">"{busca}"</span>}
               </div>
             </div>
 
             {filteredGames.length === 0 ? (
-              <div className="text-center py-40 space-y-10 max-w-2xl mx-auto">
-                <div className="inline-flex p-12 rounded-full bg-primary/5 border border-primary/10 mb-8">
-                  <LayoutGrid className="w-24 h-24 text-primary/30" />
+              <div className="text-center py-20 md:py-40 space-y-8 md:space-y-10 max-w-2xl mx-auto">
+                <div className="inline-flex p-8 md:p-12 rounded-full bg-primary/5 border border-primary/10 mb-4 md:mb-8">
+                  <LayoutGrid className="w-16 h-16 md:w-24 md:h-24 text-primary/30" />
                 </div>
-                <h3 className="text-responsive-h3 uppercase font-extrabold tracking-tight">Nenhum tesouro encontrado</h3>
-                <p className="text-responsive-body">
+                <h3 className="text-xl md:text-responsive-h3 uppercase font-extrabold tracking-tight">Nenhum tesouro encontrado</h3>
+                <p className="text-sm md:text-responsive-body">
                   Não encontramos nenhum título com esses critérios. Tente navegar pelas categorias para descobrir os melhores jogos da nova geração.
                 </p>
                 <button 
                   onClick={() => { setBusca(""); setCategoria("todas"); }}
-                  className="px-12 py-6 bg-primary text-primary-foreground rounded-full font-black uppercase tracking-[0.2em] text-xs hover:scale-105 transition-all shadow-2xl shadow-primary/30"
+                  className="px-8 md:px-12 py-4 md:py-6 bg-primary text-primary-foreground rounded-full font-black uppercase tracking-[0.2em] text-[10px] md:text-xs hover:scale-105 transition-all shadow-2xl shadow-primary/30"
                 >
                   Catálogo Completo
                 </button>
@@ -211,25 +211,25 @@ const Index = () => {
             )}
           </motion.div>
         ) : (
-          <div className="space-y-60">
+          <div className="space-y-32 md:space-y-60">
             <GameSection title="🔥 Mais Jogados" icon="flame" games={emAlta} />
             <GameSection title="⭐ Seleção de Elite" icon="star" games={recomendados} />
             <GameSection title="🚀 Jogos da Nova Geração" icon="rocket" games={recentes} />
             
-            <section className="space-y-16">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 border-b-2 border-primary/20 pb-20">
+            <section className="space-y-12 md:space-y-16">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-10 border-b-2 border-primary/20 pb-12 md:pb-20">
                 <div className="space-y-4">
                   <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Jogos</span> <span className="text-foreground">Mais Baixados</span></h2>
-                  <div className="flex items-center gap-8">
-                    <span className="w-32 h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
-                    <span className="text-responsive-body font-medium">{games.length} experiências de alto nível disponíveis</span>
+                  <div className="flex items-center gap-4 md:gap-8">
+                    <span className="w-20 md:w-32 h-1.5 md:h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
+                    <span className="text-sm md:text-responsive-body font-medium">{games.length} experiências de alto nível</span>
                   </div>
                 </div>
                 
                 <select 
                   value={ordenacao} 
                   onChange={(e) => setOrdenacao(e.target.value as SortOption)}
-                  className="bg-card border border-border/50 rounded-2xl px-8 py-5 text-sm font-bold uppercase tracking-widest focus:outline-none focus:ring-8 focus:ring-primary/5 transition-all hover:border-primary/30 cursor-pointer shadow-xl shadow-black/10"
+                  className="bg-card border border-border/50 rounded-xl sm:rounded-2xl px-6 md:px-8 py-3.5 md:py-5 text-xs md:text-sm font-bold uppercase tracking-widest focus:outline-none focus:ring-8 focus:ring-primary/5 transition-all hover:border-primary/30 cursor-pointer shadow-xl shadow-black/10"
                 >
                   <option value="nome">Ordem Alfabética</option>
                   <option value="preco_asc">Melhor Investimento</option>
