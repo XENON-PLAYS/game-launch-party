@@ -144,14 +144,14 @@ const GameDetail = () => {
             <span>Voltar ao Catálogo</span>
           </Link>
 
-          <div className="grid lg:grid-cols-[400px_1fr] gap-12 lg:items-start">
+          <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Visuals */}
-            <div className="space-y-4">
-              <div className="rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4]">
+            <div className="lg:col-span-4 space-y-4">
+              <div className="rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4] bg-muted">
                 <img 
                   src={selectedImage || game.imagem || ""} 
                   alt={game.nome} 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-cover transition-all duration-500" 
                 />
               </div>
 
@@ -177,12 +177,11 @@ const GameDetail = () => {
               )}
             </div>
 
-            {/* Content Info */}
-            <div className="space-y-8">
+            <div className="lg:col-span-8 space-y-8">
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2">
                   {game.categorias.map((c) => (
-                    <span key={c} className="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                    <span key={c} className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20">
                       {c}
                     </span>
                   ))}
@@ -193,7 +192,7 @@ const GameDetail = () => {
                 </h1>
 
                 {/* Rating summary */}
-                <div className="flex items-center gap-4 py-2 border-y border-border">
+                <div className="flex items-center gap-4 py-2 border-y border-border w-fit">
                   <div className="flex items-center gap-1.5">
                     {[1, 2, 3, 4, 5].map((s) => (
                       <Star key={s} className={`w-4 h-4 ${s <= Math.round(avgRating?.avg ?? 0) ? "text-yellow-400 fill-yellow-400" : "text-muted-foreground/30"}`} />
@@ -206,17 +205,17 @@ const GameDetail = () => {
                 </div>
               </div>
 
-              <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl">
                 {game.descricao}
               </p>
 
               {/* Quick Actions Bar */}
-              <div className="flex flex-wrap items-center gap-6 pt-4">
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mb-1">Preço Atual</span>
-                  <span className="text-4xl font-bold text-primary">
-                    {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
-                  </span>
+              <div className="flex flex-wrap items-end gap-8 pt-4">
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Preço Atual</span>
+                  <div className="text-4xl font-bold text-primary flex items-baseline gap-1">
+                    {game.preco === 0 ? "GRÁTIS" : <><span className="text-xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -225,7 +224,7 @@ const GameDetail = () => {
                       const element = document.getElementById('download-section');
                       element?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all duration-300"
+                    className="flex items-center gap-3 px-10 py-4 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1"
                   >
                     <span>Baixar Agora</span>
                     <Download className="w-4 h-4" />
@@ -233,7 +232,7 @@ const GameDetail = () => {
                   
                   <button
                     onClick={toggleFavorite}
-                    className={`p-4 rounded-2xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary"}`}
+                    className={`p-4 rounded-xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary hover:border-primary/50 shadow-sm"}`}
                   >
                     <Heart className={`w-6 h-6 ${isFavorited ? "fill-primary" : ""}`} />
                   </button>
@@ -241,19 +240,19 @@ const GameDetail = () => {
               </div>
 
               {/* Attributes Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-border">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-8 border-t border-border">
                 {[
                   { icon: Building2, label: "Desenvolvedor", value: game.desenvolvedor },
                   { icon: Calendar, label: "Lançamento", value: game.lancamento },
                   { icon: Shield, label: "Classificação", value: game.classificacao },
                   { icon: HardDrive, label: "Tamanho", value: game.tamanho }
                 ].map((item, i) => (
-                  <div key={i} className="space-y-2">
-                    <div className="flex items-center gap-2 text-primary">
-                      <item.icon className="w-4 h-4" />
+                  <div key={i} className="space-y-2 group">
+                    <div className="flex items-center gap-2 text-primary/70 group-hover:text-primary transition-colors">
+                      <item.icon className="w-3.5 h-3.5" />
                       <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground">{item.label}</span>
                     </div>
-                    <p className="text-sm font-bold truncate">{item.value || "—"}</p>
+                    <p className="text-sm font-bold truncate group-hover:text-foreground transition-colors">{item.value || "—"}</p>
                   </div>
                 ))}
               </div>
@@ -262,12 +261,12 @@ const GameDetail = () => {
         </div>
       </section>
 
-      <main className="container mx-auto px-4 py-20 space-y-24">
+      <main className="container mx-auto px-4 py-20 space-y-32">
         {/* Gallery / Trailer Section */}
         {game.trailer_url && (
-          <section className="space-y-10">
+          <section className="space-y-12">
             <div className="flex items-center gap-6">
-              <div className="p-4 rounded-[2rem] bg-primary/10 border border-primary/20">
+              <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
                 <Play className="w-8 h-8 text-primary" />
               </div>
               <div className="space-y-1">
@@ -279,7 +278,7 @@ const GameDetail = () => {
               </div>
             </div>
 
-            <div className="aspect-video rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl bg-black relative group">
+            <div className="aspect-video rounded-3xl overflow-hidden border border-border shadow-3xl bg-black relative group">
               <iframe
                 src={game.trailer_url}
                 title={`${game.nome} Trailer`}
@@ -292,11 +291,11 @@ const GameDetail = () => {
         )}
 
         {/* Requirements & Download Section */}
-        <section id="download-section" className="grid lg:grid-cols-2 gap-16">
+        <section id="download-section" className="grid lg:grid-cols-2 gap-20">
           {/* Download Area */}
-          <div className="space-y-10">
+          <div className="space-y-12">
             <div className="flex items-center gap-6">
-              <div className="p-4 rounded-[2rem] bg-primary/10 border border-primary/20">
+              <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
                 <Download className="w-8 h-8 text-primary" />
               </div>
               <div className="space-y-1">
@@ -314,15 +313,15 @@ const GameDetail = () => {
                   <button
                     key={link.id}
                     onClick={() => handleDownload(link.id, link.url)}
-                    className={`group flex items-center justify-between px-8 py-6 rounded-3xl border transition-all duration-300 ${
+                    className={`group flex items-center justify-between px-8 py-6 rounded-2xl border transition-all duration-300 ${
                       link.status === "online"
-                        ? "bg-white/5 border-white/10 hover:border-primary/50 hover:bg-primary/5"
-                        : "bg-white/5 border-white/5 opacity-40 cursor-not-allowed"
+                        ? "bg-card border-border hover:border-primary/50 hover:bg-primary/5"
+                        : "bg-muted border-border opacity-40 cursor-not-allowed"
                     }`}
                     disabled={link.status !== "online"}
                   >
                     <div className="flex items-center gap-5">
-                      <div className={`p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-primary group-hover:text-primary-foreground transition-all`}>
+                      <div className={`p-3 rounded-xl bg-muted border border-border group-hover:bg-primary group-hover:text-primary-foreground transition-all`}>
                         <Download className="w-5 h-5" />
                       </div>
                       <div className="text-left">
@@ -343,16 +342,16 @@ const GameDetail = () => {
                 ))}
               </div>
             ) : (
-              <div className="p-12 text-center rounded-[3rem] bg-white/5 border border-dashed border-white/10">
+              <div className="p-12 text-center rounded-3xl bg-muted/30 border border-dashed border-border">
                 <p className="text-muted-foreground font-bold uppercase tracking-widest text-xs">Nenhum link disponível no momento</p>
               </div>
             )}
           </div>
 
           {/* System Requirements */}
-          <div className="space-y-10">
+          <div className="space-y-12">
             <div className="flex items-center gap-6">
-              <div className="p-4 rounded-[2rem] bg-primary/10 border border-primary/20">
+              <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
                 <Monitor className="w-8 h-8 text-primary" />
               </div>
               <div className="space-y-1">
@@ -367,7 +366,7 @@ const GameDetail = () => {
             <div className="grid gap-8">
               {[{ label: "Mínimos", data: reqMin }, { label: "Recomendados", data: reqRec }].map(({ label, data }) =>
                 data ? (
-                  <div key={label} className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 space-y-6">
+                  <div key={label} className="bg-card border border-border rounded-3xl p-8 space-y-6">
                     <div className="flex items-center justify-between">
                       <h3 className="text-2xl font-bold tracking-tighter uppercase">{label}</h3>
                       <div className={`px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${label === "Mínimos" ? "bg-orange-500/10 text-orange-400" : "bg-emerald-500/10 text-emerald-400"}`}>
@@ -376,7 +375,7 @@ const GameDetail = () => {
                     </div>
                     <div className="space-y-3">
                       {Object.entries(data).map(([key, val]) => (
-                        <div key={key} className="flex justify-between items-center py-3 border-b border-white/5 last:border-0 group">
+                        <div key={key} className="flex justify-between items-center py-3 border-b border-border last:border-0 group">
                           <span className="text-xs text-muted-foreground uppercase font-bold tracking-widest group-hover:text-primary transition-colors">
                             {key === "placa" ? "GPU" : key === "armazenamento" ? "Disk" : key === "memoria" ? "RAM" : key === "processador" ? "CPU" : key}
                           </span>
@@ -392,10 +391,10 @@ const GameDetail = () => {
         </section>
 
         {/* Social / Community Section */}
-        <section className="grid lg:grid-cols-2 gap-16 pt-12">
+        <section className="grid lg:grid-cols-2 gap-20">
           <div className="space-y-8">
             <div className="flex items-center gap-6">
-              <div className="p-4 rounded-[2rem] bg-primary/10 border border-primary/20">
+              <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
                 <Star className="w-8 h-8 text-primary" />
               </div>
               <div className="space-y-1">
@@ -406,14 +405,14 @@ const GameDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-[3rem] p-10">
+            <div className="bg-card border border-border rounded-3xl p-8">
               <StarRating gameId={game.id} />
             </div>
           </div>
 
           <div className="space-y-8">
             <div className="flex items-center gap-6">
-              <div className="p-4 rounded-[2rem] bg-primary/10 border border-primary/20">
+              <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
                 <MessageSquare className="w-8 h-8 text-primary" />
               </div>
               <div className="space-y-1">
@@ -424,14 +423,14 @@ const GameDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-[3rem] p-10">
+            <div className="bg-card border border-border rounded-3xl p-8">
               <GameComments gameId={game.id} />
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-white/5 bg-background py-16 mt-20">
+      <footer className="border-t border-border bg-card py-16 mt-20">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.4em]">© 2025 Jogos Piratas — Navegando pelos Sete Mares dos Games</p>
         </div>

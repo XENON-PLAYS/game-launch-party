@@ -98,16 +98,16 @@ export function HeroCarousel() {
               {game.descricao}
             </p>
             
-            <div className="flex items-center gap-6 pt-4">
-              <div className="flex flex-col">
-                <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold mb-1">Preço</span>
-                <span className="text-3xl font-bold text-primary">
-                  {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
-                </span>
+            <div className="flex flex-wrap items-end gap-8 pt-4">
+              <div className="space-y-1">
+                <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold">Preço</span>
+                <div className="text-4xl font-bold text-primary flex items-baseline gap-1">
+                  {game.preco === 0 ? "GRÁTIS" : <><span className="text-xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
+                </div>
               </div>
               <Link 
                 to={`/jogo/${game.id}`} 
-                className="flex items-center gap-3 px-8 py-4 rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300"
+                className="flex items-center gap-3 px-10 py-4 rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1"
               >
                 <span>VER DETALHES</span>
                 <Info className="w-5 h-5" />
