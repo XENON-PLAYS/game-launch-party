@@ -241,21 +241,21 @@ const GameDetail = () => {
               </p>
 
               {/* Quick Actions Bar */}
-              <div className="flex flex-wrap items-end gap-8 pt-4">
+              <div className="flex flex-col sm:flex-row sm:items-end gap-6 md:gap-8 pt-4">
                 <div className="space-y-1">
                   <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Preço Atual</span>
-                  <div className="text-4xl font-bold text-primary flex items-baseline gap-1">
+                  <div className="text-3xl md:text-4xl font-bold text-primary flex items-baseline gap-1">
                     {game.preco === 0 ? "GRÁTIS" : <><span className="text-xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 w-full sm:w-auto">
                   <button 
                     onClick={() => {
                       const element = document.getElementById('download-section');
                       element?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="flex items-center gap-3 px-10 py-4 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-8 md:px-10 py-3.5 md:py-4 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest text-[10px] md:text-xs hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1 active:scale-95"
                   >
                     <span>Baixar Agora</span>
                     <Download className="w-4 h-4" />
@@ -263,9 +263,9 @@ const GameDetail = () => {
                   
                   <button
                     onClick={toggleFavorite}
-                    className={`p-4 rounded-xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary hover:border-primary/50 shadow-sm"}`}
+                    className={`p-3.5 md:p-4 rounded-xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary hover:border-primary/50 shadow-sm"} active:scale-95`}
                   >
-                    <Heart className={`w-6 h-6 ${isFavorited ? "fill-primary" : ""}`} />
+                    <Heart className={`w-5 h-5 md:w-6 md:h-6 ${isFavorited ? "fill-primary" : ""}`} />
                   </button>
                 </div>
               </div>
