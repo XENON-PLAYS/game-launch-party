@@ -49,11 +49,25 @@ const Perfil = () => {
   }
  }, [user, profile, authLoading, navigate]);
 
- useEffect(() => {
-  if (user) {
-   fetchExtraData();
-  }
- }, [user, activeTab]);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("success") === "true") {
+      toast.success("Pagamento realizado com sucesso! Seu status VIP será atualizado em instantes.", {
+        duration: 5000,
+        icon: <Trophy className="w-5 h-5 text-yellow-500" />
+      });
+      // Remove the query param from URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+      // Refresh profile to see VIP status
+      refreshProfile();
+    }
+  }, [refreshProfile]);
+
+  useEffect(() => {
+   if (user) {
+    fetchExtraData();
+   }
+  }, [user, activeTab]);
 
  const fetchExtraData = async () => {
   if (!user) return;

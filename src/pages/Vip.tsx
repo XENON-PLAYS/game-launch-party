@@ -4,10 +4,21 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect } from "react";
 
 const VipPage = () => {
   const { profile } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("canceled") === "true") {
+      toast.error("O pagamento foi cancelado. Se tiver alguma dúvida, entre em contato com o suporte.");
+      // Remove the query param
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
 
   const plans = [
     {
@@ -58,8 +69,26 @@ const VipPage = () => {
     }
   ];
 
-  const handleSubscribe = (planName: string) => {
-    toast.info(`Sistema de pagamento via Pix/Cartão sendo integrado para o plano ${planName}. Entre em contato com o suporte.`);
+  const handleSubscribe = async (planName: string) => {
+    if (!profile) {
+      toast.error("Você precisa estar logado para assinar um plano.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { planName, userId: profile.id },
+      });
+
+      if (error) throw error;
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error("Ocorreu um erro ao iniciar o pagamento. Tente novamente mais tarde.");
+    }
   };
 
   return (
