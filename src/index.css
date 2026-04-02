@@ -9,7 +9,7 @@
 
 /* Using standard system fonts for better readability and performance */
 :root {
-  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 @layer base {
@@ -126,19 +126,19 @@
 
   /* Responsive Typography System */
   .text-responsive-h1 {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold tracking-tighter leading-tight;
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight leading-[1.1];
   }
   .text-responsive-h2 {
-    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tighter leading-tight;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight;
   }
   .text-responsive-h3 {
-    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold tracking-tight;
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight;
   }
   .text-responsive-body {
-    @apply text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl leading-relaxed;
+    @apply text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl leading-relaxed text-muted-foreground;
   }
   .text-responsive-small {
-    @apply text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-bold uppercase tracking-widest;
+    @apply text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-primary;
   }
 }
 
