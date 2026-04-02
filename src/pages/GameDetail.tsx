@@ -167,7 +167,7 @@ const GameDetail = () => {
                     onClick={() => setSelectedImage(null)} 
                     className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${!selectedImage ? "border-primary" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                   >
-                    <img src={game.imagem || ""} alt="Main" className="w-full h-full object-cover" />
+                    <img src={game.imagem || ""} alt="Main" className="w-full h-full object-cover" onError={handleImageError} />
                   </button>
                   {game.galeria.map((img, i) => (
                     <button 
@@ -175,7 +175,7 @@ const GameDetail = () => {
                       onClick={() => setSelectedImage(img)} 
                       className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${selectedImage === img ? "border-primary" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                     >
-                      <img src={img} alt={`Screenshot ${i + 1}`} className="w-full h-full object-cover" />
+                      <img src={img} alt={`Screenshot ${i + 1}`} className="w-full h-full object-cover" onError={handleImageError} />
                     </button>
                   ))}
                 </div>
