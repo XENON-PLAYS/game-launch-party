@@ -156,6 +156,7 @@ const GameDetail = () => {
                   src={selectedImage || game.imagem || ""} 
                   alt={game.nome} 
                   className="w-full h-full object-cover transition-all duration-500" 
+                  onError={handleImageError}
                 />
               </div>
 
