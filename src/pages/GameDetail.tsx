@@ -162,9 +162,9 @@ const GameDetail = () => {
       
 
       {/* Hero Section */}
-      <section className="bg-card border-b border-border py-12 sm:py-20 lg:py-32">
+      <section className="bg-card border-b border-border py-8 sm:py-20 lg:py-32">
         <div className="container-responsive">
-          <div className="mb-10 sm:mb-16">
+          <div className="mb-6 sm:mb-16">
             <Breadcrumbs 
               items={[
                 { label: "Catálogo", path: "/" },
@@ -173,10 +173,10 @@ const GameDetail = () => {
             />
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 items-start">
             {/* Visuals */}
-            <div className="lg:col-span-5 xl:col-span-4 space-y-8 sm:space-y-10">
-              <div className="rounded-3xl overflow-hidden border border-border shadow-3xl aspect-[3/4] bg-muted group/hero-image relative">
+            <div className="lg:col-span-5 xl:col-span-4 space-y-6 sm:space-y-10">
+              <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-border shadow-3xl aspect-[3/4] bg-muted group/hero-image relative">
                 <img 
                   src={selectedImage || game.imagem || ""} 
                   alt={game.nome} 
@@ -188,10 +188,10 @@ const GameDetail = () => {
 
               {/* Gallery thumbnails */}
               {game.galeria && game.galeria.length > 0 && (
-                <div className="grid grid-cols-4 gap-4 sm:gap-6">
+                <div className="grid grid-cols-4 gap-2 sm:gap-6">
                   <button 
                     onClick={() => setSelectedImage(null)} 
-                    className={`rounded-2xl overflow-hidden border-4 transition-all aspect-video ${!selectedImage ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
+                    className={`rounded-xl sm:rounded-2xl overflow-hidden border-2 sm:border-4 transition-all aspect-video ${!selectedImage ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                   >
                     <img src={game.imagem || ""} alt="Main" className="w-full h-full object-cover" onError={handleImageError} />
                   </button>
@@ -199,7 +199,7 @@ const GameDetail = () => {
                     <button 
                       key={i} 
                       onClick={() => setSelectedImage(img)} 
-                      className={`rounded-2xl overflow-hidden border-4 transition-all aspect-video ${selectedImage === img ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
+                      className={`rounded-xl sm:rounded-2xl overflow-hidden border-2 sm:border-4 transition-all aspect-video ${selectedImage === img ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                     >
                       <img src={img} alt={`Screenshot ${i + 1}`} className="w-full h-full object-cover" onError={handleImageError} />
                     </button>
@@ -208,7 +208,7 @@ const GameDetail = () => {
               )}
             </div>
 
-            <div className="lg:col-span-7 xl:col-span-8 space-y-10 sm:space-y-16">
+            <div className="lg:col-span-7 xl:col-span-8 space-y-8 sm:space-y-16">
               <div className="space-y-6 sm:space-y-8">
                 <div className="flex flex-wrap gap-3">
                   {(game.categorias || []).map((c) => (
