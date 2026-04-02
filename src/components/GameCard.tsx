@@ -47,12 +47,12 @@ export function GameCard({ game }: GameCardProps) {
             </span>
           </div>
           
-          <div className="flex gap-2">
+          <div className="flex w-full">
             <Link 
               to={`/jogo/${game.id}`} 
-              className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-xs bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-lg shadow-primary/20"
+              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-bold text-xs bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-lg shadow-primary/20"
             >
-              <Download className="w-3.5 h-3.5" />
+              <Info className="w-3.5 h-3.5" />
               <span>VER DETALHES</span>
             </Link>
           </div>
