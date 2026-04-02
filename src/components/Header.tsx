@@ -164,7 +164,7 @@ export function Header() {
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
+      <>
         {mobileOpen && (
           <motion.div 
             initial={{ opacity: 0, height: 0 }}
