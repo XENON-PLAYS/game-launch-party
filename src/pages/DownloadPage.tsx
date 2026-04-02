@@ -61,8 +61,8 @@ const DownloadPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-lg mx-auto text-center space-y-8">
+      <div className="container-responsive py-8 md:py-16">
+        <div className="max-w-xl mx-auto text-center space-y-8 md:space-y-12">
           {/* Game info */}
           {game && (
             <div className="space-y-4">
