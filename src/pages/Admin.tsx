@@ -143,7 +143,7 @@ const Admin = () => {
 
       <main className="container-responsive py-6">
         {/* Metrics Summary */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           <div className="bg-card border border-border rounded-xl p-6">
             <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-primary" /> Downloads por Jogo
