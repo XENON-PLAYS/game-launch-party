@@ -13,7 +13,7 @@ import { StarRating } from "@/components/StarRating";
 
 
 const GameDetail = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   
