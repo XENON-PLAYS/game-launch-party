@@ -55,7 +55,13 @@ export function Header() {
 
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="hidden sm:block">
+            <OnlineUsers />
+          </div>
+
+          {user && <NotificationBell />}
+
           {/* Theme Toggle */}
           <button onClick={toggleTheme} className="p-2.5 rounded-xl hover:bg-muted transition-colors">
             {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-muted-foreground" />}
