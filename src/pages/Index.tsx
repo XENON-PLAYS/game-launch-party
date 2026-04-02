@@ -255,7 +255,7 @@ const Index = () => {
                 <span className="font-black text-4xl tracking-tighter leading-none text-primary">GRATIS</span>
               </div>
               <p className="text-responsive-body max-w-sm">
-                A maior comunidade de compartilhamento de jogos. Descubra novos horizontes, jogue com seus amigos e compartilhe suas experiências épicas.
+                A maior comunidade de compartilhamento de jogos. Descubra os melhores jogos da nova geração, jogue com seus amigos e compartilhe suas experiências épicas.
               </p>
             </div>
             
