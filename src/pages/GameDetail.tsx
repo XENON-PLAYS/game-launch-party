@@ -218,7 +218,7 @@ const GameDetail = () => {
                   ))}
                 </div>
                 
-                <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold tracking-tighter uppercase leading-tight">
                   {game.nome}
                 </h1>
 
