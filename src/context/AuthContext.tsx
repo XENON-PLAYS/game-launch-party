@@ -42,7 +42,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .select("*")
       .eq("user_id", userId)
       .single();
-    if (data) setProfile(data);
+    if (data) {
+      setProfile(data);
+      if (data.theme) setTheme(data.theme as "light" | "dark");
+    }
 
     const { data: roleData } = await supabase
       .from("user_roles")
