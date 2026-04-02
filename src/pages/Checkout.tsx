@@ -4,9 +4,10 @@ import { useAuth } from "@/context/AuthContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Shield, CreditCard, ArrowLeft, Loader2, Sparkles, Zap } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { Check, Shield, CreditCard, ArrowLeft, Sparkles } from "lucide-react";
+import { PRICING_CONFIG } from "@/config/pricing";
 import { toast } from "sonner";
+
 
 const Checkout = () => {
   const { profile, user } = useAuth();
