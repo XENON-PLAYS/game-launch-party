@@ -37,6 +37,7 @@ const Admin = () => {
     result = [...result].sort((a, b) => {
       if (ordenacao === "preco_asc") return a.preco - b.preco;
       if (ordenacao === "preco_desc") return b.preco - a.preco;
+      if (ordenacao === "downloads") return b.download_count - a.download_count;
       return a.nome.localeCompare(b.nome);
     });
     return result;
