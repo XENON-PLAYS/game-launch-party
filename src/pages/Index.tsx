@@ -162,12 +162,12 @@ const Index = () => {
             animate={{ opacity: 1 }}
             className="space-y-16"
           >
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 border-b border-border/40 pb-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 border-b-2 border-primary/20 pb-16">
               <div className="space-y-4">
-                <h2 className="text-responsive-h2">Catálogo Filtrado</h2>
+                <h2 className="text-responsive-h2"><span className="text-primary">Catálogo</span> <span className="text-foreground">Filtrado</span></h2>
                 <div className="flex items-center gap-4">
                   <span className="w-24 h-1.5 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                  <p className="text-responsive-body">
+                  <p className="text-responsive-body font-medium">
                     {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
                   </p>
                 </div>
