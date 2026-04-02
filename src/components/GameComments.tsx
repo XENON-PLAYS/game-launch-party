@@ -3,7 +3,8 @@ import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { MessageSquare, ThumbsUp, ThumbsDown, Reply, Trash2, Send } from "lucide-react";
+import { MessageSquare, ThumbsUp, ThumbsDown, Reply, Trash2, Send, ShieldAlert, Flag } from "lucide-react";
+import { toast } from "sonner";
 
 interface GameCommentsProps {
   gameId: string;
