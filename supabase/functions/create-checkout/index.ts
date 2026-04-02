@@ -13,7 +13,39 @@ serve(async (req) => {
   }
 
   try {
-    const { planName, userId, email } = await req.json();
+    // Authenticate the user
+    const authHeader = req.headers.get("authorization");
+    if (!authHeader) {
+      return new Response(JSON.stringify({ error: "Missing authorization header" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 401,
+      });
+    }
+
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL") || "",
+      Deno.env.get("SUPABASE_ANON_KEY") || "",
+      { global: { headers: { Authorization: authHeader } } }
+    );
+
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 401,
+      });
+    }
+
+    const { planName } = await req.json();
+
+    // Validate planName
+    const validPlans = ["Mensal", "Semestral", "Anual"];
+    if (!planName || !validPlans.includes(planName)) {
+      return new Response(JSON.stringify({ error: "Invalid plan" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
       apiVersion: "2023-10-16",
@@ -21,30 +53,25 @@ serve(async (req) => {
 
     const planConfig: Record<string, { amount: number, productId: string }> = {
       "Mensal": { 
-        amount: 500, // R$ 5,00
+        amount: 500,
         productId: "prod_UGA3qOYFSDXjZw" 
       },
       "Semestral": { 
-        amount: 2500, // R$ 25,00
+        amount: 2500,
         productId: "prod_UGA3qOYFSDXjZw"
       },
       "Anual": { 
-        amount: 4500, // R$ 45,00
+        amount: 4500,
         productId: "prod_UGA3f7rVU6LR32"
       },
     };
 
-    const config = planConfig[planName as keyof typeof planConfig];
-
-    if (!config) {
-      throw new Error(`Plano inválido: ${planName}`);
-    }
-
+    const config = planConfig[planName];
     const origin = req.headers.get("origin") || "http://localhost:3000";
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      customer_email: email,
+      customer_email: user.email,
       line_items: [
         {
           price_data: {
@@ -58,10 +85,10 @@ serve(async (req) => {
       mode: "payment",
       success_url: `${origin}/perfil?success=true`,
       cancel_url: `${origin}/checkout?plan=${planName}&canceled=true`,
-      client_reference_id: userId,
+      client_reference_id: user.id,
       metadata: {
         planName,
-        userId,
+        userId: user.id,
       },
     });
 
@@ -71,9 +98,9 @@ serve(async (req) => {
     });
   } catch (error) {
     console.error("Error creating checkout session:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 400,
+      status: 500,
     });
   }
 });

@@ -15,7 +15,7 @@ serve(async (req) => {
   try {
     const signature = req.headers.get("stripe-signature");
     if (!signature) {
-      throw new Error("No stripe signature");
+      return new Response(JSON.stringify({ error: "Missing signature" }), { status: 400 });
     }
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
@@ -25,28 +25,33 @@ serve(async (req) => {
     const body = await req.text();
     const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET");
     
+    if (!webhookSecret) {
+      console.error("STRIPE_WEBHOOK_SECRET not configured");
+      return new Response(JSON.stringify({ error: "Webhook not configured" }), { status: 500 });
+    }
+
     let event;
     try {
-      if (webhookSecret) {
-        event = await stripe.webhooks.constructEventAsync(body, signature, webhookSecret);
-      } else {
-        event = JSON.parse(body);
-      }
+      event = await stripe.webhooks.constructEventAsync(body, signature, webhookSecret);
     } catch (err) {
-      console.error(`Webhook signature verification failed.`, err.message);
-      return new Response(`Webhook Error: ${err.message}`, { status: 400 });
+      console.error("Webhook signature verification failed.", err.message);
+      return new Response(JSON.stringify({ error: "Invalid signature" }), { status: 400 });
     }
 
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
       const { planName, userId } = session.metadata;
 
+      if (!planName || !userId) {
+        console.error("Missing metadata in checkout session");
+        return new Response(JSON.stringify({ error: "Missing metadata" }), { status: 400 });
+      }
+
       const supabase = createClient(
         Deno.env.get("SUPABASE_URL") || "",
         Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || ""
       );
 
-      // Map plan durations
       const durations: Record<string, number> = {
         "Mensal": 30,
         "Semestral": 180,
@@ -57,19 +62,18 @@ serve(async (req) => {
       const expiresAt = new Date();
       expiresAt.setDate(expiresAt.getDate() + daysToAdd);
 
-      // Update profile
       const { error: updateError } = await supabase
         .from("profiles")
         .update({
           is_vip: true,
           vip_expires_at: expiresAt.toISOString(),
-          badges: ["VIP"], // Add badge logic if needed
+          badges: ["VIP"],
         })
         .eq("user_id", userId);
 
       if (updateError) {
         console.error("Error updating profile:", updateError);
-        throw updateError;
+        return new Response(JSON.stringify({ error: "Failed to update profile" }), { status: 500 });
       }
 
       console.log(`User ${userId} upgraded to VIP for ${planName}`);
@@ -81,9 +85,9 @@ serve(async (req) => {
     });
   } catch (error) {
     console.error("Error processing webhook:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 400,
+      status: 500,
     });
   }
 });
