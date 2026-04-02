@@ -87,13 +87,9 @@ export function Header() {
           >
             <ShoppingCart className="w-5 h-5 group-hover:scale-110 transition-transform" />
             {count > 0 && (
-              <motion.span 
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="absolute -top-1.5 -right-1.5 bg-primary text-primary-foreground text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold border-2 border-background"
-              >
+              <span className="absolute -top-1.5 -right-1.5 bg-primary text-primary-foreground text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold border-2 border-background">
                 {count}
-              </motion.span>
+              </span>
             )}
           </button>
 

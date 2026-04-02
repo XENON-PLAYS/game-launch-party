@@ -1,7 +1,7 @@
 import { Tables } from "@/integrations/supabase/types";
 import { GameCard } from "./GameCard";
 import { Flame, Star, Clock, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+
 
 type Game = Tables<"games">;
 

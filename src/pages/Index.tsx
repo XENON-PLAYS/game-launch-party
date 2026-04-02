@@ -144,11 +144,7 @@ const Index = () => {
             ))}
           </div>
         ) : isSearching ? (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="space-y-10"
-          >
+          <div>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-8">
               <div>
                 <h2 className="text-4xl font-bold tracking-tighter uppercase mb-2">Resultados da busca</h2>
