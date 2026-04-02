@@ -211,7 +211,7 @@ const GameDetail = () => {
             <div className="lg:col-span-7 xl:col-span-8 space-y-10 sm:space-y-16">
               <div className="space-y-6 sm:space-y-8">
                 <div className="flex flex-wrap gap-3">
-                  {game.categorias.map((c) => (
+                  {(game.categorias || []).map((c) => (
                     <Link 
                       key={c} 
                       to={`/categoria/${c}`}
