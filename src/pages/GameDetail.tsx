@@ -213,7 +213,7 @@ const GameDetail = () => {
               {/* Quick Actions Bar */}
               <div className="flex flex-wrap items-center gap-6 pt-4">
                 <div className="flex flex-col">
-                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em] mb-1">Preço Atual</span>
+                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mb-1">Preço Atual</span>
                   <span className="text-4xl font-bold text-primary">
                     {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
                   </span>
@@ -222,27 +222,23 @@ const GameDetail = () => {
                 <div className="flex items-center gap-3">
                   <button 
                     onClick={() => addItem(game)}
-                    className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold uppercase tracking-widest text-xs hover:scale-105 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 group"
+                    className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all duration-300"
                   >
                     <span>Adicionar ao Carrinho</span>
-                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="w-4 h-4" />
                   </button>
                   
                   <button
                     onClick={toggleFavorite}
-                    className={`p-4 rounded-2xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary shadow-lg shadow-primary/20" : "bg-white/5 border-white/10 text-muted-foreground hover:border-primary/50 hover:text-primary"}`}
+                    className={`p-4 rounded-2xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary"}`}
                   >
                     <Heart className={`w-6 h-6 ${isFavorited ? "fill-primary" : ""}`} />
-                  </button>
-                  
-                  <button className="p-4 rounded-2xl bg-white/5 border border-white/10 text-muted-foreground hover:border-primary/50 hover:text-primary transition-all duration-300">
-                    <Share2 className="w-6 h-6" />
                   </button>
                 </div>
               </div>
 
               {/* Attributes Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-white/5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-border">
                 {[
                   { icon: Building2, label: "Desenvolvedor", value: game.desenvolvedor },
                   { icon: Calendar, label: "Lançamento", value: game.lancamento },
@@ -258,7 +254,7 @@ const GameDetail = () => {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
