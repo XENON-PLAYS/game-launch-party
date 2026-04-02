@@ -29,7 +29,7 @@ const App = () => (
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/jogo/:id" element={<GameDetail />} />
+                <Route path="/jogo/:slug" element={<GameDetail />} />
                 <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
                 
                 <Route path="/login" element={<Login />} />
