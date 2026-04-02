@@ -208,9 +208,13 @@ const GameDetail = () => {
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2">
                   {game.categorias.map((c) => (
-                    <span key={c} className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20">
+                    <Link 
+                      key={c} 
+                      to={`/categoria/${c}`}
+                      className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20 hover:bg-primary/30 transition-colors"
+                    >
                       {c}
-                    </span>
+                    </Link>
                   ))}
                 </div>
                 
