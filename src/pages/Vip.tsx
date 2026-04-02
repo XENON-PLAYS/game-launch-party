@@ -52,9 +52,9 @@ const VipPage = () => {
         "Participação em sorteios mensais",
         "Status 'Capitão da Frota'"
       ],
-      color: "from-yellow-500/20 to-yellow-600/20",
-      borderColor: "border-yellow-500/30",
-      buttonColor: "bg-yellow-600 hover:bg-yellow-700 shadow-yellow-500/20"
+      color: "from-primary/30 to-primary/40",
+      borderColor: "border-primary/60",
+      buttonColor: "bg-primary hover:bg-primary/90 shadow-primary/40"
     }
   ];
 
