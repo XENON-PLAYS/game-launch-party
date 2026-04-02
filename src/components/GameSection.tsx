@@ -14,7 +14,8 @@ interface GameSectionProps {
 const icons = { 
   flame: { icon: Flame, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" }, 
   star: { icon: Star, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" }, 
-  clock: { icon: Clock, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" } 
+  clock: { icon: Clock, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" },
+  rocket: { icon: Rocket, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" } 
 };
 
 export function GameSection({ title, icon, games }: GameSectionProps) {
