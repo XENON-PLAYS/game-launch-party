@@ -1,9 +1,10 @@
-import { useState, useMemo, useEffect } from "react";
-import { Search, SlidersHorizontal, ArrowUpDown, Filter, X } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import { Link } from "react-router-dom";
 import { GameCard } from "@/components/GameCard";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { supabase } from "@/integrations/supabase/client";
@@ -55,6 +56,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
+      <SEO />
       <Header />
       
       
@@ -219,7 +221,27 @@ const Index = () => {
         )}
       </main>
 
-      <footer className="border-t border-white/5 bg-background py-16 mt-20">
+      {/* SEO Categories Index */}
+      <section className="bg-card/50 border-t border-white/5 py-12">
+        <div className="container mx-auto px-4">
+          <div className="space-y-6">
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground text-center">Navegue por Categorias</h4>
+            <div className="flex flex-wrap justify-center gap-3">
+              {allCategories.map((cat) => (
+                <Link 
+                  key={cat} 
+                  to={`/categoria/${cat}`}
+                  className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-bold uppercase tracking-widest hover:border-primary hover:text-primary transition-all duration-300"
+                >
+                  {cat}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-white/5 bg-background py-16 mt-0">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div className="space-y-6">

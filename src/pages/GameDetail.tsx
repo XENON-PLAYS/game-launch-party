@@ -1,10 +1,12 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
-import { Download, ArrowLeft, Monitor, HardDrive, Calendar, Building2, Tag, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Loader2, Share2, Play } from "lucide-react";
+import { Download, ArrowLeft, Monitor, HardDrive, Calendar, Building2, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Play } from "lucide-react";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
@@ -13,7 +15,7 @@ import { StarRating } from "@/components/StarRating";
 
 
 const GameDetail = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   
@@ -24,72 +26,84 @@ const GameDetail = () => {
   };
 
   const { data: game, isLoading } = useQuery({
-    queryKey: ["game", id],
+    queryKey: ["game", slug],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("games")
-        .select("*")
-        .eq("id", id!)
-        .single();
+      // Tenta buscar por slug, se não encontrar (ou se o slug parecer um UUID), tenta por ID para manter compatibilidade
+      let query = supabase.from("games").select("*");
+      
+      const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug!);
+      
+      if (isUUID) {
+        query = query.eq("id", slug!);
+      } else {
+        query = query.eq("slug", slug!);
+      }
+
+      const { data, error } = await query.maybeSingle();
       if (error) throw error;
       return data;
     },
-    enabled: !!id,
+    enabled: !!slug,
   });
 
+  const gameId = game?.id;
+
   const { data: downloadLinks } = useQuery({
-    queryKey: ["download-links", id],
+    queryKey: ["download-links", gameId],
     queryFn: async () => {
       const { data } = await supabase
         .from("download_links")
         .select("*")
-        .eq("game_id", id!);
+        .eq("game_id", gameId!);
       return data ?? [];
     },
-    enabled: !!id,
+    enabled: !!gameId,
   });
 
   const { data: avgRating } = useQuery({
-    queryKey: ["avg-rating", id],
+    queryKey: ["avg-rating", gameId],
     queryFn: async () => {
       const { data } = await supabase
         .from("game_ratings")
         .select("rating")
-        .eq("game_id", id!);
+        .eq("game_id", gameId!);
       if (!data || data.length === 0) return { avg: 0, count: 0 };
       const avg = data.reduce((s, r) => s + r.rating, 0) / data.length;
       return { avg: Math.round(avg * 10) / 10, count: data.length };
     },
-    enabled: !!id,
+    enabled: !!gameId,
   });
 
   const { data: isFavorited, refetch: refetchFav } = useQuery({
-    queryKey: ["favorite", id, user?.id],
+    queryKey: ["favorite", gameId, user?.id],
     queryFn: async () => {
       if (!user) return false;
       const { data } = await supabase
         .from("favorites")
         .select("id")
         .eq("user_id", user.id)
-        .eq("game_id", id!)
+        .eq("game_id", gameId!)
         .maybeSingle();
       return !!data;
     },
-    enabled: !!id,
+    enabled: !!gameId && !!user?.id,
   });
 
   const toggleFavorite = async () => {
     if (!user) return navigate("/login");
+    if (!gameId) return;
+
     if (isFavorited) {
-      await supabase.from("favorites").delete().eq("user_id", user.id).eq("game_id", id!);
+      await supabase.from("favorites").delete().eq("user_id", user.id).eq("game_id", gameId);
     } else {
-      await supabase.from("favorites").insert({ user_id: user.id, game_id: id! });
+      await supabase.from("favorites").insert({ user_id: user.id, game_id: gameId });
     }
     refetchFav();
   };
 
   const handleDownload = (linkId: string, url: string) => {
-    navigate(`/download/${id}/${linkId}`);
+    if (!gameId) return;
+    navigate(`/download/${gameId}/${linkId}`);
   };
 
   if (isLoading) {
@@ -137,16 +151,24 @@ const GameDetail = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
+      <SEO 
+        title={game.nome}
+        description={game.descricao?.substring(0, 160) + (game.descricao?.length > 160 ? "..." : "")}
+        image={game.imagem}
+        keywords={`${game.nome}, download ${game.nome}, baixar ${game.nome}, ${game.categorias.join(", ")}, pc games`}
+      />
       <Header />
       
 
       {/* Hero Section */}
       <section className="bg-card border-b border-border py-12">
         <div className="container mx-auto px-4">
-          <Link to="/" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors mb-8 group">
-            <ArrowLeft className="w-4 h-4" />
-            <span>Voltar ao Catálogo</span>
-          </Link>
+          <Breadcrumbs 
+            items={[
+              { label: "Catálogo", path: "/" },
+              { label: game.nome }
+            ]} 
+          />
 
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Visuals */}
@@ -186,9 +208,13 @@ const GameDetail = () => {
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2">
                   {game.categorias.map((c) => (
-                    <span key={c} className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20">
+                    <Link 
+                      key={c} 
+                      to={`/categoria/${c}`}
+                      className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20 hover:bg-primary/30 transition-colors"
+                    >
                       {c}
-                    </span>
+                    </Link>
                   ))}
                 </div>
                 

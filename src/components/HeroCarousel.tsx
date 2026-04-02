@@ -70,9 +70,13 @@ export function HeroCarousel() {
           <div className="space-y-6">
             <div className="flex gap-2 flex-wrap">
               {game.categorias.map((c) => (
-                <span key={c} className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20">
+                <Link 
+                  key={c} 
+                  to={`/categoria/${c}`}
+                  className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20 hover:bg-primary/30 transition-colors"
+                >
                   {c}
-                </span>
+                </Link>
               ))}
             </div>
             
@@ -92,7 +96,7 @@ export function HeroCarousel() {
                 </div>
               </div>
               <Link 
-                to={`/jogo/${game.id}`} 
+                to={`/jogo/${game.slug || game.id}`} 
                 className="flex items-center gap-3 px-10 py-4 rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1"
               >
                 <span>VER DETALHES</span>
@@ -102,7 +106,7 @@ export function HeroCarousel() {
           </div>
 
           <div className="hidden md:block">
-            <Link to={`/jogo/${game.id}`} className="block rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4]">
+            <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4]">
               <img 
                 src={game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
                 alt={game.nome} 

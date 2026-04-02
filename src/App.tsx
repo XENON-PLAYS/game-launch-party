@@ -14,6 +14,7 @@ import Cadastro from "./pages/Cadastro.tsx";
 import Admin from "./pages/Admin.tsx";
 import DownloadPage from "./pages/DownloadPage.tsx";
 import Perfil from "./pages/Perfil.tsx";
+import CategoryPage from "./pages/CategoryPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -29,8 +30,9 @@ const App = () => (
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/jogo/:id" element={<GameDetail />} />
+                <Route path="/jogo/:slug" element={<GameDetail />} />
                 <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
+                <Route path="/categoria/:category" element={<CategoryPage />} />
                 
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
