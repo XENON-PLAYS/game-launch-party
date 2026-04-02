@@ -58,9 +58,17 @@ export function Header() {
           <div className="relative">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="px-4 py-2 rounded-lg hover:bg-primary hover:shadow-[0_0_15px_hsl(1_76%_55%/0.5)] transition-all font-bold text-sm flex items-center gap-1 font-['Evogria']"
+              className="flex items-center gap-2 p-1.5 pr-3 rounded-full bg-secondary/50 hover:bg-primary hover:text-primary-foreground transition-all duration-300 font-bold text-sm font-['Evogria'] group"
             >
-              {user ? (profile?.display_name || user.email || "Usuário") : "Acessar"} <ChevronDown className="w-3.5 h-3.5" />
+              <div className="w-8 h-8 rounded-full overflow-hidden border border-border group-hover:border-primary-foreground/30 transition-colors bg-background flex items-center justify-center shrink-0">
+                {profile?.avatar_url ? (
+                  <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />
+                ) : (
+                  <User className="w-4 h-4" />
+                )}
+              </div>
+              <span className="max-w-[100px] truncate">{profile?.display_name || user.email?.split("@")[0] || "Usuário"}</span>
+              <ChevronDown className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100" />
             </button>
             {menuOpen && (
               <div className="absolute right-0 top-full mt-3 bg-popover border border-border rounded-xl w-48 shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
