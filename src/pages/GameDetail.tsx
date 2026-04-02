@@ -292,37 +292,39 @@ const GameDetail = () => {
         </div>
       </section>
 
-      <main className="container mx-auto px-4 py-20 space-y-32">
+      <main className="container mx-auto px-4 py-16 space-y-24">
         {/* Gallery / Trailer Section */}
         {game.trailer_url && (
-          <section className="space-y-12">
+          <section className="space-y-10">
             <div className="flex items-center gap-6">
-              <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
-                <Play className="w-8 h-8 text-primary" />
+              <div className="p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
+                <Play className="w-6 h-6 text-primary" />
               </div>
               <div className="space-y-1">
-                <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Trailer Oficial</h2>
+                <h2 className="text-3xl font-bold tracking-tighter uppercase leading-none">Trailer Oficial</h2>
                 <div className="flex items-center gap-3">
-                  <span className="w-16 h-1 bg-primary rounded-full" />
+                  <span className="w-12 h-1 bg-primary rounded-full" />
                   <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Cinemática em 4K</span>
                 </div>
               </div>
             </div>
 
-            <div className="aspect-video rounded-3xl overflow-hidden border border-border shadow-3xl bg-black relative group">
-              <iframe
-                src={game.trailer_url}
-                title={`${game.nome} Trailer`}
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="max-w-4xl mx-auto">
+              <div className="aspect-video rounded-3xl overflow-hidden border border-border shadow-3xl bg-black relative group">
+                <iframe
+                  src={game.trailer_url}
+                  title={`${game.nome} Trailer`}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </section>
         )}
 
         {/* Requirements & Download Section */}
-        <section id="download-section" className="grid lg:grid-cols-2 gap-20">
+        <section id="download-section" className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Download Area */}
           <div className="space-y-12">
             <div className="flex items-center gap-6">
