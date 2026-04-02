@@ -1,20 +1,21 @@
 import { Tables } from "@/integrations/supabase/types";
 import { GameCard } from "./GameCard";
-import { Flame, Star, Clock, ChevronRight } from "lucide-react";
+import { Flame, Star, Clock, ChevronRight, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
 
 type Game = Tables<"games">;
 
 interface GameSectionProps {
   title: string;
-  icon: "flame" | "star" | "clock";
+  icon: "flame" | "star" | "clock" | "rocket";
   games: Game[];
 }
 
 const icons = { 
   flame: { icon: Flame, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" }, 
   star: { icon: Star, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" }, 
-  clock: { icon: Clock, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" } 
+  clock: { icon: Clock, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" },
+  rocket: { icon: Rocket, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" } 
 };
 
 export function GameSection({ title, icon, games }: GameSectionProps) {

@@ -186,7 +186,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-responsive-h3 uppercase font-extrabold tracking-tight">Nenhum tesouro encontrado</h3>
                 <p className="text-responsive-body">
-                  Não encontramos nenhum título com esses critérios. Tente navegar pelas categorias para descobrir novos horizontes épicos.
+                  Não encontramos nenhum título com esses critérios. Tente navegar pelas categorias para descobrir os melhores jogos da nova geração.
                 </p>
                 <button 
                   onClick={() => { setBusca(""); setCategoria("todas"); }}
@@ -214,12 +214,12 @@ const Index = () => {
           <div className="space-y-60">
             <GameSection title="🔥 Mais Jogados" icon="flame" games={emAlta} />
             <GameSection title="⭐ Seleção de Elite" icon="star" games={recomendados} />
-            <GameSection title="🕐 Novos Horizontes" icon="clock" games={recentes} />
+            <GameSection title="🚀 Jogos da Nova Geração" icon="rocket" games={recentes} />
             
             <section className="space-y-16">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 border-b-2 border-primary/20 pb-20">
                 <div className="space-y-4">
-                  <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Catálogo</span> <span className="text-foreground">Premium</span></h2>
+                  <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Jogos</span> <span className="text-foreground">Mais Baixados</span></h2>
                   <div className="flex items-center gap-8">
                     <span className="w-32 h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
                     <span className="text-responsive-body font-medium">{games.length} experiências de alto nível disponíveis</span>
@@ -255,7 +255,7 @@ const Index = () => {
                 <span className="font-black text-4xl tracking-tighter leading-none text-primary">GRATIS</span>
               </div>
               <p className="text-responsive-body max-w-sm">
-                A maior comunidade de compartilhamento de jogos. Descubra novos horizontes, jogue com seus amigos e compartilhe suas experiências épicas.
+                A maior comunidade de compartilhamento de jogos. Descubra os melhores jogos da nova geração, jogue com seus amigos e compartilhe suas experiências épicas.
               </p>
             </div>
             
