@@ -246,48 +246,48 @@ const Index = () => {
         )}
       </main>
 
-      <footer className="border-t border-border/50 bg-card py-48 mt-60">
+      <footer className="border-t border-border/50 bg-card py-16 md:py-48 mt-20 md:mt-60">
         <div className="container-responsive">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-24 mb-32">
-            <div className="space-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24 mb-16 md:mb-32">
+            <div className="space-y-6 md:space-y-12">
               <div className="flex flex-col">
-                <span className="font-black text-4xl tracking-tighter leading-none">JOGOS</span>
-                <span className="font-black text-4xl tracking-tighter leading-none text-primary">GRATIS</span>
+                <span className="font-black text-3xl md:text-4xl tracking-tighter leading-none">JOGOS</span>
+                <span className="font-black text-3xl md:text-4xl tracking-tighter leading-none text-primary">GRATIS</span>
               </div>
-              <p className="text-responsive-body max-w-sm">
+              <p className="text-sm md:text-responsive-body max-w-sm">
                 A maior comunidade de compartilhamento de jogos. Descubra os melhores jogos da nova geração, jogue com seus amigos e compartilhe suas experiências épicas.
               </p>
             </div>
             
-            <div className="space-y-12">
+            <div className="space-y-6 md:space-y-12">
               <h4 className="text-responsive-small text-foreground font-extrabold">Plataforma</h4>
-              <ul className="space-y-6 text-lg font-medium">
+              <ul className="space-y-3 md:space-y-6 text-base md:text-lg font-medium">
                 <li><button className="hover:text-primary transition-colors">Início</button></li>
                 <li><button className="hover:text-primary transition-colors">Catálogo</button></li>
                 <li><button className="hover:text-primary transition-colors">Novidades</button></li>
               </ul>
             </div>
             
-            <div className="space-y-12">
+            <div className="space-y-6 md:space-y-12">
               <h4 className="text-responsive-small text-foreground font-extrabold">Suporte</h4>
-              <ul className="space-y-6 text-lg font-medium">
+              <ul className="space-y-3 md:space-y-6 text-base md:text-lg font-medium">
                 <li><button className="hover:text-primary transition-colors">Central de Ajuda</button></li>
                 <li><button className="hover:text-primary transition-colors">Termos de Uso</button></li>
                 <li><button className="hover:text-primary transition-colors">Privacidade</button></li>
               </ul>
             </div>
 
-            <div className="space-y-12">
+            <div className="space-y-6 md:space-y-12">
               <h4 className="text-responsive-small text-foreground font-extrabold">Informativo</h4>
-              <p className="text-responsive-body">Receba avisos de novos tesouros diretamente no seu e-mail.</p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <input type="email" placeholder="Seu e-mail..." className="bg-background border border-border/50 rounded-2xl px-6 py-5 text-sm w-full focus:outline-none focus:ring-4 focus:ring-primary/10 shadow-xl shadow-black/5" />
-                <button className="bg-primary text-primary-foreground px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest shadow-2xl shadow-primary/20 hover:scale-105 transition-all">OK</button>
+              <p className="text-sm md:text-responsive-body">Receba avisos de novos tesouros diretamente no seu e-mail.</p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input type="email" placeholder="Seu e-mail..." className="bg-background border border-border/50 rounded-xl px-4 md:px-6 py-3 md:py-5 text-xs md:text-sm w-full focus:outline-none focus:ring-4 focus:ring-primary/10 shadow-xl shadow-black/5" />
+                <button className="bg-primary text-primary-foreground px-6 md:px-10 py-3 md:py-5 rounded-xl font-black uppercase text-[10px] md:text-xs tracking-widest shadow-2xl shadow-primary/20 hover:scale-105 transition-all">OK</button>
               </div>
             </div>
           </div>
           
-          <div className="pt-16 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-10 text-sm font-bold opacity-40 uppercase tracking-widest">
+          <div className="pt-8 md:pt-16 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-10 text-[10px] md:text-sm font-bold opacity-40 uppercase tracking-widest text-center md:text-left">
             <p>© 2025 JOGOS GRATIS. Navegação segura e eficiente.</p>
           </div>
         </div>
