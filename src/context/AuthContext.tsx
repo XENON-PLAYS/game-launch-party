@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { useTheme } from "./ThemeContext";
 
 interface Profile {
   id: string;
@@ -10,6 +11,9 @@ interface Profile {
   avatar_url: string | null;
   bio: string | null;
   is_vip: boolean;
+  theme: string;
+  status: string;
+  badges: string[];
 }
 
 interface AuthContextType {
@@ -30,6 +34,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const { setTheme } = useTheme();
 
   const fetchProfile = useCallback(async (userId: string) => {
     const { data } = await supabase
@@ -37,7 +42,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .select("*")
       .eq("user_id", userId)
       .single();
-    if (data) setProfile(data);
+    if (data) {
+      setProfile(data);
+      if (data.theme) setTheme(data.theme as "light" | "dark");
+    }
 
     const { data: roleData } = await supabase
       .from("user_roles")
