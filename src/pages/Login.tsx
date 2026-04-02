@@ -4,6 +4,7 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
 import { CartPopup } from "@/components/CartPopup";
+import { toast } from "sonner";
 
 const Login = () => {
   const { login } = useAuth();
@@ -17,11 +18,22 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErro("");
-    if (!email || !senha) { setErro("Preencha todos os campos!"); return; }
+    if (!email || !senha) {
+      setErro("Preencha todos os campos!");
+      toast.error("Preencha todos os campos!");
+      return;
+    }
     setLoading(true);
     const { error } = await login(email, senha);
     setLoading(false);
-    if (error) { setErro(error); return; }
+    
+    if (error) {
+      setErro(error);
+      toast.error(error);
+      return;
+    }
+    
+    toast.success("Bem-vindo de volta!");
     navigate("/");
   };
 
@@ -30,7 +42,7 @@ const Login = () => {
       {/* Decorative Background Elements */}
       <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full" />
       <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full" />
-
+      
       <Header />
       <CartPopup />
       

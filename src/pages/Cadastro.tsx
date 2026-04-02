@@ -4,6 +4,7 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
 import { CartPopup } from "@/components/CartPopup";
+import { toast } from "sonner";
 
 const Cadastro = () => {
   const { register } = useAuth();
@@ -18,22 +19,41 @@ const Cadastro = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErro("");
-    if (!form.nome || !form.email || !form.senha) { setErro("Preencha todos os campos!"); return; }
-    if (form.senha.length < 6) { setErro("Senha deve ter no mínimo 6 caracteres!"); return; }
-    if (form.senha !== form.confirma) { setErro("As senhas não conferem!"); return; }
+    if (!form.nome || !form.email || !form.senha) {
+      setErro("Preencha todos os campos!");
+      toast.error("Preencha todos os campos!");
+      return;
+    }
+    if (form.senha.length < 6) {
+      setErro("Senha deve ter no mínimo 6 caracteres!");
+      toast.error("Senha muito curta!");
+      return;
+    }
+    if (form.senha !== form.confirma) {
+      setErro("As senhas não conferem!");
+      toast.error("As senhas não coincidem!");
+      return;
+    }
 
     setLoading(true);
     const { error } = await register({ email: form.email, password: form.senha, displayName: form.nome });
     setLoading(false);
-    if (error) { setErro(error); return; }
+    
+    if (error) {
+      setErro(error);
+      toast.error(error);
+      return;
+    }
+    
+    toast.success("Conta criada com sucesso! Você já pode entrar.");
     navigate("/login");
   };
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
       {/* Decorative Background Elements */}
-      <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full" />
+      <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full" />
       
       <Header />
       <CartPopup />
