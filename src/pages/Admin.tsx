@@ -202,6 +202,7 @@ const Admin = () => {
             <option value="nome">Nome A-Z</option>
             <option value="preco_asc">Preço ↑</option>
             <option value="preco_desc">Preço ↓</option>
+            <option value="downloads">Mais Baixados</option>
           </select>
           <select value={filtroCategoria} onChange={(e) => setFiltroCategoria(e.target.value)} className="bg-card border border-border rounded-lg px-3 py-2.5 text-sm text-foreground">
             <option value="todas">Todas Categorias</option>
