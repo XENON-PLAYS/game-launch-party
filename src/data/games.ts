@@ -504,6 +504,18 @@ export const games: Game[] = [
     modos: ["Singleplayer"],
     idiomas: ["Português", "Inglês"],
   },
+  {
+    id: 48,
+    nome: "EA Sports FC 24",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/library_600x900.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/capsule_616x353.jpg",
+    categorias: ["Esportes", "Simulação"],
+    modos: ["Singleplayer", "Multiplayer"],
+    idiomas: ["Português", "Inglês"],
+  },
 ];
 
 export const allCategories = Array.from(new Set(games.flatMap((g) => g.categorias))).sort();
