@@ -81,7 +81,7 @@ const DownloadPage = () => {
           )}
 
           {/* Countdown or ready */}
-          <div className="bg-card border border-border rounded-2xl p-8 space-y-6">
+          <div className="bg-card border border-border rounded-3xl p-6 md:p-10 space-y-8 md:space-y-10 shadow-2xl">
             {!ready ? (
               <>
                 <div className="flex items-center justify-center gap-3">
