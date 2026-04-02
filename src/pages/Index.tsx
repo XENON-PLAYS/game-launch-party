@@ -129,35 +129,35 @@ const Index = () => {
         </div>
       </section>
 
-      <main className="container mx-auto px-4 py-12 space-y-20">
+      <main className="container-responsive py-8 md:py-12 lg:py-20 space-y-12 md:space-y-20">
         {isLoading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-6">
             {Array.from({ length: 10 }).map((_, i) => (
-              <div key={i} className="bg-white/5 rounded-2xl overflow-hidden border border-white/5 p-1">
+              <div key={i} className="bg-card rounded-2xl overflow-hidden border border-border p-1">
                 <Skeleton className="aspect-[3/4] w-full rounded-xl" />
                 <div className="p-4 space-y-3">
-                  <Skeleton className="h-5 w-3/4" />
+                  <Skeleton className="h-4 w-3/4" />
                   <div className="flex justify-between items-center">
-                    <Skeleton className="h-6 w-20" />
-                    <Skeleton className="h-8 w-16" />
+                    <Skeleton className="h-5 w-16" />
+                    <Skeleton className="h-8 w-12" />
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : isSearching ? (
-          <div className="space-y-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-8">
+          <div className="space-y-8 md:space-y-10">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border pb-6 md:pb-8">
               <div>
-                <h2 className="text-4xl font-bold tracking-tighter uppercase mb-2">Resultados da busca</h2>
-                <p className="text-muted-foreground text-sm font-bold uppercase tracking-widest">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter uppercase mb-2">Resultados</h2>
+                <p className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">
                   {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
                 </p>
               </div>
-              <div className="flex gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                <span>Ativo:</span>
-                {categoria !== "todas" && <span className="text-primary">{categoria}</span>}
-                {busca && <span className="text-primary">"{busca}"</span>}
+              <div className="flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                <span className="opacity-50">Ativo:</span>
+                {categoria !== "todas" && <span className="text-primary bg-primary/10 px-2 py-0.5 rounded">{categoria}</span>}
+                {busca && <span className="text-primary bg-primary/10 px-2 py-0.5 rounded">"{busca}"</span>}
               </div>
             </div>
 
