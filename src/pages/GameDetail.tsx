@@ -240,19 +240,19 @@ const GameDetail = () => {
               </div>
 
               {/* Attributes Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-border">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-8 border-t border-border">
                 {[
                   { icon: Building2, label: "Desenvolvedor", value: game.desenvolvedor },
                   { icon: Calendar, label: "Lançamento", value: game.lancamento },
                   { icon: Shield, label: "Classificação", value: game.classificacao },
                   { icon: HardDrive, label: "Tamanho", value: game.tamanho }
                 ].map((item, i) => (
-                  <div key={i} className="space-y-2">
-                    <div className="flex items-center gap-2 text-primary">
-                      <item.icon className="w-4 h-4" />
+                  <div key={i} className="space-y-2 group">
+                    <div className="flex items-center gap-2 text-primary/70 group-hover:text-primary transition-colors">
+                      <item.icon className="w-3.5 h-3.5" />
                       <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground">{item.label}</span>
                     </div>
-                    <p className="text-sm font-bold truncate">{item.value || "—"}</p>
+                    <p className="text-sm font-bold truncate group-hover:text-foreground transition-colors">{item.value || "—"}</p>
                   </div>
                 ))}
               </div>
