@@ -121,12 +121,17 @@ const Index = () => {
             
             <button 
               onClick={() => setShowFilters(!showFilters)}
-              className={`w-full md:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl border transition-all flex items-center justify-center gap-3 font-bold text-xs sm:text-sm tracking-[0.1em] uppercase ${
+              className={`w-full md:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl border transition-all flex items-center justify-center gap-3 font-bold text-xs sm:text-sm tracking-[0.1em] uppercase group ${
                 showFilters ? "bg-primary text-primary-foreground border-primary shadow-2xl shadow-primary/20" : "bg-card border-border/50 hover:border-primary/30"
               }`}
             >
-              <SlidersHorizontal className="w-4 h-4 sm:w-5 sm:h-5" />
+              <SlidersHorizontal className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 ${showFilters ? "rotate-180" : ""}`} />
               <span>Filtros Refinados</span>
+              {(categoria !== "todas" || ordenacao !== "nome") && (
+                <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-black animate-in zoom-in duration-300 ${showFilters ? "bg-white text-primary" : "bg-primary text-white"}`}>
+                  {(categoria !== "todas" ? 1 : 0) + (ordenacao !== "nome" ? 1 : 0)}
+                </span>
+              )}
             </button>
           </div>
 
