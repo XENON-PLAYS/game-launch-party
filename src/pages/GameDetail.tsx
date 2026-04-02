@@ -134,7 +134,7 @@ const GameDetail = () => {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       <Header />
-      <CartPopup />
+      
 
       {/* Hero Section */}
       <section className="bg-card border-b border-border py-12">
