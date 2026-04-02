@@ -441,7 +441,7 @@ const GameDetail = () => {
                 <h2 className="text-responsive-h2 leading-none uppercase">Avaliar</h2>
                 <div className="flex items-center gap-6">
                   <span className="w-16 sm:w-24 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                  <span className="text-responsive-small text-muted-foreground opacity-80">Seu Voto de Pirata</span>
+                  <span className="text-responsive-small text-muted-foreground opacity-80">Seu Voto de Jogador</span>
                 </div>
               </div>
             </div>

@@ -286,7 +286,7 @@ export function GameComments({ gameId }: GameCommentsProps) {
                       <div key={reply.id} className="space-y-2 group/reply">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <span className="font-black text-xs uppercase tracking-tight">{replyProfile?.display_name || "Pirata"}</span>
+                            <span className="font-black text-xs uppercase tracking-tight">{replyProfile?.display_name || "Jogador"}</span>
                             {replyProfile?.is_vip && (
                               <span className="bg-yellow-500/10 text-yellow-500 text-[8px] font-black px-1.5 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest">VIP</span>
                             )}
