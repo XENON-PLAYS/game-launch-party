@@ -40,7 +40,7 @@ const Index = () => {
   const filteredGames = useMemo(() => {
     let result = games;
     if (busca) result = result.filter((g) => g.nome.toLowerCase().includes(busca.toLowerCase()));
-    if (categoria !== "todas") result = result.filter((g) => g.categorias.includes(categoria));
+    if (categoria !== "todas") result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
     
     result = [...result].sort((a, b) => {
       if (ordenacao === "preco_asc") return a.preco - b.preco;
