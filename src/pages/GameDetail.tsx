@@ -100,7 +100,8 @@ const GameDetail = () => {
   };
 
   const handleDownload = (linkId: string, url: string) => {
-    navigate(`/download/${id}/${linkId}`);
+    if (!gameId) return;
+    navigate(`/download/${gameId}/${linkId}`);
   };
 
   if (isLoading) {
