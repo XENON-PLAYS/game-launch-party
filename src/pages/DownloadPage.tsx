@@ -59,38 +59,54 @@ const DownloadPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
       <Header />
-      <div className="container-responsive py-8 md:py-16">
-        <div className="max-w-xl mx-auto text-center space-y-8 md:space-y-12">
+      <main className="container-responsive py-12 sm:py-24 lg:py-32">
+        <div className="max-w-3xl mx-auto text-center space-y-12 sm:space-y-20 lg:space-y-32">
           {/* Game info */}
           {game && (
-            <div className="space-y-4">
-              <img src={game.imagem || ""} alt={game.nome} className="w-32 h-44 object-cover rounded-xl mx-auto border border-border shadow-xl" />
-              <h1 className="text-2xl font-bold">{game.nome}</h1>
-              {link && <p className="text-muted-foreground text-sm">{link.label}</p>}
+            <div className="space-y-8 sm:space-y-12 animate-fade-in">
+              <div className="relative group mx-auto w-40 sm:w-56 lg:w-72 aspect-[3/4]">
+                <img 
+                  src={game.imagem || ""} 
+                  alt={game.nome} 
+                  className="w-full h-full object-cover rounded-[2rem] sm:rounded-[3rem] mx-auto border-4 border-card shadow-3xl group-hover:scale-105 transition-transform duration-700" 
+                />
+                <div className="absolute inset-0 rounded-[2rem] sm:rounded-[3rem] shadow-[0_0_80px_rgba(249,115,22,0.1)] group-hover:shadow-[0_0_100px_rgba(249,115,22,0.2)] transition-shadow duration-700" />
+              </div>
+              <div className="space-y-4">
+                <h1 className="text-responsive-h2 leading-none uppercase">{game.nome}</h1>
+                {link && (
+                  <div className="flex items-center justify-center gap-4">
+                    <span className="w-12 h-1.5 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                    <p className="text-responsive-small text-muted-foreground opacity-80">{link.label}</p>
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
           {/* VIP badge */}
           {isVip && (
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
-              <Shield className="w-4 h-4" />
-              <span className="text-sm font-bold">VIP — Download Direto</span>
+            <div className="inline-flex items-center gap-4 px-8 py-4 rounded-2xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 shadow-2xl shadow-yellow-500/5 animate-bounce">
+              <Shield className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span className="text-sm sm:text-base font-black uppercase tracking-widest">VIP — Download Instantâneo</span>
             </div>
           )}
 
           {/* Countdown or ready */}
-          <div className="bg-card border border-border rounded-3xl p-6 md:p-10 space-y-8 md:space-y-10 shadow-2xl">
+          <div className="bg-card border-2 border-border rounded-[2.5rem] sm:rounded-[4rem] p-10 sm:p-20 space-y-12 sm:space-y-16 shadow-3xl relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            
             {!ready ? (
-              <>
-                <div className="flex items-center justify-center gap-3">
-                  <Loader2 className="w-6 h-6 animate-spin text-primary" />
-                  <span className="text-lg font-bold">Preparando download…</span>
+              <div className="relative z-10 space-y-12 sm:space-y-16">
+                <div className="flex items-center justify-center gap-4 text-primary animate-pulse">
+                  <Loader2 className="w-8 h-8 sm:w-10 sm:h-10 animate-spin" />
+                  <span className="text-responsive-h3 uppercase leading-none">Preparando Escotilha…</span>
                 </div>
-                <div className="relative w-24 h-24 mx-auto">
+                <div className="relative w-32 h-32 sm:w-48 sm:h-48 mx-auto">
                   <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" stroke="hsl(var(--border))" strokeWidth="6" fill="none" />
+                    <circle cx="50" cy="50" r="45" stroke="hsl(var(--border))" strokeWidth="4" fill="none" className="opacity-20" />
                     <circle
                       cx="50" cy="50" r="45"
                       stroke="hsl(var(--primary))"
@@ -98,43 +114,53 @@ const DownloadPage = () => {
                       fill="none"
                       strokeLinecap="round"
                       strokeDasharray={`${(1 - countdown / 5) * 283} 283`}
-                      className="transition-all duration-1000"
+                      className="transition-all duration-1000 shadow-[0_0_20px_rgba(249,115,22,0.5)]"
                     />
                   </svg>
-                  <span className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-primary">{countdown}</span>
+                  <span className="absolute inset-0 flex items-center justify-center text-4xl sm:text-6xl font-black text-primary drop-shadow-2xl">{countdown}</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Aguarde o tempo para liberar o download</p>
-              </>
+                <p className="text-responsive-body text-muted-foreground opacity-70">Aguarde o vento favorável para liberar o tesouro em seu porto.</p>
+              </div>
             ) : (
-              <>
-                <div className="flex items-center justify-center gap-2 text-green-400">
-                  <Download className="w-6 h-6" />
-                  <span className="text-lg font-bold">Download Pronto!</span>
+              <div className="relative z-10 space-y-12 sm:space-y-16 animate-fade-in">
+                <div className="flex items-center justify-center gap-4 text-emerald-400">
+                  <Download className="w-8 h-8 sm:w-10 sm:h-10" />
+                  <span className="text-responsive-h3 uppercase leading-none">Porto Liberado!</span>
                 </div>
                 <button
                   onClick={handleDownload}
-                  className="w-full py-4.5 md:py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-lg md:text-xl hover:bg-primary/90 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
+                  className="w-full py-6 sm:py-8 rounded-[1.5rem] sm:rounded-[2.5rem] bg-primary text-primary-foreground font-black text-xl sm:text-2xl lg:text-3xl uppercase tracking-[0.2em] hover:bg-primary/90 hover:scale-[1.03] active:scale-95 transition-all shadow-[0_20px_60px_-15px_rgba(249,115,22,0.5)] flex items-center justify-center gap-6"
                 >
-                  <Download className="w-6 h-6" />
+                  <Download className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12" />
                   Baixar Agora
                 </button>
-              </>
+              </div>
             )}
           </div>
 
           {/* Ad space placeholder */}
           {!isVip && (
-            <div className="bg-muted border border-border rounded-xl p-8 text-center">
-              <p className="text-xs text-muted-foreground uppercase tracking-wider">Espaço para Anúncios</p>
-              <p className="text-sm text-muted-foreground mt-2">Assine VIP para remover anúncios e pular a espera</p>
+            <div className="bg-muted/30 border-2 border-dashed border-border rounded-[2rem] p-10 sm:p-16 text-center space-y-4">
+              <p className="text-responsive-small text-muted-foreground opacity-40">Espaço Reservado para a Frota</p>
+              <p className="text-responsive-body text-muted-foreground opacity-80">Torne-se um <strong>Capitão VIP</strong> para remover todos os obstáculos e navegar sem espera.</p>
             </div>
           )}
 
-          <button onClick={() => navigate(`/jogo/${gameId}`)} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-            ← Voltar para o jogo
+          <button 
+            onClick={() => navigate(`/jogo/${gameId}`)} 
+            className="text-responsive-small text-muted-foreground hover:text-primary transition-all flex items-center justify-center gap-3 mx-auto font-black"
+          >
+            <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span>RETORNAR À TABERNA DO JOGO</span>
           </button>
         </div>
-      </div>
+      </main>
+
+      <footer className="border-t border-border bg-card py-20 sm:py-32 mt-20">
+        <div className="container-responsive text-center text-responsive-small text-muted-foreground opacity-60">
+          <p>© 2025 Jogos Piratas — Sua bússola para os melhores tesouros digitais.</p>
+        </div>
+      </footer>
     </div>
   );
 };
