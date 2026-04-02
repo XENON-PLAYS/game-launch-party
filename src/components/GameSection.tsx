@@ -32,27 +32,27 @@ export function GameSection({ title, icon, games }: GameSectionProps) {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="space-y-8 py-8 md:py-12"
     >
-      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 border-b border-border/30 pb-10">
-        <div className="flex items-center gap-5 group">
-          <div className={`p-4 rounded-2xl ${config.bg} ${config.border} border group-hover:scale-105 transition-transform duration-500 shadow-sm`}>
-            <Icon className={`w-6 h-6 lg:w-8 lg:h-8 ${config.color}`} />
+      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 border-b border-border/30 pb-6 md:pb-10">
+        <div className="flex items-center gap-4 md:gap-5 group">
+          <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl ${config.bg} ${config.border} border group-hover:scale-105 transition-transform duration-500 shadow-sm`}>
+            <Icon className={`w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 ${config.color}`} />
           </div>
           <div className="space-y-1">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">{title}</h2>
-            <div className="flex items-center gap-3">
-              <span className="w-12 h-1 bg-primary/40 rounded-full" />
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-50">{games.length} Títulos Disponíveis</span>
+            <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">{title}</h2>
+            <div className="flex items-center gap-2 md:gap-3">
+              <span className="w-8 md:w-12 h-1 bg-primary/40 rounded-full" />
+              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-50">{games.length} Títulos</span>
             </div>
           </div>
         </div>
         
-        <button className="flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-all duration-300 group">
+        <button className="flex items-center gap-2 text-[9px] sm:text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-all duration-300 group">
           <span>VER TUDO</span>
-          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
       
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6 lg:gap-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
         {games.map((game, index) => (
           <motion.div
             key={game.id}

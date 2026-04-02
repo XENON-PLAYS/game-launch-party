@@ -135,19 +135,19 @@
 
   /* Responsive Typography System */
   .text-responsive-h1 {
-    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight leading-[1.1];
+    @apply text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight leading-[1.1];
   }
   .text-responsive-h2 {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight;
+    @apply text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight;
   }
   .text-responsive-h3 {
-    @apply text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight;
+    @apply text-xl sm:text-3xl md:text-4xl font-bold tracking-tight;
   }
   .text-responsive-body {
-    @apply text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl leading-relaxed text-muted-foreground;
+    @apply text-sm sm:text-lg md:text-xl lg:text-xl xl:text-2xl leading-relaxed text-muted-foreground;
   }
   .text-responsive-small {
-    @apply text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-primary;
+    @apply text-[9px] sm:text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-primary;
   }
 }
 

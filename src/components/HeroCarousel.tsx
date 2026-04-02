@@ -65,7 +65,7 @@ export function HeroCarousel() {
   const game = featured[current];
 
   return (
-    <section className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
+    <section className="relative h-[480px] sm:h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={current}
@@ -94,9 +94,9 @@ export function HeroCarousel() {
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           </motion.div>
 
-          <div className="container-responsive h-full flex flex-col justify-center relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-12 items-center">
-              <div className="space-y-6 max-w-2xl">
+          <div className="container-responsive h-full flex flex-col justify-center relative z-10 pt-16 md:pt-0">
+            <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-center">
+              <div className="space-y-4 md:space-y-6 max-w-2xl">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -126,7 +126,7 @@ export function HeroCarousel() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7, duration: 0.8 }}
-                  className="text-responsive-body line-clamp-3 md:line-clamp-none max-w-xl"
+                  className="text-responsive-body line-clamp-2 sm:line-clamp-3 md:line-clamp-none max-w-xl"
                 >
                   {game.descricao}
                 </motion.p>
@@ -135,15 +135,15 @@ export function HeroCarousel() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.9, duration: 0.8 }}
-                  className="flex flex-wrap items-center gap-8 pt-8"
+                  className="flex flex-wrap items-center gap-4 sm:gap-8 pt-4 sm:pt-8"
                 >
                   <div className="flex flex-col">
-                    <span className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Investimento</span>
-                    <div className="text-3xl md:text-4xl font-black text-primary flex items-center gap-3">
+                    <span className="text-[9px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Investimento</span>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-black text-primary flex items-center gap-2 sm:gap-3">
                       {game.preco === 0 && (
-                        <span className="relative flex h-3 w-3">
+                        <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-primary"></span>
                         </span>
                       )}
                       {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
@@ -152,10 +152,10 @@ export function HeroCarousel() {
                   
                   <Link 
                     to={`/jogo/${game.slug || game.id}`} 
-                    className="flex items-center gap-3 px-10 py-5 rounded-full font-bold text-base bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1"
+                    className="flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full font-bold text-xs sm:text-base bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1"
                   >
                     <span>EXPLORAR JOGO</span>
-                    <Play className="w-5 h-5 fill-current" />
+                    <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
                   </Link>
                 </motion.div>
               </div>

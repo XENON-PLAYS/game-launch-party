@@ -45,15 +45,15 @@ const CategoryPage = () => {
           ]} 
         />
 
-        <div className="space-y-12 sm:space-y-20 lg:space-y-32">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-border pb-12 sm:pb-20">
+        <div className="space-y-8 md:space-y-20 lg:space-y-32 mt-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 border-b border-border pb-8 md:pb-20">
             <div className="space-y-4">
               <h1 className="text-responsive-h1 leading-none uppercase">
                 {categoryName}
               </h1>
-              <div className="flex items-center gap-6">
-                <span className="w-16 sm:w-24 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                <span className="text-responsive-small text-muted-foreground opacity-80">
+              <div className="flex items-center gap-4 md:gap-6">
+                <span className="w-12 md:w-24 h-1.5 md:h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                <span className="text-[10px] md:text-responsive-small text-muted-foreground opacity-80">
                   {games.length} jogo{games.length !== 1 ? "s" : ""} na frota de {categoryName}
                 </span>
               </div>

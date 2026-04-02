@@ -34,8 +34,8 @@ export function Header() {
             className="w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:w-14 lg:h-14" 
           />
           <div className="flex flex-col">
-            <span className="font-bold text-base sm:text-lg md:text-xl lg:text-2xl tracking-tighter leading-none">JOGOS</span>
-            <span className="font-bold text-base sm:text-lg md:text-xl lg:text-2xl tracking-tighter leading-none text-primary">GRATIS</span>
+            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none">JOGOS</span>
+            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none text-primary">GRATIS</span>
           </div>
         </Link>
 
