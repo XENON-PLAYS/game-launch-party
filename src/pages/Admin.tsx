@@ -115,9 +115,13 @@ const Admin = () => {
 
   const openAdd = () => { 
     setEditGame({ 
-      categorias: [], modes: [], idiomas: [], 
-      requisitos_minimo: {}, requisitos_recomendado: {}, 
-      destaques: [], galeria: [] 
+      categorias: [], 
+      modos: [], 
+      idiomas: [], 
+      requisitos_minimo: {}, 
+      requisitos_recomendado: {}, 
+      destaques: [], 
+      galeria: [] 
     }); 
     setLinks([]);
     setModalMode("add"); 
