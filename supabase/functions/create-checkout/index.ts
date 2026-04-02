@@ -19,16 +19,23 @@ serve(async (req) => {
       apiVersion: "2023-10-16",
     });
 
-    // Map plan names to price amounts (in cents)
-    const planPrices: Record<string, number> = {
-      "Mensal": 500,
-      "Semestral": 2500,
-      "Anual": 4500,
+    // Map plan names to configuration
+    const planConfig: Record<string, { amount: number, productId?: string }> = {
+      "Mensal": { 
+        amount: 500, 
+        productId: "prod_UG9zjWjIIRzxYc" 
+      },
+      "Semestral": { 
+        amount: 2500 
+      },
+      "Anual": { 
+        amount: 4500 
+      },
     };
 
-    const amount = planPrices[planName];
+    const config = planConfig[planName];
 
-    if (!amount) {
+    if (!config) {
       throw new Error("Plano inválido");
     }
 
@@ -38,11 +45,13 @@ serve(async (req) => {
         {
           price_data: {
             currency: "brl",
-            product_data: {
-              name: `Plano VIP ${planName}`,
-              description: `Acesso VIP por ${planName === "Mensal" ? "1 mês" : planName === "Semestral" ? "6 meses" : "1 ano"}`,
-            },
-            unit_amount: amount,
+            unit_amount: config.amount,
+            ...(config.productId ? { product: config.productId } : {
+              product_data: {
+                name: `Plano VIP ${planName}`,
+                description: `Acesso VIP por ${planName === "Mensal" ? "1 mês" : planName === "Semestral" ? "6 meses" : "1 ano"}`,
+              }
+            }),
           },
           quantity: 1,
         },
