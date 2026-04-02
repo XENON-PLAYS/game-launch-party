@@ -337,37 +337,266 @@ const Admin = () => {
       </main>
 
       {modalOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/70 flex items-center justify-center p-0 md:p-4" onClick={() => setModalOpen(false)}>
-          <div className="bg-card border-x md:border border-border rounded-none md:rounded-2xl w-full max-w-2xl h-full md:h-auto md:max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="sticky top-0 z-10 bg-card border-b border-border px-6 py-4 flex items-center justify-between md:rounded-t-2xl">
-              <h2 className="text-lg font-bold">{modalMode === "add" ? "Adicionar Novo Jogo" : "Editar Jogo"}</h2>
-              <button onClick={() => setModalOpen(false)} className="p-2 hover:bg-secondary rounded-lg"><X className="w-5 h-5" /></button>
+        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-0 sm:p-4 animate-in fade-in duration-300" onClick={() => setModalOpen(false)}>
+          <div className="bg-card border-x sm:border border-border rounded-none sm:rounded-[2rem] w-full max-w-4xl h-full sm:h-auto sm:max-h-[90vh] overflow-hidden flex flex-col shadow-3xl animate-in zoom-in-95 duration-300" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="p-6 sm:p-8 border-b border-border flex items-center justify-between bg-muted/30">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                  {modalMode === "add" ? <Plus className="w-6 h-6" /> : <Pencil className="w-6 h-6" />}
+                </div>
+                <div>
+                  <h2 className="text-xl font-black uppercase tracking-tight">{modalMode === "add" ? "Adicionar Novo Jogo" : "Editar Jogo"}</h2>
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest opacity-60">Complete os detalhes do tesouro</p>
+                </div>
+              </div>
+              <button onClick={() => setModalOpen(false)} className="p-3 hover:bg-muted rounded-xl transition-colors"><X className="w-6 h-6" /></button>
             </div>
-            <form onSubmit={saveGame} className="p-6 space-y-4">
-              <div><label className="admin-label">Nome *</label><input required value={editGame.nome || ""} onChange={(e) => setField("nome", e.target.value)} placeholder="Grand Theft Auto V" className="admin-input" /></div>
-              <div><label className="admin-label">Preço (R$) *</label><input type="number" step="0.01" min="0" required value={editGame.preco ?? ""} onChange={(e) => setField("preco", parseFloat(e.target.value) || 0)} placeholder="0" className="admin-input" /></div>
-              <div><label className="admin-label">Categorias (vírgula)</label><input value={editGame.categorias?.join(", ") || ""} onChange={(e) => setField("categorias", e.target.value.split(",").map((s) => s.trim()).filter(Boolean))} placeholder="Ação, RPG" className="admin-input" /></div>
-              <div><label className="admin-label">Modos de Jogo</label><input value={editGame.modos?.join(", ") || ""} onChange={(e) => setField("modos", e.target.value.split(",").map((s) => s.trim()).filter(Boolean))} placeholder="Singleplayer, Multiplayer" className="admin-input" /></div>
-              <div><label className="admin-label">Idiomas</label><input value={editGame.idiomas?.join(", ") || ""} onChange={(e) => setField("idiomas", e.target.value.split(",").map((s) => s.trim()).filter(Boolean))} placeholder="Português, Inglês" className="admin-input" /></div>
-              <div><label className="admin-label">Classificação</label><input value={editGame.classificacao || ""} onChange={(e) => setField("classificacao", e.target.value)} placeholder="18+" className="admin-input" /></div>
-              <div><label className="admin-label">Trailer (YouTube embed URL)</label><input value={editGame.trailer_url || ""} onChange={(e) => setField("trailer_url", e.target.value)} className="admin-input" /></div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div><label className="admin-label">Lançamento</label><input type="date" value={editGame.lancamento || ""} onChange={(e) => setField("lancamento", e.target.value)} className="admin-input" /></div>
-                <div><label className="admin-label">Desenvolvedor</label><input value={editGame.desenvolvedor || ""} onChange={(e) => setField("desenvolvedor", e.target.value)} className="admin-input" /></div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div><label className="admin-label">Distribuidor</label><input value={editGame.distribuidor || ""} onChange={(e) => setField("distribuidor", e.target.value)} className="admin-input" /></div>
-                <div><label className="admin-label">Tamanho</label><input value={editGame.tamanho || ""} onChange={(e) => setField("tamanho", e.target.value)} placeholder="120 GB" className="admin-input" /></div>
-              </div>
-              <div><label className="admin-label">Descrição</label><textarea rows={4} value={editGame.descricao || ""} onChange={(e) => setField("descricao", e.target.value)} className="admin-input resize-none" /></div>
-              <div><label className="admin-label">Destaques (por linha)</label><textarea rows={3} value={editGame.destaques?.join("\n") || ""} onChange={(e) => setField("destaques", e.target.value.split("\n").filter(Boolean))} className="admin-input resize-none" /></div>
-              <div><label className="admin-label">URL da Imagem</label><input value={editGame.imagem || ""} onChange={(e) => setField("imagem", e.target.value)} className="admin-input" /></div>
-              {editGame.imagem && <img src={editGame.imagem} alt="Preview" className="max-w-full rounded-lg border border-border" />}
-              <div className="flex gap-3 pt-4">
-                <button type="button" onClick={() => setModalOpen(false)} className="flex-1 py-3 rounded-lg bg-secondary hover:bg-secondary/80 font-bold text-sm">Cancelar</button>
-                <button type="submit" className="flex-1 py-3 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm">Salvar Jogo</button>
-              </div>
+
+            {/* Tabs */}
+            <div className="flex border-b border-border bg-muted/10 px-6 sm:px-8">
+              {[
+                { id: "general", label: "Geral", icon: LayoutGrid },
+                { id: "requirements", label: "Requisitos", icon: Monitor },
+                { id: "downloads", label: "Links", icon: Download },
+                { id: "gallery", label: "Mídia", icon: ImageIcon }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`flex items-center gap-2 px-6 py-4 text-xs font-black uppercase tracking-widest transition-all border-b-2 ${activeTab === tab.id ? "border-primary text-primary bg-primary/5" : "border-transparent text-muted-foreground hover:text-foreground"}`}
+                >
+                  <tab.icon className="w-4 h-4" />
+                  <span className="hidden sm:inline">{tab.label}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Modal Body */}
+            <form id="admin-form" onSubmit={saveGame} className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-8 bg-card/50">
+              {activeTab === "general" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-in slide-in-from-bottom-4 duration-500">
+                  <div className="space-y-6">
+                    <div>
+                      <label className="admin-label">Nome do Jogo *</label>
+                      <input required value={editGame.nome || ""} onChange={(e) => setField("nome", e.target.value)} placeholder="Grand Theft Auto V" className="admin-input" />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="admin-label">Preço (R$) *</label>
+                        <input type="number" step="0.01" min="0" required value={editGame.preco ?? ""} onChange={(e) => setField("preco", parseFloat(e.target.value) || 0)} className="admin-input" />
+                      </div>
+                      <div>
+                        <label className="admin-label">Tamanho</label>
+                        <input value={editGame.tamanho || ""} onChange={(e) => setField("tamanho", e.target.value)} placeholder="120 GB" className="admin-input" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="admin-label">Slug (URL)</label>
+                      <input value={editGame.slug || ""} onChange={(e) => setField("slug", e.target.value)} placeholder="gta-v" className="admin-input" />
+                    </div>
+                    <div>
+                      <label className="admin-label">Categorias (vírgula)</label>
+                      <input value={editGame.categorias?.join(", ") || ""} onChange={(e) => setField("categorias", e.target.value.split(",").map(s => s.trim()).filter(Boolean))} className="admin-input" />
+                    </div>
+                  </div>
+                  <div className="space-y-6">
+                    <div>
+                      <label className="admin-label">Descrição</label>
+                      <textarea rows={6} value={editGame.descricao || ""} onChange={(e) => setField("descricao", e.target.value)} className="admin-input resize-none" />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="admin-label">Lançamento</label>
+                        <input type="date" value={editGame.lancamento || ""} onChange={(e) => setField("lancamento", e.target.value)} className="admin-input" />
+                      </div>
+                      <div>
+                        <label className="admin-label">Desenvolvedor</label>
+                        <input value={editGame.desenvolvedor || ""} onChange={(e) => setField("desenvolvedor", e.target.value)} className="admin-input" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === "requirements" && (
+                <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-500">
+                  <RequirementsEditor 
+                    label="Requisitos Mínimos"
+                    initialValue={editGame.requisitos_minimo}
+                    onChange={(v) => setField("requisitos_minimo", v)}
+                  />
+                  <RequirementsEditor 
+                    label="Requisitos Recomendados"
+                    initialValue={editGame.requisitos_recomendado}
+                    onChange={(v) => setField("requisitos_recomendado", v)}
+                  />
+                </div>
+              )}
+
+              {activeTab === "downloads" && (
+                <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xs font-black uppercase tracking-widest text-primary">Links de Download</h3>
+                    <button 
+                      type="button" 
+                      onClick={() => setLinks([...links, { label: "Servidor 1", url: "", status: "online", click_count: 0 }])}
+                      className="px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary/20 transition-all"
+                    >
+                      Adicionar Link
+                    </button>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    {links.map((link, idx) => (
+                      <div key={idx} className="p-4 border border-border rounded-2xl bg-muted/20 flex flex-col sm:flex-row gap-4">
+                        <div className="flex-1 space-y-2">
+                          <label className="text-[10px] font-bold uppercase tracking-widest opacity-60">Rótulo (ex: Google Drive)</label>
+                          <input 
+                            value={link.label} 
+                            onChange={(e) => {
+                              const newLinks = [...links];
+                              newLinks[idx].label = e.target.value;
+                              setLinks(newLinks);
+                            }}
+                            className="admin-input !py-2 !text-xs"
+                          />
+                        </div>
+                        <div className="flex-[2] space-y-2">
+                          <label className="text-[10px] font-bold uppercase tracking-widest opacity-60">URL do Tesouro</label>
+                          <input 
+                            value={link.url} 
+                            onChange={(e) => {
+                              const newLinks = [...links];
+                              newLinks[idx].url = e.target.value;
+                              setLinks(newLinks);
+                            }}
+                            className="admin-input !py-2 !text-xs"
+                          />
+                        </div>
+                        <div className="w-full sm:w-32 space-y-2">
+                          <label className="text-[10px] font-bold uppercase tracking-widest opacity-60">Status</label>
+                          <select 
+                            value={link.status}
+                            onChange={(e) => {
+                              const newLinks = [...links];
+                              newLinks[idx].status = e.target.value;
+                              setLinks(newLinks);
+                            }}
+                            className="admin-input !py-2 !text-xs"
+                          >
+                            <option value="online">Online</option>
+                            <option value="offline">Offline</option>
+                          </select>
+                        </div>
+                        <div className="flex items-end">
+                          <button 
+                            type="button" 
+                            onClick={() => setLinks(links.filter((_, i) => i !== idx))}
+                            className="p-3 bg-destructive/10 text-destructive rounded-xl hover:bg-destructive/20 transition-all"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                    {links.length === 0 && (
+                      <div className="p-12 text-center border-2 border-dashed border-border rounded-3xl opacity-40">
+                        Nenhum link configurado para este jogo.
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {activeTab === "gallery" && (
+                <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-500">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <label className="admin-label">Capa Principal</label>
+                      <div 
+                        className="aspect-[3/4] rounded-[2rem] border-4 border-dashed border-border bg-muted/20 flex flex-col items-center justify-center gap-4 cursor-pointer hover:border-primary/50 transition-all overflow-hidden relative group"
+                        onClick={() => fileInputRef.current?.click()}
+                      >
+                        {editGame.imagem ? (
+                          <>
+                            <img src={editGame.imagem} className="w-full h-full object-cover" />
+                            <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                              <ImageIcon className="w-12 h-12 text-white" />
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <ImageIcon className="w-12 h-12 text-muted-foreground opacity-30" />
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Clique para Upload</p>
+                          </>
+                        )}
+                        {uploading && (
+                          <div className="absolute inset-0 bg-background/80 flex items-center justify-center z-20">
+                            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                          </div>
+                        )}
+                      </div>
+                      <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={(e) => handleImageUpload(e, "imagem")} />
+                      <input value={editGame.imagem || ""} onChange={(e) => setField("imagem", e.target.value)} placeholder="Ou cole a URL..." className="admin-input !text-xs !py-2" />
+                    </div>
+
+                    <div className="space-y-4">
+                      <label className="admin-label">Galeria de Screenshots</label>
+                      <div className="grid grid-cols-2 gap-4">
+                        {editGame.galeria?.map((img, idx) => (
+                          <div key={idx} className="aspect-video rounded-xl border border-border overflow-hidden relative group">
+                            <img src={img} className="w-full h-full object-cover" />
+                            <button 
+                              type="button" 
+                              onClick={() => setEditGame(prev => ({ ...prev, galeria: prev.galeria?.filter((_, i) => i !== idx) }))}
+                              className="absolute top-2 right-2 p-1.5 bg-destructive text-white rounded-lg opacity-0 group-hover:opacity-100 transition-all"
+                            >
+                              <X className="w-3 h-3" />
+                            </button>
+                          </div>
+                        ))}
+                        <div 
+                          className="aspect-video rounded-xl border-2 border-dashed border-border flex items-center justify-center hover:border-primary/50 cursor-pointer transition-all"
+                          onClick={() => {
+                            const input = document.createElement('input');
+                            input.type = 'file';
+                            input.accept = 'image/*';
+                            input.onchange = (e) => handleImageUpload(e as any, "galeria");
+                            input.click();
+                          }}
+                        >
+                          <Plus className="w-6 h-6 text-muted-foreground opacity-40" />
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="admin-label">Trailer (YouTube Embed URL)</label>
+                        <input value={editGame.trailer_url || ""} onChange={(e) => setField("trailer_url", e.target.value)} placeholder="https://www.youtube.com/embed/..." className="admin-input" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </form>
+
+            {/* Modal Footer */}
+            <div className="p-6 sm:p-8 border-t border-border bg-muted/30 flex items-center justify-end gap-4">
+              <button 
+                type="button" 
+                onClick={() => setModalOpen(false)} 
+                className="px-8 py-3 rounded-xl font-bold text-sm uppercase tracking-widest text-muted-foreground hover:bg-muted transition-all"
+              >
+                Cancelar
+              </button>
+              <button 
+                form="admin-form"
+                type="submit" 
+                disabled={uploading}
+                className="px-12 py-3 rounded-xl bg-primary text-primary-foreground font-black uppercase tracking-[0.2em] text-sm hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all active:scale-95 disabled:opacity-50"
+              >
+                {uploading ? "Aguarde..." : "Salvar Tesouro"}
+              </button>
+            </div>
           </div>
         </div>
       )}
