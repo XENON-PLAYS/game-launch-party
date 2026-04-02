@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect } from "react";
 
 const VipPage = () => {
-  const { profile } = useAuth();
+  const { profile, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const VipPage = () => {
 
     try {
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { planName, userId: profile.id },
+        body: { planName, userId: profile.id, email: user?.email },
       });
 
       if (error) throw error;
@@ -195,7 +195,7 @@ const VipPage = () => {
                   className={`w-full py-5 rounded-2xl ${plan.buttonColor} text-white font-black uppercase tracking-[0.2em] text-xs transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3`}
                 >
                   <CreditCard className="w-4 h-4" />
-                  Assinar Agora
+                  Assinar via Cartão ou Pix
                 </button>
               </motion.div>
             ))}

@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    const { planName, userId } = await req.json();
+    const { planName, userId, email } = await req.json();
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
       apiVersion: "2023-10-16",
@@ -44,7 +44,8 @@ serve(async (req) => {
     const origin = req.headers.get("origin") || "http://localhost:3000";
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+      payment_method_types: ["card", "pix"],
+      customer_email: email,
       line_items: [
         {
           price_data: {
