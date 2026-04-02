@@ -19,6 +19,10 @@ const GameDetail = () => {
   
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
+  };
+
   const { data: game, isLoading } = useQuery({
     queryKey: ["game", id],
     queryFn: async () => {
