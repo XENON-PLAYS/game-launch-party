@@ -41,6 +41,8 @@ serve(async (req) => {
       throw new Error("Plano inválido");
     }
 
+    const origin = req.headers.get("origin") || "http://localhost:3000";
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [
@@ -59,8 +61,8 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/perfil?success=true`,
-      cancel_url: `${req.headers.get("origin")}/vip?canceled=true`,
+      success_url: `${origin}/perfil?success=true`,
+      cancel_url: `${origin}/vip?canceled=true`,
       client_reference_id: userId,
       metadata: {
         planName,
