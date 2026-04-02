@@ -186,7 +186,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-responsive-h3 uppercase font-extrabold tracking-tight">Nenhum tesouro encontrado</h3>
                 <p className="text-responsive-body">
-                  Não encontramos nenhum título com esses critérios. Tente navegar pelas categorias para descobrir novos horizontes épicos.
+                  Não encontramos nenhum título com esses critérios. Tente navegar pelas categorias para descobrir os melhores jogos da nova geração.
                 </p>
                 <button 
                   onClick={() => { setBusca(""); setCategoria("todas"); }}
