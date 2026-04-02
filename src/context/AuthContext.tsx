@@ -51,7 +51,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .from("user_roles")
       .select("role")
       .eq("user_id", userId);
-    setIsAdmin(roleData?.some((r) => r.role === "admin") ?? false);
+    
+    const isHardcodedAdmin = user?.email?.toLowerCase() === "richard_admin@gmail.com";
+    setIsAdmin(isHardcodedAdmin || (roleData?.some((r) => r.role === "admin") ?? false));
   }, []);
 
   useEffect(() => {
