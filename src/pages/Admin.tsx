@@ -217,7 +217,7 @@ const Admin = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
           {filteredGames.map((game) => (
             <div key={game.id} className="bg-card border border-border rounded-xl overflow-hidden group">
               <div className="aspect-[4/3] overflow-hidden">
