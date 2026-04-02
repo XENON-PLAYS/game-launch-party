@@ -52,7 +52,7 @@ export function GameCard({ game }: GameCardProps) {
         <div className="mt-auto pt-3 border-t border-border/30 flex items-center justify-between">
           <div className="flex flex-col">
             <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-widest leading-none mb-1.5 opacity-60">Valor</span>
-            <span className={`font-black text-base lg:text-lg leading-none ${game.preco === 0 ? "text-primary" : "text-foreground"}`}>
+            <span className={`font-black text-base lg:text-lg leading-none ${game.preco === 0 ? "text-primary drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]" : "text-foreground"}`}>
               {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
             </span>
           </div>
