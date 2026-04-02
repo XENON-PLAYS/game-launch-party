@@ -11,7 +11,7 @@ interface GameCardProps {
 }
 
 export function GameCard({ game }: GameCardProps) {
-  const { addItem } = useCart();
+  
 
   return (
     <div className="group bg-card rounded-xl overflow-hidden border border-border hover:border-primary transition-all duration-300 relative">
