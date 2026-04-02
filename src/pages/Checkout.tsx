@@ -55,20 +55,34 @@ const Checkout = () => {
     }
   }, [profile, planName, selectedPlan, navigate, searchParams]);
 
-  const handleCheckout = () => {
-    if (!profile || !planName) return;
+  const handleCheckout = async () => {
+    if (!profile || !planName || !user) return;
+    setLoading(true);
     
-    const key = planName.toLowerCase() as keyof typeof PRICING_CONFIG;
-    const checkoutUrl = PRICING_CONFIG[key];
+    try {
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: {
+          planName,
+          userId: user.id,
+          email: user.email,
+        },
+      });
 
-    if (checkoutUrl) {
-      // Append user info to the Stripe link if needed, 
-      // but following user instruction to not alter values
-      window.location.href = checkoutUrl;
-    } else {
-      toast.error("Link de checkout não configurado para este plano.");
+      if (error) throw error;
+      
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error("Não foi possível gerar o link de pagamento.");
+      }
+    } catch (error: any) {
+      console.error("Error creating checkout session:", error);
+      toast.error(error.message || "Erro ao iniciar o pagamento. Tente novamente mais tarde.");
+    } finally {
+      setLoading(false);
     }
   };
+
 
 
   if (!selectedPlan) return null;
