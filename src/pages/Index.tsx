@@ -68,7 +68,7 @@ const Index = () => {
                 placeholder="Qual obra-prima você está procurando?" 
                 value={busca} 
                 onChange={(e) => setBusca(e.target.value)}
-                className="w-full pl-16 pr-6 py-4 bg-card border border-border/50 rounded-2xl text-lg focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all shadow-xl shadow-black/5" 
+                className="w-full pl-16 pr-6 py-4 bg-card border border-primary/20 rounded-2xl text-lg focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all shadow-xl shadow-black/5 placeholder:text-muted-foreground/50" 
               />
               {busca && (
                 <button 
