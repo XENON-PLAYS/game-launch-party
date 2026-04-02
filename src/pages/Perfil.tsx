@@ -76,7 +76,7 @@ const Perfil = () => {
       } else if (activeTab === "ranking") {
         const { data, error } = await supabase.rpc('get_user_ranking' as any);
         if (error) throw error;
-        setRanking(data || []);
+        setRanking((data as any[]) || []);
       } else if (activeTab === "recommendations") {
         const { data } = await supabase
           .from("games")
