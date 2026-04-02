@@ -1,9 +1,10 @@
-import { useState, useMemo, useEffect } from "react";
-import { Search, SlidersHorizontal, ArrowUpDown, Filter, X } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import { Link } from "react-router-dom";
 import { GameCard } from "@/components/GameCard";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { supabase } from "@/integrations/supabase/client";
