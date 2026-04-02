@@ -31,7 +31,7 @@ export function GameCard({ game }: GameCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
         
         <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-          {game.categorias.slice(0, 1).map((cat) => (
+          {(game.categorias || []).slice(0, 1).map((cat) => (
             <span 
               key={cat} 
               className="text-[10px] uppercase font-bold px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-xl text-white border border-white/10 tracking-widest"

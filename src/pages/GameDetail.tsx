@@ -156,7 +156,7 @@ const GameDetail = () => {
         title={game.nome}
         description={game.descricao?.substring(0, 160) + (game.descricao?.length > 160 ? "..." : "")}
         image={game.imagem}
-        keywords={`${game.nome}, download ${game.nome}, baixar ${game.nome}, ${game.categorias.join(", ")}, pc games`}
+        keywords={`${game.nome}, download ${game.nome}, baixar ${game.nome}, ${(game.categorias || []).join(", ")}, pc games`}
       />
       <Header />
       
@@ -211,7 +211,7 @@ const GameDetail = () => {
             <div className="lg:col-span-7 xl:col-span-8 space-y-10 sm:space-y-16">
               <div className="space-y-6 sm:space-y-8">
                 <div className="flex flex-wrap gap-3">
-                  {game.categorias.map((c) => (
+                  {(game.categorias || []).map((c) => (
                     <Link 
                       key={c} 
                       to={`/categoria/${c}`}

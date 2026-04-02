@@ -28,11 +28,11 @@ const Index = () => {
   });
 
   const allCategories = useMemo(() => {
-    return Array.from(new Set(games.flatMap((g) => g.categorias))).sort();
+    return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
   }, [games]);
 
   const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 10), [games]);
-  const recomendados = useMemo(() => games.filter((g) => (g as any).avg_rating >= 4 || g.destaques.length > 0).slice(0, 10), [games]);
+  const recomendados = useMemo(() => games.filter((g) => (g as any).avg_rating >= 4 || (g.destaques && g.destaques.length > 0)).slice(0, 10), [games]);
   const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 10), [games]);
 
   const isSearching = busca || categoria !== "todas";
@@ -40,7 +40,7 @@ const Index = () => {
   const filteredGames = useMemo(() => {
     let result = games;
     if (busca) result = result.filter((g) => g.nome.toLowerCase().includes(busca.toLowerCase()));
-    if (categoria !== "todas") result = result.filter((g) => g.categorias.includes(categoria));
+    if (categoria !== "todas") result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
     
     result = [...result].sort((a, b) => {
       if (ordenacao === "preco_asc") return a.preco - b.preco;
