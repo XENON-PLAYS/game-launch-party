@@ -16,7 +16,7 @@ const GameDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { addItem } = useCart();
+  
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const { data: game, isLoading } = useQuery({
