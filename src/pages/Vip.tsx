@@ -21,9 +21,9 @@ const VipPage = () => {
         "Sem anúncios no site",
         "Suporte prioritário"
       ],
-      color: "from-blue-500/20 to-blue-600/20",
-      borderColor: "border-blue-500/30",
-      buttonColor: "bg-blue-600 hover:bg-blue-700 shadow-blue-500/20"
+      color: "from-primary/10 to-primary/20",
+      borderColor: "border-primary/20",
+      buttonColor: "bg-primary/80 hover:bg-primary shadow-primary/10"
     },
     {
       name: "Semestral",
