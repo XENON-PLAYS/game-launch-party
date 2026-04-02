@@ -150,12 +150,12 @@ const Admin = () => {
       const compressedFile = await imageCompression(file, options);
       
       const fileExt = file.name.split(".").pop();
-      const filePath = `games/${Date.now()}.${fileExt}`;
+      const filePath = `covers/${Date.now()}.${fileExt}`;
 
-      const { error: uploadError } = await supabase.storage.from("games").upload(filePath, compressedFile);
+      const { error: uploadError } = await supabase.storage.from("game-images").upload(filePath, compressedFile);
       if (uploadError) throw uploadError;
 
-      const { data: { publicUrl } } = supabase.storage.from("games").getPublicUrl(filePath);
+      const { data: { publicUrl } } = supabase.storage.from("game-images").getPublicUrl(filePath);
 
       if (field === "imagem") {
         setEditGame(prev => ({ ...prev, imagem: publicUrl }));

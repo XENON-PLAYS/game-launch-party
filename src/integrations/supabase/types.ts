@@ -440,6 +440,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      increment_link_clicks: { Args: { link_id: string }; Returns: undefined }
       slugify: { Args: { text: string }; Returns: string }
       unaccent: { Args: { "": string }; Returns: string }
     }

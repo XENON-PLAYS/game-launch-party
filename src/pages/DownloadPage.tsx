@@ -54,6 +54,13 @@ const DownloadPage = () => {
       game_id: gameId!,
       download_link_id: linkId!,
     });
+    
+    // Increment click count
+    await supabase.rpc('increment_link_clicks', { link_id: linkId! });
+    
+    // Increment game download count
+    await supabase.from("games").update({ download_count: (game as any)?.download_count + 1 }).eq("id", gameId!);
+    
     // Increment click count — we use RPC or direct (admin only), so just open the link
     window.open(link.url, "_blank");
   };
