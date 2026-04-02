@@ -21,9 +21,9 @@ const VipPage = () => {
         "Sem anúncios no site",
         "Suporte prioritário"
       ],
-      color: "from-blue-500/20 to-blue-600/20",
-      borderColor: "border-blue-500/30",
-      buttonColor: "bg-blue-600 hover:bg-blue-700 shadow-blue-500/20"
+      color: "from-primary/10 to-primary/20",
+      borderColor: "border-primary/20",
+      buttonColor: "bg-primary/80 hover:bg-primary shadow-primary/10"
     },
     {
       name: "Semestral",
@@ -52,9 +52,9 @@ const VipPage = () => {
         "Participação em sorteios mensais",
         "Status 'Capitão da Frota'"
       ],
-      color: "from-yellow-500/20 to-yellow-600/20",
-      borderColor: "border-yellow-500/30",
-      buttonColor: "bg-yellow-600 hover:bg-yellow-700 shadow-yellow-500/20"
+      color: "from-primary/30 to-primary/40",
+      borderColor: "border-primary/60",
+      buttonColor: "bg-primary hover:bg-primary/90 shadow-primary/40"
     }
   ];
 
@@ -74,7 +74,7 @@ const VipPage = () => {
             animate={{ scale: 1, opacity: 1 }}
             className="inline-flex p-6 rounded-full bg-primary/10 border border-primary/20 mb-8"
           >
-            <Trophy className="w-16 h-16 text-primary drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]" />
+            <Trophy className="w-16 h-16 text-primary drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]" />
           </motion.div>
           <motion.h1 
             initial={{ y: 20, opacity: 0 }}
@@ -153,8 +153,8 @@ const VipPage = () => {
                 <div className="space-y-6 flex-1">
                   {plan.features.map((feature, j) => (
                     <div key={j} className="flex items-center gap-4 text-sm font-bold uppercase tracking-tight">
-                      <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
-                        <Check className="w-3 h-3 text-emerald-500" />
+                      <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 text-primary" />
                       </div>
                       <span>{feature}</span>
                     </div>

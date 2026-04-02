@@ -12,9 +12,9 @@ interface GameSectionProps {
 }
 
 const icons = { 
-  flame: { icon: Flame, color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500/20" }, 
-  star: { icon: Star, color: "text-yellow-500", bg: "bg-yellow-500/10", border: "border-yellow-500/20" }, 
-  clock: { icon: Clock, color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" } 
+  flame: { icon: Flame, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" }, 
+  star: { icon: Star, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" }, 
+  clock: { icon: Clock, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" } 
 };
 
 export function GameSection({ title, icon, games }: GameSectionProps) {

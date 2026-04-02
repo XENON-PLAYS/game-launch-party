@@ -68,7 +68,7 @@ const Index = () => {
                 placeholder="Qual obra-prima você está procurando?" 
                 value={busca} 
                 onChange={(e) => setBusca(e.target.value)}
-                className="w-full pl-16 pr-6 py-4 bg-card border border-border/50 rounded-2xl text-lg focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all shadow-xl shadow-black/5" 
+                className="w-full pl-16 pr-6 py-4 bg-card border border-primary/20 rounded-2xl text-lg focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all shadow-xl shadow-black/5 placeholder:text-muted-foreground/50" 
               />
               {busca && (
                 <button 
@@ -162,12 +162,12 @@ const Index = () => {
             animate={{ opacity: 1 }}
             className="space-y-16"
           >
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 border-b border-border/40 pb-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 border-b-2 border-primary/20 pb-16">
               <div className="space-y-4">
-                <h2 className="text-responsive-h2">Catálogo Filtrado</h2>
+                <h2 className="text-responsive-h2"><span className="text-primary">Catálogo</span> <span className="text-foreground">Filtrado</span></h2>
                 <div className="flex items-center gap-4">
                   <span className="w-24 h-1.5 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                  <p className="text-responsive-body">
+                  <p className="text-responsive-body font-medium">
                     {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
                   </p>
                 </div>
@@ -217,12 +217,12 @@ const Index = () => {
             <GameSection title="🕐 Novos Horizontes" icon="clock" games={recentes} />
             
             <section className="space-y-16">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 border-b border-border/40 pb-20">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 border-b-2 border-primary/20 pb-20">
                 <div className="space-y-4">
-                  <h2 className="text-responsive-h2 leading-none font-extrabold">Catálogo Premium</h2>
+                  <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Catálogo</span> <span className="text-foreground">Premium</span></h2>
                   <div className="flex items-center gap-8">
                     <span className="w-32 h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
-                    <span className="text-responsive-body">{games.length} experiências de alto nível disponíveis</span>
+                    <span className="text-responsive-body font-medium">{games.length} experiências de alto nível disponíveis</span>
                   </div>
                 </div>
                 
