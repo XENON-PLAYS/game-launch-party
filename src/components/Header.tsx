@@ -166,12 +166,7 @@ export function Header() {
       {/* Mobile Menu */}
       <>
         {mobileOpen && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-white/5 bg-popover/95 backdrop-blur-xl overflow-hidden font-bold uppercase tracking-widest text-xs"
-          >
+          <div className="md:hidden border-t border-border bg-popover overflow-hidden font-bold uppercase tracking-widest text-xs">
             <div className="px-4 py-6 space-y-4">
               <Link to="/" className="block py-2 text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>Catálogo</Link>
               <Link to="/" className="block py-2 text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>Novidades</Link>
