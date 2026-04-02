@@ -28,6 +28,7 @@ export const games: Game[] = [
   {
     id: 1,
     nome: "Red Dead Redemption 2",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/library_600x900.jpg",
@@ -40,6 +41,7 @@ export const games: Game[] = [
   {
     id: 2,
     nome: "Elden Ring",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/library_600x900.jpg",
@@ -61,6 +63,7 @@ export const games: Game[] = [
   {
     id: 4,
     nome: "Dark Souls 3",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/library_600x900.jpg",
@@ -72,6 +75,7 @@ export const games: Game[] = [
   {
     id: 5,
     nome: "Resident Evil 2",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/883710/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/883710/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/883710/library_600x900.jpg",
@@ -101,6 +105,7 @@ export const games: Game[] = [
   {
     id: 8,
     nome: "Cyberpunk 2077",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/library_600x900.jpg",
@@ -112,6 +117,7 @@ export const games: Game[] = [
   {
     id: 9,
     nome: "GTA V",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/library_600x900.jpg",
@@ -123,6 +129,7 @@ export const games: Game[] = [
   {
     id: 10,
     nome: "The Witcher 3",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/library_600x900.jpg",
@@ -143,6 +150,7 @@ export const games: Game[] = [
   {
     id: 12,
     nome: "Garry's Mod",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/4000/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/4000/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/4000/library_600x900.jpg",
@@ -154,6 +162,7 @@ export const games: Game[] = [
   {
     id: 13,
     nome: "Rust",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_600x900.jpg",
@@ -165,6 +174,7 @@ export const games: Game[] = [
   {
     id: 14,
     nome: "Baldur's Gate 3",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/library_600x900.jpg",
@@ -185,6 +195,7 @@ export const games: Game[] = [
   {
     id: 16,
     nome: "Hogwarts Legacy",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/library_600x900.jpg",
@@ -205,6 +216,7 @@ export const games: Game[] = [
   {
     id: 18,
     nome: "Sekiro Shadows Die Twice",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/library_600x900.jpg",
@@ -216,6 +228,7 @@ export const games: Game[] = [
   {
     id: 19,
     nome: "Devil May Cry 5",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/library_600x900.jpg",
@@ -227,6 +240,7 @@ export const games: Game[] = [
   {
     id: 20,
     nome: "Portal 2",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/620/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/620/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/620/library_600x900.jpg",
@@ -238,6 +252,7 @@ export const games: Game[] = [
   {
     id: 21,
     nome: "Left 4 Dead 2",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_600x900.jpg",
@@ -249,6 +264,7 @@ export const games: Game[] = [
   {
     id: 22,
     nome: "Rainbow Six Siege",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/library_600x900.jpg",
@@ -269,6 +285,7 @@ export const games: Game[] = [
   {
     id: 24,
     nome: "Marvel Spider-Man Remastered",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/library_600x900.jpg",
@@ -280,6 +297,7 @@ export const games: Game[] = [
   {
     id: 25,
     nome: "Spider-Man Miles Morales",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/library_600x900.jpg",
@@ -291,6 +309,7 @@ export const games: Game[] = [
   {
     id: 26,
     nome: "Resident Evil 4 Remake",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/library_600x900.jpg",
@@ -302,6 +321,7 @@ export const games: Game[] = [
   {
     id: 27,
     nome: "Battlefield 2042",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1238810/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1238810/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1238810/library_600x900.jpg",
@@ -367,6 +387,7 @@ export const games: Game[] = [
   {
     id: 34,
     nome: "Batman Arkham Knight",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/208650/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/208650/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/208650/library_600x900.jpg",
@@ -378,6 +399,7 @@ export const games: Game[] = [
   {
     id: 35,
     nome: "DOOM Eternal",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/782330/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/782330/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/782330/library_600x900.jpg",
@@ -398,6 +420,7 @@ export const games: Game[] = [
   {
     id: 37,
     nome: "Cities Skylines",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/library_600x900.jpg",
@@ -409,6 +432,7 @@ export const games: Game[] = [
   {
     id: 38,
     nome: "Stardew Valley",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/library_600x900.jpg",
@@ -420,6 +444,7 @@ export const games: Game[] = [
   {
     id: 39,
     nome: "Phasmophobia",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/739630/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/739630/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/739630/library_600x900.jpg",
@@ -476,6 +501,7 @@ export const games: Game[] = [
   {
     id: 45,
     nome: "Skyrim Special Edition",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/library_600x900.jpg",
@@ -487,6 +513,7 @@ export const games: Game[] = [
   {
     id: 46,
     nome: "Star Wars Jedi Fallen Order",
+    preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1172380/library_600x900.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1172380/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1172380/library_600x900.jpg",
