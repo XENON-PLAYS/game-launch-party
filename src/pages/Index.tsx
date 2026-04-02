@@ -252,7 +252,7 @@ const Index = () => {
             <div className="space-y-12">
               <div className="flex flex-col">
                 <span className="font-black text-4xl tracking-tighter leading-none">JOGOS</span>
-                <span className="font-black text-4xl tracking-tighter leading-none text-primary">PIRATAS</span>
+                <span className="font-black text-4xl tracking-tighter leading-none text-primary">GRATIS</span>
               </div>
               <p className="text-responsive-body max-w-sm">
                 A maior comunidade de compartilhamento de jogos. Descubra novos horizontes, jogue com seus amigos e compartilhe suas experiências épicas.
