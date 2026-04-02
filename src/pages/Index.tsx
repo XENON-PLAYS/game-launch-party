@@ -43,8 +43,23 @@ const Index = () => {
     if (categoria !== "todas") result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
     
     result = [...result].sort((a, b) => {
-      if (ordenacao === "preco_asc") return a.preco - b.preco;
-      if (ordenacao === "preco_desc") return b.preco - a.preco;
+      if (ordenacao === "pesado") {
+        const parseSize = (s: string | null) => {
+          if (!s) return 0;
+          const match = s.match(/(\d+(\.\d+)?)/);
+          return match ? parseFloat(match[1]) : 0;
+        };
+        return parseSize(b.tamanho) - parseSize(a.tamanho);
+      }
+      if (ordenacao === "leve") {
+        const parseSize = (s: string | null) => {
+          if (!s) return Infinity;
+          const match = s.match(/(\d+(\.\d+)?)/);
+          return match ? parseFloat(match[1]) : Infinity;
+        };
+        return parseSize(a.tamanho) - parseSize(b.tamanho);
+      }
+      if (ordenacao === "popular" || ordenacao === "alta") return (b.download_count || 0) - (a.download_count || 0);
       if (ordenacao === "lancamento") return (b.lancamento || "").localeCompare(a.lancamento || "");
       return a.nome.localeCompare(b.nome);
     });
