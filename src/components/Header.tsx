@@ -114,7 +114,6 @@ export function Header() {
               <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${menuOpen ? "rotate-180" : "opacity-50"}`} />
             </button>
             
-              <>
               {menuOpen && (
                 <div className="absolute right-0 top-full mt-4 bg-popover border border-border rounded-2xl w-64 shadow-2xl overflow-hidden z-50 p-2">
                   {user ? (
