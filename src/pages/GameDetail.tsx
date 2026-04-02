@@ -248,7 +248,13 @@ const GameDetail = () => {
               <div className="flex flex-col sm:flex-row sm:items-end gap-10 sm:gap-12 pt-6">
                 <div className="space-y-3">
                   <span className="text-responsive-small text-muted-foreground opacity-70">Preço do Tesouro</span>
-                  <div className="text-responsive-h2 text-primary flex items-baseline gap-2">
+                  <div className="text-responsive-h2 text-primary flex items-center gap-4">
+                    {game.preco === 0 && (
+                      <span className="relative flex h-4 w-4">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-4 w-4 bg-primary"></span>
+                      </span>
+                    )}
                     {game.preco === 0 ? "GRÁTIS" : <><span className="text-2xl sm:text-3xl lg:text-4xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
                   </div>
                 </div>

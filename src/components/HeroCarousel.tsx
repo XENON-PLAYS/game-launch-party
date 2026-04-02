@@ -139,7 +139,13 @@ export function HeroCarousel() {
                 >
                   <div className="flex flex-col">
                     <span className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1 font-bold">Investimento</span>
-                    <div className="text-3xl md:text-4xl font-black text-primary">
+                    <div className="text-3xl md:text-4xl font-black text-primary flex items-center gap-3">
+                      {game.preco === 0 && (
+                        <span className="relative flex h-3 w-3">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                        </span>
+                      )}
                       {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
                     </div>
                   </div>

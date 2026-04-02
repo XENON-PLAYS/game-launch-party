@@ -31,6 +31,11 @@ export function GameCard({ game }: GameCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
         
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+          {game.preco === 0 && (
+            <span className="text-[10px] uppercase font-black px-2.5 py-1 rounded bg-primary text-primary-foreground border border-primary/20 tracking-wider shadow-lg shadow-primary/40 animate-pulse">
+              GRÁTIS
+            </span>
+          )}
           {(game.categorias || []).slice(0, 1).map((cat) => (
             <span 
               key={cat} 
@@ -52,7 +57,13 @@ export function GameCard({ game }: GameCardProps) {
         <div className="mt-auto pt-3 border-t border-border/30 flex items-center justify-between">
           <div className="flex flex-col">
             <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-widest leading-none mb-1.5 opacity-60">Valor</span>
-            <span className="text-foreground font-bold text-base lg:text-lg leading-none">
+            <span className={`font-black text-base lg:text-lg leading-none flex items-center gap-2 ${game.preco === 0 ? "text-primary" : "text-foreground"}`}>
+              {game.preco === 0 && (
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+              )}
               {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
             </span>
           </div>
