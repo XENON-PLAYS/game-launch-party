@@ -114,7 +114,16 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
-    @apply tracking-tight font-bold;
+    @apply tracking-tight font-bold text-foreground;
+  }
+
+  /* Strategic red highlights for specific letters or words */
+  .text-highlight-red {
+    @apply text-primary;
+  }
+
+  .border-highlight-red {
+    @apply border-primary/30 hover:border-primary/60 transition-colors;
   }
 }
 
