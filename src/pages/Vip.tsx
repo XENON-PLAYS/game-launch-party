@@ -10,6 +10,15 @@ const VipPage = () => {
   const { profile } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("canceled") === "true") {
+      toast.error("O pagamento foi cancelado. Se tiver alguma dúvida, entre em contato com o suporte.");
+      // Remove the query param
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
   const plans = [
     {
       name: "Mensal",
