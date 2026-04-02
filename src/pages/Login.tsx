@@ -44,7 +44,7 @@ const Login = () => {
       <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full" />
       
       <Header />
-      <CartPopup />
+      
       
       <main className="flex-1 flex items-center justify-center px-4 py-12 relative z-10">
         <form onSubmit={handleSubmit} autoComplete="off" className="w-full max-w-[480px]">

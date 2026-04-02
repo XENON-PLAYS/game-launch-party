@@ -416,7 +416,7 @@ const Perfil = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
-      <CartPopup />
+      
       
       <main className="flex-1 container mx-auto px-4 py-12 max-w-6xl">
         <div className="grid md:grid-cols-[280px_1fr] gap-8">
