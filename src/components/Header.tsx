@@ -149,7 +149,6 @@ export function Header() {
                   )}
                 </div>
               )}
-            </>
           </div>
 
           {/* Mobile Menu Toggle */}
