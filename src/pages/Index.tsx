@@ -64,20 +64,20 @@ const Index = () => {
 
       {/* Search & Filters Area */}
       <section className="bg-card border-b border-border py-6">
-        <div className="container mx-auto px-4">
+        <div className="container-responsive">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="w-full md:max-w-xl relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <div className="w-full md:max-w-xl relative group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <input 
                 type="text" 
                 placeholder="Qual jogo você está procurando?" 
                 value={busca} 
                 onChange={(e) => setBusca(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-background border border-input rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" 
+                className="w-full pl-10 pr-4 py-3 bg-background border border-input rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" 
               />
             </div>
             
-            <div className="flex gap-2 w-full md:w-auto">
+            <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 no-scrollbar">
               <button 
                 onClick={() => setShowFilters(!showFilters)}
                 className={`flex-1 md:flex-none px-4 py-3 rounded-xl border transition-all flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider ${
