@@ -7,7 +7,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Tables } from "@/integrations/supabase/types";
 
 type Game = Tables<"games">;
-type SortOption = "nome" | "preco_asc" | "preco_desc";
+type SortOption = "nome" | "preco_asc" | "preco_desc" | "downloads";
 
 const Admin = () => {
   const { user, logout, isAdmin, isLoading: authLoading } = useAuth();
@@ -37,6 +37,7 @@ const Admin = () => {
     result = [...result].sort((a, b) => {
       if (ordenacao === "preco_asc") return a.preco - b.preco;
       if (ordenacao === "preco_desc") return b.preco - a.preco;
+      if (ordenacao === "downloads") return b.download_count - a.download_count;
       return a.nome.localeCompare(b.nome);
     });
     return result;
@@ -141,6 +142,57 @@ const Admin = () => {
       </header>
 
       <main className="container mx-auto px-4 py-6">
+        {/* Metrics Summary */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className="bg-card border border-border rounded-xl p-6">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" /> Downloads por Jogo
+            </h3>
+            <div className="space-y-4">
+              {[...games].sort((a, b) => b.download_count - a.download_count).slice(0, 5).map(g => (
+                <div key={g.id} className="flex items-center justify-between gap-4">
+                  <span className="text-sm font-bold truncate flex-1">{g.nome}</span>
+                  <span className="text-xs px-2 py-1 rounded bg-secondary font-mono">{g.download_count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-card border border-border rounded-xl p-6">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-yellow-500" /> Jogos Populares
+            </h3>
+            <div className="space-y-4">
+              {[...games].sort((a, b) => b.download_count - a.download_count).slice(0, 3).map(g => (
+                <div key={g.id} className="flex items-center gap-3">
+                  <img src={g.imagem || ""} className="w-10 h-10 rounded object-cover" alt="" />
+                  <div>
+                    <p className="text-xs font-bold truncate">{g.nome}</p>
+                    <p className="text-[10px] text-muted-foreground">{g.download_count} downloads</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-card border border-border rounded-xl p-6">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-blue-500" /> Jogos Recentes
+            </h3>
+            <div className="space-y-4">
+              {[...games].sort((a, b) => (b.created_at || "").localeCompare(a.created_at || "")).slice(0, 3).map(g => (
+                <div key={g.id} className="flex items-center gap-3">
+                  <img src={g.imagem || ""} className="w-10 h-10 rounded object-cover" alt="" />
+                  <div>
+                    <p className="text-xs font-bold truncate">{g.nome}</p>
+                    <p className="text-[10px] text-muted-foreground">Adicionado em {new Date(g.created_at).toLocaleDateString()}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <div className="flex flex-wrap gap-3 mb-6">
           <div className="relative flex-1 min-w-[200px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -150,6 +202,7 @@ const Admin = () => {
             <option value="nome">Nome A-Z</option>
             <option value="preco_asc">Preço ↑</option>
             <option value="preco_desc">Preço ↓</option>
+            <option value="downloads">Mais Baixados</option>
           </select>
           <select value={filtroCategoria} onChange={(e) => setFiltroCategoria(e.target.value)} className="bg-card border border-border rounded-lg px-3 py-2.5 text-sm text-foreground">
             <option value="todas">Todas Categorias</option>

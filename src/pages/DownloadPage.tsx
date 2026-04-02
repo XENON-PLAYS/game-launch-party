@@ -49,13 +49,11 @@ const DownloadPage = () => {
   const handleDownload = async () => {
     if (!link) return;
     // Record download
-    if (user) {
-      await supabase.from("download_history").insert({
-        user_id: user.id,
-        game_id: gameId!,
-        download_link_id: linkId!,
-      });
-    }
+    await supabase.from("download_history").insert({
+      user_id: user?.id || null,
+      game_id: gameId!,
+      download_link_id: linkId!,
+    });
     // Increment click count — we use RPC or direct (admin only), so just open the link
     window.open(link.url, "_blank");
   };

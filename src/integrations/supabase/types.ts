@@ -20,21 +20,21 @@ export type Database = {
           download_link_id: string | null
           game_id: string
           id: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           created_at?: string
           download_link_id?: string | null
           game_id: string
           id?: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           created_at?: string
           download_link_id?: string | null
           game_id?: string
           id?: string
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -212,6 +212,7 @@ export type Database = {
           desenvolvedor: string | null
           destaques: string[]
           distribuidor: string | null
+          download_count: number
           galeria: string[]
           id: string
           idiomas: string[]
@@ -235,6 +236,7 @@ export type Database = {
           desenvolvedor?: string | null
           destaques?: string[]
           distribuidor?: string | null
+          download_count?: number
           galeria?: string[]
           id?: string
           idiomas?: string[]
@@ -258,6 +260,7 @@ export type Database = {
           desenvolvedor?: string | null
           destaques?: string[]
           distribuidor?: string | null
+          download_count?: number
           galeria?: string[]
           id?: string
           idiomas?: string[]
