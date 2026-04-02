@@ -32,8 +32,8 @@ export function Header() {
             className="w-10 h-10 md:w-12 md:h-12" 
           />
           <div className="flex flex-col">
-            <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none">JOGOS</span>
-            <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
+            <span className="font-bold text-xl tracking-tighter leading-none">JOGOS</span>
+            <span className="font-bold text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
           </div>
         </Link>
 
