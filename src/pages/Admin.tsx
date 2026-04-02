@@ -1,10 +1,13 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { Plus, Pencil, Trash2, Search, X, Store, LogOut, ChevronDown } from "lucide-react";
+import { Plus, Pencil, Trash2, Search, X, Store, LogOut, ChevronDown, Download, Monitor, LayoutGrid, BarChart3, Clock, Flame, Shield, Users, Image as ImageIcon, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Tables } from "@/integrations/supabase/types";
+import { RequirementsEditor } from "@/components/RequirementsEditor";
+import { toast } from "sonner";
+import imageCompression from "browser-image-compression";
 
 type Game = Tables<"games">;
 type SortOption = "nome" | "preco_asc" | "preco_desc" | "downloads";
