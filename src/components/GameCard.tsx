@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Download } from "lucide-react";
+import { Info } from "lucide-react";
 import { Tables } from "@/integrations/supabase/types";
 import { motion } from "framer-motion";
 
