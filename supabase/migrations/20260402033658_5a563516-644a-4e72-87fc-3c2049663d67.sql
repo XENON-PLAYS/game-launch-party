@@ -1,0 +1,1 @@
+ALTER FUNCTION public.handle_comment_reaction_stats() SET search_path = public;

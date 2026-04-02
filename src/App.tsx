@@ -8,7 +8,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Index from "./pages/Index.tsx";
 import GameDetail from "./pages/GameDetail.tsx";
-
+import Vip from "./pages/Vip.tsx";
 import Login from "./pages/Login.tsx";
 import Cadastro from "./pages/Cadastro.tsx";
 import Admin from "./pages/Admin.tsx";
@@ -31,6 +31,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/jogo/:slug" element={<GameDetail />} />
+                <Route path="/vip" element={<Vip />} />
                 <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
                 <Route path="/categoria/:category" element={<CategoryPage />} />
                 

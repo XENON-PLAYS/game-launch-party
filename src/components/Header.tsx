@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search, Trophy, Bell } from "lucide-react";
 
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect } from "react";
+import { OnlineUsers } from "./OnlineUsers";
+import { NotificationBell } from "./NotificationBell";
 import logo from "@/assets/logo.png";
 
 export function Header() {
@@ -41,6 +43,9 @@ export function Header() {
         <nav className="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-widest">
           <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Catálogo</Link>
           <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Novidades</Link>
+          <Link to="/vip" className="text-yellow-500 hover:text-yellow-400 flex items-center gap-2 animate-pulse">
+            <Trophy className="w-4 h-4" /> VIP
+          </Link>
           {isAdmin && (
             <Link to="/admin" className="text-primary hover:text-primary/80 flex items-center gap-2">
               <Shield className="w-4 h-4" /> Admin
@@ -50,7 +55,13 @@ export function Header() {
 
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="hidden sm:block">
+            <OnlineUsers />
+          </div>
+
+          {user && <NotificationBell />}
+
           {/* Theme Toggle */}
           <button onClick={toggleTheme} className="p-2.5 rounded-xl hover:bg-muted transition-colors">
             {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-muted-foreground" />}
@@ -85,6 +96,9 @@ export function Header() {
                         <Shield className="w-4 h-4" /> Admin
                       </Link>
                     )}
+                    <Link to="/vip" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-yellow-500/10 text-yellow-500 rounded-lg text-sm font-bold">
+                      <Trophy className="w-4 h-4" /> Área VIP
+                    </Link>
                     <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
                       <User className="w-4 h-4" /> Perfil
                     </Link>
