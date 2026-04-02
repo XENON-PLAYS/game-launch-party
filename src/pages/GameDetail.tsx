@@ -161,33 +161,36 @@ const GameDetail = () => {
       
 
       {/* Hero Section */}
-      <section className="bg-card border-b border-border py-12">
+      <section className="bg-card border-b border-border py-12 sm:py-20 lg:py-32">
         <div className="container-responsive">
-          <Breadcrumbs 
-            items={[
-              { label: "Catálogo", path: "/" },
-              { label: game.nome }
-            ]} 
-          />
+          <div className="mb-10 sm:mb-16">
+            <Breadcrumbs 
+              items={[
+                { label: "Catálogo", path: "/" },
+                { label: game.nome }
+              ]} 
+            />
+          </div>
 
-          <div className="grid lg:grid-cols-12 gap-12 items-start">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             {/* Visuals */}
-            <div className="lg:col-span-4 space-y-4">
-              <div className="rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4] bg-muted">
+            <div className="lg:col-span-5 xl:col-span-4 space-y-8 sm:space-y-10">
+              <div className="rounded-3xl overflow-hidden border border-border shadow-3xl aspect-[3/4] bg-muted group/hero-image relative">
                 <img 
                   src={selectedImage || game.imagem || ""} 
                   alt={game.nome} 
-                  className="w-full h-full object-cover transition-all duration-500" 
+                  className="w-full h-full object-cover transition-all duration-700 group-hover/hero-image:scale-110" 
                   onError={handleImageError}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/hero-image:opacity-100 transition-opacity duration-500" />
               </div>
 
               {/* Gallery thumbnails */}
               {game.galeria && game.galeria.length > 0 && (
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-4 gap-4 sm:gap-6">
                   <button 
                     onClick={() => setSelectedImage(null)} 
-                    className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${!selectedImage ? "border-primary" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
+                    className={`rounded-2xl overflow-hidden border-4 transition-all aspect-video ${!selectedImage ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                   >
                     <img src={game.imagem || ""} alt="Main" className="w-full h-full object-cover" onError={handleImageError} />
                   </button>
@@ -195,7 +198,7 @@ const GameDetail = () => {
                     <button 
                       key={i} 
                       onClick={() => setSelectedImage(img)} 
-                      className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${selectedImage === img ? "border-primary" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
+                      className={`rounded-2xl overflow-hidden border-4 transition-all aspect-video ${selectedImage === img ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                     >
                       <img src={img} alt={`Screenshot ${i + 1}`} className="w-full h-full object-cover" onError={handleImageError} />
                     </button>
@@ -204,86 +207,86 @@ const GameDetail = () => {
               )}
             </div>
 
-            <div className="lg:col-span-8 space-y-8">
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-2">
+            <div className="lg:col-span-7 xl:col-span-8 space-y-10 sm:space-y-16">
+              <div className="space-y-6 sm:space-y-8">
+                <div className="flex flex-wrap gap-3">
                   {game.categorias.map((c) => (
                     <Link 
                       key={c} 
                       to={`/categoria/${c}`}
-                      className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20 hover:bg-primary/30 transition-colors"
+                      className="text-responsive-small px-4 py-2 rounded-xl bg-primary/10 text-primary border border-primary/20 hover:bg-primary/30 transition-all shadow-sm"
                     >
                       {c}
                     </Link>
                   ))}
                 </div>
                 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold tracking-tighter uppercase leading-tight">
+                <h1 className="text-responsive-h1 leading-none uppercase">
                   {game.nome}
                 </h1>
 
                 {/* Rating summary */}
-                <div className="flex items-center gap-4 py-2 border-y border-border w-fit">
-                  <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-6 py-4 border-y border-border w-fit">
+                  <div className="flex items-center gap-2">
                     {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} className={`w-4 h-4 ${s <= Math.round(avgRating?.avg ?? 0) ? "text-yellow-400 fill-yellow-400" : "text-muted-foreground/30"}`} />
+                      <Star key={s} className={`w-5 h-5 sm:w-6 sm:h-6 ${s <= Math.round(avgRating?.avg ?? 0) ? "text-yellow-400 fill-yellow-400" : "text-muted-foreground/30"}`} />
                     ))}
                   </div>
-                  <div className="h-4 w-px bg-border" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                    {avgRating?.avg ?? 0} <span className="opacity-50">/ 5.0</span>
+                  <div className="h-6 w-px bg-border" />
+                  <span className="text-sm sm:text-base lg:text-lg font-black uppercase tracking-widest text-muted-foreground">
+                    {avgRating?.avg ?? 0} <span className="opacity-40">/ 5.0</span>
                   </span>
                 </div>
               </div>
 
-              <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl">
+              <p className="text-responsive-body text-muted-foreground opacity-90 max-w-4xl">
                 {game.descricao}
               </p>
 
               {/* Quick Actions Bar */}
-              <div className="flex flex-col sm:flex-row sm:items-end gap-6 md:gap-8 pt-4">
-                <div className="space-y-1">
-                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Preço Atual</span>
-                  <div className="text-3xl md:text-4xl font-bold text-primary flex items-baseline gap-1">
-                    {game.preco === 0 ? "GRÁTIS" : <><span className="text-xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
+              <div className="flex flex-col sm:flex-row sm:items-end gap-10 sm:gap-12 pt-6">
+                <div className="space-y-3">
+                  <span className="text-responsive-small text-muted-foreground opacity-70">Preço do Tesouro</span>
+                  <div className="text-responsive-h2 text-primary flex items-baseline gap-2">
+                    {game.preco === 0 ? "GRÁTIS" : <><span className="text-2xl sm:text-3xl lg:text-4xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 w-full sm:w-auto">
+                <div className="flex items-center gap-4 w-full sm:w-auto">
                   <button 
                     onClick={() => {
                       const element = document.getElementById('download-section');
                       element?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-8 md:px-10 py-3.5 md:py-4 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest text-[10px] md:text-xs hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1 active:scale-95"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-4 px-10 sm:px-16 py-4 sm:py-6 bg-primary text-primary-foreground rounded-2xl font-black uppercase tracking-[0.2em] text-xs sm:text-sm lg:text-base hover:bg-primary/90 transition-all duration-500 shadow-3xl shadow-primary/30 hover:-translate-y-2 active:scale-95"
                   >
-                    <span>Baixar Agora</span>
-                    <Download className="w-4 h-4" />
+                    <span>Baixar Tesouro</span>
+                    <Download className="w-5 h-5 sm:w-6 sm:h-6" />
                   </button>
                   
                   <button
                     onClick={toggleFavorite}
-                    className={`p-3.5 md:p-4 rounded-xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary hover:border-primary/50 shadow-sm"} active:scale-95`}
+                    className={`p-4 sm:p-6 rounded-2xl border-2 transition-all duration-500 ${isFavorited ? "bg-primary/10 border-primary text-primary shadow-xl shadow-primary/10" : "bg-background border-border text-muted-foreground hover:text-primary hover:border-primary/50 shadow-2xl shadow-black/5"} active:scale-90 hover:-translate-y-1`}
                   >
-                    <Heart className={`w-5 h-5 md:w-6 md:h-6 ${isFavorited ? "fill-primary" : ""}`} />
+                    <Heart className={`w-6 h-6 sm:w-8 sm:h-8 ${isFavorited ? "fill-primary" : ""}`} />
                   </button>
                 </div>
               </div>
 
               {/* Attributes Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-8 border-t border-border">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 sm:gap-16 pt-12 border-t border-border">
                 {[
                   { icon: Building2, label: "Desenvolvedor", value: game.desenvolvedor },
                   { icon: Calendar, label: "Lançamento", value: game.lancamento },
                   { icon: Shield, label: "Classificação", value: game.classificacao },
                   { icon: HardDrive, label: "Tamanho", value: game.tamanho }
                 ].map((item, i) => (
-                  <div key={i} className="space-y-2 group">
-                    <div className="flex items-center gap-2 text-primary/70 group-hover:text-primary transition-colors">
-                      <item.icon className="w-3.5 h-3.5" />
-                      <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground">{item.label}</span>
+                  <div key={i} className="space-y-3 group cursor-default">
+                    <div className="flex items-center gap-3 text-primary/60 group-hover:text-primary transition-all duration-300">
+                      <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="text-responsive-small text-muted-foreground opacity-70">{item.label}</span>
                     </div>
-                    <p className="text-sm font-bold truncate group-hover:text-foreground transition-colors">{item.value || "—"}</p>
+                    <p className="text-sm sm:text-base lg:text-lg font-black truncate group-hover:text-foreground transition-all duration-300">{item.value || "—"}</p>
                   </div>
                 ))}
               </div>
