@@ -120,7 +120,7 @@
 
 @layer utilities {
   .container-responsive {
-    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1440px] 2xl:max-w-[1800px] 3xl:max-w-[2100px];
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1440px] 2xl:max-w-[1800px];
     width: 100%;
   }
 
