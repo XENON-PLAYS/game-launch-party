@@ -17,13 +17,18 @@ export function GameComments({ gameId }: GameCommentsProps) {
   const [content, setContent] = useState("");
   const [replyTo, setReplyTo] = useState<string | null>(null);
   const [replyContent, setReplyContent] = useState("");
+  const [lastPostTime, setLastPostTime] = useState(0);
 
   const { data: comments = [] } = useQuery({
     queryKey: ["comments", gameId],
     queryFn: async () => {
       const { data } = await supabase
         .from("game_comments")
-        .select("*, profiles:user_id(display_name, avatar_url)")
+        .select(`
+          *,
+          profiles:user_id(display_name, avatar_url, is_vip, badges),
+          reactions:comment_reactions(user_id, reaction_type)
+        `)
         .eq("game_id", gameId)
         .is("parent_id", null)
         .order("created_at", { ascending: false });
@@ -36,7 +41,11 @@ export function GameComments({ gameId }: GameCommentsProps) {
     queryFn: async () => {
       const { data } = await supabase
         .from("game_comments")
-        .select("*, profiles:user_id(display_name, avatar_url)")
+        .select(`
+          *,
+          profiles:user_id(display_name, avatar_url, is_vip, badges),
+          reactions:comment_reactions(user_id, reaction_type)
+        `)
         .eq("game_id", gameId)
         .not("parent_id", "is", null)
         .order("created_at", { ascending: true });
