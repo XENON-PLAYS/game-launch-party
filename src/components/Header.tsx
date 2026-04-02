@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
 
 export function Header() {
-  const { count, setIsOpen } = useCart();
+  
   const { user, profile, logout, isAdmin } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
