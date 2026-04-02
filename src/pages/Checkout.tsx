@@ -176,14 +176,20 @@ const Checkout = () => {
 
               <button 
                 onClick={handleCheckout}
-                className="w-full py-6 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20 active:scale-[0.98] flex items-center justify-center gap-3 group"
-
+                disabled={loading}
+                className="w-full py-6 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20 active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed"
               >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span>Iniciando...</span>
+                  </>
+                ) : (
                   <>
                     <span>Finalizar Pagamento</span>
                     <Sparkles className="w-5 h-5 group-hover:animate-pulse" />
                   </>
-
+                )}
               </button>
 
               <div className="text-center space-y-4">
