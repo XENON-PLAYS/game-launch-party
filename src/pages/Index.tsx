@@ -287,10 +287,6 @@ const Index = () => {
           
           <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-muted-foreground text-[10px] font-bold uppercase tracking-[0.2em]">
             <p>© 2025 Jogos Piratas. Todos os tesouros reservados.</p>
-            <div className="flex gap-8">
-              <span>Desenvolvido por Richard, Bruno e Isabela</span>
-              <span className="text-primary">v1.0.0</span>
-            </div>
           </div>
         </div>
       </footer>

@@ -48,15 +48,6 @@ export function Header() {
           )}
         </nav>
 
-        {/* Search Desktop Mockup */}
-        <div className="hidden xl:flex flex-1 max-w-sm relative group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary" />
-          <input 
-            type="text" 
-            placeholder="Buscar jogos piratas..." 
-            className="w-full bg-background border border-input rounded-full pl-11 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-          />
-        </div>
 
         {/* Actions */}
         <div className="flex items-center gap-3">
