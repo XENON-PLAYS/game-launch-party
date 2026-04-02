@@ -149,7 +149,7 @@ const Admin = () => {
               <span className="w-2 h-2 rounded-full bg-primary" /> Downloads por Jogo
             </h3>
             <div className="space-y-4">
-              {games.slice(0, 5).sort((a, b) => b.download_count - a.download_count).map(g => (
+              {[...games].sort((a, b) => b.download_count - a.download_count).slice(0, 5).map(g => (
                 <div key={g.id} className="flex items-center justify-between gap-4">
                   <span className="text-sm font-bold truncate flex-1">{g.nome}</span>
                   <span className="text-xs px-2 py-1 rounded bg-secondary font-mono">{g.download_count}</span>
