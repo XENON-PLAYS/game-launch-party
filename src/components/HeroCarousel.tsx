@@ -70,9 +70,13 @@ export function HeroCarousel() {
           <div className="space-y-6">
             <div className="flex gap-2 flex-wrap">
               {game.categorias.map((c) => (
-                <span key={c} className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20">
+                <Link 
+                  key={c} 
+                  to={`/categoria/${c}`}
+                  className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20 hover:bg-primary/30 transition-colors"
+                >
                   {c}
-                </span>
+                </Link>
               ))}
             </div>
             
