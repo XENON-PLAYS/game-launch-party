@@ -3,6 +3,9 @@ export interface Game {
   nome: string;
   preco: number;
   imagem: string;
+  heroImage?: string;
+  verticalImage?: string;
+  capsuleImage?: string;
   trailer?: string;
   lancamento?: string;
   desenvolvedor?: string;
