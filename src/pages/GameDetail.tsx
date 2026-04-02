@@ -346,14 +346,14 @@ const GameDetail = () => {
                   <button
                     key={link.id}
                     onClick={() => handleDownload(link.id, link.url)}
-                    className={`group flex items-center justify-between px-8 py-6 rounded-2xl border transition-all duration-300 ${
+                    className={`group flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:px-8 sm:py-6 rounded-2xl border transition-all duration-300 gap-4 ${
                       link.status === "online"
                         ? "bg-card border-border hover:border-primary/50 hover:bg-primary/5"
                         : "bg-muted border-border opacity-40 cursor-not-allowed"
                     }`}
                     disabled={link.status !== "online"}
                   >
-                    <div className="flex items-center gap-5">
+                    <div className="flex items-center gap-4 sm:gap-5">
                       <div className={`p-3 rounded-xl bg-muted border border-border group-hover:bg-primary group-hover:text-primary-foreground transition-all`}>
                         <Download className="w-5 h-5" />
                       </div>
