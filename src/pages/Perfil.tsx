@@ -466,23 +466,23 @@ const Perfil = () => {
 
               <div className="text-center mt-4">
                 <div className="flex items-center justify-center gap-2 mb-1">
-                  <h2 className="font-['SuperSenior'] text-xl truncate max-w-[180px]">
+                  <h2 className=" text-xl truncate max-w-[180px]">
                     {profile?.display_name || "Usuário"}
                   </h2>
                   <div className={`w-2.5 h-2.5 rounded-full ${status === 'online' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-gray-500'}`} />
                 </div>
-                <p className="text-muted-foreground text-sm font-['Evogria']">
+                <p className="text-muted-foreground text-sm ">
                   @{profile?.username || "sem_usuario"}
                 </p>
                 
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
                   {profile?.is_vip && (
-                    <span className="bg-yellow-500/10 text-yellow-500 text-[9px] font-bold px-2 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest font-['Evogria']">
+                    <span className="bg-yellow-500/10 text-yellow-500 text-[9px] font-bold px-2 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest ">
                       VIP
                     </span>
                   )}
                   {profile?.badges?.map((badge: string, idx: number) => (
-                    <span key={idx} className="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded border border-primary/20 uppercase tracking-widest font-['Evogria']">
+                    <span key={idx} className="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded border border-primary/20 uppercase tracking-widest ">
                       {badge}
                     </span>
                   ))}
@@ -502,7 +502,7 @@ const Perfil = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-['Evogria'] transition-all ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'hover:bg-white/5 text-muted-foreground'}`}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm  transition-all ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'hover:bg-white/5 text-muted-foreground'}`}
                 >
                   <tab.icon className={`w-4 h-4 ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
                   {tab.label}
@@ -511,13 +511,13 @@ const Perfil = () => {
             </div>
 
             <div className="auth-fieldset p-6 space-y-4">
-              <h3 className="text-sm font-['Evogria'] border-b border-border pb-2">Informações</h3>
+              <h3 className="text-sm  border-b border-border pb-2">Informações</h3>
               <div className="space-y-2">
-                <p className="text-[10px] text-muted-foreground uppercase font-['Evogria']">Email</p>
+                <p className="text-[10px] text-muted-foreground uppercase ">Email</p>
                 <p className="text-xs font-medium truncate">{user?.email}</p>
               </div>
               <div className="space-y-2">
-                <p className="text-[10px] text-muted-foreground uppercase font-['Evogria']">Membro desde</p>
+                <p className="text-[10px] text-muted-foreground uppercase ">Membro desde</p>
                 <p className="text-xs font-medium">
                   {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
                 </p>
