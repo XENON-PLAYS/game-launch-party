@@ -106,12 +106,12 @@
 
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground;
-    font-family: "Evogria", Arial, sans-serif;
+    font-family: var(--font-sans);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: "SuperSenior", "Evogria", sans-serif;
-    @apply tracking-tight;
+    font-family: var(--font-sans);
+    @apply tracking-tight font-bold;
   }
 }
 
