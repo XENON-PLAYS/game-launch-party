@@ -14,13 +14,7 @@ export function GameCard({ game }: GameCardProps) {
   const { addItem } = useCart();
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
-      className="group bg-card/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/5 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 relative"
-    >
+    <div className="group bg-card rounded-xl overflow-hidden border border-border hover:border-primary transition-all duration-300 relative">
       <Link to={`/jogo/${game.id}`} className="block relative aspect-[3/4] overflow-hidden">
         <img 
           src={game.imagem || ""} 
