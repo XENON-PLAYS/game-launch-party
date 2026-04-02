@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 
-type SortOption = "nome" | "preco_asc" | "preco_desc" | "lancamento";
+type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
 const Index = () => {
   const [busca, setBusca] = useState("");
