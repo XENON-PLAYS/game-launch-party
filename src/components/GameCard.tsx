@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Download } from "lucide-react";
 import { Tables } from "@/integrations/supabase/types";
 import { motion } from "framer-motion";
-import { useCart } from "@/context/CartContext";
+
 
 type Game = Tables<"games">;
 
