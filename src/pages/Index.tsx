@@ -178,24 +178,24 @@ const Index = () => {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-6">
                 {filteredGames.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             )}
           </div>
         ) : (
-          <div className="space-y-20">
+          <div className="space-y-12 md:space-y-24">
             <GameSection title="🔥 Em Alta" icon="flame" games={emAlta} />
             <GameSection title="⭐ Recomendados" icon="star" games={recomendados} />
             <GameSection title="🕐 Recentes" icon="clock" games={recentes} />
             
-            <section className="space-y-10">
+            <section className="space-y-8 md:space-y-10">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="space-y-2">
-                  <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Catálogo Completo</h2>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter uppercase leading-none">Catálogo Completo</h2>
                   <div className="flex items-center gap-3">
-                    <span className="w-16 h-1 bg-primary rounded-full" />
-                    <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">{games.length} jogos disponíveis</span>
+                    <span className="w-12 md:w-16 h-1 bg-primary rounded-full" />
+                    <span className="text-[9px] md:text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">{games.length} jogos disponíveis</span>
                   </div>
                 </div>
                 
@@ -203,7 +203,7 @@ const Index = () => {
                   <select 
                     value={ordenacao} 
                     onChange={(e) => setOrdenacao(e.target.value as SortOption)}
-                    className="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="bg-card border border-border rounded-xl px-4 py-2.5 text-[10px] md:text-xs font-bold uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                   >
                     <option value="nome">Nome (A-Z)</option>
                     <option value="preco_asc">Menor Preço</option>
@@ -213,7 +213,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-6">
                 {games.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             </section>
@@ -221,8 +221,8 @@ const Index = () => {
         )}
       </main>
 
-      <footer className="border-t border-white/5 bg-background py-16 mt-20">
-        <div className="container mx-auto px-4">
+      <footer className="border-t border-border bg-card py-12 md:py-20 mt-20">
+        <div className="container-responsive">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div className="space-y-6">
               <Link to="/" className="flex items-center gap-4 group">
