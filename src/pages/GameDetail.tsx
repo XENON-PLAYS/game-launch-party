@@ -295,25 +295,25 @@ const GameDetail = () => {
         </div>
       </section>
 
-      <main className="container-responsive py-12 md:py-16 lg:py-24 space-y-16 md:space-y-24">
+      <main className="container-responsive py-16 sm:py-32 lg:py-48 space-y-24 sm:space-y-48">
         {/* Gallery / Trailer Section */}
         {game.trailer_url && (
-          <section className="space-y-10">
-            <div className="flex items-center gap-6">
-              <div className="p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
-                <Play className="w-6 h-6 text-primary" />
+          <section className="space-y-12 sm:space-y-16">
+            <div className="flex items-center gap-6 sm:gap-10">
+              <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
+                <Play className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-primary" />
               </div>
-              <div className="space-y-1">
-                <h2 className="text-3xl font-bold tracking-tighter uppercase leading-none">Trailer Oficial</h2>
-                <div className="flex items-center gap-3">
-                  <span className="w-12 h-1 bg-primary rounded-full" />
-                  <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Cinemática em 4K</span>
+              <div className="space-y-3">
+                <h2 className="text-responsive-h2 leading-none uppercase">Trailer Oficial</h2>
+                <div className="flex items-center gap-6">
+                  <span className="w-16 sm:w-32 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                  <span className="text-responsive-small text-muted-foreground opacity-80">Cinemática em 4K disponível</span>
                 </div>
               </div>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <div className="aspect-video rounded-3xl overflow-hidden border border-border shadow-3xl bg-black relative group">
+            <div className="max-w-6xl mx-auto px-4 sm:px-0">
+              <div className="aspect-video rounded-3xl sm:rounded-[3rem] overflow-hidden border-8 border-card shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5)] bg-black relative group/trailer hover:scale-[1.02] transition-transform duration-700">
                 <iframe
                   src={game.trailer_url}
                   title={`${game.nome} Trailer`}
@@ -327,18 +327,18 @@ const GameDetail = () => {
         )}
 
         {/* Requirements & Download Section */}
-        <section id="download-section" className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+        <section id="download-section" className="grid lg:grid-cols-2 gap-20 sm:gap-32">
           {/* Download Area */}
-          <div className="space-y-10">
-            <div className="flex items-center gap-4 md:gap-6">
-              <div className="p-3 md:p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
-                <Download className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+          <div className="space-y-12 sm:space-y-16">
+            <div className="flex items-center gap-6 sm:gap-8">
+              <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
+                <Download className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
               </div>
-              <div className="space-y-1">
-                <h2 className="text-2xl md:text-3xl font-bold tracking-tighter uppercase leading-none">Download</h2>
-                <div className="flex items-center gap-3">
-                  <span className="w-10 md:w-12 h-1 bg-primary rounded-full" />
-                  <span className="text-[9px] md:text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Links Verificados</span>
+              <div className="space-y-3">
+                <h2 className="text-responsive-h2 leading-none uppercase">Baixar o Tesouro</h2>
+                <div className="flex items-center gap-6">
+                  <span className="w-16 sm:w-24 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                  <span className="text-responsive-small text-muted-foreground opacity-80">Links Verificados pela Frota</span>
                 </div>
               </div>
             </div>
