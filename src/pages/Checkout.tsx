@@ -149,7 +149,7 @@ const Checkout = () => {
                 </div>
                 <div>
                   <p className="text-xs font-black uppercase tracking-widest">Meio de Pagamento</p>
-                  <p className="text-sm text-muted-foreground font-medium">Cartão de Crédito ou PIX</p>
+                  <p className="text-sm text-muted-foreground font-medium">Cartão de Crédito</p>
                 </div>
               </div>
 

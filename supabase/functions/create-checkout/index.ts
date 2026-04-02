@@ -43,7 +43,7 @@ serve(async (req) => {
     const origin = req.headers.get("origin") || "http://localhost:3000";
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card", "pix"],
+      payment_method_types: ["card"],
       customer_email: email,
       line_items: [
         {
