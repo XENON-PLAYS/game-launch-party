@@ -162,7 +162,7 @@ const GameDetail = () => {
 
       {/* Hero Section */}
       <section className="bg-card border-b border-border py-12">
-        <div className="container mx-auto px-4">
+        <div className="container-responsive">
           <Breadcrumbs 
             items={[
               { label: "Catálogo", path: "/" },
