@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+import { Search, SlidersHorizontal, ArrowUpDown, Filter, X } from "lucide-react";
 import { GameCard } from "@/components/GameCard";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
@@ -8,8 +8,9 @@ import { HeroCarousel } from "@/components/HeroCarousel";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
+import { motion, AnimatePresence } from "framer-motion";
 
-type SortOption = "nome" | "preco_asc" | "preco_desc";
+type SortOption = "nome" | "preco_asc" | "preco_desc" | "lancamento";
 
 const Index = () => {
   const [busca, setBusca] = useState("");
@@ -40,104 +41,283 @@ const Index = () => {
     let result = games;
     if (busca) result = result.filter((g) => g.nome.toLowerCase().includes(busca.toLowerCase()));
     if (categoria !== "todas") result = result.filter((g) => g.categorias.includes(categoria));
+    
     result = [...result].sort((a, b) => {
       if (ordenacao === "preco_asc") return a.preco - b.preco;
       if (ordenacao === "preco_desc") return b.preco - a.preco;
+      if (ordenacao === "lancamento") return (b.lancamento || "").localeCompare(a.lancamento || "");
       return a.nome.localeCompare(b.nome);
     });
     return result;
   }, [busca, categoria, ordenacao, games]);
 
   return (
-    <div className="min-h-screen bg-background transition-colors duration-300">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
       <Header />
       <CartPopup />
-      <HeroCarousel />
+      
+      {!isSearching && <HeroCarousel />}
 
-      {/* Search & Filters */}
-      <section className="border-b border-border bg-card/30">
-        <div className="container mx-auto px-4 py-5">
-          <div className="flex gap-2 max-w-xl">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <input type="text" placeholder="Buscar jogos..." value={busca} onChange={(e) => setBusca(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" />
+      {/* Modern Search & Filters Area */}
+      <section className="sticky top-16 z-40 bg-background/60 backdrop-blur-xl border-b border-white/5 py-6">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div className="w-full md:max-w-2xl relative group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+              <input 
+                type="text" 
+                placeholder="Qual jogo você está procurando hoje?" 
+                value={busca} 
+                onChange={(e) => setBusca(e.target.value)}
+                className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-lg placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 shadow-xl shadow-black/20" 
+              />
+              {busca && (
+                <button 
+                  onClick={() => setBusca("")} 
+                  className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-white/10 transition-colors"
+                >
+                  <X className="w-4 h-4 text-muted-foreground" />
+                </button>
+              )}
             </div>
-            <button onClick={() => setShowFilters(!showFilters)}
-              className={`px-4 rounded-xl border transition-all flex items-center gap-2 ${showFilters ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border hover:border-primary/40"}`}>
-              <SlidersHorizontal className="w-4 h-4" />
-              <span className="hidden sm:inline text-sm">Filtros</span>
-            </button>
+            
+            <div className="flex gap-3 w-full md:w-auto">
+              <button 
+                onClick={() => setShowFilters(!showFilters)}
+                className={`flex-1 md:flex-none px-6 py-4 rounded-2xl border transition-all duration-300 flex items-center justify-center gap-3 font-bold uppercase tracking-widest text-xs ${
+                  showFilters || isSearching 
+                    ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" 
+                    : "bg-white/5 border-white/10 hover:border-primary/50 text-foreground"
+                }`}
+              >
+                <SlidersHorizontal className="w-4 h-4" />
+                <span>Filtros {isSearching && "Ativos"}</span>
+              </button>
+            </div>
           </div>
-          {showFilters && (
-            <div className="flex flex-wrap gap-4 mt-4 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="space-y-1">
-                <label className="text-xs text-muted-foreground uppercase tracking-wider">Categoria</label>
-                <select value={categoria} onChange={(e) => setCategoria(e.target.value)} className="block bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50">
-                  <option value="todas">Todas</option>
-                  {allCategories.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
-                </select>
-              </div>
-              <div className="space-y-1">
-                <label className="text-xs text-muted-foreground uppercase tracking-wider">Ordenar</label>
-                <select value={ordenacao} onChange={(e) => setOrdenacao(e.target.value as SortOption)} className="block bg-card border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50">
-                  <option value="nome">Nome (A-Z)</option>
-                  <option value="preco_asc">Preço ↑</option>
-                  <option value="preco_desc">Preço ↓</option>
-                </select>
-              </div>
-            </div>
-          )}
+
+          <AnimatePresence>
+            {showFilters && (
+              <motion.div 
+                initial={{ opacity: 0, height: 0, y: -10 }}
+                animate={{ opacity: 1, height: "auto", y: 0 }}
+                exit={{ opacity: 0, height: 0, y: -10 }}
+                className="overflow-hidden"
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8 pb-4">
+                  <div className="space-y-3">
+                    <label className="flex items-center gap-2 text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em] ml-1">
+                      <Filter className="w-3 h-3" /> Categorias
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      <button 
+                        onClick={() => setCategoria("todas")}
+                        className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${
+                          categoria === "todas" ? "bg-primary border-primary text-primary-foreground" : "bg-white/5 border-white/10 hover:border-primary/30"
+                        }`}
+                      >
+                        Todas
+                      </button>
+                      {allCategories.map((cat) => (
+                        <button 
+                          key={cat}
+                          onClick={() => setCategoria(cat)}
+                          className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${
+                            categoria === cat ? "bg-primary border-primary text-primary-foreground" : "bg-white/5 border-white/10 hover:border-primary/30"
+                          }`}
+                        >
+                          {cat}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="flex items-center gap-2 text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em] ml-1">
+                      <ArrowUpDown className="w-3 h-3" /> Ordenar Por
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        { id: "nome", label: "Nome" },
+                        { id: "preco_asc", label: "Menor Preço" },
+                        { id: "preco_desc", label: "Maior Preço" },
+                        { id: "lancamento", label: "Lançamento" }
+                      ].map((opt) => (
+                        <button 
+                          key={opt.id}
+                          onClick={() => setOrdenacao(opt.id as SortOption)}
+                          className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${
+                            ordenacao === opt.id ? "bg-primary border-primary text-primary-foreground" : "bg-white/5 border-white/10 hover:border-primary/30"
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-end pb-1">
+                    <button 
+                      onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
+                      className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest hover:text-primary transition-colors flex items-center gap-2 underline underline-offset-4"
+                    >
+                      Limpar todos os filtros
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
-      <main className="container mx-auto px-4 py-8 space-y-12">
+      <main className="container mx-auto px-4 py-12 space-y-24">
         {isLoading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {Array.from({ length: 10 }).map((_, i) => (
-              <div key={i} className="bg-card rounded-xl overflow-hidden border border-border">
-                <Skeleton className="aspect-[3/4] w-full" />
-                <div className="p-3 space-y-2"><Skeleton className="h-4 w-3/4" /><Skeleton className="h-7 w-20" /></div>
+              <div key={i} className="bg-white/5 rounded-2xl overflow-hidden border border-white/5 p-1">
+                <Skeleton className="aspect-[3/4] w-full rounded-xl" />
+                <div className="p-4 space-y-3">
+                  <Skeleton className="h-5 w-3/4" />
+                  <div className="flex justify-between items-center">
+                    <Skeleton className="h-6 w-20" />
+                    <Skeleton className="h-8 w-16" />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         ) : isSearching ? (
-          <>
-            <p className="text-muted-foreground text-sm">{filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}</p>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="space-y-10"
+          >
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-8">
+              <div>
+                <h2 className="text-4xl font-bold tracking-tighter uppercase mb-2">Resultados da busca</h2>
+                <p className="text-muted-foreground text-sm font-bold uppercase tracking-widest">
+                  {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
+                </p>
+              </div>
+              <div className="flex gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                <span>Ativo:</span>
+                {categoria !== "todas" && <span className="text-primary">{categoria}</span>}
+                {busca && <span className="text-primary">"{busca}"</span>}
+              </div>
+            </div>
+
             {filteredGames.length === 0 ? (
-              <div className="text-center py-20 text-muted-foreground">
-                <p className="text-xl mb-2">Nenhum jogo encontrado</p>
-                <p className="text-sm">Tente ajustar os filtros ou a busca</p>
+              <div className="text-center py-32 space-y-6">
+                <div className="inline-flex p-6 rounded-full bg-white/5 border border-white/10 mb-4">
+                  <Search className="w-12 h-12 text-muted-foreground/30" />
+                </div>
+                <h3 className="text-3xl font-bold tracking-tighter uppercase">Nenhum tesouro encontrado</h3>
+                <p className="text-muted-foreground max-w-sm mx-auto">
+                  Não encontramos nenhum jogo com esses critérios. Tente navegar pelas categorias ou usar termos mais genéricos.
+                </p>
+                <button 
+                  onClick={() => { setBusca(""); setCategoria("todas"); }}
+                  className="px-8 py-3 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest text-xs hover:scale-105 transition-transform"
+                >
+                  Ver todo o catálogo
+                </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                 {filteredGames.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             )}
-          </>
+          </motion.div>
         ) : (
-          <>
+          <div className="space-y-24">
             <GameSection title="🔥 Em Alta" icon="flame" games={emAlta} />
             <GameSection title="⭐ Recomendados" icon="star" games={recomendados} />
             <GameSection title="🕐 Recentes" icon="clock" games={recentes} />
-            <section className="space-y-5">
-              <div className="flex items-center gap-3">
-                <h2 className="text-2xl font-bold tracking-tight">Catálogo Completo</h2>
-                <div className="flex-1 h-px bg-border ml-2" />
-                <span className="text-sm text-muted-foreground">{games.length} jogos</span>
+            
+            <section className="space-y-10">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="space-y-2">
+                  <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Catálogo Completo</h2>
+                  <div className="flex items-center gap-3">
+                    <span className="w-16 h-1 bg-primary rounded-full" />
+                    <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">{games.length} jogos disponíveis</span>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3">
+                  <select 
+                    value={ordenacao} 
+                    onChange={(e) => setOrdenacao(e.target.value as SortOption)}
+                    className="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs font-bold uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  >
+                    <option value="nome">Nome (A-Z)</option>
+                    <option value="preco_asc">Menor Preço</option>
+                    <option value="preco_desc">Maior Preço</option>
+                    <option value="lancamento">Novidades</option>
+                  </select>
+                </div>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                 {games.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             </section>
-          </>
+          </div>
         )}
       </main>
 
-      <footer className="border-t border-border bg-card/50 py-6">
-        <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between text-muted-foreground text-xs gap-2">
-          <p>© 2025 Richard, Bruno e Isabela. Todos os direitos reservados.</p>
-          <p>Desenvolvido por Richard, Bruno e Isabela</p>
+      <footer className="border-t border-white/5 bg-background py-16 mt-20">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div className="space-y-6">
+              <Link to="/" className="flex items-center gap-4 group">
+                <img src={logo} alt="Jogos Piratas" className="w-12 h-12" />
+                <div className="flex flex-col">
+                  <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none">JOGOS</span>
+                  <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
+                </div>
+              </Link>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                A maior comunidade de compartilhamento de jogos. Descubra, jogue e compartilhe suas experiências.
+              </p>
+            </div>
+            
+            <div className="space-y-6">
+              <h4 className="text-xs font-bold uppercase tracking-widest">Navegação</h4>
+              <ul className="space-y-4 text-sm text-muted-foreground">
+                <li><Link to="/" className="hover:text-primary transition-colors">Catálogo</Link></li>
+                <li><Link to="/" className="hover:text-primary transition-colors">Novidades</Link></li>
+                <li><Link to="/" className="hover:text-primary transition-colors">Em Alta</Link></li>
+              </ul>
+            </div>
+            
+            <div className="space-y-6">
+              <h4 className="text-xs font-bold uppercase tracking-widest">Suporte</h4>
+              <ul className="space-y-4 text-sm text-muted-foreground">
+                <li><Link to="/" className="hover:text-primary transition-colors">FAQ</Link></li>
+                <li><Link to="/" className="hover:text-primary transition-colors">Termos de Uso</Link></li>
+                <li><Link to="/" className="hover:text-primary transition-colors">Privacidade</Link></li>
+              </ul>
+            </div>
+
+            <div className="space-y-6">
+              <h4 className="text-xs font-bold uppercase tracking-widest">Newsletter</h4>
+              <p className="text-sm text-muted-foreground">Receba avisos de novos tesouros no seu e-mail.</p>
+              <div className="flex gap-2">
+                <input type="email" placeholder="Seu e-mail..." className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm w-full focus:outline-none focus:ring-2 focus:ring-primary/50" />
+                <button className="bg-primary text-primary-foreground px-4 py-2 rounded-xl font-bold uppercase text-[10px] tracking-widest">OK</button>
+              </div>
+            </div>
+          </div>
+          
+          <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-muted-foreground text-[10px] font-bold uppercase tracking-[0.2em]">
+            <p>© 2025 Jogos Piratas. Todos os tesouros reservados.</p>
+            <div className="flex gap-8">
+              <span>Desenvolvido por Richard, Bruno e Isabela</span>
+              <span className="text-primary">v1.0.0</span>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
