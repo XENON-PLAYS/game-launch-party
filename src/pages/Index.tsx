@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Search, SlidersHorizontal, LayoutGrid, X } from "lucide-react";
+import { Search, SlidersHorizontal, LayoutGrid, X, Target, Sword, Ghost, Shield, Compass, Users, Clock, Zap, Star, Gamepad2, Layers, Trash2 } from "lucide-react";
 import { GameCard } from "@/components/GameCard";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
