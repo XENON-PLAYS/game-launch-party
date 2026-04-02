@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const VipPage = () => {
   const { profile } = useAuth();
