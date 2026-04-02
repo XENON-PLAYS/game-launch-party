@@ -44,10 +44,8 @@ const Perfil = () => {
         .eq("user_id", user.id);
 
       if (error) throw error;
+      await refreshProfile();
       toast.success("Perfil atualizado com sucesso!");
-      // The AuthContext should ideally handle the profile refresh, 
-      // but for simplicity here we just wait for the subscription or reload
-      window.location.reload(); 
     } catch (error: any) {
       toast.error(error.message || "Erro ao atualizar perfil");
     } finally {
