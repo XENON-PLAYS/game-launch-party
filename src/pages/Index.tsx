@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 
-type SortOption = "nome" | "preco_asc" | "preco_desc" | "lancamento";
+type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
 const Index = () => {
   const [busca, setBusca] = useState("");
@@ -43,8 +43,23 @@ const Index = () => {
     if (categoria !== "todas") result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
     
     result = [...result].sort((a, b) => {
-      if (ordenacao === "preco_asc") return a.preco - b.preco;
-      if (ordenacao === "preco_desc") return b.preco - a.preco;
+      if (ordenacao === "pesado") {
+        const parseSize = (s: string | null) => {
+          if (!s) return 0;
+          const match = s.match(/(\d+(\.\d+)?)/);
+          return match ? parseFloat(match[1]) : 0;
+        };
+        return parseSize(b.tamanho) - parseSize(a.tamanho);
+      }
+      if (ordenacao === "leve") {
+        const parseSize = (s: string | null) => {
+          if (!s) return Infinity;
+          const match = s.match(/(\d+(\.\d+)?)/);
+          return match ? parseFloat(match[1]) : Infinity;
+        };
+        return parseSize(a.tamanho) - parseSize(b.tamanho);
+      }
+      if (ordenacao === "popular" || ordenacao === "alta") return (b.download_count || 0) - (a.download_count || 0);
       if (ordenacao === "lancamento") return (b.lancamento || "").localeCompare(a.lancamento || "");
       return a.nome.localeCompare(b.nome);
     });
@@ -116,8 +131,10 @@ const Index = () => {
                     <div className="flex flex-wrap gap-2 md:gap-3">
                       {[
                         { id: "nome", label: "Alfabética" },
-                        { id: "preco_asc", label: "Melhor Investimento" },
-                        { id: "preco_desc", label: "Premium" },
+                        { id: "popular", label: "Popular" },
+                        { id: "alta", label: "Em Alta" },
+                        { id: "pesado", label: "Mais Pesado" },
+                        { id: "leve", label: "Mais Leve" },
                         { id: "lancamento", label: "Lançamentos" }
                       ].map((opt) => (
                         <button key={opt.id} onClick={() => setOrdenacao(opt.id as SortOption)} className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition-all ${ordenacao === opt.id ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" : "bg-card border-border/50 hover:border-primary/20"}`}>{opt.label}</button>
