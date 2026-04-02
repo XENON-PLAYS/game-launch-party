@@ -67,7 +67,7 @@ export function Header() {
                   <User className="w-4 h-4" />
                 )}
               </div>
-              <span className="max-w-[100px] truncate">{profile?.display_name || user.email?.split("@")[0] || "Usuário"}</span>
+              <span className="max-w-[100px] truncate">{profile?.display_name || user?.email?.split("@")[0] || "Usuário"}</span>
               <ChevronDown className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100" />
             </button>
             {menuOpen && (
