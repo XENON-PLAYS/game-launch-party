@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { Search, SlidersHorizontal, ArrowUpDown, Filter, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import { GameCard } from "@/components/GameCard";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
@@ -9,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/assets/logo.png";
 
 type SortOption = "nome" | "preco_asc" | "preco_desc" | "lancamento";
 
