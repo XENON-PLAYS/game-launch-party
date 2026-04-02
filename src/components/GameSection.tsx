@@ -1,7 +1,7 @@
 import { Tables } from "@/integrations/supabase/types";
 import { GameCard } from "./GameCard";
 import { Flame, Star, Clock, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+
 
 type Game = Tables<"games">;
 
@@ -25,13 +25,7 @@ export function GameSection({ title, icon, games }: GameSectionProps) {
 
   return (
     <section className="space-y-8 py-4">
-      <motion.div 
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="flex items-center justify-between gap-4"
-      >
+      <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4 group">
           <div className={`p-3 rounded-2xl ${config.bg} ${config.border} border group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-black/20`}>
             <Icon className={`w-6 h-6 ${config.color}`} />
@@ -49,7 +43,7 @@ export function GameSection({ title, icon, games }: GameSectionProps) {
           Ver todos
           <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </button>
-      </motion.div>
+      </div>
       
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {games.map((game, index) => (

@@ -134,117 +134,39 @@
   }
 }
 
-/* ===== AUTH PAGES (Login / Cadastro) — spinning red border ===== */
-
-@property --auth-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
+/* ===== AUTH PAGES (Login / Cadastro) ===== */
 
 .auth-fieldset {
-  @apply relative p-8 pt-12 pb-14 rounded-[2rem] overflow-hidden;
-  background: rgba(23, 23, 23, 0.8);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-
-.auth-fieldset::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: conic-gradient(
-    from var(--auth-angle),
-    transparent 0%,
-    transparent 25%,
-    hsl(var(--primary)) 50%,
-    transparent 75%,
-    transparent 100%
-  );
-  z-index: -1;
-  animation: auth-spin 4s linear infinite;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  padding: 2px;
-  border-radius: 2rem;
-}
-
-@keyframes auth-spin {
-  from { --auth-angle: 0deg; }
-  to { --auth-angle: 360deg; }
+  @apply relative p-8 rounded-2xl bg-card border border-border shadow-2xl;
 }
 
 .auth-title {
-  @apply text-center text-4xl font-bold mb-2 tracking-tighter;
+  @apply text-center text-3xl font-bold mb-6 tracking-tight;
   font-family: "SuperSenior", sans-serif;
-  background: linear-gradient(to bottom, #fff, #999);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.3));
 }
 
 .auth-label {
   @apply text-muted-foreground text-xs font-semibold uppercase tracking-widest mb-1.5 ml-1;
-  font-family: "Evogria", sans-serif;
 }
 
 .auth-input {
-  @apply w-full px-4 py-3.5 rounded-xl text-sm transition-all duration-300;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: hsl(var(--foreground));
-  font-family: "Evogria", Arial, sans-serif;
+  @apply w-full px-4 py-3 rounded-xl text-sm transition-all duration-300 bg-background border border-input;
 }
 
 .auth-input:focus {
-  @apply outline-none ring-2 ring-primary/20 border-primary bg-primary/5;
-}
-
-.auth-input::placeholder {
-  @apply text-muted-foreground/40;
+  @apply outline-none ring-2 ring-primary/20 border-primary;
 }
 
 .auth-btn {
-  @apply relative overflow-hidden px-6 py-4 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-primary/20;
-  font-family: "Evogria", sans-serif;
-  background: linear-gradient(135deg, hsl(var(--primary)), #cc0000);
-  color: white;
-}
-
-.auth-btn:hover {
-  @apply shadow-xl shadow-primary/40 brightness-110;
-}
-
-.auth-btn:disabled {
-  @apply opacity-50 cursor-not-allowed scale-100;
-}
-
-.auth-btn-glow {
-  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full;
-  animation: btn-shine 3s infinite;
-}
-
-@keyframes btn-shine {
-  100% { transform: translateX(100%); }
+  @apply w-full py-4 rounded-xl font-bold text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300;
 }
 
 /* ===== ADMIN PANEL ===== */
 
 .admin-label {
-  @apply block text-xs text-muted-foreground mb-1 uppercase tracking-wider;
-  font-family: "Evogria", sans-serif;
+  @apply block text-xs text-muted-foreground mb-1 uppercase tracking-wider font-bold;
 }
 
 .admin-input {
-  @apply w-full px-3 py-2.5 rounded-lg text-sm;
-  background-color: hsl(0 0% 17%);
-  border: 1px solid hsl(0 0% 22%);
-  color: hsl(0 0% 95%);
-}
-
-.admin-input:focus {
-  @apply outline-none ring-2;
-  ring-color: hsl(1 76% 55% / 0.5);
-  border-color: hsl(1 76% 55%);
+  @apply w-full px-3 py-2.5 rounded-lg text-sm bg-background border border-input;
 }

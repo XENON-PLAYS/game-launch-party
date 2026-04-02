@@ -9,7 +9,7 @@ import { HeroCarousel } from "@/components/HeroCarousel";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
-import { motion, AnimatePresence } from "framer-motion";
+
 import logo from "@/assets/logo.png";
 
 type SortOption = "nome" | "preco_asc" | "preco_desc" | "lancamento";
@@ -60,116 +60,70 @@ const Index = () => {
       
       {!isSearching && <HeroCarousel />}
 
-      {/* Modern Search & Filters Area */}
-      <section className="sticky top-16 z-40 bg-background/60 backdrop-blur-xl border-b border-white/5 py-6">
+      {/* Search & Filters Area */}
+      <section className="bg-card border-b border-border py-6">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="w-full md:max-w-2xl relative group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+            <div className="w-full md:max-w-xl relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input 
                 type="text" 
-                placeholder="Qual jogo você está procurando hoje?" 
+                placeholder="Qual jogo você está procurando?" 
                 value={busca} 
                 onChange={(e) => setBusca(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl text-lg placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 shadow-xl shadow-black/20" 
+                className="w-full pl-10 pr-4 py-3 bg-background border border-input rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" 
               />
-              {busca && (
-                <button 
-                  onClick={() => setBusca("")} 
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-white/10 transition-colors"
-                >
-                  <X className="w-4 h-4 text-muted-foreground" />
-                </button>
-              )}
             </div>
             
-            <div className="flex gap-3 w-full md:w-auto">
+            <div className="flex gap-2 w-full md:w-auto">
               <button 
                 onClick={() => setShowFilters(!showFilters)}
-                className={`flex-1 md:flex-none px-6 py-4 rounded-2xl border transition-all duration-300 flex items-center justify-center gap-3 font-bold uppercase tracking-widest text-xs ${
-                  showFilters || isSearching 
-                    ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" 
-                    : "bg-white/5 border-white/10 hover:border-primary/50 text-foreground"
+                className={`flex-1 md:flex-none px-4 py-3 rounded-xl border transition-all flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider ${
+                  showFilters ? "bg-primary text-primary-foreground border-primary" : "bg-background border-input hover:border-primary/50"
                 }`}
               >
                 <SlidersHorizontal className="w-4 h-4" />
-                <span>Filtros {isSearching && "Ativos"}</span>
+                <span>Filtros</span>
               </button>
             </div>
           </div>
 
-          <AnimatePresence>
-            {showFilters && (
-              <motion.div 
-                initial={{ opacity: 0, height: 0, y: -10 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -10 }}
-                className="overflow-hidden"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8 pb-4">
-                  <div className="space-y-3">
-                    <label className="flex items-center gap-2 text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em] ml-1">
-                      <Filter className="w-3 h-3" /> Categorias
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      <button 
-                        onClick={() => setCategoria("todas")}
-                        className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${
-                          categoria === "todas" ? "bg-primary border-primary text-primary-foreground" : "bg-white/5 border-white/10 hover:border-primary/30"
-                        }`}
-                      >
-                        Todas
-                      </button>
-                      {allCategories.map((cat) => (
-                        <button 
-                          key={cat}
-                          onClick={() => setCategoria(cat)}
-                          className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${
-                            categoria === cat ? "bg-primary border-primary text-primary-foreground" : "bg-white/5 border-white/10 hover:border-primary/30"
-                          }`}
-                        >
-                          {cat}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <label className="flex items-center gap-2 text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em] ml-1">
-                      <ArrowUpDown className="w-3 h-3" /> Ordenar Por
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        { id: "nome", label: "Nome" },
-                        { id: "preco_asc", label: "Menor Preço" },
-                        { id: "preco_desc", label: "Maior Preço" },
-                        { id: "lancamento", label: "Lançamento" }
-                      ].map((opt) => (
-                        <button 
-                          key={opt.id}
-                          onClick={() => setOrdenacao(opt.id as SortOption)}
-                          className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${
-                            ordenacao === opt.id ? "bg-primary border-primary text-primary-foreground" : "bg-white/5 border-white/10 hover:border-primary/30"
-                          }`}
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex items-end pb-1">
-                    <button 
-                      onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
-                      className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest hover:text-primary transition-colors flex items-center gap-2 underline underline-offset-4"
-                    >
-                      Limpar todos os filtros
-                    </button>
-                  </div>
+          {showFilters && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+              <div className="space-y-2">
+                <label className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Categorias</label>
+                <div className="flex flex-wrap gap-2">
+                  <button onClick={() => setCategoria("todas")} className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${categoria === "todas" ? "bg-primary text-primary-foreground border-primary" : "bg-background border-input"}`}>Todas</button>
+                  {allCategories.map((cat) => (
+                    <button key={cat} onClick={() => setCategoria(cat)} className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${categoria === cat ? "bg-primary text-primary-foreground border-primary" : "bg-background border-input"}`}>{cat}</button>
+                  ))}
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Ordenar Por</label>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { id: "nome", label: "Nome" },
+                    { id: "preco_asc", label: "Menor Preço" },
+                    { id: "preco_desc", label: "Maior Preço" },
+                    { id: "lancamento", label: "Lançamento" }
+                  ].map((opt) => (
+                    <button key={opt.id} onClick={() => setOrdenacao(opt.id as SortOption)} className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${ordenacao === opt.id ? "bg-primary text-primary-foreground border-primary" : "bg-background border-input"}`}>{opt.label}</button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-end">
+                <button 
+                  onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
+                  className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest hover:text-primary transition-colors flex items-center gap-2 underline"
+                >
+                  Limpar filtros
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -190,11 +144,7 @@ const Index = () => {
             ))}
           </div>
         ) : isSearching ? (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="space-y-10"
-          >
+          <div className="space-y-10">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-8">
               <div>
                 <h2 className="text-4xl font-bold tracking-tighter uppercase mb-2">Resultados da busca</h2>
@@ -230,7 +180,7 @@ const Index = () => {
                 {filteredGames.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             )}
-          </motion.div>
+          </div>
         ) : (
           <div className="space-y-24">
             <GameSection title="🔥 Em Alta" icon="flame" games={emAlta} />

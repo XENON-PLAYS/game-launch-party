@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
-import { motion, AnimatePresence } from "framer-motion";
+
 import { useCart } from "@/context/CartContext";
 
 const GameDetail = () => {
@@ -136,49 +136,23 @@ const GameDetail = () => {
       <Header />
       <CartPopup />
 
-      {/* Hero Section with Parallax Background */}
-      <section className="relative overflow-hidden min-h-[60vh] flex flex-col pt-8">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-20 blur-3xl scale-110 pointer-events-none"
-          style={{ backgroundImage: `url(${game.imagem})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none" />
+      {/* Hero Section */}
+      <section className="bg-card border-b border-border py-12">
+        <div className="container mx-auto px-4">
+          <Link to="/" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors mb-8 group">
+            <ArrowLeft className="w-4 h-4" />
+            <span>Voltar ao Catálogo</span>
+          </Link>
 
-        <div className="container mx-auto px-4 relative flex-1 flex flex-col">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="mb-8"
-          >
-            <Link to="/" className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors group">
-              <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-primary/50 transition-colors">
-                <ArrowLeft className="w-4 h-4" />
-              </div>
-              <span>Catálogo Completo</span>
-            </Link>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-[400px_1fr] gap-12 lg:items-start flex-1 pb-16">
+          <div className="grid lg:grid-cols-[400px_1fr] gap-12 lg:items-start">
             {/* Visuals */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="space-y-4"
-            >
-              <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl shadow-black/60 relative group aspect-[3/4]">
-                <AnimatePresence mode="wait">
-                  <motion.img 
-                    key={selectedImage || "main"}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    src={selectedImage || game.imagem || ""} 
-                    alt={game.nome} 
-                    className="w-full h-full object-cover" 
-                  />
-                </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="space-y-4">
+              <div className="rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4]">
+                <img 
+                  src={selectedImage || game.imagem || ""} 
+                  alt={game.nome} 
+                  className="w-full h-full object-cover" 
+                />
               </div>
 
               {/* Gallery thumbnails */}
@@ -186,7 +160,7 @@ const GameDetail = () => {
                 <div className="grid grid-cols-4 gap-3">
                   <button 
                     onClick={() => setSelectedImage(null)} 
-                    className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${!selectedImage ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-white/5 hover:border-primary/40 opacity-70 hover:opacity-100"}`}
+                    className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${!selectedImage ? "border-primary" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                   >
                     <img src={game.imagem || ""} alt="Main" className="w-full h-full object-cover" />
                   </button>
@@ -194,49 +168,40 @@ const GameDetail = () => {
                     <button 
                       key={i} 
                       onClick={() => setSelectedImage(img)} 
-                      className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${selectedImage === img ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-white/5 hover:border-primary/40 opacity-70 hover:opacity-100"}`}
+                      className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${selectedImage === img ? "border-primary" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                     >
                       <img src={img} alt={`Screenshot ${i + 1}`} className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
               )}
-            </motion.div>
+            </div>
 
             {/* Content Info */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="space-y-8"
-            >
+            <div className="space-y-8">
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2">
                   {game.categorias.map((c) => (
-                    <span key={c} className="text-[10px] uppercase font-bold tracking-[0.2em] px-4 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 backdrop-blur-sm">
+                    <span key={c} className="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20">
                       {c}
                     </span>
                   ))}
                 </div>
                 
-                <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-[0.9] text-shadow-md">
+                <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-tight">
                   {game.nome}
                 </h1>
 
                 {/* Rating summary */}
-                <div className="flex items-center gap-4 py-2 border-y border-white/5">
+                <div className="flex items-center gap-4 py-2 border-y border-border">
                   <div className="flex items-center gap-1.5">
                     {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} className={`w-4 h-4 ${s <= Math.round(avgRating?.avg ?? 0) ? "text-yellow-400 fill-yellow-400" : "text-white/10"}`} />
+                      <Star key={s} className={`w-4 h-4 ${s <= Math.round(avgRating?.avg ?? 0) ? "text-yellow-400 fill-yellow-400" : "text-muted-foreground/30"}`} />
                     ))}
                   </div>
-                  <div className="h-4 w-px bg-white/10" />
+                  <div className="h-4 w-px bg-border" />
                   <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
                     {avgRating?.avg ?? 0} <span className="opacity-50">/ 5.0</span>
-                  </span>
-                  <div className="h-4 w-px bg-white/10" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                    {avgRating?.count ?? 0} <span className="opacity-50">Avaliações</span>
                   </span>
                 </div>
               </div>
@@ -248,7 +213,7 @@ const GameDetail = () => {
               {/* Quick Actions Bar */}
               <div className="flex flex-wrap items-center gap-6 pt-4">
                 <div className="flex flex-col">
-                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em] mb-1">Preço Atual</span>
+                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mb-1">Preço Atual</span>
                   <span className="text-4xl font-bold text-primary">
                     {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
                   </span>
@@ -257,27 +222,23 @@ const GameDetail = () => {
                 <div className="flex items-center gap-3">
                   <button 
                     onClick={() => addItem(game)}
-                    className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold uppercase tracking-widest text-xs hover:scale-105 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 group"
+                    className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all duration-300"
                   >
                     <span>Adicionar ao Carrinho</span>
-                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="w-4 h-4" />
                   </button>
                   
                   <button
                     onClick={toggleFavorite}
-                    className={`p-4 rounded-2xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary shadow-lg shadow-primary/20" : "bg-white/5 border-white/10 text-muted-foreground hover:border-primary/50 hover:text-primary"}`}
+                    className={`p-4 rounded-2xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary"}`}
                   >
                     <Heart className={`w-6 h-6 ${isFavorited ? "fill-primary" : ""}`} />
-                  </button>
-                  
-                  <button className="p-4 rounded-2xl bg-white/5 border border-white/10 text-muted-foreground hover:border-primary/50 hover:text-primary transition-all duration-300">
-                    <Share2 className="w-6 h-6" />
                   </button>
                 </div>
               </div>
 
               {/* Attributes Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-white/5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-border">
                 {[
                   { icon: Building2, label: "Desenvolvedor", value: game.desenvolvedor },
                   { icon: Calendar, label: "Lançamento", value: game.lancamento },
@@ -293,7 +254,7 @@ const GameDetail = () => {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

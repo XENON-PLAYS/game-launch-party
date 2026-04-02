@@ -78,99 +78,50 @@ export function HeroCarousel() {
   };
 
   return (
-    <section className="relative overflow-hidden border-b border-border min-h-[400px] md:min-h-[500px] flex items-center">
-      <AnimatePresence initial={false} custom={direction}>
-        <motion.div
-          key={current}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 }
-          }}
-          className="absolute inset-0"
-        >
-          {/* Background Image with blur */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center scale-110 blur-2xl opacity-20 transition-transform duration-[10000ms]"
-            style={{ backgroundImage: `url(${game.imagem})` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-          
-          <div className="container mx-auto px-4 h-full relative flex items-center">
-            <div className="grid md:grid-cols-[1fr_350px] gap-12 items-center w-full">
-              <div className="space-y-6">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="flex gap-2 flex-wrap"
-                >
-                  {game.categorias.map((c) => (
-                    <span key={c} className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-md bg-primary/20 text-primary border border-primary/30 backdrop-blur-sm">
-                      {c}
-                    </span>
-                  ))}
-                </motion.div>
-                
-                <motion.h2 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[0.9] text-shadow-md"
-                >
-                  {game.nome}
-                </motion.h2>
-                
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-muted-foreground text-base md:text-lg max-w-xl line-clamp-3 leading-relaxed"
-                >
-                  {game.descricao}
-                </motion.p>
-                
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="flex items-center gap-6 pt-4"
-                >
-                  <div className="flex flex-col">
-                    <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold mb-1">Preço</span>
-                    <span className="text-3xl font-bold text-primary">
-                      {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
-                    </span>
-                  </div>
-                  <Link 
-                    to={`/jogo/${game.id}`} 
-                    className="flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-base bg-primary hover:bg-primary/90 text-primary-foreground hover:scale-105 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 group"
-                  >
-                    <span>VER DETALHES</span>
-                    <Info className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                  </Link>
-                </motion.div>
+    <section className="relative overflow-hidden border-b border-border bg-card">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-[1fr_350px] gap-12 items-center">
+          <div className="space-y-6">
+            <div className="flex gap-2 flex-wrap">
+              {game.categorias.map((c) => (
+                <span key={c} className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20">
+                  {c}
+                </span>
+              ))}
+            </div>
+            
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
+              {game.nome}
+            </h2>
+            
+            <p className="text-muted-foreground text-lg max-w-xl line-clamp-3">
+              {game.descricao}
+            </p>
+            
+            <div className="flex items-center gap-6 pt-4">
+              <div className="flex flex-col">
+                <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold mb-1">Preço</span>
+                <span className="text-3xl font-bold text-primary">
+                  {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
+                </span>
               </div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                transition={{ delay: 0.4, type: "spring" }}
-                className="hidden md:block"
+              <Link 
+                to={`/jogo/${game.id}`} 
+                className="flex items-center gap-3 px-8 py-4 rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300"
               >
-                <Link to={`/jogo/${game.id}`} className="block rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 hover:scale-[1.02] transition-transform duration-700 aspect-[3/4] relative group">
-                  <img src={game.imagem || ""} alt={game.nome} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              </motion.div>
+                <span>VER DETALHES</span>
+                <Info className="w-5 h-5" />
+              </Link>
             </div>
           </div>
-        </motion.div>
-      </AnimatePresence>
+
+          <div className="hidden md:block">
+            <Link to={`/jogo/${game.id}`} className="block rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4]">
+              <img src={game.imagem || ""} alt={game.nome} className="w-full h-full object-cover" />
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* Controls Overlay */}
       <div className="absolute bottom-10 left-0 w-full z-10">
