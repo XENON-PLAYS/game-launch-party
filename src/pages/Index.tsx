@@ -131,8 +131,8 @@ const Index = () => {
 
       <main className="container-responsive py-8 md:py-12 lg:py-20 space-y-12 md:space-y-20">
         {isLoading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-6">
-            {Array.from({ length: 10 }).map((_, i) => (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-8 gap-4 sm:gap-6 lg:gap-8">
+            {Array.from({ length: 12 }).map((_, i) => (
               <div key={i} className="bg-card rounded-2xl overflow-hidden border border-border p-1">
                 <Skeleton className="aspect-[3/4] w-full rounded-xl" />
                 <div className="p-4 space-y-3">
@@ -146,64 +146,48 @@ const Index = () => {
             ))}
           </div>
         ) : isSearching ? (
-          <div className="space-y-8 md:space-y-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border pb-6 md:pb-8">
+          <div className="space-y-8 md:space-y-12 lg:space-y-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border pb-8 md:pb-12">
               <div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter uppercase mb-2">Resultados</h2>
-                <p className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">
+                <h2 className="text-responsive-h2 mb-4">Resultados</h2>
+                <p className="text-responsive-small text-muted-foreground opacity-70">
                   {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                <span className="opacity-50">Ativo:</span>
-                {categoria !== "todas" && <span className="text-primary bg-primary/10 px-2 py-0.5 rounded">{categoria}</span>}
-                {busca && <span className="text-primary bg-primary/10 px-2 py-0.5 rounded">"{busca}"</span>}
+              <div className="flex flex-wrap gap-2 md:gap-3">
+                <span className="text-responsive-small text-muted-foreground opacity-50 self-center">Filtros Ativos:</span>
+                {categoria !== "todas" && <span className="text-primary bg-primary/10 px-3 py-1 rounded-lg text-xs font-bold border border-primary/20">{categoria}</span>}
+                {busca && <span className="text-primary bg-primary/10 px-3 py-1 rounded-lg text-xs font-bold border border-primary/20">"{busca}"</span>}
               </div>
             </div>
-
-            {filteredGames.length === 0 ? (
-              <div className="text-center py-32 space-y-6">
-                <div className="inline-flex p-6 rounded-full bg-white/5 border border-white/10 mb-4">
-                  <Search className="w-12 h-12 text-muted-foreground/30" />
-                </div>
-                <h3 className="text-3xl font-bold tracking-tighter uppercase">Nenhum tesouro encontrado</h3>
-                <p className="text-muted-foreground max-w-sm mx-auto">
-                  Não encontramos nenhum jogo com esses critérios. Tente navegar pelas categorias ou usar termos mais genéricos.
-                </p>
-                <button 
-                  onClick={() => { setBusca(""); setCategoria("todas"); }}
-                  className="px-8 py-3 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest text-xs hover:scale-105 transition-transform"
-                >
-                  Ver todo o catálogo
-                </button>
-              </div>
+...
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-8 gap-4 sm:gap-6 lg:gap-8">
                 {filteredGames.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             )}
           </div>
         ) : (
-          <div className="space-y-12 md:space-y-24">
+          <div className="space-y-16 md:space-y-32 lg:space-y-48">
             <GameSection title="🔥 Em Alta" icon="flame" games={emAlta} />
             <GameSection title="⭐ Recomendados" icon="star" games={recomendados} />
             <GameSection title="🕐 Recentes" icon="clock" games={recentes} />
             
-            <section className="space-y-8 md:space-y-10">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div className="space-y-2">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter uppercase leading-none">Catálogo Completo</h2>
-                  <div className="flex items-center gap-3">
-                    <span className="w-12 md:w-16 h-1 bg-primary rounded-full" />
-                    <span className="text-[9px] md:text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">{games.length} jogos disponíveis</span>
+            <section className="space-y-10 md:space-y-16 lg:space-y-20">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 border-b border-border pb-10">
+                <div className="space-y-4">
+                  <h2 className="text-responsive-h2 leading-none">Catálogo Completo</h2>
+                  <div className="flex items-center gap-4">
+                    <span className="w-16 md:w-24 h-1.5 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                    <span className="text-responsive-small text-muted-foreground opacity-80">{games.length} jogos disponíveis</span>
                   </div>
                 </div>
                 
-                <div className="flex gap-3">
+                <div className="flex gap-4">
                   <select 
                     value={ordenacao} 
                     onChange={(e) => setOrdenacao(e.target.value as SortOption)}
-                    className="bg-card border border-border rounded-xl px-4 py-2.5 text-[10px] md:text-xs font-bold uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                    className="bg-card border border-border rounded-2xl px-6 py-3.5 text-xs lg:text-sm font-black uppercase tracking-widest focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all hover:border-primary/50 cursor-pointer shadow-xl shadow-black/5"
                   >
                     <option value="nome">Nome (A-Z)</option>
                     <option value="preco_asc">Menor Preço</option>
@@ -213,7 +197,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-8 gap-4 sm:gap-6 lg:gap-8">
                 {games.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             </section>
