@@ -1,12 +1,18 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 import { Header } from "@/components/Header";
 import { CartPopup } from "@/components/CartPopup";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Camera, User, Check, AlertCircle, BadgeCheck } from "lucide-react";
+import { 
+  Loader2, Camera, User, Check, AlertCircle, BadgeCheck, 
+  History, Heart, Trophy, Sparkles, Moon, Sun, 
+  Circle, Edit3, Save, X, ExternalLink
+} from "lucide-react";
 import { toast } from "sonner";
 import imageCompression from "browser-image-compression";
+import { GameCard } from "@/components/GameCard";
 
 const Perfil = () => {
   const { user, profile, isLoading: authLoading, refreshProfile } = useAuth();
