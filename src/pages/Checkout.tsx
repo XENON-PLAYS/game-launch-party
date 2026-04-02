@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { Check, Shield, CreditCard, ArrowLeft, Sparkles } from "lucide-react";
 import { PRICING_CONFIG } from "@/config/pricing";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { Loader2 } from "lucide-react";
 
 
 const Checkout = () => {
