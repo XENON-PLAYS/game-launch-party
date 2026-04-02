@@ -242,11 +242,11 @@ const Admin = () => {
       </main>
 
       {modalOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/70 flex items-center justify-center p-4" onClick={() => setModalOpen(false)}>
-          <div className="bg-card border border-border rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="sticky top-0 bg-card border-b border-border px-6 py-4 flex items-center justify-between rounded-t-2xl">
+        <div className="fixed inset-0 z-[100] bg-black/70 flex items-center justify-center p-0 md:p-4" onClick={() => setModalOpen(false)}>
+          <div className="bg-card border-x md:border border-border rounded-none md:rounded-2xl w-full max-w-2xl h-full md:h-auto md:max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="sticky top-0 z-10 bg-card border-b border-border px-6 py-4 flex items-center justify-between md:rounded-t-2xl">
               <h2 className="text-lg font-bold">{modalMode === "add" ? "Adicionar Novo Jogo" : "Editar Jogo"}</h2>
-              <button onClick={() => setModalOpen(false)} className="p-1 hover:bg-secondary rounded-lg"><X className="w-5 h-5" /></button>
+              <button onClick={() => setModalOpen(false)} className="p-2 hover:bg-secondary rounded-lg"><X className="w-5 h-5" /></button>
             </div>
             <form onSubmit={saveGame} className="p-6 space-y-4">
               <div><label className="admin-label">Nome *</label><input required value={editGame.nome || ""} onChange={(e) => setField("nome", e.target.value)} placeholder="Grand Theft Auto V" className="admin-input" /></div>
