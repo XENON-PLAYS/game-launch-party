@@ -23,31 +23,18 @@ export function Header() {
   }, []);
 
   return (
-    <header 
-      className={`sticky top-0 z-[100] transition-all duration-500 ${
-        scrolled 
-          ? "bg-background/80 backdrop-blur-xl border-b border-white/5 py-3 shadow-2xl shadow-black/40" 
-          : "bg-transparent py-5"
-      }`}
-    >
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-6">
+    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b border-border py-4 shadow-sm">
+      <div className="container mx-auto px-4 flex items-center justify-between gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-4 shrink-0 group relative">
-          <div className="relative">
-            <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-150 group-hover:scale-[2] transition-transform duration-500 opacity-0 group-hover:opacity-100" />
-            <img 
-              src={logo} 
-              alt="Jogos Piratas" 
-              className="w-12 h-12 md:w-14 md:h-14 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 relative z-10 drop-shadow-2xl" 
-            />
-          </div>
+        <Link to="/" className="flex items-center gap-3 shrink-0">
+          <img 
+            src={logo} 
+            alt="Jogos Piratas" 
+            className="w-10 h-10 md:w-12 md:h-12" 
+          />
           <div className="flex flex-col">
-            <span className="font-['SuperSenior'] text-2xl tracking-tighter hidden sm:block leading-[0.8] group-hover:text-primary transition-colors">
-              JOGOS
-            </span>
-            <span className="font-['SuperSenior'] text-2xl tracking-tighter hidden sm:block leading-[0.8] text-primary">
-              PIRATAS
-            </span>
+            <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none">JOGOS</span>
+            <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
           </div>
         </Link>
 

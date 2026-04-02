@@ -68,6 +68,6 @@ export function GameCard({ game }: GameCardProps) {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
