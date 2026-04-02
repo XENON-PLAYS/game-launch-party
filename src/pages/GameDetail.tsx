@@ -441,7 +441,7 @@ const GameDetail = () => {
                 <h2 className="text-responsive-h2 leading-none uppercase">Avaliar</h2>
                 <div className="flex items-center gap-6">
                   <span className="w-16 sm:w-24 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                  <span className="text-responsive-small text-muted-foreground opacity-80">Seu Voto de Pirata</span>
+                  <span className="text-responsive-small text-muted-foreground opacity-80">Seu Voto de Jogador</span>
                 </div>
               </div>
             </div>
@@ -473,14 +473,14 @@ const GameDetail = () => {
       <footer className="border-t border-border bg-card py-20 sm:py-32 lg:py-48 mt-32 sm:mt-48 lg:mt-60">
         <div className="container-responsive text-center space-y-10">
           <Link to="/" className="inline-flex items-center gap-5 group mx-auto">
-            <img src={logo} alt="Jogos Piratas" className="w-16 h-16 sm:w-20 sm:h-20" />
+            <img src={logo} alt="JOGOS GRATIS" className="w-16 h-16 sm:w-20 sm:h-20" />
             <div className="flex flex-col text-left">
               <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none">JOGOS</span>
-              <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none text-primary">PIRATAS</span>
+              <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none text-primary">GRATIS</span>
             </div>
           </Link>
           <div className="pt-16 border-t border-border flex flex-col md:flex-row justify-between items-center gap-10 text-responsive-small text-muted-foreground opacity-60">
-            <p>© 2025 Jogos Piratas — Navegando pelos Sete Mares dos Games desde 1715.</p>
+            <p>© 2025 JOGOS GRATIS — Navegando pelos Sete Mares dos Games desde 1715.</p>
             <div className="flex gap-8">
               <Link to="/" className="hover:text-primary transition-colors">Termos</Link>
               <Link to="/" className="hover:text-primary transition-colors">Privacidade</Link>

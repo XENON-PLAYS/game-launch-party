@@ -165,7 +165,7 @@ const DownloadPage = () => {
 
       <footer className="border-t border-border bg-card py-20 sm:py-32 mt-20">
         <div className="container-responsive text-center text-responsive-small text-muted-foreground opacity-60">
-          <p>© 2025 Jogos Piratas — Sua bússola para os melhores tesouros digitais.</p>
+          <p>© 2025 JOGOS GRATIS — Sua bússola para os melhores tesouros digitais.</p>
         </div>
       </footer>
     </div>

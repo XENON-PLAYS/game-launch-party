@@ -190,7 +190,7 @@ const VipPage = () => {
 
       <footer className="border-t border-border/50 bg-card py-20 mt-32">
         <div className="container-responsive text-center text-muted-foreground opacity-40 font-bold uppercase tracking-widest text-xs">
-          © 2025 Jogos Piratas — Navegue com a elite.
+          © 2025 JOGOS GRATIS — Navegue com a elite.
         </div>
       </footer>
     </div>

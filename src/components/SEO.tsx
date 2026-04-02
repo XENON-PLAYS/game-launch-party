@@ -9,13 +9,13 @@ interface SEOProps {
 }
 
 export const SEO = ({ 
-  title = "Jogos Piratas - O maior catálogo de jogos", 
+  title = "JOGOS GRATIS - O maior catálogo de jogos", 
   description = "A maior comunidade de compartilhamento de jogos. Descubra, jogue e compartilhe suas experiências.", 
-  keywords = "jogos, games, download, grátis, pirata, jogos piratas, download de jogos",
+  keywords = "jogos, games, download, grátis, jogos gratis, download de jogos",
   image = "/logo.png",
-  url = "https://jogospiratas.com"
+  url = "https://jogosgratis.com"
 }: SEOProps) => {
-  const fullTitle = title.includes("Jogos Piratas") ? title : `${title} | Jogos Piratas`;
+  const fullTitle = title.includes("JOGOS GRATIS") ? title : `${title} | JOGOS GRATIS`;
 
   return (
     <Helmet>
