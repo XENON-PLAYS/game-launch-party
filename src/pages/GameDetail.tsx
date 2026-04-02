@@ -385,37 +385,40 @@ const GameDetail = () => {
           </div>
 
           {/* System Requirements */}
-          <div className="space-y-10">
-            <div className="flex items-center gap-6">
-              <div className="p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
-                <Monitor className="w-6 h-6 text-primary" />
+          <div className="space-y-12 sm:space-y-16">
+            <div className="flex items-center gap-6 sm:gap-10">
+              <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
+                <Monitor className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
               </div>
-              <div className="space-y-1">
-                <h2 className="text-3xl font-bold tracking-tighter uppercase leading-none">Requisitos</h2>
-                <div className="flex items-center gap-3">
-                  <span className="w-12 h-1 bg-primary rounded-full" />
-                  <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Especificações Técnicas</span>
+              <div className="space-y-3">
+                <h2 className="text-responsive-h2 leading-none uppercase">Requisitos</h2>
+                <div className="flex items-center gap-6">
+                  <span className="w-16 sm:w-32 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                  <span className="text-responsive-small text-muted-foreground opacity-80">Especificações da Frota</span>
                 </div>
               </div>
             </div>
 
-            <div className="grid gap-8">
-              {[{ label: "Mínimos", data: reqMin }, { label: "Recomendados", data: reqRec }].map(({ label, data }) =>
+            <div className="grid gap-10 sm:gap-12">
+              {[
+                { label: "Mínimos", data: reqMin },
+                { label: "Recomendados", data: reqRec }
+              ].map(({ label, data }) =>
                 data ? (
-                  <div key={label} className="bg-card border border-border rounded-3xl p-8 space-y-6">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-2xl font-bold tracking-tighter uppercase">{label}</h3>
-                      <div className={`px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${label === "Mínimos" ? "bg-orange-500/10 text-orange-400" : "bg-emerald-500/10 text-emerald-400"}`}>
-                        {label === "Mínimos" ? "Básico" : "Ideal"}
+                  <div key={label} className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-10 shadow-2xl shadow-black/5 hover:border-primary/20 transition-all duration-500">
+                    <div className="flex items-center justify-between border-b border-border pb-8">
+                      <h3 className="text-responsive-h3 text-primary uppercase leading-none">{label}</h3>
+                      <div className={`px-6 py-2 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest ${label === "Mínimos" ? "bg-orange-500/10 text-orange-400 border border-orange-500/20" : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"}`}>
+                        {label === "Mínimos" ? "Essencial" : "Optimizado"}
                       </div>
                     </div>
-                    <div className="space-y-3">
+                    <div className="grid sm:grid-cols-2 gap-x-12 gap-y-8">
                       {Object.entries(data).map(([key, val]) => (
-                        <div key={key} className="flex justify-between items-center py-3 border-b border-border last:border-0 group">
-                          <span className="text-xs text-muted-foreground uppercase font-bold tracking-widest group-hover:text-primary transition-colors">
-                            {key === "placa" ? "GPU" : key === "armazenamento" ? "Disk" : key === "memoria" ? "RAM" : key === "processador" ? "CPU" : key}
+                        <div key={key} className="space-y-2 group">
+                          <span className="text-responsive-small text-muted-foreground opacity-60 group-hover:text-primary transition-all duration-300">
+                            {key === "placa" ? "GPU / Placa de Vídeo" : key === "armazenamento" ? "Espaço em Disco" : key === "memoria" ? "Memória RAM" : key === "processador" ? "Processador CPU" : key}
                           </span>
-                          <span className="text-sm font-bold">{String(val)}</span>
+                          <p className="text-sm sm:text-base lg:text-lg font-black group-hover:text-foreground transition-all duration-300 leading-snug">{String(val)}</p>
                         </div>
                       ))}
                     </div>
@@ -427,48 +430,62 @@ const GameDetail = () => {
         </section>
 
         {/* Social / Community Section */}
-        <section className="grid lg:grid-cols-2 gap-12 lg:gap-20">
-          <div className="space-y-6">
-            <div className="flex items-center gap-6">
-              <div className="p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
-                <Star className="w-6 h-6 text-primary" />
+        <section className="grid lg:grid-cols-2 gap-20 sm:gap-32">
+          <div className="space-y-12 sm:space-y-16">
+            <div className="flex items-center gap-6 sm:gap-8">
+              <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
+                <Star className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
               </div>
-              <div className="space-y-1">
-                <h2 className="text-3xl font-bold tracking-tighter uppercase leading-none">Avaliar</h2>
-                <div className="flex items-center gap-3">
-                  <span className="w-12 h-1 bg-primary rounded-full" />
-                  <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Sua opinião importa</span>
+              <div className="space-y-3">
+                <h2 className="text-responsive-h2 leading-none uppercase">Avaliar</h2>
+                <div className="flex items-center gap-6">
+                  <span className="w-16 sm:w-24 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                  <span className="text-responsive-small text-muted-foreground opacity-80">Seu Voto de Pirata</span>
                 </div>
               </div>
             </div>
-            <div className="bg-card border border-border rounded-3xl p-6">
+            <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 shadow-2xl shadow-black/5">
               <StarRating gameId={game.id} />
             </div>
           </div>
 
-          <div className="space-y-6">
-            <div className="flex items-center gap-6">
-              <div className="p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
-                <MessageSquare className="w-6 h-6 text-primary" />
+          <div className="space-y-12 sm:space-y-16">
+            <div className="flex items-center gap-6 sm:gap-8">
+              <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
+                <MessageSquare className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
               </div>
-              <div className="space-y-1">
-                <h2 className="text-3xl font-bold tracking-tighter uppercase leading-none">Comentários</h2>
-                <div className="flex items-center gap-3">
-                  <span className="w-12 h-1 bg-primary rounded-full" />
-                  <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Comunidade Pirata</span>
+              <div className="space-y-3">
+                <h2 className="text-responsive-h2 leading-none uppercase">Taberna</h2>
+                <div className="flex items-center gap-6">
+                  <span className="w-16 sm:w-24 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                  <span className="text-responsive-small text-muted-foreground opacity-80">Conversa da Tripulação</span>
                 </div>
               </div>
             </div>
-            <div className="bg-card border border-border rounded-3xl p-6">
+            <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 shadow-2xl shadow-black/5">
               <GameComments gameId={game.id} />
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-border bg-card py-16 mt-20">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.4em]">© 2025 Jogos Piratas — Navegando pelos Sete Mares dos Games</p>
+      <footer className="border-t border-border bg-card py-20 sm:py-32 lg:py-48 mt-32 sm:mt-48 lg:mt-60">
+        <div className="container-responsive text-center space-y-10">
+          <Link to="/" className="inline-flex items-center gap-5 group mx-auto">
+            <img src={logo} alt="Jogos Piratas" className="w-16 h-16 sm:w-20 sm:h-20" />
+            <div className="flex flex-col text-left">
+              <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none">JOGOS</span>
+              <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none text-primary">PIRATAS</span>
+            </div>
+          </Link>
+          <div className="pt-16 border-t border-border flex flex-col md:flex-row justify-between items-center gap-10 text-responsive-small text-muted-foreground opacity-60">
+            <p>© 2025 Jogos Piratas — Navegando pelos Sete Mares dos Games desde 1715.</p>
+            <div className="flex gap-8">
+              <Link to="/" className="hover:text-primary transition-colors">Termos</Link>
+              <Link to="/" className="hover:text-primary transition-colors">Privacidade</Link>
+              <Link to="/" className="hover:text-primary transition-colors">Cookies</Link>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
