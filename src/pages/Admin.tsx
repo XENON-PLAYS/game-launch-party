@@ -141,7 +141,7 @@ const Admin = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-6">
+      <main className="container-responsive py-6">
         {/* Metrics Summary */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           <div className="bg-card border border-border rounded-xl p-6">
