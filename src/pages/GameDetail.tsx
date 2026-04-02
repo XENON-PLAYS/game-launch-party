@@ -177,12 +177,11 @@ const GameDetail = () => {
               )}
             </div>
 
-            {/* Content Info */}
-            <div className="space-y-8">
+            <div className="lg:col-span-8 space-y-8">
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2">
                   {game.categorias.map((c) => (
-                    <span key={c} className="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                    <span key={c} className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20">
                       {c}
                     </span>
                   ))}
@@ -193,7 +192,7 @@ const GameDetail = () => {
                 </h1>
 
                 {/* Rating summary */}
-                <div className="flex items-center gap-4 py-2 border-y border-border">
+                <div className="flex items-center gap-4 py-2 border-y border-border w-fit">
                   <div className="flex items-center gap-1.5">
                     {[1, 2, 3, 4, 5].map((s) => (
                       <Star key={s} className={`w-4 h-4 ${s <= Math.round(avgRating?.avg ?? 0) ? "text-yellow-400 fill-yellow-400" : "text-muted-foreground/30"}`} />
@@ -206,17 +205,17 @@ const GameDetail = () => {
                 </div>
               </div>
 
-              <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl">
                 {game.descricao}
               </p>
 
               {/* Quick Actions Bar */}
-              <div className="flex flex-wrap items-center gap-6 pt-4">
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mb-1">Preço Atual</span>
-                  <span className="text-4xl font-bold text-primary">
-                    {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
-                  </span>
+              <div className="flex flex-wrap items-end gap-8 pt-4">
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Preço Atual</span>
+                  <div className="text-4xl font-bold text-primary flex items-baseline gap-1">
+                    {game.preco === 0 ? "GRÁTIS" : <><span className="text-xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -225,7 +224,7 @@ const GameDetail = () => {
                       const element = document.getElementById('download-section');
                       element?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all duration-300"
+                    className="flex items-center gap-3 px-10 py-4 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1"
                   >
                     <span>Baixar Agora</span>
                     <Download className="w-4 h-4" />
@@ -233,7 +232,7 @@ const GameDetail = () => {
                   
                   <button
                     onClick={toggleFavorite}
-                    className={`p-4 rounded-2xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary"}`}
+                    className={`p-4 rounded-xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary hover:border-primary/50 shadow-sm"}`}
                   >
                     <Heart className={`w-6 h-6 ${isFavorited ? "fill-primary" : ""}`} />
                   </button>
