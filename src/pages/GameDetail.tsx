@@ -24,66 +24,77 @@ const GameDetail = () => {
   };
 
   const { data: game, isLoading } = useQuery({
-    queryKey: ["game", id],
+    queryKey: ["game", slug],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("games")
-        .select("*")
-        .eq("id", id!)
-        .single();
+      // Tenta buscar por slug, se não encontrar (ou se o slug parecer um UUID), tenta por ID para manter compatibilidade
+      let query = supabase.from("games").select("*");
+      
+      const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug!);
+      
+      if (isUUID) {
+        query = query.eq("id", slug!);
+      } else {
+        query = query.eq("slug", slug!);
+      }
+
+      const { data, error } = await query.maybeSingle();
       if (error) throw error;
       return data;
     },
-    enabled: !!id,
+    enabled: !!slug,
   });
 
+  const gameId = game?.id;
+
   const { data: downloadLinks } = useQuery({
-    queryKey: ["download-links", id],
+    queryKey: ["download-links", gameId],
     queryFn: async () => {
       const { data } = await supabase
         .from("download_links")
         .select("*")
-        .eq("game_id", id!);
+        .eq("game_id", gameId!);
       return data ?? [];
     },
-    enabled: !!id,
+    enabled: !!gameId,
   });
 
   const { data: avgRating } = useQuery({
-    queryKey: ["avg-rating", id],
+    queryKey: ["avg-rating", gameId],
     queryFn: async () => {
       const { data } = await supabase
         .from("game_ratings")
         .select("rating")
-        .eq("game_id", id!);
+        .eq("game_id", gameId!);
       if (!data || data.length === 0) return { avg: 0, count: 0 };
       const avg = data.reduce((s, r) => s + r.rating, 0) / data.length;
       return { avg: Math.round(avg * 10) / 10, count: data.length };
     },
-    enabled: !!id,
+    enabled: !!gameId,
   });
 
   const { data: isFavorited, refetch: refetchFav } = useQuery({
-    queryKey: ["favorite", id, user?.id],
+    queryKey: ["favorite", gameId, user?.id],
     queryFn: async () => {
       if (!user) return false;
       const { data } = await supabase
         .from("favorites")
         .select("id")
         .eq("user_id", user.id)
-        .eq("game_id", id!)
+        .eq("game_id", gameId!)
         .maybeSingle();
       return !!data;
     },
-    enabled: !!id,
+    enabled: !!gameId && !!user?.id,
   });
 
   const toggleFavorite = async () => {
     if (!user) return navigate("/login");
+    if (!gameId) return;
+
     if (isFavorited) {
-      await supabase.from("favorites").delete().eq("user_id", user.id).eq("game_id", id!);
+      await supabase.from("favorites").delete().eq("user_id", user.id).eq("game_id", gameId);
     } else {
-      await supabase.from("favorites").insert({ user_id: user.id, game_id: id! });
+      await supabase.from("favorites").insert({ user_id: user.id, game_id: gameId });
     }
     refetchFav();
   };
