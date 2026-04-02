@@ -22,7 +22,7 @@ export function GameCard({ game }: GameCardProps) {
     >
       <Link to={`/jogo/${game.slug || game.id}`} className="block relative aspect-[3/4] overflow-hidden shrink-0">
         <img 
-          src={game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
+          src={(game as any).vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
           alt={game.nome} 
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
           loading="lazy" 
