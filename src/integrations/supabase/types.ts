@@ -222,6 +222,7 @@ export type Database = {
           preco: number
           requisitos_minimo: Json | null
           requisitos_recomendado: Json | null
+          slug: string | null
           tamanho: string | null
           trailer_url: string | null
           updated_at: string
@@ -244,6 +245,7 @@ export type Database = {
           preco?: number
           requisitos_minimo?: Json | null
           requisitos_recomendado?: Json | null
+          slug?: string | null
           tamanho?: string | null
           trailer_url?: string | null
           updated_at?: string
@@ -266,6 +268,7 @@ export type Database = {
           preco?: number
           requisitos_minimo?: Json | null
           requisitos_recomendado?: Json | null
+          slug?: string | null
           tamanho?: string | null
           trailer_url?: string | null
           updated_at?: string
@@ -402,6 +405,8 @@ export type Database = {
         }
         Returns: boolean
       }
+      slugify: { Args: { text: string }; Returns: string }
+      unaccent: { Args: { "": string }; Returns: string }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
