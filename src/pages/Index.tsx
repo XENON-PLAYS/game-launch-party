@@ -12,6 +12,30 @@ import { motion, AnimatePresence } from "framer-motion";
 
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
+const categoryIconMap: Record<string, any> = {
+  "FPS": Target,
+  "RPG": Shield,
+  "Ação": Sword,
+  "Terror": Ghost,
+  "Aventura": Compass,
+  "Multiplayer": Users,
+  "Estratégia": Layers,
+  "Simulação": Gamepad2,
+  "Sobrevivência": Shield,
+  "Mundo Aberto": Compass,
+  "Battle Royale": Target,
+  "Soulslike": Sword,
+  "Plataforma": Layers,
+  "Casual": Gamepad2,
+  "Puzzle": Gamepad2,
+  "Sandbox": Gamepad2,
+  "Indie": Gamepad2,
+  "Tático": Target,
+  "Hack and Slash": Sword,
+  "MMORPG": Users,
+  "Farming Sim": Gamepad2,
+};
+
 const Index = () => {
   const [busca, setBusca] = useState("");
   const [categoria, setCategoria] = useState("todas");
