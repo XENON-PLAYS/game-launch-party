@@ -221,11 +221,14 @@ const GameDetail = () => {
 
                 <div className="flex items-center gap-3">
                   <button 
-                    onClick={() => addItem(game)}
+                    onClick={() => {
+                      const element = document.getElementById('download-section');
+                      element?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                     className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all duration-300"
                   >
-                    <span>Adicionar ao Carrinho</span>
-                    <ChevronRight className="w-4 h-4" />
+                    <span>Baixar Agora</span>
+                    <Download className="w-4 h-4" />
                   </button>
                   
                   <button
