@@ -1,0 +1,1 @@
+ALTER FUNCTION public.get_user_ranking() SET search_path = public;
