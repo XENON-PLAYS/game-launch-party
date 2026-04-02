@@ -42,14 +42,17 @@ const Checkout = () => {
   const selectedPlan = planName ? (plans as any)[planName] : null;
 
   useEffect(() => {
+    if (searchParams.get("canceled") === "true") {
+      toast.error("O pagamento foi cancelado. Você pode tentar novamente quando desejar.");
+    }
+
     if (!profile) {
       toast.error("Por favor, faça login para continuar.");
       navigate("/login?redirect=/checkout" + (planName ? `?plan=${planName}` : ""));
-    }
-    if (!planName || !selectedPlan) {
+    } else if (!planName || !selectedPlan) {
       navigate("/vip");
     }
-  }, [profile, planName, selectedPlan, navigate]);
+  }, [profile, planName, selectedPlan, navigate, searchParams]);
 
   const handleCheckout = async () => {
     if (!profile || !planName) return;
