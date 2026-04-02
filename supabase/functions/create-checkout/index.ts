@@ -23,13 +23,15 @@ serve(async (req) => {
     const planConfig: Record<string, { amount: number, productId?: string }> = {
       "Mensal": { 
         amount: 500, 
-        productId: "prod_UG9zjWjIIRzxYc" 
+        productId: "prod_UGA3qOYFSDXjZw" 
       },
       "Semestral": { 
-        amount: 2500 
+        amount: 2500,
+        productId: "prod_UGA3qOYFSDXjZw"
       },
       "Anual": { 
-        amount: 4500 
+        amount: 4500,
+        productId: "prod_UGA3f7rVU6LR32"
       },
     };
 
