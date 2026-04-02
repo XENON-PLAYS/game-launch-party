@@ -31,6 +31,11 @@ export function GameCard({ game }: GameCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
         
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+          {game.preco === 0 && (
+            <span className="text-[10px] uppercase font-black px-2.5 py-1 rounded bg-primary text-primary-foreground border border-primary/20 tracking-wider shadow-lg shadow-primary/40 animate-pulse">
+              GRÁTIS
+            </span>
+          )}
           {(game.categorias || []).slice(0, 1).map((cat) => (
             <span 
               key={cat} 
