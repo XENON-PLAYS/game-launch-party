@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
 
-import { useCart } from "@/context/CartContext";
+
 
 const GameDetail = () => {
   const { id } = useParams();
