@@ -131,8 +131,10 @@ const Index = () => {
                     <div className="flex flex-wrap gap-2 md:gap-3">
                       {[
                         { id: "nome", label: "Alfabética" },
-                        { id: "preco_asc", label: "Melhor Investimento" },
-                        { id: "preco_desc", label: "Premium" },
+                        { id: "popular", label: "Popular" },
+                        { id: "alta", label: "Em Alta" },
+                        { id: "pesado", label: "Mais Pesado" },
+                        { id: "leve", label: "Mais Leve" },
                         { id: "lancamento", label: "Lançamentos" }
                       ].map((opt) => (
                         <button key={opt.id} onClick={() => setOrdenacao(opt.id as SortOption)} className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition-all ${ordenacao === opt.id ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" : "bg-card border-border/50 hover:border-primary/20"}`}>{opt.label}</button>
