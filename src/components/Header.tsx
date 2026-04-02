@@ -71,6 +71,9 @@ export function Header() {
                         <Shield className="w-4 h-4 text-primary" /> Painel Admin
                       </Link>
                     )}
+                    <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-4 py-3 hover:bg-primary/10 transition-colors text-sm border-b border-border">
+                      <UserPlus className="w-4 h-4" /> Meu Perfil
+                    </Link>
                     <button onClick={() => { logout(); setMenuOpen(false); }} className="flex items-center gap-2 px-4 py-3 hover:bg-primary/10 transition-colors text-sm w-full text-left">
                       <LogOut className="w-4 h-4" /> Sair
                     </button>
