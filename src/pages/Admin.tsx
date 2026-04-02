@@ -7,7 +7,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Tables } from "@/integrations/supabase/types";
 
 type Game = Tables<"games">;
-type SortOption = "nome" | "preco_asc" | "preco_desc";
+type SortOption = "nome" | "preco_asc" | "preco_desc" | "downloads";
 
 const Admin = () => {
   const { user, logout, isAdmin, isLoading: authLoading } = useAuth();
