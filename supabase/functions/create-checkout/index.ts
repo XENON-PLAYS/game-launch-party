@@ -19,26 +19,25 @@ serve(async (req) => {
       apiVersion: "2023-10-16",
     });
 
-    // Map plan names to configuration
-    const planConfig: Record<string, { amount: number, productId?: string }> = {
+    const planConfig: Record<string, { amount: number, productId: string }> = {
       "Mensal": { 
-        amount: 500, 
+        amount: 500, // R$ 5,00
         productId: "prod_UGA3qOYFSDXjZw" 
       },
       "Semestral": { 
-        amount: 2500,
+        amount: 2500, // R$ 25,00
         productId: "prod_UGA3qOYFSDXjZw"
       },
       "Anual": { 
-        amount: 4500,
+        amount: 4500, // R$ 45,00
         productId: "prod_UGA3f7rVU6LR32"
       },
     };
 
-    const config = planConfig[planName];
+    const config = planConfig[planName as keyof typeof planConfig];
 
     if (!config) {
-      throw new Error("Plano inválido");
+      throw new Error(`Plano inválido: ${planName}`);
     }
 
     const origin = req.headers.get("origin") || "http://localhost:3000";
@@ -51,19 +50,14 @@ serve(async (req) => {
           price_data: {
             currency: "brl",
             unit_amount: config.amount,
-            ...(config.productId ? { product: config.productId } : {
-              product_data: {
-                name: `Plano VIP ${planName}`,
-                description: `Acesso VIP por ${planName === "Mensal" ? "1 mês" : planName === "Semestral" ? "6 meses" : "1 ano"}`,
-              }
-            }),
+            product: config.productId,
           },
           quantity: 1,
         },
       ],
       mode: "payment",
       success_url: `${origin}/perfil?success=true`,
-      cancel_url: `${origin}/vip?canceled=true`,
+      cancel_url: `${origin}/checkout?plan=${planName}&canceled=true`,
       client_reference_id: userId,
       metadata: {
         planName,
