@@ -113,8 +113,59 @@ const Admin = () => {
   if (authLoading) return null;
   if (!isAdmin) return <Navigate to="/login" replace />;
 
-  const openAdd = () => { setEditGame({}); setModalMode("add"); setModalOpen(true); };
-  const openEdit = (game: Game) => { setEditGame({ ...game }); setModalMode("edit"); setModalOpen(true); };
+  const openAdd = () => { 
+    setEditGame({ 
+      categorias: [], modes: [], idiomas: [], 
+      requisitos_minimo: {}, requisitos_recomendado: {}, 
+      destaques: [], galeria: [] 
+    }); 
+    setLinks([]);
+    setModalMode("add"); 
+    setModalOpen(true); 
+    setActiveTab("general");
+  };
+
+  const openEdit = async (game: Game) => { 
+    setEditGame({ ...game }); 
+    // Fetch links for this game
+    const { data } = await supabase.from("download_links").select("*").eq("game_id", game.id);
+    setLinks(data || []);
+    setModalMode("edit"); 
+    setModalOpen(true); 
+    setActiveTab("general");
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: "imagem" | "galeria") => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      // Compress
+      const options = { maxSizeMB: 1, maxWidthOrHeight: 1200, useWebWorker: true };
+      const compressedFile = await imageCompression(file, options);
+      
+      const fileExt = file.name.split(".").pop();
+      const filePath = `games/${Date.now()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage.from("games").upload(filePath, compressedFile);
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage.from("games").getPublicUrl(filePath);
+
+      if (field === "imagem") {
+        setEditGame(prev => ({ ...prev, imagem: publicUrl }));
+      } else {
+        setEditGame(prev => ({ ...prev, galeria: [...(prev.galeria || []), publicUrl] }));
+      }
+      toast.success("Upload concluído!");
+    } catch (error: any) {
+      toast.error(error.message);
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const deleteGame = (id: string, nome: string) => { if (confirm(`Eliminar "${nome}"?`)) deleteMutation.mutate(id); };
   const setField = (key: string, value: any) => setEditGame((p) => ({ ...p, [key]: value }));
   const formatPreco = (v: number) => (v === 0 ? "Gratuito" : `R$ ${v.toFixed(2).replace(".", ",")}`);
