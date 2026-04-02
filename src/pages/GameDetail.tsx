@@ -110,8 +110,8 @@ const GameDetail = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid md:grid-cols-[400px_1fr] gap-12">
+        <div className="container-responsive py-8 md:py-12">
+          <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[400px_1fr] gap-8 md:gap-12">
             <Skeleton className="aspect-[3/4] rounded-3xl" />
             <div className="space-y-6">
               <Skeleton className="h-10 w-64" />
