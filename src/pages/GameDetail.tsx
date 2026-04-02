@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
-import { motion, AnimatePresence } from "framer-motion";
+
 import { useCart } from "@/context/CartContext";
 
 const GameDetail = () => {

@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
-import { motion, AnimatePresence } from "framer-motion";
+
 
 export function Header() {
   const { count, setIsOpen } = useCart();

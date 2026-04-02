@@ -9,7 +9,7 @@ import { HeroCarousel } from "@/components/HeroCarousel";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
-import { motion, AnimatePresence } from "framer-motion";
+
 import logo from "@/assets/logo.png";
 
 type SortOption = "nome" | "preco_asc" | "preco_desc" | "lancamento";
