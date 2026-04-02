@@ -139,40 +139,86 @@ const Index = () => {
                 transition={{ duration: 0.5, ease: "circOut" }}
                 className="overflow-hidden"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12 pt-6 sm:pt-12 border-t border-border/40 mt-6 sm:mt-10 pb-4 sm:pb-6">
-                  <div className="space-y-4">
-                    <label className="text-responsive-small opacity-60">Categorias em Destaque</label>
-                    <div className="flex flex-wrap gap-2 md:gap-3">
-                      <button onClick={() => setCategoria("todas")} className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition-all ${categoria === "todas" ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" : "bg-card border-border/50 hover:border-primary/20"}`}>Todas</button>
-                      {allCategories.map((cat) => (
-                        <button key={cat} onClick={() => setCategoria(cat)} className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition-all ${categoria === cat ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" : "bg-card border-border/50 hover:border-primary/20"}`}>{cat}</button>
-                      ))}
+                <div className="pt-8 border-t border-border/40 mt-8 pb-12">
+                  <div className="flex flex-col lg:flex-row gap-12">
+                    {/* Categorias Section */}
+                    <div className="flex-1 space-y-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-1.5 h-6 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                        <h3 className="text-sm font-black uppercase tracking-widest text-foreground/80">Filtrar por Categoria</h3>
+                      </div>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                        <button 
+                          onClick={() => setCategoria("todas")} 
+                          className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-black transition-all border ${
+                            categoria === "todas" 
+                            ? "bg-primary text-primary-foreground border-primary shadow-xl shadow-primary/20 scale-105" 
+                            : "bg-card/50 border-border/50 hover:border-primary/30 hover:bg-card/80 text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          <LayoutGrid className="w-4 h-4" />
+                          <span>TODAS</span>
+                        </button>
+                        {allCategories.map((cat) => {
+                          const Icon = categoryIconMap[cat] || Gamepad2;
+                          return (
+                            <button 
+                              key={cat} 
+                              onClick={() => setCategoria(cat)} 
+                              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all border ${
+                                categoria === cat 
+                                ? "bg-primary text-primary-foreground border-primary shadow-xl shadow-primary/20 scale-105" 
+                                : "bg-card/50 border-border/50 hover:border-primary/30 hover:bg-card/80 text-muted-foreground hover:text-foreground"
+                              }`}
+                            >
+                              <Icon className="w-4 h-4" />
+                              <span className="uppercase">{cat}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="space-y-4">
-                    <label className="text-responsive-small opacity-60">Critério de Ordenação</label>
-                    <div className="flex flex-wrap gap-2 md:gap-3">
-                      {[
-                        { id: "nome", label: "Alfabética" },
-                        { id: "popular", label: "Popular" },
-                        { id: "alta", label: "Em Alta" },
-                        { id: "pesado", label: "Mais Pesado" },
-                        { id: "leve", label: "Mais Leve" },
-                        { id: "lancamento", label: "Lançamentos" }
-                      ].map((opt) => (
-                        <button key={opt.id} onClick={() => setOrdenacao(opt.id as SortOption)} className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition-all ${ordenacao === opt.id ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" : "bg-card border-border/50 hover:border-primary/20"}`}>{opt.label}</button>
-                      ))}
+                    {/* Ordenação Section */}
+                    <div className="lg:w-80 space-y-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-1.5 h-6 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                        <h3 className="text-sm font-black uppercase tracking-widest text-foreground/80">Ordenar Catálogo</h3>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+                        {[
+                          { id: "nome", label: "Alfabética", icon: LayoutGrid },
+                          { id: "popular", label: "Popular", icon: Star },
+                          { id: "alta", label: "Em Alta", icon: Zap },
+                          { id: "pesado", label: "Mais Pesado", icon: Layers },
+                          { id: "leve", label: "Mais Leve", icon: Zap },
+                          { id: "lancamento", label: "Lançamentos", icon: Clock }
+                        ].map((opt) => (
+                          <button 
+                            key={opt.id} 
+                            onClick={() => setOrdenacao(opt.id as SortOption)} 
+                            className={`flex items-center gap-3 px-6 py-4 rounded-xl text-xs font-black transition-all border ${
+                              ordenacao === opt.id 
+                              ? "bg-primary text-primary-foreground border-primary shadow-xl shadow-primary/20" 
+                              : "bg-card/50 border-border/50 hover:border-primary/30 hover:bg-card/80 text-muted-foreground hover:text-foreground"
+                            }`}
+                          >
+                            <opt.icon className="w-4 h-4" />
+                            <span className="uppercase">{opt.label}</span>
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="pt-6 border-t border-border/20">
+                        <button 
+                          onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
+                          className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-xs font-black text-muted-foreground hover:text-destructive hover:bg-destructive/5 transition-all border border-dashed border-border/50 hover:border-destructive/30 uppercase tracking-widest"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                          <span>Redefinir Filtros</span>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="flex items-end">
-                    <button 
-                      onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
-                      className="text-sm font-bold text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 underline decoration-2 underline-offset-8"
-                    >
-                      Redefinir Filtros
-                    </button>
                   </div>
                 </div>
               </motion.div>
