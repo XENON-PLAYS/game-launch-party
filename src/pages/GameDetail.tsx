@@ -344,42 +344,42 @@ const GameDetail = () => {
             </div>
 
             {downloadLinks && downloadLinks.length > 0 ? (
-              <div className="grid gap-4">
+              <div className="grid gap-6">
                 {downloadLinks.map((link) => (
                   <button
                     key={link.id}
                     onClick={() => handleDownload(link.id, link.url)}
-                    className={`group flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:px-8 sm:py-6 rounded-2xl border transition-all duration-300 gap-4 ${
+                    className={`group flex flex-col sm:flex-row sm:items-center justify-between p-6 sm:px-10 sm:py-8 rounded-3xl border-2 transition-all duration-500 gap-6 ${
                       link.status === "online"
-                        ? "bg-card border-border hover:border-primary/50 hover:bg-primary/5"
+                        ? "bg-card border-border hover:border-primary/50 hover:bg-primary/5 shadow-2xl shadow-black/5 hover:-translate-y-1"
                         : "bg-muted border-border opacity-40 cursor-not-allowed"
                     }`}
                     disabled={link.status !== "online"}
                   >
-                    <div className="flex items-center gap-4 sm:gap-5">
-                      <div className={`p-3 rounded-xl bg-muted border border-border group-hover:bg-primary group-hover:text-primary-foreground transition-all`}>
-                        <Download className="w-5 h-5" />
+                    <div className="flex items-center gap-6 sm:gap-8">
+                      <div className={`p-4 sm:p-5 rounded-2xl bg-muted border border-border group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-xl`}>
+                        <Download className="w-6 h-6 sm:w-8 sm:h-8" />
                       </div>
-                      <div className="text-left">
-                        <p className="font-bold text-lg uppercase tracking-wider">{link.label}</p>
-                        <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest group-hover:text-primary transition-colors">Servidor Dedicado</p>
+                      <div className="text-left space-y-1">
+                        <p className="font-black text-lg sm:text-xl lg:text-2xl uppercase tracking-widest leading-none">{link.label}</p>
+                        <p className="text-responsive-small text-muted-foreground opacity-70 group-hover:text-primary transition-colors">Servidor Dedicado de Alta Performance</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                      <div className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+                    <div className="flex items-center gap-6">
+                      <div className={`flex items-center gap-3 px-6 py-2 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest ${
                         link.status === "online" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-red-500/10 text-red-400 border border-red-500/20"
                       }`}>
-                        <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${link.status === "online" ? "bg-emerald-400" : "bg-red-400"}`} />
-                        {link.status === "online" ? "Online" : "Offline"}
+                        <div className={`w-2 h-2 rounded-full animate-pulse ${link.status === "online" ? "bg-emerald-400" : "bg-red-400"}`} />
+                        {link.status === "online" ? "Operante" : "Inoperante"}
                       </div>
-                      <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+                      <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:translate-x-2 transition-transform" />
                     </div>
                   </button>
                 ))}
               </div>
             ) : (
-              <div className="p-12 text-center rounded-3xl bg-muted/30 border border-dashed border-border">
-                <p className="text-muted-foreground font-bold uppercase tracking-widest text-xs">Nenhum link disponível no momento</p>
+              <div className="p-20 text-center rounded-[3rem] bg-muted/20 border-4 border-dashed border-border">
+                <p className="text-responsive-small text-muted-foreground opacity-60">Nenhum porto seguro disponível no momento</p>
               </div>
             )}
           </div>
