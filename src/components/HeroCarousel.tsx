@@ -4,7 +4,6 @@ import { ChevronLeft, ChevronRight, Info } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
-import { motion, AnimatePresence } from "framer-motion";
 
 export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
@@ -41,6 +40,10 @@ export function HeroCarousel() {
     return () => clearInterval(timer);
   }, [next, featured.length]);
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
+  };
+
   if (featured.length === 0) {
     return (
       <section className="border-b border-border bg-gradient-to-br from-card via-background to-card">
@@ -59,23 +62,6 @@ export function HeroCarousel() {
   }
 
   const game = featured[current];
-
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0
-    })
-  };
 
   return (
     <section className="relative overflow-hidden border-b border-border bg-card">
@@ -117,13 +103,17 @@ export function HeroCarousel() {
 
           <div className="hidden md:block">
             <Link to={`/jogo/${game.id}`} className="block rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4]">
-              <img src={game.imagem || ""} alt={game.nome} className="w-full h-full object-cover" />
+              <img 
+                src={game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
+                alt={game.nome} 
+                className="w-full h-full object-cover" 
+                onError={handleImageError}
+              />
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Controls Overlay */}
       <div className="absolute bottom-10 left-0 w-full z-10">
         <div className="container mx-auto px-4 flex items-center justify-between">
           <div className="flex gap-3">

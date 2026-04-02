@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import { Tables } from "@/integrations/supabase/types";
-import { motion } from "framer-motion";
-
 
 type Game = Tables<"games">;
 
@@ -11,16 +9,19 @@ interface GameCardProps {
 }
 
 export function GameCard({ game }: GameCardProps) {
-  
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
+  };
 
   return (
     <div className="group bg-card rounded-xl overflow-hidden border border-border hover:border-primary transition-all duration-300 relative">
       <Link to={`/jogo/${game.id}`} className="block relative aspect-[3/4] overflow-hidden">
         <img 
-          src={game.imagem || ""} 
+          src={game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
           alt={game.nome} 
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1500ms]" 
           loading="lazy" 
+          onError={handleImageError}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
         <div className="absolute top-3 left-3 flex flex-wrap gap-2">

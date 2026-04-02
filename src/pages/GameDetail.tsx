@@ -19,6 +19,10 @@ const GameDetail = () => {
   
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
+  };
+
   const { data: game, isLoading } = useQuery({
     queryKey: ["game", id],
     queryFn: async () => {
@@ -152,6 +156,7 @@ const GameDetail = () => {
                   src={selectedImage || game.imagem || ""} 
                   alt={game.nome} 
                   className="w-full h-full object-cover transition-all duration-500" 
+                  onError={handleImageError}
                 />
               </div>
 
@@ -162,7 +167,7 @@ const GameDetail = () => {
                     onClick={() => setSelectedImage(null)} 
                     className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${!selectedImage ? "border-primary" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                   >
-                    <img src={game.imagem || ""} alt="Main" className="w-full h-full object-cover" />
+                    <img src={game.imagem || ""} alt="Main" className="w-full h-full object-cover" onError={handleImageError} />
                   </button>
                   {game.galeria.map((img, i) => (
                     <button 
@@ -170,7 +175,7 @@ const GameDetail = () => {
                       onClick={() => setSelectedImage(img)} 
                       className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${selectedImage === img ? "border-primary" : "border-border hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                     >
-                      <img src={img} alt={`Screenshot ${i + 1}`} className="w-full h-full object-cover" />
+                      <img src={img} alt={`Screenshot ${i + 1}`} className="w-full h-full object-cover" onError={handleImageError} />
                     </button>
                   ))}
                 </div>
