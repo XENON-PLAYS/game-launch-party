@@ -13,6 +13,7 @@ import Login from "./pages/Login.tsx";
 import Cadastro from "./pages/Cadastro.tsx";
 import Admin from "./pages/Admin.tsx";
 import DownloadPage from "./pages/DownloadPage.tsx";
+import Perfil from "./pages/Perfil.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/perfil" element={<Perfil />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
