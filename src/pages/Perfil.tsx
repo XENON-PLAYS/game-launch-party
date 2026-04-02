@@ -16,13 +16,25 @@ import { GameCard } from "@/components/GameCard";
 
 const Perfil = () => {
   const { user, profile, isLoading: authLoading, refreshProfile } = useAuth();
+  const { theme: currentTheme, setTheme } = useTheme();
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [username, setUsername] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [bio, setBio] = useState("");
+  const [status, setStatus] = useState("offline");
+  const [themePreference, setThemePreference] = useState<"light" | "dark">("dark");
+  
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  
+  const [activeTab, setActiveTab] = useState<"settings" | "history" | "favorites" | "ranking" | "recommendations">("settings");
+  const [downloadHistory, setDownloadHistory] = useState<any[]>([]);
+  const [favorites, setFavorites] = useState<any[]>([]);
+  const [ranking, setRanking] = useState<any[]>([]);
+  const [recommendations, setRecommendations] = useState<any[]>([]);
+  const [loadingExtra, setLoadingExtra] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -31,8 +43,64 @@ const Perfil = () => {
     if (profile) {
       setUsername(profile.username || "");
       setDisplayName(profile.display_name || "");
+      setBio(profile.bio || "");
+      setStatus(profile.status || "offline");
+      setThemePreference((profile.theme as "light" | "dark") || "dark");
     }
   }, [user, profile, authLoading, navigate]);
+
+  useEffect(() => {
+    if (user) {
+      fetchExtraData();
+    }
+  }, [user, activeTab]);
+
+  const fetchExtraData = async () => {
+    if (!user) return;
+    setLoadingExtra(true);
+    try {
+      if (activeTab === "history") {
+        const { data } = await supabase
+          .from("download_history")
+          .select("*, games(*)")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: false });
+        setDownloadHistory(data || []);
+      } else if (activeTab === "favorites") {
+        const { data } = await supabase
+          .from("favorites")
+          .select("*, games(*)")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: false });
+        setFavorites(data || []);
+      } else if (activeTab === "ranking") {
+        // Simple ranking: top users by download history count
+        const { data } = await supabase
+          .rpc('get_user_ranking'); 
+        
+        if (data) {
+          setRanking(data);
+        } else {
+          // Fallback if RPC doesn't exist yet
+          const { data: profilesData } = await supabase
+            .from("profiles")
+            .select("username, display_name, avatar_url, is_vip, badges")
+            .limit(10);
+          setRanking(profilesData || []);
+        }
+      } else if (activeTab === "recommendations") {
+        const { data } = await supabase
+          .from("games")
+          .select("*")
+          .limit(4);
+        setRecommendations(data || []);
+      }
+    } catch (error) {
+      console.error("Error fetching extra data:", error);
+    } finally {
+      setLoadingExtra(false);
+    }
+  };
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
