@@ -22,18 +22,18 @@ export function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b border-border py-4 shadow-sm">
-      <div className="container mx-auto px-4 flex items-center justify-between gap-6">
+    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b border-border py-3 md:py-4 shadow-sm">
+      <div className="container-responsive flex items-center justify-between gap-4 md:gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 shrink-0">
+        <Link to="/" className="flex items-center gap-2 md:gap-3 shrink-0">
           <img 
             src={logo} 
             alt="Jogos Piratas" 
-            className="w-10 h-10 md:w-12 md:h-12" 
+            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" 
           />
           <div className="flex flex-col">
-            <span className="font-bold text-xl tracking-tighter leading-none">JOGOS</span>
-            <span className="font-bold text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
+            <span className="font-bold text-lg sm:text-xl tracking-tighter leading-none">JOGOS</span>
+            <span className="font-bold text-lg sm:text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
           </div>
         </Link>
 
