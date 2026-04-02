@@ -195,7 +195,7 @@ const VipPage = () => {
                   className={`w-full py-5 rounded-2xl ${plan.buttonColor} text-white font-black uppercase tracking-[0.2em] text-xs transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3`}
                 >
                   <CreditCard className="w-4 h-4" />
-                  Assinar Agora
+                  Assinar via Cartão ou Pix
                 </button>
               </motion.div>
             ))}
