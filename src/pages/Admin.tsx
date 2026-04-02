@@ -183,9 +183,10 @@ const Admin = () => {
     }
 
     try {
+      // Cast editGame to any for insertion to avoid strict type issues with Partial
       const { data: gameData, error } = modalMode === "add" 
-        ? await supabase.from("games").insert(editGame).select().single()
-        : await supabase.from("games").update(editGame).eq("id", editGame.id!).select().single();
+        ? await supabase.from("games").insert(editGame as any).select().single()
+        : await supabase.from("games").update(editGame as any).eq("id", editGame.id!).select().single();
 
       if (error) throw error;
 
