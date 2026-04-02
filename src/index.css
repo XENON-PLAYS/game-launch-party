@@ -102,16 +102,25 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground;
     font-family: var(--font-sans);
+    overflow-x: hidden;
+    width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
     @apply tracking-tight font-bold;
+  }
+}
+
+@layer utilities {
+  .container-responsive {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1440px] 2xl:max-w-[1800px] 3xl:max-w-[2400px];
   }
 }
 
