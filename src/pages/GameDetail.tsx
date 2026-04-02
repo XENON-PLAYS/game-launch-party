@@ -4,16 +4,19 @@ import { CartPopup } from "@/components/CartPopup";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
-import { Download, ArrowLeft, Monitor, HardDrive, Calendar, Building2, Tag, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Loader2 } from "lucide-react";
+import { Download, ArrowLeft, Monitor, HardDrive, Calendar, Building2, Tag, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Loader2, Share2, Play } from "lucide-react";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
+import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "@/context/CartContext";
 
 const GameDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { addItem } = useCart();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const { data: game, isLoading } = useQuery({
@@ -89,14 +92,17 @@ const GameDetail = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid md:grid-cols-[320px_1fr] gap-8">
-            <Skeleton className="aspect-[3/4] rounded-xl" />
-            <div className="space-y-4">
-              <Skeleton className="h-8 w-48" />
-              <Skeleton className="h-12 w-3/4" />
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid md:grid-cols-[400px_1fr] gap-12">
+            <Skeleton className="aspect-[3/4] rounded-3xl" />
+            <div className="space-y-6">
+              <Skeleton className="h-10 w-64" />
               <Skeleton className="h-20 w-full" />
-              <Skeleton className="h-10 w-32" />
+              <Skeleton className="h-32 w-full" />
+              <div className="flex gap-4">
+                <Skeleton className="h-14 w-40" />
+                <Skeleton className="h-14 w-14" />
+              </div>
             </div>
           </div>
         </div>
@@ -106,11 +112,17 @@ const GameDetail = () => {
 
   if (!game) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background flex flex-col">
         <Header />
-        <div className="container mx-auto px-4 py-20 text-center">
-          <h1 className="text-2xl font-bold mb-4">Jogo não encontrado</h1>
-          <Link to="/" className="text-primary hover:underline">Voltar ao catálogo</Link>
+        <div className="flex-1 flex flex-col items-center justify-center container mx-auto px-4 py-20 text-center space-y-6">
+          <div className="p-6 rounded-full bg-white/5 border border-white/10">
+            <Globe className="w-16 h-16 text-muted-foreground/30" />
+          </div>
+          <h1 className="text-4xl font-bold tracking-tighter uppercase">Jogo não encontrado</h1>
+          <p className="text-muted-foreground max-w-md">O tesouro que você procura parece ter sido movido ou nunca existiu.</p>
+          <Link to="/" className="px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold uppercase tracking-widest text-xs hover:scale-105 transition-transform shadow-xl shadow-primary/20">
+            Voltar ao catálogo
+          </Link>
         </div>
       </div>
     );
@@ -120,168 +132,190 @@ const GameDetail = () => {
   const reqRec = game.requisitos_recomendado as Record<string, string> | null;
 
   return (
-    <div className="min-h-screen bg-background transition-colors duration-300">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       <Header />
       <CartPopup />
 
-      {/* Back */}
-      <div className="container mx-auto px-4 pt-6">
-        <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground text-sm transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Voltar ao catálogo
-        </Link>
-      </div>
+      {/* Hero Section with Parallax Background */}
+      <section className="relative overflow-hidden min-h-[60vh] flex flex-col pt-8">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-20 blur-3xl scale-110 pointer-events-none"
+          style={{ backgroundImage: `url(${game.imagem})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none" />
 
-      {/* Hero */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid md:grid-cols-[320px_1fr] gap-8">
-          {/* Image */}
-          <div className="space-y-3">
-            <div className="rounded-xl overflow-hidden border border-border shadow-2xl shadow-primary/5">
-              <img src={selectedImage || game.imagem || ""} alt={game.nome} className="w-full aspect-[3/4] object-cover" />
-            </div>
-            {/* Gallery thumbnails */}
-            {game.galeria && game.galeria.length > 0 && (
-              <div className="grid grid-cols-4 gap-2">
-                <button onClick={() => setSelectedImage(null)} className={`rounded-lg overflow-hidden border-2 transition-all ${!selectedImage ? "border-primary" : "border-border hover:border-primary/40"}`}>
-                  <img src={game.imagem || ""} alt="Main" className="w-full aspect-video object-cover" />
-                </button>
-                {game.galeria.map((img, i) => (
-                  <button key={i} onClick={() => setSelectedImage(img)} className={`rounded-lg overflow-hidden border-2 transition-all ${selectedImage === img ? "border-primary" : "border-border hover:border-primary/40"}`}>
-                    <img src={img} alt={`Screenshot ${i + 1}`} className="w-full aspect-video object-cover" />
+        <div className="container mx-auto px-4 relative flex-1 flex flex-col">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="mb-8"
+          >
+            <Link to="/" className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors group">
+              <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-primary/50 transition-colors">
+                <ArrowLeft className="w-4 h-4" />
+              </div>
+              <span>Catálogo Completo</span>
+            </Link>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-[400px_1fr] gap-12 lg:items-start flex-1 pb-16">
+            {/* Visuals */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="space-y-4"
+            >
+              <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl shadow-black/60 relative group aspect-[3/4]">
+                <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={selectedImage || "main"}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    src={selectedImage || game.imagem || ""} 
+                    alt={game.nome} 
+                    className="w-full h-full object-cover" 
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              </div>
+
+              {/* Gallery thumbnails */}
+              {game.galeria && game.galeria.length > 0 && (
+                <div className="grid grid-cols-4 gap-3">
+                  <button 
+                    onClick={() => setSelectedImage(null)} 
+                    className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${!selectedImage ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-white/5 hover:border-primary/40 opacity-70 hover:opacity-100"}`}
+                  >
+                    <img src={game.imagem || ""} alt="Main" className="w-full h-full object-cover" />
                   </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Info */}
-          <div className="space-y-6">
-            <div>
-              <div className="flex flex-wrap gap-2 mb-3">
-                {game.categorias.map((c) => (
-                  <span key={c} className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">{c}</span>
-                ))}
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-2">{game.nome}</h1>
-
-              {/* Rating summary */}
-              <div className="flex items-center gap-3 mb-3">
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star key={s} className={`w-4 h-4 ${s <= Math.round(avgRating?.avg ?? 0) ? "text-yellow-400 fill-yellow-400" : "text-muted-foreground/30"}`} />
-                  ))}
-                </div>
-                <span className="text-sm text-muted-foreground">
-                  {avgRating?.avg ?? 0} ({avgRating?.count ?? 0} avaliações)
-                </span>
-              </div>
-
-              <p className="text-muted-foreground leading-relaxed">{game.descricao}</p>
-            </div>
-
-            {/* Destaques */}
-            {game.destaques && game.destaques.length > 0 && (
-              <div className="space-y-2">
-                <h3 className="font-bold text-sm uppercase tracking-wider text-muted-foreground">Destaques</h3>
-                <ul className="space-y-1">
-                  {game.destaques.map((d, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                      {d}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Meta */}
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              {game.desenvolvedor && (
-                <div className="flex items-center gap-2 text-muted-foreground"><Building2 className="w-4 h-4 text-primary" /><span>{game.desenvolvedor}</span></div>
-              )}
-              {game.lancamento && (
-                <div className="flex items-center gap-2 text-muted-foreground"><Calendar className="w-4 h-4 text-primary" /><span>{game.lancamento}</span></div>
-              )}
-              {game.classificacao && (
-                <div className="flex items-center gap-2 text-muted-foreground"><Shield className="w-4 h-4 text-primary" /><span>{game.classificacao}</span></div>
-              )}
-              {game.tamanho && (
-                <div className="flex items-center gap-2 text-muted-foreground"><HardDrive className="w-4 h-4 text-primary" /><span>{game.tamanho}</span></div>
-              )}
-            </div>
-
-            {/* Languages */}
-            {game.idiomas.length > 0 && (
-              <div className="flex items-center gap-2 flex-wrap">
-                <Globe className="w-4 h-4 text-primary" />
-                {game.idiomas.map((i) => (
-                  <span key={i} className="text-xs px-2 py-1 rounded bg-secondary text-secondary-foreground">{i}</span>
-                ))}
-              </div>
-            )}
-
-            {/* Modes */}
-            {game.modos.length > 0 && (
-              <div className="flex items-center gap-2 flex-wrap">
-                <Tag className="w-4 h-4 text-primary" />
-                {game.modos.map((m) => (
-                  <span key={m} className="text-xs px-3 py-1 rounded-full bg-secondary text-secondary-foreground">{m}</span>
-                ))}
-              </div>
-            )}
-
-            {/* Actions */}
-            <div className="flex items-center gap-3 pt-2">
-              <span className="text-3xl font-bold text-primary">
-                {game.preco === 0 ? "Grátis" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
-              </span>
-              <button
-                onClick={toggleFavorite}
-                className={`p-3 rounded-xl border transition-all ${isFavorited ? "bg-primary/10 border-primary text-primary" : "border-border hover:border-primary/40 text-muted-foreground hover:text-primary"}`}
-              >
-                <Heart className={`w-5 h-5 ${isFavorited ? "fill-primary" : ""}`} />
-              </button>
-            </div>
-
-            {/* Download Links */}
-            {downloadLinks && downloadLinks.length > 0 && (
-              <div className="space-y-3">
-                <h3 className="font-bold text-sm uppercase tracking-wider text-muted-foreground">Links de Download</h3>
-                <div className="space-y-2">
-                  {downloadLinks.map((link) => (
-                    <button
-                      key={link.id}
-                      onClick={() => handleDownload(link.id, link.url)}
-                      className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border transition-all ${
-                        link.status === "online"
-                          ? "border-primary/30 bg-primary/5 hover:bg-primary/10 hover:border-primary"
-                          : "border-border bg-muted/50 opacity-50 cursor-not-allowed"
-                      }`}
-                      disabled={link.status !== "online"}
+                  {game.galeria.map((img, i) => (
+                    <button 
+                      key={i} 
+                      onClick={() => setSelectedImage(img)} 
+                      className={`rounded-xl overflow-hidden border-2 transition-all aspect-video ${selectedImage === img ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-white/5 hover:border-primary/40 opacity-70 hover:opacity-100"}`}
                     >
-                      <div className="flex items-center gap-3">
-                        <Download className="w-4 h-4 text-primary" />
-                        <span className="font-medium text-sm">{link.label}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${link.status === "online" ? "bg-green-500/10 text-green-400" : "bg-destructive/10 text-destructive"}`}>
-                          {link.status === "online" ? "● Online" : "● Offline"}
-                        </span>
-                        <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                      </div>
+                      <img src={img} alt={`Screenshot ${i + 1}`} className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
+              )}
+            </motion.div>
+
+            {/* Content Info */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="space-y-8"
+            >
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  {game.categorias.map((c) => (
+                    <span key={c} className="text-[10px] uppercase font-bold tracking-[0.2em] px-4 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 backdrop-blur-sm">
+                      {c}
+                    </span>
+                  ))}
+                </div>
+                
+                <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-[0.9] text-shadow-md">
+                  {game.nome}
+                </h1>
+
+                {/* Rating summary */}
+                <div className="flex items-center gap-4 py-2 border-y border-white/5">
+                  <div className="flex items-center gap-1.5">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} className={`w-4 h-4 ${s <= Math.round(avgRating?.avg ?? 0) ? "text-yellow-400 fill-yellow-400" : "text-white/10"}`} />
+                    ))}
+                  </div>
+                  <div className="h-4 w-px bg-white/10" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                    {avgRating?.avg ?? 0} <span className="opacity-50">/ 5.0</span>
+                  </span>
+                  <div className="h-4 w-px bg-white/10" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                    {avgRating?.count ?? 0} <span className="opacity-50">Avaliações</span>
+                  </span>
+                </div>
               </div>
-            )}
+
+              <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">
+                {game.descricao}
+              </p>
+
+              {/* Quick Actions Bar */}
+              <div className="flex flex-wrap items-center gap-6 pt-4">
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-[0.2em] mb-1">Preço Atual</span>
+                  <span className="text-4xl font-bold text-primary">
+                    {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button 
+                    onClick={() => addItem(game)}
+                    className="flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold uppercase tracking-widest text-xs hover:scale-105 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 group"
+                  >
+                    <span>Adicionar ao Carrinho</span>
+                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  
+                  <button
+                    onClick={toggleFavorite}
+                    className={`p-4 rounded-2xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary shadow-lg shadow-primary/20" : "bg-white/5 border-white/10 text-muted-foreground hover:border-primary/50 hover:text-primary"}`}
+                  >
+                    <Heart className={`w-6 h-6 ${isFavorited ? "fill-primary" : ""}`} />
+                  </button>
+                  
+                  <button className="p-4 rounded-2xl bg-white/5 border border-white/10 text-muted-foreground hover:border-primary/50 hover:text-primary transition-all duration-300">
+                    <Share2 className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Attributes Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-white/5">
+                {[
+                  { icon: Building2, label: "Desenvolvedor", value: game.desenvolvedor },
+                  { icon: Calendar, label: "Lançamento", value: game.lancamento },
+                  { icon: Shield, label: "Classificação", value: game.classificacao },
+                  { icon: HardDrive, label: "Tamanho", value: game.tamanho }
+                ].map((item, i) => (
+                  <div key={i} className="space-y-2">
+                    <div className="flex items-center gap-2 text-primary">
+                      <item.icon className="w-4 h-4" />
+                      <span className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground">{item.label}</span>
+                    </div>
+                    <p className="text-sm font-bold truncate">{item.value || "—"}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
+      </section>
 
-        {/* Trailer */}
+      <main className="container mx-auto px-4 py-20 space-y-24">
+        {/* Gallery / Trailer Section */}
         {game.trailer_url && (
-          <div className="mt-12 space-y-4">
-            <h2 className="text-xl font-bold">Trailer</h2>
-            <div className="aspect-video rounded-xl overflow-hidden border border-border">
+          <section className="space-y-10">
+            <div className="flex items-center gap-6">
+              <div className="p-4 rounded-[2rem] bg-primary/10 border border-primary/20">
+                <Play className="w-8 h-8 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Trailer Oficial</h2>
+                <div className="flex items-center gap-3">
+                  <span className="w-16 h-1 bg-primary rounded-full" />
+                  <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Cinemática em 4K</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="aspect-video rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl bg-black relative group">
               <iframe
                 src={game.trailer_url}
                 title={`${game.nome} Trailer`}
@@ -290,45 +324,152 @@ const GameDetail = () => {
                 allowFullScreen
               />
             </div>
-          </div>
+          </section>
         )}
 
-        {/* Requirements */}
-        {(reqMin || reqRec) && (
-          <div className="mt-12 space-y-4">
-            <h2 className="text-xl font-bold">Requisitos do Sistema</h2>
-            <div className="grid md:grid-cols-2 gap-4">
+        {/* Requirements & Download Section */}
+        <section className="grid lg:grid-cols-2 gap-16">
+          {/* Download Area */}
+          <div className="space-y-10">
+            <div className="flex items-center gap-6">
+              <div className="p-4 rounded-[2rem] bg-primary/10 border border-primary/20">
+                <Download className="w-8 h-8 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Download</h2>
+                <div className="flex items-center gap-3">
+                  <span className="w-16 h-1 bg-primary rounded-full" />
+                  <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Links Verificados</span>
+                </div>
+              </div>
+            </div>
+
+            {downloadLinks && downloadLinks.length > 0 ? (
+              <div className="grid gap-4">
+                {downloadLinks.map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => handleDownload(link.id, link.url)}
+                    className={`group flex items-center justify-between px-8 py-6 rounded-3xl border transition-all duration-300 ${
+                      link.status === "online"
+                        ? "bg-white/5 border-white/10 hover:border-primary/50 hover:bg-primary/5"
+                        : "bg-white/5 border-white/5 opacity-40 cursor-not-allowed"
+                    }`}
+                    disabled={link.status !== "online"}
+                  >
+                    <div className="flex items-center gap-5">
+                      <div className={`p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-primary group-hover:text-primary-foreground transition-all`}>
+                        <Download className="w-5 h-5" />
+                      </div>
+                      <div className="text-left">
+                        <p className="font-bold text-lg uppercase tracking-wider">{link.label}</p>
+                        <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest group-hover:text-primary transition-colors">Servidor Dedicado</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+                        link.status === "online" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-red-500/10 text-red-400 border border-red-500/20"
+                      }`}>
+                        <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${link.status === "online" ? "bg-emerald-400" : "bg-red-400"}`} />
+                        {link.status === "online" ? "Online" : "Offline"}
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="p-12 text-center rounded-[3rem] bg-white/5 border border-dashed border-white/10">
+                <p className="text-muted-foreground font-bold uppercase tracking-widest text-xs">Nenhum link disponível no momento</p>
+              </div>
+            )}
+          </div>
+
+          {/* System Requirements */}
+          <div className="space-y-10">
+            <div className="flex items-center gap-6">
+              <div className="p-4 rounded-[2rem] bg-primary/10 border border-primary/20">
+                <Monitor className="w-8 h-8 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Requisitos</h2>
+                <div className="flex items-center gap-3">
+                  <span className="w-16 h-1 bg-primary rounded-full" />
+                  <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Especificações Técnicas</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-8">
               {[{ label: "Mínimos", data: reqMin }, { label: "Recomendados", data: reqRec }].map(({ label, data }) =>
                 data ? (
-                  <div key={label} className="bg-card border border-border rounded-xl p-5 space-y-3">
-                    <h3 className="font-bold text-primary">{label}</h3>
-                    {Object.entries(data).map(([key, val]) => (
-                      <div key={key} className="flex justify-between text-sm border-b border-border/50 pb-2 last:border-0">
-                        <span className="text-muted-foreground capitalize">{key === "placa" ? "Placa de Vídeo" : key}</span>
-                        <span className="font-medium">{String(val)}</span>
+                  <div key={label} className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 space-y-6">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-2xl font-bold tracking-tighter uppercase">{label}</h3>
+                      <div className={`px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${label === "Mínimos" ? "bg-orange-500/10 text-orange-400" : "bg-emerald-500/10 text-emerald-400"}`}>
+                        {label === "Mínimos" ? "Básico" : "Ideal"}
                       </div>
-                    ))}
+                    </div>
+                    <div className="space-y-3">
+                      {Object.entries(data).map(([key, val]) => (
+                        <div key={key} className="flex justify-between items-center py-3 border-b border-white/5 last:border-0 group">
+                          <span className="text-xs text-muted-foreground uppercase font-bold tracking-widest group-hover:text-primary transition-colors">
+                            {key === "placa" ? "GPU" : key === "armazenamento" ? "Disk" : key === "memoria" ? "RAM" : key === "processador" ? "CPU" : key}
+                          </span>
+                          <span className="text-sm font-bold">{String(val)}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ) : null
               )}
             </div>
           </div>
-        )}
+        </section>
 
-        {/* Star Rating */}
-        <div className="mt-12">
-          <StarRating gameId={game.id} />
-        </div>
+        {/* Social / Community Section */}
+        <section className="grid lg:grid-cols-2 gap-16 pt-12">
+          <div className="space-y-8">
+            <div className="flex items-center gap-6">
+              <div className="p-4 rounded-[2rem] bg-primary/10 border border-primary/20">
+                <Star className="w-8 h-8 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Avaliar</h2>
+                <div className="flex items-center gap-3">
+                  <span className="w-16 h-1 bg-primary rounded-full" />
+                  <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Sua opinião importa</span>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-[3rem] p-10">
+              <StarRating gameId={game.id} />
+            </div>
+          </div>
 
-        {/* Comments */}
-        <div className="mt-12">
-          <GameComments gameId={game.id} />
-        </div>
-      </div>
+          <div className="space-y-8">
+            <div className="flex items-center gap-6">
+              <div className="p-4 rounded-[2rem] bg-primary/10 border border-primary/20">
+                <MessageSquare className="w-8 h-8 text-primary" />
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Comentários</h2>
+                <div className="flex items-center gap-3">
+                  <span className="w-16 h-1 bg-primary rounded-full" />
+                  <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Comunidade Pirata</span>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-[3rem] p-10">
+              <GameComments gameId={game.id} />
+            </div>
+          </div>
+        </section>
+      </main>
 
-      <footer className="border-t border-border bg-card/50 py-8 mt-16">
-        <div className="container mx-auto px-4 text-center text-muted-foreground text-sm">
-          <p>© 2025 Jogos Piratas — Todos os direitos reservados</p>
+      <footer className="border-t border-white/5 bg-background py-16 mt-20">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.4em]">© 2025 Jogos Piratas — Navegando pelos Sete Mares dos Games</p>
         </div>
       </footer>
     </div>
