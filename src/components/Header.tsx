@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
-import { ShoppingCart, Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { ShoppingCart, Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Header() {
   const { count, setIsOpen } = useCart();
@@ -12,120 +13,219 @@ export function Header() {
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-popover/95 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between gap-4">
+    <header 
+      className={`sticky top-0 z-[100] transition-all duration-500 ${
+        scrolled 
+          ? "bg-background/80 backdrop-blur-xl border-b border-white/5 py-3 shadow-2xl shadow-black/40" 
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 shrink-0 group">
-          <img src={logo} alt="Jogos Piratas" className="w-12 h-12 group-hover:scale-110 transition-transform" />
-          <span className="font-['SuperSenior'] text-xl tracking-wide hidden sm:block leading-tight">
-            JOGOS<br /><span className="text-primary">PIRATAS</span>
-          </span>
+        <Link to="/" className="flex items-center gap-4 shrink-0 group relative">
+          <div className="relative">
+            <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-150 group-hover:scale-[2] transition-transform duration-500 opacity-0 group-hover:opacity-100" />
+            <img 
+              src={logo} 
+              alt="Jogos Piratas" 
+              className="w-12 h-12 md:w-14 md:h-14 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 relative z-10 drop-shadow-2xl" 
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-['SuperSenior'] text-2xl tracking-tighter hidden sm:block leading-[0.8] group-hover:text-primary transition-colors">
+              JOGOS
+            </span>
+            <span className="font-['SuperSenior'] text-2xl tracking-tighter hidden sm:block leading-[0.8] text-primary">
+              PIRATAS
+            </span>
+          </div>
         </Link>
 
         {/* Nav Desktop */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-['Evogria']">
-          <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">Catálogo</Link>
-          <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">Novidades</Link>
+        <nav className="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-widest">
+          <Link to="/" className="text-muted-foreground hover:text-primary transition-all duration-300 relative group">
+            Catálogo
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+          </Link>
+          <Link to="/" className="text-muted-foreground hover:text-primary transition-all duration-300 relative group">
+            Novidades
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+          </Link>
           {isAdmin && (
-            <Link to="/admin" className="text-primary hover:text-primary/80 transition-colors flex items-center gap-1">
-              <Shield className="w-3.5 h-3.5" /> Admin
+            <Link to="/admin" className="text-primary hover:text-primary/80 transition-all duration-300 flex items-center gap-2 group">
+              <Shield className="w-4 h-4 group-hover:rotate-12 transition-transform" /> Admin
             </Link>
           )}
         </nav>
 
+        {/* Search Desktop Mockup */}
+        <div className="hidden xl:flex flex-1 max-w-sm relative group">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+          <input 
+            type="text" 
+            placeholder="Buscar jogos piratas..." 
+            className="w-full bg-white/5 border border-white/10 rounded-full pl-11 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+          />
+        </div>
+
         {/* Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-secondary transition-all duration-300"
+            className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-300"
             title={theme === "dark" ? "Tema claro" : "Tema escuro"}
           >
-            {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-muted-foreground" />}
-          </button>
-
-          {/* Cart */}
-          <button onClick={() => setIsOpen(true)} className="relative p-2 rounded-lg hover:bg-secondary transition-colors">
-            <ShoppingCart className="w-5 h-5" />
-            {count > 0 && (
-              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">{count}</span>
+            {theme === "dark" ? (
+              <Sun className="w-5 h-5 text-yellow-400" />
+            ) : (
+              <Moon className="w-5 h-5 text-muted-foreground" />
             )}
           </button>
 
-          {/* Acessar Dropdown */}
+          {/* Cart */}
+          <button 
+            onClick={() => setIsOpen(true)} 
+            className="relative p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-300 group"
+          >
+            <ShoppingCart className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            {count > 0 && (
+              <motion.span 
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute -top-1.5 -right-1.5 bg-primary text-primary-foreground text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold border-2 border-background"
+              >
+                {count}
+              </motion.span>
+            )}
+          </button>
+
+          {/* User Profile / Menu */}
           <div className="relative">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center gap-2 p-1.5 pr-3 rounded-full bg-secondary/50 hover:bg-primary hover:text-primary-foreground transition-all duration-300 font-bold text-sm font-['Evogria'] group"
+              className={`flex items-center gap-3 p-1.5 pr-4 rounded-full transition-all duration-300 font-bold text-xs uppercase tracking-widest group border ${
+                menuOpen ? "bg-primary border-primary text-primary-foreground" : "bg-white/5 border-white/5 hover:border-primary/50"
+              }`}
             >
-              <div className="w-8 h-8 rounded-full overflow-hidden border border-border group-hover:border-primary-foreground/30 transition-colors bg-background flex items-center justify-center shrink-0">
+              <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-background shadow-lg bg-background flex items-center justify-center shrink-0">
                 {profile?.avatar_url ? (
                   <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />
                 ) : (
                   <User className="w-4 h-4" />
                 )}
               </div>
-              <span className="max-w-[100px] truncate">{profile?.display_name || user?.email?.split("@")[0] || "Usuário"}</span>
-              <ChevronDown className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100" />
+              <span className="hidden md:block max-w-[100px] truncate">
+                {profile?.display_name || user?.email?.split("@")[0] || "Acessar"}
+              </span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${menuOpen ? "rotate-180" : "opacity-50"}`} />
             </button>
-            {menuOpen && (
-              <div className="absolute right-0 top-full mt-3 bg-popover border border-border rounded-xl w-48 shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                {user ? (
-                  <>
-                    {isAdmin && (
-                      <Link to="/admin" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-4 py-3 hover:bg-primary/10 transition-colors text-sm border-b border-border">
-                        <Shield className="w-4 h-4 text-primary" /> Painel Admin
+            
+            <AnimatePresence>
+              {menuOpen && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  className="absolute right-0 top-full mt-4 bg-popover/95 backdrop-blur-xl border border-white/10 rounded-2xl w-64 shadow-2xl overflow-hidden z-50 p-2"
+                >
+                  {user ? (
+                    <div className="space-y-1">
+                      <div className="px-4 py-3 border-b border-white/5 mb-1">
+                        <p className="text-xs text-muted-foreground uppercase font-bold tracking-widest mb-1">Logado como</p>
+                        <p className="text-sm font-bold truncate">{profile?.display_name || user.email}</p>
+                      </div>
+                      {isAdmin && (
+                        <Link to="/admin" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-primary hover:text-primary-foreground rounded-xl transition-all duration-300 text-sm font-bold uppercase tracking-widest">
+                          <Shield className="w-4 h-4" /> Painel Admin
+                        </Link>
+                      )}
+                      <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 rounded-xl transition-all duration-300 text-sm font-bold uppercase tracking-widest">
+                        <User className="w-4 h-4" /> Meu Perfil
                       </Link>
-                    )}
-                    <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-4 py-3 hover:bg-primary/10 transition-colors text-sm border-b border-border">
-                      <UserPlus className="w-4 h-4" /> Meu Perfil
-                    </Link>
-                    <button onClick={() => { logout(); setMenuOpen(false); }} className="flex items-center gap-2 px-4 py-3 hover:bg-primary/10 transition-colors text-sm w-full text-left">
-                      <LogOut className="w-4 h-4" /> Sair
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link to="/login" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-4 py-3 hover:bg-primary/10 transition-colors text-sm border-b border-border">
-                      <LogIn className="w-4 h-4" /> Login
-                    </Link>
-                    <Link to="/cadastro" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-4 py-3 hover:bg-primary/10 transition-colors text-sm">
-                      <UserPlus className="w-4 h-4" /> Registrar
-                    </Link>
-                  </>
-                )}
-              </div>
-            )}
+                      <button 
+                        onClick={() => { logout(); setMenuOpen(false); }} 
+                        className="flex items-center gap-3 px-4 py-3 hover:bg-destructive/10 hover:text-destructive rounded-xl transition-all duration-300 text-sm font-bold uppercase tracking-widest w-full text-left"
+                      >
+                        <LogOut className="w-4 h-4" /> Sair
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-1">
+                      <Link to="/login" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-primary hover:text-primary-foreground rounded-xl transition-all duration-300 text-sm font-bold uppercase tracking-widest">
+                        <LogIn className="w-4 h-4" /> Entrar
+                      </Link>
+                      <Link to="/cadastro" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 rounded-xl transition-all duration-300 text-sm font-bold uppercase tracking-widest">
+                        <UserPlus className="w-4 h-4" /> Criar Conta
+                      </Link>
+                    </div>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button className="p-2 rounded-lg hover:bg-secondary transition-colors md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+          <button 
+            className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all duration-300 md:hidden" 
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-popover px-4 py-4 space-y-3 font-['Evogria']">
-          <Link to="/" className="block text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>Catálogo</Link>
-          <Link to="/" className="block text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>Novidades</Link>
-          {isAdmin && <Link to="/admin" className="block text-primary" onClick={() => setMobileOpen(false)}>Painel Admin</Link>}
-          {!user ? (
-            <>
-              <Link to="/login" className="block text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>Login</Link>
-              <Link to="/cadastro" className="block text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>Registrar</Link>
-            </>
-          ) : (
-            <>
-              <Link to="/perfil" className="block text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>Meu Perfil</Link>
-              <button onClick={() => { logout(); setMobileOpen(false); }} className="block text-muted-foreground hover:text-foreground">Sair</button>
-            </>
-          )}
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t border-white/5 bg-popover/95 backdrop-blur-xl overflow-hidden font-bold uppercase tracking-widest text-xs"
+          >
+            <div className="px-4 py-6 space-y-4">
+              <Link to="/" className="block py-2 text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>Catálogo</Link>
+              <Link to="/" className="block py-2 text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>Novidades</Link>
+              {isAdmin && <Link to="/admin" className="block py-2 text-primary" onClick={() => setMobileOpen(false)}>Painel Admin</Link>}
+              <div className="pt-4 border-t border-white/5 flex flex-col gap-4">
+                {!user ? (
+                  <>
+                    <Link to="/login" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                      <LogIn className="w-4 h-4" /> Login
+                    </Link>
+                    <Link to="/cadastro" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                      <UserPlus className="w-4 h-4" /> Registrar
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/perfil" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                      <User className="w-4 h-4" /> Meu Perfil
+                    </Link>
+                    <button 
+                      onClick={() => { logout(); setMobileOpen(false); }} 
+                      className="flex items-center gap-3 text-destructive"
+                    >
+                      <LogOut className="w-4 h-4" /> Sair
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
