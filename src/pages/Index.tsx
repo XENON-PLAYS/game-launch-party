@@ -180,7 +180,7 @@ const Index = () => {
                 {filteredGames.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             )}
-          </motion.div>
+          </div>
         ) : (
           <div className="space-y-24">
             <GameSection title="🔥 Em Alta" icon="flame" games={emAlta} />

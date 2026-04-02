@@ -196,9 +196,9 @@ export function Header() {
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </>
     </header>
   );
 }
