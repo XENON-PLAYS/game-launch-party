@@ -148,9 +148,9 @@ export function Header() {
                       </Link>
                     </div>
                   )}
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
+            </>
           </div>
 
           {/* Mobile Menu Toggle */}
