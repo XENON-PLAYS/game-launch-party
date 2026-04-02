@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search } from "lucide-react";
-import { useCart } from "@/context/CartContext";
+
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect } from "react";
