@@ -28,7 +28,7 @@ const Index = () => {
   });
 
   const allCategories = useMemo(() => {
-    return Array.from(new Set(games.flatMap((g) => g.categorias))).sort();
+    return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
   }, [games]);
 
   const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 10), [games]);
