@@ -382,15 +382,15 @@ const GameDetail = () => {
           </div>
 
           {/* System Requirements */}
-          <div className="space-y-12">
+          <div className="space-y-10">
             <div className="flex items-center gap-6">
-              <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
-                <Monitor className="w-8 h-8 text-primary" />
+              <div className="p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
+                <Monitor className="w-6 h-6 text-primary" />
               </div>
               <div className="space-y-1">
-                <h2 className="text-4xl font-bold tracking-tighter uppercase leading-none">Requisitos</h2>
+                <h2 className="text-3xl font-bold tracking-tighter uppercase leading-none">Requisitos</h2>
                 <div className="flex items-center gap-3">
-                  <span className="w-16 h-1 bg-primary rounded-full" />
+                  <span className="w-12 h-1 bg-primary rounded-full" />
                   <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Especificações Técnicas</span>
                 </div>
               </div>
