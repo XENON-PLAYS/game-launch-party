@@ -316,11 +316,14 @@ export type Database = {
       profiles: {
         Row: {
           avatar_url: string | null
+          badges: string[] | null
           bio: string | null
           created_at: string
           display_name: string | null
           id: string
           is_vip: boolean
+          status: string | null
+          theme: string | null
           updated_at: string
           user_id: string
           username: string | null
@@ -328,11 +331,14 @@ export type Database = {
         }
         Insert: {
           avatar_url?: string | null
+          badges?: string[] | null
           bio?: string | null
           created_at?: string
           display_name?: string | null
           id?: string
           is_vip?: boolean
+          status?: string | null
+          theme?: string | null
           updated_at?: string
           user_id: string
           username?: string | null
@@ -340,11 +346,14 @@ export type Database = {
         }
         Update: {
           avatar_url?: string | null
+          badges?: string[] | null
           bio?: string | null
           created_at?: string
           display_name?: string | null
           id?: string
           is_vip?: boolean
+          status?: string | null
+          theme?: string | null
           updated_at?: string
           user_id?: string
           username?: string | null
