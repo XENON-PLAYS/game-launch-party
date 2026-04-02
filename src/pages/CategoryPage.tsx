@@ -109,7 +109,7 @@ const CategoryPage = () => {
             </div>
           </Link>
           <div className="pt-16 border-t border-border flex flex-col md:flex-row justify-between items-center gap-10 text-responsive-small text-muted-foreground opacity-60">
-            <p>© 2025 Jogos Piratas — Navegando pelos Sete Mares dos Games desde 1715.</p>
+            <p>© 2025 JOGOS GRATIS — Navegando pelos Sete Mares dos Games desde 1715.</p>
           </div>
         </div>
       </footer>

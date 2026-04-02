@@ -288,7 +288,7 @@ const Index = () => {
           </div>
           
           <div className="pt-16 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-10 text-sm font-bold opacity-40 uppercase tracking-widest">
-            <p>© 2025 Jogos Piratas. Navegação segura e eficiente.</p>
+            <p>© 2025 JOGOS GRATIS. Navegação segura e eficiente.</p>
           </div>
         </div>
       </footer>
