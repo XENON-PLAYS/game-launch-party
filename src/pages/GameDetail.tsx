@@ -1,10 +1,12 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
-import { Download, ArrowLeft, Monitor, HardDrive, Calendar, Building2, Tag, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Loader2, Share2, Play } from "lucide-react";
+import { Download, Monitor, HardDrive, Calendar, Building2, Globe, Shield, Star, Heart, ChevronRight, Play } from "lucide-react";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
