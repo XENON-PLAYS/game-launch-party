@@ -61,8 +61,8 @@ const DownloadPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-lg mx-auto text-center space-y-8">
+      <div className="container-responsive py-8 md:py-16">
+        <div className="max-w-xl mx-auto text-center space-y-8 md:space-y-12">
           {/* Game info */}
           {game && (
             <div className="space-y-4">
@@ -81,7 +81,7 @@ const DownloadPage = () => {
           )}
 
           {/* Countdown or ready */}
-          <div className="bg-card border border-border rounded-2xl p-8 space-y-6">
+          <div className="bg-card border border-border rounded-3xl p-6 md:p-10 space-y-8 md:space-y-10 shadow-2xl">
             {!ready ? (
               <>
                 <div className="flex items-center justify-center gap-3">
@@ -113,9 +113,9 @@ const DownloadPage = () => {
                 </div>
                 <button
                   onClick={handleDownload}
-                  className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:bg-primary/90 hover:scale-[1.02] transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
+                  className="w-full py-4.5 md:py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-lg md:text-xl hover:bg-primary/90 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
                 >
-                  <Download className="w-5 h-5" />
+                  <Download className="w-6 h-6" />
                   Baixar Agora
                 </button>
               </>

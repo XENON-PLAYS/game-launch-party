@@ -110,8 +110,8 @@ const GameDetail = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid md:grid-cols-[400px_1fr] gap-12">
+        <div className="container-responsive py-8 md:py-12">
+          <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[400px_1fr] gap-8 md:gap-12">
             <Skeleton className="aspect-[3/4] rounded-3xl" />
             <div className="space-y-6">
               <Skeleton className="h-10 w-64" />
@@ -162,7 +162,7 @@ const GameDetail = () => {
 
       {/* Hero Section */}
       <section className="bg-card border-b border-border py-12">
-        <div className="container mx-auto px-4">
+        <div className="container-responsive">
           <Breadcrumbs 
             items={[
               { label: "Catálogo", path: "/" },
@@ -218,7 +218,7 @@ const GameDetail = () => {
                   ))}
                 </div>
                 
-                <h1 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold tracking-tighter uppercase leading-tight">
                   {game.nome}
                 </h1>
 
@@ -241,21 +241,21 @@ const GameDetail = () => {
               </p>
 
               {/* Quick Actions Bar */}
-              <div className="flex flex-wrap items-end gap-8 pt-4">
+              <div className="flex flex-col sm:flex-row sm:items-end gap-6 md:gap-8 pt-4">
                 <div className="space-y-1">
                   <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Preço Atual</span>
-                  <div className="text-4xl font-bold text-primary flex items-baseline gap-1">
+                  <div className="text-3xl md:text-4xl font-bold text-primary flex items-baseline gap-1">
                     {game.preco === 0 ? "GRÁTIS" : <><span className="text-xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 w-full sm:w-auto">
                   <button 
                     onClick={() => {
                       const element = document.getElementById('download-section');
                       element?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="flex items-center gap-3 px-10 py-4 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1"
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-8 md:px-10 py-3.5 md:py-4 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest text-[10px] md:text-xs hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1 active:scale-95"
                   >
                     <span>Baixar Agora</span>
                     <Download className="w-4 h-4" />
@@ -263,9 +263,9 @@ const GameDetail = () => {
                   
                   <button
                     onClick={toggleFavorite}
-                    className={`p-4 rounded-xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary hover:border-primary/50 shadow-sm"}`}
+                    className={`p-3.5 md:p-4 rounded-xl border transition-all duration-300 ${isFavorited ? "bg-primary/10 border-primary text-primary" : "bg-background border-border text-muted-foreground hover:text-primary hover:border-primary/50 shadow-sm"} active:scale-95`}
                   >
-                    <Heart className={`w-6 h-6 ${isFavorited ? "fill-primary" : ""}`} />
+                    <Heart className={`w-5 h-5 md:w-6 md:h-6 ${isFavorited ? "fill-primary" : ""}`} />
                   </button>
                 </div>
               </div>
@@ -292,7 +292,7 @@ const GameDetail = () => {
         </div>
       </section>
 
-      <main className="container mx-auto px-4 py-16 space-y-24">
+      <main className="container-responsive py-12 md:py-16 lg:py-24 space-y-16 md:space-y-24">
         {/* Gallery / Trailer Section */}
         {game.trailer_url && (
           <section className="space-y-10">
@@ -327,15 +327,15 @@ const GameDetail = () => {
         <section id="download-section" className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Download Area */}
           <div className="space-y-10">
-            <div className="flex items-center gap-6">
-              <div className="p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
-                <Download className="w-6 h-6 text-primary" />
+            <div className="flex items-center gap-4 md:gap-6">
+              <div className="p-3 md:p-3.5 rounded-2xl bg-primary/10 border border-primary/20">
+                <Download className="w-5 h-5 md:w-6 md:h-6 text-primary" />
               </div>
               <div className="space-y-1">
-                <h2 className="text-3xl font-bold tracking-tighter uppercase leading-none">Download</h2>
+                <h2 className="text-2xl md:text-3xl font-bold tracking-tighter uppercase leading-none">Download</h2>
                 <div className="flex items-center gap-3">
-                  <span className="w-12 h-1 bg-primary rounded-full" />
-                  <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Links Verificados</span>
+                  <span className="w-10 md:w-12 h-1 bg-primary rounded-full" />
+                  <span className="text-[9px] md:text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em]">Links Verificados</span>
                 </div>
               </div>
             </div>
@@ -346,14 +346,14 @@ const GameDetail = () => {
                   <button
                     key={link.id}
                     onClick={() => handleDownload(link.id, link.url)}
-                    className={`group flex items-center justify-between px-8 py-6 rounded-2xl border transition-all duration-300 ${
+                    className={`group flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:px-8 sm:py-6 rounded-2xl border transition-all duration-300 gap-4 ${
                       link.status === "online"
                         ? "bg-card border-border hover:border-primary/50 hover:bg-primary/5"
                         : "bg-muted border-border opacity-40 cursor-not-allowed"
                     }`}
                     disabled={link.status !== "online"}
                   >
-                    <div className="flex items-center gap-5">
+                    <div className="flex items-center gap-4 sm:gap-5">
                       <div className={`p-3 rounded-xl bg-muted border border-border group-hover:bg-primary group-hover:text-primary-foreground transition-all`}>
                         <Download className="w-5 h-5" />
                       </div>

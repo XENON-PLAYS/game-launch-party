@@ -119,7 +119,7 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 bg-popover/95 backdrop-blur-md border-b border-border">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="container-responsive h-16 flex items-center justify-between">
           <h1 className="flex items-center gap-2 text-lg font-bold">
             <span className="text-primary">⚙</span> Painel Admin
           </h1>
@@ -141,9 +141,9 @@ const Admin = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-6">
+      <main className="container-responsive py-6">
         {/* Metrics Summary */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           <div className="bg-card border border-border rounded-xl p-6">
             <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-primary" /> Downloads por Jogo
@@ -217,7 +217,7 @@ const Admin = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
           {filteredGames.map((game) => (
             <div key={game.id} className="bg-card border border-border rounded-xl overflow-hidden group">
               <div className="aspect-[4/3] overflow-hidden">
@@ -242,11 +242,11 @@ const Admin = () => {
       </main>
 
       {modalOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/70 flex items-center justify-center p-4" onClick={() => setModalOpen(false)}>
-          <div className="bg-card border border-border rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="sticky top-0 bg-card border-b border-border px-6 py-4 flex items-center justify-between rounded-t-2xl">
+        <div className="fixed inset-0 z-[100] bg-black/70 flex items-center justify-center p-0 md:p-4" onClick={() => setModalOpen(false)}>
+          <div className="bg-card border-x md:border border-border rounded-none md:rounded-2xl w-full max-w-2xl h-full md:h-auto md:max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="sticky top-0 z-10 bg-card border-b border-border px-6 py-4 flex items-center justify-between md:rounded-t-2xl">
               <h2 className="text-lg font-bold">{modalMode === "add" ? "Adicionar Novo Jogo" : "Editar Jogo"}</h2>
-              <button onClick={() => setModalOpen(false)} className="p-1 hover:bg-secondary rounded-lg"><X className="w-5 h-5" /></button>
+              <button onClick={() => setModalOpen(false)} className="p-2 hover:bg-secondary rounded-lg"><X className="w-5 h-5" /></button>
             </div>
             <form onSubmit={saveGame} className="p-6 space-y-4">
               <div><label className="admin-label">Nome *</label><input required value={editGame.nome || ""} onChange={(e) => setField("nome", e.target.value)} placeholder="Grand Theft Auto V" className="admin-input" /></div>
@@ -256,11 +256,11 @@ const Admin = () => {
               <div><label className="admin-label">Idiomas</label><input value={editGame.idiomas?.join(", ") || ""} onChange={(e) => setField("idiomas", e.target.value.split(",").map((s) => s.trim()).filter(Boolean))} placeholder="Português, Inglês" className="admin-input" /></div>
               <div><label className="admin-label">Classificação</label><input value={editGame.classificacao || ""} onChange={(e) => setField("classificacao", e.target.value)} placeholder="18+" className="admin-input" /></div>
               <div><label className="admin-label">Trailer (YouTube embed URL)</label><input value={editGame.trailer_url || ""} onChange={(e) => setField("trailer_url", e.target.value)} className="admin-input" /></div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div><label className="admin-label">Lançamento</label><input type="date" value={editGame.lancamento || ""} onChange={(e) => setField("lancamento", e.target.value)} className="admin-input" /></div>
                 <div><label className="admin-label">Desenvolvedor</label><input value={editGame.desenvolvedor || ""} onChange={(e) => setField("desenvolvedor", e.target.value)} className="admin-input" /></div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div><label className="admin-label">Distribuidor</label><input value={editGame.distribuidor || ""} onChange={(e) => setField("distribuidor", e.target.value)} className="admin-input" /></div>
                 <div><label className="admin-label">Tamanho</label><input value={editGame.tamanho || ""} onChange={(e) => setField("tamanho", e.target.value)} placeholder="120 GB" className="admin-input" /></div>
               </div>

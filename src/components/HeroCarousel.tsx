@@ -64,40 +64,49 @@ export function HeroCarousel() {
   const game = featured[current];
 
   return (
-    <section className="relative overflow-hidden border-b border-border bg-card">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-[1fr_350px] gap-12 items-center">
-          <div className="space-y-6">
+    <section className="relative overflow-hidden border-b border-border bg-card group/hero">
+      <div className="absolute inset-0 opacity-10 md:opacity-20 pointer-events-none transition-opacity duration-1000">
+        <img 
+          src={game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
+          alt="" 
+          className="w-full h-full object-cover blur-3xl scale-110" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/10" />
+      </div>
+
+      <div className="container-responsive py-8 md:py-12 lg:py-20 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_350px] lg:grid-cols-[1fr_450px] 2xl:grid-cols-[1fr_550px] gap-8 md:gap-12 lg:gap-20 items-center">
+          <div className="space-y-4 md:space-y-6">
             <div className="flex gap-2 flex-wrap">
               {game.categorias.map((c) => (
                 <Link 
                   key={c} 
                   to={`/categoria/${c}`}
-                  className="text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded bg-primary/10 text-primary border border-primary/20 hover:bg-primary/30 transition-colors"
+                  className="text-[10px] sm:text-xs uppercase tracking-widest font-bold px-3 py-1.5 rounded bg-primary/10 text-primary border border-primary/20 hover:bg-primary/30 transition-colors"
                 >
                   {c}
                 </Link>
               ))}
             </div>
             
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl 2xl:text-8xl font-bold tracking-tighter leading-tight animate-fade-in">
               {game.nome}
             </h2>
             
-            <p className="text-muted-foreground text-lg max-w-xl line-clamp-3">
+            <p className="text-muted-foreground text-base sm:text-lg lg:text-xl 2xl:text-2xl max-w-2xl line-clamp-3 md:line-clamp-none">
               {game.descricao}
             </p>
             
-            <div className="flex flex-wrap items-end gap-8 pt-4">
+            <div className="flex flex-wrap items-center gap-6 md:gap-8 pt-4">
               <div className="space-y-1">
-                <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold">Preço</span>
-                <div className="text-4xl font-bold text-primary flex items-baseline gap-1">
-                  {game.preco === 0 ? "GRÁTIS" : <><span className="text-xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
+                <span className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest font-bold">Preço</span>
+                <div className="text-3xl sm:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-primary flex items-baseline gap-1">
+                  {game.preco === 0 ? "GRÁTIS" : <><span className="text-lg sm:text-xl lg:text-2xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
                 </div>
               </div>
               <Link 
                 to={`/jogo/${game.slug || game.id}`} 
-                className="flex items-center gap-3 px-10 py-4 rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1"
+                className="flex items-center gap-3 px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-base bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-xl shadow-primary/20 hover:-translate-y-1 active:scale-95"
               >
                 <span>VER DETALHES</span>
                 <Info className="w-5 h-5" />
@@ -105,14 +114,15 @@ export function HeroCarousel() {
             </div>
           </div>
 
-          <div className="hidden md:block">
-            <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4]">
+          <div className="hidden md:block group/image">
+            <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4] relative">
               <img 
                 src={game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
                 alt={game.nome} 
-                className="w-full h-full object-cover" 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-110" 
                 onError={handleImageError}
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity" />
             </Link>
           </div>
         </div>
