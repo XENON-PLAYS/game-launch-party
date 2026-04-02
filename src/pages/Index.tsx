@@ -226,8 +226,8 @@ const Index = () => {
               <Link to="/" className="flex items-center gap-4 group">
                 <img src={logo} alt="Jogos Piratas" className="w-12 h-12" />
                 <div className="flex flex-col">
-                  <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none">JOGOS</span>
-                  <span className="font-['SuperSenior'] text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
+                  <span className="font-bold text-xl tracking-tighter leading-none">JOGOS</span>
+                  <span className="font-bold text-xl tracking-tighter leading-none text-primary">PIRATAS</span>
                 </div>
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed">
