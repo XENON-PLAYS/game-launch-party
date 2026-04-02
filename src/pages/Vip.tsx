@@ -153,8 +153,8 @@ const VipPage = () => {
                 <div className="space-y-6 flex-1">
                   {plan.features.map((feature, j) => (
                     <div key={j} className="flex items-center gap-4 text-sm font-bold uppercase tracking-tight">
-                      <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
-                        <Check className="w-3 h-3 text-emerald-500" />
+                      <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 text-primary" />
                       </div>
                       <span>{feature}</span>
                     </div>
