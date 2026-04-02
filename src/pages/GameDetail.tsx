@@ -210,52 +210,52 @@ const GameDetail = () => {
 
             <div className="lg:col-span-7 xl:col-span-8 space-y-8 sm:space-y-16">
               <div className="space-y-6 sm:space-y-8">
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {(game.categorias || []).map((c) => (
                     <Link 
                       key={c} 
                       to={`/categoria/${c}`}
-                      className="text-responsive-small px-4 py-2 rounded-xl bg-primary/10 text-primary border border-primary/20 hover:bg-primary/30 transition-all shadow-sm"
+                      className="text-[10px] sm:text-responsive-small px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-primary/10 text-primary border border-primary/20 hover:bg-primary/30 transition-all shadow-sm"
                     >
                       {c}
                     </Link>
                   ))}
                 </div>
                 
-                <h1 className="text-responsive-h1 leading-none uppercase">
+                <h1 className="text-3xl sm:text-responsive-h1 leading-none uppercase">
                   {game.nome}
                 </h1>
 
                 {/* Rating summary */}
-                <div className="flex items-center gap-6 py-4 border-y border-border w-fit">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4 sm:gap-6 py-4 border-y border-border w-fit">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
                     {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} className={`w-5 h-5 sm:w-6 sm:h-6 ${s <= Math.round(avgRating?.avg ?? 0) ? "text-yellow-400 fill-yellow-400" : "text-muted-foreground/30"}`} />
+                      <Star key={s} className={`w-4 h-4 sm:w-6 sm:h-6 ${s <= Math.round(avgRating?.avg ?? 0) ? "text-yellow-400 fill-yellow-400" : "text-muted-foreground/30"}`} />
                     ))}
                   </div>
-                  <div className="h-6 w-px bg-border" />
-                  <span className="text-sm sm:text-base lg:text-lg font-black uppercase tracking-widest text-muted-foreground">
+                  <div className="h-4 sm:h-6 w-px bg-border" />
+                  <span className="text-xs sm:text-base lg:text-lg font-black uppercase tracking-widest text-muted-foreground">
                     {avgRating?.avg ?? 0} <span className="opacity-40">/ 5.0</span>
                   </span>
                 </div>
               </div>
 
-              <p className="text-responsive-body text-muted-foreground opacity-90 max-w-4xl">
+              <p className="text-sm sm:text-responsive-body text-muted-foreground opacity-90 max-w-4xl">
                 {game.descricao}
               </p>
 
               {/* Quick Actions Bar */}
-              <div className="flex flex-col sm:flex-row sm:items-end gap-10 sm:gap-12 pt-6">
-                <div className="space-y-3">
-                  <span className="text-responsive-small text-muted-foreground opacity-70">Preço do Tesouro</span>
-                  <div className="text-responsive-h2 text-primary flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-end gap-6 sm:gap-12 pt-4 sm:pt-6">
+                <div className="space-y-2 sm:space-y-3">
+                  <span className="text-[10px] sm:text-responsive-small text-muted-foreground opacity-70">Preço do Tesouro</span>
+                  <div className="text-2xl sm:text-responsive-h2 text-primary flex items-center gap-3 sm:gap-4">
                     {game.preco === 0 && (
-                      <span className="relative flex h-4 w-4">
+                      <span className="relative flex h-3 w-3 sm:h-4 sm:w-4">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-4 w-4 bg-primary"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 sm:h-4 sm:w-4 bg-primary"></span>
                       </span>
                     )}
-                    {game.preco === 0 ? "GRÁTIS" : <><span className="text-2xl sm:text-3xl lg:text-4xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
+                    {game.preco === 0 ? "GRÁTIS" : <><span className="text-xl sm:text-3xl lg:text-4xl">R$</span> {Number(game.preco).toFixed(2).replace(".", ",")}</>}
                   </div>
                 </div>
 
