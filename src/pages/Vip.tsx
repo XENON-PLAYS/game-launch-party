@@ -58,8 +58,26 @@ const VipPage = () => {
     }
   ];
 
-  const handleSubscribe = (planName: string) => {
-    toast.info(`Sistema de pagamento via Pix/Cartão sendo integrado para o plano ${planName}. Entre em contato com o suporte.`);
+  const handleSubscribe = async (planName: string) => {
+    if (!profile) {
+      toast.error("Você precisa estar logado para assinar um plano.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { planName, userId: profile.id },
+      });
+
+      if (error) throw error;
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error("Ocorreu um erro ao iniciar o pagamento. Tente novamente mais tarde.");
+    }
   };
 
   return (
