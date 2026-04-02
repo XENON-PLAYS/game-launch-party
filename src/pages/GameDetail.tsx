@@ -10,7 +10,7 @@ import { Download, ArrowLeft, Monitor, HardDrive, Calendar, Building2, Globe, Sh
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
-import { StarRating } from "@/components/StarRating";
+import logo from "@/assets/logo.png";
 
 
 
