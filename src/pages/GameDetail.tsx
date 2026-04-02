@@ -156,7 +156,7 @@ const GameDetail = () => {
         title={game.nome}
         description={game.descricao?.substring(0, 160) + (game.descricao?.length > 160 ? "..." : "")}
         image={game.imagem}
-        keywords={`${game.nome}, download ${game.nome}, baixar ${game.nome}, ${game.categorias.join(", ")}, pc games`}
+        keywords={`${game.nome}, download ${game.nome}, baixar ${game.nome}, ${(game.categorias || []).join(", ")}, pc games`}
       />
       <Header />
       
