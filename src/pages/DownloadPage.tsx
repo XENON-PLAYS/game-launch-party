@@ -113,9 +113,9 @@ const DownloadPage = () => {
                 </div>
                 <button
                   onClick={handleDownload}
-                  className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:bg-primary/90 hover:scale-[1.02] transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
+                  className="w-full py-4.5 md:py-5 rounded-2xl bg-primary text-primary-foreground font-bold text-lg md:text-xl hover:bg-primary/90 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
                 >
-                  <Download className="w-5 h-5" />
+                  <Download className="w-6 h-6" />
                   Baixar Agora
                 </button>
               </>
