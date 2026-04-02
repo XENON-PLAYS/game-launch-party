@@ -58,35 +58,35 @@ const Index = () => {
       
       {!isSearching && <HeroCarousel />}
 
-      <section className="bg-background/50 backdrop-blur-3xl sticky top-20 z-30 border-b border-border/40 py-6">
+      <section className="bg-background/50 backdrop-blur-3xl sticky top-[60px] sm:top-20 z-30 border-b border-border/40 py-4 sm:py-6">
         <div className="container-responsive">
-          <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
+          <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-center justify-between">
             <div className="w-full md:max-w-2xl relative group">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+              <Search className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <input 
                 type="text" 
                 placeholder="Qual obra-prima você está procurando?" 
                 value={busca} 
                 onChange={(e) => setBusca(e.target.value)}
-                className="w-full pl-16 pr-6 py-4 bg-card border border-primary/20 rounded-2xl text-lg focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all shadow-xl shadow-black/5 placeholder:text-muted-foreground/50" 
+                className="w-full pl-10 sm:pl-16 pr-6 py-3 sm:py-4 bg-card border border-primary/20 rounded-xl sm:rounded-2xl text-sm sm:text-lg focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all shadow-xl shadow-black/5 placeholder:text-muted-foreground/50" 
               />
               {busca && (
                 <button 
                   onClick={() => setBusca("")}
-                  className="absolute right-6 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-1 transition-colors"
+                  className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-1 transition-colors"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               )}
             </div>
             
             <button 
               onClick={() => setShowFilters(!showFilters)}
-              className={`px-8 py-4 rounded-2xl border transition-all flex items-center justify-center gap-3 font-bold text-sm tracking-[0.1em] uppercase ${
+              className={`w-full md:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl border transition-all flex items-center justify-center gap-3 font-bold text-xs sm:text-sm tracking-[0.1em] uppercase ${
                 showFilters ? "bg-primary text-primary-foreground border-primary shadow-2xl shadow-primary/20" : "bg-card border-border/50 hover:border-primary/30"
               }`}
             >
-              <SlidersHorizontal className="w-5 h-5" />
+              <SlidersHorizontal className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Filtros Refinados</span>
             </button>
           </div>
@@ -100,7 +100,7 @@ const Index = () => {
                 transition={{ duration: 0.5, ease: "circOut" }}
                 className="overflow-hidden"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 pt-12 border-t border-border/40 mt-10 pb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12 pt-6 sm:pt-12 border-t border-border/40 mt-6 sm:mt-10 pb-4 sm:pb-6">
                   <div className="space-y-4">
                     <label className="text-responsive-small opacity-60">Categorias em Destaque</label>
                     <div className="flex flex-wrap gap-2 md:gap-3">
