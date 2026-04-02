@@ -56,6 +56,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
+      <SEO />
       <Header />
       
       
