@@ -65,15 +65,6 @@ export function Header() {
             {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-muted-foreground" />}
           </button>
 
-          {/* Cart */}
-          <button onClick={() => setIsOpen(true)} className="relative p-2.5 rounded-xl hover:bg-muted transition-colors">
-            <ShoppingCart className="w-5 h-5" />
-            {count > 0 && (
-              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold border-2 border-background">
-                {count}
-              </span>
-            )}
-          </button>
 
           {/* User Profile / Menu */}
           <div className="relative">
