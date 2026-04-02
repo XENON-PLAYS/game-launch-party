@@ -116,7 +116,7 @@ const Login = () => {
               <button 
                 type="button"
                 onClick={() => {
-                  setEmail("RICHARD_ADMIN@gmail.com");
+                  setEmail("varaver90@gmail.com");
                   setSenha("Teste123@");
                 }}
                 className="text-[10px] text-muted-foreground/60 hover:text-primary uppercase tracking-widest font-bold transition-all text-center"

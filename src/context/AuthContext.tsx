@@ -52,7 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .select("role")
       .eq("user_id", userId);
     
-    const isHardcodedAdmin = user?.email?.toLowerCase() === "richard_admin@gmail.com";
+    const isHardcodedAdmin = user?.email?.toLowerCase() === "varaver90@gmail.com";
     setIsAdmin(isHardcodedAdmin || (roleData?.some((r) => r.role === "admin") ?? false));
   }, []);
 
