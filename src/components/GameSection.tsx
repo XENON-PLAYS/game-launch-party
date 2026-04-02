@@ -7,7 +7,7 @@ type Game = Tables<"games">;
 
 interface GameSectionProps {
   title: string;
-  icon: "flame" | "star" | "clock";
+  icon: "flame" | "star" | "clock" | "rocket";
   games: Game[];
 }
 
