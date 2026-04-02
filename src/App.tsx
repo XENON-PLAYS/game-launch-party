@@ -8,7 +8,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Index from "./pages/Index.tsx";
 import GameDetail from "./pages/GameDetail.tsx";
-
+import Vip from "./pages/Vip.tsx";
 import Login from "./pages/Login.tsx";
 import Cadastro from "./pages/Cadastro.tsx";
 import Admin from "./pages/Admin.tsx";
