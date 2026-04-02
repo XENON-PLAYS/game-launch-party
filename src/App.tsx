@@ -31,7 +31,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/jogo/:id" element={<GameDetail />} />
                 <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
-                <Route path="/checkout" element={<Checkout />} />
+                
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/admin" element={<Admin />} />
