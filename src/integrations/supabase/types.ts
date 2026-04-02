@@ -212,6 +212,7 @@ export type Database = {
           desenvolvedor: string | null
           destaques: string[]
           distribuidor: string | null
+          download_count: number
           galeria: string[]
           id: string
           idiomas: string[]
@@ -235,6 +236,7 @@ export type Database = {
           desenvolvedor?: string | null
           destaques?: string[]
           distribuidor?: string | null
+          download_count?: number
           galeria?: string[]
           id?: string
           idiomas?: string[]
@@ -258,6 +260,7 @@ export type Database = {
           desenvolvedor?: string | null
           destaques?: string[]
           distribuidor?: string | null
+          download_count?: number
           galeria?: string[]
           id?: string
           idiomas?: string[]
