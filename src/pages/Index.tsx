@@ -184,7 +184,7 @@ const Index = () => {
             )}
           </div>
         ) : (
-          <div className="space-y-24">
+          <div className="space-y-20">
             <GameSection title="🔥 Em Alta" icon="flame" games={emAlta} />
             <GameSection title="⭐ Recomendados" icon="star" games={recomendados} />
             <GameSection title="🕐 Recentes" icon="clock" games={recentes} />
