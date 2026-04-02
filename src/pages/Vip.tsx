@@ -78,7 +78,7 @@ const VipPage = () => {
 
     try {
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { planName, userId: profile.id },
+        body: { planName, userId: profile.id, email: user?.email },
       });
 
       if (error) throw error;
