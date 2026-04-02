@@ -144,14 +144,14 @@ const GameDetail = () => {
             <span>Voltar ao Catálogo</span>
           </Link>
 
-          <div className="grid lg:grid-cols-[400px_1fr] gap-12 lg:items-start">
+          <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Visuals */}
-            <div className="space-y-4">
-              <div className="rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4]">
+            <div className="lg:col-span-4 space-y-4">
+              <div className="rounded-2xl overflow-hidden border border-border shadow-2xl aspect-[3/4] bg-muted">
                 <img 
                   src={selectedImage || game.imagem || ""} 
                   alt={game.nome} 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-cover transition-all duration-500" 
                 />
               </div>
 
