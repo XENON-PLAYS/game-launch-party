@@ -160,8 +160,8 @@ const Checkout = () => {
 
               <button 
                 onClick={handleCheckout}
-                disabled={loading}
-                className="w-full py-6 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group"
+                className="w-full py-6 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20 active:scale-[0.98] flex items-center justify-center gap-3 group"
+
               >
                 {loading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
