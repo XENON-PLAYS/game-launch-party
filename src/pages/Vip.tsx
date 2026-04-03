@@ -67,9 +67,11 @@ const VipPage = () => {
         "Prioridade em pedidos de jogos",
         "Sorteios mensais de chaves Steam"
       ],
-      color: "from-primary/30 to-primary/40",
-      borderColor: "border-primary/60",
-      buttonColor: "bg-primary hover:bg-primary/90 shadow-primary/40"
+      color: "from-amber-400/10 to-amber-400/20",
+      borderColor: "border-amber-400/60",
+      buttonColor: "bg-amber-500 hover:bg-amber-600 shadow-amber-400/40",
+      iconColor: "text-amber-500",
+      iconBg: "bg-amber-400/20"
     }
   ];
 
