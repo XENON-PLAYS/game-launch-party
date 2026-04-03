@@ -339,6 +339,16 @@ const GameDetail = () => {
               </div>
             </div>
 
+            <div className="flex justify-end">
+              <button 
+                onClick={() => user ? setIsBugReportModalOpen(true) : navigate("/login")}
+                className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-destructive transition-colors group"
+              >
+                <Bug className="w-3.5 h-3.5 group-hover:animate-bounce" />
+                Reportar Erro / Link Offline
+              </button>
+            </div>
+
             {downloadLinks && downloadLinks.length > 0 ? (
               <div className="grid gap-6">
                 {downloadLinks.map((link) => (
