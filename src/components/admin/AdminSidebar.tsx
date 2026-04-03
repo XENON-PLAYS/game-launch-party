@@ -82,7 +82,7 @@ export function AdminSidebar() {
         ))}
 
         <p className="px-3 mt-8 mb-4 text-[10px] font-black text-muted-foreground/50 uppercase tracking-[0.2em]">Comunidade</p>
-        {menuItems.slice(2, 4).map((item) => (
+        {menuItems.slice(2, 6).map((item) => (
           <SidebarItem 
             key={item.href} 
             {...item} 
