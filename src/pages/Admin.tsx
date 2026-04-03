@@ -94,6 +94,10 @@ const Admin = () => {
           requisitos_minimo: game.requisitos_minimo,
           requisitos_recomendado: game.requisitos_recomendado,
           tamanho: game.tamanho,
+          pre_requisitos: game.pre_requisitos,
+          passo_a_passo: game.passo_a_passo,
+          link_demo: game.link_demo,
+          observacoes: game.observacoes,
         }).eq("id", game.id!);
       }
     },
