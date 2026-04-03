@@ -160,11 +160,11 @@ const Checkout = () => {
           </div>
 
           {/* Right Side: Payment Info */}
-          <div className="flex flex-col justify-center space-y-8 p-10 rounded-[2.5rem] bg-gradient-to-br from-card to-card/50 border-2 border-primary/10 shadow-2xl h-fit">
+          <div className={`flex flex-col justify-center space-y-8 p-10 rounded-[2.5rem] bg-gradient-to-br from-card to-card/50 border-2 ${selectedPlan.borderColor} shadow-2xl h-fit`}>
             <div className="space-y-6">
               <div className="flex items-center gap-4 p-4 rounded-xl bg-background border border-border">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <CreditCard className="w-5 h-5 text-primary" />
+                <div className={`w-10 h-10 rounded-lg ${selectedPlan.iconBg} flex items-center justify-center`}>
+                  <CreditCard className={`w-5 h-5 ${selectedPlan.iconColor}`} />
                 </div>
                 <div>
                   <p className="text-xs font-black uppercase tracking-widest">Meio de Pagamento</p>
@@ -179,14 +179,14 @@ const Checkout = () => {
                 </div>
                 <div className="flex justify-between items-center text-lg font-black uppercase tracking-tight pt-4 border-t border-border/50">
                   <span>Total</span>
-                  <span className="text-primary">{selectedPlan.price}</span>
+                  <span className={selectedPlan.iconColor}>{selectedPlan.price}</span>
                 </div>
               </div>
 
               <button 
                 onClick={handleCheckout}
                 disabled={loading}
-                className="w-full py-6 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20 active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed"
+                className={`w-full py-6 rounded-2xl ${selectedPlan.iconBg.replace('/10', '')} ${selectedPlan.iconColor.replace('text', 'bg').replace('500', '600').replace('400', '500')} hover:opacity-90 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed`}
               >
                 {loading ? (
                   <>
