@@ -13,6 +13,7 @@ interface StarRatingProps {
 export function StarRating({ gameId }: StarRatingProps) {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { slug } = useParams();
   const queryClient = useQueryClient();
   const [hover, setHover] = useState(0);
 

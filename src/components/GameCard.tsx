@@ -44,6 +44,12 @@ export function GameCard({ game }: GameCardProps) {
               {cat}
             </span>
           ))}
+          {((game as any).rating_avg > 0) && (
+            <span className="text-[10px] uppercase font-bold px-2.5 py-1 rounded bg-yellow-500/80 backdrop-blur-md text-white border border-yellow-500/20 tracking-wider flex items-center gap-1">
+              <Star className="w-3 h-3 fill-white" />
+              {(game as any).rating_avg}
+            </span>
+          )}
         </div>
       </Link>
       
