@@ -280,23 +280,6 @@ const GameDetail = () => {
                 </div>
               </div>
 
-              {/* Attributes Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 sm:gap-16 pt-12 border-t border-border">
-                {[
-                  { icon: Building2, label: "Desenvolvedor", value: game.desenvolvedor },
-                  { icon: Calendar, label: "Lançamento", value: game.lancamento },
-                  { icon: Shield, label: "Classificação", value: game.classificacao },
-                  { icon: HardDrive, label: "Tamanho", value: game.tamanho }
-                ].map((item, i) => (
-                  <div key={i} className="space-y-3 group cursor-default">
-                    <div className="flex items-center gap-3 text-primary/60 group-hover:text-primary transition-all duration-300">
-                      <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span className="text-responsive-small text-muted-foreground opacity-70">{item.label}</span>
-                    </div>
-                    <p className="text-sm sm:text-base lg:text-lg font-black truncate group-hover:text-foreground transition-all duration-300">{item.value || "—"}</p>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
