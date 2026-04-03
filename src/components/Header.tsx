@@ -7,6 +7,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect } from "react";
 import { OnlineUsers } from "./OnlineUsers";
 import { NotificationBell } from "./NotificationBell";
+import { SunMoonSystem } from "./SunMoonSystem";
 import logo from "@/assets/logo.png";
 
 export function Header() {
