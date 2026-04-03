@@ -40,7 +40,7 @@ export function GameComments({ gameId }: GameCommentsProps) {
       const userIds = [...new Set(comments.map(c => c.user_id))];
       const { data: profiles, error: profilesError } = await supabase
         .from("profiles")
-        .select("user_id, display_name, avatar_url, is_vip, badges")
+        .select("user_id, display_name, avatar_url, is_vip, badges, status")
         .in("user_id", userIds);
 
       if (profilesError) {
