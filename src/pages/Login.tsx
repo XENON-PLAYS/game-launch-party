@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
+import { SpaceBackground } from "@/components/SpaceBackground";
 
 import { toast } from "sonner";
 
@@ -40,10 +41,8 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full" />
+    <div className="min-h-screen bg-[#05070A] relative overflow-hidden flex flex-col">
+      <SpaceBackground />
       
       <Header />
       
