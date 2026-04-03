@@ -45,12 +45,19 @@ const Admin = () => {
     queryFn: async () => {
       const { count: userCount } = await supabase.from("profiles").select("*", { count: "exact", head: true });
       const { data: ratingData } = await supabase.from("game_ratings").select("rating");
+      const { count: pendingRequests } = await supabase.from("game_requests").select("*", { count: "exact", head: true }).eq("status", "pending");
+      const { count: newReports } = await supabase.from("bug_reports").select("*", { count: "exact", head: true }).eq("status", "new");
       
       const avgRating = ratingData && ratingData.length > 0
         ? ratingData.reduce((acc, r) => acc + r.rating, 0) / ratingData.length
         : 0;
         
-      return { userCount: userCount ?? 0, averageRating: avgRating };
+      return { 
+        userCount: userCount ?? 0, 
+        averageRating: avgRating,
+        pendingRequests: pendingRequests ?? 0,
+        newReports: newReports ?? 0
+      };
     },
     enabled: activeTab === "dashboard",
   });
@@ -149,6 +156,8 @@ const Admin = () => {
                   games={games} 
                   userCount={statsData?.userCount || 0} 
                   averageRating={statsData?.averageRating || 0} 
+                  pendingRequests={statsData?.pendingRequests || 0}
+                  newReports={statsData?.newReports || 0}
                 />
               )}
               {activeTab === "games" && (
