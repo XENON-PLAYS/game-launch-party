@@ -626,19 +626,21 @@ const Perfil = () => {
         ))}
        </div>
 
-      <div className="auth-fieldset p-6 space-y-4">
-       <h3 className="text-sm border-b border-border pb-2">Informações</h3>
-       <div className="space-y-2">
-        <p className="text-[10px] text-muted-foreground uppercase ">Email</p>
-        <p className="text-xs font-medium truncate">{user?.email}</p>
-       </div>
-       <div className="space-y-2">
-        <p className="text-[10px] text-muted-foreground uppercase ">Membro desde</p>
-        <p className="text-xs font-medium">
-         {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
-        </p>
-       </div>
-      </div>
+       {isOwnProfile && (
+        <div className="auth-fieldset p-6 space-y-4">
+         <h3 className="text-sm border-b border-border pb-2">Informações</h3>
+         <div className="space-y-2">
+          <p className="text-[10px] text-muted-foreground uppercase ">Email</p>
+          <p className="text-xs font-medium truncate">{user?.email}</p>
+         </div>
+         <div className="space-y-2">
+          <p className="text-[10px] text-muted-foreground uppercase ">Membro desde</p>
+          <p className="text-xs font-medium">
+           {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
+          </p>
+         </div>
+        </div>
+       )}
      </div>
 
      {/* Main Content Area */}
