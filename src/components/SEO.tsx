@@ -15,7 +15,7 @@ export const SEO = ({
   image = "/logo.png",
   url = "https://jogogratis.com"
 }: SEOProps) => {
-  const fullTitle = title.includes("JOGO GRATIS") ? title : `${title} | JOGO GRATIS`;
+  const fullTitle = title.includes("JOGOS GRÁTIS") ? title : `${title} | JOGOS GRÁTIS`;
 
   return (
     <Helmet>
