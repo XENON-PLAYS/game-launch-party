@@ -5,6 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { MeteorBackground } from "@/components/MeteorBackground";
 
 const Login = () => {
   const { login } = useAuth();
@@ -42,12 +43,8 @@ const Login = () => {
   return (
     <div className="min-h-screen space-background flex flex-col">
       <Header />
-      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
-        <div className="ufo"></div>
-        <div className="cosmic-element cosmic-1"></div>
-        <div className="cosmic-element cosmic-2"></div>
-        <div className="cosmic-element cosmic-3"></div>
-      </div>
+      <MeteorBackground />
+
 
       <motion.main 
         initial={{ opacity: 0, y: 10 }}
