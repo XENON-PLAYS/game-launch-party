@@ -59,6 +59,7 @@ const Perfil = () => {
         if (!user) navigate("/login");
       } else {
         setIsOwnProfile(false);
+        setActiveTab("profile");
         setViewLoading(true);
         const { data, error } = await supabase
           .from("profiles")
