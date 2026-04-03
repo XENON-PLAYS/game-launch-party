@@ -193,7 +193,7 @@ export function HeroCarousel() {
                 key={i} 
                 onClick={() => goTo(i)}
                 className="relative h-1 group focus:outline-none" 
-                style={{ width: i === current ? "60px" : "30px" }}
+                style={{ width: i === current ? (window.innerWidth < 640 ? "40px" : "60px") : (window.innerWidth < 640 ? "20px" : "30px") }}
               >
                 <div className="absolute inset-0 bg-white/20 rounded-full overflow-hidden">
                   <motion.div 
