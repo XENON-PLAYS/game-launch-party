@@ -33,7 +33,7 @@ const Perfil = () => {
  const [loading, setLoading] = useState(false);
  const [uploading, setUploading] = useState(false);
  
- const [activeTab, setActiveTab] = useState<"settings" | "history" | "favorites" | "ranking" | "recommendations">("settings");
+ const [activeTab, setActiveTab] = useState<"settings" | "history" | "favorites" | "ranking" | "recommendations" | "profile">("settings");
  const [downloadHistory, setDownloadHistory] = useState<any[]>([]);
  const [favorites, setFavorites] = useState<any[]>([]);
  const [ranking, setRanking] = useState<any[]>([]);
