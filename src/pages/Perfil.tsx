@@ -679,17 +679,19 @@ const Perfil = () => {
        </div>
 
        {isOwnProfile && (
-        <div className="auth-fieldset p-6 space-y-4">
-         <h3 className="text-sm border-b border-border pb-2">Informações</h3>
-         <div className="space-y-2">
-          <p className="text-[10px] text-muted-foreground uppercase ">Email</p>
-          <p className="text-xs font-medium truncate">{user?.email}</p>
-         </div>
-         <div className="space-y-2">
-          <p className="text-[10px] text-muted-foreground uppercase ">Membro desde</p>
-          <p className="text-xs font-medium">
-           {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
-          </p>
+        <div className="auth-fieldset p-6 space-y-5 bg-card/30 backdrop-blur-xl border-white/5 shadow-xl">
+         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground border-b border-white/5 pb-3">Dados da Conta</h3>
+         <div className="space-y-4">
+          <div className="space-y-1">
+           <p className="text-[9px] text-primary font-black uppercase tracking-widest ">E-mail cadastrado</p>
+           <p className="text-xs font-bold truncate text-foreground/90">{user?.email}</p>
+          </div>
+          <div className="space-y-1">
+           <p className="text-[9px] text-primary font-black uppercase tracking-widest ">Data de cadastro</p>
+           <p className="text-xs font-bold text-foreground/90">
+            {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
+           </p>
+          </div>
          </div>
         </div>
        )}
