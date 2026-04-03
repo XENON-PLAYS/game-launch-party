@@ -143,14 +143,21 @@ const Admin = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // MIME type validation
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Apenas imagens (JPEG, PNG, WebP) são permitidas.");
+      return;
+    }
+
     setUploading(true);
     try {
       // Compress
       const options = { maxSizeMB: 1, maxWidthOrHeight: 1200, useWebWorker: true };
       const compressedFile = await imageCompression(file, options);
       
-      const fileExt = file.name.split(".").pop();
-      const filePath = `covers/${Date.now()}.${fileExt}`;
+      const fileExt = "webp"; // Standardize extension
+      const filePath = `covers/${crypto.randomUUID()}.${fileExt}`;
 
       const { error: uploadError } = await supabase.storage.from("game-images").upload(filePath, compressedFile);
       if (uploadError) throw uploadError;
