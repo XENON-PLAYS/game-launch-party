@@ -32,9 +32,11 @@ const VipPage = () => {
         "Experiência 100% livre de anúncios",
         "Suporte técnico priorizado"
       ],
-      color: "from-primary/10 to-primary/20",
-      borderColor: "border-primary/20",
-      buttonColor: "bg-primary/80 hover:bg-primary shadow-primary/10"
+      color: "from-orange-500/10 to-orange-500/20",
+      borderColor: "border-orange-500/20",
+      buttonColor: "bg-orange-600 hover:bg-orange-700 shadow-orange-500/10",
+      iconColor: "text-orange-500",
+      iconBg: "bg-orange-500/20"
     },
     {
       name: "Semestral",
@@ -48,9 +50,11 @@ const VipPage = () => {
         "Sugestões de jogos personalizadas"
       ],
       popular: true,
-      color: "from-primary/20 to-primary/30",
-      borderColor: "border-primary/50",
-      buttonColor: "bg-primary hover:bg-primary/90 shadow-primary/30"
+      color: "from-slate-400/10 to-slate-400/20",
+      borderColor: "border-slate-400/50",
+      buttonColor: "bg-slate-500 hover:bg-slate-600 shadow-slate-400/30",
+      iconColor: "text-slate-400",
+      iconBg: "bg-slate-400/20"
     },
     {
       name: "Anual",
@@ -63,9 +67,11 @@ const VipPage = () => {
         "Prioridade em pedidos de jogos",
         "Sorteios mensais de chaves Steam"
       ],
-      color: "from-primary/30 to-primary/40",
-      borderColor: "border-primary/60",
-      buttonColor: "bg-primary hover:bg-primary/90 shadow-primary/40"
+      color: "from-amber-400/10 to-amber-400/20",
+      borderColor: "border-amber-400/60",
+      buttonColor: "bg-amber-500 hover:bg-amber-600 shadow-amber-400/40",
+      iconColor: "text-amber-500",
+      iconBg: "bg-amber-400/20"
     }
   ];
 
@@ -153,7 +159,7 @@ const VipPage = () => {
                 className={`relative p-10 rounded-[2.5rem] border-2 bg-gradient-to-br ${plan.color} ${plan.borderColor} flex flex-col space-y-10 group hover:scale-[1.02] transition-all duration-500 overflow-hidden shadow-2xl`}
               >
                 {plan.popular && (
-                  <div className="absolute top-8 right-8 bg-primary text-primary-foreground text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest animate-pulse">
+                  <div className={`absolute top-8 right-8 ${plan.buttonColor} text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest animate-pulse`}>
                     MAIS POPULAR
                   </div>
                 )}
@@ -170,8 +176,8 @@ const VipPage = () => {
                 <div className="space-y-6 flex-1">
                   {plan.features.map((feature, j) => (
                     <div key={j} className="flex items-center gap-4 text-sm font-bold uppercase tracking-tight">
-                      <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                        <Check className="w-3 h-3 text-primary" />
+                      <div className={`w-6 h-6 rounded-full ${plan.iconBg} flex items-center justify-center shrink-0`}>
+                        <Check className={`w-3 h-3 ${plan.iconColor}`} />
                       </div>
                       <span>{feature}</span>
                     </div>

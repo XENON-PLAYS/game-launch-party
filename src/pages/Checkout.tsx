@@ -24,21 +24,33 @@ const Checkout = () => {
       price: "R$ 5",
       period: "mês",
       description: "Acesso total por 30 dias.",
-      features: ["Downloads imediatos (sem filas)", "Insignia VIP exclusiva", "Experiência sem anúncios", "Suporte prioritário"]
+      features: ["Downloads imediatos (sem filas)", "Insignia VIP exclusiva", "Experiência sem anúncios", "Suporte prioritário"],
+      iconColor: "text-orange-500",
+      iconBg: "bg-orange-500/10",
+      borderColor: "border-orange-500/20",
+      buttonColor: "bg-orange-600 hover:bg-orange-700 shadow-orange-500/10"
     },
     "Semestral": {
       name: "Plano Semestral",
       price: "R$ 25",
       period: "6 meses",
       description: "Economia de 15% inclusa.",
-      features: ["Todos os benefícios do Mensal", "Badge VIP Prata de prestígio", "Acesso antecipado a jogos", "Sugestões personalizadas"]
+      features: ["Todos os benefícios do Mensal", "Badge VIP Prata de prestígio", "Acesso antecipado a jogos", "Sugestões personalizadas"],
+      iconColor: "text-slate-400",
+      iconBg: "bg-slate-400/10",
+      borderColor: "border-slate-400/20",
+      buttonColor: "bg-slate-500 hover:bg-slate-600 shadow-slate-400/30"
     },
     "Anual": {
       name: "Plano Anual",
       price: "R$ 45",
       period: "ano",
       description: "O melhor custo-benefício!",
-      features: ["Todos os benefícios do Semestral", "Insignia Ouro Lendária", "Prioridade em pedidos", "Sorteios mensais de keys"]
+      features: ["Todos os benefícios do Semestral", "Insignia Ouro Lendária", "Prioridade em pedidos", "Sorteios mensais de keys"],
+      iconColor: "text-amber-400",
+      iconBg: "bg-amber-400/10",
+      borderColor: "border-amber-400/20",
+      buttonColor: "bg-amber-500 hover:bg-amber-600 shadow-amber-400/40"
     }
   };
 
@@ -118,14 +130,14 @@ const Checkout = () => {
               </p>
             </div>
 
-            <div className="p-8 rounded-[2rem] bg-card border border-primary/20 space-y-8">
+            <div className={`p-8 rounded-[2rem] bg-card border ${selectedPlan.borderColor} space-y-8`}>
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-2xl font-black uppercase">{selectedPlan.name}</h3>
                   <p className="text-muted-foreground text-sm font-medium">{selectedPlan.description}</p>
                 </div>
                 <div className="text-right">
-                  <div className="text-3xl font-black text-primary">{selectedPlan.price}</div>
+                  <div className={`text-3xl font-black ${selectedPlan.iconColor}`}>{selectedPlan.price}</div>
                   <div className="text-xs font-bold text-muted-foreground uppercase">/{selectedPlan.period}</div>
                 </div>
               </div>
@@ -133,8 +145,8 @@ const Checkout = () => {
               <div className="space-y-4 pt-8 border-t border-border/50">
                 {selectedPlan.features.map((feature: string, i: number) => (
                   <div key={i} className="flex items-center gap-3 text-sm font-bold uppercase tracking-tight">
-                    <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <Check className="w-3 h-3 text-primary" />
+                    <div className={`w-5 h-5 rounded-full ${selectedPlan.iconBg} flex items-center justify-center shrink-0`}>
+                      <Check className={`w-3 h-3 ${selectedPlan.iconColor}`} />
                     </div>
                     <span>{feature}</span>
                   </div>
@@ -151,11 +163,11 @@ const Checkout = () => {
           </div>
 
           {/* Right Side: Payment Info */}
-          <div className="flex flex-col justify-center space-y-8 p-10 rounded-[2.5rem] bg-gradient-to-br from-card to-card/50 border-2 border-primary/10 shadow-2xl h-fit">
+          <div className={`flex flex-col justify-center space-y-8 p-10 rounded-[2.5rem] bg-gradient-to-br from-card to-card/50 border-2 ${selectedPlan.borderColor} shadow-2xl h-fit`}>
             <div className="space-y-6">
               <div className="flex items-center gap-4 p-4 rounded-xl bg-background border border-border">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <CreditCard className="w-5 h-5 text-primary" />
+                <div className={`w-10 h-10 rounded-lg ${selectedPlan.iconBg} flex items-center justify-center`}>
+                  <CreditCard className={`w-5 h-5 ${selectedPlan.iconColor}`} />
                 </div>
                 <div>
                   <p className="text-xs font-black uppercase tracking-widest">Meio de Pagamento</p>
@@ -170,14 +182,14 @@ const Checkout = () => {
                 </div>
                 <div className="flex justify-between items-center text-lg font-black uppercase tracking-tight pt-4 border-t border-border/50">
                   <span>Total</span>
-                  <span className="text-primary">{selectedPlan.price}</span>
+                  <span className={selectedPlan.iconColor}>{selectedPlan.price}</span>
                 </div>
               </div>
 
               <button 
                 onClick={handleCheckout}
                 disabled={loading}
-                className="w-full py-6 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-primary/20 active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed"
+                className={`w-full py-6 rounded-2xl ${selectedPlan.buttonColor} text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed`}
               >
                 {loading ? (
                   <>
