@@ -86,7 +86,7 @@ export function HeroCarousel() {
             <img 
               src={(game as any).hero_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
               alt="" 
-              className="w-full h-full object-cover" 
+              className="w-full h-full object-cover brightness-[0.35] blur-[1px] opacity-80" 
               onError={handleImageError}
             />
             {/* Elegant Gradient Overlays */}
