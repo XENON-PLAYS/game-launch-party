@@ -79,6 +79,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, [fetchProfile]);
 
+  useEffect(() => {
+    let interval: any;
+    if (user) {
+      // Initial update
+      supabase.rpc("update_online_status");
+      // Periodic heartbeat
+      interval = setInterval(() => {
+        supabase.rpc("update_online_status");
+      }, 30000); // 30 seconds
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [user]);
+
   const login = useCallback(async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     return { error: error?.message ?? null };
