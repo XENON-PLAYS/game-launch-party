@@ -17,11 +17,11 @@ const CategoryPage = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("games")
-        .select("*")
+        .select("id, nome, preco, imagem, vertical_image, categorias, slug, download_count, rating_avg, lancamento, destaques, tamanho")
         .contains("categorias", [category])
         .order("nome");
       if (error) throw error;
-      return data;
+      return data as any[];
     },
     enabled: !!category,
   });
