@@ -54,7 +54,8 @@ export function BugReportModal({ isOpen, onClose, gameId, gameName }: BugReportM
           user_id: user.id,
           game_id: gameId,
           report_type: reportType,
-          description: description
+          description: description,
+          status: 'new'
         });
 
       if (error) throw error;
