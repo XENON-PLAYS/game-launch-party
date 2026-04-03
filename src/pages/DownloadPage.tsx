@@ -165,7 +165,7 @@ const DownloadPage = () => {
             className="text-responsive-small text-muted-foreground hover:text-primary transition-all flex items-center justify-center gap-3 mx-auto font-black"
           >
             <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span>RETORNAR À TABERNA DO JOGO</span>
+            <span>RETORNAR AO CHAT DO JOGO</span>
           </button>
         </div>
       </main>

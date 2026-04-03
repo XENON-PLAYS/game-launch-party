@@ -157,7 +157,7 @@ export function GameComments({ gameId }: GameCommentsProps) {
             <MessageSquare className="w-6 h-6 text-primary" />
           </div>
           <div className="flex flex-col">
-            <h2 className="text-2xl font-black uppercase tracking-tight">Taberna de Discussão</h2>
+            <h2 className="text-2xl font-black uppercase tracking-tight">Chat de Discussão</h2>
             <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest opacity-60">{comments.length + replies.length} Mensagens na Garrafa</p>
           </div>
         </div>
