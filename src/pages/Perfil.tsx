@@ -543,9 +543,15 @@ const Perfil = () => {
      <div className="grid md:grid-cols-[280px_1fr] gap-8">
       {/* Sidebar */}
       <div className="space-y-6">
-       <div className="auth-fieldset flex flex-col items-center p-8">
-        <div className="relative group">
-         <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/20 bg-secondary flex items-center justify-center relative">
+       <div className="auth-fieldset flex flex-col items-center p-0 overflow-hidden group/sidebar">
+        {/* Cover Gradient */}
+        <div className="w-full h-24 bg-gradient-to-br from-primary/40 via-primary/20 to-transparent relative">
+         <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
+        </div>
+        
+        <div className="flex flex-col items-center px-8 pb-8 -mt-12 relative z-10">
+         <div className="relative group">
+          <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-background bg-secondary flex items-center justify-center relative shadow-xl ring-1 ring-white/10">
           {targetProfile?.avatar_url ? (
            <img 
             src={targetProfile.avatar_url} 
