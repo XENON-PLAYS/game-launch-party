@@ -8,9 +8,21 @@ const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
+// Safe localStorage access
+const getSafeStorage = () => {
+  try {
+    if (typeof window !== "undefined" && window.localStorage) {
+      return window.localStorage;
+    }
+  } catch (e) {
+    console.warn("localStorage not available", e);
+  }
+  return undefined;
+};
+
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
-    storage: localStorage,
+    storage: getSafeStorage(),
     persistSession: true,
     autoRefreshToken: true,
   }

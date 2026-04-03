@@ -14,7 +14,7 @@ export function SkyBackground() {
   const scrollRotate = useTransform(smoothYProgress, [0, 1], [0, 20]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-background" style={{ contain: 'strict' }}>
+    <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-background">
       {/* 1. Global Background Base Gradient */}
       <motion.div
         animate={{

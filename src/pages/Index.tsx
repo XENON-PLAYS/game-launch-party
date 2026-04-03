@@ -97,7 +97,7 @@ const Index = () => {
       
       {!isSearching && <HeroCarousel />}
 
-      <section className="bg-background/50 backdrop-blur-3xl sticky top-[60px] sm:top-20 z-30 border-b border-border/40 py-4 sm:py-6">
+      <section className="bg-background/50 backdrop-blur-xl sticky top-[60px] sm:top-20 z-30 border-b border-border/40 py-4 sm:py-6">
         <div className="container-responsive">
           <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-center justify-between">
             <div className="w-full md:max-w-2xl relative group">

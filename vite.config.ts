@@ -7,7 +7,7 @@ import compression from "vite-plugin-compression";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
+    host: true,
     port: 8080,
     hmr: {
       overlay: false,
@@ -16,14 +16,6 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === "development" && componentTagger(),
-    compression({
-      algorithm: "brotliCompress",
-      ext: ".br",
-    }),
-    compression({
-      algorithm: "gzip",
-      ext: ".gz",
-    }),
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -32,6 +24,7 @@ export default defineConfig(({ mode }) => ({
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],
   },
   build: {
+    target: "es2015",
     reportCompressedSize: true,
     cssCodeSplit: true,
     rollupOptions: {
