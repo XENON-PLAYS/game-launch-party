@@ -221,9 +221,12 @@ export function GameComments({ gameId }: GameCommentsProps) {
                     <div className={`flex flex-col max-w-[80%] space-y-1 ${isMe ? "items-end" : "items-start"}`}>
                       {/* Name and Date */}
                       <div className={`flex items-center gap-2 px-1 ${isMe ? "flex-row-reverse" : "flex-row"}`}>
-                        <span className={`text-[10px] font-black uppercase tracking-widest ${isMe ? "text-primary" : "text-muted-foreground"}`}>
+                        <Link 
+                          to={profile?.user_id ? `/perfil/${profile.user_id}` : "#"}
+                          className={`text-[10px] font-black uppercase tracking-widest hover:underline ${isMe ? "text-primary" : "text-muted-foreground hover:text-primary transition-colors"}`}
+                        >
                           {profile?.display_name || "Anônimo"}
-                        </span>
+                        </Link>
                         {profile?.is_vip && (
                           <span className="bg-yellow-500/10 text-yellow-500 text-[8px] font-black px-1 py-0.5 rounded border border-yellow-500/20 uppercase">VIP</span>
                         )}
