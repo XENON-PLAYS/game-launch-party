@@ -613,6 +613,15 @@ const GameDetail = () => {
           </div>
         </div>
       </footer>
+
+      {game && (
+        <BugReportModal 
+          isOpen={isBugReportModalOpen} 
+          onClose={() => setIsBugReportModalOpen(false)} 
+          gameId={game.id} 
+          gameName={game.nome} 
+        />
+      )}
     </div>
   );
 };
