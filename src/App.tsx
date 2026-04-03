@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { SkyBackground } from "@/components/SkyBackground";
 import Index from "./pages/Index.tsx";
 import GameDetail from "./pages/GameDetail.tsx";
 import Vip from "./pages/Vip.tsx";
@@ -25,27 +26,26 @@ const App = () => (
     <TooltipProvider>
       <ThemeProvider>
         <AuthProvider>
-          
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/jogo/:slug" element={<GameDetail />} />
-                <Route path="/vip" element={<Vip />} />
-                <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
-                <Route path="/categoria/:category" element={<CategoryPage />} />
-                
-                <Route path="/login" element={<Login />} />
-                <Route path="/cadastro" element={<Cadastro />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/perfil" element={<Perfil />} />
-                <Route path="/perfil/:userId" element={<Perfil />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          
+          <SkyBackground />
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/jogo/:slug" element={<GameDetail />} />
+              <Route path="/vip" element={<Vip />} />
+              <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
+              <Route path="/categoria/:category" element={<CategoryPage />} />
+              
+              <Route path="/login" element={<Login />} />
+              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/perfil" element={<Perfil />} />
+              <Route path="/perfil/:userId" element={<Perfil />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
         </AuthProvider>
       </ThemeProvider>
     </TooltipProvider>
