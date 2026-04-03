@@ -53,10 +53,8 @@ const Cadastro = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full" />
+    <div className="min-h-screen bg-[#05070A] relative overflow-hidden flex flex-col">
+      <SpaceBackground />
       
       <Header />
       
