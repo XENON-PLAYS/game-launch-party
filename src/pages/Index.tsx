@@ -91,7 +91,7 @@ const Index = () => {
   }, [busca, categoria, ordenacao, games]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
+    <div className="min-h-screen bg-background/20 text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
       <SEO />
       <Header />
       
