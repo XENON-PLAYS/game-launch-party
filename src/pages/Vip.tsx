@@ -25,12 +25,12 @@ const VipPage = () => {
       name: "Mensal",
       price: "R$ 5",
       period: "/mês",
-      description: "Ideal para experimentar as vantagens da frota.",
+      description: "Acesso completo a todas as funcionalidades VIP por 30 dias.",
       features: [
-        "Download direto (sem espera)",
-        "Badge VIP no perfil",
-        "Sem anúncios no site",
-        "Suporte prioritário"
+        "Downloads imediatos (sem filas)",
+        "Insignia VIP exclusiva no perfil",
+        "Experiência 100% livre de anúncios",
+        "Suporte técnico priorizado"
       ],
       color: "from-primary/10 to-primary/20",
       borderColor: "border-primary/20",
@@ -40,12 +40,12 @@ const VipPage = () => {
       name: "Semestral",
       price: "R$ 25",
       period: "/6 meses",
-      description: "Economia de 15% para navegadores experientes.",
+      description: "Economize 15% e garanta sua tranquilidade por meio ano.",
       features: [
-        "Tudo do plano Mensal",
-        "Badge VIP Prata",
-        "Acesso antecipado a novos jogos",
-        "Recomendações personalizadas"
+        "Todos os benefícios do Mensal",
+        "Badge VIP Prata de prestígio",
+        "Acesso antecipado a lançamentos",
+        "Sugestões de jogos personalizadas"
       ],
       popular: true,
       color: "from-primary/20 to-primary/30",
@@ -56,12 +56,12 @@ const VipPage = () => {
       name: "Anual",
       price: "R$ 45",
       period: "/ano",
-      description: "O melhor valor! Economia de 25% para capitães lendários.",
+      description: "Melhor Custo-Benefício: Economia de 25% para membros de elite.",
       features: [
-        "Tudo do plano Semestral",
-        "Badge VIP Ouro Lendário",
-        "Participação em sorteios mensais",
-        "Status 'Capitão da Frota'"
+        "Todos os benefícios do Semestral",
+        "Insignia Ouro Lendário exclusiva",
+        "Prioridade em pedidos de jogos",
+        "Sorteios mensais de chaves Steam"
       ],
       color: "from-primary/30 to-primary/40",
       borderColor: "border-primary/60",
