@@ -553,6 +553,57 @@ export const games: Game[] = [
     modos: ["Singleplayer", "Multiplayer"],
     idiomas: ["Português", "Inglês"],
   },
+  {
+    id: 49,
+    nome: "Balatro",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/capsule_616x353.jpg",
+    categorias: ["Casual", "Indie", "Estratégia"],
+    modos: ["Singleplayer"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "O roguelike de póquer. Balatro é um jogo de construção de baralhos de cartas hipnoticamente satisfatório onde vais jogar mãos de póquer ilegais, descobrir jóqueres que vão mudar o rumo do jogo e fazer combinações empolgantes.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo *:</strong> Windows 7, 8, 10, 11 x64<br></li><li><strong>Processador:</strong> Intel Core i3<br></li><li><strong>Memória:</strong> 1 GB de RAM<br></li><li><strong>Placa gráfica:</strong> OpenGL 2.1 compatible graphics card, integrated graphics<br></li><li><strong>Espaço no disco:</strong> Requer 150 MB de espaço livre</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits</li></ul>"
+    }
+  },
+  {
+    id: 50,
+    nome: "Rocket League®",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/capsule_616x353.jpg",
+    categorias: ["Ação", "Indie", "Corridas", "Desporto"],
+    modos: ["Multiplayer"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Futebol e condução encontram-se uma vez mais na aguardada sequela do clássico de arena baseado na física que conquistou os jogadores, o Supersonic Acrobatic Rocket-Powered Battle-Cars!",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo *:</strong> Windows 7 (64 bit) or Newer (64 bit) Windows OS<br></li><li><strong>Processador:</strong> 2.5 GHz Dual core<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa gráfica:</strong> NVIDIA GeForce 760, AMD Radeon R7 270X, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Ligação à Internet de banda larga<br></li><li><strong>Espaço no disco:</strong> Requer 20 GB de espaço livre</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo *:</strong> Windows 7 (64 bit) or Newer (64 bit) Windows OS<br></li><li><strong>Processador:</strong> 3.0+ GHz Quad core<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa gráfica:</strong> NVIDIA GeForce GTX 1060, AMD Radeon RX 470, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Ligação à Internet de banda larga<br></li><li><strong>Espaço no disco:</strong> Requer 20 GB de espaço livre<br></li><li><strong>Notas adicionais:</strong> Gamepad or Controller Recommended</li></ul>"
+    }
+  },
+  {
+    id: 51,
+    nome: "Satisfactory",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/capsule_616x353.jpg",
+    categorias: ["Aventura", "Indie", "Simulação", "Estratégia"],
+    modos: ["Singleplayer", "Co-op"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo:</strong> Windows 10 or later (64-Bit)<br></li><li><strong>Processador:</strong> i5-3570 3.4 GHz 4 Core<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa gráfica:</strong> Nvidia GTX 1650/GTX 1050-ti, or AMD RX 470/RX 570, or equivalent performance &amp; VRAM<br></li><li><strong>Espaço no disco:</strong> Requer 20 GB de espaço livre<br></li><li><strong>Notas adicionais:</strong> Internet connection required for multiplayer.</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo:</strong> Windows 11 or later (64-Bit)<br></li><li><strong>Processador:</strong> Ryzen 5 5600X﻿ or ﻿i5-12400 ﻿or equivalent performance, 6 physical cores minimum<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa gráfica:</strong> Nvidia RTX 2070﻿ or RX 5700, or equivalent performance &amp; VRAM<br></li><li><strong>Espaço no disco:</strong> Requer 20 GB de espaço livre<br></li><li><strong>Notas adicionais:</strong> Internet connection required for multiplayer.</li></ul>"
+    }
+  },
 ];
 
 export const allCategories = Array.from(new Set(games.flatMap((g) => g.categorias))).sort();
