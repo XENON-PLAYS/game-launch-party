@@ -45,6 +45,8 @@ type Profile = {
   is_vip: boolean;
   created_at: string;
   role: string | null;
+  status: string | null;
+  last_seen_at: string | null;
 };
 
 interface UserAdminListProps {
