@@ -18,6 +18,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
