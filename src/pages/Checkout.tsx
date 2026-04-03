@@ -189,7 +189,7 @@ const Checkout = () => {
               <button 
                 onClick={handleCheckout}
                 disabled={loading}
-                className={`w-full py-6 rounded-2xl ${selectedPlan.iconBg.replace('/10', '')} ${selectedPlan.iconColor.replace('text', 'bg').replace('500', '600').replace('400', '500')} hover:opacity-90 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed`}
+                className={`w-full py-6 rounded-2xl ${selectedPlan.buttonColor} text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed`}
               >
                 {loading ? (
                   <>
