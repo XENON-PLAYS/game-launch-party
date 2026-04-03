@@ -180,7 +180,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
     }
   };
 
-  const addLink = () => setLinks([...links, { label: "Direct Download", url: "", status: "Ativo" }]);
+  const addLink = () => setLinks([...links, { label: "Direct Download", url: "", status: "online" }]);
   const updateLink = (index: number, field: keyof DownloadLink, value: any) => {
     const newLinks = [...links];
     newLinks[index] = { ...newLinks[index], [field]: value };
