@@ -267,7 +267,7 @@ const Perfil = () => {
     );
   }
 
- const isGifAvatar = profile?.avatar_url?.toLowerCase().endsWith(".gif");
+ const isGifAvatar = targetProfile?.avatar_url?.toLowerCase().endsWith(".gif");
 
  const renderTabContent = () => {
   if (loadingExtra) {
