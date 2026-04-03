@@ -6,33 +6,41 @@ export function OnlineUsers() {
   const [onlineCount, setOnlineCount] = useState(0);
 
   useEffect(() => {
-    const channel = supabase.channel("online-users", {
-      config: {
-        presence: {
-          key: "user",
-        },
-      },
-    });
+    // Unique key per session to ensure accurate counting of all tabs/users
+    const channel = supabase.channel("online-users");
 
     channel
       .on("presence", { event: "sync" }, () => {
         const state = channel.presenceState();
-        const count = Object.keys(state).length;
+        // Count all unique presence entries (sessions)
+        const count = Object.values(state).flat().length;
         setOnlineCount(count);
       })
       .on("presence", { event: "join" }, ({ key, newPresences }) => {
-        // console.log("join", key, newPresences);
+        // console.log("User joined", key, newPresences);
       })
       .on("presence", { event: "leave" }, ({ key, leftPresences }) => {
-        // console.log("leave", key, leftPresences);
+        // console.log("User left", key, leftPresences);
       })
       .subscribe(async (status) => {
         if (status === "SUBSCRIBED") {
-          await channel.track({ online_at: new Date().toISOString() });
+          // Track current user presence with a timestamp
+          await channel.track({ 
+            online_at: new Date().toISOString()
+          });
         }
       });
 
+    // Heartbeat to update database status for authenticated users
+    const heartbeatInterval = setInterval(async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        await supabase.rpc("update_online_status");
+      }
+    }, 30000); // Every 30 seconds
+
     return () => {
+      clearInterval(heartbeatInterval);
       channel.unsubscribe();
     };
   }, []);

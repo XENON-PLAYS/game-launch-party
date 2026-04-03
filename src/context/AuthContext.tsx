@@ -13,6 +13,7 @@ interface Profile {
   is_vip: boolean;
   theme: string;
   status: string;
+  last_seen_at: string;
   badges: string[];
 }
 
