@@ -1,9 +1,9 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useTheme } from "@/context/ThemeContext";
+// useTheme removed to keep background unchanged as requested
 
 export function SkyBackground() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
+  // Hardcode isDark to true to keep background unchanged as requested
+  const isDark = true;
   const { scrollYProgress } = useScroll();
   
   // Smooth scroll transitions
