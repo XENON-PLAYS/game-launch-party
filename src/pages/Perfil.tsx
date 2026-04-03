@@ -281,35 +281,42 @@ const Perfil = () => {
   switch (activeTab) {
    case "profile":
     return (
-      <div className="auth-fieldset p-8">
+      <div className="auth-fieldset p-8 bg-card/40 backdrop-blur-xl border-white/5 shadow-2xl relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors" />
+        
         <h1 className="auth-title !text-left !mb-8 flex items-center gap-3">
-          <User className="w-6 h-6 text-primary" />
-          Perfil de Usuário
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <User className="w-5 h-5 text-primary" />
+          </div>
+          Perfil do Jogador
         </h1>
         
-        <div className="space-y-6">
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div className="space-y-1">
-              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Nome de Exibição</label>
-              <p className="text-lg font-bold">{targetProfile?.display_name || "Nenhum nome definido"}</p>
-            </div>
-            
-            <div className="space-y-1">
-              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Nome de Usuário</label>
-              <p className="text-lg font-bold">@{targetProfile?.username || "sem_usuario"}</p>
-            </div>
+        <div className="grid sm:grid-cols-2 gap-8 relative z-10">
+          <div className="space-y-1 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors">
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/70">Nome de Exibição</label>
+            <p className="text-xl font-bold tracking-tight">{targetProfile?.display_name || "Nenhum nome definido"}</p>
+          </div>
+          
+          <div className="space-y-1 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors">
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/70">Identificação</label>
+            <p className="text-xl font-bold tracking-tight text-muted-foreground">@{targetProfile?.username || "sem_usuario"}</p>
+          </div>
 
-            <div className="space-y-1 sm:col-span-2">
-              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Bio</label>
-              <p className="text-muted-foreground leading-relaxed">
-                {targetProfile?.bio || "Este usuário ainda não escreveu uma bio."}
-              </p>
+          <div className="space-y-1 sm:col-span-2 p-6 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors">
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/70 mb-3 block">Sobre o Jogador</label>
+            <p className="text-muted-foreground leading-relaxed italic">
+              "{targetProfile?.bio || "Este usuário ainda não escreveu uma bio em sua jornada épica."}"
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-4 sm:col-span-2 p-4 rounded-xl bg-primary/5 border border-primary/10">
+            <div className="p-2 bg-primary/20 rounded-full">
+              <Trophy className="w-4 h-4 text-primary" />
             </div>
-            
-            <div className="space-y-1">
-              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Membro desde</label>
+            <div>
+              <label className="text-[10px] font-black uppercase tracking-widest text-primary/60">Data de Ingresso</label>
               <p className="text-sm font-bold">
-                {targetProfile?.created_at ? new Date(targetProfile.created_at).toLocaleDateString("pt-BR") : "Desconhecido"}
+                {targetProfile?.created_at ? new Date(targetProfile.created_at).toLocaleDateString("pt-BR", { day: 'numeric', month: 'long', year: 'numeric' }) : "Desconhecido"}
               </p>
             </div>
           </div>
@@ -319,92 +326,111 @@ const Perfil = () => {
 
    case "settings":
     return (
-     <div className="auth-fieldset p-8">
+     <div className="auth-fieldset p-8 bg-card/40 backdrop-blur-xl border-white/5 shadow-2xl relative overflow-hidden group">
+      <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 blur-3xl rounded-full -mr-24 -mt-24 group-hover:bg-primary/10 transition-colors" />
+      
       <h1 className="auth-title !text-left !mb-8 flex items-center gap-3">
-       <Edit3 className="w-6 h-6 text-primary" />
-       Configurações
+       <div className="p-2 bg-primary/10 rounded-lg">
+        <Edit3 className="w-5 h-5 text-primary" />
+       </div>
+       Configurações de Conta
       </h1>
       
-      <form onSubmit={handleUpdateProfile} className="space-y-6">
-       <div className="grid sm:grid-cols-2 gap-6">
-        <div className="space-y-2">
-         <label className="auth-label">Nome de Exibição</label>
+      <form onSubmit={handleUpdateProfile} className="space-y-8 relative z-10">
+       <div className="grid sm:grid-cols-2 gap-8">
+        <div className="space-y-2 group/input">
+         <label className="auth-label group-focus-within/input:text-primary transition-colors flex items-center gap-2">
+          Nome de Exibição
+          <div className="h-px flex-1 bg-border/40 group-focus-within/input:bg-primary/20 transition-all" />
+         </label>
          <input 
           type="text" 
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
           placeholder="Como você quer ser chamado"
-          className="auth-input"
+          className="auth-input bg-white/[0.03] border-white/5 focus:bg-white/[0.06] transition-all hover:border-white/20"
          />
         </div>
         
-        <div className="space-y-2">
-         <label className="auth-label">Nome de Usuário (@)</label>
+        <div className="space-y-2 group/input">
+         <label className="auth-label group-focus-within/input:text-primary transition-colors flex items-center gap-2">
+          Nome de Usuário (@)
+          <div className="h-px flex-1 bg-border/40 group-focus-within/input:bg-primary/20 transition-all" />
+         </label>
          <input 
           type="text" 
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="usuario_unico"
-          className="auth-input"
+          className="auth-input bg-white/[0.03] border-white/5 focus:bg-white/[0.06] transition-all hover:border-white/20"
          />
         </div>
 
-        <div className="space-y-2 sm:col-span-2">
-         <label className="auth-label">Bio (Sobre você)</label>
+        <div className="space-y-2 sm:col-span-2 group/input">
+         <label className="auth-label group-focus-within/input:text-primary transition-colors flex items-center gap-2">
+          Bio (Conte um pouco sobre sua jornada)
+          <div className="h-px flex-1 bg-border/40 group-focus-within/input:bg-primary/20 transition-all" />
+         </label>
          <textarea 
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           placeholder="Conte um pouco sobre você..."
-          className="auth-input min-h-[100px] resize-none"
+          className="auth-input min-h-[120px] resize-none bg-white/[0.03] border-white/5 focus:bg-white/[0.06] transition-all hover:border-white/20"
          />
         </div>
 
-        <div className="space-y-2">
-         <label className="auth-label">Preferência de Tema</label>
-         <div className="flex gap-2">
+        <div className="space-y-3">
+         <label className="auth-label flex items-center gap-2">
+          Ambiente Visual
+          <div className="h-px flex-1 bg-border/40" />
+         </label>
+         <div className="flex gap-3 p-1 bg-black/20 rounded-xl border border-white/5">
           <button
            type="button"
            onClick={() => setThemePreference("dark")}
-           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${themePreference === 'dark' ? 'border-primary bg-primary/10' : 'border-border bg-secondary/50'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${themePreference === 'dark' ? 'border-primary/50 bg-primary/20 text-white shadow-inner' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
           >
            <Moon className="w-4 h-4" /> Escuro
           </button>
           <button
            type="button"
            onClick={() => setThemePreference("light")}
-           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${themePreference === 'light' ? 'border-primary bg-primary/10' : 'border-border bg-secondary/50'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${themePreference === 'light' ? 'border-primary/50 bg-primary/20 text-white shadow-inner' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
           >
            <Sun className="w-4 h-4" /> Claro
           </button>
          </div>
         </div>
 
-        <div className="space-y-2">
-         <label className="auth-label">Status Online</label>
-         <div className="flex gap-2">
+        <div className="space-y-3">
+         <label className="auth-label flex items-center gap-2">
+          Privacidade & Status
+          <div className="h-px flex-1 bg-border/40" />
+         </label>
+         <div className="flex gap-3 p-1 bg-black/20 rounded-xl border border-white/5">
           <button
            type="button"
            onClick={() => setStatus("online")}
-           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${status === 'online' ? 'border-green-500 bg-green-500/10' : 'border-border bg-secondary/50'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${status === 'online' ? 'border-green-500/50 bg-green-500/10 text-green-400' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
           >
-           <Circle className="w-3 h-3 fill-green-500 text-green-500" /> Online
+           <div className={`w-2 h-2 rounded-full ${status === 'online' ? 'bg-green-500 animate-pulse' : 'bg-green-900/40'}`} /> Online
           </button>
           <button
            type="button"
            onClick={() => setStatus("offline")}
-           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${status === 'offline' ? 'border-gray-500 bg-gray-500/10' : 'border-border bg-secondary/50'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${status === 'offline' ? 'border-gray-500/50 bg-gray-500/10 text-gray-400' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
           >
-           <Circle className="w-3 h-3 fill-gray-500 text-gray-500" /> Offline
+           <div className={`w-2 h-2 rounded-full ${status === 'offline' ? 'bg-gray-500 shadow-lg' : 'bg-gray-900/40'}`} /> Offline
           </button>
          </div>
         </div>
        </div>
 
-       <div className="pt-4 border-t border-border">
+       <div className="pt-8 border-t border-white/5 flex justify-end">
         <button 
          type="submit" 
          disabled={loading}
-         className="auth-btn px-8 flex items-center justify-center gap-2 min-w-[150px]"
+         className="auth-btn !w-auto px-10 flex items-center justify-center gap-2 hover:scale-[1.02] hover:shadow-primary/25 active:scale-95 transition-all shadow-xl"
         >
          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
          Salvar Alterações
@@ -468,43 +494,54 @@ const Perfil = () => {
    case "ranking":
     return (
      <div className="space-y-6">
-      <h2 className="text-2xl font-bold flex items-center gap-3">
-       <Trophy className="w-6 h-6 text-yellow-500" /> Ranking Global
+      <h2 className="text-2xl font-black flex items-center gap-3 tracking-tight">
+       <div className="p-2 bg-yellow-500/10 rounded-lg">
+        <Trophy className="w-6 h-6 text-yellow-500" />
+       </div>
+       Ranking de Jogadores
       </h2>
-      <div className="auth-fieldset !p-0 overflow-hidden">
-       <table className="w-full">
-        <thead>
-         <tr className="bg-white/5 text-left">
-          <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider">Pos</th>
-          <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider">Usuário</th>
-          <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-right">Downloads</th>
-         </tr>
-        </thead>
-        <tbody className="divide-y divide-white/5">
-          {ranking.map((r, i) => (
-           <tr key={i} className="hover:bg-white/5 transition-colors">
-            <td className="px-6 py-4 font-bold text-lg">#{i + 1}</td>
-            <td className="px-6 py-4">
-             <div className="flex items-center gap-3">
-              <Link to={`/perfil/${r.user_id}`} className="shrink-0 hover:scale-110 transition-transform">
-                <img src={r.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=user"} className="w-8 h-8 rounded-full border border-border" />
-              </Link>
-              <div>
-               <Link to={`/perfil/${r.user_id}`} className="font-medium flex items-center gap-1 hover:text-primary transition-colors">
-                {r.display_name}
-                {r.is_vip && <BadgeCheck className="w-3 h-3 text-yellow-500" />}
-               </Link>
-               <p className="text-xs text-muted-foreground">@{r.username}</p>
-              </div>
-             </div>
-            </td>
-           <td className="px-6 py-4 text-right font-mono font-bold text-primary">
-            {r.download_count}
-           </td>
+      <div className="auth-fieldset !p-0 overflow-hidden bg-card/40 backdrop-blur-xl border-white/5 shadow-2xl">
+       <div className="overflow-x-auto">
+        <table className="w-full">
+         <thead>
+          <tr className="bg-white/5 text-left border-b border-white/5">
+           <th className="px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Posição</th>
+           <th className="px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Jogador</th>
+           <th className="px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-right text-muted-foreground">Downloads</th>
           </tr>
-         ))}
-        </tbody>
-       </table>
+         </thead>
+         <tbody className="divide-y divide-white/5">
+           {ranking.map((r, i) => (
+            <tr key={i} className="group hover:bg-primary/5 transition-all duration-300">
+             <td className="px-6 py-4">
+              <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg font-black text-sm ${i === 0 ? 'bg-yellow-500 text-black shadow-lg shadow-yellow-500/20' : i === 1 ? 'bg-gray-300 text-black shadow-lg shadow-gray-300/20' : i === 2 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/20' : 'bg-white/5 text-muted-foreground'}`}>
+               #{i + 1}
+              </span>
+             </td>
+             <td className="px-6 py-4">
+              <div className="flex items-center gap-4">
+               <Link to={`/perfil/${r.user_id}`} className="shrink-0 relative">
+                <img src={r.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=user"} className="w-10 h-10 rounded-full border-2 border-white/10 group-hover:border-primary/50 transition-colors object-cover" />
+                {r.is_vip && <div className="absolute -top-1 -right-1 bg-yellow-500 rounded-full p-0.5"><BadgeCheck className="w-2.5 h-2.5 text-black" /></div>}
+               </Link>
+               <div>
+                <Link to={`/perfil/${r.user_id}`} className="font-bold text-sm group-hover:text-primary transition-colors flex items-center gap-1">
+                 {r.display_name}
+                </Link>
+                <p className="text-xs text-muted-foreground">@{r.username}</p>
+               </div>
+              </div>
+             </td>
+            <td className="px-6 py-4 text-right">
+             <span className="font-mono font-black text-primary text-lg tracking-tighter">
+              {r.download_count}
+             </span>
+            </td>
+           </tr>
+          ))}
+         </tbody>
+        </table>
+       </div>
       </div>
      </div>
     );
@@ -528,18 +565,30 @@ const Perfil = () => {
   }
  };
 
- return (
-  <div className="min-h-screen bg-background flex flex-col">
+  return (
+  <div className="min-h-screen bg-background flex flex-col relative overflow-hidden">
+   {/* Professional Background Elements */}
+   <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full animate-pulse" />
+    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+   </div>
+
    <Header />
    
-   
-   <main className="flex-1 container mx-auto px-4 py-12 max-w-6xl">
+   <main className="flex-1 container mx-auto px-4 py-12 max-w-6xl relative z-10">
      <div className="grid md:grid-cols-[280px_1fr] gap-8">
       {/* Sidebar */}
       <div className="space-y-6">
-       <div className="auth-fieldset flex flex-col items-center p-8">
-        <div className="relative group">
-         <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/20 bg-secondary flex items-center justify-center relative">
+       <div className="auth-fieldset flex flex-col items-center p-0 overflow-hidden group/sidebar">
+        {/* Cover Gradient */}
+        <div className="w-full h-24 bg-gradient-to-br from-primary/40 via-primary/20 to-transparent relative">
+         <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
+        </div>
+        
+        <div className="flex flex-col items-center px-8 pb-8 -mt-12 relative z-10">
+         <div className="relative group">
+          <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-background bg-secondary flex items-center justify-center relative shadow-xl ring-1 ring-white/10">
           {targetProfile?.avatar_url ? (
            <img 
             src={targetProfile.avatar_url} 
@@ -606,9 +655,10 @@ const Perfil = () => {
          </div>
         </div>
        </div>
+      </div>
 
       {/* Nav Menu */}
-       <div className="auth-fieldset !p-2 space-y-1">
+       <div className="auth-fieldset !p-2 space-y-1 bg-card/40 backdrop-blur-xl border-white/5 shadow-xl">
         {[
          { id: "profile", icon: User, label: "Perfil", hidden: false },
          { id: "settings", icon: Edit3, label: "Configurações", hidden: !isOwnProfile },
@@ -620,26 +670,28 @@ const Perfil = () => {
          <button
           key={tab.id}
           onClick={() => setActiveTab(tab.id as any)}
-          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'hover:bg-white/5 text-muted-foreground'}`}
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-300 ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/25 scale-[1.02]' : 'hover:bg-primary/10 text-muted-foreground hover:text-primary hover:translate-x-1'}`}
          >
-          <tab.icon className={`w-4 h-4 ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
-          {tab.label}
+          <tab.icon className={`w-4 h-4 transition-colors ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
+          <span className="font-semibold">{tab.label}</span>
          </button>
         ))}
        </div>
 
        {isOwnProfile && (
-        <div className="auth-fieldset p-6 space-y-4">
-         <h3 className="text-sm border-b border-border pb-2">Informações</h3>
-         <div className="space-y-2">
-          <p className="text-[10px] text-muted-foreground uppercase ">Email</p>
-          <p className="text-xs font-medium truncate">{user?.email}</p>
-         </div>
-         <div className="space-y-2">
-          <p className="text-[10px] text-muted-foreground uppercase ">Membro desde</p>
-          <p className="text-xs font-medium">
-           {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
-          </p>
+        <div className="auth-fieldset p-6 space-y-5 bg-card/30 backdrop-blur-xl border-white/5 shadow-xl">
+         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground border-b border-white/5 pb-3">Dados da Conta</h3>
+         <div className="space-y-4">
+          <div className="space-y-1">
+           <p className="text-[9px] text-primary font-black uppercase tracking-widest ">E-mail cadastrado</p>
+           <p className="text-xs font-bold truncate text-foreground/90">{user?.email}</p>
+          </div>
+          <div className="space-y-1">
+           <p className="text-[9px] text-primary font-black uppercase tracking-widest ">Data de cadastro</p>
+           <p className="text-xs font-bold text-foreground/90">
+            {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
+           </p>
+          </div>
          </div>
         </div>
        )}
