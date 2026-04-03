@@ -7,6 +7,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect } from "react";
 import { OnlineUsers } from "./OnlineUsers";
 import { NotificationBell } from "./NotificationBell";
+import { SunMoonSystem } from "./SunMoonSystem";
 import logo from "@/assets/logo.png";
 
 export function Header() {
@@ -66,31 +67,10 @@ export function Header() {
           {/* Theme Toggle */}
           <button 
             onClick={toggleTheme} 
-            className="p-2.5 rounded-xl hover:bg-muted transition-colors relative h-10 w-10 flex items-center justify-center overflow-hidden"
+            className="p-2.5 rounded-xl hover:bg-muted transition-colors relative h-10 w-10 flex items-center justify-center overflow-visible"
             aria-label="Alternar tema"
           >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={theme}
-                initial={{ rotate: -360, scale: 0, opacity: 0 }}
-                animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                exit={{ rotate: 360, scale: 0, opacity: 0 }}
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ 
-                  type: "spring",
-                  stiffness: 180,
-                  damping: 18
-                }}
-                className="flex items-center justify-center pointer-events-none"
-              >
-                {theme === "dark" ? (
-                  <Sun className="w-5 h-5 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]" />
-                ) : (
-                  <Moon className="w-5 h-5 text-indigo-400 drop-shadow-[0_0_8px_rgba(129,140,248,0.4)]" />
-                )}
-              </motion.div>
-            </AnimatePresence>
+            <SunMoonSystem />
           </button>
 
 
