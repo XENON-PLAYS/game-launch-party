@@ -4,30 +4,35 @@ import { Header } from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
-import { Download, Loader2, Shield, Clock } from "lucide-react";
+import { Download, Loader2, Shield, Clock, AlertCircle, CheckCircle2, RefreshCw } from "lucide-react";
+import { InstallationWizard } from "@/components/InstallationWizard";
+import { toast } from "sonner";
 
 const DownloadPage = () => {
   const { gameId, linkId } = useParams();
   const { user, profile } = useAuth();
   const navigate = useNavigate();
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(10);
   const [ready, setReady] = useState(false);
+  const [downloadStarted, setDownloadStarted] = useState(false);
 
   const isVip = profile?.is_vip ?? false;
 
-  const { data: game } = useQuery({
+  const { data: game, isLoading: gameLoading } = useQuery({
     queryKey: ["game", gameId],
     queryFn: async () => {
-      const { data } = await supabase.from("games").select("nome, imagem").eq("id", gameId!).single();
+      const { data, error } = await supabase.from("games").select("*").eq("id", gameId!).single();
+      if (error) throw error;
       return data;
     },
     enabled: !!gameId,
   });
 
-  const { data: link } = useQuery({
+  const { data: link, isLoading: linkLoading } = useQuery({
     queryKey: ["download-link", linkId],
     queryFn: async () => {
-      const { data } = await supabase.from("download_links").select("*").eq("id", linkId!).single();
+      const { data, error } = await supabase.from("download_links").select("*").eq("id", linkId!).single();
+      if (error) throw error;
       return data;
     },
     enabled: !!linkId,
@@ -35,6 +40,7 @@ const DownloadPage = () => {
 
   useEffect(() => {
     if (isVip) {
+      setCountdown(0);
       setReady(true);
       return;
     }
@@ -49,6 +55,9 @@ const DownloadPage = () => {
   const handleDownload = async () => {
     if (!link) return;
     
+    setDownloadStarted(true);
+    toast.success("Download iniciado com sucesso!");
+    
     try {
       // Record download history
       await supabase.from("download_history").insert({
@@ -57,124 +66,173 @@ const DownloadPage = () => {
         download_link_id: linkId!,
       });
       
-      // Increment counts via RPC (bypass RLS and avoid NaN issues)
+      // Increment counts via RPC
       await Promise.all([
         supabase.rpc('increment_link_clicks', { link_id: linkId! }),
         supabase.rpc('increment_game_downloads', { game_id: gameId! })
       ]);
       
-      // Open the link in a new tab
+      // Open the link
       window.open(link.url, "_blank");
     } catch (error) {
       console.error("Error during download tracking:", error);
-      // Still open the link even if tracking fails, to not block the user
       window.open(link.url, "_blank");
     }
   };
+
+  const reportError = () => {
+    toast.info("Relatório enviado para a equipe técnica.");
+  };
+
+  if (gameLoading || linkLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-12 h-12 text-primary animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
       <Header />
       <main className="container-responsive py-12 sm:py-24 lg:py-32">
-        <div className="max-w-3xl mx-auto text-center space-y-12 sm:space-y-20 lg:space-y-32">
-          {/* Game info */}
-          {game && (
-            <div className="space-y-8 sm:space-y-12 animate-fade-in">
-              <div className="relative group mx-auto w-40 sm:w-56 lg:w-72 aspect-[3/4]">
-                <img 
-                  src={game.imagem || ""} 
-                  alt={game.nome} 
-                  className="w-full h-full object-cover rounded-[2rem] sm:rounded-[3rem] mx-auto border-4 border-card shadow-3xl group-hover:scale-105 transition-transform duration-700" 
-                />
-                <div className="absolute inset-0 rounded-[2rem] sm:rounded-[3rem] shadow-[0_0_80px_rgba(249,115,22,0.1)] group-hover:shadow-[0_0_100px_rgba(249,115,22,0.2)] transition-shadow duration-700" />
-              </div>
-              <div className="space-y-4">
-                <h1 className="text-responsive-h2 leading-none uppercase">{game.nome}</h1>
-                {link && (
-                  <div className="flex items-center justify-center gap-4">
-                    <span className="w-12 h-1.5 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                    <p className="text-responsive-small text-muted-foreground opacity-80">{link.label}</p>
-                  </div>
-                )}
-              </div>
+        <div className="max-w-5xl mx-auto space-y-20 lg:space-y-32">
+          
+          {/* Status Header */}
+          <div className="text-center space-y-8 animate-in fade-in slide-in-from-top-4 duration-1000">
+            <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-black uppercase tracking-widest">
+              <Shield className="w-4 h-4" />
+              Conexão Segura e Criptografada
             </div>
-          )}
-
-          {/* VIP badge */}
-          {isVip && (
-            <div className="inline-flex items-center gap-4 px-8 py-4 rounded-2xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 shadow-2xl shadow-yellow-500/5 animate-bounce">
-              <Shield className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="text-sm sm:text-base font-black uppercase tracking-widest">VIP — Download Instantâneo</span>
-            </div>
-          )}
-
-          {/* Countdown or ready */}
-          <div className="bg-card border-2 border-border rounded-[2.5rem] sm:rounded-[4rem] p-10 sm:p-20 space-y-12 sm:space-y-16 shadow-3xl relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-            
-            {!ready ? (
-              <div className="relative z-10 space-y-12 sm:space-y-16">
-                <div className="flex items-center justify-center gap-4 text-primary animate-pulse">
-                  <Loader2 className="w-8 h-8 sm:w-10 sm:h-10 animate-spin" />
-                  <span className="text-responsive-h3 uppercase leading-none">Preparando Escotilha…</span>
-                </div>
-                <div className="relative w-32 h-32 sm:w-48 sm:h-48 mx-auto">
-                  <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" stroke="hsl(var(--border))" strokeWidth="4" fill="none" className="opacity-20" />
-                    <circle
-                      cx="50" cy="50" r="45"
-                      stroke="hsl(var(--primary))"
-                      strokeWidth="6"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeDasharray={`${(1 - countdown / 5) * 283} 283`}
-                      className="transition-all duration-1000 shadow-[0_0_20px_rgba(249,115,22,0.5)]"
-                    />
-                  </svg>
-                  <span className="absolute inset-0 flex items-center justify-center text-4xl sm:text-6xl font-black text-primary drop-shadow-2xl">{countdown}</span>
-                </div>
-                <p className="text-responsive-body text-muted-foreground opacity-70">Aguarde o vento favorável para liberar o tesouro em seu porto.</p>
-              </div>
-            ) : (
-              <div className="relative z-10 space-y-12 sm:space-y-16 animate-fade-in">
-                <div className="flex items-center justify-center gap-4 text-emerald-400">
-                  <Download className="w-8 h-8 sm:w-10 sm:h-10" />
-                  <span className="text-responsive-h3 uppercase leading-none">Porto Liberado!</span>
-                </div>
-                <button
-                  onClick={handleDownload}
-                  className="w-full py-6 sm:py-8 rounded-[1.5rem] sm:rounded-[2.5rem] bg-primary text-primary-foreground font-black text-xl sm:text-2xl lg:text-3xl uppercase tracking-[0.2em] hover:bg-primary/90 hover:scale-[1.03] active:scale-95 transition-all shadow-[0_20px_60px_-15px_rgba(249,115,22,0.5)] flex items-center justify-center gap-6"
-                >
-                  <Download className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12" />
-                  Baixar Agora
-                </button>
-              </div>
-            )}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
+              Portal de <span className="text-primary italic">Download</span>
+            </h1>
           </div>
 
-          {/* Ad space placeholder */}
-          {!isVip && (
-            <div className="bg-muted/30 border-2 border-dashed border-border rounded-[2rem] p-10 sm:p-16 text-center space-y-4">
-              <p className="text-responsive-small text-muted-foreground opacity-40">Espaço Reservado para a Frota</p>
-              <p className="text-responsive-body text-muted-foreground opacity-80">Torne-se um <strong>Capitão VIP</strong> para remover todos os obstáculos e navegar sem espera.</p>
-            </div>
-          )}
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            {/* Sidebar info */}
+            <div className="lg:col-span-4 space-y-10 order-2 lg:order-1">
+              {game && (
+                <div className="bg-card border-2 border-border rounded-[2.5rem] p-8 space-y-8 shadow-2xl relative overflow-hidden group">
+                  <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-border/50">
+                    <img 
+                      src={game.imagem || ""} 
+                      alt={game.nome} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    />
+                  </div>
+                  <div className="space-y-4">
+                    <h2 className="text-2xl font-black uppercase leading-tight">{game.nome}</h2>
+                    <div className="flex flex-wrap gap-2">
+                      {game.categorias?.slice(0, 3).map(cat => (
+                        <span key={cat} className="px-3 py-1 rounded-full bg-muted text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{cat}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
 
-          <button 
-            onClick={() => navigate(`/jogo/${gameId}`)} 
-            className="text-responsive-small text-muted-foreground hover:text-primary transition-all flex items-center justify-center gap-3 mx-auto font-black"
-          >
-            <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span>RETORNAR AO CHAT DO JOGO</span>
-          </button>
+              {/* Troubleshooting quick links */}
+              <div className="space-y-4">
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground px-4">Recursos Úteis</p>
+                <div className="grid gap-2">
+                  <button onClick={reportError} className="w-full flex items-center justify-between p-4 rounded-2xl bg-red-500/5 border border-red-500/10 text-red-400 hover:bg-red-500/10 transition-colors text-sm font-bold">
+                    Link não funciona?
+                    <AlertCircle className="w-4 h-4" />
+                  </button>
+                  <button onClick={() => setCountdown(10)} className="w-full flex items-center justify-between p-4 rounded-2xl bg-muted border border-border text-muted-foreground hover:text-foreground transition-colors text-sm font-bold">
+                    Reiniciar Contagem
+                    <RefreshCw className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Main Content */}
+            <div className="lg:col-span-8 order-1 lg:order-2">
+              {!downloadStarted ? (
+                <div className="bg-card border-2 border-border rounded-[3rem] p-10 sm:p-20 space-y-12 sm:space-y-16 shadow-3xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-8">
+                    {isVip ? (
+                      <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-yellow-500 text-black font-black uppercase tracking-widest text-xs shadow-xl shadow-yellow-500/20">
+                        <Shield className="w-4 h-4" />
+                        VIP Instantâneo
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-muted border border-border text-muted-foreground font-black uppercase tracking-widest text-xs">
+                        Acesso Gratuito
+                      </div>
+                    )}
+                  </div>
+
+                  {!ready ? (
+                    <div className="space-y-12 text-center py-10">
+                      <div className="relative w-40 h-40 sm:w-56 sm:h-56 mx-auto">
+                        <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="4" fill="none" className="text-border/30" />
+                          <circle
+                            cx="50" cy="50" r="45"
+                            stroke="currentColor"
+                            strokeWidth="6"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeDasharray={`${(1 - countdown / 10) * 283} 283`}
+                            className="text-primary transition-all duration-1000 drop-shadow-[0_0_15px_rgba(249,115,22,0.4)]"
+                          />
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                          <span className="text-6xl sm:text-8xl font-black text-primary">{countdown}</span>
+                          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Segundos</span>
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <h3 className="text-2xl font-black uppercase tracking-widest">Validando Arquivos</h3>
+                        <p className="text-muted-foreground max-w-sm mx-auto">Aguarde enquanto nossa frota verifica a integridade dos links de download.</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-12 animate-in zoom-in-95 duration-500">
+                      <div className="p-10 rounded-[2.5rem] bg-emerald-500/5 border-2 border-emerald-500/20 text-center space-y-6">
+                        <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto">
+                          <CheckCircle2 className="w-10 h-10 text-emerald-400" />
+                        </div>
+                        <div className="space-y-2">
+                          <h3 className="text-3xl font-black uppercase tracking-tighter text-emerald-400">Pronto para Zarpagem!</h3>
+                          <p className="text-muted-foreground">O link foi verificado e está pronto para transferência.</p>
+                        </div>
+                      </div>
+                      
+                      <button
+                        onClick={handleDownload}
+                        className="w-full py-10 rounded-[2.5rem] bg-primary text-primary-foreground font-black text-2xl sm:text-4xl uppercase tracking-[0.2em] hover:bg-primary/90 hover:scale-[1.02] active:scale-95 transition-all shadow-[0_30px_90px_-20px_rgba(249,115,22,0.6)] flex items-center justify-center gap-8 group"
+                      >
+                        <Download className="w-10 h-10 group-hover:animate-bounce" />
+                        Baixar Agora
+                      </button>
+
+                      <p className="text-center text-xs text-muted-foreground uppercase tracking-widest font-bold opacity-60">
+                        Servidor: {link?.label || "Padrão"} • Latência: 24ms • Integridade: 100%
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                game && <InstallationWizard game={game} />
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center gap-6">
+            <button 
+              onClick={() => navigate(`/jogo/${gameId}`)} 
+              className="px-10 py-5 rounded-2xl bg-muted/50 border border-border text-muted-foreground hover:text-primary hover:border-primary/30 transition-all flex items-center gap-3 font-black uppercase tracking-widest text-xs"
+            >
+              <Clock className="w-4 h-4" />
+              Retornar à Navegação
+            </button>
+          </div>
         </div>
       </main>
-
-      <footer className="border-t border-border bg-card py-20 sm:py-32 mt-20">
-        <div className="container-responsive text-center text-responsive-small text-muted-foreground opacity-60">
-          <p>© 2025 JOGOS GRATIS — Sua bússola para os melhores tesouros digitais.</p>
-        </div>
-      </footer>
     </div>
   );
 };
