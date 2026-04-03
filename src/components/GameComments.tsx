@@ -32,7 +32,6 @@ export function GameComments({ gameId }: GameCommentsProps) {
           profiles:user_id(display_name, avatar_url, is_vip, badges)
         `)
         .eq("game_id", gameId)
-        .is("parent_id", null)
         .order("created_at", { ascending: true }) // Ascending for chat feel
         .limit(100);
       
