@@ -111,6 +111,9 @@
     overflow-x: hidden;
     width: 100%;
     transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Custom Scrollbar for a modern look */
