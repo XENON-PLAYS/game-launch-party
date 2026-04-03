@@ -27,7 +27,8 @@ const Checkout = () => {
       features: ["Downloads imediatos (sem filas)", "Insignia VIP exclusiva", "Experiência sem anúncios", "Suporte prioritário"],
       iconColor: "text-orange-500",
       iconBg: "bg-orange-500/10",
-      borderColor: "border-orange-500/20"
+      borderColor: "border-orange-500/20",
+      buttonColor: "bg-orange-600 hover:bg-orange-700 shadow-orange-500/10"
     },
     "Semestral": {
       name: "Plano Semestral",
@@ -37,7 +38,8 @@ const Checkout = () => {
       features: ["Todos os benefícios do Mensal", "Badge VIP Prata de prestígio", "Acesso antecipado a jogos", "Sugestões personalizadas"],
       iconColor: "text-slate-400",
       iconBg: "bg-slate-400/10",
-      borderColor: "border-slate-400/20"
+      borderColor: "border-slate-400/20",
+      buttonColor: "bg-slate-500 hover:bg-slate-600 shadow-slate-400/30"
     },
     "Anual": {
       name: "Plano Anual",
@@ -47,7 +49,8 @@ const Checkout = () => {
       features: ["Todos os benefícios do Semestral", "Insignia Ouro Lendária", "Prioridade em pedidos", "Sorteios mensais de keys"],
       iconColor: "text-amber-400",
       iconBg: "bg-amber-400/10",
-      borderColor: "border-amber-400/20"
+      borderColor: "border-amber-400/20",
+      buttonColor: "bg-amber-500 hover:bg-amber-600 shadow-amber-400/40"
     }
   };
 
