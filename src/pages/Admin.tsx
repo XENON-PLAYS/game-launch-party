@@ -146,7 +146,7 @@ const Admin = () => {
             {gamesLoading ? (
               <div className="h-[60vh] flex flex-col items-center justify-center space-y-4">
                 <Loader2 className="h-12 w-12 text-primary animate-spin" />
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground">Sincronizando com a Central Elite...</p>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground">Sincronizando com a Central de Jogos...</p>
               </div>
             ) : gamesError ? (
               <div className="h-[60vh] flex flex-col items-center justify-center space-y-6 text-center max-w-md mx-auto">
