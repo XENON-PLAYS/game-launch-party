@@ -46,9 +46,9 @@ const StatCard = ({ icon: Icon, label, value, trend, color }: { icon: any, label
   </Card>
 );
 
-export function DashboardOverview({ games }: DashboardOverviewProps) {
+export function DashboardOverview({ games, userCount, averageRating }: DashboardOverviewProps) {
   const totalDownloads = games.reduce((acc, game) => acc + (game.download_count || 0), 0);
-  const averageRating = 4.8; // Hardcoded for now, would come from database
+  const displayRating = averageRating > 0 ? averageRating.toFixed(1) : "0.0";
   
   const topGames = [...games]
     .sort((a, b) => (b.download_count || 0) - (a.download_count || 0))
