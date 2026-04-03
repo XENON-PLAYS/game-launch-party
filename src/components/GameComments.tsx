@@ -1,355 +1,289 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { MessageSquare, ThumbsUp, ThumbsDown, Reply, Trash2, Send, ShieldAlert, Flag } from "lucide-react";
+import { MessageSquare, Send, Trash2, Flag, ShieldAlert, Loader2, User } from "lucide-react";
 import { toast } from "sonner";
-
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface GameCommentsProps {
   gameId: string;
 }
 
 export function GameComments({ gameId }: GameCommentsProps) {
-  const { user, profile, isAdmin } = useAuth();
+  const { user, isAdmin } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [content, setContent] = useState("");
-  const [replyTo, setReplyTo] = useState<string | null>(null);
-  const [replyContent, setReplyContent] = useState("");
-  const [lastPostTime, setLastPostTime] = useState(0);
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const { data: comments = [] } = useQuery({
+  // Fetch initial comments
+  const { data: comments = [], isLoading, isError } = useQuery({
     queryKey: ["comments", gameId],
     queryFn: async () => {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("game_comments")
         .select(`
           *,
-          profiles:user_id(display_name, avatar_url, is_vip, badges),
-          reactions:comment_reactions(user_id, reaction_type)
+          profiles:user_id(display_name, avatar_url, is_vip, badges)
         `)
         .eq("game_id", gameId)
         .is("parent_id", null)
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: true }); // Ascending for chat feel
+      
+      if (error) throw error;
       return data ?? [];
     },
   });
 
-  const { data: replies = [] } = useQuery({
-    queryKey: ["replies", gameId],
-    queryFn: async () => {
-      const { data } = await supabase
-        .from("game_comments")
-        .select(`
-          *,
-          profiles:user_id(display_name, avatar_url, is_vip, badges),
-          reactions:comment_reactions(user_id, reaction_type)
-        `)
-        .eq("game_id", gameId)
-        .not("parent_id", "is", null)
-        .order("created_at", { ascending: true });
-      return data ?? [];
-    },
-  });
+  // Real-time subscription
+  useEffect(() => {
+    const channel = supabase
+      .channel(`game_comments_${gameId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "game_comments",
+          filter: `game_id=eq.${gameId}`,
+        },
+        () => {
+          // Re-fetch comments when anything changes
+          queryClient.invalidateQueries({ queryKey: ["comments", gameId] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [gameId, queryClient]);
+
+  // Scroll to bottom when comments change
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [comments]);
 
   const postComment = useMutation({
-    mutationFn: async ({ text, parentId }: { text: string; parentId?: string }) => {
-      if (!user) return;
+    mutationFn: async (text: string) => {
+      if (!user) throw new Error("Você precisa estar logado para enviar mensagens.");
       
-      // Anti-spam check (5 seconds)
-      const now = Date.now();
-      if (now - lastPostTime < 5000) {
-        throw new Error("Aguarde um pouco antes de postar novamente.");
-      }
-
       const { error } = await supabase.from("game_comments").insert({
         user_id: user.id,
         game_id: gameId,
-        content: text,
-        parent_id: parentId || null,
+        content: text.trim(),
       });
+      
       if (error) throw error;
-      setLastPostTime(now);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comments", gameId] });
-      queryClient.invalidateQueries({ queryKey: ["replies", gameId] });
       setContent("");
-      setReplyContent("");
-      setReplyTo(null);
-      toast.success("Comentário enviado!");
+      // Success is handled by real-time subscription auto-refetch
     },
     onError: (err: any) => {
-      toast.error(err.message);
-    }
-  });
-
-  const toggleReaction = useMutation({
-    mutationFn: async ({ commentId, type }: { commentId: string; type: 'like' | 'dislike' }) => {
-      if (!user) return navigate("/login");
-
-      const { data: existing } = await supabase
-        .from("comment_reactions")
-        .select("*")
-        .eq("user_id", user.id)
-        .eq("comment_id", commentId)
-        .maybeSingle();
-
-      if (existing) {
-        if (existing.reaction_type === type) {
-          // Remove if clicking same type
-          await supabase.from("comment_reactions").delete().eq("id", existing.id);
-        } else {
-          // Update if clicking different type
-          await supabase.from("comment_reactions").update({ reaction_type: type }).eq("id", existing.id);
-        }
-      } else {
-        // Insert new
-        await supabase.from("comment_reactions").insert({
-          user_id: user.id,
-          comment_id: commentId,
-          reaction_type: type
-        });
-      }
-    },
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: ["comments", gameId] });
-      queryClient.invalidateQueries({ queryKey: ["replies", gameId] });
-      toast.success(variables.type === 'like' ? "Você gostou desse comentário!" : "Você não gostou desse comentário!");
-    },
-    onError: (err: any) => {
-      toast.error("Erro ao reagir ao comentário: " + err.message);
+      toast.error(err.message || "Erro ao enviar mensagem");
     }
   });
 
   const deleteComment = useMutation({
     mutationFn: async (commentId: string) => {
-      await supabase.from("game_comments").delete().eq("id", commentId);
+      const { error } = await supabase.from("game_comments").delete().eq("id", commentId);
+      if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comments", gameId] });
-      queryClient.invalidateQueries({ queryKey: ["replies", gameId] });
+      toast.success("Mensagem removida");
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return navigate("/login");
-    if (!content.trim()) return;
-    postComment.mutate({ text: content.trim() });
-  };
-
-  const handleReply = (parentId: string) => {
-    if (!user) return navigate("/login");
-    if (!replyContent.trim()) return;
-    postComment.mutate({ text: replyContent.trim(), parentId });
+    if (!content.trim() || postComment.isPending) return;
+    postComment.mutate(content.trim());
   };
 
   const formatDate = (dateStr: string) => {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+    try {
+      return format(new Date(dateStr), "HH:mm", { locale: ptBR });
+    } catch (e) {
+      return "";
+    }
   };
 
+  if (isError) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
+        <div className="p-4 rounded-full bg-destructive/10 text-destructive">
+          <ShieldAlert className="w-8 h-8" />
+        </div>
+        <p className="text-muted-foreground font-medium">Erro ao carregar o chat. Tente novamente.</p>
+        <button 
+          onClick={() => queryClient.invalidateQueries({ queryKey: ["comments", gameId] })}
+          className="text-primary hover:underline text-sm font-bold uppercase tracking-widest"
+        >
+          Recarregar
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="p-3 rounded-2xl bg-primary/10 border border-primary/20">
-            <MessageSquare className="w-6 h-6 text-primary" />
+    <div className="flex flex-col h-[600px] bg-card/50 backdrop-blur-sm border border-border rounded-3xl overflow-hidden shadow-2xl relative">
+      {/* Chat Header */}
+      <div className="p-6 border-b border-border bg-card flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-xl bg-primary/10 border border-primary/20">
+            <MessageSquare className="w-5 h-5 text-primary" />
           </div>
-          <div className="flex flex-col">
-            <h2 className="text-2xl font-black uppercase tracking-tight">Chat de Discussão</h2>
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest opacity-60">{comments.length + replies.length} Mensagens na Garrafa</p>
+          <div>
+            <h3 className="font-black uppercase tracking-tight text-sm">Chat da Tripulação</h3>
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Tempo Real Ativado</span>
+            </div>
           </div>
+        </div>
+        <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest bg-muted/50 px-3 py-1.5 rounded-lg border border-border">
+          {comments.length} Mensagens
         </div>
       </div>
 
-      {/* Post comment */}
-      <motion.form 
-        onSubmit={handleSubmit} 
-        className="flex flex-col gap-4 p-6 bg-card border-2 border-border rounded-[2rem] shadow-xl"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+      {/* Messages Area */}
+      <div 
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent hover:scrollbar-thumb-primary/40 transition-colors"
       >
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder={user ? "O que você achou desse tesouro?" : "Faça login para compartilhar sua opinião..."}
-          className="w-full px-6 py-4 bg-muted/30 border border-border rounded-2xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all min-h-[120px] resize-none"
-          disabled={!user}
-        />
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-50">
-            <ShieldAlert className="w-3 h-3" />
-            <span>Respeite a tripulação. Evite spam.</span>
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center h-full space-y-3 opacity-50">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            <p className="text-xs font-bold uppercase tracking-[0.2em]">Sincronizando com a frota...</p>
           </div>
+        ) : comments.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-40">
+            <div className="p-6 rounded-full bg-muted border-2 border-dashed border-border">
+              <MessageSquare className="w-12 h-12" />
+            </div>
+            <div className="space-y-1">
+              <p className="font-black uppercase tracking-widest text-xs">Nenhum sussurro no mar</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest">Seja o primeiro a enviar uma mensagem!</p>
+            </div>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <AnimatePresence initial={false}>
+              {comments.map((comment: any) => {
+                const isMe = comment.user_id === user?.id;
+                const profile = comment.profiles;
+                
+                return (
+                  <motion.div
+                    key={comment.id}
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    className={`flex items-start gap-3 ${isMe ? "flex-row-reverse" : "flex-row"}`}
+                  >
+                    {/* Avatar */}
+                    <div className={`shrink-0 w-8 h-8 rounded-lg border-2 overflow-hidden flex items-center justify-center bg-muted transition-all duration-300 ${isMe ? "border-primary/50" : "border-border"}`}>
+                      {profile?.avatar_url ? (
+                        <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />
+                      ) : (
+                        <User className={`w-4 h-4 ${isMe ? "text-primary" : "text-muted-foreground"}`} />
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className={`flex flex-col max-w-[80%] space-y-1 ${isMe ? "items-end" : "items-start"}`}>
+                      {/* Name and Date */}
+                      <div className={`flex items-center gap-2 px-1 ${isMe ? "flex-row-reverse" : "flex-row"}`}>
+                        <span className={`text-[10px] font-black uppercase tracking-widest ${isMe ? "text-primary" : "text-muted-foreground"}`}>
+                          {profile?.display_name || "Anônimo"}
+                        </span>
+                        {profile?.is_vip && (
+                          <span className="bg-yellow-500/10 text-yellow-500 text-[8px] font-black px-1 py-0.5 rounded border border-yellow-500/20 uppercase">VIP</span>
+                        )}
+                        <span className="text-[9px] font-bold text-muted-foreground/50 uppercase">
+                          {formatDate(comment.created_at)}
+                        </span>
+                      </div>
+
+                      {/* Bubble */}
+                      <div className={`relative group p-4 rounded-2xl text-sm leading-relaxed shadow-sm transition-all duration-300 border ${
+                        isMe 
+                          ? "bg-primary text-primary-foreground border-primary rounded-tr-none shadow-lg shadow-primary/10" 
+                          : "bg-muted/50 text-foreground border-border rounded-tl-none hover:bg-muted/80"
+                      }`}>
+                        {comment.content}
+
+                        {/* Actions overlay for own messages or admin */}
+                        {(isMe || isAdmin) && (
+                          <button 
+                            onClick={() => {
+                              if (window.confirm("Remover esta mensagem?")) deleteComment.mutate(comment.id);
+                            }}
+                            className={`absolute -top-2 ${isMe ? "-left-2" : "-right-2"} p-1.5 rounded-lg bg-card border border-border text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-all shadow-xl active:scale-90`}
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+        )}
+      </div>
+
+      {/* Input Area */}
+      <div className="p-6 bg-card border-t border-border">
+        <form onSubmit={handleSubmit} className="relative">
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSubmit(e);
+              }
+            }}
+            placeholder={user ? "Escreva seu sussurro aqui..." : "Faça login para participar da conversa"}
+            disabled={!user || postComment.isPending}
+            className="w-full px-6 py-4 bg-muted/30 border border-border rounded-2xl text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all min-h-[60px] max-h-[120px] resize-none pr-16"
+          />
           <button
             type="submit"
             disabled={!user || !content.trim() || postComment.isPending}
-            className="px-10 py-4 rounded-xl bg-primary text-primary-foreground font-black uppercase tracking-[0.2em] text-xs hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-3 shadow-lg shadow-primary/20 hover:-translate-y-1 active:scale-95"
+            className="absolute right-3 bottom-3 p-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:scale-90"
           >
-            {postComment.isPending ? "Postando..." : (
-              <>
-                <span>Lançar Comentário</span>
-                <Send className="w-4 h-4" />
-              </>
+            {postComment.isPending ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <Send className="w-5 h-5" />
             )}
           </button>
+        </form>
+        <div className="mt-3 flex items-center justify-between px-2">
+          <div className="flex items-center gap-1.5 opacity-50">
+            <ShieldAlert className="w-3 h-3 text-muted-foreground" />
+            <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">Chat moderado pela frota</span>
+          </div>
+          {!user && (
+            <button 
+              onClick={() => navigate("/login")}
+              className="text-[9px] font-black text-primary uppercase tracking-widest hover:underline"
+            >
+              Fazer Login agora
+            </button>
+          )}
         </div>
-      </motion.form>
-
-      {/* Comments list */}
-      <div className="space-y-6">
-        {comments.map((comment: any) => {
-          const commentReplies = replies.filter((r: any) => r.parent_id === comment.id);
-          const profileData = comment.profiles as any;
-          return (
-            <div key={comment.id} className="bg-card border border-border rounded-xl p-5 space-y-4 shadow-sm hover:border-primary/20 transition-all group">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl overflow-hidden bg-primary/10 border border-primary/20 flex items-center justify-center relative">
-                    {profileData?.avatar_url ? (
-                      <img src={profileData.avatar_url} alt="" className="w-full h-full object-cover" />
-                    ) : (
-                      <span className="text-primary font-black uppercase text-lg">{(profileData?.display_name || "U")[0]}</span>
-                    )}
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="flex items-center gap-2">
-                      <span className="font-black text-sm uppercase tracking-tight">{profileData?.display_name || "Jogador Anônimo"}</span>
-                      {profileData?.is_vip && (
-                        <span className="bg-yellow-500/10 text-yellow-500 text-[8px] font-black px-1.5 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest">VIP</span>
-                      )}
-                      {profileData?.badges?.slice(0, 1).map((b: string, i: number) => (
-                        <span key={i} className="bg-primary/10 text-primary text-[8px] font-black px-1.5 py-0.5 rounded border border-primary/20 uppercase tracking-widest">{b}</span>
-                      ))}
-                    </div>
-                    <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest opacity-60">{formatDate(comment.created_at)}</span>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  {(comment.user_id === user?.id || isAdmin) && (
-                    <button 
-                      onClick={() => {
-                        if (confirm("Deseja apagar este comentário?")) deleteComment.mutate(comment.id);
-                      }} 
-                      className="p-2 rounded-xl hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-all"
-                      title="Excluir"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  )}
-                  <button className="p-2 rounded-xl hover:bg-muted text-muted-foreground hover:text-orange-500 transition-all" title="Denunciar">
-                    <Flag className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-
-              <p className="text-sm leading-relaxed text-foreground/90 pl-[52px]">
-                {comment.content}
-              </p>
-
-              <div className="flex items-center gap-4 pl-[52px] pt-2">
-                <div className="flex items-center gap-1 border border-border rounded-lg p-0.5">
-                  <button 
-                    onClick={() => toggleReaction.mutate({ commentId: comment.id, type: 'like' })}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all ${comment.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'like') ? 'bg-primary/10 text-primary' : 'hover:bg-muted text-muted-foreground'}`}
-                  >
-                    <ThumbsUp className={`w-3.5 h-3.5 ${comment.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'like') ? 'fill-primary' : ''}`} />
-                    <span className="text-[10px] font-black">{comment.likes || 0}</span>
-                  </button>
-                  <div className="w-px h-4 bg-border" />
-                  <button 
-                    onClick={() => toggleReaction.mutate({ commentId: comment.id, type: 'dislike' })}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all ${comment.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'dislike') ? 'bg-destructive/10 text-destructive' : 'hover:bg-muted text-muted-foreground'}`}
-                  >
-                    <ThumbsDown className={`w-3.5 h-3.5 ${comment.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'dislike') ? 'fill-destructive' : ''}`} />
-                    <span className="text-[10px] font-black">{comment.dislikes || 0}</span>
-                  </button>
-                </div>
-
-                <button 
-                  onClick={() => setReplyTo(replyTo === comment.id ? null : comment.id)} 
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border text-[10px] font-black uppercase tracking-widest transition-all ${replyTo === comment.id ? 'bg-primary text-primary-foreground border-primary' : 'hover:bg-muted text-muted-foreground'}`}
-                >
-                  <Reply className="w-3.5 h-3.5" />
-                  Responder
-                </button>
-              </div>
-
-              {/* Replies */}
-              {commentReplies.length > 0 && (
-                <div className="ml-[52px] space-y-4 border-l-2 border-border/50 pl-6 mt-6">
-                  {commentReplies.map((reply: any) => {
-                    const replyProfile = reply.profiles as any;
-                    return (
-                      <div key={reply.id} className="space-y-2 group/reply">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="font-black text-xs uppercase tracking-tight">{replyProfile?.display_name || "Jogador"}</span>
-                            {replyProfile?.is_vip && (
-                              <span className="bg-yellow-500/10 text-yellow-500 text-[8px] font-black px-1.5 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest">VIP</span>
-                            )}
-                            <span className="text-[10px] text-muted-foreground opacity-60">• {formatDate(reply.created_at)}</span>
-                          </div>
-                          {(reply.user_id === user?.id || isAdmin) && (
-                            <button onClick={() => deleteComment.mutate(reply.id)} className="p-1 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive opacity-0 group-hover/reply:opacity-100 transition-opacity">
-                              <Trash2 className="w-3 h-3" />
-                            </button>
-                          )}
-                        </div>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{reply.content}</p>
-                        
-                        <div className="flex items-center gap-3 pt-1">
-                          <button onClick={() => toggleReaction.mutate({ commentId: reply.id, type: 'like' })} className={`flex items-center gap-1 text-[10px] font-bold ${reply.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'like') ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}>
-                            <ThumbsUp className="w-3 h-3" /> {reply.likes || 0}
-                          </button>
-                          <button onClick={() => toggleReaction.mutate({ commentId: reply.id, type: 'dislike' })} className={`flex items-center gap-1 text-[10px] font-bold ${reply.reactions?.some((r: any) => r.user_id === user?.id && r.reaction_type === 'dislike') ? 'text-destructive' : 'text-muted-foreground hover:text-destructive'}`}>
-                            <ThumbsDown className="w-3 h-3" /> {reply.dislikes || 0}
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Reply form */}
-              {replyTo === comment.id && (
-                <motion.div 
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="ml-[52px] flex flex-col gap-3 p-4 bg-muted/30 rounded-2xl border border-border"
-                >
-                  <textarea
-                    value={replyContent}
-                    onChange={(e) => setReplyContent(e.target.value)}
-                    placeholder="Escreva sua resposta para a tripulação..."
-                    className="w-full px-4 py-3 bg-card border border-border rounded-xl text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 min-h-[80px] resize-none"
-                    autoFocus
-                  />
-                  <div className="flex justify-end gap-2">
-                    <button onClick={() => setReplyTo(null)} className="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-muted-foreground hover:bg-muted transition-all">Cancelar</button>
-                    <button 
-                      onClick={() => handleReply(comment.id)} 
-                      disabled={!replyContent.trim() || postComment.isPending} 
-                      className="px-6 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-black uppercase tracking-widest hover:bg-primary/90 disabled:opacity-50 transition-all shadow-lg shadow-primary/20"
-                    >
-                      {postComment.isPending ? "Enviando..." : "Responder"}
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </div>
-          );
-        })}
-        {comments.length === 0 && (
-          <p className="text-center text-muted-foreground py-8">Nenhum comentário ainda. Seja o primeiro!</p>
-        )}
       </div>
     </div>
   );
