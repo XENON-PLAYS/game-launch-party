@@ -133,6 +133,9 @@ export function Header() {
           <Link to="/" className="block py-2 text-muted-foreground hover:text-primary" onClick={() => setMobileOpen(false)}>Catálogo</Link>
           <Link to="/" className="block py-2 text-muted-foreground hover:text-primary" onClick={() => setMobileOpen(false)}>Novidades</Link>
           {isAdmin && <Link to="/admin" className="block py-2 text-primary" onClick={() => setMobileOpen(false)}>Admin</Link>}
+          <Link to="/vip" className="block py-2 text-yellow-500 animate-pulse flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+            <Trophy className="w-4 h-4" /> VIP
+          </Link>
           <div className="pt-4 border-t border-border flex flex-col gap-4">
             {!user ? (
               <>

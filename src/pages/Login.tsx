@@ -36,7 +36,7 @@ const Login = () => {
     }
     
     toast.success("Bem-vindo de volta!");
-    navigate("/");
+    navigate(redirect);
   };
 
   return (

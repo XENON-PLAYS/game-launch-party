@@ -48,7 +48,7 @@ const Cadastro = () => {
     }
     
     toast.success("Conta criada com sucesso! Você já pode entrar.");
-    navigate("/login");
+    navigate(`/login${redirect !== "/" ? `?redirect=${redirect}` : ""}`);
   };
 
   return (
