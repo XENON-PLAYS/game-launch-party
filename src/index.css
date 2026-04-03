@@ -183,64 +183,34 @@
   }
 }
 
-/* ===== AUTH PAGES (Login / Cadastro) ===== */
-
+/* Restored standard auth styles */
 .auth-fieldset {
-  @apply relative p-10 rounded-3xl bg-black/40 border border-white/10 shadow-2xl backdrop-blur-2xl transition-all duration-500;
-  box-shadow: 0 0 50px -12px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(255, 255, 255, 0.05);
-}
-
-.auth-fieldset:hover {
-  @apply border-white/20;
-  box-shadow: 0 0 70px -10px rgba(0, 0, 0, 0.6), 0 0 30px -5px rgba(234, 56, 56, 0.05);
+  @apply bg-card border border-border p-8 rounded-xl shadow-lg;
 }
 
 .auth-title {
-  @apply text-center text-4xl font-black mb-2 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60;
-  font-family: var(--font-sans);
+  @apply text-2xl font-bold text-center mb-2;
 }
 
 .auth-subtitle {
-  @apply text-muted-foreground text-sm font-medium text-center mb-10 opacity-70;
+  @apply text-muted-foreground text-center mb-6;
 }
 
 .auth-label {
-  @apply text-white/50 text-[10px] font-bold uppercase tracking-[0.2em] mb-2 ml-1 block transition-colors duration-300;
-}
-
-.auth-input-container {
-  @apply relative;
+  @apply block text-sm font-medium mb-1;
 }
 
 .auth-input {
-  @apply w-full px-5 py-4 rounded-2xl text-sm transition-all duration-300 bg-white/5 border border-white/10 text-white placeholder:text-white/20;
-}
-
-.auth-input:focus {
-  @apply outline-none border-primary/50 bg-white/10 ring-4 ring-primary/10;
-}
-
-.auth-input:focus + .auth-label {
-  @apply text-primary;
+  @apply w-full px-3 py-2 bg-background border border-input rounded-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all;
 }
 
 .auth-btn {
-  @apply relative overflow-hidden w-full py-4.5 rounded-2xl font-black text-sm uppercase tracking-widest bg-primary text-white transition-all duration-500 shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-95;
-}
-
-.auth-btn-glow {
-  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full transition-transform duration-1000 ease-in-out;
-}
-
-.auth-btn:hover .auth-btn-glow {
-  @apply translate-x-full;
+  @apply w-full py-2 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90 transition-opacity disabled:opacity-50;
 }
 
 .auth-link {
-  @apply text-primary font-bold transition-all duration-300 hover:text-primary/80 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full;
+  @apply text-primary hover:underline;
 }
-
-/* ===== ADMIN PANEL ===== */
 
 .admin-label {
   @apply block text-xs text-muted-foreground mb-1 uppercase tracking-wider font-bold;
