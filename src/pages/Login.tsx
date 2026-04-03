@@ -3,7 +3,6 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
-import { SpaceBackground } from "@/components/SpaceBackground";
 import { toast } from "sonner";
 
 const Login = () => {
@@ -40,15 +39,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
-      <SpaceBackground />
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       
-      <main className="flex-1 flex items-center justify-center px-4 py-12 relative z-10">
+      <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
-          <form onSubmit={handleSubmit} className="auth-fieldset">
-            <h1 className="auth-title">Acessar Conta</h1>
-            <p className="auth-subtitle">Entre com seu e-mail e senha</p>
+          <form onSubmit={handleSubmit} className="bg-card border border-border p-8 rounded-xl shadow-lg">
+            <h1 className="text-2xl font-bold text-center mb-2">Acessar Conta</h1>
+            <p className="text-muted-foreground text-center mb-6">Entre com seu e-mail e senha</p>
             
             {erro && (
               <div className="bg-destructive/10 border border-destructive text-destructive text-sm p-3 rounded mb-4 text-center">
@@ -58,25 +56,25 @@ const Login = () => {
             
             <div className="space-y-4">
               <div>
-                <label className="auth-label">Email</label>
+                <label className="block text-sm font-medium mb-1">Email</label>
                 <input 
                   type="email" 
                   value={email} 
                   onChange={(e) => setEmail(e.target.value)} 
                   placeholder="seu@email.com" 
-                  className="auth-input" 
+                  className="w-full px-3 py-2 bg-background border border-input rounded-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
                   required
                 />
               </div>
               
               <div className="relative">
-                <label className="auth-label">Senha</label>
+                <label className="block text-sm font-medium mb-1">Senha</label>
                 <input 
                   type={showPass ? "text" : "password"} 
                   value={senha} 
                   onChange={(e) => setSenha(e.target.value)} 
                   placeholder="******" 
-                  className="auth-input" 
+                  className="w-full px-3 py-2 bg-background border border-input rounded-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
                   required
                 />
                 <button 
@@ -88,26 +86,15 @@ const Login = () => {
                 </button>
               </div>
               
-              <button type="submit" disabled={loading} className="auth-btn mt-2">
+              <button type="submit" disabled={loading} className="w-full py-2 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 mt-2">
                 {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : "Entrar"}
               </button>
             </div>
 
-            <div className="mt-6 flex flex-col items-center gap-4">
-              <button 
-                type="button"
-                onClick={() => {
-                  setEmail("varaver90@gmail.com");
-                  setSenha("Teste123@");
-                }}
-                className="text-xs text-muted-foreground hover:text-primary transition-colors"
-              >
-                Preencher Admin (Teste)
-              </button>
-
+            <div className="mt-6 text-center">
               <p className="text-sm text-muted-foreground">
                 Não tem uma conta?{" "}
-                <Link to="/cadastro" className="auth-link font-medium">
+                <Link to="/cadastro" className="text-primary hover:underline font-medium">
                   Cadastre-se
                 </Link>
               </p>
