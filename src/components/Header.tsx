@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search, Trophy, Bell } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search, Trophy, Bell, PlusCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useAuth } from "@/context/AuthContext";
@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { OnlineUsers } from "./OnlineUsers";
 import { NotificationBell } from "./NotificationBell";
 import { SunMoonSystem } from "./SunMoonSystem";
+import { GameRequestModal } from "./GameRequestModal";
 import logo from "@/assets/logo.png";
 
 export function Header() {
@@ -17,6 +18,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,7 +46,12 @@ export function Header() {
         {/* Nav Desktop */}
         <nav className="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-widest">
           <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Catálogo</Link>
-          <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Novidades</Link>
+          <button 
+            onClick={() => user ? setIsRequestModalOpen(true) : navigate("/login")}
+            className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+          >
+            <PlusCircle className="w-4 h-4" /> Pedir Jogo
+          </button>
           <Link to="/vip" className="text-yellow-500 hover:text-yellow-400 flex items-center gap-2 animate-pulse">
             <Trophy className="w-4 h-4" /> VIP
           </Link>
@@ -137,7 +144,15 @@ export function Header() {
       {mobileOpen && (
         <div className="md:hidden border-t border-border bg-popover py-4 px-4 space-y-4 font-bold uppercase tracking-widest text-xs">
           <Link to="/" className="block py-2 text-muted-foreground hover:text-primary" onClick={() => setMobileOpen(false)}>Catálogo</Link>
-          <Link to="/" className="block py-2 text-muted-foreground hover:text-primary" onClick={() => setMobileOpen(false)}>Novidades</Link>
+          <button 
+            className="block w-full text-left py-2 text-muted-foreground hover:text-primary" 
+            onClick={() => {
+              setMobileOpen(false);
+              user ? setIsRequestModalOpen(true) : navigate("/login");
+            }}
+          >
+            Pedir Jogo
+          </button>
           {isAdmin && <Link to="/admin" className="block py-2 text-primary" onClick={() => setMobileOpen(false)}>Admin</Link>}
           <Link to="/vip" className="block py-2 text-yellow-500 animate-pulse flex items-center gap-2" onClick={() => setMobileOpen(false)}>
             <Trophy className="w-4 h-4" /> VIP
@@ -159,6 +174,11 @@ export function Header() {
           </div>
         </div>
       )}
+      
+      <GameRequestModal 
+        isOpen={isRequestModalOpen} 
+        onClose={() => setIsRequestModalOpen(false)} 
+      />
     </header>
   );
 }

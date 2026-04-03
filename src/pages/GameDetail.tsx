@@ -6,11 +6,12 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
-import { Download, ArrowLeft, Monitor, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Play, CheckCircle, Info, ExternalLink } from "lucide-react";
+import { Download, ArrowLeft, Monitor, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Play, CheckCircle, Info, ExternalLink, Bug } from "lucide-react";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
+import { BugReportModal } from "@/components/BugReportModal";
 import logo from "@/assets/logo.png";
 
 
@@ -21,6 +22,7 @@ const GameDetail = () => {
   const { user } = useAuth();
   
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isBugReportModalOpen, setIsBugReportModalOpen] = useState(false);
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
@@ -337,6 +339,16 @@ const GameDetail = () => {
               </div>
             </div>
 
+            <div className="flex justify-end">
+              <button 
+                onClick={() => user ? setIsBugReportModalOpen(true) : navigate("/login")}
+                className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-destructive transition-colors group"
+              >
+                <Bug className="w-3.5 h-3.5 group-hover:animate-bounce" />
+                Reportar Erro / Link Offline
+              </button>
+            </div>
+
             {downloadLinks && downloadLinks.length > 0 ? (
               <div className="grid gap-6">
                 {downloadLinks.map((link) => (
@@ -601,6 +613,15 @@ const GameDetail = () => {
           </div>
         </div>
       </footer>
+
+      {game && (
+        <BugReportModal 
+          isOpen={isBugReportModalOpen} 
+          onClose={() => setIsBugReportModalOpen(false)} 
+          gameId={game.id} 
+          gameName={game.nome} 
+        />
+      )}
     </div>
   );
 };

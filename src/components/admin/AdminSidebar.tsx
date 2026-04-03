@@ -9,7 +9,9 @@ import {
   Download,
   Bell,
   BarChart3,
-  ExternalLink
+  ExternalLink,
+  PlusCircle,
+  AlertTriangle
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -44,6 +46,8 @@ export function AdminSidebar() {
     { icon: Gamepad2, label: "Catálogo", href: "/admin?tab=games" },
     { icon: Users, label: "Usuários", href: "/admin?tab=users" },
     { icon: MessageSquare, label: "Comentários", href: "/admin?tab=comments" },
+    { icon: PlusCircle, label: "Pedidos", href: "/admin?tab=requests" },
+    { icon: AlertTriangle, label: "Reportes", href: "/admin?tab=reports" },
     { icon: Download, label: "Downloads", href: "/admin?tab=downloads" },
     { icon: Star, label: "Avaliações", href: "/admin?tab=ratings" },
   ];
@@ -78,7 +82,7 @@ export function AdminSidebar() {
         ))}
 
         <p className="px-3 mt-8 mb-4 text-[10px] font-black text-muted-foreground/50 uppercase tracking-[0.2em]">Comunidade</p>
-        {menuItems.slice(2, 4).map((item) => (
+        {menuItems.slice(2, 6).map((item) => (
           <SidebarItem 
             key={item.href} 
             {...item} 
@@ -87,7 +91,7 @@ export function AdminSidebar() {
         ))}
 
         <p className="px-3 mt-8 mb-4 text-[10px] font-black text-muted-foreground/50 uppercase tracking-[0.2em]">Analytics</p>
-        {menuItems.slice(4).map((item) => (
+        {menuItems.slice(6).map((item) => (
           <SidebarItem 
             key={item.href} 
             {...item} 
