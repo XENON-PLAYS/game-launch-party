@@ -61,20 +61,20 @@ export const SpaceBackground = () => {
           key={star.id}
           initial={{ x: 0, y: 0, opacity: 0, scale: 0 }}
           animate={{ 
-            x: -400, 
-            y: 400, 
-            opacity: [0, 1, 0],
-            scale: [0, 1, 0.5]
+            x: [-50, -500], 
+            y: [50, 500], 
+            opacity: [0, 0.8, 0],
+            scale: [0, 1.2, 0.8]
           }}
           transition={{ 
             duration: star.duration, 
             delay: star.delay,
-            ease: "easeOut"
+            ease: "easeIn"
           }}
-          className="absolute w-[2px] h-[2px] bg-white rounded-full shadow-[0_0_10px_2px_rgba(255,255,255,0.8)]"
+          className="absolute w-1 h-1 bg-white rounded-full shadow-[0_0_15px_3px_rgba(255,255,255,0.4)]"
           style={{ top: star.top, left: star.left }}
         >
-          <div className="absolute top-0 left-0 w-[100px] h-[1px] bg-gradient-to-r from-white to-transparent -rotate-[45deg] origin-left" />
+          <div className="absolute top-1/2 left-0 w-[120px] h-[2px] bg-gradient-to-r from-white to-transparent -rotate-[45deg] origin-left -translate-y-1/2 opacity-60" />
         </motion.div>
       ))}
 
