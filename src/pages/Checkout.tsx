@@ -127,14 +127,14 @@ const Checkout = () => {
               </p>
             </div>
 
-            <div className="p-8 rounded-[2rem] bg-card border border-primary/20 space-y-8">
+            <div className={`p-8 rounded-[2rem] bg-card border ${selectedPlan.borderColor} space-y-8`}>
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-2xl font-black uppercase">{selectedPlan.name}</h3>
                   <p className="text-muted-foreground text-sm font-medium">{selectedPlan.description}</p>
                 </div>
                 <div className="text-right">
-                  <div className="text-3xl font-black text-primary">{selectedPlan.price}</div>
+                  <div className={`text-3xl font-black ${selectedPlan.iconColor}`}>{selectedPlan.price}</div>
                   <div className="text-xs font-bold text-muted-foreground uppercase">/{selectedPlan.period}</div>
                 </div>
               </div>
@@ -142,8 +142,8 @@ const Checkout = () => {
               <div className="space-y-4 pt-8 border-t border-border/50">
                 {selectedPlan.features.map((feature: string, i: number) => (
                   <div key={i} className="flex items-center gap-3 text-sm font-bold uppercase tracking-tight">
-                    <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <Check className="w-3 h-3 text-primary" />
+                    <div className={`w-5 h-5 rounded-full ${selectedPlan.iconBg} flex items-center justify-center shrink-0`}>
+                      <Check className={`w-3 h-3 ${selectedPlan.iconColor}`} />
                     </div>
                     <span>{feature}</span>
                   </div>
