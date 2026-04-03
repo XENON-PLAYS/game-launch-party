@@ -481,21 +481,23 @@ const Perfil = () => {
          </tr>
         </thead>
         <tbody className="divide-y divide-white/5">
-         {ranking.map((r, i) => (
-          <tr key={i} className="hover:bg-white/5 transition-colors">
-           <td className="px-6 py-4 font-bold text-lg">#{i + 1}</td>
-           <td className="px-6 py-4">
-            <div className="flex items-center gap-3">
-             <img src={r.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=user"} className="w-8 h-8 rounded-full" />
-             <div>
-              <p className="font-medium flex items-center gap-1">
-               {r.display_name}
-               {r.is_vip && <BadgeCheck className="w-3 h-3 text-yellow-500" />}
-              </p>
-              <p className="text-xs text-muted-foreground">@{r.username}</p>
+          {ranking.map((r, i) => (
+           <tr key={i} className="hover:bg-white/5 transition-colors">
+            <td className="px-6 py-4 font-bold text-lg">#{i + 1}</td>
+            <td className="px-6 py-4">
+             <div className="flex items-center gap-3">
+              <Link to={`/perfil/${r.user_id}`} className="shrink-0 hover:scale-110 transition-transform">
+                <img src={r.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=user"} className="w-8 h-8 rounded-full border border-border" />
+              </Link>
+              <div>
+               <Link to={`/perfil/${r.user_id}`} className="font-medium flex items-center gap-1 hover:text-primary transition-colors">
+                {r.display_name}
+                {r.is_vip && <BadgeCheck className="w-3 h-3 text-yellow-500" />}
+               </Link>
+               <p className="text-xs text-muted-foreground">@{r.username}</p>
+              </div>
              </div>
-            </div>
-           </td>
+            </td>
            <td className="px-6 py-4 text-right font-mono font-bold text-primary">
             {r.download_count}
            </td>
