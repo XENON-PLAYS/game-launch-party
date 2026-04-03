@@ -56,7 +56,7 @@ export function Header() {
           </Link>
           {isAdmin && (
             <Link to="/admin" className="text-primary hover:text-primary/80 flex items-center gap-2">
-              <Shield className="w-4 h-4" /> Admin
+              <Shield className="w-4 h-4" /> Painel de Administrador
             </Link>
           )}
         </nav>
