@@ -171,7 +171,7 @@
 
   .space-background {
     position: relative;
-    background: radial-gradient(circle at 50% 50%, #1a0505 0%, #000000 100%);
+    background: radial-gradient(circle at 50% 50%, #2a0808 0%, #0a0000 100%);
     overflow: hidden;
   }
 
