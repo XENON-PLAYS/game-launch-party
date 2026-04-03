@@ -367,25 +367,6 @@ const GameDetail = () => {
                   </button>
                 ))}
                 
-                {game.link_demo && (
-                  <a
-                    href={game.link_demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col sm:flex-row sm:items-center justify-between p-6 sm:px-10 sm:py-8 rounded-3xl border-2 border-primary/20 bg-primary/5 hover:bg-primary/10 transition-all duration-500 gap-6"
-                  >
-                    <div className="flex items-center gap-6 sm:gap-8">
-                      <div className="p-4 sm:p-5 rounded-2xl bg-primary text-primary-foreground shadow-xl">
-                        <ExternalLink className="w-6 h-6 sm:w-8 sm:h-8" />
-                      </div>
-                      <div className="text-left space-y-1">
-                        <p className="font-black text-lg sm:text-xl lg:text-2xl uppercase tracking-widest leading-none">Versão Demo</p>
-                        <p className="text-responsive-small text-muted-foreground opacity-70 group-hover:text-primary transition-colors">Experimente o jogo antes de baixar a versão completa</p>
-                      </div>
-                    </div>
-                    <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:translate-x-2 transition-transform" />
-                  </a>
-                )}
               </div>
             ) : (
               <div className="space-y-6">
