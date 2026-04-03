@@ -39,7 +39,7 @@ export function Header() {
           />
           <div className="flex flex-col leading-[0.85]">
             <span className="font-black text-white text-base sm:text-lg md:text-2xl lg:text-3xl tracking-tighter uppercase drop-shadow-md">JOGOS</span>
-            <span className="font-black text-red-600 text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter uppercase drop-shadow-sm">GRÁTIS</span>
+            <span className="font-black text-red-600 text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter uppercase drop-shadow-sm">GRATIS</span>
           </div>
         </Link>
 
@@ -57,7 +57,7 @@ export function Header() {
           </Link>
           {isAdmin && (
             <Link to="/admin" className="text-primary hover:text-primary/80 flex items-center gap-2">
-              <Shield className="w-4 h-4" /> Painel de Administrador
+              <Shield className="w-4 h-4" /> Admin
             </Link>
           )}
         </nav>
@@ -106,7 +106,7 @@ export function Header() {
                     </div>
                     {isAdmin && (
                       <Link to="/admin" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
-                        <Shield className="w-4 h-4" /> Painel de Administrador
+                        <Shield className="w-4 h-4" /> Admin
                       </Link>
                     )}
                     <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
@@ -155,7 +155,7 @@ export function Header() {
           </button>
           {isAdmin && (
             <Link to="/admin" className="block py-2 text-primary flex items-center gap-2" onClick={() => setMobileOpen(false)}>
-              <Shield className="w-4 h-4" /> Painel de Administrador
+              <Shield className="w-4 h-4" /> Admin
             </Link>
           )}
           <Link to="/vip" className="block py-2 text-yellow-500 animate-pulse flex items-center gap-2" onClick={() => setMobileOpen(false)}>
