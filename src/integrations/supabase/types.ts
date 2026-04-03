@@ -394,6 +394,7 @@ export type Database = {
           display_name: string | null
           id: string
           is_vip: boolean
+          last_seen_at: string | null
           status: string | null
           theme: string | null
           updated_at: string
@@ -409,6 +410,7 @@ export type Database = {
           display_name?: string | null
           id?: string
           is_vip?: boolean
+          last_seen_at?: string | null
           status?: string | null
           theme?: string | null
           updated_at?: string
@@ -424,6 +426,7 @@ export type Database = {
           display_name?: string | null
           id?: string
           is_vip?: boolean
+          last_seen_at?: string | null
           status?: string | null
           theme?: string | null
           updated_at?: string
@@ -453,7 +456,13 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      online_users_stats: {
+        Row: {
+          online_count: number | null
+          total_users: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       get_admin_users_list: {
@@ -493,6 +502,7 @@ export type Database = {
       }
       increment_link_clicks: { Args: { link_id: string }; Returns: undefined }
       slugify: { Args: { text: string }; Returns: string }
+      update_online_status: { Args: never; Returns: undefined }
       update_own_profile: {
         Args: {
           _avatar_url?: string
