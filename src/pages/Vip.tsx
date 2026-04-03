@@ -159,7 +159,7 @@ const VipPage = () => {
                 className={`relative p-10 rounded-[2.5rem] border-2 bg-gradient-to-br ${plan.color} ${plan.borderColor} flex flex-col space-y-10 group hover:scale-[1.02] transition-all duration-500 overflow-hidden shadow-2xl`}
               >
                 {plan.popular && (
-                  <div className="absolute top-8 right-8 bg-primary text-primary-foreground text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest animate-pulse">
+                  <div className={`absolute top-8 right-8 ${plan.buttonColor} text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest animate-pulse`}>
                     MAIS POPULAR
                   </div>
                 )}
