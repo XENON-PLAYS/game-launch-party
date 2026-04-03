@@ -13,7 +13,7 @@ export function HeroCarousel() {
   const { data: featured = [] } = useQuery({
     queryKey: ["featured-games"],
     queryFn: async () => {
-      const { data } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
+      const { data } = await supabase.from("games").select("id, nome, preco, imagem, hero_image, vertical_image, categorias, slug, descricao, lancamento").order("lancamento", { ascending: false }).limit(5);
       return data ?? [];
     },
   });
