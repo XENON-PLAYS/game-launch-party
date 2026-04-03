@@ -258,13 +258,18 @@ export const games: Game[] = [
     id: 21,
     nome: "Left 4 Dead 2",
     preco: 0,
-    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_600x900.jpg",
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/header.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/capsule_616x353.jpg",
-    categorias: ["Terror", "FPS"],
+    categorias: ["Ação", "Terror", "FPS"],
     modos: ["Singleplayer", "Multiplayer"],
     idiomas: ["Português", "Inglês"],
+    descricao: "Set in the zombie apocalypse, Left 4 Dead 2 is a co-operative action horror FPS takes you and your friends through the cities, swamps and cemeteries of the Deep South, from Savannah to New Orleans across five expansive campaigns.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>Sistema Operativo *:</strong> Windows® 7 32/64-bit / Vista 32/64 / XP<br></li><li><strong>Processador:</strong> Pentium 4 3.0GHz<br></li><li><strong>Memória:</strong> 2 GB de RAM<br></li><li><strong>Placa gráfica:</strong> Video card with 128 MB, Shader model 2.0. ATI X800, NVidia 6600 or better<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Espaço no disco:</strong> Requer 13 GB de espaço livre<br></li><li><strong>Placa de som:</strong> DirectX 9.0c compatible sound card</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>Sistema Operativo *:</strong> Windows® 7 32/64-bit / Vista 32/64 / XP<br></li><li><strong>Processador:</strong> Intel core 2 duo 2.4GHz<br></li><li><strong>Memória:</strong> 2 GB de RAM<br></li><li><strong>Placa gráfica:</strong> Video Card Shader model 3.0. NVidia 7600, ATI X1600 or better<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Espaço no disco:</strong> Requer 13 GB de espaço livre<br></li><li><strong>Placa de som:</strong> DirectX 9.0c compatible sound card</li></ul>"
+    }
   },
   {
     id: 22,
