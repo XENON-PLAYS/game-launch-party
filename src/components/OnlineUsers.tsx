@@ -31,16 +31,7 @@ export function OnlineUsers() {
         }
       });
 
-    // Heartbeat to update database status for authenticated users
-    const heartbeatInterval = setInterval(async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        await supabase.rpc("update_online_status");
-      }
-    }, 30000); // Every 30 seconds
-
     return () => {
-      clearInterval(heartbeatInterval);
       channel.unsubscribe();
     };
   }, []);
