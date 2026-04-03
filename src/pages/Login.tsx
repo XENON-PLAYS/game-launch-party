@@ -49,9 +49,14 @@ const Login = () => {
         <div className="cosmic-element cosmic-3"></div>
       </div>
 
-      <main className="flex-1 flex items-center justify-center px-4 py-12 relative z-10">
+      <motion.main 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="flex-1 flex items-center justify-center px-4 py-12 relative z-10"
+      >
         <div className="w-full max-w-md">
-          <form onSubmit={handleSubmit} className="bg-card border border-border p-8 rounded-xl shadow-lg">
+          <form onSubmit={handleSubmit} className="bg-card border border-border p-8 rounded-xl shadow-lg transition-transform duration-300 hover:shadow-primary/5">
             <h1 className="text-2xl font-bold text-center mb-2">Acessar Conta</h1>
             <p className="text-muted-foreground text-center mb-6">Entre com seu e-mail e senha</p>
             
@@ -93,7 +98,7 @@ const Login = () => {
                 </button>
               </div>
               
-              <button type="submit" disabled={loading} className="w-full py-2 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 mt-2">
+              <button type="submit" disabled={loading} className="w-full py-2 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-50 mt-2">
                 {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : "Entrar"}
               </button>
             </div>
@@ -101,14 +106,14 @@ const Login = () => {
             <div className="mt-6 text-center">
               <p className="text-sm text-muted-foreground">
                 Não tem uma conta?{" "}
-                <Link to="/cadastro" className="text-primary hover:underline font-medium">
+                <Link to="/cadastro" className="text-primary hover:underline font-medium transition-colors">
                   Cadastre-se
                 </Link>
               </p>
             </div>
           </form>
         </div>
-      </main>
+      </motion.main>
     </div>
   );
 };
