@@ -40,6 +40,7 @@ const App = () => (
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/perfil" element={<Perfil />} />
+                <Route path="/perfil/:userId" element={<Perfil />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
