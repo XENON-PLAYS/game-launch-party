@@ -234,13 +234,36 @@ const Perfil = () => {
   }
  };
 
- if (authLoading) {
-  return (
-   <div className="min-h-screen bg-background flex items-center justify-center">
-    <Loader2 className="w-8 h-8 animate-spin text-primary" />
-   </div>
-  );
- }
+  if (authLoading || viewLoading) {
+   return (
+    <div className="min-h-screen bg-background flex items-center justify-center">
+     <Loader2 className="w-8 h-8 animate-spin text-primary" />
+    </div>
+   );
+  }
+
+  // Regra de privacidade: se o usuário estiver offline, bloquear visualização para terceiros
+  if (!isOwnProfile && targetProfile?.status === 'offline') {
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
+        <main className="flex-1 container mx-auto px-4 py-12 flex flex-col items-center justify-center text-center space-y-6">
+          <div className="p-8 rounded-3xl bg-card border border-border shadow-2xl max-w-md w-full animate-in fade-in zoom-in duration-300">
+            <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto mb-6">
+              <User className="w-10 h-10 text-muted-foreground opacity-50" />
+            </div>
+            <h2 className="text-2xl font-black uppercase tracking-tight mb-2">Perfil Indisponível</h2>
+            <p className="text-muted-foreground font-medium">Este usuário ativou o modo offline e seu perfil não está disponível no momento.</p>
+            <div className="pt-6">
+              <Link to="/" className="auth-btn px-8 inline-flex items-center gap-2">
+                Voltar para o Início
+              </Link>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
  const isGifAvatar = profile?.avatar_url?.toLowerCase().endsWith(".gif");
 
