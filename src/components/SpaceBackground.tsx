@@ -128,6 +128,26 @@ export const SpaceBackground = () => {
         className="absolute top-[20%] right-[10%] w-[40%] h-[40%] bg-purple-600/10 blur-[100px] rounded-full" 
       />
       
+      {/* Floating Planet - Decorative */}
+      <motion.div
+        animate={{
+          y: [0, -20, 0],
+          rotate: [0, 5, 0],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute top-[15%] right-[15%] w-32 h-32 rounded-full overflow-hidden opacity-20 blur-[1px] hidden lg:block"
+        style={{
+          background: "radial-gradient(circle at 30% 30%, #4f46e5 0%, #1e1b4b 100%)",
+          boxShadow: "inset -10px -10px 20px rgba(0,0,0,0.5), 0 0 40px rgba(79, 70, 229, 0.2)"
+        }}
+      >
+        <div className="absolute inset-0 opacity-20 bg-noise" />
+      </motion.div>
+      
       {/* Subtle Noise for texture */}
       <div className="absolute inset-0 bg-noise opacity-[0.03]" />
       
