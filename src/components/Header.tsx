@@ -105,9 +105,6 @@ export function Header() {
                     <Link to="/vip" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-yellow-500/10 text-yellow-500 rounded-lg text-sm font-bold">
                       <Trophy className="w-4 h-4" /> Área VIP
                     </Link>
-                    <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
-                      <User className="w-4 h-4" /> Perfil
-                    </Link>
                     <button onClick={() => { logout(); setMenuOpen(false); }} className="flex items-center gap-2 px-3 py-2 hover:bg-destructive/10 text-destructive rounded-lg text-sm font-bold w-full text-left">
                       <LogOut className="w-4 h-4" /> Sair
                     </button>
