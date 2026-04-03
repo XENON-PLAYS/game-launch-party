@@ -209,7 +209,7 @@
 }
 
 .auth-input-container {
-  @apply relative group;
+  @apply relative;
 }
 
 .auth-input {
