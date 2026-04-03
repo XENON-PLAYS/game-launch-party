@@ -133,69 +133,70 @@ const Admin = () => {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.02] pointer-events-none" />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col md:flex-row min-h-screen">
         <AdminSidebar />
         
-        <div className="md:pl-64 flex flex-col min-h-screen">
+        <div className="flex-1 flex flex-col md:pl-64 min-h-screen">
           <AdminHeader />
-        
-        <main className="flex-1 p-6 md:p-10 max-w-[1600px] mx-auto w-full">
-          {gamesLoading ? (
-            <div className="h-[60vh] flex flex-col items-center justify-center space-y-4">
-              <Loader2 className="h-12 w-12 text-primary animate-spin" />
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground">Sincronizando com a Central Elite...</p>
-            </div>
-          ) : gamesError ? (
-            <div className="h-[60vh] flex flex-col items-center justify-center space-y-6 text-center max-w-md mx-auto">
-              <div className="w-20 h-20 rounded-full bg-destructive/10 flex items-center justify-center text-destructive">
-                <AlertCircle className="h-10 w-10" />
+          
+          <main className="flex-1 p-6 md:p-10 max-w-[1600px] mx-auto w-full">
+            {gamesLoading ? (
+              <div className="h-[60vh] flex flex-col items-center justify-center space-y-4">
+                <Loader2 className="h-12 w-12 text-primary animate-spin" />
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground">Sincronizando com a Central Elite...</p>
               </div>
-              <div className="space-y-2">
-                <h3 className="text-xl font-black uppercase tracking-tight">Falha na Sincronização</h3>
-                <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest opacity-60">Não foi possível carregar os dados do catálogo. Verifique sua conexão ou permissões.</p>
+            ) : gamesError ? (
+              <div className="h-[60vh] flex flex-col items-center justify-center space-y-6 text-center max-w-md mx-auto">
+                <div className="w-20 h-20 rounded-full bg-destructive/10 flex items-center justify-center text-destructive">
+                  <AlertCircle className="h-10 w-10" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-black uppercase tracking-tight">Falha na Sincronização</h3>
+                  <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest opacity-60">Não foi possível carregar os dados do catálogo. Verifique sua conexão ou permissões.</p>
+                </div>
+                <Button onClick={() => queryClient.invalidateQueries({ queryKey: ["admin-games"] })} className="rounded-xl px-8 h-12 font-black uppercase tracking-widest text-xs">
+                  Tentar Novamente
+                </Button>
               </div>
-              <Button onClick={() => queryClient.invalidateQueries({ queryKey: ["admin-games"] })} className="rounded-xl px-8 h-12 font-black uppercase tracking-widest text-xs">
-                Tentar Novamente
-              </Button>
-            </div>
-          ) : (
-            <>
-              {activeTab === "dashboard" && (
-                <DashboardOverview 
-                  games={games} 
-                  userCount={statsData?.userCount || 0} 
-                  averageRating={statsData?.averageRating || 0} 
-                  pendingRequests={statsData?.pendingRequests || 0}
-                  newReports={statsData?.newReports || 0}
-                />
-              )}
-              {activeTab === "games" && (
-                <GameAdminList 
-                  games={games} 
-                  onEdit={handleOpenEdit} 
-                  onDelete={handleDeleteGame}
-                  onAdd={handleOpenAdd}
-                />
-              )}
-              {activeTab === "users" && (
-                usersLoading ? (
-                  <div className="h-[40vh] flex flex-col items-center justify-center space-y-4">
-                    <Loader2 className="h-10 w-10 text-primary animate-spin" />
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground">Carregando base de usuários...</p>
-                  </div>
-                ) : (
-                  <UserAdminList users={usersData as any} />
-                )
-              )}
-              {activeTab === "requests" && (
-                <GameRequestList />
-              )}
-              {activeTab === "reports" && (
-                <BugReportList />
-              )}
-            </>
-          )}
-        </main>
+            ) : (
+              <>
+                {activeTab === "dashboard" && (
+                  <DashboardOverview 
+                    games={games} 
+                    userCount={statsData?.userCount || 0} 
+                    averageRating={statsData?.averageRating || 0} 
+                    pendingRequests={statsData?.pendingRequests || 0}
+                    newReports={statsData?.newReports || 0}
+                  />
+                )}
+                {activeTab === "games" && (
+                  <GameAdminList 
+                    games={games} 
+                    onEdit={handleOpenEdit} 
+                    onDelete={handleDeleteGame}
+                    onAdd={handleOpenAdd}
+                  />
+                )}
+                {activeTab === "users" && (
+                  usersLoading ? (
+                    <div className="h-[40vh] flex flex-col items-center justify-center space-y-4">
+                      <Loader2 className="h-10 w-10 text-primary animate-spin" />
+                      <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground">Carregando base de usuários...</p>
+                    </div>
+                  ) : (
+                    <UserAdminList users={usersData as any} />
+                  )
+                )}
+                {activeTab === "requests" && (
+                  <GameRequestList />
+                )}
+                {activeTab === "reports" && (
+                  <BugReportList />
+                )}
+              </>
+            )}
+          </main>
+        </div>
       </div>
 
       <GameFormModal 
