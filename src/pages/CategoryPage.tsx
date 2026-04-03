@@ -21,7 +21,7 @@ const CategoryPage = () => {
         .contains("categorias", [category])
         .order("nome");
       if (error) throw error;
-      return data;
+      return data as any[];
     },
     enabled: !!category,
   });
