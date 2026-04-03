@@ -10,6 +10,7 @@ import { AdminHeader } from "@/components/admin/AdminHeader";
 import { DashboardOverview } from "@/components/admin/DashboardOverview";
 import { GameAdminList } from "@/components/admin/GameAdminList";
 import { GameFormModal } from "@/components/admin/GameFormModal";
+import { UserAdminList } from "@/components/admin/UserAdminList";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
