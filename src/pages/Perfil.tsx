@@ -494,43 +494,54 @@ const Perfil = () => {
    case "ranking":
     return (
      <div className="space-y-6">
-      <h2 className="text-2xl font-bold flex items-center gap-3">
-       <Trophy className="w-6 h-6 text-yellow-500" /> Ranking Global
+      <h2 className="text-2xl font-black flex items-center gap-3 tracking-tight">
+       <div className="p-2 bg-yellow-500/10 rounded-lg">
+        <Trophy className="w-6 h-6 text-yellow-500" />
+       </div>
+       Ranking de Jogadores
       </h2>
-      <div className="auth-fieldset !p-0 overflow-hidden">
-       <table className="w-full">
-        <thead>
-         <tr className="bg-white/5 text-left">
-          <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider">Pos</th>
-          <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider">Usuário</th>
-          <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-right">Downloads</th>
-         </tr>
-        </thead>
-        <tbody className="divide-y divide-white/5">
-          {ranking.map((r, i) => (
-           <tr key={i} className="hover:bg-white/5 transition-colors">
-            <td className="px-6 py-4 font-bold text-lg">#{i + 1}</td>
-            <td className="px-6 py-4">
-             <div className="flex items-center gap-3">
-              <Link to={`/perfil/${r.user_id}`} className="shrink-0 hover:scale-110 transition-transform">
-                <img src={r.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=user"} className="w-8 h-8 rounded-full border border-border" />
-              </Link>
-              <div>
-               <Link to={`/perfil/${r.user_id}`} className="font-medium flex items-center gap-1 hover:text-primary transition-colors">
-                {r.display_name}
-                {r.is_vip && <BadgeCheck className="w-3 h-3 text-yellow-500" />}
-               </Link>
-               <p className="text-xs text-muted-foreground">@{r.username}</p>
-              </div>
-             </div>
-            </td>
-           <td className="px-6 py-4 text-right font-mono font-bold text-primary">
-            {r.download_count}
-           </td>
+      <div className="auth-fieldset !p-0 overflow-hidden bg-card/40 backdrop-blur-xl border-white/5 shadow-2xl">
+       <div className="overflow-x-auto">
+        <table className="w-full">
+         <thead>
+          <tr className="bg-white/5 text-left border-b border-white/5">
+           <th className="px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Posição</th>
+           <th className="px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Jogador</th>
+           <th className="px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-right text-muted-foreground">Downloads</th>
           </tr>
-         ))}
-        </tbody>
-       </table>
+         </thead>
+         <tbody className="divide-y divide-white/5">
+           {ranking.map((r, i) => (
+            <tr key={i} className="group hover:bg-primary/5 transition-all duration-300">
+             <td className="px-6 py-4">
+              <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg font-black text-sm ${i === 0 ? 'bg-yellow-500 text-black shadow-lg shadow-yellow-500/20' : i === 1 ? 'bg-gray-300 text-black shadow-lg shadow-gray-300/20' : i === 2 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/20' : 'bg-white/5 text-muted-foreground'}`}>
+               #{i + 1}
+              </span>
+             </td>
+             <td className="px-6 py-4">
+              <div className="flex items-center gap-4">
+               <Link to={`/perfil/${r.user_id}`} className="shrink-0 relative">
+                <img src={r.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=user"} className="w-10 h-10 rounded-full border-2 border-white/10 group-hover:border-primary/50 transition-colors object-cover" />
+                {r.is_vip && <div className="absolute -top-1 -right-1 bg-yellow-500 rounded-full p-0.5"><BadgeCheck className="w-2.5 h-2.5 text-black" /></div>}
+               </Link>
+               <div>
+                <Link to={`/perfil/${r.user_id}`} className="font-bold text-sm group-hover:text-primary transition-colors flex items-center gap-1">
+                 {r.display_name}
+                </Link>
+                <p className="text-xs text-muted-foreground">@{r.username}</p>
+               </div>
+              </div>
+             </td>
+            <td className="px-6 py-4 text-right">
+             <span className="font-mono font-black text-primary text-lg tracking-tighter">
+              {r.download_count}
+             </span>
+            </td>
+           </tr>
+          ))}
+         </tbody>
+        </table>
+       </div>
       </div>
      </div>
     );
