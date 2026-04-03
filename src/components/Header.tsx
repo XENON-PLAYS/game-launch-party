@@ -72,10 +72,10 @@ export function Header() {
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={theme}
-                initial={{ y: -20, opacity: 0, rotate: -45 }}
-                animate={{ y: 0, opacity: 1, rotate: 0 }}
-                exit={{ y: 20, opacity: 0, rotate: 45 }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
+                initial={{ y: -20, opacity: 0, rotate: -90, scale: 0.5 }}
+                animate={{ y: 0, opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ y: 20, opacity: 0, rotate: 90, scale: 0.5 }}
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                 className="flex items-center justify-center"
               >
                 {theme === "dark" ? (
