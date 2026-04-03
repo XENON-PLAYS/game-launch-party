@@ -138,7 +138,12 @@ export function UserAdminList({ users }: UserAdminListProps) {
                       {user.display_name || "Sem Nickname"}
                     </TableCell>
                     <TableCell className="font-bold text-xs text-muted-foreground font-mono">
-                      @{user.username || "sem_username"}
+                      <div className="flex flex-col">
+                        <span>@{user.username || "sem_username"}</span>
+                        {user.role && (
+                          <span className="text-[10px] text-primary font-black uppercase tracking-widest">{user.role}</span>
+                        )}
+                      </div>
                     </TableCell>
                     <TableCell className="text-center">
                       {user.is_vip ? (

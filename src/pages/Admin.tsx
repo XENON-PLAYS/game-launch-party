@@ -56,10 +56,7 @@ const Admin = () => {
   const { data: usersData = [], isLoading: usersLoading } = useQuery({
     queryKey: ["admin-users"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("*, user_roles(role)")
-        .order("created_at", { ascending: false });
+      const { data, error } = await supabase.rpc("get_admin_users_list");
       if (error) throw error;
       return data ?? [];
     },
