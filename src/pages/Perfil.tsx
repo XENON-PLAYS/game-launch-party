@@ -620,7 +620,7 @@ const Perfil = () => {
        </div>
 
       {/* Nav Menu */}
-       <div className="auth-fieldset !p-2 space-y-1">
+       <div className="auth-fieldset !p-2 space-y-1 bg-card/40 backdrop-blur-xl border-white/5 shadow-xl">
         {[
          { id: "profile", icon: User, label: "Perfil", hidden: false },
          { id: "settings", icon: Edit3, label: "Configurações", hidden: !isOwnProfile },
@@ -632,10 +632,10 @@ const Perfil = () => {
          <button
           key={tab.id}
           onClick={() => setActiveTab(tab.id as any)}
-          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'hover:bg-white/5 text-muted-foreground'}`}
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-300 ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/25 scale-[1.02]' : 'hover:bg-primary/10 text-muted-foreground hover:text-primary hover:translate-x-1'}`}
          >
-          <tab.icon className={`w-4 h-4 ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
-          {tab.label}
+          <tab.icon className={`w-4 h-4 transition-colors ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
+          <span className="font-semibold">{tab.label}</span>
          </button>
         ))}
        </div>
