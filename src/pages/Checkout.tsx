@@ -23,22 +23,22 @@ const Checkout = () => {
       name: "Plano Mensal",
       price: "R$ 5",
       period: "mês",
-      description: "Ideal para começar.",
-      features: ["Acesso VIP por 30 dias", "Badge VIP Básica", "Downloads Ilimitados"]
+      description: "Acesso total por 30 dias.",
+      features: ["Downloads imediatos (sem filas)", "Insignia VIP exclusiva", "Experiência sem anúncios", "Suporte prioritário"]
     },
     "Semestral": {
       name: "Plano Semestral",
       price: "R$ 25",
       period: "6 meses",
-      description: "Economia de 15%.",
-      features: ["Acesso VIP por 180 dias", "Badge VIP Prata", "Downloads Ilimitados", "Prioridade no Suporte"]
+      description: "Economia de 15% inclusa.",
+      features: ["Todos os benefícios do Mensal", "Badge VIP Prata de prestígio", "Acesso antecipado a jogos", "Sugestões personalizadas"]
     },
     "Anual": {
       name: "Plano Anual",
       price: "R$ 45",
       period: "ano",
-      description: "Melhor valor!",
-      features: ["Acesso VIP por 365 dias", "Badge VIP Ouro", "Downloads Ilimitados", "Suporte 24/7", "Sorteios Exclusivos"]
+      description: "O melhor custo-benefício!",
+      features: ["Todos os benefícios do Semestral", "Insignia Ouro Lendária", "Prioridade em pedidos", "Sorteios mensais de keys"]
     }
   };
 
