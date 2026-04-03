@@ -50,9 +50,11 @@ const VipPage = () => {
         "Sugestões de jogos personalizadas"
       ],
       popular: true,
-      color: "from-primary/20 to-primary/30",
-      borderColor: "border-primary/50",
-      buttonColor: "bg-primary hover:bg-primary/90 shadow-primary/30"
+      color: "from-slate-400/10 to-slate-400/20",
+      borderColor: "border-slate-400/50",
+      buttonColor: "bg-slate-500 hover:bg-slate-600 shadow-slate-400/30",
+      iconColor: "text-slate-400",
+      iconBg: "bg-slate-400/20"
     },
     {
       name: "Anual",
