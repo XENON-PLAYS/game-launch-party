@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useTheme } from "@/context/ThemeContext";
+// useTheme removed to keep background unchanged as requested
 
 export function SkyBackground() {
   // Hardcode isDark to true to keep background unchanged as requested
