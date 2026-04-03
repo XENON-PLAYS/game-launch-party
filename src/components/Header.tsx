@@ -39,7 +39,7 @@ export function Header() {
           />
           <div className="flex flex-col leading-[0.85]">
             <span className="font-black text-white text-base sm:text-lg md:text-2xl lg:text-3xl tracking-tighter uppercase drop-shadow-md">JOGOS</span>
-            <span className="font-black text-red-600 text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter uppercase drop-shadow-sm">GRÁTIS</span>
+            <span className="font-black text-red-600 text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter uppercase drop-shadow-sm">GRATIS</span>
           </div>
         </Link>
 
