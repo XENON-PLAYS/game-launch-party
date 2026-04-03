@@ -115,9 +115,13 @@ export function GameComments({ gameId }: GameCommentsProps) {
         });
       }
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["comments", gameId] });
       queryClient.invalidateQueries({ queryKey: ["replies", gameId] });
+      toast.success(variables.type === 'like' ? "Você gostou desse comentário!" : "Você não gostou desse comentário!");
+    },
+    onError: (err: any) => {
+      toast.error("Erro ao reagir ao comentário: " + err.message);
     }
   });
 
