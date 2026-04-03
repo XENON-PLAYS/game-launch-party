@@ -238,7 +238,8 @@ const GameDetail = () => {
                   </div>
                   <div className="h-4 sm:h-6 w-px bg-border" />
                   <span className="text-xs sm:text-base lg:text-lg font-black uppercase tracking-widest text-muted-foreground">
-                    {avgRating?.avg ?? 0} <span className="opacity-40">/ 5.0</span>
+                    {avgRating?.avg?.toFixed(1) ?? "0.0"} <span className="opacity-40">/ 5.0</span>
+                    <span className="text-[10px] sm:text-xs opacity-60 ml-2">({avgRating?.count ?? 0} {avgRating?.count === 1 ? 'voto' : 'votos'})</span>
                   </span>
                 </div>
               </div>
