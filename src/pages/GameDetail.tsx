@@ -592,7 +592,7 @@ const GameDetail = () => {
                 <MessageSquare className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
               </div>
               <div className="space-y-3">
-                <h2 className="text-responsive-h2 leading-none uppercase">Taberna</h2>
+                <h2 className="text-responsive-h2 leading-none uppercase">Chat</h2>
                 <div className="flex items-center gap-6">
                   <span className="w-16 sm:w-24 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
                   <span className="text-responsive-small text-muted-foreground opacity-80">Conversa da Tripulação</span>
