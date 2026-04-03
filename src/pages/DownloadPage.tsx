@@ -114,7 +114,7 @@ const DownloadPage = () => {
             <div className="lg:col-span-4 space-y-10 order-2 lg:order-1">
               {game && (
                 <div className="bg-card border-2 border-border rounded-[2.5rem] p-8 space-y-8 shadow-2xl relative overflow-hidden group">
-                  <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-border/50">
+                  <div className="aspect-[3/4] max-w-[200px] lg:max-w-none mx-auto rounded-2xl overflow-hidden border border-border/50">
                     <img 
                       src={game.imagem || ""} 
                       alt={game.nome} 
