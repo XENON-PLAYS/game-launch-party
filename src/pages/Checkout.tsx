@@ -16,6 +16,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<"stripe" | "pix">("stripe");
   const planName = searchParams.get("plan");
 
   const plans = {
@@ -163,46 +164,142 @@ const Checkout = () => {
           </div>
 
           {/* Right Side: Payment Info */}
-          <div className={`flex flex-col justify-center space-y-8 p-10 rounded-[2.5rem] bg-gradient-to-br from-card to-card/50 border-2 ${selectedPlan.borderColor} shadow-2xl h-fit`}>
+          <div className={`flex flex-col justify-center space-y-8 p-10 rounded-[2.5rem] bg-gradient-to-br from-card to-card/50 border-2 ${selectedPlan.borderColor} shadow-2xl h-fit relative overflow-hidden group/payment`}>
+            {/* Background Decor */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl -mr-16 -mt-16 pointer-events-none group-hover/payment:bg-primary/10 transition-colors duration-500" />
+            
             <div className="space-y-6">
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-background border border-border">
-                <div className={`w-10 h-10 rounded-lg ${selectedPlan.iconBg} flex items-center justify-center`}>
-                  <CreditCard className={`w-5 h-5 ${selectedPlan.iconColor}`} />
-                </div>
-                <div>
-                  <p className="text-xs font-black uppercase tracking-widest">Meio de Pagamento</p>
-                  <p className="text-sm text-muted-foreground font-medium">Cartão de Crédito</p>
-                </div>
+              {/* Payment Selector */}
+              <div className="grid grid-cols-2 gap-3 p-1.5 bg-background/50 rounded-2xl border border-border/50">
+                <button 
+                  onClick={() => setPaymentMethod("stripe")}
+                  className={`flex items-center justify-center gap-2 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                    paymentMethod === "stripe" 
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105" 
+                    : "text-muted-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  <CreditCard className="w-3.5 h-3.5" />
+                  Cartão / Stripe
+                </button>
+                <button 
+                  onClick={() => setPaymentMethod("pix")}
+                  className={`flex items-center justify-center gap-2 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                    paymentMethod === "pix" 
+                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-500/20 scale-105" 
+                    : "text-muted-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  <div className="w-3.5 h-3.5 rounded-full bg-emerald-500/20 flex items-center justify-center text-[8px] font-black text-emerald-500">P</div>
+                  PIX Instantâneo
+                </button>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex justify-between items-center text-sm font-bold uppercase tracking-widest opacity-60">
+              {paymentMethod === "stripe" ? (
+                <div className="flex items-center gap-4 p-5 rounded-2xl bg-background/30 border border-border/40 backdrop-blur-sm">
+                  <div className={`w-12 h-12 rounded-xl ${selectedPlan.iconBg} flex items-center justify-center shadow-inner`}>
+                    <CreditCard className={`w-6 h-6 ${selectedPlan.iconColor}`} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60">Meio de Pagamento</p>
+                    <p className="text-sm font-black uppercase tracking-tight">Cartão de Crédito / Débito</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-6 p-6 rounded-3xl bg-emerald-500/5 border border-emerald-500/10 backdrop-blur-sm animate-in fade-in zoom-in-95 duration-500">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                      <div className="text-emerald-500 font-black text-lg italic">PIX</div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500/60">Pagamento via PIX</p>
+                      <p className="text-sm font-black uppercase tracking-tight">Liberação Imediata</p>
+                    </div>
+                  </div>
+                  
+                  <div className="aspect-square bg-white rounded-2xl p-4 flex items-center justify-center shadow-lg border-4 border-emerald-500/20 group/qr relative">
+                    <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover/qr:opacity-100 transition-opacity rounded-xl" />
+                    <img 
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021126580014br.gov.bcb.pix013669146030-01d7-4638-89c0-67c0f16611525204000053039865404${selectedPlan.price.replace("R$ ", "")}.005802BR5915JOGOS%20GRATIS6009SAO%20PAULO62070503***6304`}
+                      alt="QR Code PIX" 
+                      className="w-full h-full object-contain group-hover/qr:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+                  <div className="space-y-3">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground text-center">Ou copie a chave abaixo:</p>
+                    <div className="flex gap-2">
+                      <input 
+                        readOnly 
+                        value="69146030-01d7-4638-89c0-67c0f1661152" 
+                        className="flex-1 bg-background border border-border/50 rounded-xl px-4 py-3 text-[10px] font-mono text-center focus:ring-2 focus:ring-emerald-500/20"
+                      />
+                      <button 
+                        onClick={() => {
+                          navigator.clipboard.writeText("69146030-01d7-4638-89c0-67c0f1661152");
+                          toast.success("Chave PIX copiada!");
+                        }}
+                        className="p-3 bg-emerald-500 text-white rounded-xl hover:bg-emerald-600 transition-colors shadow-lg shadow-emerald-500/20"
+                      >
+                        <Check className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-4 pt-4 border-t border-border/40">
+                <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest opacity-60">
                   <span>Subtotal</span>
                   <span>{selectedPlan.price}</span>
                 </div>
-                <div className="flex justify-between items-center text-lg font-black uppercase tracking-tight pt-4 border-t border-border/50">
-                  <span>Total</span>
-                  <span className={selectedPlan.iconColor}>{selectedPlan.price}</span>
+                <div className="flex justify-between items-center text-xl font-black uppercase tracking-tight pt-4 border-t border-border/20">
+                  <span>Total Final</span>
+                  <span className={paymentMethod === "pix" ? "text-emerald-500" : selectedPlan.iconColor}>{selectedPlan.price}</span>
                 </div>
               </div>
 
-              <button 
-                onClick={handleCheckout}
-                disabled={loading}
-                className={`w-full py-6 rounded-2xl ${selectedPlan.buttonColor} text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed`}
-              >
-                {loading ? (
-                  <>
+              {paymentMethod === "stripe" ? (
+                <button 
+                  onClick={handleCheckout}
+                  disabled={loading}
+                  className={`w-full py-6 rounded-2xl ${selectedPlan.buttonColor} text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed`}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Processando...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Pagar com Cartão</span>
+                      <Sparkles className="w-5 h-5 group-hover:animate-pulse" />
+                    </>
+                  )}
+                </button>
+              ) : (
+                <button 
+                  onClick={() => {
+                    setLoading(true);
+                    setTimeout(() => {
+                      setLoading(false);
+                      toast.success("Aguardando confirmação do PIX...");
+                      navigate("/perfil");
+                    }, 2000);
+                  }}
+                  disabled={loading}
+                  className="w-full py-6 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black uppercase tracking-[0.2em] text-sm transition-all shadow-xl shadow-emerald-500/20 active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {loading ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Iniciando...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Finalizar Pagamento</span>
-                    <Sparkles className="w-5 h-5 group-hover:animate-pulse" />
-                  </>
-                )}
-              </button>
+                  ) : (
+                    <>
+                      <span>Confirmar Pagamento</span>
+                      <Shield className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    </>
+                  )}
+                </button>
+              )}
 
               <div className="text-center space-y-4">
                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest leading-relaxed">
