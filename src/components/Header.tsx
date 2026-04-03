@@ -37,8 +37,9 @@ export function Header() {
             alt="Logo" 
             className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 object-contain" 
           />
-          <div className="flex flex-col">
-            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none text-primary">JOGO GRATIS</span>
+          <div className="flex flex-col leading-[0.85]">
+            <span className="font-black text-white text-base sm:text-lg md:text-2xl lg:text-3xl tracking-tighter uppercase drop-shadow-md">JOGOS</span>
+            <span className="font-black text-red-600 text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter uppercase drop-shadow-sm">GRÁTIS</span>
           </div>
         </Link>
 
