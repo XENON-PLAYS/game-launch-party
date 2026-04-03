@@ -455,7 +455,6 @@ export type Database = {
       }
       increment_link_clicks: { Args: { link_id: string }; Returns: undefined }
       slugify: { Args: { text: string }; Returns: string }
-      unaccent: { Args: { "": string }; Returns: string }
       update_own_profile: {
         Args: {
           _avatar_url?: string
