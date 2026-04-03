@@ -49,13 +49,13 @@ export function HeroCarousel() {
     return (
       <section className="bg-background">
         <div className="container-responsive py-12 md:py-24">
-          <div className="grid md:grid-cols-[1fr_400px] gap-12 items-center min-h-[400px]">
+          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-[600px]">
             <div className="space-y-6">
               <Skeleton className="h-6 w-32" />
               <Skeleton className="h-20 w-3/4" />
               <Skeleton className="h-32 w-full" />
             </div>
-            <Skeleton className="hidden md:block rounded-2xl aspect-[3/4]" />
+            <Skeleton className="mx-auto md:mr-0 rounded-2xl aspect-[3/4] w-full max-w-[220px] md:max-w-[360px]" />
           </div>
         </div>
       </section>
