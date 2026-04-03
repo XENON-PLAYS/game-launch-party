@@ -63,10 +63,22 @@ const GameDetail = () => {
     enabled: !!gameId,
   });
 
-  const avgRating = { 
-    avg: Number(game?.rating_avg || 0), 
-    count: Number(game?.rating_count || 0) 
-  };
+  const { data: avgRating } = useQuery({
+    queryKey: ["avg-rating", gameId],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("games")
+        .select("rating_avg, rating_count")
+        .eq("id", gameId!)
+        .maybeSingle();
+      
+      return { 
+        avg: Number(data?.rating_avg || 0), 
+        count: Number(data?.rating_count || 0) 
+      };
+    },
+    enabled: !!gameId,
+  });
 
   const { data: isFavorited, refetch: refetchFav } = useQuery({
     queryKey: ["favorite", gameId, user?.id],

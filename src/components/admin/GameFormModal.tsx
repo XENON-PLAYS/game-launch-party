@@ -105,8 +105,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
       const compressedFile = await imageCompression(file, options);
       
       const fileExt = "webp";
-      const uuid = typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : Math.random().toString(36).substring(2, 15);
-      const filePath = `games/${uuid}.${fileExt}`;
+      const filePath = `games/${crypto.randomUUID()}.${fileExt}`;
 
       const { error: uploadError } = await supabase.storage.from("game-images").upload(filePath, compressedFile);
       if (uploadError) throw uploadError;

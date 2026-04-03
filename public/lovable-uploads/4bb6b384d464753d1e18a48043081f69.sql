@@ -1,0 +1,5 @@
+ALTER TABLE public.games 
+ADD COLUMN IF NOT EXISTS pre_requisitos TEXT,
+ADD COLUMN IF NOT EXISTS passo_a_passo TEXT,
+ADD COLUMN IF NOT EXISTS link_demo TEXT,
+ADD COLUMN IF NOT EXISTS observacoes TEXT;

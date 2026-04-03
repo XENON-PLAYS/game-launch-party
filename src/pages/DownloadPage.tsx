@@ -21,7 +21,7 @@ const DownloadPage = () => {
   const { data: game, isLoading: gameLoading } = useQuery({
     queryKey: ["game", gameId],
     queryFn: async () => {
-      const { data, error } = await supabase.from("games").select("id, nome, imagem, categorias").eq("id", gameId!).single();
+      const { data, error } = await supabase.from("games").select("*").eq("id", gameId!).single();
       if (error) throw error;
       return data;
     },
