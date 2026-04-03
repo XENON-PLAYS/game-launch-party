@@ -98,7 +98,7 @@ const VipPage = () => {
             animate={{ y: 0, opacity: 1 }}
             className="text-responsive-h1 leading-none uppercase font-black"
           >
-            Torne-se um <span className="text-primary">Capitão VIP</span>
+            Sua Experiência <span className="text-primary">VIP de Elite</span>
           </motion.h1>
           <motion.p 
             initial={{ y: 20, opacity: 0 }}
