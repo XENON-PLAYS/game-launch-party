@@ -53,7 +53,12 @@ const Cadastro = () => {
   return (
     <div className="min-h-screen space-background flex flex-col">
       <Header />
-      
+      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+        <div className="cosmic-element cosmic-1"></div>
+        <div className="cosmic-element cosmic-2"></div>
+        <div className="cosmic-element cosmic-3"></div>
+      </div>
+
       <main className="flex-1 flex items-center justify-center px-4 py-12 relative z-10">
         <div className="w-full max-w-md">
           <form onSubmit={handleSubmit} className="bg-card border border-border p-8 rounded-xl shadow-lg">
