@@ -164,7 +164,7 @@ export function HeroCarousel() {
                 initial={{ opacity: 0, scale: 0.8, rotate: 2 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ delay: 0.6, duration: 1, type: "spring" }}
-                className="hidden md:flex justify-center items-center"
+                className="flex justify-center items-center mt-6 md:mt-0"
               >
                 <div className="relative group/poster w-full max-w-[280px] lg:max-w-[360px]">
                   <div className="absolute -inset-4 bg-primary/20 rounded-[2.5rem] blur-2xl group-hover:bg-primary/30 transition-all duration-700" />
