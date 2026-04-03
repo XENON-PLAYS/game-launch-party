@@ -15,15 +15,19 @@ import imageCompression from "browser-image-compression";
 import { GameCard } from "@/components/GameCard";
 
 const Perfil = () => {
- const { user, profile, isLoading: authLoading, refreshProfile } = useAuth();
- const { theme: currentTheme, setTheme } = useTheme();
- const navigate = useNavigate();
- const fileInputRef = useRef<HTMLInputElement>(null);
+  const { user, profile, isLoading: authLoading, refreshProfile } = useAuth();
+  const { userId } = useParams();
+  const { theme: currentTheme, setTheme } = useTheme();
+  const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
- const [username, setUsername] = useState("");
- const [displayName, setDisplayName] = useState("");
- const [bio, setBio] = useState("");
- const [status, setStatus] = useState("offline");
+  const [username, setUsername] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [bio, setBio] = useState("");
+  const [status, setStatus] = useState("offline");
+  const [targetProfile, setTargetProfile] = useState<any>(null);
+  const [viewLoading, setViewLoading] = useState(true);
+  const [isOwnProfile, setIsOwnProfile] = useState(false);
  const [themePreference, setThemePreference] = useState<"light" | "dark">("dark");
  
  const [loading, setLoading] = useState(false);
