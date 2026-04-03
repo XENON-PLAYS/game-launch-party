@@ -206,13 +206,16 @@ export function GameComments({ gameId }: GameCommentsProps) {
                     className={`flex items-start gap-3 ${isMe ? "flex-row-reverse" : "flex-row"}`}
                   >
                     {/* Avatar */}
-                    <div className={`shrink-0 w-8 h-8 rounded-lg border-2 overflow-hidden flex items-center justify-center bg-muted transition-all duration-300 ${isMe ? "border-primary/50" : "border-border"}`}>
+                    <Link 
+                      to={profile?.user_id ? `/perfil/${profile.user_id}` : "#"}
+                      className={`shrink-0 w-8 h-8 rounded-lg border-2 overflow-hidden flex items-center justify-center bg-muted transition-all duration-300 hover:scale-110 active:scale-95 ${isMe ? "border-primary/50" : "border-border hover:border-primary/50"}`}
+                    >
                       {profile?.avatar_url ? (
                         <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />
                       ) : (
                         <User className={`w-4 h-4 ${isMe ? "text-primary" : "text-muted-foreground"}`} />
                       )}
-                    </div>
+                    </Link>
 
                     {/* Content */}
                     <div className={`flex flex-col max-w-[80%] space-y-1 ${isMe ? "items-end" : "items-start"}`}>
