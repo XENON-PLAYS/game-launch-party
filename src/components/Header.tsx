@@ -72,16 +72,15 @@ export function Header() {
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={theme}
-                initial={{ rotate: -360, scale: 0, opacity: 0 }}
+                initial={{ rotate: -180, scale: 0.5, opacity: 0 }}
                 animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                exit={{ rotate: 360, scale: 0, opacity: 0 }}
-                whileHover={{ scale: 1.15 }}
+                exit={{ rotate: 180, scale: 0.5, opacity: 0 }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ 
                   type: "spring",
-                  stiffness: 200,
-                  damping: 20,
-                  mass: 1
+                  stiffness: 260,
+                  damping: 20
                 }}
                 className="flex items-center justify-center pointer-events-none"
               >
