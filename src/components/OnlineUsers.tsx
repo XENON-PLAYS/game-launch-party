@@ -13,7 +13,7 @@ export function OnlineUsers() {
       .on("presence", { event: "sync" }, () => {
         const state = channel.presenceState();
         // Count all unique presence entries (sessions)
-        const count = Object.values(state).flat().length;
+        const count = Object.keys(state).length;
         setOnlineCount(count);
       })
       .on("presence", { event: "join" }, ({ key, newPresences }) => {
