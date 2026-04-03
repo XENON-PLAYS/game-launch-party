@@ -52,6 +52,8 @@ const Admin = () => {
     },
     enabled: activeTab === "dashboard",
   });
+  
+  const { data: usersData = [], isLoading: usersLoading } = useQuery({
     queryKey: ["admin-users"],
     queryFn: async () => {
       const { data, error } = await supabase
