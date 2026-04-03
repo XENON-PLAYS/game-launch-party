@@ -36,7 +36,16 @@ import { Tables } from "@/integrations/supabase/types";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
-type Profile = Tables<"profiles"> & { user_roles?: { role: string }[] };
+type Profile = {
+  id: string;
+  user_id: string;
+  username: string | null;
+  display_name: string | null;
+  avatar_url: string | null;
+  is_vip: boolean;
+  created_at: string;
+  role: string | null;
+};
 
 interface UserAdminListProps {
   users: Profile[];
