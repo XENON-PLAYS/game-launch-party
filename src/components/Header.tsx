@@ -155,7 +155,7 @@ export function Header() {
           </button>
           {isAdmin && (
             <Link to="/admin" className="block py-2 text-primary flex items-center gap-2" onClick={() => setMobileOpen(false)}>
-              <Shield className="w-4 h-4" /> Painel de Administrador
+              <Shield className="w-4 h-4" /> Admin
             </Link>
           )}
           <Link to="/vip" className="block py-2 text-yellow-500 animate-pulse flex items-center gap-2" onClick={() => setMobileOpen(false)}>
