@@ -532,76 +532,78 @@ const Perfil = () => {
    
    
    <main className="flex-1 container mx-auto px-4 py-12 max-w-6xl">
-    <div className="grid md:grid-cols-[280px_1fr] gap-8">
-     {/* Sidebar */}
-     <div className="space-y-6">
-      <div className="auth-fieldset flex flex-col items-center p-8">
-       <div className="relative group">
-        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/20 bg-secondary flex items-center justify-center relative">
-         {profile?.avatar_url ? (
-          <img 
-           src={profile.avatar_url} 
-           alt="Avatar" 
-           className="w-full h-full object-cover"
-          />
-         ) : (
-          <User className="w-16 h-16 text-muted-foreground" />
+     <div className="grid md:grid-cols-[280px_1fr] gap-8">
+      {/* Sidebar */}
+      <div className="space-y-6">
+       <div className="auth-fieldset flex flex-col items-center p-8">
+        <div className="relative group">
+         <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/20 bg-secondary flex items-center justify-center relative">
+          {targetProfile?.avatar_url ? (
+           <img 
+            src={targetProfile.avatar_url} 
+            alt="Avatar" 
+            className="w-full h-full object-cover"
+           />
+          ) : (
+           <User className="w-16 h-16 text-muted-foreground" />
+          )}
+          {uploading && (
+           <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+            <Loader2 className="w-8 h-8 animate-spin text-white" />
+           </div>
+          )}
+         </div>
+         
+         {isOwnProfile && (
+           <button 
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            className="absolute bottom-0 right-0 bg-primary text-primary-foreground p-2 rounded-full shadow-lg hover:scale-110 transition-transform disabled:opacity-50"
+           >
+            <Camera className="w-4 h-4" />
+           </button>
          )}
-         {uploading && (
-          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-           <Loader2 className="w-8 h-8 animate-spin text-white" />
+         
+         {isGifAvatar && (
+          <div className="absolute -top-1 -right-1 bg-yellow-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5 animate-pulse shadow-lg">
+           <BadgeCheck className="w-3 h-3" /> GIF
           </div>
          )}
+         
+         <input 
+          type="file" 
+          ref={fileInputRef}
+          className="hidden" 
+          accept="image/jpeg,image/png,image/gif"
+          onChange={handleAvatarUpload}
+         />
         </div>
-        
-        <button 
-         onClick={() => fileInputRef.current?.click()}
-         disabled={uploading}
-         className="absolute bottom-0 right-0 bg-primary text-primary-foreground p-2 rounded-full shadow-lg hover:scale-110 transition-transform disabled:opacity-50"
-        >
-         <Camera className="w-4 h-4" />
-        </button>
-        
-        {isGifAvatar && (
-         <div className="absolute -top-1 -right-1 bg-yellow-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5 animate-pulse shadow-lg">
-          <BadgeCheck className="w-3 h-3" /> GIF
-         </div>
-        )}
-        
-        <input 
-         type="file" 
-         ref={fileInputRef}
-         className="hidden" 
-         accept="image/jpeg,image/png,image/gif"
-         onChange={handleAvatarUpload}
-        />
-       </div>
 
-       <div className="text-center mt-4">
-        <div className="flex items-center justify-center gap-2 mb-1">
-         <h2 className="text-xl truncate max-w-[180px]">
-          {profile?.display_name || "Usuário"}
-         </h2>
-         <div className={`w-2.5 h-2.5 rounded-full ${status === 'online' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-gray-500'}`} />
-        </div>
-        <p className="text-muted-foreground text-sm ">
-         @{profile?.username || "sem_usuario"}
-        </p>
-        
-        <div className="flex flex-wrap justify-center gap-2 mt-4">
-         {profile?.is_vip && (
-          <span className="bg-yellow-500/10 text-yellow-500 text-[9px] font-bold px-2 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest ">
-           VIP
-          </span>
-         )}
-         {profile?.badges?.map((badge: string, idx: number) => (
-          <span key={idx} className="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded border border-primary/20 uppercase tracking-widest ">
-           {badge}
-          </span>
-         ))}
+        <div className="text-center mt-4 w-full">
+         <div className="flex items-center justify-center gap-2 mb-1">
+          <h2 className="text-xl truncate max-w-[180px]">
+           {targetProfile?.display_name || "Usuário"}
+          </h2>
+          <div className={`w-2.5 h-2.5 rounded-full ${targetProfile?.status === 'online' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-gray-500'}`} />
+         </div>
+         <p className="text-muted-foreground text-sm ">
+          @{targetProfile?.username || "sem_usuario"}
+         </p>
+         
+         <div className="flex flex-wrap justify-center gap-2 mt-4">
+          {targetProfile?.is_vip && (
+           <span className="bg-yellow-500/10 text-yellow-500 text-[9px] font-bold px-2 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest ">
+            VIP
+           </span>
+          )}
+          {targetProfile?.badges?.map((badge: string, idx: number) => (
+           <span key={idx} className="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded border border-primary/20 uppercase tracking-widest ">
+            {badge}
+           </span>
+          ))}
+         </div>
         </div>
        </div>
-      </div>
 
       {/* Nav Menu */}
       <div className="auth-fieldset !p-2 space-y-1">
