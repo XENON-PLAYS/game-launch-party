@@ -40,10 +40,20 @@ serve(async (req) => {
 
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
-      const { planName, userId } = session.metadata;
+      let planName = session.metadata?.planName;
+      let userId = session.metadata?.userId;
+
+      // If metadata is missing (e.g. from a Payment Link), try to parse client_reference_id
+      if ((!planName || !userId) && session.client_reference_id) {
+        const parts = session.client_reference_id.split("__");
+        if (parts.length === 2) {
+          userId = parts[0];
+          planName = parts[1];
+        }
+      }
 
       if (!planName || !userId) {
-        console.error("Missing metadata in checkout session");
+        console.error("Missing metadata or client_reference_id in checkout session");
         return new Response(JSON.stringify({ error: "Missing metadata" }), { status: 400 });
       }
 
