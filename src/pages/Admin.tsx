@@ -169,6 +169,12 @@ const Admin = () => {
                   <UserAdminList users={usersData as any} />
                 )
               )}
+              {activeTab === "requests" && (
+                <GameRequestList />
+              )}
+              {activeTab === "reports" && (
+                <BugReportList />
+              )}
             </>
           )}
         </main>
