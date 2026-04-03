@@ -49,13 +49,13 @@ export function HeroCarousel() {
     return (
       <section className="bg-background">
         <div className="container-responsive py-12 md:py-24">
-          <div className="grid md:grid-cols-[1fr_400px] gap-12 items-center min-h-[400px]">
+          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-[600px]">
             <div className="space-y-6">
               <Skeleton className="h-6 w-32" />
               <Skeleton className="h-20 w-3/4" />
               <Skeleton className="h-32 w-full" />
             </div>
-            <Skeleton className="hidden md:block rounded-2xl aspect-[3/4]" />
+            <Skeleton className="mx-auto md:mr-0 rounded-2xl aspect-[3/4] w-full max-w-[220px] md:max-w-[360px]" />
           </div>
         </div>
       </section>
@@ -65,7 +65,7 @@ export function HeroCarousel() {
   const game = featured[current];
 
   return (
-    <section className="relative h-[480px] sm:h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
+    <section className="relative h-[600px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={current}
@@ -86,7 +86,7 @@ export function HeroCarousel() {
             <img 
               src={(game as any).hero_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
               alt="" 
-              className="w-full h-full object-cover" 
+              className="w-full h-full object-cover brightness-[0.35] blur-[1px] opacity-80" 
               onError={handleImageError}
             />
             {/* Elegant Gradient Overlays */}
@@ -95,7 +95,7 @@ export function HeroCarousel() {
           </motion.div>
 
           <div className="container-responsive h-full flex flex-col justify-center relative z-10 pt-16 md:pt-0">
-            <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-8 md:gap-12 items-center">
               <div className="space-y-4 md:space-y-6 max-w-2xl">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -164,9 +164,9 @@ export function HeroCarousel() {
                 initial={{ opacity: 0, scale: 0.8, rotate: 2 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ delay: 0.6, duration: 1, type: "spring" }}
-                className="hidden md:block"
+                className="flex justify-center items-center mt-6 md:mt-0"
               >
-                <div className="relative group/poster">
+                <div className="relative group/poster w-full max-w-[220px] sm:max-w-[300px] lg:max-w-[380px]">
                   <div className="absolute -inset-4 bg-primary/20 rounded-[2.5rem] blur-2xl group-hover:bg-primary/30 transition-all duration-700" />
                   <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-3xl overflow-hidden border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] aspect-[3/4] relative">
                     <img 
