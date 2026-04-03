@@ -140,10 +140,14 @@ const Admin = () => {
                 />
               )}
               {activeTab === "users" && (
-                <div className="py-20 text-center">
-                  <h3 className="text-2xl font-black uppercase tracking-tighter mb-2">Gestão de Usuários</h3>
-                  <p className="text-muted-foreground uppercase tracking-widest text-xs font-bold">Módulo em desenvolvimento...</p>
-                </div>
+                usersLoading ? (
+                  <div className="h-[40vh] flex flex-col items-center justify-center space-y-4">
+                    <Loader2 className="h-10 w-10 text-primary animate-spin" />
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground">Carregando base de usuários...</p>
+                  </div>
+                ) : (
+                  <UserAdminList users={usersData} />
+                )
               )}
             </>
           )}
