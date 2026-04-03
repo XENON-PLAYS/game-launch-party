@@ -143,7 +143,13 @@ const Admin = () => {
             </div>
           ) : (
             <>
-              {activeTab === "dashboard" && <DashboardOverview games={games} />}
+              {activeTab === "dashboard" && (
+                <DashboardOverview 
+                  games={games} 
+                  userCount={statsData?.userCount || 0} 
+                  averageRating={statsData?.averageRating || 0} 
+                />
+              )}
               {activeTab === "games" && (
                 <GameAdminList 
                   games={games} 
