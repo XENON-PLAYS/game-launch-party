@@ -10,13 +10,14 @@ export function SunMoonSystem() {
     <div className="relative w-10 h-10 flex items-center justify-center overflow-visible">
       {/* Sun Icon */}
       <motion.div
+        initial={false}
         animate={{
           x: isDark ? 0 : -12,
           y: isDark ? 0 : 0,
-          scale: isDark ? 1 : 0.4,
-          opacity: isDark ? 1 : 0.3,
+          scale: isDark ? 1 : 0.6,
+          opacity: isDark ? 1 : 0.5,
           rotate: isDark ? 0 : 180,
-          filter: isDark ? "blur(0px)" : "blur(1px)",
+          filter: isDark ? "blur(0px)" : "blur(0.5px)",
         }}
         transition={{ 
           type: "spring", 
@@ -31,13 +32,14 @@ export function SunMoonSystem() {
 
       {/* Moon Icon */}
       <motion.div
+        initial={false}
         animate={{
           x: !isDark ? 0 : 12,
           y: !isDark ? 0 : 0,
-          scale: !isDark ? 1 : 0.4,
-          opacity: !isDark ? 1 : 0.3,
+          scale: !isDark ? 1 : 0.6,
+          opacity: !isDark ? 1 : 0.5,
           rotate: !isDark ? 0 : -180,
-          filter: !isDark ? "blur(0px)" : "blur(1px)",
+          filter: !isDark ? "blur(0px)" : "blur(0.5px)",
         }}
         transition={{ 
           type: "spring", 
@@ -54,7 +56,7 @@ export function SunMoonSystem() {
       <motion.div 
         animate={{ rotate: isDark ? 0 : 180 }}
         transition={{ duration: 1, ease: "easeInOut" }}
-        className="absolute inset-0 border border-primary/5 rounded-full pointer-events-none"
+        className="absolute inset-0 border border-primary/10 rounded-full pointer-events-none"
       />
     </div>
   );
