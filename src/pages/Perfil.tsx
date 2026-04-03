@@ -279,6 +279,44 @@ const Perfil = () => {
   }
 
   switch (activeTab) {
+   case "profile":
+    return (
+      <div className="auth-fieldset p-8">
+        <h1 className="auth-title !text-left !mb-8 flex items-center gap-3">
+          <User className="w-6 h-6 text-primary" />
+          Perfil de Usuário
+        </h1>
+        
+        <div className="space-y-6">
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div className="space-y-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Nome de Exibição</label>
+              <p className="text-lg font-bold">{targetProfile?.display_name || "Nenhum nome definido"}</p>
+            </div>
+            
+            <div className="space-y-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Nome de Usuário</label>
+              <p className="text-lg font-bold">@{targetProfile?.username || "sem_usuario"}</p>
+            </div>
+
+            <div className="space-y-1 sm:col-span-2">
+              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Bio</label>
+              <p className="text-muted-foreground leading-relaxed">
+                {targetProfile?.bio || "Este usuário ainda não escreveu uma bio."}
+              </p>
+            </div>
+            
+            <div className="space-y-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Membro desde</label>
+              <p className="text-sm font-bold">
+                {targetProfile?.created_at ? new Date(targetProfile.created_at).toLocaleDateString("pt-BR") : "Desconhecido"}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
    case "settings":
     return (
      <div className="auth-fieldset p-8">
