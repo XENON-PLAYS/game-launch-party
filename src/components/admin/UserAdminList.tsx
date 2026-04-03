@@ -120,6 +120,7 @@ export function UserAdminList({ users }: UserAdminListProps) {
                   <TableHead className="text-[10px] font-black uppercase tracking-widest">Nickname / Display Name</TableHead>
                   <TableHead className="text-[10px] font-black uppercase tracking-widest">Username</TableHead>
                   <TableHead className="text-[10px] font-black uppercase tracking-widest text-center">Status VIP</TableHead>
+                   <TableHead className="text-[10px] font-black uppercase tracking-widest text-center">Status Online</TableHead>
                   <TableHead className="text-[10px] font-black uppercase tracking-widest">Membro Desde</TableHead>
                   <TableHead className="text-[10px] font-black uppercase tracking-widest text-right">Ações</TableHead>
                 </TableRow>
