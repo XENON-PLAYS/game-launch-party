@@ -443,6 +443,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_admin_users_list: {
+        Args: never
+        Returns: {
+          avatar_url: string
+          created_at: string
+          display_name: string
+          id: string
+          is_vip: boolean
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+          username: string
+        }[]
+      }
       get_user_ranking: {
         Args: never
         Returns: {

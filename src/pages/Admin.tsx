@@ -10,6 +10,7 @@ import { AdminHeader } from "@/components/admin/AdminHeader";
 import { DashboardOverview } from "@/components/admin/DashboardOverview";
 import { GameAdminList } from "@/components/admin/GameAdminList";
 import { GameFormModal } from "@/components/admin/GameFormModal";
+import { UserAdminList } from "@/components/admin/UserAdminList";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -35,6 +36,31 @@ const Admin = () => {
       if (error) throw error;
       return data ?? [];
     },
+  });
+  
+  const { data: statsData } = useQuery({
+    queryKey: ["admin-stats"],
+    queryFn: async () => {
+      const { count: userCount } = await supabase.from("profiles").select("*", { count: "exact", head: true });
+      const { data: ratingData } = await supabase.from("game_ratings").select("rating");
+      
+      const avgRating = ratingData && ratingData.length > 0
+        ? ratingData.reduce((acc, r) => acc + r.rating, 0) / ratingData.length
+        : 0;
+        
+      return { userCount: userCount ?? 0, averageRating: avgRating };
+    },
+    enabled: activeTab === "dashboard",
+  });
+  
+  const { data: usersData = [], isLoading: usersLoading } = useQuery({
+    queryKey: ["admin-users"],
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc("get_admin_users_list");
+      if (error) throw error;
+      return data ?? [];
+    },
+    enabled: activeTab === "users",
   });
 
   if (authLoading) {
@@ -116,7 +142,13 @@ const Admin = () => {
             </div>
           ) : (
             <>
-              {activeTab === "dashboard" && <DashboardOverview games={games} />}
+              {activeTab === "dashboard" && (
+                <DashboardOverview 
+                  games={games} 
+                  userCount={statsData?.userCount || 0} 
+                  averageRating={statsData?.averageRating || 0} 
+                />
+              )}
               {activeTab === "games" && (
                 <GameAdminList 
                   games={games} 
@@ -126,10 +158,14 @@ const Admin = () => {
                 />
               )}
               {activeTab === "users" && (
-                <div className="py-20 text-center">
-                  <h3 className="text-2xl font-black uppercase tracking-tighter mb-2">Gestão de Usuários</h3>
-                  <p className="text-muted-foreground uppercase tracking-widest text-xs font-bold">Módulo em desenvolvimento...</p>
-                </div>
+                usersLoading ? (
+                  <div className="h-[40vh] flex flex-col items-center justify-center space-y-4">
+                    <Loader2 className="h-10 w-10 text-primary animate-spin" />
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground">Carregando base de usuários...</p>
+                  </div>
+                ) : (
+                  <UserAdminList users={usersData as any} />
+                )
               )}
             </>
           )}

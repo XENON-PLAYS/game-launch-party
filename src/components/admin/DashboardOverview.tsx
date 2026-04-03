@@ -20,6 +20,8 @@ type Game = Tables<"games">;
 
 interface DashboardOverviewProps {
   games: Game[];
+  userCount: number;
+  averageRating: number;
 }
 
 const StatCard = ({ icon: Icon, label, value, trend, color }: { icon: any, label: string, value: string | number, trend?: string, color: string }) => (
@@ -44,9 +46,9 @@ const StatCard = ({ icon: Icon, label, value, trend, color }: { icon: any, label
   </Card>
 );
 
-export function DashboardOverview({ games }: DashboardOverviewProps) {
+export function DashboardOverview({ games, userCount, averageRating }: DashboardOverviewProps) {
   const totalDownloads = games.reduce((acc, game) => acc + (game.download_count || 0), 0);
-  const averageRating = 4.8; // Hardcoded for now, would come from database
+  const displayRating = averageRating > 0 ? averageRating.toFixed(1) : "0.0";
   
   const topGames = [...games]
     .sort((a, b) => (b.download_count || 0) - (a.download_count || 0))
@@ -94,14 +96,14 @@ export function DashboardOverview({ games }: DashboardOverviewProps) {
         <StatCard 
           icon={Users} 
           label="Usuários Ativos" 
-          value="1,420" 
+          value={userCount.toLocaleString()} 
           trend="+28%" 
           color="bg-purple-500" 
         />
         <StatCard 
           icon={Star} 
           label="Avaliação Média" 
-          value={averageRating} 
+          value={displayRating} 
           trend="+0.2" 
           color="bg-yellow-500" 
         />
