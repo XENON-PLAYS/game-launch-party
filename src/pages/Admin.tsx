@@ -38,6 +38,19 @@ const Admin = () => {
     },
   });
 
+  const { data: usersData = [], isLoading: usersLoading } = useQuery({
+    queryKey: ["admin-users"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data ?? [];
+    },
+    enabled: activeTab === "users",
+  });
+
   if (authLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
