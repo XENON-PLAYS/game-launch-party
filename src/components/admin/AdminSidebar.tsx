@@ -58,7 +58,7 @@ export function AdminSidebar() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 z-50 h-screen w-64 border-r border-border/40 bg-card/50 backdrop-blur-xl hidden md:flex flex-col">
+    <aside className="fixed left-0 top-0 z-50 h-screen w-64 border-r border-border/10 bg-background/40 backdrop-blur-2xl hidden md:flex flex-col">
       <div className="p-6">
         <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20">
