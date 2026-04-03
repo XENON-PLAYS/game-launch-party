@@ -473,7 +473,9 @@ export type Database = {
           display_name: string
           id: string
           is_vip: boolean
+          last_seen_at: string
           role: Database["public"]["Enums"]["app_role"]
+          status: string
           user_id: string
           username: string
         }[]
