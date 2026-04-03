@@ -618,6 +618,7 @@ const Perfil = () => {
          </div>
         </div>
        </div>
+      </div>
 
       {/* Nav Menu */}
        <div className="auth-fieldset !p-2 space-y-1 bg-card/40 backdrop-blur-xl border-white/5 shadow-xl">
