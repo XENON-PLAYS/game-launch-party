@@ -19,8 +19,8 @@ export function SkyBackground() {
       <motion.div
         animate={{
           background: isDark 
-            ? "radial-gradient(circle at 50% 10%, #0f172a 0%, #020617 100%)" 
-            : "radial-gradient(circle at 50% 10%, #f8fafc 0%, #e2e8f0 100%)"
+            ? "#131313" 
+            : "#ffffff"
         }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
         className="absolute inset-0"
