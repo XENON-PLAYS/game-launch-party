@@ -16,8 +16,8 @@ export interface Game {
   classificacao?: string;
   descricao?: string;
   requisitos?: {
-    minimo: { sistema: string; processador: string; memoria: string; placa: string; armazenamento: string };
-    recomendado: { sistema: string; processador: string; memoria: string; placa: string; armazenamento: string };
+    minimo: { sistema: string; processador: string; memoria: string; placa: string; armazenamento: string } | string;
+    recomendado: { sistema: string; processador: string; memoria: string; placa: string; armazenamento: string } | string;
   };
   destaques?: string[];
   torrentLink?: string;
