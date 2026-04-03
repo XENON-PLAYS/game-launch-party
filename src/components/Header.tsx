@@ -174,6 +174,11 @@ export function Header() {
           </div>
         </div>
       )}
+      
+      <GameRequestModal 
+        isOpen={isRequestModalOpen} 
+        onClose={() => setIsRequestModalOpen(false)} 
+      />
     </header>
   );
 }
