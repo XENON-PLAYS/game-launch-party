@@ -259,6 +259,8 @@ export type Database = {
           passo_a_passo: string | null
           pre_requisitos: string | null
           preco: number
+          rating_avg: number | null
+          rating_count: number | null
           requisitos_minimo: Json | null
           requisitos_recomendado: Json | null
           slug: string | null
@@ -290,6 +292,8 @@ export type Database = {
           passo_a_passo?: string | null
           pre_requisitos?: string | null
           preco?: number
+          rating_avg?: number | null
+          rating_count?: number | null
           requisitos_minimo?: Json | null
           requisitos_recomendado?: Json | null
           slug?: string | null
@@ -321,6 +325,8 @@ export type Database = {
           passo_a_passo?: string | null
           pre_requisitos?: string | null
           preco?: number
+          rating_avg?: number | null
+          rating_count?: number | null
           requisitos_minimo?: Json | null
           requisitos_recomendado?: Json | null
           slug?: string | null
