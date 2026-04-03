@@ -1,4 +1,4 @@
-import { Store, LogOut, Skull, ChevronDown, User, Bell, Settings } from "lucide-react";
+import { Store, LogOut, Shield, ChevronDown, User, Bell, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";

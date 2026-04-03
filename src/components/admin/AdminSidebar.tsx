@@ -11,8 +11,7 @@ import {
   BarChart3,
   ExternalLink,
   PlusCircle,
-  AlertTriangle,
-  Skull
+  AlertTriangle
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
