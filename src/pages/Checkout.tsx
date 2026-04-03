@@ -73,7 +73,8 @@ const Checkout = () => {
       // Add user info to the URL to link the payment to the user
       const checkoutUrl = new URL(stripeUrl);
       checkoutUrl.searchParams.set("prefilled_email", user.email || "");
-      checkoutUrl.searchParams.set("client_reference_id", user.id);
+      // Combine userId and planName into client_reference_id for the webhook to parse
+      checkoutUrl.searchParams.set("client_reference_id", `${user.id}__${planName}`);
       
       // Redirect to Stripe checkout
       window.location.href = checkoutUrl.toString();
