@@ -5,17 +5,17 @@ export const SpaceBackground = () => {
   const [shootingStars, setShootingStars] = useState<{ id: number; top: string; left: string; delay: number; duration: number }[]>([]);
 
   useEffect(() => {
-    // Generate random shooting stars
+    const generateStar = () => ({
+      id: Math.random(),
+      top: `${Math.random() * 40}%`,
+      left: `${Math.random() * 100}%`,
+      delay: Math.random() * 2,
+      duration: 1.2 + Math.random() * 1.5,
+    });
+
     const interval = setInterval(() => {
-      const newStar = {
-        id: Date.now(),
-        top: `${Math.random() * 50}%`,
-        left: `${Math.random() * 100}%`,
-        delay: Math.random() * 2,
-        duration: 1.5 + Math.random() * 2,
-      };
-      setShootingStars((prev) => [...prev.slice(-3), newStar]);
-    }, 4000);
+      setShootingStars((prev) => [...prev.slice(-2), generateStar()]);
+    }, 6000); // Frequency: every 6 seconds
 
     return () => clearInterval(interval);
   }, []);
