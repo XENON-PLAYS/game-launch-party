@@ -238,12 +238,43 @@
 
   @keyframes shooting-star-anim {
     0% { transform: translate(-100px, -100px) rotate(45deg); opacity: 0; }
-    1% { opacity: 1; }
-    5% { transform: translate(600px, 600px) rotate(45deg); opacity: 0; }
-    100% { transform: translate(600px, 600px) rotate(45deg); opacity: 0; }
+    2% { opacity: 0.8; }
+    15% { transform: translate(800px, 800px) rotate(45deg); opacity: 0; }
+    100% { transform: translate(800px, 800px) rotate(45deg); opacity: 0; }
   }
 
-  .cosmic-1 { top: 10%; left: 20%; animation: shooting-star-anim 10s infinite 2s; }
-  .cosmic-2 { top: 30%; left: 60%; animation: shooting-star-anim 15s infinite 7s; }
-  .cosmic-3 { top: 5%; left: 80%; animation: shooting-star-anim 12s infinite 12s; }
+  @keyframes ufo-float {
+    0% { transform: translate(-100px, 20vh) scale(0.6); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.4; }
+    100% { transform: translate(110vw, 10vh) scale(0.6); opacity: 0; }
+  }
+
+  .ufo {
+    position: absolute;
+    width: 15px;
+    height: 6px;
+    background: radial-gradient(ellipse at center, #7dd3fc 0%, #0ea5e9 100%);
+    border-radius: 50% 50% 40% 40%;
+    box-shadow: 0 0 8px #7dd3fc;
+    z-index: -1;
+    animation: ufo-float 80s infinite linear;
+    pointer-events: none;
+  }
+
+  .ufo::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50% 50% 0 0;
+  }
+
+  .cosmic-1 { top: 15%; left: 10%; animation: shooting-star-anim 20s infinite 5s; }
+  .cosmic-2 { top: 40%; left: 50%; animation: shooting-star-anim 25s infinite 12s; }
+  .cosmic-3 { top: 10%; left: 75%; animation: shooting-star-anim 18s infinite 2s; }
 }
