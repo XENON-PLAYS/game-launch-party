@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
@@ -9,6 +9,8 @@ import { toast } from "sonner";
 const Cadastro = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
   const [form, setForm] = useState({ nome: "", email: "", senha: "", confirma: "" });
   const [erro, setErro] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -46,7 +48,7 @@ const Cadastro = () => {
     }
     
     toast.success("Conta criada com sucesso! Você já pode entrar.");
-    navigate("/login");
+    navigate(`/login${redirect !== "/" ? `?redirect=${redirect}` : ""}`);
   };
 
   return (
