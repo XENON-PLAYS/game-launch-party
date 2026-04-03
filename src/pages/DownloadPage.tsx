@@ -48,21 +48,28 @@ const DownloadPage = () => {
 
   const handleDownload = async () => {
     if (!link) return;
-    // Record download
-    await supabase.from("download_history").insert({
-      user_id: user?.id || null,
-      game_id: gameId!,
-      download_link_id: linkId!,
-    });
     
-    // Increment click count
-    await supabase.rpc('increment_link_clicks', { link_id: linkId! });
-    
-    // Increment game download count
-    await supabase.from("games").update({ download_count: (game as any)?.download_count + 1 }).eq("id", gameId!);
-    
-    // Increment click count — we use RPC or direct (admin only), so just open the link
-    window.open(link.url, "_blank");
+    try {
+      // Record download history
+      await supabase.from("download_history").insert({
+        user_id: user?.id || null,
+        game_id: gameId!,
+        download_link_id: linkId!,
+      });
+      
+      // Increment counts via RPC (bypass RLS and avoid NaN issues)
+      await Promise.all([
+        supabase.rpc('increment_link_clicks', { link_id: linkId! }),
+        supabase.rpc('increment_game_downloads', { game_id: gameId! })
+      ]);
+      
+      // Open the link in a new tab
+      window.open(link.url, "_blank");
+    } catch (error) {
+      console.error("Error during download tracking:", error);
+      // Still open the link even if tracking fails, to not block the user
+      window.open(link.url, "_blank");
+    }
   };
 
   return (

@@ -449,6 +449,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      increment_game_downloads: {
+        Args: { game_id: string }
+        Returns: undefined
+      }
       increment_link_clicks: { Args: { link_id: string }; Returns: undefined }
       slugify: { Args: { text: string }; Returns: string }
       unaccent: { Args: { "": string }; Returns: string }

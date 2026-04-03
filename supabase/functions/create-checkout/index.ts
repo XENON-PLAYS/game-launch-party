@@ -51,18 +51,18 @@ serve(async (req) => {
       apiVersion: "2023-10-16",
     });
 
-    const planConfig: Record<string, { amount: number, productId: string }> = {
+    const planConfig: Record<string, { amount: number, title: string }> = {
       "Mensal": { 
         amount: 500,
-        productId: "prod_UGA3qOYFSDXjZw" 
+        title: "Plano Mensal VIP" 
       },
       "Semestral": { 
         amount: 2500,
-        productId: "prod_UGA3qOYFSDXjZw"
+        title: "Plano Semestral VIP"
       },
       "Anual": { 
         amount: 4500,
-        productId: "prod_UGA3f7rVU6LR32"
+        title: "Plano Anual VIP"
       },
     };
 
@@ -77,7 +77,10 @@ serve(async (req) => {
           price_data: {
             currency: "brl",
             unit_amount: config.amount,
-            product: config.productId,
+            product_data: {
+              name: config.title,
+              description: `Acesso VIP ao site JOGOS GRATIS - Plano ${planName}`,
+            },
           },
           quantity: 1,
         },
