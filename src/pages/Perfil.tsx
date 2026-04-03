@@ -326,92 +326,111 @@ const Perfil = () => {
 
    case "settings":
     return (
-     <div className="auth-fieldset p-8">
+     <div className="auth-fieldset p-8 bg-card/40 backdrop-blur-xl border-white/5 shadow-2xl relative overflow-hidden group">
+      <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 blur-3xl rounded-full -mr-24 -mt-24 group-hover:bg-primary/10 transition-colors" />
+      
       <h1 className="auth-title !text-left !mb-8 flex items-center gap-3">
-       <Edit3 className="w-6 h-6 text-primary" />
-       Configurações
+       <div className="p-2 bg-primary/10 rounded-lg">
+        <Edit3 className="w-5 h-5 text-primary" />
+       </div>
+       Configurações de Conta
       </h1>
       
-      <form onSubmit={handleUpdateProfile} className="space-y-6">
-       <div className="grid sm:grid-cols-2 gap-6">
-        <div className="space-y-2">
-         <label className="auth-label">Nome de Exibição</label>
+      <form onSubmit={handleUpdateProfile} className="space-y-8 relative z-10">
+       <div className="grid sm:grid-cols-2 gap-8">
+        <div className="space-y-2 group/input">
+         <label className="auth-label group-focus-within/input:text-primary transition-colors flex items-center gap-2">
+          Nome de Exibição
+          <div className="h-px flex-1 bg-border/40 group-focus-within/input:bg-primary/20 transition-all" />
+         </label>
          <input 
           type="text" 
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
           placeholder="Como você quer ser chamado"
-          className="auth-input"
+          className="auth-input bg-white/[0.03] border-white/5 focus:bg-white/[0.06] transition-all hover:border-white/20"
          />
         </div>
         
-        <div className="space-y-2">
-         <label className="auth-label">Nome de Usuário (@)</label>
+        <div className="space-y-2 group/input">
+         <label className="auth-label group-focus-within/input:text-primary transition-colors flex items-center gap-2">
+          Nome de Usuário (@)
+          <div className="h-px flex-1 bg-border/40 group-focus-within/input:bg-primary/20 transition-all" />
+         </label>
          <input 
           type="text" 
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="usuario_unico"
-          className="auth-input"
+          className="auth-input bg-white/[0.03] border-white/5 focus:bg-white/[0.06] transition-all hover:border-white/20"
          />
         </div>
 
-        <div className="space-y-2 sm:col-span-2">
-         <label className="auth-label">Bio (Sobre você)</label>
+        <div className="space-y-2 sm:col-span-2 group/input">
+         <label className="auth-label group-focus-within/input:text-primary transition-colors flex items-center gap-2">
+          Bio (Conte um pouco sobre sua jornada)
+          <div className="h-px flex-1 bg-border/40 group-focus-within/input:bg-primary/20 transition-all" />
+         </label>
          <textarea 
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           placeholder="Conte um pouco sobre você..."
-          className="auth-input min-h-[100px] resize-none"
+          className="auth-input min-h-[120px] resize-none bg-white/[0.03] border-white/5 focus:bg-white/[0.06] transition-all hover:border-white/20"
          />
         </div>
 
-        <div className="space-y-2">
-         <label className="auth-label">Preferência de Tema</label>
-         <div className="flex gap-2">
+        <div className="space-y-3">
+         <label className="auth-label flex items-center gap-2">
+          Ambiente Visual
+          <div className="h-px flex-1 bg-border/40" />
+         </label>
+         <div className="flex gap-3 p-1 bg-black/20 rounded-xl border border-white/5">
           <button
            type="button"
            onClick={() => setThemePreference("dark")}
-           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${themePreference === 'dark' ? 'border-primary bg-primary/10' : 'border-border bg-secondary/50'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${themePreference === 'dark' ? 'border-primary/50 bg-primary/20 text-white shadow-inner' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
           >
            <Moon className="w-4 h-4" /> Escuro
           </button>
           <button
            type="button"
            onClick={() => setThemePreference("light")}
-           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${themePreference === 'light' ? 'border-primary bg-primary/10' : 'border-border bg-secondary/50'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${themePreference === 'light' ? 'border-primary/50 bg-primary/20 text-white shadow-inner' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
           >
            <Sun className="w-4 h-4" /> Claro
           </button>
          </div>
         </div>
 
-        <div className="space-y-2">
-         <label className="auth-label">Status Online</label>
-         <div className="flex gap-2">
+        <div className="space-y-3">
+         <label className="auth-label flex items-center gap-2">
+          Privacidade & Status
+          <div className="h-px flex-1 bg-border/40" />
+         </label>
+         <div className="flex gap-3 p-1 bg-black/20 rounded-xl border border-white/5">
           <button
            type="button"
            onClick={() => setStatus("online")}
-           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${status === 'online' ? 'border-green-500 bg-green-500/10' : 'border-border bg-secondary/50'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${status === 'online' ? 'border-green-500/50 bg-green-500/10 text-green-400' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
           >
-           <Circle className="w-3 h-3 fill-green-500 text-green-500" /> Online
+           <div className={`w-2 h-2 rounded-full ${status === 'online' ? 'bg-green-500 animate-pulse' : 'bg-green-900/40'}`} /> Online
           </button>
           <button
            type="button"
            onClick={() => setStatus("offline")}
-           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all ${status === 'offline' ? 'border-gray-500 bg-gray-500/10' : 'border-border bg-secondary/50'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${status === 'offline' ? 'border-gray-500/50 bg-gray-500/10 text-gray-400' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
           >
-           <Circle className="w-3 h-3 fill-gray-500 text-gray-500" /> Offline
+           <div className={`w-2 h-2 rounded-full ${status === 'offline' ? 'bg-gray-500 shadow-lg' : 'bg-gray-900/40'}`} /> Offline
           </button>
          </div>
         </div>
        </div>
 
-       <div className="pt-4 border-t border-border">
+       <div className="pt-8 border-t border-white/5 flex justify-end">
         <button 
          type="submit" 
          disabled={loading}
-         className="auth-btn px-8 flex items-center justify-center gap-2 min-w-[150px]"
+         className="auth-btn !w-auto px-10 flex items-center justify-center gap-2 hover:scale-[1.02] hover:shadow-primary/25 active:scale-95 transition-all shadow-xl"
         >
          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
          Salvar Alterações
