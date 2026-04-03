@@ -1,4 +1,4 @@
-import { Store, LogOut, Shield, ChevronDown, User, Bell, Settings } from "lucide-react";
+import { Store, LogOut, Skull, ChevronDown, User, Bell, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
@@ -20,7 +20,7 @@ export function AdminHeader() {
     <header className="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-border/10 bg-background/40 px-4 backdrop-blur-2xl md:px-6">
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-2 md:hidden">
-          <Shield className="h-6 w-6 text-primary" />
+          <Skull className="h-6 w-6 text-primary animate-pulse" />
           <span className="text-lg font-bold">Admin</span>
         </div>
       </div>
@@ -51,7 +51,7 @@ export function AdminHeader() {
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">{profile?.display_name || "Administrador"}</p>
-                <p className="text-xs leading-none text-muted-foreground">{profile?.user_id ? "admin@elite.com" : "Carregando..."}</p>
+                <p className="text-xs leading-none text-muted-foreground">{profile?.user_id ? "admin@jogosgratis.com" : "Carregando..."}</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />

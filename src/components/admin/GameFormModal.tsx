@@ -201,7 +201,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                 {mode === "add" ? "Cadastrar Novo" : "Configurar"} <span className="text-primary">Título</span>
               </DialogTitle>
               <DialogDescription className="text-xs font-bold uppercase tracking-[0.2em] opacity-60">
-                Central de gerenciamento de metadados do Elite
+                Central de gerenciamento de metadados de JOGOS GRATIS
               </DialogDescription>
             </div>
           </div>

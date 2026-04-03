@@ -11,7 +11,8 @@ import {
   BarChart3,
   ExternalLink,
   PlusCircle,
-  AlertTriangle
+  AlertTriangle,
+  Skull
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -62,11 +63,11 @@ export function AdminSidebar() {
       <div className="p-6">
         <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20">
-            <Shield className="h-6 w-6" />
+            <Skull className="h-6 w-6 animate-pulse" />
           </div>
           <div className="flex flex-col">
-            <span className="text-lg font-black tracking-tighter leading-none">ELITE</span>
-            <span className="text-[10px] font-black tracking-[0.2em] text-primary uppercase">Studio</span>
+            <span className="text-lg font-black tracking-tighter leading-none uppercase">JOGOS</span>
+            <span className="text-[10px] font-black tracking-[0.2em] text-primary uppercase">GRATIS</span>
           </div>
         </Link>
       </div>
