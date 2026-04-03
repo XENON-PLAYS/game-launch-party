@@ -103,7 +103,7 @@ export function DashboardOverview({ games, userCount, averageRating }: Dashboard
         <StatCard 
           icon={Star} 
           label="Avaliação Média" 
-          value={averageRating} 
+          value={displayRating} 
           trend="+0.2" 
           color="bg-yellow-500" 
         />
