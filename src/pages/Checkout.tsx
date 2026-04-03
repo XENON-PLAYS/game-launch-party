@@ -62,25 +62,24 @@ const Checkout = () => {
     setLoading(true);
     
     try {
-      const { data, error } = await supabase.functions.invoke("create-checkout", {
-        body: {
-          planName,
-          userId: user.id,
-          email: user.email,
-        },
-      });
-
-      if (error) throw error;
+      // Find the corresponding URL in PRICING_CONFIG
+      const planKey = planName.toLowerCase() as keyof typeof PRICING_CONFIG;
+      const stripeUrl = PRICING_CONFIG[planKey];
       
-      if (data?.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error("Não foi possível gerar o link de pagamento.");
+      if (!stripeUrl) {
+        throw new Error("Plano não configurado.");
       }
+
+      // Add user info to the URL to link the payment to the user
+      const checkoutUrl = new URL(stripeUrl);
+      checkoutUrl.searchParams.set("prefilled_email", user.email || "");
+      checkoutUrl.searchParams.set("client_reference_id", user.id);
+      
+      // Redirect to Stripe checkout
+      window.location.href = checkoutUrl.toString();
     } catch (error: any) {
-      console.error("Error creating checkout session:", error);
+      console.error("Error redirecting to checkout:", error);
       toast.error(error.message || "Erro ao iniciar o pagamento. Tente novamente mais tarde.");
-    } finally {
       setLoading(false);
     }
   };
