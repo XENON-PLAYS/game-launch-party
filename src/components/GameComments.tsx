@@ -25,18 +25,34 @@ export function GameComments({ gameId }: GameCommentsProps) {
   const { data: comments = [], isLoading, isError } = useQuery({
     queryKey: ["comments", gameId],
     queryFn: async () => {
-      const { data, error } = await supabase
+      // Primeiro busca os comentários
+      const { data: comments, error: commentsError } = await supabase
         .from("game_comments")
-        .select(`
-          *,
-          profiles:user_id(display_name, avatar_url, is_vip, badges)
-        `)
+        .select("*")
         .eq("game_id", gameId)
-        .order("created_at", { ascending: true }) // Ascending for chat feel
+        .order("created_at", { ascending: true })
         .limit(100);
       
-      if (error) throw error;
-      return data ?? [];
+      if (commentsError) throw commentsError;
+      if (!comments || comments.length === 0) return [];
+
+      // Depois busca os perfis relacionados separadamente (abordagem alternativa sem join)
+      const userIds = [...new Set(comments.map(c => c.user_id))];
+      const { data: profiles, error: profilesError } = await supabase
+        .from("profiles")
+        .select("user_id, display_name, avatar_url, is_vip, badges")
+        .in("user_id", userIds);
+
+      if (profilesError) {
+        console.error("Erro ao carregar perfis:", profilesError);
+        return comments;
+      }
+
+      // Une os dados
+      return comments.map(comment => ({
+        ...comment,
+        profiles: profiles.find(p => p.user_id === comment.user_id)
+      }));
     },
   });
 
