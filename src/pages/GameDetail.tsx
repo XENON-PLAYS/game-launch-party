@@ -434,7 +434,11 @@ const GameDetail = () => {
         </section>
 
         {/* Installation Section */}
-        <section className="space-y-16">
+        <section className="space-y-16 relative py-16 px-6 sm:px-12 rounded-[3.5rem] bg-card/30 border border-border/50 overflow-hidden shadow-inner">
+          {/* Decorative background for the section */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -z-10 translate-x-1/3 -translate-y-1/3" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -z-10 -translate-x-1/3 translate-y-1/3" />
+          
           <div className="flex items-center gap-6 sm:gap-10">
             <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
               <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
