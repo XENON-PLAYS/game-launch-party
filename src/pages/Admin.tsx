@@ -442,6 +442,33 @@ const Admin = () => {
                 </div>
               )}
 
+              {activeTab === "installation" && (
+                <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-500">
+                  <div className="grid lg:grid-cols-2 gap-12">
+                    <div className="space-y-6">
+                      <div>
+                        <label className="admin-label">Pré-requisitos / Dependências</label>
+                        <textarea rows={4} value={editGame.pre_requisitos || ""} onChange={(e) => setField("pre_requisitos", e.target.value)} placeholder="Steam, DirectX 12, etc." className="admin-input resize-none" />
+                      </div>
+                      <div>
+                        <label className="admin-label">Passo a Passo (separe por ;)</label>
+                        <textarea rows={6} value={editGame.passo_a_passo || ""} onChange={(e) => setField("passo_a_passo", e.target.value)} placeholder="1. Baixar; 2. Instalar; 3. Jogar" className="admin-input resize-none" />
+                      </div>
+                    </div>
+                    <div className="space-y-6">
+                      <div>
+                        <label className="admin-label">Link Demo / Teste</label>
+                        <input value={editGame.link_demo || ""} onChange={(e) => setField("link_demo", e.target.value)} placeholder="https://store.steampowered.com/app/..." className="admin-input" />
+                      </div>
+                      <div>
+                        <label className="admin-label">Observações (separe por ;)</label>
+                        <textarea rows={6} value={editGame.observacoes || ""} onChange={(e) => setField("observacoes", e.target.value)} placeholder="Idioma: Português; Tamanho: 60GB; etc." className="admin-input resize-none" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {activeTab === "downloads" && (
                 <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
                   <div className="flex items-center justify-between">
