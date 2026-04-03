@@ -102,6 +102,9 @@ export function Header() {
                         <Shield className="w-4 h-4" /> Admin
                       </Link>
                     )}
+                    <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
+                      <User className="w-4 h-4" /> Perfil
+                    </Link>
                     <Link to="/vip" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-yellow-500/10 text-yellow-500 rounded-lg text-sm font-bold">
                       <Trophy className="w-4 h-4" /> Área VIP
                     </Link>
@@ -147,7 +150,9 @@ export function Header() {
               </>
             ) : (
               <>
-                
+                <Link to="/perfil" className="flex items-center gap-2 text-muted-foreground" onClick={() => setMobileOpen(false)}>
+                  <User className="w-4 h-4" /> Perfil
+                </Link>
                 <button onClick={() => { logout(); setMobileOpen(false); }} className="flex items-center gap-2 text-destructive"><LogOut className="w-4 h-4" /> Sair</button>
               </>
             )}
