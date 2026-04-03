@@ -576,133 +576,135 @@ const Perfil = () => {
 
    <Header />
    
-   <main className="flex-1 container mx-auto px-4 py-12 max-w-6xl relative z-10">
-     <div className="grid md:grid-cols-[280px_1fr] gap-8">
-      {/* Sidebar */}
-      <div className="space-y-6">
-       <div className="auth-fieldset flex flex-col items-center p-0 overflow-hidden group/sidebar">
-        {/* Cover Gradient */}
-        <div className="w-full h-24 bg-gradient-to-br from-primary/40 via-primary/20 to-transparent relative">
-         <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
-        </div>
-        
-        <div className="flex flex-col items-center px-8 pb-8 -mt-12 relative z-10">
-         <div className="relative group">
-          <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-background bg-secondary flex items-center justify-center relative shadow-xl ring-1 ring-white/10">
-          {targetProfile?.avatar_url ? (
-           <img 
-            src={targetProfile.avatar_url} 
-            alt="Avatar" 
-            className="w-full h-full object-cover"
-           />
-          ) : (
-           <User className="w-16 h-16 text-muted-foreground" />
-          )}
-          {uploading && (
-           <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-            <Loader2 className="w-8 h-8 animate-spin text-white" />
-           </div>
-          )}
-         </div>
-         
-         {isOwnProfile && (
-           <button 
-            onClick={() => fileInputRef.current?.click()}
-            disabled={uploading}
-            className="absolute bottom-0 right-0 bg-primary text-primary-foreground p-2 rounded-full shadow-lg hover:scale-110 transition-transform disabled:opacity-50"
-           >
-            <Camera className="w-4 h-4" />
-           </button>
-         )}
-         
-         {isGifAvatar && (
-          <div className="absolute -top-1 -right-1 bg-yellow-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5 animate-pulse shadow-lg">
-           <BadgeCheck className="w-3 h-3" /> GIF
+    <main className="flex-1 container mx-auto px-4 py-12 max-w-6xl relative z-10">
+      <div className="grid md:grid-cols-[280px_1fr] gap-8 items-start">
+        {/* Sidebar Container */}
+        <div className="space-y-6">
+          {/* User Info Card */}
+          <div className="auth-fieldset flex flex-col items-center p-0 overflow-hidden group/sidebar">
+            {/* Cover Gradient */}
+            <div className="w-full h-24 bg-gradient-to-br from-primary/40 via-primary/20 to-transparent relative">
+              <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
+            </div>
+            
+            <div className="flex flex-col items-center px-8 pb-8 -mt-12 relative z-10">
+              <div className="relative group">
+                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-background bg-secondary flex items-center justify-center relative shadow-xl ring-1 ring-white/10">
+                  {targetProfile?.avatar_url ? (
+                    <img 
+                      src={targetProfile.avatar_url} 
+                      alt="Avatar" 
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <User className="w-16 h-16 text-muted-foreground" />
+                  )}
+                  {uploading && (
+                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                      <Loader2 className="w-8 h-8 animate-spin text-white" />
+                    </div>
+                  )}
+                </div>
+                
+                {isOwnProfile && (
+                  <button 
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={uploading}
+                    className="absolute bottom-0 right-0 bg-primary text-primary-foreground p-2 rounded-full shadow-lg hover:scale-110 transition-transform disabled:opacity-50"
+                  >
+                    <Camera className="w-4 h-4" />
+                  </button>
+                )}
+                
+                {isGifAvatar && (
+                  <div className="absolute -top-1 -right-1 bg-yellow-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5 animate-pulse shadow-lg">
+                    <BadgeCheck className="w-3 h-3" /> GIF
+                  </div>
+                )}
+                
+                <input 
+                  type="file" 
+                  ref={fileInputRef}
+                  className="hidden" 
+                  accept="image/jpeg,image/png,image/gif"
+                  onChange={handleAvatarUpload}
+                />
+              </div>
+
+              <div className="text-center mt-4 w-full">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <h2 className="text-xl truncate max-w-[180px] font-bold">
+                    {targetProfile?.display_name || "Usuário"}
+                  </h2>
+                  <div className={`w-2.5 h-2.5 rounded-full ${targetProfile?.status === 'online' || (targetProfile?.last_seen_at && new Date(targetProfile.last_seen_at).getTime() > Date.now() - 5 * 60 * 1000) ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-gray-500'}`} />
+                </div>
+                <p className="text-muted-foreground text-sm ">
+                  @{targetProfile?.username || "sem_usuario"}
+                </p>
+                
+                <div className="flex flex-wrap justify-center gap-2 mt-4">
+                  {targetProfile?.is_vip && (
+                    <span className="bg-yellow-500/10 text-yellow-500 text-[9px] font-bold px-2 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest ">
+                      VIP
+                    </span>
+                  )}
+                  {targetProfile?.badges?.map((badge: string, idx: number) => (
+                    <span key={idx} className="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded border border-primary/20 uppercase tracking-widest ">
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-         )}
-         
-         <input 
-          type="file" 
-          ref={fileInputRef}
-          className="hidden" 
-          accept="image/jpeg,image/png,image/gif"
-          onChange={handleAvatarUpload}
-         />
+
+          {/* Nav Menu */}
+          <div className="auth-fieldset !p-2 space-y-1 bg-card/40 backdrop-blur-xl border-white/5 shadow-xl">
+            {[
+              { id: "profile", icon: User, label: "Perfil", hidden: false },
+              { id: "settings", icon: Edit3, label: "Configurações", hidden: !isOwnProfile },
+              { id: "favorites", icon: Heart, label: "Favoritos", hidden: !isOwnProfile },
+              { id: "history", icon: History, label: "Download History", hidden: !isOwnProfile },
+              { id: "ranking", icon: Trophy, label: "Ranking Global", hidden: false },
+              { id: "recommendations", icon: Sparkles, label: "Sugestões", hidden: false },
+            ].filter(tab => !tab.hidden).map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-300 ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/25 scale-[1.02]' : 'hover:bg-primary/10 text-muted-foreground hover:text-primary hover:translate-x-1'}`}
+              >
+                <tab.icon className={`w-4 h-4 transition-colors ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
+                <span className="font-semibold">{tab.label}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Account Details */}
+          {isOwnProfile && (
+            <div className="auth-fieldset p-6 space-y-5 bg-card/30 backdrop-blur-xl border-white/5 shadow-xl">
+              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground border-b border-white/5 pb-3">Dados da Conta</h3>
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <p className="text-[9px] text-primary font-black uppercase tracking-widest ">E-mail cadastrado</p>
+                  <p className="text-xs font-bold truncate text-foreground/90">{user?.email}</p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-[9px] text-primary font-black uppercase tracking-widest ">Data de cadastro</p>
+                  <p className="text-xs font-bold text-foreground/90">
+                    {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
-        <div className="text-center mt-4 w-full">
-         <div className="flex items-center justify-center gap-2 mb-1">
-          <h2 className="text-xl truncate max-w-[180px]">
-           {targetProfile?.display_name || "Usuário"}
-          </h2>
-          <div className={`w-2.5 h-2.5 rounded-full ${targetProfile?.status === 'online' || (targetProfile?.last_seen_at && new Date(targetProfile.last_seen_at).getTime() > Date.now() - 5 * 60 * 1000) ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-gray-500'}`} />
-         </div>
-         <p className="text-muted-foreground text-sm ">
-          @{targetProfile?.username || "sem_usuario"}
-         </p>
-         
-         <div className="flex flex-wrap justify-center gap-2 mt-4">
-          {targetProfile?.is_vip && (
-           <span className="bg-yellow-500/10 text-yellow-500 text-[9px] font-bold px-2 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest ">
-            VIP
-           </span>
-          )}
-          {targetProfile?.badges?.map((badge: string, idx: number) => (
-           <span key={idx} className="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded border border-primary/20 uppercase tracking-widest ">
-            {badge}
-           </span>
-          ))}
-         </div>
+        {/* Main Content Area */}
+        <div className="space-y-6">
+          {renderTabContent()}
         </div>
-       </div>
       </div>
-
-      {/* Nav Menu */}
-       <div className="auth-fieldset !p-2 space-y-1 bg-card/40 backdrop-blur-xl border-white/5 shadow-xl">
-        {[
-         { id: "profile", icon: User, label: "Perfil", hidden: false },
-         { id: "settings", icon: Edit3, label: "Configurações", hidden: !isOwnProfile },
-         { id: "favorites", icon: Heart, label: "Favoritos", hidden: !isOwnProfile },
-         { id: "history", icon: History, label: "Download History", hidden: !isOwnProfile },
-         { id: "ranking", icon: Trophy, label: "Ranking Global", hidden: false },
-         { id: "recommendations", icon: Sparkles, label: "Sugestões", hidden: false },
-        ].filter(tab => !tab.hidden).map(tab => (
-         <button
-          key={tab.id}
-          onClick={() => setActiveTab(tab.id as any)}
-          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-300 ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/25 scale-[1.02]' : 'hover:bg-primary/10 text-muted-foreground hover:text-primary hover:translate-x-1'}`}
-         >
-          <tab.icon className={`w-4 h-4 transition-colors ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
-          <span className="font-semibold">{tab.label}</span>
-         </button>
-        ))}
-       </div>
-
-       {isOwnProfile && (
-        <div className="auth-fieldset p-6 space-y-5 bg-card/30 backdrop-blur-xl border-white/5 shadow-xl">
-         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground border-b border-white/5 pb-3">Dados da Conta</h3>
-         <div className="space-y-4">
-          <div className="space-y-1">
-           <p className="text-[9px] text-primary font-black uppercase tracking-widest ">E-mail cadastrado</p>
-           <p className="text-xs font-bold truncate text-foreground/90">{user?.email}</p>
-          </div>
-          <div className="space-y-1">
-           <p className="text-[9px] text-primary font-black uppercase tracking-widest ">Data de cadastro</p>
-           <p className="text-xs font-bold text-foreground/90">
-            {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
-           </p>
-          </div>
-         </div>
-        </div>
-       )}
-     </div>
-
-     {/* Main Content Area */}
-     <div className="space-y-6">
-      {renderTabContent()}
-     </div>
-    </div>
-   </main>
+    </main>
   </div>
  );
 };
