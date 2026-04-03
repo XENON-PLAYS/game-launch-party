@@ -22,10 +22,15 @@ interface DashboardOverviewProps {
   games: Game[];
   userCount: number;
   averageRating: number;
+  pendingRequests?: number;
+  newReports?: number;
 }
 
-const StatCard = ({ icon: Icon, label, value, trend, color }: { icon: any, label: string, value: string | number, trend?: string, color: string }) => (
-  <Card className="overflow-hidden border-border/40 bg-card/50 backdrop-blur-xl group hover:border-primary/40 transition-all duration-500 shadow-lg shadow-black/5">
+const StatCard = ({ icon: Icon, label, value, trend, color, onClick }: { icon: any, label: string, value: string | number, trend?: string, color: string, onClick?: () => void }) => (
+  <Card 
+    onClick={onClick}
+    className={`overflow-hidden border-border/40 bg-card/50 backdrop-blur-xl group hover:border-primary/40 transition-all duration-500 shadow-lg shadow-black/5 ${onClick ? 'cursor-pointer' : ''}`}
+  >
     <CardContent className="p-6">
       <div className="flex items-center justify-between gap-4">
         <div className="space-y-2">
@@ -46,7 +51,7 @@ const StatCard = ({ icon: Icon, label, value, trend, color }: { icon: any, label
   </Card>
 );
 
-export function DashboardOverview({ games, userCount, averageRating }: DashboardOverviewProps) {
+export function DashboardOverview({ games, userCount, averageRating, pendingRequests = 0, newReports = 0 }: DashboardOverviewProps) {
   const totalDownloads = games.reduce((acc, game) => acc + (game.download_count || 0), 0);
   const displayRating = averageRating > 0 ? averageRating.toFixed(1) : "0.0";
   
@@ -78,7 +83,7 @@ export function DashboardOverview({ games, userCount, averageRating }: Dashboard
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <StatCard 
           icon={Gamepad2} 
           label="Total de Jogos" 
@@ -106,6 +111,18 @@ export function DashboardOverview({ games, userCount, averageRating }: Dashboard
           value={displayRating} 
           trend="+0.2" 
           color="bg-yellow-500" 
+        />
+        <StatCard 
+          icon={Gamepad2} 
+          label="Pedidos Pendentes" 
+          value={pendingRequests} 
+          color="bg-amber-500" 
+        />
+        <StatCard 
+          icon={AlertTriangle} 
+          label="Reportes Novos" 
+          value={newReports} 
+          color="bg-destructive" 
         />
       </div>
 
