@@ -36,7 +36,7 @@ export function SkyBackground() {
             y: [0, 30, 0]
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full blur-[120px] bg-primary/20"
+          className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full blur-[120px] bg-primary/20 will-change-transform"
         />
         <motion.div 
           animate={{
