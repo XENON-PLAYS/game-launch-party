@@ -65,7 +65,7 @@ export function HeroCarousel() {
   const game = featured[current];
 
   return (
-    <section className="relative h-[600px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
+    <section className="relative h-[850px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={current}
@@ -94,9 +94,9 @@ export function HeroCarousel() {
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           </motion.div>
 
-          <div className="container-responsive h-full flex flex-col justify-center relative z-10 pt-16 md:pt-0">
-            <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-8 md:gap-12 items-center">
-              <div className="space-y-4 md:space-y-6 max-w-2xl">
+          <div className="container-responsive h-full flex flex-col justify-center relative z-10 pt-12 sm:pt-16 md:pt-0">
+            <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 sm:gap-8 md:gap-12 items-center">
+              <div className="space-y-3 sm:space-y-4 md:space-y-6 max-w-2xl">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -164,9 +164,9 @@ export function HeroCarousel() {
                 initial={{ opacity: 0, scale: 0.8, rotate: 2 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ delay: 0.6, duration: 1, type: "spring" }}
-                className="flex justify-center items-center mt-6 md:mt-0"
+                className="flex justify-center items-center mt-4 sm:mt-6 md:mt-0"
               >
-                <div className="relative group/poster w-full max-w-[240px] sm:max-w-[320px] lg:max-w-[400px]">
+                <div className="relative group/poster w-full max-w-[180px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[400px]">
                   <div className="absolute -inset-4 bg-primary/20 rounded-[2.5rem] blur-2xl group-hover:bg-primary/30 transition-all duration-700" />
                   <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-3xl overflow-hidden border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] aspect-[3/4] relative">
                     <img 
@@ -185,15 +185,14 @@ export function HeroCarousel() {
       </AnimatePresence>
 
       {/* Modern Controls */}
-      <div className="absolute bottom-12 left-0 w-full z-20">
-        <div className="container-responsive flex items-center justify-between">
-          <div className="flex gap-4">
+      <div className="absolute bottom-6 sm:bottom-12 left-0 w-full z-20">
+        <div className="container-responsive flex items-center justify-between gap-4">
+          <div className="flex gap-2 sm:gap-4">
             {featured.map((_, i) => (
               <button 
                 key={i} 
                 onClick={() => goTo(i)}
-                className="relative h-1 group focus:outline-none" 
-                style={{ width: i === current ? "60px" : "30px" }}
+                className={`relative h-1 group focus:outline-none transition-all duration-300 ${i === current ? 'w-10 sm:w-[60px]' : 'w-5 sm:w-[30px]'}`}
               >
                 <div className="absolute inset-0 bg-white/20 rounded-full overflow-hidden">
                   <motion.div 
