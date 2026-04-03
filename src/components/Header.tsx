@@ -32,12 +32,13 @@ export function Header() {
       <div className="container-responsive flex items-center justify-between gap-3 md:gap-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0">
-          <Shield 
-            className="w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:w-14 lg:h-14 text-primary" 
+          <img 
+            src={logo} 
+            alt="Logo" 
+            className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 object-contain" 
           />
           <div className="flex flex-col">
-            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none">ELITE</span>
-            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none text-primary">STUDIO</span>
+            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none text-primary">JOGO GRATIS</span>
           </div>
         </Link>
 
