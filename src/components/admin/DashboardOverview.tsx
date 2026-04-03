@@ -96,7 +96,7 @@ export function DashboardOverview({ games, userCount, averageRating }: Dashboard
         <StatCard 
           icon={Users} 
           label="Usuários Ativos" 
-          value="1,420" 
+          value={userCount.toLocaleString()} 
           trend="+28%" 
           color="bg-purple-500" 
         />
