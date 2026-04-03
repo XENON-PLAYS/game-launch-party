@@ -164,9 +164,9 @@ export function HeroCarousel() {
                 initial={{ opacity: 0, scale: 0.8, rotate: 2 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ delay: 0.6, duration: 1, type: "spring" }}
-                className="flex justify-center items-center mt-6 md:mt-0"
+                className="flex justify-center items-center mt-4 sm:mt-6 md:mt-0"
               >
-                <div className="relative group/poster w-full max-w-[240px] sm:max-w-[320px] lg:max-w-[400px]">
+                <div className="relative group/poster w-full max-w-[180px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[400px]">
                   <div className="absolute -inset-4 bg-primary/20 rounded-[2.5rem] blur-2xl group-hover:bg-primary/30 transition-all duration-700" />
                   <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-3xl overflow-hidden border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] aspect-[3/4] relative">
                     <img 
