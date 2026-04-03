@@ -16,6 +16,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<"stripe" | "pix">("stripe");
   const planName = searchParams.get("plan");
 
   const plans = {
