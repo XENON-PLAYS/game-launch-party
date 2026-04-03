@@ -12,12 +12,12 @@ export function SunMoonSystem() {
       <motion.div
         initial={false}
         animate={{
-          x: isDark ? 0 : -12,
-          y: isDark ? 0 : 0,
-          scale: isDark ? 1 : 0.6,
-          opacity: isDark ? 1 : 0.5,
-          rotate: isDark ? 0 : 180,
-          filter: isDark ? "blur(0px)" : "blur(0.5px)",
+          x: !isDark ? 0 : -12,
+          y: !isDark ? 0 : 0,
+          scale: !isDark ? 1 : 0.6,
+          opacity: !isDark ? 1 : 0.5,
+          rotate: !isDark ? 0 : 180,
+          filter: !isDark ? "blur(0px)" : "blur(0.5px)",
         }}
         transition={{ 
           type: "spring", 
