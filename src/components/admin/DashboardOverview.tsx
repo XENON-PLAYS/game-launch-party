@@ -9,7 +9,8 @@ import {
   Shield,
   Zap,
   Flame,
-  MousePointer2
+  MousePointer2,
+  AlertTriangle
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";

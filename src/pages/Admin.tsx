@@ -156,6 +156,8 @@ const Admin = () => {
                   games={games} 
                   userCount={statsData?.userCount || 0} 
                   averageRating={statsData?.averageRating || 0} 
+                  pendingRequests={statsData?.pendingRequests || 0}
+                  newReports={statsData?.newReports || 0}
                 />
               )}
               {activeTab === "games" && (
