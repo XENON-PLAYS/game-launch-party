@@ -37,8 +37,21 @@ const Admin = () => {
       return data ?? [];
     },
   });
-
-  const { data: usersData = [], isLoading: usersLoading } = useQuery({
+  
+  const { data: statsData } = useQuery({
+    queryKey: ["admin-stats"],
+    queryFn: async () => {
+      const { count: userCount } = await supabase.from("profiles").select("*", { count: "exact", head: true });
+      const { data: ratingData } = await supabase.from("game_ratings").select("rating");
+      
+      const avgRating = ratingData && ratingData.length > 0
+        ? ratingData.reduce((acc, r) => acc + r.rating, 0) / ratingData.length
+        : 0;
+        
+      return { userCount: userCount ?? 0, averageRating: avgRating };
+    },
+    enabled: activeTab === "dashboard",
+  });
     queryKey: ["admin-users"],
     queryFn: async () => {
       const { data, error } = await supabase
