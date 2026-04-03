@@ -46,7 +46,12 @@ export function Header() {
         {/* Nav Desktop */}
         <nav className="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-widest">
           <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Catálogo</Link>
-          <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Novidades</Link>
+          <button 
+            onClick={() => user ? setIsRequestModalOpen(true) : navigate("/login")}
+            className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+          >
+            <PlusCircle className="w-4 h-4" /> Pedir Jogo
+          </button>
           <Link to="/vip" className="text-yellow-500 hover:text-yellow-400 flex items-center gap-2 animate-pulse">
             <Trophy className="w-4 h-4" /> VIP
           </Link>
