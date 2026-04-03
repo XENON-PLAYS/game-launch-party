@@ -33,7 +33,8 @@ export function GameComments({ gameId }: GameCommentsProps) {
         `)
         .eq("game_id", gameId)
         .is("parent_id", null)
-        .order("created_at", { ascending: true }); // Ascending for chat feel
+        .order("created_at", { ascending: true }) // Ascending for chat feel
+        .limit(100);
       
       if (error) throw error;
       return data ?? [];
