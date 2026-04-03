@@ -152,7 +152,11 @@ export function Header() {
           >
             Pedir Jogo
           </button>
-          {isAdmin && <Link to="/admin" className="block py-2 text-primary" onClick={() => setMobileOpen(false)}>Admin</Link>}
+          {isAdmin && (
+            <Link to="/admin" className="block py-2 text-primary flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+              <Shield className="w-4 h-4" /> Painel de Administrador
+            </Link>
+          )}
           <Link to="/vip" className="block py-2 text-yellow-500 animate-pulse flex items-center gap-2" onClick={() => setMobileOpen(false)}>
             <Trophy className="w-4 h-4" /> VIP
           </Link>
