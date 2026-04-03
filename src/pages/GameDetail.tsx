@@ -453,50 +453,6 @@ const GameDetail = () => {
 
           <div className="grid lg:grid-cols-2 gap-10 sm:gap-16">
             <div className="space-y-10">
-              {/* Technical Sheet - Including all information as requested */}
-              <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
-                <div className="flex items-center gap-4 text-primary">
-                  <Monitor className="w-6 h-6" />
-                  <h3 className="text-xl font-black uppercase tracking-widest">Ficha Técnica do Jogo</h3>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-6 text-sm">
-                  {[
-                    { label: "Nome", value: game.nome },
-                    { label: "Desenvolvedor", value: game.desenvolvedor },
-                    { label: "Distribuidor", value: game.distribuidor },
-                    { label: "Lançamento", value: game.lancamento },
-                    { label: "Classificação", value: game.classificacao },
-                    { label: "Tamanho", value: game.tamanho },
-                    { label: "Preço", value: game.preco === 0 ? "Grátis" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}` },
-                  ].map((item, i) => item.value ? (
-                    <div key={i} className="space-y-1">
-                      <span className="text-muted-foreground opacity-60 uppercase text-[10px] font-bold tracking-widest">{item.label}</span>
-                      <p className="font-black text-foreground">{String(item.value)}</p>
-                    </div>
-                  ) : null)}
-                  
-                  {game.idiomas && game.idiomas.length > 0 && (
-                    <div className="space-y-1 sm:col-span-2">
-                      <span className="text-muted-foreground opacity-60 uppercase text-[10px] font-bold tracking-widest">Idiomas</span>
-                      <p className="font-black text-foreground">{(game.idiomas as string[]).join(", ")}</p>
-                    </div>
-                  )}
-                  
-                  {game.modos && game.modos.length > 0 && (
-                    <div className="space-y-1 sm:col-span-2">
-                      <span className="text-muted-foreground opacity-60 uppercase text-[10px] font-bold tracking-widest">Modos de Jogo</span>
-                      <p className="font-black text-foreground">{(game.modos as string[]).join(", ")}</p>
-                    </div>
-                  )}
-
-                  {game.categorias && game.categorias.length > 0 && (
-                    <div className="space-y-1 sm:col-span-2">
-                      <span className="text-muted-foreground opacity-60 uppercase text-[10px] font-bold tracking-widest">Categorias</span>
-                      <p className="font-black text-foreground">{(game.categorias as string[]).join(", ")}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
 
               {game.pre_requisitos && (
                 <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
