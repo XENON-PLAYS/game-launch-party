@@ -1,6 +1,25 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export const SpaceBackground = () => {
+  const [shootingStars, setShootingStars] = useState<{ id: number; top: string; left: string; delay: number; duration: number }[]>([]);
+
+  useEffect(() => {
+    // Generate random shooting stars
+    const interval = setInterval(() => {
+      const newStar = {
+        id: Date.now(),
+        top: `${Math.random() * 50}%`,
+        left: `${Math.random() * 100}%`,
+        delay: Math.random() * 2,
+        duration: 1.5 + Math.random() * 2,
+      };
+      setShootingStars((prev) => [...prev.slice(-3), newStar]);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-[#05070A]">
       {/* Fixed Stars Layer */}
@@ -22,8 +41,8 @@ export const SpaceBackground = () => {
       {/* Twinkling Stars Layer */}
       <motion.div 
         initial={{ opacity: 0.1 }}
-        animate={{ opacity: [0.1, 0.4, 0.1] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        animate={{ opacity: [0.1, 0.5, 0.1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
         className="absolute inset-0"
         style={{
           backgroundImage: `
@@ -36,13 +55,84 @@ export const SpaceBackground = () => {
         }}
       />
 
+      {/* Shooting Stars */}
+      {shootingStars.map((star) => (
+        <motion.div
+          key={star.id}
+          initial={{ x: 0, y: 0, opacity: 0, scale: 0 }}
+          animate={{ 
+            x: -400, 
+            y: 400, 
+            opacity: [0, 1, 0],
+            scale: [0, 1, 0.5]
+          }}
+          transition={{ 
+            duration: star.duration, 
+            delay: star.delay,
+            ease: "easeOut"
+          }}
+          className="absolute w-[2px] h-[2px] bg-white rounded-full shadow-[0_0_10px_2px_rgba(255,255,255,0.8)]"
+          style={{ top: star.top, left: star.left }}
+        >
+          <div className="absolute top-0 left-0 w-[100px] h-[1px] bg-gradient-to-r from-white to-transparent -rotate-[45deg] origin-left" />
+        </motion.div>
+      ))}
+
+      {/* Floating Particles */}
+      {Array.from({ length: 15 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-primary/20 rounded-full blur-[1px]"
+          animate={{
+            y: [0, -100, 0],
+            x: [0, Math.random() * 50 - 25, 0],
+            opacity: [0, 0.4, 0],
+            scale: [0, 1.5, 0]
+          }}
+          transition={{
+            duration: 15 + Math.random() * 10,
+            repeat: Infinity,
+            delay: Math.random() * 10,
+            ease: "easeInOut"
+          }}
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+          }}
+        />
+      ))}
+
       {/* Space Glows (Nebulae) */}
-      <div className="absolute -top-[10%] -left-[10%] w-[60%] h-[60%] bg-primary/10 blur-[120px] rounded-full" />
-      <div className="absolute -bottom-[10%] -right-[10%] w-[60%] h-[60%] bg-blue-600/10 blur-[120px] rounded-full" />
-      <div className="absolute top-[20%] right-[10%] w-[40%] h-[40%] bg-purple-600/5 blur-[100px] rounded-full" />
+      <motion.div 
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.1, 0.15, 0.1],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-[10%] -left-[10%] w-[60%] h-[60%] bg-primary/20 blur-[120px] rounded-full" 
+      />
+      <motion.div 
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.1, 0.2, 0.1],
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute -bottom-[10%] -right-[10%] w-[60%] h-[60%] bg-blue-600/15 blur-[120px] rounded-full" 
+      />
+      <motion.div 
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.05, 0.1, 0.05],
+        }}
+        transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+        className="absolute top-[20%] right-[10%] w-[40%] h-[40%] bg-purple-600/10 blur-[100px] rounded-full" 
+      />
       
       {/* Subtle Noise for texture */}
       <div className="absolute inset-0 bg-noise opacity-[0.03]" />
+      
+      {/* Bottom Gradient for smoother content transition */}
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#05070A] to-transparent z-1" />
     </div>
   );
 };
