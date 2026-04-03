@@ -72,16 +72,22 @@ export function Header() {
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={theme}
-                initial={{ y: -20, opacity: 0, rotate: -90, scale: 0.5 }}
-                animate={{ y: 0, opacity: 1, rotate: 0, scale: 1 }}
-                exit={{ y: 20, opacity: 0, rotate: 90, scale: 0.5 }}
-                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                className="flex items-center justify-center"
+                initial={{ rotate: -360, scale: 0, opacity: 0 }}
+                animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                exit={{ rotate: 360, scale: 0, opacity: 0 }}
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 180,
+                  damping: 18
+                }}
+                className="flex items-center justify-center pointer-events-none"
               >
                 {theme === "dark" ? (
-                  <Sun className="w-5 h-5 text-yellow-400" />
+                  <Sun className="w-5 h-5 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]" />
                 ) : (
-                  <Moon className="w-5 h-5 text-muted-foreground" />
+                  <Moon className="w-5 h-5 text-indigo-400 drop-shadow-[0_0_8px_rgba(129,140,248,0.4)]" />
                 )}
               </motion.div>
             </AnimatePresence>
