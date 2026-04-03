@@ -163,13 +163,18 @@ export const games: Game[] = [
     id: 13,
     nome: "Rust",
     preco: 0,
-    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_600x900.jpg",
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/header.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/capsule_616x353.jpg",
-    categorias: ["Sobrevivência", "Multiplayer"],
+    categorias: ["Ação", "Aventura", "Indie", "Sobrevivência", "Multiplayer"],
     modos: ["Multiplayer"],
     idiomas: ["Português", "Inglês"],
+    descricao: "O único objetivo em Rust é sobreviver. Tudo te quer ver morto: a vida selvagem da ilha, outros habitantes, o ambiente e outros sobreviventes. Faz o que for preciso para aguentar outra noite.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo:</strong> Windows 11 64bit<br></li><li><strong>Processador:</strong> AMD Ryzen 5 1400 or Intel Core i5-6600<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa gráfica:</strong> AMD Radeon RX 470, NVIDIA GeForce GTX 1060, Intel® Arc™ A580<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Ligação à Internet de banda larga<br></li><li><strong>Espaço no disco:</strong> Requer 45 GB de espaço livre</li></ul>",
+      recomendado: ""
+    }
   },
   {
     id: 14,
