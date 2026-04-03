@@ -36,6 +36,7 @@ export function Header() {
             src={logo} 
             alt="JOGOS GRATIS" 
             className="w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:w-14 lg:h-14" 
+            fetchPriority="high"
           />
           <div className="flex flex-col">
             <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none">JOGOS</span>

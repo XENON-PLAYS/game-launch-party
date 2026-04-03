@@ -88,6 +88,7 @@ export function HeroCarousel() {
               alt="" 
               className="w-full h-full object-cover" 
               onError={handleImageError}
+              fetchPriority={current === 0 ? "high" : "auto"}
             />
             {/* Elegant Gradient Overlays */}
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
