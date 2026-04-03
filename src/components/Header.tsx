@@ -64,8 +64,27 @@ export function Header() {
           {user && <NotificationBell />}
 
           {/* Theme Toggle */}
-          <button onClick={toggleTheme} className="p-2.5 rounded-xl hover:bg-muted transition-colors">
-            {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-muted-foreground" />}
+          <button 
+            onClick={toggleTheme} 
+            className="p-2.5 rounded-xl hover:bg-muted transition-colors relative h-10 w-10 flex items-center justify-center overflow-hidden"
+            aria-label="Alternar tema"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={theme}
+                initial={{ y: -20, opacity: 0, rotate: -45 }}
+                animate={{ y: 0, opacity: 1, rotate: 0 }}
+                exit={{ y: 20, opacity: 0, rotate: 45 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                className="flex items-center justify-center"
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-5 h-5 text-yellow-400" />
+                ) : (
+                  <Moon className="w-5 h-5 text-muted-foreground" />
+                )}
+              </motion.div>
+            </AnimatePresence>
           </button>
 
 
