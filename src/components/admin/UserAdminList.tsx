@@ -147,8 +147,8 @@ export function UserAdminList({ users }: UserAdminListProps) {
                     </TableCell>
                     <TableCell className="text-center">
                       {user.is_vip ? (
-                        <Badge className="bg-amber-500/10 text-amber-500 border-amber-500/20 text-[9px] font-black uppercase tracking-widest">
-                          <Star className="h-3 w-3 mr-1 fill-amber-500" />
+                        <Badge className="bg-primary/10 text-primary border-primary/20 text-[9px] font-black uppercase tracking-widest">
+                          <Star className="h-3 w-3 mr-1 fill-primary" />
                           VIP
                         </Badge>
                       ) : (

@@ -164,7 +164,7 @@ const Admin = () => {
                     <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground">Carregando base de usuários...</p>
                   </div>
                 ) : (
-                  <UserAdminList users={usersData} />
+                  <UserAdminList users={usersData as any} />
                 )
               )}
             </>
