@@ -79,7 +79,7 @@ serve(async (req) => {
             unit_amount: config.amount,
             product_data: {
               name: config.title,
-              description: `Acesso VIP ao site JOGOS GRATIS - Plano ${planName}`,
+              description: `Acesso VIP ao site ELITE Studio - Plano ${planName}`,
             },
           },
           quantity: 1,

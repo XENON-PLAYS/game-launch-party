@@ -9,13 +9,13 @@ interface SEOProps {
 }
 
 export const SEO = ({ 
-  title = "JOGOS GRATIS - O maior catálogo de jogos", 
+  title = "ELITE Studio - O maior catálogo de jogos", 
   description = "A maior comunidade de compartilhamento de jogos. Descubra, jogue e compartilhe suas experiências.", 
-  keywords = "jogos, games, download, grátis, jogos gratis, download de jogos",
+  keywords = "jogos, games, download, grátis, elite studio, download de jogos",
   image = "/logo.png",
-  url = "https://jogosgratis.com"
+  url = "https://elitestudio.com"
 }: SEOProps) => {
-  const fullTitle = title.includes("JOGOS GRATIS") ? title : `${title} | JOGOS GRATIS`;
+  const fullTitle = title.includes("ELITE Studio") ? title : `${title} | ELITE Studio`;
 
   return (
     <Helmet>

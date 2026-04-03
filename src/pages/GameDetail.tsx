@@ -604,7 +604,7 @@ const GameDetail = () => {
             </div>
           </Link>
           <div className="pt-16 border-t border-border flex flex-col md:flex-row justify-between items-center gap-10 text-responsive-small text-muted-foreground opacity-60">
-            <p>© 2025 JOGOS GRATIS — Navegando pelos Sete Mares dos Games desde 1715.</p>
+            <p>© 2025 ELITE Studio — A melhor experiência gamer.</p>
             <div className="flex gap-8">
               <Link to="/" className="hover:text-primary transition-colors">Termos</Link>
               <Link to="/" className="hover:text-primary transition-colors">Privacidade</Link>
