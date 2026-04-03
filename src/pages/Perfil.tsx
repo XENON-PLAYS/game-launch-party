@@ -281,35 +281,42 @@ const Perfil = () => {
   switch (activeTab) {
    case "profile":
     return (
-      <div className="auth-fieldset p-8">
+      <div className="auth-fieldset p-8 bg-card/40 backdrop-blur-xl border-white/5 shadow-2xl relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors" />
+        
         <h1 className="auth-title !text-left !mb-8 flex items-center gap-3">
-          <User className="w-6 h-6 text-primary" />
-          Perfil de Usuário
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <User className="w-5 h-5 text-primary" />
+          </div>
+          Perfil do Jogador
         </h1>
         
-        <div className="space-y-6">
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div className="space-y-1">
-              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Nome de Exibição</label>
-              <p className="text-lg font-bold">{targetProfile?.display_name || "Nenhum nome definido"}</p>
-            </div>
-            
-            <div className="space-y-1">
-              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Nome de Usuário</label>
-              <p className="text-lg font-bold">@{targetProfile?.username || "sem_usuario"}</p>
-            </div>
+        <div className="grid sm:grid-cols-2 gap-8 relative z-10">
+          <div className="space-y-1 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors">
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/70">Nome de Exibição</label>
+            <p className="text-xl font-bold tracking-tight">{targetProfile?.display_name || "Nenhum nome definido"}</p>
+          </div>
+          
+          <div className="space-y-1 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors">
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/70">Identificação</label>
+            <p className="text-xl font-bold tracking-tight text-muted-foreground">@{targetProfile?.username || "sem_usuario"}</p>
+          </div>
 
-            <div className="space-y-1 sm:col-span-2">
-              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Bio</label>
-              <p className="text-muted-foreground leading-relaxed">
-                {targetProfile?.bio || "Este usuário ainda não escreveu uma bio."}
-              </p>
+          <div className="space-y-1 sm:col-span-2 p-6 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors">
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/70 mb-3 block">Sobre o Jogador</label>
+            <p className="text-muted-foreground leading-relaxed italic">
+              "{targetProfile?.bio || "Este usuário ainda não escreveu uma bio em sua jornada épica."}"
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-4 sm:col-span-2 p-4 rounded-xl bg-primary/5 border border-primary/10">
+            <div className="p-2 bg-primary/20 rounded-full">
+              <Trophy className="w-4 h-4 text-primary" />
             </div>
-            
-            <div className="space-y-1">
-              <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Membro desde</label>
+            <div>
+              <label className="text-[10px] font-black uppercase tracking-widest text-primary/60">Data de Ingresso</label>
               <p className="text-sm font-bold">
-                {targetProfile?.created_at ? new Date(targetProfile.created_at).toLocaleDateString("pt-BR") : "Desconhecido"}
+                {targetProfile?.created_at ? new Date(targetProfile.created_at).toLocaleDateString("pt-BR", { day: 'numeric', month: 'long', year: 'numeric' }) : "Desconhecido"}
               </p>
             </div>
           </div>
