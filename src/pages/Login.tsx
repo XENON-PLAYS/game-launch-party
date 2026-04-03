@@ -49,7 +49,7 @@ const Login = () => {
       
       <main className="flex-1 flex items-center justify-center px-4 py-12 relative z-10">
         <form onSubmit={handleSubmit} autoComplete="off" className="w-full max-w-[480px]">
-          <div className="auth-fieldset">
+          <div className="auth-fieldset glass border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.3)] backdrop-blur-xl">
             <div className="flex flex-col items-center mb-10">
               <h1 className="auth-title">Acessar Conta</h1>
               <div className="h-1 w-20 bg-primary/50 rounded-full mt-2" />
