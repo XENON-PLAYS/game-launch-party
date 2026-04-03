@@ -62,12 +62,26 @@ serve(async (req) => {
       const expiresAt = new Date();
       expiresAt.setDate(expiresAt.getDate() + daysToAdd);
 
+      const { data: currentProfile, error: profileError } = await supabase
+        .from("profiles")
+        .select("badges")
+        .eq("user_id", userId)
+        .single();
+
+      if (profileError) {
+        console.error("Error fetching current profile:", profileError);
+        return new Response(JSON.stringify({ error: "Failed to fetch profile" }), { status: 500 });
+      }
+
+      const currentBadges = currentProfile.badges || [];
+      const updatedBadges = Array.from(new Set([...currentBadges, "VIP"]));
+
       const { error: updateError } = await supabase
         .from("profiles")
         .update({
           is_vip: true,
           vip_expires_at: expiresAt.toISOString(),
-          badges: ["VIP"],
+          badges: updatedBadges,
         })
         .eq("user_id", userId);
 
