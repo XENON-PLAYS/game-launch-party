@@ -95,7 +95,7 @@ export function HeroCarousel() {
           </motion.div>
 
           <div className="container-responsive h-full flex flex-col justify-center relative z-10 pt-16 md:pt-0">
-            <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-8 md:gap-12 items-center">
               <div className="space-y-4 md:space-y-6 max-w-2xl">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
