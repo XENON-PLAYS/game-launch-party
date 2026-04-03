@@ -16,8 +16,8 @@ export interface Game {
   classificacao?: string;
   descricao?: string;
   requisitos?: {
-    minimo: { sistema: string; processador: string; memoria: string; placa: string; armazenamento: string };
-    recomendado: { sistema: string; processador: string; memoria: string; placa: string; armazenamento: string };
+    minimo: { sistema: string; processador: string; memoria: string; placa: string; armazenamento: string } | string;
+    recomendado: { sistema: string; processador: string; memoria: string; placa: string; armazenamento: string } | string;
   };
   destaques?: string[];
   torrentLink?: string;
@@ -163,13 +163,18 @@ export const games: Game[] = [
     id: 13,
     nome: "Rust",
     preco: 0,
-    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_600x900.jpg",
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/header.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/capsule_616x353.jpg",
-    categorias: ["Sobrevivência", "Multiplayer"],
+    categorias: ["Ação", "Aventura", "Indie", "Sobrevivência", "Multiplayer"],
     modos: ["Multiplayer"],
     idiomas: ["Português", "Inglês"],
+    descricao: "O único objetivo em Rust é sobreviver. Tudo te quer ver morto: a vida selvagem da ilha, outros habitantes, o ambiente e outros sobreviventes. Faz o que for preciso para aguentar outra noite.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo:</strong> Windows 11 64bit<br></li><li><strong>Processador:</strong> AMD Ryzen 5 1400 or Intel Core i5-6600<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa gráfica:</strong> AMD Radeon RX 470, NVIDIA GeForce GTX 1060, Intel® Arc™ A580<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Ligação à Internet de banda larga<br></li><li><strong>Espaço no disco:</strong> Requer 45 GB de espaço livre</li></ul>",
+      recomendado: ""
+    }
   },
   {
     id: 14,
@@ -253,13 +258,18 @@ export const games: Game[] = [
     id: 21,
     nome: "Left 4 Dead 2",
     preco: 0,
-    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_600x900.jpg",
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/header.jpg",
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/capsule_616x353.jpg",
-    categorias: ["Terror", "FPS"],
+    categorias: ["Ação", "Terror", "FPS"],
     modos: ["Singleplayer", "Multiplayer"],
     idiomas: ["Português", "Inglês"],
+    descricao: "Set in the zombie apocalypse, Left 4 Dead 2 is a co-operative action horror FPS takes you and your friends through the cities, swamps and cemeteries of the Deep South, from Savannah to New Orleans across five expansive campaigns.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>Sistema Operativo *:</strong> Windows® 7 32/64-bit / Vista 32/64 / XP<br></li><li><strong>Processador:</strong> Pentium 4 3.0GHz<br></li><li><strong>Memória:</strong> 2 GB de RAM<br></li><li><strong>Placa gráfica:</strong> Video card with 128 MB, Shader model 2.0. ATI X800, NVidia 6600 or better<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Espaço no disco:</strong> Requer 13 GB de espaço livre<br></li><li><strong>Placa de som:</strong> DirectX 9.0c compatible sound card</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>Sistema Operativo *:</strong> Windows® 7 32/64-bit / Vista 32/64 / XP<br></li><li><strong>Processador:</strong> Intel core 2 duo 2.4GHz<br></li><li><strong>Memória:</strong> 2 GB de RAM<br></li><li><strong>Placa gráfica:</strong> Video Card Shader model 3.0. NVidia 7600, ATI X1600 or better<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Espaço no disco:</strong> Requer 13 GB de espaço livre<br></li><li><strong>Placa de som:</strong> DirectX 9.0c compatible sound card</li></ul>"
+    }
   },
   {
     id: 22,
@@ -542,6 +552,57 @@ export const games: Game[] = [
     categorias: ["Esportes", "Simulação"],
     modos: ["Singleplayer", "Multiplayer"],
     idiomas: ["Português", "Inglês"],
+  },
+  {
+    id: 49,
+    nome: "Balatro",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/capsule_616x353.jpg",
+    categorias: ["Casual", "Indie", "Estratégia"],
+    modos: ["Singleplayer"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "O roguelike de póquer. Balatro é um jogo de construção de baralhos de cartas hipnoticamente satisfatório onde vais jogar mãos de póquer ilegais, descobrir jóqueres que vão mudar o rumo do jogo e fazer combinações empolgantes.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo *:</strong> Windows 7, 8, 10, 11 x64<br></li><li><strong>Processador:</strong> Intel Core i3<br></li><li><strong>Memória:</strong> 1 GB de RAM<br></li><li><strong>Placa gráfica:</strong> OpenGL 2.1 compatible graphics card, integrated graphics<br></li><li><strong>Espaço no disco:</strong> Requer 150 MB de espaço livre</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits</li></ul>"
+    }
+  },
+  {
+    id: 50,
+    nome: "Rocket League®",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/capsule_616x353.jpg",
+    categorias: ["Ação", "Indie", "Corridas", "Desporto"],
+    modos: ["Multiplayer"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Futebol e condução encontram-se uma vez mais na aguardada sequela do clássico de arena baseado na física que conquistou os jogadores, o Supersonic Acrobatic Rocket-Powered Battle-Cars!",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo *:</strong> Windows 7 (64 bit) or Newer (64 bit) Windows OS<br></li><li><strong>Processador:</strong> 2.5 GHz Dual core<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa gráfica:</strong> NVIDIA GeForce 760, AMD Radeon R7 270X, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Ligação à Internet de banda larga<br></li><li><strong>Espaço no disco:</strong> Requer 20 GB de espaço livre</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo *:</strong> Windows 7 (64 bit) or Newer (64 bit) Windows OS<br></li><li><strong>Processador:</strong> 3.0+ GHz Quad core<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa gráfica:</strong> NVIDIA GeForce GTX 1060, AMD Radeon RX 470, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Ligação à Internet de banda larga<br></li><li><strong>Espaço no disco:</strong> Requer 20 GB de espaço livre<br></li><li><strong>Notas adicionais:</strong> Gamepad or Controller Recommended</li></ul>"
+    }
+  },
+  {
+    id: 51,
+    nome: "Satisfactory",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/capsule_616x353.jpg",
+    categorias: ["Aventura", "Indie", "Simulação", "Estratégia"],
+    modos: ["Singleplayer", "Co-op"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo:</strong> Windows 10 or later (64-Bit)<br></li><li><strong>Processador:</strong> i5-3570 3.4 GHz 4 Core<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa gráfica:</strong> Nvidia GTX 1650/GTX 1050-ti, or AMD RX 470/RX 570, or equivalent performance &amp; VRAM<br></li><li><strong>Espaço no disco:</strong> Requer 20 GB de espaço livre<br></li><li><strong>Notas adicionais:</strong> Internet connection required for multiplayer.</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo:</strong> Windows 11 or later (64-Bit)<br></li><li><strong>Processador:</strong> Ryzen 5 5600X﻿ or ﻿i5-12400 ﻿or equivalent performance, 6 physical cores minimum<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa gráfica:</strong> Nvidia RTX 2070﻿ or RX 5700, or equivalent performance &amp; VRAM<br></li><li><strong>Espaço no disco:</strong> Requer 20 GB de espaço livre<br></li><li><strong>Notas adicionais:</strong> Internet connection required for multiplayer.</li></ul>"
+    }
   },
 ];
 

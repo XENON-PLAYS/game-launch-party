@@ -147,8 +147,8 @@ const GameDetail = () => {
     );
   }
 
-  const reqMin = game.requisitos_minimo as Record<string, string> | null;
-  const reqRec = game.requisitos_recomendado as Record<string, string> | null;
+  const reqMin = game.requisitos_minimo;
+  const reqRec = game.requisitos_recomendado;
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
@@ -402,15 +402,22 @@ const GameDetail = () => {
                         {label === "Mínimos" ? "Essencial" : "Optimizado"}
                       </div>
                     </div>
-                    <div className="grid sm:grid-cols-2 gap-x-12 gap-y-8">
-                      {Object.entries(data).map(([key, val]) => (
-                        <div key={key} className="space-y-2 group">
-                          <span className="text-responsive-small text-muted-foreground opacity-60 group-hover:text-primary transition-all duration-300">
-                            {key === "placa" ? "GPU / Placa de Vídeo" : key === "armazenamento" ? "Espaço em Disco" : key === "memoria" ? "Memória RAM" : key === "processador" ? "Processador CPU" : key}
-                          </span>
-                          <p className="text-sm sm:text-base lg:text-lg font-black group-hover:text-foreground transition-all duration-300 leading-snug">{String(val)}</p>
-                        </div>
-                      ))}
+                    <div className={typeof data === 'string' ? "space-y-4" : "grid sm:grid-cols-2 gap-x-12 gap-y-8"}>
+                      {typeof data === 'string' ? (
+                        <div 
+                          className="prose prose-invert max-w-none text-muted-foreground prose-strong:text-primary prose-ul:list-disc prose-li:mb-2 [&_ul]:pl-5"
+                          dangerouslySetInnerHTML={{ __html: data }} 
+                        />
+                      ) : (
+                        Object.entries(data as Record<string, any>).map(([key, val]) => (
+                          <div key={key} className="space-y-2 group">
+                            <span className="text-responsive-small text-muted-foreground opacity-60 group-hover:text-primary transition-all duration-300">
+                              {key === "placa" ? "GPU / Placa de Vídeo" : key === "armazenamento" ? "Espaço em Disco" : key === "memoria" ? "Memória RAM" : key === "processador" ? "Processador CPU" : key}
+                            </span>
+                            <p className="text-sm sm:text-base lg:text-lg font-black group-hover:text-foreground transition-all duration-300 leading-snug">{String(val)}</p>
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
                 ) : null
