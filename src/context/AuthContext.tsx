@@ -112,8 +112,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const logout = useCallback(async () => {
+    if (user) {
+      await supabase
+        .from("profiles")
+        .update({ status: "offline" })
+        .eq("user_id", user.id);
+    }
     await supabase.auth.signOut();
-  }, []);
+  }, [user]);
 
   const refreshProfile = useCallback(async () => {
     if (user) await fetchProfile(user.id);
