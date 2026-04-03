@@ -106,7 +106,7 @@ export function Header() {
                     </div>
                     {isAdmin && (
                       <Link to="/admin" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
-                        <Shield className="w-4 h-4" /> Painel de Administrador
+                        <Shield className="w-4 h-4" /> Admin
                       </Link>
                     )}
                     <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
