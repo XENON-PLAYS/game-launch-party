@@ -185,9 +185,9 @@ export function HeroCarousel() {
       </AnimatePresence>
 
       {/* Modern Controls */}
-      <div className="absolute bottom-12 left-0 w-full z-20">
-        <div className="container-responsive flex items-center justify-between">
-          <div className="flex gap-4">
+      <div className="absolute bottom-6 sm:bottom-12 left-0 w-full z-20">
+        <div className="container-responsive flex items-center justify-between gap-4">
+          <div className="flex gap-2 sm:gap-4">
             {featured.map((_, i) => (
               <button 
                 key={i} 
