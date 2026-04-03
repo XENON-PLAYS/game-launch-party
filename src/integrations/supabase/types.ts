@@ -252,8 +252,12 @@ export type Database = {
           idiomas: string[]
           imagem: string | null
           lancamento: string | null
+          link_demo: string | null
           modos: string[]
           nome: string
+          observacoes: string | null
+          passo_a_passo: string | null
+          pre_requisitos: string | null
           preco: number
           requisitos_minimo: Json | null
           requisitos_recomendado: Json | null
@@ -279,8 +283,12 @@ export type Database = {
           idiomas?: string[]
           imagem?: string | null
           lancamento?: string | null
+          link_demo?: string | null
           modos?: string[]
           nome: string
+          observacoes?: string | null
+          passo_a_passo?: string | null
+          pre_requisitos?: string | null
           preco?: number
           requisitos_minimo?: Json | null
           requisitos_recomendado?: Json | null
@@ -306,8 +314,12 @@ export type Database = {
           idiomas?: string[]
           imagem?: string | null
           lancamento?: string | null
+          link_demo?: string | null
           modos?: string[]
           nome?: string
+          observacoes?: string | null
+          passo_a_passo?: string | null
+          pre_requisitos?: string | null
           preco?: number
           requisitos_minimo?: Json | null
           requisitos_recomendado?: Json | null

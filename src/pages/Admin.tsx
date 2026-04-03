@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { Plus, Pencil, Trash2, Search, X, Store, LogOut, ChevronDown, Download, Monitor, LayoutGrid, BarChart3, Clock, Flame, Shield, Users, Image as ImageIcon, Loader2 } from "lucide-react";
+import { Plus, Pencil, Trash2, Search, X, Store, LogOut, ChevronDown, Download, Monitor, LayoutGrid, BarChart3, Clock, Flame, Shield, Users, Image as ImageIcon, Loader2, CheckCircle } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -25,7 +25,7 @@ const Admin = () => {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  const [activeTab, setActiveTab] = useState<"general" | "requirements" | "downloads" | "gallery">("general");
+  const [activeTab, setActiveTab] = useState<"general" | "requirements" | "downloads" | "gallery" | "installation">("general");
   const [links, setLinks] = useState<any[]>([]);
 
   const { data: games = [] } = useQuery({
@@ -71,6 +71,10 @@ const Admin = () => {
           requisitos_minimo: game.requisitos_minimo,
           requisitos_recomendado: game.requisitos_recomendado,
           tamanho: game.tamanho,
+          pre_requisitos: game.pre_requisitos,
+          passo_a_passo: game.passo_a_passo,
+          link_demo: game.link_demo,
+          observacoes: game.observacoes,
         });
       } else {
         await supabase.from("games").update({
@@ -90,6 +94,10 @@ const Admin = () => {
           requisitos_minimo: game.requisitos_minimo,
           requisitos_recomendado: game.requisitos_recomendado,
           tamanho: game.tamanho,
+          pre_requisitos: game.pre_requisitos,
+          passo_a_passo: game.passo_a_passo,
+          link_demo: game.link_demo,
+          observacoes: game.observacoes,
         }).eq("id", game.id!);
       }
     },
@@ -121,8 +129,12 @@ const Admin = () => {
       requisitos_minimo: {}, 
       requisitos_recomendado: {}, 
       destaques: [], 
-      galeria: [] 
-    }); 
+      galeria: [],
+      pre_requisitos: "",
+      passo_a_passo: "",
+      link_demo: "",
+      observacoes: "" 
+    });
     setLinks([]);
     setModalMode("add"); 
     setModalOpen(true); 
@@ -366,7 +378,8 @@ const Admin = () => {
                 { id: "general", label: "Geral", icon: LayoutGrid },
                 { id: "requirements", label: "Requisitos", icon: Monitor },
                 { id: "downloads", label: "Links", icon: Download },
-                { id: "gallery", label: "Mídia", icon: ImageIcon }
+                { id: "gallery", label: "Mídia", icon: ImageIcon },
+                { id: "installation", label: "Instalação", icon: CheckCircle }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -438,6 +451,33 @@ const Admin = () => {
                     initialValue={editGame.requisitos_recomendado}
                     onChange={(v) => setField("requisitos_recomendado", v)}
                   />
+                </div>
+              )}
+
+              {activeTab === "installation" && (
+                <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-500">
+                  <div className="grid lg:grid-cols-2 gap-12">
+                    <div className="space-y-6">
+                      <div>
+                        <label className="admin-label">Pré-requisitos / Dependências</label>
+                        <textarea rows={4} value={editGame.pre_requisitos || ""} onChange={(e) => setField("pre_requisitos", e.target.value)} placeholder="Steam, DirectX 12, etc." className="admin-input resize-none" />
+                      </div>
+                      <div>
+                        <label className="admin-label">Passo a Passo (separe por ;)</label>
+                        <textarea rows={6} value={editGame.passo_a_passo || ""} onChange={(e) => setField("passo_a_passo", e.target.value)} placeholder="1. Baixar; 2. Instalar; 3. Jogar" className="admin-input resize-none" />
+                      </div>
+                    </div>
+                    <div className="space-y-6">
+                      <div>
+                        <label className="admin-label">Link Demo / Teste</label>
+                        <input value={editGame.link_demo || ""} onChange={(e) => setField("link_demo", e.target.value)} placeholder="https://store.steampowered.com/app/..." className="admin-input" />
+                      </div>
+                      <div>
+                        <label className="admin-label">Observações (separe por ;)</label>
+                        <textarea rows={6} value={editGame.observacoes || ""} onChange={(e) => setField("observacoes", e.target.value)} placeholder="Idioma: Português; Tamanho: 60GB; etc." className="admin-input resize-none" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
 
