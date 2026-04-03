@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { Eye, EyeOff, Loader2, User, Mail, Lock, UserPlus, ChevronRight } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
 import { SpaceBackground } from "@/components/SpaceBackground";
-import { motion } from "framer-motion";
-
 import { toast } from "sonner";
 
 const Cadastro = () => {
@@ -54,146 +52,95 @@ const Cadastro = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#05070A] relative overflow-hidden flex flex-col">
+    <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
       <SpaceBackground />
-      
       <Header />
       
-      
-      <main className="flex-1 flex items-center justify-center px-4 py-20 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full max-w-[500px]"
-        >
-          <form onSubmit={handleSubmit} autoComplete="off" className="relative group">
-            {/* Decorative background glow */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-purple-600/30 rounded-[32px] blur-2xl opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+      <main className="flex-1 flex items-center justify-center px-4 py-12 relative z-10">
+        <div className="w-full max-w-md">
+          <form onSubmit={handleSubmit} className="auth-fieldset">
+            <h1 className="auth-title">Nova Conta</h1>
+            <p className="auth-subtitle">Crie sua conta para começar</p>
+            
+            {erro && (
+              <div className="bg-destructive/10 border border-destructive text-destructive text-sm p-3 rounded mb-4 text-center">
+                {erro}
+              </div>
+            )}
+            
+            <div className="space-y-4">
+              <div>
+                <label className="auth-label">Nome Completo</label>
+                <input 
+                  type="text" 
+                  value={form.nome} 
+                  onChange={(e) => set("nome", e.target.value)} 
+                  placeholder="Seu nome" 
+                  className="auth-input" 
+                  required
+                />
+              </div>
+              
+              <div>
+                <label className="auth-label">Email</label>
+                <input 
+                  type="email" 
+                  value={form.email} 
+                  onChange={(e) => set("email", e.target.value)} 
+                  placeholder="seu@email.com" 
+                  className="auth-input" 
+                  required
+                />
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="relative">
+                  <label className="auth-label">Senha</label>
+                  <input 
+                    type={showPass ? "text" : "password"} 
+                    value={form.senha} 
+                    onChange={(e) => set("senha", e.target.value)} 
+                    placeholder="******" 
+                    className="auth-input" 
+                    required
+                  />
+                  <button 
+                    type="button" 
+                    onClick={() => setShowPass(!showPass)} 
+                    className="absolute right-3 top-[34px] text-muted-foreground hover:text-foreground"
+                  >
+                    {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+                
+                <div>
+                  <label className="auth-label">Confirmar Senha</label>
+                  <input 
+                    type="password" 
+                    value={form.confirma} 
+                    onChange={(e) => set("confirma", e.target.value)} 
+                    placeholder="******" 
+                    className="auth-input" 
+                    required
+                  />
+                </div>
+              </div>
+              
+              <button type="submit" disabled={loading} className="auth-btn mt-2">
+                {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : "Criar Conta"}
+              </button>
+            </div>
 
-            <div className="auth-fieldset relative overflow-hidden">
-              {/* Internal subtle light sweep */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-30" />
-
-              <div className="flex flex-col items-center mb-8">
-                <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 border border-primary/20 shadow-inner">
-                  <UserPlus className="w-8 h-8 text-primary" />
-                </div>
-                <h1 className="auth-title">Nova Conta</h1>
-                <p className="auth-subtitle">
-                  Inicie sua jornada cósmica conosco hoje mesmo
-                </p>
-              </div>
-              
-              {erro && (
-                <motion.div 
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  className="bg-destructive/10 border border-destructive/20 text-destructive text-sm p-4 rounded-2xl mb-8 text-center"
-                >
-                  {erro}
-                </motion.div>
-              )}
-              
-              <div className="space-y-6">
-                <div className="flex flex-col">
-                  <label className="auth-label">Nome Completo</label>
-                  <div className="auth-input-container">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors" />
-                    <input 
-                      type="text" 
-                      value={form.nome} 
-                      onChange={(e) => set("nome", e.target.value)} 
-                      placeholder="Como deseja ser chamado?" 
-                      className="auth-input pl-12" 
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div className="flex flex-col">
-                  <label className="auth-label">Seu Email</label>
-                  <div className="auth-input-container">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors" />
-                    <input 
-                      type="email" 
-                      value={form.email} 
-                      onChange={(e) => set("email", e.target.value)} 
-                      placeholder="exemplo@email.com" 
-                      className="auth-input pl-12" 
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="flex flex-col">
-                    <label className="auth-label">Senha</label>
-                    <div className="auth-input-container">
-                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors" />
-                      <input 
-                        type={showPass ? "text" : "password"} 
-                        value={form.senha} 
-                        onChange={(e) => set("senha", e.target.value)} 
-                        placeholder="••••••••" 
-                        className="auth-input px-12" 
-                        required
-                      />
-                      <button 
-                        type="button" 
-                        onClick={() => setShowPass(!showPass)} 
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 hover:text-white transition-colors"
-                      >
-                        {showPass ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-col">
-                    <label className="auth-label">Confirmar</label>
-                    <div className="auth-input-container">
-                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-primary transition-colors" />
-                      <input 
-                        type="password" 
-                        value={form.confirma} 
-                        onChange={(e) => set("confirma", e.target.value)} 
-                        placeholder="••••••••" 
-                        className="auth-input pl-12" 
-                        required
-                      />
-                    </div>
-                  </div>
-                </div>
-                
-                <button type="submit" disabled={loading} className="auth-btn group/btn mt-4">
-                  <div className="auth-btn-glow" />
-                  <div className="relative flex items-center justify-center gap-2">
-                    {loading ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        <span>Construindo Perfil...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>Finalizar Cadastro</span>
-                        <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </>
-                    )}
-                  </div>
-                </button>
-              </div>
-              
-              <div className="mt-10 text-center">
-                <p className="text-white/40 text-xs uppercase tracking-widest font-bold">
-                  Já faz parte da tripulação?{" "}
-                  <Link to="/login" className="auth-link ml-1">
-                    Fazer Login
-                  </Link>
-                </p>
-              </div>
+            <div className="mt-6 text-center">
+              <p className="text-sm text-muted-foreground">
+                Já tem uma conta?{" "}
+                <Link to="/login" className="auth-link font-medium">
+                  Fazer Login
+                </Link>
+              </p>
             </div>
           </form>
-        </motion.div>
+        </div>
       </main>
     </div>
   );
