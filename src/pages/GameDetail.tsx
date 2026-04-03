@@ -597,14 +597,14 @@ const GameDetail = () => {
       <footer className="border-t border-border bg-card py-20 sm:py-32 lg:py-48 mt-32 sm:mt-48 lg:mt-60">
         <div className="container-responsive text-center space-y-10">
           <Link to="/" className="inline-flex items-center gap-5 group mx-auto">
-            <img src={logo} alt="JOGOS GRATIS" className="w-16 h-16 sm:w-20 sm:h-20" />
+            <Shield className="w-16 h-16 sm:w-20 sm:h-20 text-primary" />
             <div className="flex flex-col text-left">
-              <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none">JOGOS</span>
-              <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none text-primary">GRATIS</span>
+              <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none">ELITE</span>
+              <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none text-primary">STUDIO</span>
             </div>
           </Link>
           <div className="pt-16 border-t border-border flex flex-col md:flex-row justify-between items-center gap-10 text-responsive-small text-muted-foreground opacity-60">
-            <p>© 2025 JOGOS GRATIS — Navegando pelos Sete Mares dos Games desde 1715.</p>
+            <p>© 2025 ELITE Studio — A melhor experiência gamer.</p>
             <div className="flex gap-8">
               <Link to="/" className="hover:text-primary transition-colors">Termos</Link>
               <Link to="/" className="hover:text-primary transition-colors">Privacidade</Link>

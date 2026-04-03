@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search, Trophy, Bell, PlusCircle, Skull } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search, Trophy, Bell, PlusCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useAuth } from "@/context/AuthContext";
@@ -32,12 +32,12 @@ export function Header() {
       <div className="container-responsive flex items-center justify-between gap-3 md:gap-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0">
-          <Skull 
-            className="w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:w-14 lg:h-14 text-primary animate-pulse" 
+          <Shield 
+            className="w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:w-14 lg:h-14 text-primary" 
           />
           <div className="flex flex-col">
-            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none">JOGOS</span>
-            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none text-primary">GRATIS</span>
+            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none">ELITE</span>
+            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none text-primary">STUDIO</span>
           </div>
         </Link>
 
