@@ -25,12 +25,12 @@ const VipPage = () => {
       name: "Mensal",
       price: "R$ 5",
       period: "/mês",
-      description: "Ideal para experimentar as vantagens da frota.",
+      description: "Acesso completo a todas as funcionalidades VIP por 30 dias.",
       features: [
-        "Download direto (sem espera)",
-        "Badge VIP no perfil",
-        "Sem anúncios no site",
-        "Suporte prioritário"
+        "Downloads imediatos (sem filas)",
+        "Insignia VIP exclusiva no perfil",
+        "Experiência 100% livre de anúncios",
+        "Suporte técnico priorizado"
       ],
       color: "from-primary/10 to-primary/20",
       borderColor: "border-primary/20",
@@ -40,12 +40,12 @@ const VipPage = () => {
       name: "Semestral",
       price: "R$ 25",
       period: "/6 meses",
-      description: "Economia de 15% para navegadores experientes.",
+      description: "Economize 15% e garanta sua tranquilidade por meio ano.",
       features: [
-        "Tudo do plano Mensal",
-        "Badge VIP Prata",
-        "Acesso antecipado a novos jogos",
-        "Recomendações personalizadas"
+        "Todos os benefícios do Mensal",
+        "Badge VIP Prata de prestígio",
+        "Acesso antecipado a lançamentos",
+        "Sugestões de jogos personalizadas"
       ],
       popular: true,
       color: "from-primary/20 to-primary/30",
@@ -56,12 +56,12 @@ const VipPage = () => {
       name: "Anual",
       price: "R$ 45",
       period: "/ano",
-      description: "O melhor valor! Economia de 25% para capitães lendários.",
+      description: "Melhor Custo-Benefício: Economia de 25% para membros de elite.",
       features: [
-        "Tudo do plano Semestral",
-        "Badge VIP Ouro Lendário",
-        "Participação em sorteios mensais",
-        "Status 'Capitão da Frota'"
+        "Todos os benefícios do Semestral",
+        "Insignia Ouro Lendário exclusiva",
+        "Prioridade em pedidos de jogos",
+        "Sorteios mensais de chaves Steam"
       ],
       color: "from-primary/30 to-primary/40",
       borderColor: "border-primary/60",
@@ -98,7 +98,7 @@ const VipPage = () => {
             animate={{ y: 0, opacity: 1 }}
             className="text-responsive-h1 leading-none uppercase font-black"
           >
-            Torne-se um <span className="text-primary">Capitão VIP</span>
+            Sua Experiência <span className="text-primary">VIP de Elite</span>
           </motion.h1>
           <motion.p 
             initial={{ y: 20, opacity: 0 }}
@@ -106,17 +106,17 @@ const VipPage = () => {
             transition={{ delay: 0.1 }}
             className="text-responsive-h3 text-muted-foreground font-medium"
           >
-            Navegue por águas tranquilas sem anúncios, downloads instantâneos e suporte exclusivo.
+            Navegue por um catálogo completo sem anúncios, com downloads imediatos e suporte exclusivo 24/7.
           </motion.p>
         </section>
 
         {/* Benefits Grid */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
-            { icon: Zap, title: "Sem Espera", desc: "Acesse seus jogos instantaneamente, sem contadores." },
-            { icon: Shield, title: "Sem Anúncios", desc: "Uma experiência limpa e focada no que importa: o jogo." },
-            { icon: Star, title: "Badge Exclusiva", desc: "Destaque-se na comunidade com badges VIP." },
-            { icon: Sparkles, title: "Suporte 24/7", desc: "Prioridade absoluta em pedidos e ajuda técnica." }
+            { icon: Zap, title: "Fila Zero", desc: "Acesse e baixe seus jogos instantaneamente, sem esperas ou contadores." },
+            { icon: Shield, title: "Livre de Ads", desc: "Navegação fluida e focada no que importa, 100% sem anúncios intrusivos." },
+            { icon: Star, title: "Insignia VIP", desc: "Destaque seu perfil na comunidade com badges exclusivas de membro." },
+            { icon: Sparkles, title: "Suporte 24/7", desc: "Canal direto de suporte técnico para ajuda imediata com seus pedidos." }
           ].map((benefit, i) => (
             <motion.div 
               key={i}
@@ -194,20 +194,20 @@ const VipPage = () => {
         <section className="bg-primary/5 border border-primary/10 rounded-[3rem] p-12 md:p-20 text-center space-y-10">
           <h2 className="text-responsive-h3 uppercase font-black">Pagamento Seguro via Pix ou Cartão</h2>
           <p className="text-responsive-body max-w-2xl mx-auto opacity-70">
-            Liberação automática após confirmação. Sem fidelidade, cancele quando quiser diretamente no seu perfil.
+            Liberação automática instantânea após confirmação do sistema. Sem taxas escondidas, cancele sua assinatura quando desejar diretamente no painel.
           </p>
           <div className="flex flex-wrap justify-center gap-8 opacity-40 grayscale group-hover:grayscale-0 transition-all">
             {/* Payment icons placeholders */}
             <div className="px-6 py-2 bg-card rounded-lg border border-border font-black">PIX</div>
             <div className="px-6 py-2 bg-card rounded-lg border border-border font-black">VISA</div>
-            <div className="px-6 py-2 bg-card rounded-lg border border-border font-black">MASTER</div>
+            <div className="px-6 py-2 bg-card rounded-lg border border-border font-black">MASTERCARD</div>
           </div>
         </section>
       </main>
 
       <footer className="border-t border-border/50 bg-card py-20 mt-32">
         <div className="container-responsive text-center text-muted-foreground opacity-40 font-bold uppercase tracking-widest text-xs">
-          © 2025 JOGOS GRATIS — Navegue com a elite.
+          © 2025 JOGOS GRATIS — Navegue com a elite dos jogadores.
         </div>
       </footer>
     </div>
