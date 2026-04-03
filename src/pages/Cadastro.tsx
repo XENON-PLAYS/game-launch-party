@@ -3,7 +3,6 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
-import { SpaceBackground } from "@/components/SpaceBackground";
 import { toast } from "sonner";
 
 const Cadastro = () => {
@@ -52,15 +51,14 @@ const Cadastro = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
-      <SpaceBackground />
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       
-      <main className="flex-1 flex items-center justify-center px-4 py-12 relative z-10">
+      <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
-          <form onSubmit={handleSubmit} className="auth-fieldset">
-            <h1 className="auth-title">Nova Conta</h1>
-            <p className="auth-subtitle">Crie sua conta para começar</p>
+          <form onSubmit={handleSubmit} className="bg-card border border-border p-8 rounded-xl shadow-lg">
+            <h1 className="text-2xl font-bold text-center mb-2">Nova Conta</h1>
+            <p className="text-muted-foreground text-center mb-6">Crie sua conta para começar</p>
             
             {erro && (
               <div className="bg-destructive/10 border border-destructive text-destructive text-sm p-3 rounded mb-4 text-center">
@@ -70,38 +68,38 @@ const Cadastro = () => {
             
             <div className="space-y-4">
               <div>
-                <label className="auth-label">Nome Completo</label>
+                <label className="block text-sm font-medium mb-1">Nome Completo</label>
                 <input 
                   type="text" 
                   value={form.nome} 
                   onChange={(e) => set("nome", e.target.value)} 
                   placeholder="Seu nome" 
-                  className="auth-input" 
+                  className="w-full px-3 py-2 bg-background border border-input rounded-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
                   required
                 />
               </div>
               
               <div>
-                <label className="auth-label">Email</label>
+                <label className="block text-sm font-medium mb-1">Email</label>
                 <input 
                   type="email" 
                   value={form.email} 
                   onChange={(e) => set("email", e.target.value)} 
                   placeholder="seu@email.com" 
-                  className="auth-input" 
+                  className="w-full px-3 py-2 bg-background border border-input rounded-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
                   required
                 />
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="relative">
-                  <label className="auth-label">Senha</label>
+                  <label className="block text-sm font-medium mb-1">Senha</label>
                   <input 
                     type={showPass ? "text" : "password"} 
                     value={form.senha} 
                     onChange={(e) => set("senha", e.target.value)} 
                     placeholder="******" 
-                    className="auth-input" 
+                    className="w-full px-3 py-2 bg-background border border-input rounded-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
                     required
                   />
                   <button 
@@ -114,19 +112,19 @@ const Cadastro = () => {
                 </div>
                 
                 <div>
-                  <label className="auth-label">Confirmar Senha</label>
+                  <label className="block text-sm font-medium mb-1">Confirmar Senha</label>
                   <input 
                     type="password" 
                     value={form.confirma} 
                     onChange={(e) => set("confirma", e.target.value)} 
                     placeholder="******" 
-                    className="auth-input" 
+                    className="w-full px-3 py-2 bg-background border border-input rounded-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" 
                     required
                   />
                 </div>
               </div>
               
-              <button type="submit" disabled={loading} className="auth-btn mt-2">
+              <button type="submit" disabled={loading} className="w-full py-2 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 mt-2">
                 {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : "Criar Conta"}
               </button>
             </div>
@@ -134,7 +132,7 @@ const Cadastro = () => {
             <div className="mt-6 text-center">
               <p className="text-sm text-muted-foreground">
                 Já tem uma conta?{" "}
-                <Link to="/login" className="auth-link font-medium">
+                <Link to="/login" className="text-primary hover:underline font-medium">
                   Fazer Login
                 </Link>
               </p>
