@@ -147,8 +147,8 @@ const GameDetail = () => {
     );
   }
 
-  const reqMin = game.requisitos_minimo as Record<string, string> | null;
-  const reqRec = game.requisitos_recomendado as Record<string, string> | null;
+  const reqMin = game.requisitos_minimo;
+  const reqRec = game.requisitos_recomendado;
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
