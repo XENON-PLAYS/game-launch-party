@@ -366,7 +366,8 @@ const Admin = () => {
                 { id: "general", label: "Geral", icon: LayoutGrid },
                 { id: "requirements", label: "Requisitos", icon: Monitor },
                 { id: "downloads", label: "Links", icon: Download },
-                { id: "gallery", label: "Mídia", icon: ImageIcon }
+                { id: "gallery", label: "Mídia", icon: ImageIcon },
+                { id: "installation", label: "Instalação", icon: CheckCircle }
               ].map((tab) => (
                 <button
                   key={tab.id}
