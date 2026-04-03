@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search, Trophy, Bell } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -63,8 +64,27 @@ export function Header() {
           {user && <NotificationBell />}
 
           {/* Theme Toggle */}
-          <button onClick={toggleTheme} className="p-2.5 rounded-xl hover:bg-muted transition-colors">
-            {theme === "dark" ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-muted-foreground" />}
+          <button 
+            onClick={toggleTheme} 
+            className="p-2.5 rounded-xl hover:bg-muted transition-colors relative h-10 w-10 flex items-center justify-center overflow-hidden"
+            aria-label="Alternar tema"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={theme}
+                initial={{ y: -20, opacity: 0, rotate: -90, scale: 0.5 }}
+                animate={{ y: 0, opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ y: 20, opacity: 0, rotate: 90, scale: 0.5 }}
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                className="flex items-center justify-center"
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-5 h-5 text-yellow-400" />
+                ) : (
+                  <Moon className="w-5 h-5 text-muted-foreground" />
+                )}
+              </motion.div>
+            </AnimatePresence>
           </button>
 
 
