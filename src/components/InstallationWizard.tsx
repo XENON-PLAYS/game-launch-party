@@ -214,8 +214,10 @@ export const InstallationWizard = ({ game }: InstallationWizardProps) => {
       </div>
 
       {/* Step Content */}
-      <div className="mt-16 bg-card border-2 border-border rounded-[2.5rem] p-8 sm:p-12 shadow-3xl min-h-[400px] flex flex-col">
-        <div className="flex-1 space-y-10">
+      <div className="mt-16 bg-gradient-to-b from-card/90 via-card/95 to-muted/10 border-2 border-border/50 rounded-[3rem] p-10 sm:p-14 shadow-3xl min-h-[450px] flex flex-col relative overflow-hidden group/wizard">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] -mr-32 -mt-32 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 blur-[80px] -ml-32 -mb-32 pointer-events-none" />
+        <div className="relative z-10 flex-1 space-y-12">
           <div className="space-y-2">
             <h4 className="text-xl sm:text-2xl font-black uppercase tracking-widest flex items-center gap-3">
               {steps[activeStep].title}
