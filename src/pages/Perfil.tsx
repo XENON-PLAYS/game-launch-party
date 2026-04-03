@@ -606,24 +606,25 @@ const Perfil = () => {
        </div>
 
       {/* Nav Menu */}
-      <div className="auth-fieldset !p-2 space-y-1">
-       {[
-        { id: "settings", icon: Edit3, label: "Configurações" },
-        { id: "favorites", icon: Heart, label: "Favoritos" },
-        { id: "history", icon: History, label: "Download History" },
-        { id: "ranking", icon: Trophy, label: "Ranking Global" },
-        { id: "recommendations", icon: Sparkles, label: "Sugestões" },
-       ].map(tab => (
-        <button
-         key={tab.id}
-         onClick={() => setActiveTab(tab.id as any)}
-         className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'hover:bg-white/5 text-muted-foreground'}`}
-        >
-         <tab.icon className={`w-4 h-4 ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
-         {tab.label}
-        </button>
-       ))}
-      </div>
+       <div className="auth-fieldset !p-2 space-y-1">
+        {[
+         { id: "profile", icon: User, label: "Perfil", hidden: false },
+         { id: "settings", icon: Edit3, label: "Configurações", hidden: !isOwnProfile },
+         { id: "favorites", icon: Heart, label: "Favoritos", hidden: !isOwnProfile },
+         { id: "history", icon: History, label: "Download History", hidden: !isOwnProfile },
+         { id: "ranking", icon: Trophy, label: "Ranking Global", hidden: false },
+         { id: "recommendations", icon: Sparkles, label: "Sugestões", hidden: false },
+        ].filter(tab => !tab.hidden).map(tab => (
+         <button
+          key={tab.id}
+          onClick={() => setActiveTab(tab.id as any)}
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'hover:bg-white/5 text-muted-foreground'}`}
+         >
+          <tab.icon className={`w-4 h-4 ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
+          {tab.label}
+         </button>
+        ))}
+       </div>
 
       <div className="auth-fieldset p-6 space-y-4">
        <h3 className="text-sm border-b border-border pb-2">Informações</h3>
