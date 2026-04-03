@@ -384,8 +384,18 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Galeria de Imagens</Label>
-                      <Button variant="outline" size="sm" className="h-8 rounded-lg text-[10px] font-black uppercase tracking-widest gap-2">
-                        <Plus className="h-3 w-3" /> Adicionar
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="h-8 rounded-lg text-[10px] font-black uppercase tracking-widest gap-2"
+                        onClick={() => {
+                          const url = prompt("Insira a URL da imagem para a galeria:");
+                          if (url) {
+                            setFormData(prev => ({ ...prev, galeria: [...(prev.galeria || []), url] }));
+                          }
+                        }}
+                      >
+                        <Plus className="h-3 w-3" /> Adicionar URL
                       </Button>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
