@@ -163,7 +163,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
             game_id: gameId,
             label: l.label || "Download",
             url: l.url || "",
-            status: l.status || "Ativo",
+            status: l.status === "Ativo" || !l.status ? "online" : l.status,
             click_count: l.click_count || 0
           }));
           const { error: linksError } = await supabase.from("download_links").insert(linksToInsert);
@@ -180,7 +180,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
     }
   };
 
-  const addLink = () => setLinks([...links, { label: "Direct Download", url: "", status: "Ativo" }]);
+  const addLink = () => setLinks([...links, { label: "Direct Download", url: "", status: "online" }]);
   const updateLink = (index: number, field: keyof DownloadLink, value: any) => {
     const newLinks = [...links];
     newLinks[index] = { ...newLinks[index], [field]: value };
@@ -384,8 +384,18 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Galeria de Imagens</Label>
-                      <Button variant="outline" size="sm" className="h-8 rounded-lg text-[10px] font-black uppercase tracking-widest gap-2">
-                        <Plus className="h-3 w-3" /> Adicionar
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="h-8 rounded-lg text-[10px] font-black uppercase tracking-widest gap-2"
+                        onClick={() => {
+                          const url = prompt("Insira a URL da imagem para a galeria:");
+                          if (url) {
+                            setFormData(prev => ({ ...prev, galeria: [...(prev.galeria || []), url] }));
+                          }
+                        }}
+                      >
+                        <Plus className="h-3 w-3" /> Adicionar URL
                       </Button>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -475,6 +485,18 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                         <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest opacity-60 max-w-xs">Adicione links de download para que os usuários possam acessar o jogo.</p>
                       </div>
                     )}
+                    <div className="pt-4 border-t border-border/40">
+                      <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">URL da Demo (Opcional)</Label>
+                      <div className="relative group mt-2">
+                        <LinkIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary" />
+                        <Input 
+                          value={formData.link_demo || ""} 
+                          onChange={(e) => handleFieldChange("link_demo", e.target.value)} 
+                          className="pl-12 h-12 rounded-xl bg-background/50" 
+                          placeholder="https://..."
+                        />
+                      </div>
+                    </div>
                   </div>
                 </TabsContent>
 
