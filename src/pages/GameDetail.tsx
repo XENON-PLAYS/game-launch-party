@@ -501,7 +501,7 @@ const GameDetail = () => {
             </div>
 
             <div className="lg:col-span-8 space-y-10">
-              <div className="bg-gradient-to-br from-card via-card/95 to-muted/10 border-2 border-border/50 rounded-[2.5rem] p-10 sm:p-14 space-y-10 shadow-2xl backdrop-blur-sm relative overflow-hidden group/installation">
+              <div className="bg-gradient-to-br from-card via-card/95 to-muted/10 border-2 border-border/50 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-14 space-y-10 shadow-2xl backdrop-blur-sm relative overflow-hidden group/installation">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] -mr-32 -mt-32 pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 blur-[80px] -ml-32 -mb-32 pointer-events-none" />
                 <div className="relative z-10">
