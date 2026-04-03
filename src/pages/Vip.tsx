@@ -72,7 +72,7 @@ const VipPage = () => {
   const handleSubscribe = async (planName: string) => {
     if (!profile) {
       toast.error("Você precisa estar logado para assinar um plano.");
-      navigate("/login?redirect=/checkout?plan=" + planName);
+      navigate("/login?redirect=" + encodeURIComponent("/checkout?plan=" + planName));
       return;
     }
     
