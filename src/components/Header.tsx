@@ -150,7 +150,9 @@ export function Header() {
               </>
             ) : (
               <>
-                
+                <Link to="/perfil" className="flex items-center gap-2 text-muted-foreground" onClick={() => setMobileOpen(false)}>
+                  <User className="w-4 h-4" /> Perfil
+                </Link>
                 <button onClick={() => { logout(); setMobileOpen(false); }} className="flex items-center gap-2 text-destructive"><LogOut className="w-4 h-4" /> Sair</button>
               </>
             )}
