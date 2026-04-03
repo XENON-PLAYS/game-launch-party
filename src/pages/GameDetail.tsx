@@ -6,11 +6,12 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
-import { Download, ArrowLeft, Monitor, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Play, CheckCircle, Info, ExternalLink } from "lucide-react";
+import { Download, ArrowLeft, Monitor, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Play, CheckCircle, Info, ExternalLink, Bug } from "lucide-react";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
+import { BugReportModal } from "@/components/BugReportModal";
 import logo from "@/assets/logo.png";
 
 

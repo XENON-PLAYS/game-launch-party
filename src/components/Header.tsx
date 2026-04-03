@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search, Trophy, Bell } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, Sun, Moon, User, Search, Trophy, Bell, PlusCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useAuth } from "@/context/AuthContext";
@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { OnlineUsers } from "./OnlineUsers";
 import { NotificationBell } from "./NotificationBell";
 import { SunMoonSystem } from "./SunMoonSystem";
+import { GameRequestModal } from "./GameRequestModal";
 import logo from "@/assets/logo.png";
 
 export function Header() {
