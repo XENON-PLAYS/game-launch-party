@@ -32,9 +32,11 @@ const VipPage = () => {
         "Experiência 100% livre de anúncios",
         "Suporte técnico priorizado"
       ],
-      color: "from-primary/10 to-primary/20",
-      borderColor: "border-primary/20",
-      buttonColor: "bg-primary/80 hover:bg-primary shadow-primary/10"
+      color: "from-orange-500/10 to-orange-500/20",
+      borderColor: "border-orange-500/20",
+      buttonColor: "bg-orange-600 hover:bg-orange-700 shadow-orange-500/10",
+      iconColor: "text-orange-500",
+      iconBg: "bg-orange-500/20"
     },
     {
       name: "Semestral",
