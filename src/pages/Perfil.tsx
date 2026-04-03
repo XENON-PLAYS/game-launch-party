@@ -207,8 +207,9 @@ const Perfil = () => {
     }
    }
 
-   const fileExt = isGif ? "gif" : "webp"; // Standardize extension
-   const filePath = `${user.id}/${crypto.randomUUID()}.${fileExt}`;
+    const fileExt = isGif ? "gif" : "webp"; // Standardize extension
+    const uuid = typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : Math.random().toString(36).substring(2, 15);
+    const filePath = `${user.id}/${uuid}.${fileExt}`;
 
    const { error: uploadError } = await supabase.storage
     .from("avatars")
