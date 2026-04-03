@@ -9,6 +9,8 @@ import { toast } from "sonner";
 const Cadastro = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
   const [form, setForm] = useState({ nome: "", email: "", senha: "", confirma: "" });
   const [erro, setErro] = useState("");
   const [showPass, setShowPass] = useState(false);
