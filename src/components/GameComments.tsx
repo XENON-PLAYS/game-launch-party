@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { MessageSquare, Send, Trash2, Flag, ShieldAlert, Loader2, User } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -40,7 +40,7 @@ export function GameComments({ gameId }: GameCommentsProps) {
       const userIds = [...new Set(comments.map(c => c.user_id))];
       const { data: profiles, error: profilesError } = await supabase
         .from("profiles")
-        .select("user_id, display_name, avatar_url, is_vip, badges")
+        .select("user_id, display_name, avatar_url, is_vip, badges, status")
         .in("user_id", userIds);
 
       if (profilesError) {
@@ -206,21 +206,27 @@ export function GameComments({ gameId }: GameCommentsProps) {
                     className={`flex items-start gap-3 ${isMe ? "flex-row-reverse" : "flex-row"}`}
                   >
                     {/* Avatar */}
-                    <div className={`shrink-0 w-8 h-8 rounded-lg border-2 overflow-hidden flex items-center justify-center bg-muted transition-all duration-300 ${isMe ? "border-primary/50" : "border-border"}`}>
+                    <Link 
+                      to={profile?.user_id ? `/perfil/${profile.user_id}` : "#"}
+                      className={`shrink-0 w-8 h-8 rounded-lg border-2 overflow-hidden flex items-center justify-center bg-muted transition-all duration-300 hover:scale-110 active:scale-95 ${isMe ? "border-primary/50" : "border-border hover:border-primary/50"}`}
+                    >
                       {profile?.avatar_url ? (
                         <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />
                       ) : (
                         <User className={`w-4 h-4 ${isMe ? "text-primary" : "text-muted-foreground"}`} />
                       )}
-                    </div>
+                    </Link>
 
                     {/* Content */}
                     <div className={`flex flex-col max-w-[80%] space-y-1 ${isMe ? "items-end" : "items-start"}`}>
                       {/* Name and Date */}
                       <div className={`flex items-center gap-2 px-1 ${isMe ? "flex-row-reverse" : "flex-row"}`}>
-                        <span className={`text-[10px] font-black uppercase tracking-widest ${isMe ? "text-primary" : "text-muted-foreground"}`}>
+                        <Link 
+                          to={profile?.user_id ? `/perfil/${profile.user_id}` : "#"}
+                          className={`text-[10px] font-black uppercase tracking-widest hover:underline ${isMe ? "text-primary" : "text-muted-foreground hover:text-primary transition-colors"}`}
+                        >
                           {profile?.display_name || "Anônimo"}
-                        </span>
+                        </Link>
                         {profile?.is_vip && (
                           <span className="bg-yellow-500/10 text-yellow-500 text-[8px] font-black px-1 py-0.5 rounded border border-yellow-500/20 uppercase">VIP</span>
                         )}
