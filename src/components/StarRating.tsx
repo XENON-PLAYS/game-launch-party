@@ -49,7 +49,12 @@ export function StarRating({ gameId }: StarRatingProps) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-rating", gameId] });
       queryClient.invalidateQueries({ queryKey: ["avg-rating", gameId] });
+      queryClient.invalidateQueries({ queryKey: ["game", slug] });
+      toast.success("Avaliação enviada!");
     },
+    onError: (err: any) => {
+      toast.error("Erro ao enviar avaliação: " + err.message);
+    }
   });
 
   const handleRate = (rating: number) => {
