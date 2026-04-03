@@ -65,7 +65,7 @@ export function HeroCarousel() {
   const game = featured[current];
 
   return (
-    <section className="relative h-[480px] sm:h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
+    <section className="relative h-[650px] sm:h-[700px] md:h-[750px] lg:h-[850px] overflow-hidden bg-background">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={current}
