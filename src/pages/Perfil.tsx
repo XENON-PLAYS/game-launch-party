@@ -93,10 +93,10 @@ const Perfil = () => {
   }, [refreshProfile]);
 
   useEffect(() => {
-   if (user) {
-    fetchExtraData();
-   }
-  }, [user, activeTab]);
+    if (isOwnProfile && user) {
+      fetchExtraData();
+    }
+  }, [user, activeTab, isOwnProfile]);
 
  const fetchExtraData = async () => {
   if (!user) return;
