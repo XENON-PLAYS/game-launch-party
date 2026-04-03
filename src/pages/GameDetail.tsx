@@ -437,91 +437,134 @@ const GameDetail = () => {
         </section>
 
         {/* Installation Section */}
-        {(game.pre_requisitos || game.passo_a_passo || game.link_demo || game.observacoes) && (
-          <section className="space-y-16">
-            <div className="flex items-center gap-6 sm:gap-10">
-              <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
-                <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
+        <section className="space-y-16">
+          <div className="flex items-center gap-6 sm:gap-10">
+            <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
+              <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
+            </div>
+            <div className="space-y-3">
+              <h2 className="text-responsive-h2 leading-none uppercase">Instalar o jogo</h2>
+              <div className="flex items-center gap-6">
+                <span className="w-16 sm:w-32 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                <span className="text-responsive-small text-muted-foreground opacity-80">Guia da Frota para uma Navegação Segura</span>
               </div>
-              <div className="space-y-3">
-                <h2 className="text-responsive-h2 leading-none uppercase">Instalar o jogo</h2>
-                <div className="flex items-center gap-6">
-                  <span className="w-16 sm:w-32 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                  <span className="text-responsive-small text-muted-foreground opacity-80">Guia da Frota para uma Navegação Segura</span>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-16">
+            <div className="space-y-10">
+              {/* Technical Sheet - Including all information as requested */}
+              <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
+                <div className="flex items-center gap-4 text-primary">
+                  <Monitor className="w-6 h-6" />
+                  <h3 className="text-xl font-black uppercase tracking-widest">Ficha Técnica do Jogo</h3>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-6 text-sm">
+                  {[
+                    { label: "Nome", value: game.nome },
+                    { label: "Desenvolvedor", value: game.desenvolvedor },
+                    { label: "Distribuidor", value: game.distribuidor },
+                    { label: "Lançamento", value: game.lancamento },
+                    { label: "Classificação", value: game.classificacao },
+                    { label: "Tamanho", value: game.tamanho },
+                    { label: "Preço", value: game.preco === 0 ? "Grátis" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}` },
+                  ].map((item, i) => item.value ? (
+                    <div key={i} className="space-y-1">
+                      <span className="text-muted-foreground opacity-60 uppercase text-[10px] font-bold tracking-widest">{item.label}</span>
+                      <p className="font-black text-foreground">{String(item.value)}</p>
+                    </div>
+                  ) : null)}
+                  
+                  {game.idiomas && game.idiomas.length > 0 && (
+                    <div className="space-y-1 sm:col-span-2">
+                      <span className="text-muted-foreground opacity-60 uppercase text-[10px] font-bold tracking-widest">Idiomas</span>
+                      <p className="font-black text-foreground">{(game.idiomas as string[]).join(", ")}</p>
+                    </div>
+                  )}
+                  
+                  {game.modos && game.modos.length > 0 && (
+                    <div className="space-y-1 sm:col-span-2">
+                      <span className="text-muted-foreground opacity-60 uppercase text-[10px] font-bold tracking-widest">Modos de Jogo</span>
+                      <p className="font-black text-foreground">{(game.modos as string[]).join(", ")}</p>
+                    </div>
+                  )}
+
+                  {game.categorias && game.categorias.length > 0 && (
+                    <div className="space-y-1 sm:col-span-2">
+                      <span className="text-muted-foreground opacity-60 uppercase text-[10px] font-bold tracking-widest">Categorias</span>
+                      <p className="font-black text-foreground">{(game.categorias as string[]).join(", ")}</p>
+                    </div>
+                  )}
                 </div>
               </div>
+
+              {game.pre_requisitos && (
+                <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
+                  <div className="flex items-center gap-4 text-primary">
+                    <Info className="w-6 h-6" />
+                    <h3 className="text-xl font-black uppercase tracking-widest">Pré-requisitos</h3>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">{game.pre_requisitos}</p>
+                </div>
+              )}
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-10 sm:gap-16">
-              <div className="space-y-10">
-                {game.pre_requisitos && (
-                  <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
-                    <div className="flex items-center gap-4 text-primary">
-                      <Info className="w-6 h-6" />
-                      <h3 className="text-xl font-black uppercase tracking-widest">Pré-requisitos</h3>
-                    </div>
-                    <p className="text-muted-foreground leading-relaxed">{game.pre_requisitos}</p>
+            <div className="space-y-10">
+              {game.passo_a_passo && (
+                <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
+                  <div className="flex items-center gap-4 text-primary">
+                    <CheckCircle className="w-6 h-6" />
+                    <h3 className="text-xl font-black uppercase tracking-widest">Passo a Passo</h3>
                   </div>
-                )}
+                  <div className="space-y-4">
+                    {game.passo_a_passo.split(';').map((step, i) => (
+                      <div key={i} className="flex gap-4">
+                        <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-black text-sm">{i + 1}</span>
+                        <p className="text-muted-foreground">{step.trim()}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-                {game.passo_a_passo && (
-                  <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
-                    <div className="flex items-center gap-4 text-primary">
-                      <CheckCircle className="w-6 h-6" />
-                      <h3 className="text-xl font-black uppercase tracking-widest">Passo a Passo</h3>
-                    </div>
-                    <div className="space-y-4">
-                      {game.passo_a_passo.split(';').map((step, i) => (
-                        <div key={i} className="flex gap-4">
-                          <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-black text-sm">{i + 1}</span>
-                          <p className="text-muted-foreground">{step.trim()}</p>
-                        </div>
-                      ))}
-                    </div>
+              {game.link_demo && (
+                <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
+                  <div className="flex items-center gap-4 text-primary">
+                    <ExternalLink className="w-6 h-6" />
+                    <h3 className="text-xl font-black uppercase tracking-widest">Teste / Demo</h3>
                   </div>
-                )}
-              </div>
+                  <p className="text-muted-foreground">Experimente a versão oficial de avaliação antes de içar as velas.</p>
+                  <a 
+                    href={game.link_demo} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 text-primary hover:text-primary/80 font-black uppercase tracking-widest text-sm transition-colors"
+                  >
+                    <span>Acessar Link Oficial</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </a>
+                </div>
+              )}
 
-              <div className="space-y-10">
-                {game.link_demo && (
-                  <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
-                    <div className="flex items-center gap-4 text-primary">
-                      <ExternalLink className="w-6 h-6" />
-                      <h3 className="text-xl font-black uppercase tracking-widest">Teste / Demo</h3>
-                    </div>
-                    <p className="text-muted-foreground">Experimente a versão oficial de avaliação antes de içar as velas.</p>
-                    <a 
-                      href={game.link_demo} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 text-primary hover:text-primary/80 font-black uppercase tracking-widest text-sm transition-colors"
-                    >
-                      <span>Acessar Link Oficial</span>
-                      <ChevronRight className="w-4 h-4" />
-                    </a>
+              {game.observacoes && (
+                <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
+                  <div className="flex items-center gap-4 text-primary">
+                    <Shield className="w-6 h-6" />
+                    <h3 className="text-xl font-black uppercase tracking-widest">Observações</h3>
                   </div>
-                )}
-
-                {game.observacoes && (
-                  <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-8 shadow-2xl shadow-black/5">
-                    <div className="flex items-center gap-4 text-primary">
-                      <Shield className="w-6 h-6" />
-                      <h3 className="text-xl font-black uppercase tracking-widest">Observações</h3>
-                    </div>
-                    <div className="grid gap-4">
-                      {game.observacoes.split(';').map((obs, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2" />
-                          <p className="text-muted-foreground text-sm">{obs.trim()}</p>
-                        </div>
-                      ))}
-                    </div>
+                  <div className="grid gap-4">
+                    {game.observacoes.split(';').map((obs, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2" />
+                        <p className="text-muted-foreground text-sm">{obs.trim()}</p>
+                      </div>
+                    ))}
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
         {/* Social / Community Section */}
         <section className="grid lg:grid-cols-2 gap-20 sm:gap-32">
