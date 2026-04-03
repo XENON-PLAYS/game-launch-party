@@ -46,7 +46,7 @@ export function SkyBackground() {
             y: [0, 20, 0]
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full blur-[100px] bg-indigo-500/10"
+          className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full blur-[100px] bg-indigo-500/10 will-change-transform"
         />
       </div>
 
