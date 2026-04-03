@@ -45,6 +45,8 @@ type Profile = {
   is_vip: boolean;
   created_at: string;
   role: string | null;
+  status: string | null;
+  last_seen_at: string | null;
 };
 
 interface UserAdminListProps {
@@ -118,6 +120,7 @@ export function UserAdminList({ users }: UserAdminListProps) {
                   <TableHead className="text-[10px] font-black uppercase tracking-widest">Nickname / Display Name</TableHead>
                   <TableHead className="text-[10px] font-black uppercase tracking-widest">Username</TableHead>
                   <TableHead className="text-[10px] font-black uppercase tracking-widest text-center">Status VIP</TableHead>
+                   <TableHead className="text-[10px] font-black uppercase tracking-widest text-center">Status Online</TableHead>
                   <TableHead className="text-[10px] font-black uppercase tracking-widest">Membro Desde</TableHead>
                   <TableHead className="text-[10px] font-black uppercase tracking-widest text-right">Ações</TableHead>
                 </TableRow>
@@ -155,6 +158,33 @@ export function UserAdminList({ users }: UserAdminListProps) {
                         <Badge variant="secondary" className="text-[9px] font-black uppercase tracking-widest">
                           Membro
                         </Badge>
+                      )}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      {user.status === 'online' || (user.last_seen_at && new Date(user.last_seen_at).getTime() > Date.now() - 5 * 60 * 1000) ? (
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-black uppercase tracking-widest">
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            Online
+                          </div>
+                          {user.last_seen_at && (
+                            <span className="text-[8px] text-muted-foreground uppercase font-bold tracking-tighter">
+                              Agora
+                            </span>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-muted border border-border text-muted-foreground text-[9px] font-black uppercase tracking-widest">
+                            <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30" />
+                            Offline
+                          </div>
+                          {user.last_seen_at && (
+                            <span className="text-[8px] text-muted-foreground uppercase font-bold tracking-tighter">
+                              {format(new Date(user.last_seen_at), "dd/MM HH:mm", { locale: ptBR })}
+                            </span>
+                          )}
+                        </div>
                       )}
                     </TableCell>
                     <TableCell className="text-xs font-bold text-muted-foreground flex items-center gap-2">

@@ -13,6 +13,7 @@ interface Profile {
   is_vip: boolean;
   theme: string;
   status: string;
+  last_seen_at: string;
   badges: string[];
 }
 
@@ -78,6 +79,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, [fetchProfile]);
 
+  useEffect(() => {
+    let interval: any;
+    if (user) {
+      // Initial update
+      supabase.rpc("update_online_status");
+      // Periodic heartbeat
+      interval = setInterval(() => {
+        supabase.rpc("update_online_status");
+      }, 30000); // 30 seconds
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [user]);
+
   const login = useCallback(async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     return { error: error?.message ?? null };
@@ -96,8 +112,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const logout = useCallback(async () => {
+    if (user) {
+      await supabase
+        .from("profiles")
+        .update({ status: "offline" })
+        .eq("user_id", user.id);
+    }
     await supabase.auth.signOut();
-  }, []);
+  }, [user]);
 
   const refreshProfile = useCallback(async () => {
     if (user) await fetchProfile(user.id);
