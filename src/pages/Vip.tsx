@@ -106,17 +106,17 @@ const VipPage = () => {
             transition={{ delay: 0.1 }}
             className="text-responsive-h3 text-muted-foreground font-medium"
           >
-            Navegue por águas tranquilas sem anúncios, downloads instantâneos e suporte exclusivo.
+            Navegue por um catálogo completo sem anúncios, com downloads imediatos e suporte exclusivo 24/7.
           </motion.p>
         </section>
 
         {/* Benefits Grid */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
-            { icon: Zap, title: "Sem Espera", desc: "Acesse seus jogos instantaneamente, sem contadores." },
-            { icon: Shield, title: "Sem Anúncios", desc: "Uma experiência limpa e focada no que importa: o jogo." },
-            { icon: Star, title: "Badge Exclusiva", desc: "Destaque-se na comunidade com badges VIP." },
-            { icon: Sparkles, title: "Suporte 24/7", desc: "Prioridade absoluta em pedidos e ajuda técnica." }
+            { icon: Zap, title: "Fila Zero", desc: "Acesse e baixe seus jogos instantaneamente, sem esperas ou contadores." },
+            { icon: Shield, title: "Livre de Ads", desc: "Navegação fluida e focada no que importa, 100% sem anúncios intrusivos." },
+            { icon: Star, title: "Insignia VIP", desc: "Destaque seu perfil na comunidade com badges exclusivas de membro." },
+            { icon: Sparkles, title: "Suporte 24/7", desc: "Canal direto de suporte técnico para ajuda imediata com seus pedidos." }
           ].map((benefit, i) => (
             <motion.div 
               key={i}
