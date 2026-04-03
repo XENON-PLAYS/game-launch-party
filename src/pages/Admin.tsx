@@ -124,11 +124,20 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
-      <AdminSidebar />
-      
-      <div className="md:pl-64 flex flex-col min-h-screen">
-        <AdminHeader />
+    <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-[20%] right-[15%] w-[30%] h-[30%] bg-primary/2 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.02] pointer-events-none" />
+      </div>
+
+      <div className="relative z-10">
+        <AdminSidebar />
+        
+        <div className="md:pl-64 flex flex-col min-h-screen">
+          <AdminHeader />
         
         <main className="flex-1 p-6 md:p-10 max-w-[1600px] mx-auto w-full">
           {gamesLoading ? (
