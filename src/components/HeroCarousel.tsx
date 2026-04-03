@@ -55,7 +55,7 @@ export function HeroCarousel() {
               <Skeleton className="h-20 w-3/4" />
               <Skeleton className="h-32 w-full" />
             </div>
-            <Skeleton className="mx-auto md:mr-0 rounded-2xl aspect-[3/4] w-full max-w-[220px] md:max-w-[360px]" />
+            <Skeleton className="mx-auto md:mr-0 rounded-2xl aspect-[3/4] w-full max-w-[240px] md:max-w-[380px]" />
           </div>
         </div>
       </section>
