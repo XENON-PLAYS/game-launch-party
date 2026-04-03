@@ -32,12 +32,13 @@ export function Header() {
       <div className="container-responsive flex items-center justify-between gap-3 md:gap-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0">
-          <Shield 
-            className="w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:w-14 lg:h-14 text-primary" 
+          <img 
+            src={logo} 
+            alt="Logo" 
+            className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 object-contain" 
           />
           <div className="flex flex-col">
-            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none">ELITE</span>
-            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none text-primary">STUDIO</span>
+            <span className="font-bold text-sm sm:text-base md:text-xl lg:text-2xl tracking-tighter leading-none text-primary">JOGO GRATIS</span>
           </div>
         </Link>
 
@@ -55,7 +56,7 @@ export function Header() {
           </Link>
           {isAdmin && (
             <Link to="/admin" className="text-primary hover:text-primary/80 flex items-center gap-2">
-              <Shield className="w-4 h-4" /> Admin
+              <Shield className="w-4 h-4" /> Painel de Administrador
             </Link>
           )}
         </nav>
@@ -104,7 +105,7 @@ export function Header() {
                     </div>
                     {isAdmin && (
                       <Link to="/admin" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
-                        <Shield className="w-4 h-4" /> Admin
+                        <Shield className="w-4 h-4" /> Painel de Administrador
                       </Link>
                     )}
                     <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
@@ -151,7 +152,11 @@ export function Header() {
           >
             Pedir Jogo
           </button>
-          {isAdmin && <Link to="/admin" className="block py-2 text-primary" onClick={() => setMobileOpen(false)}>Admin</Link>}
+          {isAdmin && (
+            <Link to="/admin" className="block py-2 text-primary flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+              <Shield className="w-4 h-4" /> Painel de Administrador
+            </Link>
+          )}
           <Link to="/vip" className="block py-2 text-yellow-500 animate-pulse flex items-center gap-2" onClick={() => setMobileOpen(false)}>
             <Trophy className="w-4 h-4" /> VIP
           </Link>
