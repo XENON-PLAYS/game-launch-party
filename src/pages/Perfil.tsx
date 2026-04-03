@@ -40,18 +40,43 @@ const Perfil = () => {
  const [recommendations, setRecommendations] = useState<any[]>([]);
  const [loadingExtra, setLoadingExtra] = useState(false);
 
- useEffect(() => {
-  if (!authLoading && !user) {
-   navigate("/login");
-  }
-  if (profile) {
-   setUsername(profile.username || "");
-   setDisplayName(profile.display_name || "");
-   setBio(profile.bio || "");
-   setStatus(profile.status || "offline");
-   setThemePreference((profile.theme as "light" | "dark") || "dark");
-  }
- }, [user, profile, authLoading, navigate]);
+  useEffect(() => {
+    const checkProfile = async () => {
+      if (authLoading) return;
+
+      if (!userId || (user && userId === user.id)) {
+        setIsOwnProfile(true);
+        if (profile) {
+          setTargetProfile(profile);
+          setUsername(profile.username || "");
+          setDisplayName(profile.display_name || "");
+          setBio(profile.bio || "");
+          setStatus(profile.status || "offline");
+          setThemePreference((profile.theme as "light" | "dark") || "dark");
+          setViewLoading(false);
+        }
+        if (!user) navigate("/login");
+      } else {
+        setIsOwnProfile(false);
+        setViewLoading(true);
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("user_id", userId)
+          .single();
+        
+        if (error || !data) {
+          toast.error("Usuário não encontrado");
+          navigate("/");
+          return;
+        }
+        setTargetProfile(data);
+        setViewLoading(false);
+      }
+    };
+
+    checkProfile();
+  }, [userId, user, profile, authLoading, navigate]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
