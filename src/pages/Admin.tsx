@@ -11,6 +11,8 @@ import { DashboardOverview } from "@/components/admin/DashboardOverview";
 import { GameAdminList } from "@/components/admin/GameAdminList";
 import { GameFormModal } from "@/components/admin/GameFormModal";
 import { UserAdminList } from "@/components/admin/UserAdminList";
+import { GameRequestList } from "@/components/admin/GameRequestList";
+import { BugReportList } from "@/components/admin/BugReportList";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
