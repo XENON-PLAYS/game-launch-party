@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2, User, Mail, Lock, UserPlus, ChevronRight } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
 import { SpaceBackground } from "@/components/SpaceBackground";
+import { motion } from "framer-motion";
 
 import { toast } from "sonner";
 
