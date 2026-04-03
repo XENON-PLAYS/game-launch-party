@@ -25,7 +25,7 @@ const Admin = () => {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  const [activeTab, setActiveTab] = useState<"general" | "requirements" | "downloads" | "gallery">("general");
+  const [activeTab, setActiveTab] = useState<"general" | "requirements" | "downloads" | "gallery" | "installation">("general");
   const [links, setLinks] = useState<any[]>([]);
 
   const { data: games = [] } = useQuery({
