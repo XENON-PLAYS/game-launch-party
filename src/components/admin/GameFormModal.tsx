@@ -163,7 +163,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
             game_id: gameId,
             label: l.label || "Download",
             url: l.url || "",
-            status: l.status || "Ativo",
+            status: l.status === "Ativo" || !l.status ? "online" : l.status,
             click_count: l.click_count || 0
           }));
           const { error: linksError } = await supabase.from("download_links").insert(linksToInsert);
