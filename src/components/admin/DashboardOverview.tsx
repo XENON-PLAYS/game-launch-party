@@ -20,6 +20,8 @@ type Game = Tables<"games">;
 
 interface DashboardOverviewProps {
   games: Game[];
+  userCount: number;
+  averageRating: number;
 }
 
 const StatCard = ({ icon: Icon, label, value, trend, color }: { icon: any, label: string, value: string | number, trend?: string, color: string }) => (
