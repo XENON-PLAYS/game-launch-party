@@ -194,7 +194,6 @@ export function HeroCarousel() {
                 onClick={() => goTo(i)}
                 className={`relative h-1 group focus:outline-none transition-all duration-300 ${i === current ? 'w-10 sm:w-[60px]' : 'w-5 sm:w-[30px]'}`}
               >
-              >
                 <div className="absolute inset-0 bg-white/20 rounded-full overflow-hidden">
                   <motion.div 
                     initial={false}
