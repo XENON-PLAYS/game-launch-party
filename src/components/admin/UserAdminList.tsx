@@ -160,6 +160,33 @@ export function UserAdminList({ users }: UserAdminListProps) {
                         </Badge>
                       )}
                     </TableCell>
+                    <TableCell className="text-center">
+                      {user.status === 'online' || (user.last_seen_at && new Date(user.last_seen_at).getTime() > Date.now() - 5 * 60 * 1000) ? (
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-black uppercase tracking-widest">
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            Online
+                          </div>
+                          {user.last_seen_at && (
+                            <span className="text-[8px] text-muted-foreground uppercase font-bold tracking-tighter">
+                              Agora
+                            </span>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-muted border border-border text-muted-foreground text-[9px] font-black uppercase tracking-widest">
+                            <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30" />
+                            Offline
+                          </div>
+                          {user.last_seen_at && (
+                            <span className="text-[8px] text-muted-foreground uppercase font-bold tracking-tighter">
+                              {format(new Date(user.last_seen_at), "dd/MM HH:mm", { locale: ptBR })}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </TableCell>
                     <TableCell className="text-xs font-bold text-muted-foreground flex items-center gap-2">
                       <Calendar className="h-3.5 w-3.5" />
                       {format(new Date(user.created_at), "dd/MM/yyyy", { locale: ptBR })}

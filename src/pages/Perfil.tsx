@@ -586,7 +586,7 @@ const Perfil = () => {
           <h2 className="text-xl truncate max-w-[180px]">
            {targetProfile?.display_name || "Usuário"}
           </h2>
-          <div className={`w-2.5 h-2.5 rounded-full ${targetProfile?.status === 'online' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-gray-500'}`} />
+          <div className={`w-2.5 h-2.5 rounded-full ${targetProfile?.status === 'online' || (targetProfile?.last_seen_at && new Date(targetProfile.last_seen_at).getTime() > Date.now() - 5 * 60 * 1000) ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-gray-500'}`} />
          </div>
          <p className="text-muted-foreground text-sm ">
           @{targetProfile?.username || "sem_usuario"}
