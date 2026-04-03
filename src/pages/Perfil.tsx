@@ -143,6 +143,13 @@ const Perfil = () => {
   const file = e.target.files?.[0];
   if (!file || !user) return;
 
+  // MIME type validation
+  const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+  if (!allowedTypes.includes(file.type)) {
+   toast.error("Apenas imagens (JPEG, PNG, WebP, GIF) são permitidas.");
+   return;
+  }
+
   // Check size (5MB limit)
   const maxSize = 5 * 1024 * 1024;
   if (file.size > maxSize) {
@@ -169,8 +176,8 @@ const Perfil = () => {
     }
    }
 
-   const fileExt = file.name.split(".").pop();
-   const filePath = `${user.id}/${Math.random()}.${fileExt}`;
+   const fileExt = isGif ? "gif" : "webp"; // Standardize extension
+   const filePath = `${user.id}/${crypto.randomUUID()}.${fileExt}`;
 
    const { error: uploadError } = await supabase.storage
     .from("avatars")
