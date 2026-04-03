@@ -5,25 +5,24 @@ const Meteor = ({ initialDelay }: { initialDelay: number }) => {
   // Configurações de movimento para cada meteoro individual
   // Usamos useMemo para manter valores fixos durante o ciclo de vida do componente
   const meteorConfig = useMemo(() => ({
-    startX: Math.random() * 80, // 0 a 80vw
-    startY: Math.random() * -20 - 10, // -30 a -10vh
-    duration: 0.8 + Math.random() * 1.2, // 0.8 a 2.0 segundos (rápido!)
-    repeatDelay: 5 + Math.random() * 15, // Espera entre passagens
+    startX: -150, // Começa fora da tela à esquerda
+    startY: Math.random() * 90 + 5, // 5 a 95vh para não colar no topo/rodapé
+    duration: 25 + Math.random() * 25, // 25 a 50 segundos (lento e sutil)
+    repeatDelay: 10 + Math.random() * 15, // Espera entre passagens
   }), []);
 
   return (
     <motion.div
       initial={{ 
-        x: "-10vw", 
-        y: "-10vh", 
+        x: "-20vw", 
+        y: 0, 
         opacity: 0,
-        scale: 0.8
+        scale: 0.7
       }}
       animate={{
-        x: ["0vw", "130vw"],
-        y: ["0vh", "130vh"],
-        opacity: [0, 1, 1, 0],
-        scale: [0.8, 1.2, 1.2, 0.8]
+        x: ["-10vw", "110vw"],
+        opacity: [0, 0.3, 0.3, 0], // Opacidade sutil
+        scale: [0.7, 1, 1, 0.7]
       }}
       transition={{
         duration: meteorConfig.duration,
@@ -34,9 +33,9 @@ const Meteor = ({ initialDelay }: { initialDelay: number }) => {
       }}
       className="cosmic-element"
       style={{
-        left: `${meteorConfig.startX}vw`,
+        left: 0,
         top: `${meteorConfig.startY}vh`,
-        rotate: "45deg",
+        rotate: "0deg",
       }}
     />
   );
