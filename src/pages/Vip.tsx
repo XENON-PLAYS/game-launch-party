@@ -194,20 +194,20 @@ const VipPage = () => {
         <section className="bg-primary/5 border border-primary/10 rounded-[3rem] p-12 md:p-20 text-center space-y-10">
           <h2 className="text-responsive-h3 uppercase font-black">Pagamento Seguro via Pix ou Cartão</h2>
           <p className="text-responsive-body max-w-2xl mx-auto opacity-70">
-            Liberação automática após confirmação. Sem fidelidade, cancele quando quiser diretamente no seu perfil.
+            Liberação automática instantânea após confirmação do sistema. Sem taxas escondidas, cancele sua assinatura quando desejar diretamente no painel.
           </p>
           <div className="flex flex-wrap justify-center gap-8 opacity-40 grayscale group-hover:grayscale-0 transition-all">
             {/* Payment icons placeholders */}
             <div className="px-6 py-2 bg-card rounded-lg border border-border font-black">PIX</div>
             <div className="px-6 py-2 bg-card rounded-lg border border-border font-black">VISA</div>
-            <div className="px-6 py-2 bg-card rounded-lg border border-border font-black">MASTER</div>
+            <div className="px-6 py-2 bg-card rounded-lg border border-border font-black">MASTERCARD</div>
           </div>
         </section>
       </main>
 
       <footer className="border-t border-border/50 bg-card py-20 mt-32">
         <div className="container-responsive text-center text-muted-foreground opacity-40 font-bold uppercase tracking-widest text-xs">
-          © 2025 JOGOS GRATIS — Navegue com a elite.
+          © 2025 JOGOS GRATIS — Navegue com a elite dos jogadores.
         </div>
       </footer>
     </div>
