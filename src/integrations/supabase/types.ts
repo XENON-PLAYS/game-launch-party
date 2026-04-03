@@ -201,6 +201,13 @@ export type Database = {
             referencedRelation: "game_comments"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "game_comments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
         ]
       }
       game_ratings: {
