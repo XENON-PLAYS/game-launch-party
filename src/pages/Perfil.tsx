@@ -46,6 +46,7 @@ const Perfil = () => {
 
       if (!userId || (user && userId === user.id)) {
         setIsOwnProfile(true);
+        setActiveTab("settings");
         if (profile) {
           setTargetProfile(profile);
           setUsername(profile.username || "");
