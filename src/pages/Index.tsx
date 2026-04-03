@@ -45,7 +45,7 @@ const Index = () => {
   const { data: games = [], isLoading } = useQuery({
     queryKey: ["games"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("games").select("*").order("nome");
+      const { data, error } = await supabase.from("games").select("id, nome, preco, imagem, vertical_image, categorias, slug, download_count, rating_avg, lancamento, destaques, tamanho").order("nome");
       if (error) throw error;
       return data;
     },
