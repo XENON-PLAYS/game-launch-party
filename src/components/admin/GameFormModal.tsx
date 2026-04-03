@@ -485,6 +485,18 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                         <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest opacity-60 max-w-xs">Adicione links de download para que os usuários possam acessar o jogo.</p>
                       </div>
                     )}
+                    <div className="pt-4 border-t border-border/40">
+                      <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">URL da Demo (Opcional)</Label>
+                      <div className="relative group mt-2">
+                        <LinkIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary" />
+                        <Input 
+                          value={formData.link_demo || ""} 
+                          onChange={(e) => handleFieldChange("link_demo", e.target.value)} 
+                          className="pl-12 h-12 rounded-xl bg-background/50" 
+                          placeholder="https://..."
+                        />
+                      </div>
+                    </div>
                   </div>
                 </TabsContent>
 
