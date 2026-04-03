@@ -129,8 +129,12 @@ const Admin = () => {
       requisitos_minimo: {}, 
       requisitos_recomendado: {}, 
       destaques: [], 
-      galeria: [] 
-    }); 
+      galeria: [],
+      pre_requisitos: "",
+      passo_a_passo: "",
+      link_demo: "",
+      observacoes: "" 
+    });
     setLinks([]);
     setModalMode("add"); 
     setModalOpen(true); 
