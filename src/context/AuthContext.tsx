@@ -57,11 +57,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!isMounted) return;
+      
       const u = session?.user ?? null;
+      console.log("Auth state change event:", event, u?.id);
+      
       setUser(u);
+      
       if (u) {
-        setTimeout(() => fetchProfile(u.id), 0);
+        // For events that imply a valid session, ensure they are online immediately
+        if (event === "SIGNED_IN" || event === "INITIAL_SESSION" || event === "USER_UPDATED") {
+          try {
+            await supabase.rpc("update_online_status");
+          } catch (error) {
+            console.error("Error updating online status:", error);
+          }
+        }
+        await fetchProfile(u.id);
       } else {
         setProfile(null);
         setIsAdmin(false);
@@ -69,14 +84,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(false);
     });
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      const u = session?.user ?? null;
-      setUser(u);
-      if (u) fetchProfile(u.id);
-      setIsLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
   }, [fetchProfile]);
 
   useEffect(() => {
