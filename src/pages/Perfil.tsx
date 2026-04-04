@@ -137,38 +137,36 @@ const Perfil = () => {
  };
 
  const handleUpdateProfile = async (e: React.FormEvent) => {
-  e.preventDefault();
-  if (!user) return;
+   e.preventDefault();
+   if (!user) return;
 
-  setLoading(true);
-  try {
-   const { error } = await supabase
-    .from("profiles")
-    .update({
-     username: username,
-     display_name: displayName,
-     bio: bio,
-     status: status,
-     theme: themePreference,
-     updated_at: new Date().toISOString(),
-    })
-    .eq("user_id", user.id);
+   setLoading(true);
+   try {
+    const { error } = await supabase.rpc("update_own_profile", {
+      _user_id: user.id,
+      _username: username || undefined,
+      _display_name: displayName || undefined,
+      _bio: bio || undefined,
+      _status: status || undefined,
+      _theme: themePreference || undefined,
+    });
 
-   if (error) throw error;
-   
-   // Update global theme if changed
-   if (themePreference !== currentTheme) {
-    setTheme(themePreference);
+    if (error) throw error;
+    
+    // Update global theme if changed
+    if (themePreference !== currentTheme) {
+     setTheme(themePreference);
+    }
+    
+    await refreshProfile();
+    toast.success("Perfil atualizado com sucesso!");
+   } catch (error: any) {
+    console.error("Profile update error:", error);
+    toast.error(error.message || "Erro ao atualizar perfil");
+   } finally {
+    setLoading(false);
    }
-   
-   await refreshProfile();
-   toast.success("Perfil atualizado com sucesso!");
-  } catch (error: any) {
-   toast.error(error.message || "Erro ao atualizar perfil");
-  } finally {
-   setLoading(false);
-  }
- };
+  };
 
  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
   const file = e.target.files?.[0];
@@ -220,12 +218,12 @@ const Perfil = () => {
     .from("avatars")
     .getPublicUrl(filePath);
 
-   const { error: updateError } = await supabase
-    .from("profiles")
-    .update({ avatar_url: publicUrl })
-    .eq("user_id", user.id);
+    const { error: updateError } = await supabase.rpc("update_own_profile", {
+      _user_id: user.id,
+      _avatar_url: publicUrl,
+    });
 
-   if (updateError) throw updateError;
+    if (updateError) throw updateError;
 
    await refreshProfile();
    toast.success("Avatar atualizado!");
