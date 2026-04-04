@@ -304,9 +304,9 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-32 md:space-y-60">
-            <GameSection title="🔥 Mais Jogados" icon="flame" games={emAlta} />
+            <GameSection title="Mais Jogados" icon="flame" games={emAlta} />
             <GameSection title="⭐ Seleção de Elite" icon="star" games={recomendados} />
-            <GameSection title="🚀 Jogos da Nova Geração" icon="rocket" games={recentes} />
+            <GameSection title="Jogos da Nova Geração" icon="rocket" games={recentes} />
             
             <section className="space-y-12 md:space-y-16">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-10 border-b-2 border-primary/20 pb-12 md:pb-20">
