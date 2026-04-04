@@ -10,13 +10,15 @@ export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  const { data: featured = [] } = useQuery({
+  const { data: featuredData } = useQuery({
     queryKey: ["featured-games"],
     queryFn: async () => {
       const { data } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
-      return data ?? [];
+      return data || [];
     },
   });
+
+  const featured = featuredData || [];
 
   const next = useCallback(() => {
     if (featured.length === 0) return;
