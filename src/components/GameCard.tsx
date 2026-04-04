@@ -25,7 +25,10 @@ export function GameCard({ game }: GameCardProps) {
           src={(game as any).vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
           alt={game.nome} 
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
-          loading="lazy" 
+          loading="lazy"
+          width={300}
+          height={400}
+          sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 184px"
           onError={handleImageError}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
