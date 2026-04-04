@@ -176,6 +176,8 @@ export function HeroCarousel() {
                       src={(game as any).vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
                       alt={game.nome} 
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover/poster:scale-105" 
+                      width={400}
+                      height={533}
                       onError={handleImageError}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/poster:opacity-100 transition-opacity" />
