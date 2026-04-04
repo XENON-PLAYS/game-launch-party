@@ -42,14 +42,16 @@ const Index = () => {
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
 
-  const { data: games = [], isLoading } = useQuery({
+  const { data: gamesData, isLoading } = useQuery({
     queryKey: ["games"],
     queryFn: async () => {
       const { data, error } = await supabase.from("games").select("*").order("nome");
       if (error) throw error;
-      return data;
+      return data || [];
     },
   });
+
+  const games = useMemo(() => gamesData || [], [gamesData]);
 
   const allCategories = useMemo(() => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
