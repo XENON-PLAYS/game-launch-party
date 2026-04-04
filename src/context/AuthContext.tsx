@@ -57,59 +57,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    // Initial session check
-    const initSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+    let isMounted = true;
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!isMounted) return;
+      
       const u = session?.user ?? null;
+      console.log("Auth state change event:", event, u?.id);
+      
       setUser(u);
       
       if (u) {
-        try {
-          // Update status to online for initial session
-          await supabase.rpc("update_online_status");
-          console.log("Initial session: Updated status to online for user:", u.id);
-        } catch (error) {
-          console.error("Error updating online status during init:", error);
-        }
-        await fetchProfile(u.id);
-      }
-      setIsLoading(false);
-    };
-
-    initSession();
-
-    // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log("Auth state change event:", event);
-      const u = session?.user ?? null;
-      
-      if (event === "SIGNED_IN") {
-        setUser(u);
-        if (u) {
+        // For events that imply a valid session, ensure they are online immediately
+        if (event === "SIGNED_IN" || event === "INITIAL_SESSION" || event === "USER_UPDATED") {
           try {
             await supabase.rpc("update_online_status");
-            console.log("SIGNED_IN: Updated status to online for user:", u.id);
           } catch (error) {
-            console.error("Error updating online status during SIGNED_IN:", error);
+            console.error("Error updating online status:", error);
           }
-          await fetchProfile(u.id);
         }
-        setIsLoading(false);
-      } else if (event === "SIGNED_OUT") {
-        setUser(null);
+        await fetchProfile(u.id);
+      } else {
         setProfile(null);
         setIsAdmin(false);
-        setIsLoading(false);
-      } else if (event === "USER_UPDATED") {
-        setUser(u);
-        if (u) await fetchProfile(u.id);
-      } else if (event === "INITIAL_SESSION") {
-        // Already handled by initSession, but ensure loading is false
-        setIsLoading(false);
       }
+      setIsLoading(false);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
   }, [fetchProfile]);
 
   useEffect(() => {
