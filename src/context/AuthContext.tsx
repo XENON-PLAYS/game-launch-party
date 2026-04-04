@@ -57,27 +57,56 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log("Auth state change event:", event);
+    // Initial session check
+    const initSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
       const u = session?.user ?? null;
       setUser(u);
       
       if (u) {
-        if (event === "SIGNED_IN" || event === "INITIAL_SESSION") {
-          try {
-            // Update status to online immediately upon login or session initialization
-            await supabase.rpc("update_online_status");
-            console.log("Updated status to online for user:", u.id);
-          } catch (error) {
-            console.error("Error updating online status:", error);
-          }
+        try {
+          // Update status to online for initial session
+          await supabase.rpc("update_online_status");
+          console.log("Initial session: Updated status to online for user:", u.id);
+        } catch (error) {
+          console.error("Error updating online status during init:", error);
         }
         await fetchProfile(u.id);
-      } else {
-        setProfile(null);
-        setIsAdmin(false);
       }
       setIsLoading(false);
+    };
+
+    initSession();
+
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log("Auth state change event:", event);
+      const u = session?.user ?? null;
+      
+      if (event === "SIGNED_IN") {
+        setUser(u);
+        if (u) {
+          try {
+            await supabase.rpc("update_online_status");
+            console.log("SIGNED_IN: Updated status to online for user:", u.id);
+          } catch (error) {
+            console.error("Error updating online status during SIGNED_IN:", error);
+          }
+          await fetchProfile(u.id);
+        }
+        setIsLoading(false);
+      } else if (event === "SIGNED_OUT") {
+        setUser(null);
+        setProfile(null);
+        setIsAdmin(false);
+        setIsLoading(false);
+      } else if (event === "USER_UPDATED") {
+        setUser(u);
+        if (u) await fetchProfile(u.id);
+      } else if (event === "INITIAL_SESSION") {
+        // Already handled by initSession, but ensure loading is false
+        setIsLoading(false);
+      }
     });
 
     return () => subscription.unsubscribe();
