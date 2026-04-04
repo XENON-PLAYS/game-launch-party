@@ -69,18 +69,31 @@ serve(async (req) => {
       };
 
       const daysToAdd = durations[planName] || 30;
-      const expiresAt = new Date();
-      expiresAt.setDate(expiresAt.getDate() + daysToAdd);
-
+      
       const { data: currentProfile, error: profileError } = await supabase
         .from("profiles")
-        .select("badges")
+        .select("badges, vip_expires_at, is_vip")
         .eq("user_id", userId)
         .single();
 
       if (profileError) {
         console.error("Error fetching current profile:", profileError);
         return new Response(JSON.stringify({ error: "Failed to fetch profile" }), { status: 500 });
+      }
+
+      // Calculate new expiration date
+      let expiresAt: Date;
+      const now = new Date();
+      const currentExpiresAt = currentProfile.vip_expires_at ? new Date(currentProfile.vip_expires_at) : null;
+
+      if (currentExpiresAt && currentExpiresAt > now) {
+        // If current VIP is still active, extend from the current expiration date
+        expiresAt = new Date(currentExpiresAt);
+        expiresAt.setDate(expiresAt.getDate() + daysToAdd);
+      } else {
+        // Otherwise, start from now
+        expiresAt = new Date(now);
+        expiresAt.setDate(expiresAt.getDate() + daysToAdd);
       }
 
       const currentBadges = currentProfile.badges || [];

@@ -59,7 +59,7 @@ const Index = () => {
   }, [games]);
 
   const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 10), [games]);
-  const recomendados = useMemo(() => games.filter((g) => (g as any).avg_rating >= 4 || (g.destaques && g.destaques.length > 0)).slice(0, 10), [games]);
+  const recomendados = useMemo(() => games.filter((g) => (g as any).rating_avg >= 4 || (g.destaques && (g.destaques as string[]).length > 0)).slice(0, 10), [games]);
   const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 10), [games]);
 
   const isSearching = busca || categoria !== "todas";
