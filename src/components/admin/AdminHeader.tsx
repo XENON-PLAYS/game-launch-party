@@ -51,7 +51,7 @@ export function AdminHeader() {
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">{profile?.display_name || "Administrador"}</p>
-                <p className="text-xs leading-none text-muted-foreground">{profile?.user_id ? "admin@jogosgratis.com" : "Carregando..."}</p>
+                <p className="text-xs leading-none text-muted-foreground">{profile?.user_id ? "admin@jogosgrátis.com" : "Carregando..."}</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
