@@ -63,7 +63,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!isMounted) return;
       
       const u = session?.user ?? null;
-      console.log("Auth state change event:", event, u?.id);
       
       setUser(u);
       
