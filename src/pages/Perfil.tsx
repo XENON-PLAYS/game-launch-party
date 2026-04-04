@@ -218,12 +218,12 @@ const Perfil = () => {
     .from("avatars")
     .getPublicUrl(filePath);
 
-   const { error: updateError } = await supabase
-    .from("profiles")
-    .update({ avatar_url: publicUrl })
-    .eq("user_id", user.id);
+    const { error: updateError } = await supabase.rpc("update_own_profile", {
+      _user_id: user.id,
+      _avatar_url: publicUrl,
+    });
 
-   if (updateError) throw updateError;
+    if (updateError) throw updateError;
 
    await refreshProfile();
    toast.success("Avatar atualizado!");
