@@ -68,20 +68,44 @@ const Index = () => {
     
     result = [...result].sort((a, b) => {
       if (ordenacao === "pesado") {
-        const parseSize = (s: string | null) => {
-          if (!s) return 0;
-          const match = s.match(/(\d+(\.\d+)?)/);
-          return match ? parseFloat(match[1]) : 0;
+        const parseSize = (s: string | null, defaultValue: number) => {
+          if (!s) return defaultValue;
+          const match = s.match(/(\d+(\.\d+)?)\s*(GB|MB|KB|TB)?/i);
+          if (!match) return defaultValue;
+          
+          let value = parseFloat(match[1]);
+          const unit = (match[3] || "GB").toUpperCase();
+          
+          const multipliers: Record<string, number> = {
+            "KB": 1 / (1024 * 1024),
+            "MB": 1 / 1024,
+            "GB": 1,
+            "TB": 1024
+          };
+          
+          return value * (multipliers[unit] || 1);
         };
-        return parseSize(b.tamanho) - parseSize(a.tamanho);
+        return parseSize(b.tamanho, 0) - parseSize(a.tamanho, 0);
       }
       if (ordenacao === "leve") {
-        const parseSize = (s: string | null) => {
-          if (!s) return Infinity;
-          const match = s.match(/(\d+(\.\d+)?)/);
-          return match ? parseFloat(match[1]) : Infinity;
+        const parseSize = (s: string | null, defaultValue: number) => {
+          if (!s) return defaultValue;
+          const match = s.match(/(\d+(\.\d+)?)\s*(GB|MB|KB|TB)?/i);
+          if (!match) return defaultValue;
+          
+          let value = parseFloat(match[1]);
+          const unit = (match[3] || "GB").toUpperCase();
+          
+          const multipliers: Record<string, number> = {
+            "KB": 1 / (1024 * 1024),
+            "MB": 1 / 1024,
+            "GB": 1,
+            "TB": 1024
+          };
+          
+          return value * (multipliers[unit] || 1);
         };
-        return parseSize(a.tamanho) - parseSize(b.tamanho);
+        return parseSize(a.tamanho, Infinity) - parseSize(b.tamanho, Infinity);
       }
       if (ordenacao === "popular" || ordenacao === "alta") return (b.download_count || 0) - (a.download_count || 0);
       if (ordenacao === "lancamento") return (b.lancamento || "").localeCompare(a.lancamento || "");
