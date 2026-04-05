@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Users } from "lucide-react";
 
 export function OnlineUsers() {
-  const [onlineCount, setOnlineCount] = useState(0);
+  const [onlineCount, setOnlineCount] = useState(1); // Start with 1 as requested "1 JOGADORES ONLINE"
 
   useEffect(() => {
     const channel = supabase.channel("online-users");
@@ -12,7 +11,7 @@ export function OnlineUsers() {
       .on("presence", { event: "sync" }, () => {
         const state = channel.presenceState();
         const count = Object.keys(state).length;
-        setOnlineCount(count);
+        setOnlineCount(count > 0 ? count : 1);
       })
       .subscribe(async (status) => {
         if (status === "SUBSCRIBED") {
@@ -28,12 +27,9 @@ export function OnlineUsers() {
   }, []);
 
   return (
-    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-      <div className="relative flex h-2 w-2">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-      </div>
-      <span>{onlineCount} Online</span>
+    <div className="bg-[#22c55e] text-white text-[10px] font-black px-4 py-2 rounded-full flex items-center gap-2 hover:bg-[#16a34a] transition-all cursor-default shadow-[0_0_15px_rgba(34,197,94,0.3)]">
+      <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+      <span>{onlineCount} {onlineCount === 1 ? 'JOGADOR' : 'JOGADORES'} ONLINE</span>
     </div>
   );
 }
