@@ -91,7 +91,7 @@ export function Header() {
               className="flex items-center gap-2 p-1.5 pr-4 rounded-full bg-muted hover:bg-muted/80 transition-colors font-bold text-xs uppercase tracking-widest border border-border"
             >
               <div className="w-8 h-8 rounded-full overflow-hidden bg-background flex items-center justify-center border border-border">
-                {profile?.avatar_url ? <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" /> : <User className="w-4 h-4" />}
+                {profile?.avatar_url ? <img src={optimizeImageUrl(profile.avatar_url, 64)} alt="" className="w-full h-full object-cover" /> : <User className="w-4 h-4" />}
               </div>
               <span className="hidden md:block max-w-[100px] truncate">
                 {profile?.display_name || user?.email?.split("@")[0] || "Entrar"}
