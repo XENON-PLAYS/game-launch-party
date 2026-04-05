@@ -204,17 +204,7 @@ export function Header() {
             className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl overflow-hidden"
           >
             <div className="py-6 px-6 space-y-6 flex flex-col">
-              {/* Mobile Search */}
-              <form onSubmit={handleSearch} className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input 
-                  type="text" 
-                  placeholder="Procurar jogos..." 
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg text-sm focus:outline-none focus:border-primary" 
-                />
-              </form>
+              {/* Mobile Search Removed from Header */}
 
               <div className="space-y-4">
                 {navLinks.map((link) => (
