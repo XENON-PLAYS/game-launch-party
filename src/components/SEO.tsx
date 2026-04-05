@@ -11,15 +11,15 @@ interface SEOProps {
 }
 
 export const SEO = ({ 
-  title = "JOGOS PIRATAS - O Melhor Catálogo de Jogos", 
-  description = "O melhor catálogo de jogos diretos e verificados para download rápido e seguro.", 
-  keywords = "jogos, games, download, grátis, download de jogos",
+  title = "Jogos Piratas - Catálogo de Jogos Grátis para PC", 
+  description = "O melhor catálogo de jogos diretos e verificados. Downloads rápidos, seguros e atualizados de jogos famosos como Skyrim, GTA e muito mais. Tudo grátis!", 
+  keywords = "jogos, games, download, grátis, download de jogos, pc games, jogos piratas",
   image = "/logo.png",
   url = "https://jogogratis.com",
   preloadImage,
   preloadPoster
 }: SEOProps) => {
-  const fullTitle = title.includes("JOGOS PIRATAS") ? title : `${title} | JOGOS PIRATAS`;
+  const fullTitle = title.toLowerCase().includes("jogos piratas") ? title : `${title} | Jogos Piratas`;
 
   return (
     <Helmet>
@@ -46,8 +46,8 @@ export const SEO = ({
           "screenshot": image,
           "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "4.5",
-            "ratingCount": "88"
+            "ratingValue": "4.8",
+            "ratingCount": "125"
           },
           "offers": {
             "@type": "Offer",
