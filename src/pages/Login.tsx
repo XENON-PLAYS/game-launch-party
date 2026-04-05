@@ -96,7 +96,7 @@ const Login = () => {
               </div>
               
               <button type="submit" disabled={loading} className="w-full py-2 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-50 mt-2">
-                {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : "Entrar"}
+                {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : "LOGIN"}
               </button>
             </div>
 

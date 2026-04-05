@@ -180,10 +180,10 @@ export function Header() {
                       ) : (
                         <div className="p-1 space-y-1">
                           <Link to="/login" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-white/5 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all">
-                            <LogIn className="w-4 h-4" /> Entrar no Site
+                            <LogIn className="w-4 h-4" /> LOGIN
                           </Link>
                           <Link to="/cadastro" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 bg-[#ff0000] hover:bg-[#e60000] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-[#ff0000]/20">
-                            <UserPlus className="w-4 h-4" /> Criar Conta
+                            <UserPlus className="w-4 h-4" /> CADASTRO
                           </Link>
                         </div>
                       )}
