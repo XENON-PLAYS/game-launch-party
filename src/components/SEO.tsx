@@ -30,6 +30,9 @@ export const SEO = ({
       {preloadImage && (
         <link rel="preload" as="image" href={preloadImage} fetchPriority="high" />
       )}
+      {preloadPoster && (
+        <link rel="preload" as="image" href={preloadPoster} fetchPriority="high" />
+      )}
       
       {/* Structured Data */}
       <script type="application/ld+json">
