@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function SkyBackground() {
   const { theme } = useTheme();
+  const isMobile = useIsMobile();
   const isDark = theme === "dark";
   const { scrollYProgress } = useScroll();
   
