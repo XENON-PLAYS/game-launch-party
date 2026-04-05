@@ -96,7 +96,7 @@ export function Header() {
 
 
           {/* User Profile / Menu */}
-          <div className="relative">
+          <div className="relative" ref={menuRef}>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="flex items-center gap-2 p-1.5 pr-4 rounded-full bg-muted hover:bg-muted/80 transition-colors font-bold text-xs uppercase tracking-widest border border-border"
@@ -110,41 +110,48 @@ export function Header() {
               <ChevronDown className={`w-3.5 h-3.5 transition-transform ${menuOpen ? "rotate-180" : ""}`} />
             </button>
             
-            {menuOpen && (
-              <div className="absolute right-0 top-full mt-2 bg-popover border border-border rounded-xl w-60 shadow-xl z-50 p-1">
-                {user ? (
-                  <div className="space-y-1">
-                    <div className="px-3 py-2 border-b border-border mb-1">
-                      <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest">Conta</p>
-                      <p className="text-sm font-bold truncate">{profile?.display_name || user.email}</p>
-                    </div>
-                    {isAdmin && (
-                      <Link to="/admin" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
-                        <Shield className="w-4 h-4" /> Admin
+            <AnimatePresence>
+              {menuOpen && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  className="absolute right-0 top-full mt-2 bg-popover border border-border rounded-xl w-60 shadow-xl z-50 p-1"
+                >
+                  {user ? (
+                    <div className="space-y-1">
+                      <div className="px-3 py-2 border-b border-border mb-1">
+                        <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest">Conta</p>
+                        <p className="text-sm font-bold truncate">{profile?.display_name || user.email}</p>
+                      </div>
+                      {isAdmin && (
+                        <Link to="/admin" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
+                          <Shield className="w-4 h-4" /> Admin
+                        </Link>
+                      )}
+                      <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
+                        <User className="w-4 h-4" /> Perfil
                       </Link>
-                    )}
-                    <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
-                      <User className="w-4 h-4" /> Perfil
-                    </Link>
-                    <Link to="/vip" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-yellow-500/10 text-yellow-500 rounded-lg text-sm font-bold">
-                      <Trophy className="w-4 h-4" /> Área VIP
-                    </Link>
-                    <button onClick={() => { logout(); setMenuOpen(false); }} className="flex items-center gap-2 px-3 py-2 hover:bg-destructive/10 text-destructive rounded-lg text-sm font-bold w-full text-left">
-                      <LogOut className="w-4 h-4" /> Sair
-                    </button>
-                  </div>
-                ) : (
-                  <div className="space-y-1">
-                    <Link to="/login" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
-                      <LogIn className="w-4 h-4" /> Entrar
-                    </Link>
-                    <Link to="/cadastro" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
-                      <UserPlus className="w-4 h-4" /> Registrar
-                    </Link>
-                  </div>
-                )}
-              </div>
-            )}
+                      <Link to="/vip" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-yellow-500/10 text-yellow-500 rounded-lg text-sm font-bold">
+                        <Trophy className="w-4 h-4" /> Área VIP
+                      </Link>
+                      <button onClick={() => { logout(); setMenuOpen(false); }} className="flex items-center gap-2 px-3 py-2 hover:bg-destructive/10 text-destructive rounded-lg text-sm font-bold w-full text-left">
+                        <LogOut className="w-4 h-4" /> Sair
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-1">
+                      <Link to="/login" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
+                        <LogIn className="w-4 h-4" /> Entrar
+                      </Link>
+                      <Link to="/cadastro" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 px-3 py-2 hover:bg-muted rounded-lg text-sm font-bold">
+                        <UserPlus className="w-4 h-4" /> Registrar
+                      </Link>
+                    </div>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Mobile Menu Toggle */}
