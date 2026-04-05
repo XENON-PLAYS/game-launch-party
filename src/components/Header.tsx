@@ -45,15 +45,13 @@ export function Header() {
     <header className="sticky top-0 z-[100] bg-[#0f0f0f] border-b border-white/5 py-4 px-6 md:px-12 flex items-center justify-between shadow-2xl transition-all duration-300">
       <div className="container mx-auto flex items-center justify-between gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group shrink-0">
+        <Link to="/" className="flex flex-col items-center group shrink-0">
+          <span className="text-[10px] font-black tracking-[0.4em] text-white/80 leading-none mb-1">JGOS</span>
           <div className="relative">
-            <Skull className="w-10 h-10 text-white fill-white transition-transform group-hover:scale-110 duration-300" />
+            <Skull className="w-8 h-8 text-white fill-white transition-transform group-hover:scale-110 duration-300" />
             <div className="absolute -inset-1 bg-white/5 rounded-full blur-lg -z-10 group-hover:bg-white/10 transition-colors" />
           </div>
-          <div className="flex font-black text-2xl tracking-tighter uppercase italic">
-            <span className="text-white">JOGOS</span>
-            <span className="text-[#ff0000] ml-2">Piratas</span>
-          </div>
+          <span className="text-[10px] font-black tracking-[0.1em] text-[#ff0000] leading-none mt-1">JOGOS GRATIS</span>
         </Link>
 
         {/* Desktop Navigation */}
