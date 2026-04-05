@@ -32,14 +32,12 @@ export function Header() {
     <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b border-border py-3 md:py-4 transition-all">
       <div className="container-responsive flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group shrink-0">
-          <div className="p-2 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
-            <Gamepad2 className="w-6 h-6 md:w-7 md:h-7 text-primary" />
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className="font-black text-foreground text-sm md:text-xl tracking-tight uppercase">JOGOS</span>
-            <span className="font-black text-primary text-sm md:text-xl tracking-tight uppercase -mt-1">GRÁTIS</span>
-          </div>
+        <Link to="/" className="flex items-center gap-3 shrink-0">
+          <img 
+            src="/src/assets/logo.png" 
+            alt="Site Logo" 
+            className="h-8 md:h-10 w-auto object-contain" 
+          />
         </Link>
 
         {/* Desktop Navigation */}
