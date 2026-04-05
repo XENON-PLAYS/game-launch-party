@@ -52,7 +52,7 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
     e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
   };
 
-  if (isLoading || isError || featured.length === 0) {
+  if (isActuallyLoading || isError || featured.length === 0) {
     return (
       <section className="bg-background relative h-[850px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden">
         {/* Skeleton should resemble the layout to reduce shift */}
