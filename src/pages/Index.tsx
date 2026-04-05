@@ -164,7 +164,26 @@ const Index = () => {
                     </motion.button>
                   )}
                 </AnimatePresence>
+              </div>
             </div>
+
+            {/* Filter Toggle Button */}
+            <button 
+              onClick={() => setShowFilters(!showFilters)}
+              className={`w-full md:w-auto px-6 py-4 rounded-2xl border transition-all flex items-center justify-center gap-3 font-black text-xs tracking-widest uppercase group ${
+                showFilters 
+                ? "bg-primary text-white border-primary shadow-lg shadow-primary/20" 
+                : "bg-white/5 border-white/5 hover:bg-white/10 text-gray-400 hover:text-white"
+              }`}
+            >
+              <SlidersHorizontal className={`w-4 h-4 transition-transform duration-500 ${showFilters ? "rotate-180" : ""}`} />
+              <span>Filtros</span>
+              {(categoria !== "todas" || ordenacao !== "nome") && (
+                <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-black ${showFilters ? "bg-white text-primary" : "bg-primary text-white"}`}>
+                  {(categoria !== "todas" ? 1 : 0) + (ordenacao !== "nome" ? 1 : 0)}
+                </span>
+              )}
+            </button>
           </div>
           
           <AnimatePresence>
