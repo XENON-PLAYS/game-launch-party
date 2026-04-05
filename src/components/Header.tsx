@@ -72,11 +72,12 @@ export function Header() {
         <Link to="/" className="flex items-center gap-3 group shrink-0">
           <div className="p-1.5 rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-all duration-500">
             <img 
-              src="/src/assets/logo.png" 
+              src={logo} 
               alt="Site Logo" 
               className="h-8 md:h-9 w-auto object-contain" 
             />
           </div>
+
         </Link>
 
         {/* Search Bar - Center */}
