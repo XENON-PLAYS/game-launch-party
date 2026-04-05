@@ -317,20 +317,38 @@ const Index = () => {
             animate={{ opacity: 1 }}
             className="space-y-10 md:space-y-16"
           >
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-10 border-b-2 border-primary/20 pb-10 md:pb-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-10 pb-10 border-b border-white/5">
               <div className="space-y-4">
-                <h2 className="text-responsive-h2"><span className="text-primary">Catálogo</span> <span className="text-foreground">Filtrado</span></h2>
+                <div className="flex items-center gap-3">
+                  <div className="w-1.5 h-8 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                  <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase italic">
+                    <span className="text-white">Catálogo</span>{" "}
+                    <span className="text-primary">Filtrado</span>
+                  </h2>
+                </div>
                 <div className="flex items-center gap-4">
-                  <span className="w-16 md:w-24 h-1.5 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                  <p className="text-sm md:text-responsive-body font-medium">
-                    {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
+                  <p className="text-sm md:text-base font-bold text-gray-500 uppercase tracking-widest">
+                    {filteredGames.length} RESULTADO{filteredGames.length !== 1 ? "S" : ""} ENCONTRADO{filteredGames.length !== 1 ? "S" : ""}
                   </p>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-2 md:gap-3">
-                <span className="text-[10px] md:text-xs font-bold text-muted-foreground opacity-60 self-center uppercase tracking-widest">Filtros:</span>
-                {categoria !== "todas" && <span className="text-primary bg-primary/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[9px] md:text-[10px] font-black border border-primary/20 uppercase tracking-widest">{categoria}</span>}
-                {busca && <span className="text-primary bg-primary/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[9px] md:text-[10px] font-black border border-primary/20 uppercase tracking-widest">"{busca}"</span>}
+              <div className="flex flex-wrap gap-2">
+                {categoria !== "todas" && (
+                  <div className="flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-2 rounded-xl">
+                    <span className="text-[10px] font-black uppercase text-primary tracking-widest">{categoria}</span>
+                    <button onClick={() => setCategoria("todas")} className="text-primary hover:text-white transition-colors">
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
+                {busca && (
+                  <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-xl">
+                    <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest">"{busca}"</span>
+                    <button onClick={() => setBusca("")} className="text-gray-400 hover:text-white transition-colors">
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
