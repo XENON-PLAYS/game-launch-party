@@ -42,6 +42,34 @@ const Login = () => {
     navigate(redirect);
   };
 
+  const handleGoogleSignIn = async () => {
+    setGoogleLoading(true);
+    setErro("");
+    try {
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+
+      if (result.error) {
+        const errorMsg = result.error instanceof Error ? result.error.message : "Erro ao entrar com Google";
+        setErro(errorMsg);
+        toast.error(errorMsg);
+        setGoogleLoading(false);
+        return;
+      }
+
+      if (result.redirected) {
+        return;
+      }
+
+      toast.success("Bem-vindo!");
+      navigate(redirect);
+    } catch (err) {
+      toast.error("Erro ao entrar com Google");
+    }
+    setGoogleLoading(false);
+  };
+
   return (
     <div className="min-h-screen space-background flex flex-col">
       <Header />
