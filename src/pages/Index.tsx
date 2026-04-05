@@ -136,19 +136,50 @@ const Index = () => {
       
       {!isSearching && <HeroCarousel initialFeatured={featured} isLoadingInitial={featuredLoading} />}
 
-      <section className="bg-background/50 backdrop-blur-3xl sticky top-[80px] sm:top-[96px] z-30 border-b border-border/40 py-4 sm:py-6">
-        <div className="container-responsive space-y-4">
-          <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-center justify-end">
+      <section className="bg-[#0f0f0f]/80 backdrop-blur-2xl sticky top-[60px] md:top-[72px] z-[90] border-b border-white/5 py-4 md:py-6 transition-all duration-300">
+        <div className="container mx-auto px-4 md:px-12">
+          <div className="flex flex-col md:flex-row gap-4 items-center max-w-7xl mx-auto">
+            {/* Unified Search Input */}
+            <div className="flex-1 w-full relative group">
+              <div className="absolute inset-0 bg-primary/5 rounded-2xl blur-lg opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
+              <div className="relative flex items-center">
+                <Search className="absolute left-5 w-5 h-5 text-gray-500 group-focus-within:text-primary transition-colors duration-300" />
+                <input 
+                  type="text" 
+                  placeholder="Pesquisar jogos, categorias ou desenvolvedoras..." 
+                  value={busca}
+                  onChange={(e) => setBusca(e.target.value)}
+                  className="w-full pl-14 pr-12 py-4 bg-white/5 border border-white/5 rounded-2xl text-sm md:text-base focus:outline-none focus:bg-white/[0.07] focus:border-primary/30 transition-all placeholder:text-gray-600 font-medium" 
+                />
+                <AnimatePresence>
+                  {busca && (
+                    <motion.button
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      onClick={() => setBusca("")}
+                      className="absolute right-4 p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all"
+                    >
+                      <X className="w-4 h-4" />
+                    </motion.button>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Filter Toggle Button */}
             <button 
               onClick={() => setShowFilters(!showFilters)}
-              className={`w-full md:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl border transition-all flex items-center justify-center gap-3 font-bold text-xs sm:text-sm tracking-[0.1em] uppercase group ${
-                showFilters ? "bg-primary text-primary-foreground border-primary shadow-2xl shadow-primary/20" : "bg-card border-border/50 hover:border-primary/30"
+              className={`w-full md:w-auto px-6 py-4 rounded-2xl border transition-all flex items-center justify-center gap-3 font-black text-xs tracking-widest uppercase group ${
+                showFilters 
+                ? "bg-primary text-white border-primary shadow-lg shadow-primary/20" 
+                : "bg-white/5 border-white/5 hover:bg-white/10 text-gray-400 hover:text-white"
               }`}
             >
-              <SlidersHorizontal className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 ${showFilters ? "rotate-180" : ""}`} />
-              <span>Filtros Refinados</span>
+              <SlidersHorizontal className={`w-4 h-4 transition-transform duration-500 ${showFilters ? "rotate-180" : ""}`} />
+              <span>Filtros</span>
               {(categoria !== "todas" || ordenacao !== "nome") && (
-                <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-black animate-in zoom-in duration-300 ${showFilters ? "bg-white text-primary" : "bg-primary text-white"}`}>
+                <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-black ${showFilters ? "bg-white text-primary" : "bg-primary text-white"}`}>
                   {(categoria !== "todas" ? 1 : 0) + (ordenacao !== "nome" ? 1 : 0)}
                 </span>
               )}
