@@ -280,12 +280,7 @@ export function Header() {
         onClose={() => setIsRequestModalOpen(false)} 
       />
       
-      <BugReportModal 
-        isOpen={isBugModalOpen} 
-        onClose={() => setIsBugModalOpen(false)}
-        gameId="general"
-        gameName="Geral"
-      />
+      {/* BugReportModal Removed */}
     </header>
   );
 }

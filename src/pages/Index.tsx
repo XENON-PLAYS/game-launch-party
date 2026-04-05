@@ -156,6 +156,24 @@ const Index = () => {
                 </span>
               )}
             </button>
+
+            {/* Nova barra de pesquisa abaixo dos filtros */}
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                setBusca(busca);
+              }}
+              className="w-full md:flex-1 relative group"
+            >
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/40 group-focus-within:text-primary transition-colors duration-300" />
+              <input 
+                type="text" 
+                placeholder="Explore o catálogo..." 
+                value={busca}
+                onChange={(e) => setBusca(e.target.value)}
+                className="w-full pl-11 pr-4 py-3 sm:py-4 bg-card border border-border/50 rounded-xl sm:rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all placeholder:text-muted-foreground/30 font-medium" 
+              />
+            </form>
           </div>
 
           <AnimatePresence>
