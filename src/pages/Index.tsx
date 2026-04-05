@@ -352,38 +352,36 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-32 md:space-y-60">
-            <div className="space-y-32 md:space-y-60">
-              <GameSection title="Mais Jogados" icon="flame" games={emAlta} />
-              <GameSection title="Jogos Mais Baixados" icon="star" games={emAlta} />
-              <GameSection title="Jogos da Nova Geração" icon="rocket" games={recentes} />
+            <GameSection title="Mais Jogados" icon="flame" games={emAlta} />
+            <GameSection title="Jogos Mais Baixados" icon="star" games={emAlta} />
+            <GameSection title="Jogos da Nova Geração" icon="rocket" games={recentes} />
 
-              <section className="space-y-12 md:space-y-16">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-10 border-b-2 border-primary/20 pb-12 md:pb-20">
-                  <div className="space-y-4">
-                    <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Explore</span> <span className="text-foreground">o Catálogo</span></h2>
-                    <div className="flex items-center gap-4 md:gap-8">
-                      <span className="w-20 md:w-32 h-1.5 md:h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
-                      <span className="text-sm md:text-responsive-body font-medium">{games.length} experiências de alto nível</span>
-                    </div>
+            <section className="space-y-12 md:space-y-16">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-10 border-b-2 border-primary/20 pb-12 md:pb-20">
+                <div className="space-y-4">
+                  <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Explore</span> <span className="text-foreground">o Catálogo</span></h2>
+                  <div className="flex items-center gap-4 md:gap-8">
+                    <span className="w-20 md:w-32 h-1.5 md:h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
+                    <span className="text-sm md:text-responsive-body font-medium">{games.length} experiências de alto nível</span>
                   </div>
-                  
-                  <select 
-                    value={ordenacao} 
-                    onChange={(e) => setOrdenacao(e.target.value as SortOption)}
-                    className="bg-card border border-border/50 rounded-xl sm:rounded-2xl px-6 md:px-8 py-3.5 md:py-5 text-xs md:text-sm font-bold uppercase tracking-widest focus:outline-none focus:ring-8 focus:ring-primary/5 transition-all hover:border-primary/30 cursor-pointer shadow-xl shadow-black/10"
-                  >
-                    <option value="nome">Ordem Alfabética</option>
-                    <option value="preco_asc">Melhor Investimento</option>
-                    <option value="preco_desc">Experiência Premium</option>
-                    <option value="lancamento">Novidades da Frota</option>
-                  </select>
                 </div>
+                
+                <select 
+                  value={ordenacao} 
+                  onChange={(e) => setOrdenacao(e.target.value as SortOption)}
+                  className="bg-card border border-border/50 rounded-xl sm:rounded-2xl px-6 md:px-8 py-3.5 md:py-5 text-xs md:text-sm font-bold uppercase tracking-widest focus:outline-none focus:ring-8 focus:ring-primary/5 transition-all hover:border-primary/30 cursor-pointer shadow-xl shadow-black/10"
+                >
+                  <option value="nome">Ordem Alfabética</option>
+                  <option value="preco_asc">Melhor Investimento</option>
+                  <option value="preco_desc">Experiência Premium</option>
+                  <option value="lancamento">Novidades da Frota</option>
+                </select>
+              </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                  {games.map((game) => <GameCard key={game.id} game={game} />)}
-                </div>
-              </section>
-            </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
+                {games.map((game) => <GameCard key={game.id} game={game} />)}
+              </div>
+            </section>
           </div>
         )}
       </main>
