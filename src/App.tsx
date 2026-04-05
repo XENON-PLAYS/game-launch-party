@@ -8,18 +8,18 @@ import { lazy, Suspense } from "react";
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SkyBackground } from "@/components/SkyBackground";
+import Index from "./pages/Index";
 
-const Index = lazy(() => import("./pages/Index.tsx"));
-const GameDetail = lazy(() => import("./pages/GameDetail.tsx"));
-const Vip = lazy(() => import("./pages/Vip.tsx"));
-const Login = lazy(() => import("./pages/Login.tsx"));
-const Cadastro = lazy(() => import("./pages/Cadastro.tsx"));
-const Admin = lazy(() => import("./pages/Admin.tsx"));
-const DownloadPage = lazy(() => import("./pages/DownloadPage.tsx"));
-const Perfil = lazy(() => import("./pages/Perfil.tsx"));
-const CategoryPage = lazy(() => import("./pages/CategoryPage.tsx"));
-const Checkout = lazy(() => import("./pages/Checkout.tsx"));
-const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const GameDetail = lazy(() => import("./pages/GameDetail"));
+const Vip = lazy(() => import("./pages/Vip"));
+const Login = lazy(() => import("./pages/Login"));
+const Cadastro = lazy(() => import("./pages/Cadastro"));
+const Admin = lazy(() => import("./pages/Admin"));
+const DownloadPage = lazy(() => import("./pages/DownloadPage"));
+const Perfil = lazy(() => import("./pages/Perfil"));
+const CategoryPage = lazy(() => import("./pages/CategoryPage"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
