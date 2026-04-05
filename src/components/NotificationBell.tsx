@@ -60,14 +60,18 @@ export function NotificationBell() {
         )}
       </button>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {open && (
-          <>
-            <div className="fixed inset-0 z-[110]" onClick={() => setOpen(false)} />
+          <div key="notifications-container">
+            <div 
+              className="fixed inset-0 z-[110]" 
+              onClick={() => setOpen(false)} 
+            />
             <motion.div 
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
               className="absolute right-0 top-full mt-2 w-80 bg-popover border border-border rounded-2xl shadow-2xl z-[120] overflow-hidden"
             >
               <div className="p-4 border-b border-border flex items-center justify-between bg-muted/30">
@@ -117,7 +121,7 @@ export function NotificationBell() {
                 )}
               </div>
             </motion.div>
-          </>
+          </div>
         )}
       </AnimatePresence>
     </div>
