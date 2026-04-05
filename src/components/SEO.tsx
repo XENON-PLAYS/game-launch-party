@@ -7,6 +7,7 @@ interface SEOProps {
   image?: string;
   url?: string;
   preloadImage?: string;
+  preloadPoster?: string;
 }
 
 export const SEO = ({ 
@@ -15,7 +16,8 @@ export const SEO = ({
   keywords = "jogos, games, download, grátis, download de jogos",
   image = "/logo.png",
   url = "https://jogogratis.com",
-  preloadImage
+  preloadImage,
+  preloadPoster
 }: SEOProps) => {
   const fullTitle = title.includes("JOGOS GRÁTIS") ? title : `${title} | JOGOS GRÁTIS`;
 
