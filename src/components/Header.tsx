@@ -25,6 +25,8 @@ import { GameRequestModal } from "./GameRequestModal";
 import { BugReportModal } from "./BugReportModal";
 import { optimizeImageUrl } from "@/lib/utils";
 import { Button } from "./ui/button";
+import logo from "@/assets/logo.png";
+
 
 export function Header() {
   const { user, profile, logout, isAdmin } = useAuth();
