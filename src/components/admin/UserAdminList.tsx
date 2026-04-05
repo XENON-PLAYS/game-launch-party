@@ -62,6 +62,42 @@ interface UserAdminListProps {
 export function UserAdminList({ users }: UserAdminListProps) {
   const [busca, setBusca] = useState("");
   const [filtroVip, setFiltroVip] = useState<"todos" | "vip" | "comum">("todos");
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
+
+  const handleToggleVip = async (userId: string, currentVip: boolean) => {
+    setLoadingId(userId);
+    try {
+      const { data, error } = await supabase.rpc("toggle_vip_status", { target_user_id: userId });
+      if (error) throw error;
+      
+      toast.success(data ? "Status VIP ativado por 30 dias!" : "Status VIP removido!");
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+    } catch (error: any) {
+      toast.error(`Erro: ${error.message}`);
+      console.error(error);
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
+  const handleToggleAdmin = async (userId: string, role: string | null) => {
+    if (!confirm(`Deseja realmente ${role === 'admin' ? 'remover' : 'adicionar'} o acesso de administrador deste usuário?`)) return;
+    
+    setLoadingId(userId);
+    try {
+      const { data, error } = await supabase.rpc("toggle_admin_role", { target_user_id: userId });
+      if (error) throw error;
+      
+      toast.success(data === 'added' ? "Acesso de administrador concedido!" : "Acesso de administrador removido!");
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+    } catch (error: any) {
+      toast.error(`Erro: ${error.message}`);
+      console.error(error);
+    } finally {
+      setLoadingId(null);
+    }
+  };
 
   const filteredUsers = useMemo(() => {
     let result = [...users];
