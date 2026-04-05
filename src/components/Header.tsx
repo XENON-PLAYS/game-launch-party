@@ -42,10 +42,6 @@ export function Header() {
     return () => window.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location.pathname]);
 
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
 
