@@ -69,14 +69,18 @@ export function Header() {
       <div className="container-responsive flex items-center justify-between gap-6 md:gap-10 relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group shrink-0">
-          <div className="p-1.5 rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-all duration-500">
-            <img 
-              src={logo} 
-              alt="Site Logo" 
-              className="h-8 md:h-9 w-auto object-contain" 
-            />
+          <img 
+            src={logo} 
+            alt="Site Logo" 
+            className="h-8 md:h-9 w-auto object-contain" 
+          />
+          <div className="flex flex-col">
+            <span className="text-sm font-black text-primary tracking-tighter">JOGOS PIRATAS VIPS</span>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">JOGADORES ONLINE</span>
+              <OnlineUsers />
+            </div>
           </div>
-
         </Link>
 
         {/* Search Bar - Center */}
