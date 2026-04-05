@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
+import { optimizeImageUrl } from "@/lib/utils";
 
 export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFeatured?: any[], isLoadingInitial?: boolean }) {
   const [current, setCurrent] = useState(0);
