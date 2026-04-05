@@ -10,8 +10,7 @@ import {
   User, 
   Trophy, 
   Search,
-  MessageSquare,
-  Bug,
+  MoreVertical,
   Home,
   Gamepad2,
   PlusCircle
