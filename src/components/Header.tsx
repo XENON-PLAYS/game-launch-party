@@ -66,8 +66,9 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-xl border-b border-border/40 py-3 sm:py-4 transition-all duration-500">
-      <div className="container-responsive flex items-center justify-between gap-4 md:gap-8 relative">
+    <header className="sticky top-0 z-[100] bg-background/60 backdrop-blur-2xl border-b border-white/5 py-4 transition-all duration-500 shadow-xl shadow-black/20">
+      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-60" />
+      <div className="container-responsive flex items-center justify-between gap-6 md:gap-10 relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group shrink-0">
           <div className="p-1.5 rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-all duration-500">
@@ -85,13 +86,13 @@ export function Header() {
           onSubmit={handleSearch}
           className="hidden md:flex flex-1 max-w-xl relative group"
         >
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/40 group-focus-within:text-primary transition-colors duration-300" />
           <input 
             type="text" 
-            placeholder="O que você está procurando?" 
+            placeholder="Explore o catálogo..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 bg-card/50 border border-border/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all placeholder:text-muted-foreground/50" 
+            className="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/5 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 focus:bg-white/[0.08] transition-all placeholder:text-muted-foreground/30 font-medium" 
           />
         </form>
 

@@ -19,9 +19,9 @@ export function GameCard({ game }: GameCardProps) {
     <motion.div 
       whileHover={{ y: -6 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="group bg-card/60 backdrop-blur-sm rounded-xl overflow-hidden border border-primary/10 hover:border-primary/60 transition-all duration-300 relative flex flex-col h-full shadow-md hover:shadow-xl"
+      className="group bg-card/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 transition-all duration-500 relative flex flex-col h-full shadow-lg hover:shadow-primary/10 hover:-translate-y-1"
     >
-      <Link to={`/jogo/${game.slug || game.id}`} className="block relative aspect-[3/4] overflow-hidden shrink-0">
+      <Link to={`/jogo/${game.slug || game.id}`} className="block relative aspect-[3/4] overflow-hidden shrink-0 rounded-2xl m-2">
         <img 
           src={optimizeImageUrl((game as any).vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f", 400)} 
           alt={game.nome} 
@@ -44,7 +44,7 @@ export function GameCard({ game }: GameCardProps) {
           {(game.categorias || []).slice(0, 1).map((cat) => (
             <span 
               key={cat} 
-              className="text-[10px] uppercase font-bold px-2.5 py-1 rounded bg-black/70 backdrop-blur-md text-white border border-white/10 tracking-wider"
+              className="text-[9px] uppercase font-black px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white border border-white/10 tracking-widest"
             >
               {cat}
             </span>
