@@ -47,15 +47,8 @@ export function Header() {
   }, []);
 
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
-  const [isBugModalOpen, setIsBugModalOpen] = useState(false);
+  const [isBugModalOpen, setIsBugModalOpen] = useState(false); // Kept for logic if needed elsewhere, but not used in header nav anymore
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/?search=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery("");
-    }
-  };
 
   const navLinks = [
     { label: "Início", path: "/", icon: Home },
