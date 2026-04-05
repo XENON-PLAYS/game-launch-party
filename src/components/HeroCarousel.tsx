@@ -10,7 +10,7 @@ export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  const { data: featuredData } = useQuery({
+  const { data: featuredData, isLoading, isError } = useQuery({
     queryKey: ["featured-games"],
     queryFn: async () => {
       const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
