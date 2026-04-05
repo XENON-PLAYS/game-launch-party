@@ -117,9 +117,11 @@ const DownloadPage = () => {
                 <div className="bg-card border-2 border-border rounded-[2.5rem] p-8 space-y-8 shadow-2xl relative overflow-hidden group">
                   <div className="aspect-[3/4] max-w-[200px] lg:max-w-none mx-auto rounded-2xl overflow-hidden border border-border/50">
                     <img 
-                      src={game.imagem || ""} 
+                      src={optimizeImageUrl(game.imagem || "", 400)} 
                       alt={game.nome} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div className="space-y-4">
