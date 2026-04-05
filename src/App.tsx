@@ -3,21 +3,23 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { lazy, Suspense } from "react";
 
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SkyBackground } from "@/components/SkyBackground";
 import Index from "./pages/Index.tsx";
-import GameDetail from "./pages/GameDetail.tsx";
-import Vip from "./pages/Vip.tsx";
-import Login from "./pages/Login.tsx";
-import Cadastro from "./pages/Cadastro.tsx";
-import Admin from "./pages/Admin.tsx";
-import DownloadPage from "./pages/DownloadPage.tsx";
-import Perfil from "./pages/Perfil.tsx";
-import CategoryPage from "./pages/CategoryPage.tsx";
-import Checkout from "./pages/Checkout.tsx";
-import NotFound from "./pages/NotFound.tsx";
+
+const GameDetail = lazy(() => import("./pages/GameDetail.tsx"));
+const Vip = lazy(() => import("./pages/Vip.tsx"));
+const Login = lazy(() => import("./pages/Login.tsx"));
+const Cadastro = lazy(() => import("./pages/Cadastro.tsx"));
+const Admin = lazy(() => import("./pages/Admin.tsx"));
+const DownloadPage = lazy(() => import("./pages/DownloadPage.tsx"));
+const Perfil = lazy(() => import("./pages/Perfil.tsx"));
+const CategoryPage = lazy(() => import("./pages/CategoryPage.tsx"));
+const Checkout = lazy(() => import("./pages/Checkout.tsx"));
+const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const queryClient = new QueryClient();
 
