@@ -72,9 +72,8 @@ const Index = () => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
   }, [games]);
 
-  const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 10), [games]);
-  const recomendados = useMemo(() => games.filter((g) => (g as any).rating_avg >= 4 || (g.destaques && (g.destaques as string[]).length > 0)).slice(0, 10), [games]);
-  const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 10), [games]);
+  const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 12), [games]);
+  const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 12), [games]);
 
   const isLoading = gamesLoading || featuredLoading;
   const isError = gamesError;
