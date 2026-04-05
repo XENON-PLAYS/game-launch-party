@@ -30,14 +30,16 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-[100] bg-background/50 backdrop-blur-3xl border-b border-border/40 py-4 sm:py-5 transition-all duration-500">
-      <div className="container-responsive flex items-center justify-between gap-4 relative">
+      <div className="container-responsive flex items-center justify-between gap-6 relative">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 shrink-0">
-          <img 
-            src="/src/assets/logo.png" 
-            alt="Site Logo" 
-            className="h-8 md:h-10 w-auto object-contain" 
-          />
+        <Link to="/" className="flex items-center gap-4 group shrink-0">
+          <div className="p-2 rounded-xl bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-all duration-500 shadow-lg shadow-primary/5">
+            <img 
+              src="/src/assets/logo.png" 
+              alt="Site Logo" 
+              className="h-8 md:h-10 w-auto object-contain" 
+            />
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
