@@ -238,18 +238,39 @@ export function UserAdminList({ users }: UserAdminListProps) {
                     <TableCell className="text-right">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg">
-                            <MoreVertical className="h-4 w-4" />
+                          <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg" disabled={loadingId === user.user_id}>
+                            {loadingId === user.user_id ? <Loader2 className="h-4 w-4 animate-spin" /> : <MoreVertical className="h-4 w-4" />}
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-40">
-                          <DropdownMenuItem className="text-xs font-bold uppercase tracking-widest cursor-pointer">
-                            <Shield className="mr-2 h-3.5 w-3.5" />
-                            <span>Ver Perfil</span>
+                        <DropdownMenuContent align="end" className="w-56">
+                          <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest opacity-50 px-2 py-1.5">Ações de Gestão</DropdownMenuLabel>
+                          
+                          <DropdownMenuItem 
+                            className="text-xs font-bold uppercase tracking-widest cursor-pointer py-2.5"
+                            onClick={() => handleToggleVip(user.user_id, user.is_vip)}
+                          >
+                            {user.is_vip ? (
+                              <><XCircle className="mr-2 h-4 w-4 text-destructive" /> Remover VIP</>
+                            ) : (
+                              <><Crown className="mr-2 h-4 w-4 text-yellow-500" /> Tornar VIP (30d)</>
+                            )}
                           </DropdownMenuItem>
+
+                          <DropdownMenuItem 
+                            className="text-xs font-bold uppercase tracking-widest cursor-pointer py-2.5"
+                            onClick={() => handleToggleAdmin(user.user_id, user.role)}
+                          >
+                            {user.role === 'admin' ? (
+                              <><ShieldAlert className="mr-2 h-4 w-4 text-destructive" /> Remover Admin</>
+                            ) : (
+                              <><Shield className="mr-2 h-4 w-4 text-primary" /> Tornar Admin</>
+                            )}
+                          </DropdownMenuItem>
+
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-xs font-bold uppercase tracking-widest text-destructive focus:bg-destructive/10 cursor-pointer">
-                            <XCircle className="mr-2 h-3.5 w-3.5" />
+                          
+                          <DropdownMenuItem className="text-xs font-bold uppercase tracking-widest text-destructive focus:bg-destructive/10 cursor-pointer py-2.5">
+                            <XCircle className="mr-2 h-4 w-4" />
                             <span>Banir Usuário</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
