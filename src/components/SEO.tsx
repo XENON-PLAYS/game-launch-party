@@ -11,15 +11,15 @@ interface SEOProps {
 }
 
 export const SEO = ({ 
-  title = "JOGOS GRÁTIS - O maior catálogo de jogos", 
-  description = "A maior comunidade de compartilhamento de jogos. Descubra, jogue e compartilhe suas experiências.", 
+  title = "JOGOS PIRATAS - O Melhor Catálogo de Jogos", 
+  description = "O melhor catálogo de jogos diretos e verificados para download rápido e seguro.", 
   keywords = "jogos, games, download, grátis, download de jogos",
   image = "/logo.png",
   url = "https://jogogratis.com",
   preloadImage,
   preloadPoster
 }: SEOProps) => {
-  const fullTitle = title.includes("JOGOS GRÁTIS") ? title : `${title} | JOGOS GRÁTIS`;
+  const fullTitle = title.includes("JOGOS PIRATAS") ? title : `${title} | JOGOS PIRATAS`;
 
   return (
     <Helmet>
