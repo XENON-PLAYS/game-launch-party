@@ -30,7 +30,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b border-border py-3 md:py-4 transition-all">
-      <div className="container-responsive flex items-center justify-between gap-4">
+      <div className="container-responsive flex items-center justify-between gap-4 relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 shrink-0">
           <img 
