@@ -43,6 +43,10 @@ const Meteor = ({ initialDelay }: { initialDelay: number }) => {
 };
 
 export const MeteorBackground = () => {
+  const isMobile = useIsMobile();
+  
+  if (isMobile) return null;
+  
   // Renderiza múltiplos meteoros com diferentes atrasos iniciais
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
