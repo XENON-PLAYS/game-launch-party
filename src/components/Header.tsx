@@ -43,22 +43,28 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground absolute left-1/2 -translate-x-1/2">
-          <Link to="/" className="hover:text-foreground transition-colors">Catálogo</Link>
+        <nav className="hidden md:flex items-center gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground absolute left-1/2 -translate-x-1/2">
+          <Link to="/" className="hover:text-primary transition-all duration-300 relative group py-2">
+            Catálogo
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+          </Link>
           <button 
             onClick={() => user ? setIsRequestModalOpen(true) : navigate("/login")}
-            className="hover:text-foreground transition-colors flex items-center gap-1.5"
+            className="hover:text-primary transition-all duration-300 relative group py-2 flex items-center gap-2"
           >
-            Pedir Jogo
+            <span>Pedir Jogo</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
           </button>
-          <Link to="/vip" className="flex items-center gap-1.5 text-yellow-500 hover:text-yellow-600 transition-colors">
-            <Trophy className="w-4 h-4" />
+          <Link to="/vip" className="flex items-center gap-2 text-yellow-500 hover:text-yellow-600 transition-all duration-300 relative group py-2">
+            <Trophy className="w-4 h-4 shadow-lg shadow-yellow-500/20" />
             <span>VIP</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 group-hover:w-full" />
           </Link>
           {isAdmin && (
-            <Link to="/admin" className="text-primary hover:text-primary/80 flex items-center gap-1.5">
-              <Shield className="w-4 h-4" />
+            <Link to="/admin" className="text-primary hover:text-primary/80 flex items-center gap-2 relative group py-2">
+              <Shield className="w-4 h-4 shadow-lg shadow-primary/20" />
               Admin
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
             </Link>
           )}
         </nav>
