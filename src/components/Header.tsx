@@ -41,7 +41,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 font-bold text-xs uppercase tracking-wider text-muted-foreground">
+        <nav className="hidden md:flex items-center gap-8 font-bold text-xs uppercase tracking-wider text-muted-foreground absolute left-1/2 -translate-x-1/2">
           <Link to="/" className="hover:text-foreground transition-colors">Catálogo</Link>
           <button 
             onClick={() => user ? setIsRequestModalOpen(true) : navigate("/login")}
