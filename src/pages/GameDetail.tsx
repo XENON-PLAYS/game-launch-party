@@ -186,6 +186,7 @@ const GameDetail = () => {
                   src={selectedImage || game.imagem || ""} 
                   alt={game.nome} 
                   className="w-full h-full object-cover transition-all duration-700 group-hover/hero-image:scale-110" 
+                  fetchPriority="high"
                   onError={handleImageError}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/hero-image:opacity-100 transition-opacity duration-500" />
