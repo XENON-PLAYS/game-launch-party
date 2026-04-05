@@ -138,25 +138,9 @@ const Index = () => {
 
       <section className="bg-background/50 backdrop-blur-3xl sticky top-[80px] sm:top-[96px] z-30 border-b border-border/40 py-4 sm:py-6">
         <div className="container-responsive">
-          <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-center justify-between">
-            <div className="w-full md:max-w-2xl relative group">
-              <Search className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
-              <input 
-                type="text" 
-                placeholder="Qual obra-prima você está procurando?" 
-                value={busca} 
-                onChange={(e) => setBusca(e.target.value)}
-                className="w-full pl-10 sm:pl-16 pr-6 py-3 sm:py-4 bg-card border border-primary/20 rounded-xl sm:rounded-2xl text-sm sm:text-lg focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all shadow-xl shadow-black/5 placeholder:text-muted-foreground/50" 
-              />
-              {busca && (
-                <button 
-                  onClick={() => setBusca("")}
-                  className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-1 transition-colors"
-                >
-                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
-                </button>
-              )}
-            </div>
+          <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-center justify-end">
+            {/* Search removed from here as it's now in the header */}
+
             
             <button 
               onClick={() => setShowFilters(!showFilters)}
