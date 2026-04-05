@@ -200,7 +200,7 @@ const DownloadPage = () => {
                           <CheckCircle2 className="w-10 h-10 text-emerald-400" />
                         </div>
                         <div className="space-y-2">
-                          <h3 className="text-3xl font-black uppercase tracking-tighter text-emerald-400">Pronto para Zarpagem!</h3>
+                          <h3 className="text-3xl font-black uppercase tracking-tighter text-emerald-400">PRONTO PARA DOWNLOAD</h3>
                           <p className="text-muted-foreground">O link foi verificado e está pronto para transferência.</p>
                         </div>
                       </div>
