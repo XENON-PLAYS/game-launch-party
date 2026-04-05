@@ -8,8 +8,7 @@ import {
   User, 
   Crown,
   Sun,
-  Moon,
-  Skull
+  Moon
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -20,6 +19,7 @@ import { OnlineUsers } from "./OnlineUsers";
 import { NotificationBell } from "./NotificationBell";
 import { GameRequestModal } from "./GameRequestModal";
 import { optimizeImageUrl } from "@/lib/utils";
+import pirateLogo from "@/assets/logo-pirate.png";
 
 export function Header() {
   const { user, profile, logout, isAdmin } = useAuth();
