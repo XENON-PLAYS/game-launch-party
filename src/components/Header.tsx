@@ -21,7 +21,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect, useRef } from "react";
 import { OnlineUsers } from "./OnlineUsers";
 import { GameRequestModal } from "./GameRequestModal";
-import { BugReportModal } from "./BugReportModal";
+
 import { optimizeImageUrl } from "@/lib/utils";
 import { Button } from "./ui/button";
 import logo from "@/assets/logo.png";
