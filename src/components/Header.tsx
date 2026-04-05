@@ -147,7 +147,7 @@ export function Header() {
             exit={{ height: 0, opacity: 0 }}
             className="md:hidden border-t border-border bg-background overflow-hidden"
           >
-            <div className="py-6 px-6 space-y-6 font-bold uppercase tracking-widest text-xs flex flex-col">
+            <div className="py-6 px-6 space-y-5 text-sm font-medium flex flex-col">
               <Link to="/" className="text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>Catálogo</Link>
               <button 
                 className="text-left text-muted-foreground hover:text-foreground" 
