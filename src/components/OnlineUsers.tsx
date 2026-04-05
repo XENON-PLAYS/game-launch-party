@@ -1,30 +1,20 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Users } from "lucide-react";
 
 export function OnlineUsers() {
   const [onlineCount, setOnlineCount] = useState(0);
 
   useEffect(() => {
-    // Unique key per session to ensure accurate counting of all tabs/users
     const channel = supabase.channel("online-users");
 
     channel
       .on("presence", { event: "sync" }, () => {
         const state = channel.presenceState();
-        // Count all unique presence entries (sessions)
         const count = Object.keys(state).length;
         setOnlineCount(count);
       })
-      .on("presence", { event: "join" }, ({ key, newPresences }) => {
-        // console.log("User joined", key, newPresences);
-      })
-      .on("presence", { event: "leave" }, ({ key, leftPresences }) => {
-        // console.log("User left", key, leftPresences);
-      })
       .subscribe(async (status) => {
         if (status === "SUBSCRIBED") {
-          // Track current user presence with a timestamp
           await channel.track({ 
             online_at: new Date().toISOString()
           });
@@ -37,9 +27,9 @@ export function OnlineUsers() {
   }, []);
 
   return (
-    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[10px] font-black uppercase tracking-widest animate-pulse">
-      <Users className="w-3 h-3" />
-      <span>{onlineCount} Jogadores Online</span>
+    <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500 hover:bg-green-600 text-black text-[10px] font-black uppercase tracking-widest shadow-[0_0_15px_rgba(34,197,94,0.4)] transition-all duration-300">
+      <span className="w-2 h-2 bg-black rounded-full animate-pulse"></span>
+      <span>{onlineCount} JOGADORES ONLINE</span>
     </div>
   );
 }
