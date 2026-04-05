@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, User, Trophy, PlusCircle, Gamepad2, Settings } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, User, Trophy, PlusCircle, Settings } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useAuth } from "@/context/AuthContext";
