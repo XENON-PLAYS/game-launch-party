@@ -81,27 +81,24 @@ export function HeroCarousel() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="absolute inset-0"
         >
-          {/* Background Image with Parallax-like movement */}
-          <motion.div 
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 10, ease: "linear" }}
-            className="absolute inset-0"
-          >
+          {/* Background Image with optimized loading */}
+          <div className="absolute inset-0">
             <img 
               src={(game as any).hero_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
               alt="" 
               className="w-full h-full object-cover brightness-[0.35] blur-[1px] opacity-80" 
-              fetchPriority="high"
+              fetchPriority={current === 0 ? "high" : "auto"}
+              loading={current === 0 ? "eager" : "lazy"}
               onError={handleImageError}
             />
             {/* Elegant Gradient Overlays */}
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-          </motion.div>
+          </div>
+
 
           <div className="container-responsive h-full flex flex-col justify-center relative z-10 pt-12 sm:pt-16 md:pt-0">
             <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 sm:gap-8 md:gap-12 items-center">
