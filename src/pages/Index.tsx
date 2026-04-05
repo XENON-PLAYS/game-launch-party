@@ -134,12 +134,14 @@ const Index = () => {
     return result;
   }, [busca, categoria, ordenacao, games]);
 
+  const firstHeroImage = featured[0] ? ((featured[0] as any).hero_image || featured[0].imagem) : undefined;
+
   return (
     <div className="min-h-screen bg-background/20 text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
-      <SEO />
+      <SEO preloadImage={firstHeroImage} />
       <Header />
       
-      {!isSearching && <HeroCarousel />}
+      {!isSearching && <HeroCarousel initialFeatured={featured} isLoadingInitial={featuredLoading} />}
 
       <section className="bg-background/50 backdrop-blur-3xl sticky top-[60px] sm:top-20 z-30 border-b border-border/40 py-4 sm:py-6">
         <div className="container-responsive">
