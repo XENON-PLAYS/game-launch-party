@@ -51,7 +51,7 @@ export function HeroCarousel() {
     e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
   };
 
-  if (featured.length === 0) {
+  if (isLoading || isError || featured.length === 0) {
     return (
       <section className="bg-background">
         <div className="container-responsive py-12 md:py-24">
