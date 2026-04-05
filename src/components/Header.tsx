@@ -8,8 +8,7 @@ import {
   User, 
   Crown,
   Sun,
-  Moon,
-  Skull
+  Moon
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -20,6 +19,7 @@ import { OnlineUsers } from "./OnlineUsers";
 import { NotificationBell } from "./NotificationBell";
 import { GameRequestModal } from "./GameRequestModal";
 import { optimizeImageUrl } from "@/lib/utils";
+import pirateLogo from "@/assets/logo-pirate.png";
 
 export function Header() {
   const { user, profile, logout, isAdmin } = useAuth();
@@ -45,13 +45,12 @@ export function Header() {
     <header className="sticky top-0 z-[100] bg-[#0f0f0f] border-b border-white/5 py-4 px-6 md:px-12 flex items-center justify-between shadow-2xl transition-all duration-300">
       <div className="container mx-auto flex items-center justify-between gap-6">
         {/* Logo */}
-        <Link to="/" className="flex flex-col items-center group shrink-0">
-          <span className="text-[10px] font-black tracking-[0.4em] text-white/80 leading-none mb-1">JGOS</span>
-          <div className="relative">
-            <Skull className="w-8 h-8 text-white fill-white transition-transform group-hover:scale-110 duration-300" />
-            <div className="absolute -inset-1 bg-white/5 rounded-full blur-lg -z-10 group-hover:bg-white/10 transition-colors" />
+        <Link to="/" className="flex items-center gap-2 group shrink-0">
+          <img src={pirateLogo} alt="Logo" className="w-10 h-10 object-contain transition-transform group-hover:scale-110 duration-300" />
+          <div className="flex flex-col items-start leading-none">
+            <span className="text-[10px] font-black tracking-[0.3em] text-white/80">JGOS</span>
+            <span className="text-[11px] font-black tracking-[0.1em] text-[#ff0000]">JOGOS GRATIS</span>
           </div>
-          <span className="text-[10px] font-black tracking-[0.1em] text-[#ff0000] leading-none mt-1">JOGOS GRATIS</span>
         </Link>
 
         {/* Desktop Navigation */}
