@@ -109,8 +109,8 @@ export function Header() {
           <Link to="/" className="flex items-center gap-2 group shrink-0">
             <img src={pirateLogo} alt="Logo" className="w-14 h-14 object-contain transition-transform group-hover:scale-110 duration-300" />
             <div className="flex flex-col items-start leading-[0.8] py-1">
-              <span className="text-xl md:text-2xl font-black tracking-tighter text-white">JOGOS</span>
-              <span className="text-xl md:text-2xl font-black tracking-tighter text-[#ff0000]">PIRATAS</span>
+              <span className="text-2xl md:text-3xl font-black tracking-tighter text-white">JOGOS</span>
+              <span className="text-2xl md:text-3xl font-black tracking-tighter text-[#ff0000]">PIRATAS</span>
             </div>
           </Link>
 
