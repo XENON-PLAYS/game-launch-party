@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function HeroCarousel() {
+export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFeatured?: any[], isLoadingInitial?: boolean }) {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
 
@@ -14,17 +14,16 @@ export function HeroCarousel() {
     queryKey: ["featured-games"],
     queryFn: async () => {
       const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
-      if (error) {
-        console.error("Error fetching featured games:", error);
-        throw error;
-      }
+      if (error) throw error;
       return data || [];
     },
-    staleTime: 1000 * 60 * 60, // 1 hour - critical for LCP
-    gcTime: 1000 * 60 * 60 * 24, // 24 hours
+    initialData: initialFeatured,
+    enabled: !initialFeatured, // Only run if not provided by parent
+    staleTime: 1000 * 60 * 60,
   });
 
-  const featured = featuredData || [];
+  const featured = featuredData || initialFeatured || [];
+  const isActuallyLoading = (isLoading || isLoadingInitial) && featured.length === 0;
 
   const next = useCallback(() => {
     if (featured.length === 0) return;
