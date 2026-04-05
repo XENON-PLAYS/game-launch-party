@@ -29,34 +29,42 @@ export function Header() {
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b border-border py-3 md:py-4 transition-all">
-      <div className="container-responsive flex items-center justify-between gap-4 relative">
+    <header className="sticky top-0 z-[100] bg-background/50 backdrop-blur-3xl border-b border-border/40 py-4 sm:py-5 transition-all duration-500">
+      <div className="container-responsive flex items-center justify-between gap-6 relative">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 shrink-0">
-          <img 
-            src="/src/assets/logo.png" 
-            alt="Site Logo" 
-            className="h-8 md:h-10 w-auto object-contain" 
-          />
+        <Link to="/" className="flex items-center gap-4 group shrink-0">
+          <div className="p-2 rounded-xl bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-all duration-500 shadow-lg shadow-primary/5">
+            <img 
+              src="/src/assets/logo.png" 
+              alt="Site Logo" 
+              className="h-8 md:h-10 w-auto object-contain" 
+            />
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground absolute left-1/2 -translate-x-1/2">
-          <Link to="/" className="hover:text-foreground transition-colors">Catálogo</Link>
+        <nav className="hidden md:flex items-center gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground absolute left-1/2 -translate-x-1/2">
+          <Link to="/" className="hover:text-primary transition-all duration-300 relative group py-2">
+            Catálogo
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+          </Link>
           <button 
             onClick={() => user ? setIsRequestModalOpen(true) : navigate("/login")}
-            className="hover:text-foreground transition-colors flex items-center gap-1.5"
+            className="hover:text-primary transition-all duration-300 relative group py-2 flex items-center gap-2"
           >
-            Pedir Jogo
+            <span>Pedir Jogo</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
           </button>
-          <Link to="/vip" className="flex items-center gap-1.5 text-yellow-500 hover:text-yellow-600 transition-colors">
-            <Trophy className="w-4 h-4" />
+          <Link to="/vip" className="flex items-center gap-2 text-yellow-500 hover:text-yellow-600 transition-all duration-300 relative group py-2">
+            <Trophy className="w-4 h-4 shadow-lg shadow-yellow-500/20" />
             <span>VIP</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 group-hover:w-full" />
           </Link>
           {isAdmin && (
-            <Link to="/admin" className="text-primary hover:text-primary/80 flex items-center gap-1.5">
-              <Shield className="w-4 h-4" />
+            <Link to="/admin" className="text-primary hover:text-primary/80 flex items-center gap-2 relative group py-2">
+              <Shield className="w-4 h-4 shadow-lg shadow-primary/20" />
               Admin
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
             </Link>
           )}
         </nav>
@@ -70,19 +78,19 @@ export function Header() {
           <div className="relative" ref={menuRef}>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center gap-2 p-1 pr-3 rounded-full bg-secondary hover:bg-secondary/80 border border-border transition-all"
+              className="flex items-center gap-3 p-1.5 pr-4 rounded-2xl bg-card/40 hover:bg-card/60 border border-border/50 backdrop-blur-xl transition-all duration-300 shadow-xl shadow-black/5 group"
             >
-              <div className="w-8 h-8 rounded-full overflow-hidden bg-muted flex items-center justify-center border border-border">
+              <div className="w-10 h-10 rounded-xl overflow-hidden bg-muted flex items-center justify-center border border-border group-hover:border-primary/40 transition-all duration-300">
                 {profile?.avatar_url ? (
                   <img src={optimizeImageUrl(profile.avatar_url, 64)} alt="" className="w-full h-full object-cover" />
                 ) : (
-                  <User className="w-4 h-4 text-muted-foreground" />
+                  <User className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 )}
               </div>
-              <span className="hidden sm:inline-block max-w-[100px] truncate text-xs font-bold uppercase tracking-tight">
-                {user ? (profile?.display_name || user.email?.split("@")[0]) : "Entrar"}
+              <span className="hidden sm:inline-block max-w-[120px] truncate text-xs font-black uppercase tracking-widest text-foreground/80 group-hover:text-foreground">
+                {user ? (profile?.display_name || user.email?.split("@")[0]) : "Acessar Conta"}
               </span>
-              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${menuOpen ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-500 ${menuOpen ? "rotate-180 text-primary" : ""}`} />
             </button>
             
             <AnimatePresence>
@@ -130,7 +138,7 @@ export function Header() {
           </div>
 
           <button 
-            className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors" 
+            className="md:hidden p-3 rounded-xl bg-card/40 hover:bg-card/60 border border-border/50 text-foreground transition-all duration-300" 
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
