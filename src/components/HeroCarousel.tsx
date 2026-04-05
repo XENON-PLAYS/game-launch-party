@@ -91,11 +91,12 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
           {/* Background Image with optimized loading */}
           <div className="absolute inset-0">
             <img 
-              src={(game as any).hero_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
+              src={optimizeImageUrl((game as any).hero_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f", 1200)} 
               alt="" 
               className="w-full h-full object-cover brightness-[0.35] blur-[1px] opacity-80" 
               fetchPriority={current === 0 ? "high" : "auto"}
               loading={current === 0 ? "eager" : "lazy"}
+              decoding="async"
               onError={handleImageError}
             />
             {/* Elegant Gradient Overlays */}
