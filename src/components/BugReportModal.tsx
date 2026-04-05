@@ -24,11 +24,12 @@ import {
 interface BugReportModalProps {
   isOpen: boolean;
   onClose: () => void;
-  gameId: string;
-  gameName: string;
+  gameId?: string | null;
+  gameName?: string;
 }
 
-export function BugReportModal({ isOpen, onClose, gameId, gameName }: BugReportModalProps) {
+export function BugReportModal({ isOpen, onClose, gameId, gameName = "Geral" }: BugReportModalProps) {
+
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [reportType, setReportType] = useState<string>("link_broken");
@@ -48,15 +49,17 @@ export function BugReportModal({ isOpen, onClose, gameId, gameName }: BugReportM
 
     setLoading(true);
     try {
+      const isUuid = (str: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
       const { error } = await supabase
         .from("bug_reports")
         .insert({
           user_id: user.id,
-          game_id: gameId,
+          game_id: gameId && isUuid(gameId) ? gameId : null,
           report_type: reportType,
           description: description,
           status: 'new'
         });
+
 
       if (error) throw error;
 
