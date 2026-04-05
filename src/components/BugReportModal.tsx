@@ -49,15 +49,17 @@ export function BugReportModal({ isOpen, onClose, gameId, gameName = "Geral" }: 
 
     setLoading(true);
     try {
+      const isUuid = (str: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
       const { error } = await supabase
         .from("bug_reports")
         .insert({
           user_id: user.id,
-          game_id: gameId,
+          game_id: gameId && isUuid(gameId) ? gameId : null,
           report_type: reportType,
           description: description,
           status: 'new'
         });
+
 
       if (error) throw error;
 
