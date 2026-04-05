@@ -66,8 +66,9 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-xl border-b border-border/40 py-3 sm:py-4 transition-all duration-500">
-      <div className="container-responsive flex items-center justify-between gap-4 md:gap-8 relative">
+    <header className="sticky top-0 z-[100] bg-background/60 backdrop-blur-2xl border-b border-white/5 py-4 transition-all duration-500 shadow-xl shadow-black/20">
+      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-60" />
+      <div className="container-responsive flex items-center justify-between gap-6 md:gap-10 relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group shrink-0">
           <div className="p-1.5 rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-all duration-500">

@@ -19,7 +19,7 @@ export function GameCard({ game }: GameCardProps) {
     <motion.div 
       whileHover={{ y: -6 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="group bg-card/60 backdrop-blur-sm rounded-xl overflow-hidden border border-primary/10 hover:border-primary/60 transition-all duration-300 relative flex flex-col h-full shadow-md hover:shadow-xl"
+      className="group bg-card/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 transition-all duration-500 relative flex flex-col h-full shadow-lg hover:shadow-primary/10 hover:-translate-y-1"
     >
       <Link to={`/jogo/${game.slug || game.id}`} className="block relative aspect-[3/4] overflow-hidden shrink-0">
         <img 
