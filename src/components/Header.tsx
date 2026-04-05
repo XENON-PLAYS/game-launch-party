@@ -9,8 +9,6 @@ import {
   Crown,
   Sun,
   Moon,
-  Menu,
-  X
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
