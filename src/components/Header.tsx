@@ -203,24 +203,6 @@ export function Header() {
         />
       </header>
 
-      {/* Mobile Navigation Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden sticky top-[73px] z-[99] bg-[#0f0f0f] border-b border-white/5 overflow-hidden"
-          >
-            <nav className="flex flex-col gap-1 p-4">
-              {navLinks}
-              <div className="mt-3 pt-3 border-t border-white/10 sm:hidden">
-                <OnlineUsers />
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }
