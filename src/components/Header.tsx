@@ -29,7 +29,7 @@ export function Header() {
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b border-border py-3 md:py-4 transition-all">
+    <header className="sticky top-0 z-[100] bg-background/50 backdrop-blur-3xl border-b border-border/40 py-4 sm:py-5 transition-all duration-500">
       <div className="container-responsive flex items-center justify-between gap-4 relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 shrink-0">
