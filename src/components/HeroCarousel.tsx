@@ -13,10 +13,11 @@ export function HeroCarousel() {
   const { data: featuredData } = useQuery({
     queryKey: ["featured-games"],
     queryFn: async () => {
-      console.log("Fetching featured games...");
       const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
-      console.log("Featured games result:", { data, error });
-      if (error) throw error;
+      if (error) {
+        console.error("Error fetching featured games:", error);
+        throw error;
+      }
       return data || [];
     },
   });
