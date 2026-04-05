@@ -352,39 +352,6 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-32 md:space-y-60">
-            {/* Sistema de Pesquisa Proeminente */}
-            <div className="max-w-4xl mx-auto -mb-8 md:-mb-16">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-[#ff0000] rounded-2xl md:rounded-3xl blur opacity-20 group-focus-within:opacity-40 transition duration-1000 group-focus-within:duration-200" />
-                <div className="relative flex items-center bg-card/40 backdrop-blur-2xl border border-white/10 rounded-2xl md:rounded-3xl p-1.5 md:p-2.5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] overflow-hidden">
-                  <div className="pl-5 md:pl-8 pr-3 md:pr-4">
-                    <Search className="w-5 h-5 md:w-7 md:h-7 text-primary" />
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Busque por jogos piratas..."
-                    value={busca}
-                    onChange={(e) => setBusca(e.target.value)}
-                    className="w-full bg-transparent border-none focus:ring-0 text-base md:text-2xl font-black uppercase tracking-widest py-4 md:py-8 placeholder:text-muted-foreground/30 outline-none"
-                  />
-                  {busca && (
-                    <button 
-                      onClick={() => setBusca("")}
-                      className="p-3 md:p-6 hover:bg-white/5 rounded-xl md:rounded-2xl transition-colors group/close mr-2"
-                    >
-                      <X className="w-5 h-5 md:w-7 md:h-7 text-muted-foreground group-hover/close:text-primary" />
-                    </button>
-                  )}
-                  <div className="hidden md:flex items-center gap-3 pr-4 md:pr-8">
-                    <span className="h-10 w-px bg-white/10" />
-                    <div className="flex flex-col items-end leading-none">
-                      <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1">Status</span>
-                      <span className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em] animate-pulse">Online</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <GameSection title="Mais Jogados" icon="flame" games={emAlta} />
             <GameSection title="Jogos Mais Baixados" icon="star" games={emAlta} />
