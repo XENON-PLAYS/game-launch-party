@@ -137,11 +137,8 @@ const Index = () => {
       {!isSearching && <HeroCarousel initialFeatured={featured} isLoadingInitial={featuredLoading} />}
 
       <section className="bg-background/50 backdrop-blur-3xl sticky top-[80px] sm:top-[96px] z-30 border-b border-border/40 py-4 sm:py-6">
-        <div className="container-responsive">
+        <div className="container-responsive space-y-4">
           <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-center justify-end">
-            {/* Search removed from here as it's now in the header */}
-
-            
             <button 
               onClick={() => setShowFilters(!showFilters)}
               className={`w-full md:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl border transition-all flex items-center justify-center gap-3 font-bold text-xs sm:text-sm tracking-[0.1em] uppercase group ${
@@ -157,6 +154,23 @@ const Index = () => {
               )}
             </button>
           </div>
+
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault();
+              setBusca(busca);
+            }}
+            className="w-full relative group"
+          >
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/40 group-focus-within:text-primary transition-colors duration-300" />
+            <input 
+              type="text" 
+              placeholder="Explore o catálogo..." 
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+              className="w-full pl-11 pr-4 py-3 sm:py-4 bg-card border border-border/50 rounded-xl sm:rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all placeholder:text-muted-foreground/30 font-medium" 
+            />
+          </form>
 
           <AnimatePresence>
             {showFilters && (

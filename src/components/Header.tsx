@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { 
-  Menu, 
+   
   X, 
   ChevronDown, 
   LogOut, 
@@ -10,8 +10,7 @@ import {
   User, 
   Trophy, 
   Search,
-  MessageSquare,
-  Bug,
+  MoreVertical,
   Home,
   Gamepad2,
   PlusCircle
@@ -22,7 +21,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect, useRef } from "react";
 import { OnlineUsers } from "./OnlineUsers";
 import { GameRequestModal } from "./GameRequestModal";
-import { BugReportModal } from "./BugReportModal";
+
 import { optimizeImageUrl } from "@/lib/utils";
 import { Button } from "./ui/button";
 import logo from "@/assets/logo.png";
@@ -32,7 +31,7 @@ export function Header() {
   const { user, profile, logout, isAdmin } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  // Search removed from header
   const navigate = useNavigate();
   const location = useLocation();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -48,21 +47,13 @@ export function Header() {
   }, []);
 
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
-  const [isBugModalOpen, setIsBugModalOpen] = useState(false);
+  const [isBugModalOpen, setIsBugModalOpen] = useState(false); // Kept for logic if needed elsewhere, but not used in header nav anymore
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/?search=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery("");
-    }
-  };
 
   const navLinks = [
     { label: "Início", path: "/", icon: Home },
     { label: "Jogos", path: "/", icon: Gamepad2 },
     { label: "Pedir Jogo", onClick: () => user ? setIsRequestModalOpen(true) : navigate("/login"), icon: PlusCircle },
-    { label: "Reportar Erro", onClick: () => setIsBugModalOpen(true), icon: Bug },
   ];
 
   return (
@@ -71,30 +62,21 @@ export function Header() {
       <div className="container-responsive flex items-center justify-between gap-6 md:gap-10 relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group shrink-0">
-          <div className="p-1.5 rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-all duration-500">
-            <img 
-              src={logo} 
-              alt="Site Logo" 
-              className="h-8 md:h-9 w-auto object-contain" 
-            />
+          <img 
+            src={logo} 
+            alt="Site Logo" 
+            className="h-8 md:h-9 w-auto object-contain" 
+          />
+          <div className="flex flex-col">
+            <span className="text-sm font-black text-primary tracking-tighter">JOGOS PIRATAS VIPS</span>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">JOGADORES ONLINE</span>
+              <OnlineUsers />
+            </div>
           </div>
-
         </Link>
 
-        {/* Search Bar - Center */}
-        <form 
-          onSubmit={handleSearch}
-          className="hidden md:flex flex-1 max-w-xl relative group"
-        >
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/40 group-focus-within:text-primary transition-colors duration-300" />
-          <input 
-            type="text" 
-            placeholder="Explore o catálogo..." 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/5 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 focus:bg-white/[0.08] transition-all placeholder:text-muted-foreground/30 font-medium" 
-          />
-        </form>
+        {/* Search Bar - Removed from Header */}
 
         {/* Desktop Navigation & Actions */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8">
@@ -125,15 +107,7 @@ export function Header() {
               )
             ))}
             
-            {/* Discord Icon */}
-            <a 
-              href="https://discord.gg/your-invite" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-[#5865F2] transition-colors"
-            >
-              <MessageSquare className="w-5 h-5" />
-            </a>
+            {/* Discord Removed */}
           </nav>
 
           <div className="flex items-center gap-4 border-l border-border/40 pl-6 lg:pl-8">
@@ -212,10 +186,10 @@ export function Header() {
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-3 md:hidden">
           <button 
-            className="p-2.5 rounded-xl bg-card/40 border border-border/50 text-foreground" 
+            className="p-2.5 rounded-xl bg-card/40 border border-border/50 text-foreground hover:bg-card/60 transition-all" 
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileOpen ? <X className="w-5 h-5" /> : <MoreVertical className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -230,17 +204,7 @@ export function Header() {
             className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl overflow-hidden"
           >
             <div className="py-6 px-6 space-y-6 flex flex-col">
-              {/* Mobile Search */}
-              <form onSubmit={handleSearch} className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input 
-                  type="text" 
-                  placeholder="Procurar jogos..." 
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg text-sm focus:outline-none focus:border-primary" 
-                />
-              </form>
+              {/* Mobile Search Removed from Header */}
 
               <div className="space-y-4">
                 {navLinks.map((link) => (
@@ -265,15 +229,7 @@ export function Header() {
                     </button>
                   )
                 ))}
-                <a 
-                  href="https://discord.gg/your-invite" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm font-bold text-[#5865F2]"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  Discord
-                </a>
+                {/* Discord Removed */}
               </div>
               
               <div className="h-px bg-border w-full"></div>
@@ -307,12 +263,7 @@ export function Header() {
         onClose={() => setIsRequestModalOpen(false)} 
       />
       
-      <BugReportModal 
-        isOpen={isBugModalOpen} 
-        onClose={() => setIsBugModalOpen(false)}
-        gameId="general"
-        gameName="Geral"
-      />
+      {/* BugReportModal Removed */}
     </header>
   );
 }
