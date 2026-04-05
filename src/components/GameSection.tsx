@@ -56,10 +56,10 @@ export function GameSection({ title, icon, games }: GameSectionProps) {
         {games.map((game, index) => (
           <motion.div
             key={game.id}
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.05 }}
+            transition={{ duration: 0.3, delay: Math.min(index * 0.03, 0.3) }}
           >
             <GameCard game={game} />
           </motion.div>
