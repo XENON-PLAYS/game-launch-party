@@ -26,10 +26,10 @@ export function GameSection({ title, icon, games }: GameSectionProps) {
 
   return (
     <motion.section 
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "100px" }}
+      transition={{ duration: 0.4 }}
       className="space-y-8 py-8 md:py-12"
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 border-b border-border/30 pb-6 md:pb-10">
