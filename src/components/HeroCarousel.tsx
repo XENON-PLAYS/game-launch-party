@@ -20,6 +20,8 @@ export function HeroCarousel() {
       }
       return data || [];
     },
+    staleTime: 1000 * 60 * 60, // 1 hour - critical for LCP
+    gcTime: 1000 * 60 * 60 * 24, // 24 hours
   });
 
   const featured = featuredData || [];
@@ -53,15 +55,19 @@ export function HeroCarousel() {
 
   if (isLoading || isError || featured.length === 0) {
     return (
-      <section className="bg-background">
-        <div className="container-responsive py-12 md:py-24">
-          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-[600px]">
+      <section className="bg-background relative h-[850px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden">
+        {/* Skeleton should resemble the layout to reduce shift */}
+        <div className="container-responsive h-full flex flex-col justify-center py-12 md:py-24">
+          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center">
             <div className="space-y-6">
-              <Skeleton className="h-6 w-32" />
-              <Skeleton className="h-20 w-3/4" />
-              <Skeleton className="h-32 w-full" />
+              <Skeleton className="h-6 w-32 bg-primary/10" />
+              <Skeleton className="h-20 w-3/4 bg-primary/5" />
+              <Skeleton className="h-32 w-full bg-white/5" />
+              <div className="flex gap-4">
+                <Skeleton className="h-16 w-48 rounded-full bg-primary/20" />
+              </div>
             </div>
-            <Skeleton className="mx-auto md:mr-0 rounded-2xl aspect-[3/4] w-full max-w-[240px] md:max-w-[380px]" />
+            <Skeleton className="mx-auto md:mr-0 rounded-3xl aspect-[3/4] w-full max-w-[240px] md:max-w-[380px] bg-white/5 shadow-2xl" />
           </div>
         </div>
       </section>
@@ -79,27 +85,24 @@ export function HeroCarousel() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="absolute inset-0"
         >
-          {/* Background Image with Parallax-like movement */}
-          <motion.div 
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 10, ease: "linear" }}
-            className="absolute inset-0"
-          >
+          {/* Background Image with optimized loading */}
+          <div className="absolute inset-0">
             <img 
               src={(game as any).hero_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
               alt="" 
               className="w-full h-full object-cover brightness-[0.35] blur-[1px] opacity-80" 
-              fetchPriority="high"
+              fetchPriority={current === 0 ? "high" : "auto"}
+              loading={current === 0 ? "eager" : "lazy"}
               onError={handleImageError}
             />
             {/* Elegant Gradient Overlays */}
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-          </motion.div>
+          </div>
+
 
           <div className="container-responsive h-full flex flex-col justify-center relative z-10 pt-12 sm:pt-16 md:pt-0">
             <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 sm:gap-8 md:gap-12 items-center">
@@ -182,6 +185,8 @@ export function HeroCarousel() {
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover/poster:scale-105" 
                       width={400}
                       height={533}
+                      fetchPriority={current === 0 ? "high" : "auto"}
+                      loading={current === 0 ? "eager" : "lazy"}
                       onError={handleImageError}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/poster:opacity-100 transition-opacity" />
