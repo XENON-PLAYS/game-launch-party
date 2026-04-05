@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, User, Trophy, PlusCircle, Gamepad2, Settings } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, LogIn, UserPlus, Shield, User, Trophy, PlusCircle, Settings } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useAuth } from "@/context/AuthContext";
@@ -30,20 +30,18 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b border-border py-3 md:py-4 transition-all">
-      <div className="container-responsive flex items-center justify-between gap-4">
+      <div className="container-responsive flex items-center justify-between gap-4 relative">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group shrink-0">
-          <div className="p-2 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
-            <Gamepad2 className="w-6 h-6 md:w-7 md:h-7 text-primary" />
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className="font-black text-foreground text-sm md:text-xl tracking-tight uppercase">JOGOS</span>
-            <span className="font-black text-primary text-sm md:text-xl tracking-tight uppercase -mt-1">GRÁTIS</span>
-          </div>
+        <Link to="/" className="flex items-center gap-3 shrink-0">
+          <img 
+            src="/src/assets/logo.png" 
+            alt="Site Logo" 
+            className="h-8 md:h-10 w-auto object-contain" 
+          />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 font-bold text-xs uppercase tracking-wider text-muted-foreground">
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground absolute left-1/2 -translate-x-1/2">
           <Link to="/" className="hover:text-foreground transition-colors">Catálogo</Link>
           <button 
             onClick={() => user ? setIsRequestModalOpen(true) : navigate("/login")}
@@ -149,7 +147,7 @@ export function Header() {
             exit={{ height: 0, opacity: 0 }}
             className="md:hidden border-t border-border bg-background overflow-hidden"
           >
-            <div className="py-6 px-6 space-y-6 font-bold uppercase tracking-widest text-xs flex flex-col">
+            <div className="py-6 px-6 space-y-5 text-sm font-medium flex flex-col">
               <Link to="/" className="text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>Catálogo</Link>
               <button 
                 className="text-left text-muted-foreground hover:text-foreground" 
