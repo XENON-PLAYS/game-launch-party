@@ -10,7 +10,10 @@ import {
   CheckCircle2,
   XCircle,
   Filter,
-  ChevronDown
+  ChevronDown,
+  ShieldAlert,
+  Crown,
+  Loader2
 } from "lucide-react";
 import { 
   Table, 
@@ -35,6 +38,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tables } from "@/integrations/supabase/types";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
 
 type Profile = {
   id: string;
