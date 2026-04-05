@@ -164,7 +164,31 @@ const Index = () => {
                     </motion.button>
                   )}
                 </AnimatePresence>
-              </div>
+            </div>
+          </div>
+          
+          <AnimatePresence>
+            {!busca && !showFilters && (
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="mt-3 flex flex-wrap items-center gap-3 px-2"
+              >
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-600">Buscas Populares:</span>
+                {["GTA V", "Minecraft", "Red Dead", "Elden Ring", "Marvel"].map((sug) => (
+                  <button 
+                    key={sug}
+                    onClick={() => setBusca(sug)}
+                    className="text-[9px] font-black uppercase tracking-[0.1em] text-gray-500 hover:text-primary transition-all bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 px-2 py-1 rounded-md"
+                  >
+                    {sug}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
             </div>
 
             {/* Filter Toggle Button */}
