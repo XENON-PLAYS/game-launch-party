@@ -42,11 +42,14 @@ const Index = () => {
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
 
-  const { data: gamesData, isLoading } = useQuery({
+  const { data: gamesData, isLoading, isError, refetch } = useQuery({
     queryKey: ["games"],
     queryFn: async () => {
       const { data, error } = await supabase.from("games").select("*").order("nome");
-      if (error) throw error;
+      if (error) {
+        console.error("Error fetching games:", error);
+        throw error;
+      }
       return data || [];
     },
   });
@@ -273,6 +276,17 @@ const Index = () => {
                 </div>
               </div>
             ))}
+          </div>
+        ) : isError ? (
+          <div className="text-center py-20 space-y-6">
+            <h3 className="text-2xl font-bold text-destructive">Erro ao carregar o catálogo</h3>
+            <p className="text-muted-foreground">Verifique sua conexão e tente novamente.</p>
+            <button 
+              onClick={() => refetch()}
+              className="px-6 py-2 bg-primary text-primary-foreground rounded-full font-bold"
+            >
+              Tentar Novamente
+            </button>
           </div>
         ) : isSearching ? (
           <motion.div 

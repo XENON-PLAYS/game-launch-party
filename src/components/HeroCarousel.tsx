@@ -10,10 +10,14 @@ export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  const { data: featuredData } = useQuery({
+  const { data: featuredData, isLoading, isError } = useQuery({
     queryKey: ["featured-games"],
     queryFn: async () => {
-      const { data } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
+      const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
+      if (error) {
+        console.error("Error fetching featured games:", error);
+        throw error;
+      }
       return data || [];
     },
   });
@@ -47,7 +51,7 @@ export function HeroCarousel() {
     e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
   };
 
-  if (featured.length === 0) {
+  if (isLoading || isError || featured.length === 0) {
     return (
       <section className="bg-background">
         <div className="container-responsive py-12 md:py-24">
