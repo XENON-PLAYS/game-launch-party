@@ -25,6 +25,10 @@ export const SEO = ({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       
+      {preloadImage && (
+        <link rel="preload" as="image" href={preloadImage} fetchPriority="high" />
+      )}
+      
       {/* Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify({
