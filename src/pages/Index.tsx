@@ -45,8 +45,13 @@ const Index = () => {
   const { data: gamesData, isLoading } = useQuery({
     queryKey: ["games"],
     queryFn: async () => {
+      console.log("Fetching games...");
       const { data, error } = await supabase.from("games").select("*").order("nome");
-      if (error) throw error;
+      if (error) {
+        console.error("Supabase Error:", error);
+        throw error;
+      }
+      console.log("Games fetched:", data?.length);
       return data || [];
     },
   });
