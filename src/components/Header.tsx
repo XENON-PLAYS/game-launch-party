@@ -40,7 +40,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b-2 border-primary/20 py-2 sm:py-3 md:py-4 shadow-sm">
+    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b border-primary/10 py-0 shadow-sm">
       <div className="container-responsive flex items-center justify-between gap-3 md:gap-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0">
@@ -49,7 +49,7 @@ export function Header() {
             alt="Logo" 
             width={64}
             height={64}
-            className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 object-contain" 
+            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 object-contain" 
           />
           <div className="flex flex-col leading-[0.85]">
             <span className="font-black text-white text-base sm:text-lg md:text-2xl lg:text-3xl tracking-tighter uppercase drop-shadow-md">JOGOS</span>
