@@ -89,7 +89,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-[100] bg-[#0f0f0f] border-b border-white/5 py-4 px-4 md:px-12 flex items-center justify-between shadow-2xl transition-all duration-300">
+      <header className="sticky top-0 z-[100] bg-[#0f0f0f] border-b border-white/5 py-2 px-4 md:px-12 flex items-center justify-between shadow-2xl transition-all duration-300">
         <div className="container mx-auto flex items-center justify-between gap-4 lg:gap-6">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group shrink-0">
