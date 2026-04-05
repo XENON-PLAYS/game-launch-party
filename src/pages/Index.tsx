@@ -352,11 +352,6 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-32 md:space-y-60">
-
-            <GameSection title="Mais Jogados" icon="flame" games={emAlta} />
-            <GameSection title="Jogos Mais Baixados" icon="star" games={emAlta} />
-            <GameSection title="Jogos da Nova Geração" icon="rocket" games={recentes} />
-            
             <section className="space-y-12 md:space-y-16">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-10 border-b-2 border-primary/20 pb-12 md:pb-20">
                 <div className="space-y-4">
@@ -383,6 +378,10 @@ const Index = () => {
                 {games.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             </section>
+
+            <GameSection title="Mais Jogados" icon="flame" games={emAlta} />
+            <GameSection title="Jogos Mais Baixados" icon="star" games={emAlta} />
+            <GameSection title="Jogos da Nova Geração" icon="rocket" games={recentes} />
           </div>
         )}
       </main>
