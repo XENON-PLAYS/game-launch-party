@@ -114,15 +114,7 @@ export function Header() {
               )
             ))}
             
-            {/* Discord Icon */}
-            <a 
-              href="https://discord.gg/your-invite" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-[#5865F2] transition-colors"
-            >
-              <MessageSquare className="w-5 h-5" />
-            </a>
+            {/* Discord Removed */}
           </nav>
 
           <div className="flex items-center gap-4 border-l border-border/40 pl-6 lg:pl-8">
