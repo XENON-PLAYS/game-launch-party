@@ -277,6 +277,17 @@ const Index = () => {
               </div>
             ))}
           </div>
+        ) : isError ? (
+          <div className="text-center py-20 space-y-6">
+            <h3 className="text-2xl font-bold text-destructive">Erro ao carregar o catálogo</h3>
+            <p className="text-muted-foreground">Verifique sua conexão e tente novamente.</p>
+            <button 
+              onClick={() => refetch()}
+              className="px-6 py-2 bg-primary text-primary-foreground rounded-full font-bold"
+            >
+              Tentar Novamente
+            </button>
+          </div>
         ) : isSearching ? (
           <motion.div 
             initial={{ opacity: 0 }}
