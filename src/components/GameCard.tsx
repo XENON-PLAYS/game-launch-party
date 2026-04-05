@@ -44,7 +44,7 @@ export function GameCard({ game }: GameCardProps) {
           {(game.categorias || []).slice(0, 1).map((cat) => (
             <span 
               key={cat} 
-              className="text-[10px] uppercase font-bold px-2.5 py-1 rounded bg-black/70 backdrop-blur-md text-white border border-white/10 tracking-wider"
+              className="text-[9px] uppercase font-black px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white border border-white/10 tracking-widest"
             >
               {cat}
             </span>
