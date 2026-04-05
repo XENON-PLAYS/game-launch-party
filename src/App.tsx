@@ -32,21 +32,23 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/jogo/:slug" element={<GameDetail />} />
-              <Route path="/vip" element={<Vip />} />
-              <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
-              <Route path="/categoria/:category" element={<CategoryPage />} />
-              
-              <Route path="/login" element={<Login />} />
-              <Route path="/cadastro" element={<Cadastro />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/perfil" element={<Perfil />} />
-              <Route path="/perfil/:userId" element={<Perfil />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Suspense fallback={null}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/jogo/:slug" element={<GameDetail />} />
+                <Route path="/vip" element={<Vip />} />
+                <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
+                <Route path="/categoria/:category" element={<CategoryPage />} />
+                
+                <Route path="/login" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/perfil" element={<Perfil />} />
+                <Route path="/perfil/:userId" element={<Perfil />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
           </BrowserRouter>
         </AuthProvider>
       </ThemeProvider>
