@@ -253,22 +253,63 @@ const Index = () => {
       </section>
 
       <main className="container-responsive py-12 md:py-24 space-y-20 md:space-y-40">
-        <form 
-          onSubmit={(e) => {
-            e.preventDefault();
-            setBusca(busca);
-          }}
-          className="w-full relative group"
-        >
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/40 group-focus-within:text-primary transition-colors duration-300" />
-          <input 
-            type="text" 
-            placeholder="Explore o catálogo..." 
-            value={busca}
-            onChange={(e) => setBusca(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 sm:py-4 bg-card border border-border/50 rounded-xl sm:rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all placeholder:text-muted-foreground/30 font-medium" 
-          />
-        </form>
+        <div className="w-full max-w-4xl mx-auto space-y-4">
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault();
+              setBusca(busca);
+            }}
+            className="w-full relative group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/5 to-primary/20 rounded-2xl sm:rounded-[2rem] blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
+            
+            <div className="relative flex items-center">
+              <div className="absolute left-6 text-muted-foreground/40 group-focus-within:text-primary transition-colors duration-300">
+                <Search className="w-5 h-5 sm:w-6 sm:h-6" />
+              </div>
+              
+              <input 
+                type="text" 
+                placeholder="O que você quer jogar hoje? Ex: Elden Ring, GTA V..." 
+                value={busca}
+                onChange={(e) => setBusca(e.target.value)}
+                className="w-full pl-16 pr-16 py-5 sm:py-7 bg-card/80 backdrop-blur-xl border border-white/5 rounded-2xl sm:rounded-[2rem] text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all placeholder:text-muted-foreground/30 font-bold tracking-tight shadow-2xl" 
+              />
+
+              <AnimatePresence>
+                {busca && (
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    type="button"
+                    onClick={() => setBusca("")}
+                    className="absolute right-6 p-2 rounded-xl bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-white transition-all border border-white/5"
+                  >
+                    <X className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </motion.button>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <div className="absolute -bottom-px left-12 right-12 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
+          </form>
+          
+          {!busca && (
+            <div className="flex flex-wrap items-center justify-center gap-4 text-[10px] sm:text-xs font-black uppercase tracking-widest text-muted-foreground/40">
+              <span>Sugestões:</span>
+              {["Ação", "Aventura", "RPG", "Estratégia"].map((sug) => (
+                <button 
+                  key={sug}
+                  onClick={() => setBusca(sug)}
+                  className="hover:text-primary transition-colors cursor-pointer"
+                >
+                  {sug}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         {isLoading ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
