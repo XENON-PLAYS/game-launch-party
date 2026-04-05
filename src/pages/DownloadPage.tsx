@@ -7,6 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Download, Loader2, Shield, Clock, AlertCircle, CheckCircle2, RefreshCw } from "lucide-react";
 import { InstallationWizard } from "@/components/InstallationWizard";
 import { toast } from "sonner";
+import { optimizeImageUrl } from "@/lib/utils";
 
 const DownloadPage = () => {
   const { gameId, linkId } = useParams();
