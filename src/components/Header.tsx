@@ -9,6 +9,7 @@ import { OnlineUsers } from "./OnlineUsers";
 import { NotificationBell } from "./NotificationBell";
 import { SunMoonSystem } from "./SunMoonSystem";
 import { GameRequestModal } from "./GameRequestModal";
+import { optimizeImageUrl } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
 export function Header() {
