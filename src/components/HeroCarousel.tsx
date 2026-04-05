@@ -78,14 +78,14 @@ export function HeroCarousel() {
 
   return (
     <section className="relative h-[850px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
-      <AnimatePresence initial={false} custom={direction}>
+      <AnimatePresence mode="wait" initial={true} custom={direction}>
         <motion.div
           key={current}
           custom={direction}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="absolute inset-0"
         >
           {/* Background Image with optimized loading */}
