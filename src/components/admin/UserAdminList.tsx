@@ -10,7 +10,10 @@ import {
   CheckCircle2,
   XCircle,
   Filter,
-  ChevronDown
+  ChevronDown,
+  ShieldAlert,
+  Crown,
+  Loader2
 } from "lucide-react";
 import { 
   Table, 
@@ -35,6 +38,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tables } from "@/integrations/supabase/types";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
 
 type Profile = {
   id: string;
@@ -56,6 +62,44 @@ interface UserAdminListProps {
 export function UserAdminList({ users }: UserAdminListProps) {
   const [busca, setBusca] = useState("");
   const [filtroVip, setFiltroVip] = useState<"todos" | "vip" | "comum">("todos");
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
+
+  const handleToggleVip = async (userId: string, currentVip: boolean) => {
+    setLoadingId(userId);
+    try {
+      // @ts-ignore - RPC will be available after running the provided SQL
+      const { data, error } = await (supabase.rpc as any)("toggle_vip_status", { target_user_id: userId });
+      if (error) throw error;
+      
+      toast.success(data ? "Status VIP ativado por 30 dias!" : "Status VIP removido!");
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+    } catch (error: any) {
+      toast.error(`Erro: ${error.message}`);
+      console.error(error);
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
+  const handleToggleAdmin = async (userId: string, role: string | null) => {
+    if (!confirm(`Deseja realmente ${role === 'admin' ? 'remover' : 'adicionar'} o acesso de administrador deste usuário?`)) return;
+    
+    setLoadingId(userId);
+    try {
+      // @ts-ignore - RPC will be available after running the provided SQL
+      const { data, error } = await (supabase.rpc as any)("toggle_admin_role", { target_user_id: userId });
+      if (error) throw error;
+      
+      toast.success(data === 'added' ? "Acesso de administrador concedido!" : "Acesso de administrador removido!");
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+    } catch (error: any) {
+      toast.error(`Erro: ${error.message}`);
+      console.error(error);
+    } finally {
+      setLoadingId(null);
+    }
+  };
 
   const filteredUsers = useMemo(() => {
     let result = [...users];
@@ -194,18 +238,39 @@ export function UserAdminList({ users }: UserAdminListProps) {
                     <TableCell className="text-right">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg">
-                            <MoreVertical className="h-4 w-4" />
+                          <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg" disabled={loadingId === user.user_id}>
+                            {loadingId === user.user_id ? <Loader2 className="h-4 w-4 animate-spin" /> : <MoreVertical className="h-4 w-4" />}
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-40">
-                          <DropdownMenuItem className="text-xs font-bold uppercase tracking-widest cursor-pointer">
-                            <Shield className="mr-2 h-3.5 w-3.5" />
-                            <span>Ver Perfil</span>
+                        <DropdownMenuContent align="end" className="w-56">
+                          <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest opacity-50 px-2 py-1.5">Ações de Gestão</DropdownMenuLabel>
+                          
+                          <DropdownMenuItem 
+                            className="text-xs font-bold uppercase tracking-widest cursor-pointer py-2.5"
+                            onClick={() => handleToggleVip(user.user_id, user.is_vip)}
+                          >
+                            {user.is_vip ? (
+                              <><XCircle className="mr-2 h-4 w-4 text-destructive" /> Remover VIP</>
+                            ) : (
+                              <><Crown className="mr-2 h-4 w-4 text-yellow-500" /> Tornar VIP (30d)</>
+                            )}
                           </DropdownMenuItem>
+
+                          <DropdownMenuItem 
+                            className="text-xs font-bold uppercase tracking-widest cursor-pointer py-2.5"
+                            onClick={() => handleToggleAdmin(user.user_id, user.role)}
+                          >
+                            {user.role === 'admin' ? (
+                              <><ShieldAlert className="mr-2 h-4 w-4 text-destructive" /> Remover Admin</>
+                            ) : (
+                              <><Shield className="mr-2 h-4 w-4 text-primary" /> Tornar Admin</>
+                            )}
+                          </DropdownMenuItem>
+
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-xs font-bold uppercase tracking-widest text-destructive focus:bg-destructive/10 cursor-pointer">
-                            <XCircle className="mr-2 h-3.5 w-3.5" />
+                          
+                          <DropdownMenuItem className="text-xs font-bold uppercase tracking-widest text-destructive focus:bg-destructive/10 cursor-pointer py-2.5">
+                            <XCircle className="mr-2 h-4 w-4" />
                             <span>Banir Usuário</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
