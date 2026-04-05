@@ -136,11 +136,8 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-4 border-l border-border/40 pl-6 lg:pl-8">
-            <div className="hidden lg:block">
-              <OnlineUsers />
-            </div>
-
             <div className="relative" ref={menuRef}>
+
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="flex items-center gap-3 p-1 rounded-full bg-card/40 hover:bg-card/60 border border-border/50 backdrop-blur-xl transition-all duration-300 group"
