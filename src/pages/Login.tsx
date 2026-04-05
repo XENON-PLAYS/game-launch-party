@@ -5,6 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { lovable } from "@/integrations/lovable/index";
 import { MeteorBackground } from "@/components/MeteorBackground";
 
 const Login = () => {
