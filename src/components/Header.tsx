@@ -61,7 +61,6 @@ export function Header() {
     { label: "Início", path: "/", icon: Home },
     { label: "Jogos", path: "/", icon: Gamepad2 },
     { label: "Pedir Jogo", onClick: () => user ? setIsRequestModalOpen(true) : navigate("/login"), icon: PlusCircle },
-    { label: "Reportar Erro", onClick: () => setIsBugModalOpen(true), icon: Bug },
   ];
 
   return (
