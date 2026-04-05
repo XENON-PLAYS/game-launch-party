@@ -53,7 +53,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .select("role")
       .eq("user_id", userId);
     
-    setIsAdmin(roleData?.some((r) => r.role === "admin") ?? false);
+    const userEmail = (await supabase.auth.getUser()).data.user?.email;
+    setIsAdmin(userEmail === 'varaver90@gmail.com' && (roleData?.some((r) => r.role === "admin") ?? false));
   }, []);
 
   useEffect(() => {
