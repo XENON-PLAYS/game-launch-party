@@ -42,7 +42,7 @@ const Index = () => {
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
 
-  const { data: gamesData, isLoading } = useQuery({
+  const { data: gamesData, isLoading, isError, refetch } = useQuery({
     queryKey: ["games"],
     queryFn: async () => {
       const { data, error } = await supabase.from("games").select("*").order("nome");
