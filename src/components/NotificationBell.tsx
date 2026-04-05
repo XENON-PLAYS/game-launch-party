@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Bell, Check, X, Info } from "lucide-react";
+import { Bell, Info } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -50,11 +50,11 @@ export function NotificationBell() {
     <div className="relative">
       <button 
         onClick={() => setOpen(!open)}
-        className="p-2.5 rounded-xl hover:bg-muted transition-colors relative"
+        className="p-2.5 rounded-xl hover:bg-white/5 transition-colors relative"
       >
-        <Bell className="w-5 h-5 text-muted-foreground" />
+        <Bell className="w-5 h-5 text-gray-400 group-hover:text-white" />
         {unreadCount > 0 && (
-          <span className="absolute top-2 right-2 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-background">
+          <span className="absolute top-2 right-2 w-4 h-4 bg-[#ff0000] text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-[#0f0f0f]">
             {unreadCount}
           </span>
         )}
@@ -72,51 +72,53 @@ export function NotificationBell() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="absolute right-0 top-full mt-2 w-80 bg-popover border border-border rounded-2xl shadow-2xl z-[120] overflow-hidden"
+              className="absolute right-0 top-full mt-4 w-80 bg-[#111111] border border-white/5 rounded-2xl shadow-2xl z-[120] overflow-hidden"
             >
-              <div className="p-4 border-b border-border flex items-center justify-between bg-muted/30">
-                <h3 className="text-xs font-black uppercase tracking-widest">Notificações</h3>
+              <div className="p-4 border-b border-white/5 flex items-center justify-between bg-white/5">
+                <h3 className="text-xs font-black uppercase tracking-widest text-white">Notificações</h3>
                 {unreadCount > 0 && (
                   <button 
                     onClick={() => markAllRead.mutate()}
-                    className="text-[10px] font-bold text-primary hover:underline uppercase tracking-widest"
+                    className="text-[10px] font-bold text-gray-400 hover:text-white hover:underline uppercase tracking-widest"
                   >
                     Marcar todas como lidas
                   </button>
                 )}
               </div>
               
-              <div className="max-h-[400px] overflow-y-auto">
+              <div className="max-h-[400px] overflow-y-auto bg-[#0f0f0f]">
                 {notifications.length > 0 ? (
-                  <div className="divide-y divide-border">
+                  <div className="divide-y divide-white/5">
                     {notifications.map((n) => (
                       <div 
                         key={n.id} 
-                        className={`p-4 space-y-2 transition-colors ${!n.read ? 'bg-primary/5' : 'hover:bg-muted/50'}`}
-                        onClick={() => !n.read && markAsRead.mutate(n.id)}
+                        className={`p-4 space-y-2 transition-colors cursor-pointer ${!n.read ? 'bg-white/5' : 'hover:bg-white/10'}`}
+                        onClick={() => {
+                          if (!n.read) markAsRead.mutate(n.id);
+                        }}
                       >
                         <div className="flex items-start gap-3">
-                          <div className={`p-2 rounded-lg ${!n.read ? 'bg-primary/20 text-primary' : 'bg-muted text-muted-foreground'}`}>
+                          <div className={`p-2 rounded-lg ${!n.read ? 'bg-[#ff0000]/10 text-[#ff0000]' : 'bg-white/5 text-gray-500'}`}>
                             <Info className="w-4 h-4" />
                           </div>
                           <div className="flex-1 space-y-1">
-                            <p className="text-sm font-bold leading-none">{n.title}</p>
-                            <p className="text-xs text-muted-foreground leading-relaxed">{n.message}</p>
-                            <p className="text-[10px] text-muted-foreground/50 font-medium">
+                            <p className="text-sm font-bold leading-none text-white">{n.title}</p>
+                            <p className="text-xs text-gray-400 leading-relaxed">{n.message}</p>
+                            <p className="text-[10px] text-gray-600 font-medium">
                               {new Date(n.created_at).toLocaleDateString()}
                             </p>
                           </div>
-                          {!n.read && <div className="w-2 h-2 rounded-full bg-primary mt-1" />}
+                          {!n.read && <div className="w-2 h-2 rounded-full bg-[#ff0000] mt-1" />}
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
                   <div className="p-12 text-center space-y-4">
-                    <div className="w-12 h-12 rounded-full bg-muted mx-auto flex items-center justify-center opacity-40">
-                      <Bell className="w-6 h-6" />
+                    <div className="w-12 h-12 rounded-full bg-white/5 mx-auto flex items-center justify-center opacity-40">
+                      <Bell className="w-6 h-6 text-gray-500" />
                     </div>
-                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Nenhuma novidade na frota</p>
+                    <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Nenhuma novidade na frota</p>
                   </div>
                 )}
               </div>
