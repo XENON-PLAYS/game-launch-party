@@ -80,10 +80,16 @@ export function GameComments({ gameId }: GameCommentsProps) {
     };
   }, [gameId, queryClient]);
 
-  // Scroll to bottom when comments change
+  // Scroll to bottom when comments change with optimization to avoid forced reflow
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      const scrollElement = scrollRef.current;
+      // Use requestAnimationFrame to defer the layout read and write to the next frame
+      // This prevents "forced reflow" by not reading layout immediately after a React render
+      const frameId = requestAnimationFrame(() => {
+        scrollElement.scrollTop = scrollElement.scrollHeight;
+      });
+      return () => cancelAnimationFrame(frameId);
     }
   }, [comments]);
 
