@@ -40,7 +40,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b-2 border-primary/20 py-1 sm:py-2 shadow-sm">
+    <header className="sticky top-0 z-[100] bg-background/80 backdrop-blur-md border-b border-primary/10 py-0 shadow-sm">
       <div className="container-responsive flex items-center justify-between gap-3 md:gap-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0">
