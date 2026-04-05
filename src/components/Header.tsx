@@ -9,8 +9,6 @@ import {
   Crown,
   Sun,
   Moon,
-  Menu,
-  X
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -27,7 +25,7 @@ export function Header() {
   const { user, profile, logout, isAdmin } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
   const navigate = useNavigate();
   const location = useLocation();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -42,10 +40,6 @@ export function Header() {
     return () => window.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location.pathname]);
 
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
 
@@ -97,20 +91,12 @@ export function Header() {
     <>
       <header className="sticky top-0 z-[100] bg-[#0f0f0f] border-b border-white/5 py-4 px-4 md:px-12 flex items-center justify-between shadow-2xl transition-all duration-300">
         <div className="container mx-auto flex items-center justify-between gap-4 lg:gap-6">
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-400 hover:text-white transition-colors"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group shrink-0">
-            <img src={pirateLogo} alt="Logo" className="w-16 h-16 md:w-20 md:h-20 object-contain transition-transform group-hover:scale-110 duration-300" />
+            <img src={pirateLogo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
             <div className="flex flex-col items-start leading-[0.8] py-1">
-              <span className="text-2xl md:text-3xl font-black tracking-tighter text-white">JOGOS</span>
-              <span className="text-2xl md:text-3xl font-black tracking-tighter text-[#ff0000]">PIRATAS</span>
+              <span className="text-xl md:text-2xl font-black tracking-tighter text-white">JOGOS</span>
+              <span className="text-xl md:text-2xl font-black tracking-tighter text-[#ff0000]">PIRATAS</span>
             </div>
           </Link>
 
@@ -215,24 +201,6 @@ export function Header() {
         />
       </header>
 
-      {/* Mobile Navigation Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden sticky top-[73px] z-[99] bg-[#0f0f0f] border-b border-white/5 overflow-hidden"
-          >
-            <nav className="flex flex-col gap-1 p-4">
-              {navLinks}
-              <div className="mt-3 pt-3 border-t border-white/10 sm:hidden">
-                <OnlineUsers />
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }
