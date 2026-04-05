@@ -574,6 +574,10 @@ export type Database = {
         Returns: undefined
       }
       increment_link_clicks: { Args: { link_id: string }; Returns: undefined }
+      insert_user_role: {
+        Args: { p_role: string; p_user_id: string }
+        Returns: undefined
+      }
       slugify: { Args: { text: string }; Returns: string }
       update_online_status: { Args: never; Returns: undefined }
       update_own_profile: {
