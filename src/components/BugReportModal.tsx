@@ -24,11 +24,12 @@ import {
 interface BugReportModalProps {
   isOpen: boolean;
   onClose: () => void;
-  gameId: string;
-  gameName: string;
+  gameId?: string | null;
+  gameName?: string;
 }
 
-export function BugReportModal({ isOpen, onClose, gameId, gameName }: BugReportModalProps) {
+export function BugReportModal({ isOpen, onClose, gameId, gameName = "Geral" }: BugReportModalProps) {
+
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [reportType, setReportType] = useState<string>("link_broken");
