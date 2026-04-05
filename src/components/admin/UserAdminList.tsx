@@ -68,7 +68,8 @@ export function UserAdminList({ users }: UserAdminListProps) {
   const handleToggleVip = async (userId: string, currentVip: boolean) => {
     setLoadingId(userId);
     try {
-      const { data, error } = await supabase.rpc("toggle_vip_status", { target_user_id: userId });
+      // @ts-ignore - RPC will be available after running the provided SQL
+      const { data, error } = await (supabase.rpc as any)("toggle_vip_status", { target_user_id: userId });
       if (error) throw error;
       
       toast.success(data ? "Status VIP ativado por 30 dias!" : "Status VIP removido!");
@@ -86,7 +87,8 @@ export function UserAdminList({ users }: UserAdminListProps) {
     
     setLoadingId(userId);
     try {
-      const { data, error } = await supabase.rpc("toggle_admin_role", { target_user_id: userId });
+      // @ts-ignore - RPC will be available after running the provided SQL
+      const { data, error } = await (supabase.rpc as any)("toggle_admin_role", { target_user_id: userId });
       if (error) throw error;
       
       toast.success(data === 'added' ? "Acesso de administrador concedido!" : "Acesso de administrador removido!");
