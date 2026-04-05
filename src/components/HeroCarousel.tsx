@@ -20,6 +20,8 @@ export function HeroCarousel() {
       }
       return data || [];
     },
+    staleTime: 1000 * 60 * 60, // 1 hour - critical for LCP
+    gcTime: 1000 * 60 * 60 * 24, // 24 hours
   });
 
   const featured = featuredData || [];
