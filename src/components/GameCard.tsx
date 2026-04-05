@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Info, Star } from "lucide-react";
 import { Tables } from "@/integrations/supabase/types";
 import { motion } from "framer-motion";
+import { optimizeImageUrl } from "@/lib/utils";
 
 type Game = Tables<"games">;
 
