@@ -256,16 +256,7 @@ export function UserAdminList({ users }: UserAdminListProps) {
                             )}
                           </DropdownMenuItem>
 
-                          <DropdownMenuItem 
-                            className="text-xs font-bold uppercase tracking-widest cursor-pointer py-2.5"
-                            onClick={() => handleToggleAdmin(user.user_id, user.role)}
-                          >
-                            {user.role === 'admin' ? (
-                              <><ShieldAlert className="mr-2 h-4 w-4 text-destructive" /> Remover Admin</>
-                            ) : (
-                              <><Shield className="mr-2 h-4 w-4 text-primary" /> Tornar Admin</>
-                            )}
-                          </DropdownMenuItem>
+                          {/* Removed toggle admin role option to ensure unique admin access */}
 
                           <DropdownMenuSeparator />
                           
