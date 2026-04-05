@@ -72,19 +72,19 @@ export function Header() {
           <div className="relative" ref={menuRef}>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center gap-2 p-1 pr-3 rounded-full bg-secondary hover:bg-secondary/80 border border-border transition-all"
+              className="flex items-center gap-3 p-1.5 pr-4 rounded-2xl bg-card/40 hover:bg-card/60 border border-border/50 backdrop-blur-xl transition-all duration-300 shadow-xl shadow-black/5 group"
             >
-              <div className="w-8 h-8 rounded-full overflow-hidden bg-muted flex items-center justify-center border border-border">
+              <div className="w-10 h-10 rounded-xl overflow-hidden bg-muted flex items-center justify-center border border-border group-hover:border-primary/40 transition-all duration-300">
                 {profile?.avatar_url ? (
                   <img src={optimizeImageUrl(profile.avatar_url, 64)} alt="" className="w-full h-full object-cover" />
                 ) : (
-                  <User className="w-4 h-4 text-muted-foreground" />
+                  <User className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 )}
               </div>
-              <span className="hidden sm:inline-block max-w-[100px] truncate text-xs font-bold uppercase tracking-tight">
-                {user ? (profile?.display_name || user.email?.split("@")[0]) : "Entrar"}
+              <span className="hidden sm:inline-block max-w-[120px] truncate text-xs font-black uppercase tracking-widest text-foreground/80 group-hover:text-foreground">
+                {user ? (profile?.display_name || user.email?.split("@")[0]) : "Acessar Conta"}
               </span>
-              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${menuOpen ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-500 ${menuOpen ? "rotate-180 text-primary" : ""}`} />
             </button>
             
             <AnimatePresence>
