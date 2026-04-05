@@ -246,15 +246,7 @@ export function Header() {
                     </button>
                   )
                 ))}
-                <a 
-                  href="https://discord.gg/your-invite" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm font-bold text-[#5865F2]"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  Discord
-                </a>
+                {/* Discord Removed */}
               </div>
               
               <div className="h-px bg-border w-full"></div>
