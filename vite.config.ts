@@ -20,22 +20,25 @@ export default defineConfig(({ mode }) => ({
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],
   },
   build: {
+    target: "esnext",
     rollupOptions: {
         output: {
-          manualChunks: {
-            "vendor-react": ["react", "react-dom", "react-router-dom"],
-            "vendor-ui": [
-              "@radix-ui/react-accordion",
-              "@radix-ui/react-alert-dialog",
-              "@radix-ui/react-avatar",
-              "@radix-ui/react-dialog",
-              "@radix-ui/react-dropdown-menu",
-              "@radix-ui/react-popover",
-              "@radix-ui/react-select",
-              "@radix-ui/react-tabs",
-              "@radix-ui/react-tooltip",
-            ],
-            "vendor-utils": ["@tanstack/react-query", "@supabase/supabase-js", "framer-motion", "lucide-react"],
+          manualChunks: (id) => {
+            if (id.includes("node_modules")) {
+              if (id.includes("react") || id.includes("react-dom") || id.includes("react-router-dom")) {
+                return "vendor-react";
+              }
+              if (id.includes("@radix-ui")) {
+                return "vendor-ui";
+              }
+              if (id.includes("framer-motion") || id.includes("lucide-react")) {
+                return "vendor-animation";
+              }
+              if (id.includes("@tanstack/react-query") || id.includes("@supabase")) {
+                return "vendor-data";
+              }
+              return "vendor";
+            }
           },
           chunkFileNames: 'assets/js/[name]-[hash].js',
           entryFileNames: 'assets/js/[name]-[hash].js',
@@ -46,5 +49,6 @@ export default defineConfig(({ mode }) => ({
     cssCodeSplit: true,
     minify: "esbuild",
     sourcemap: false,
+    reportCompressedSize: false,
   },
 }));

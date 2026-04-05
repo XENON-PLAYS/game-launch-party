@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Meteor = ({ initialDelay }: { initialDelay: number }) => {
   // Configurações de movimento para cada meteoro individual
@@ -42,6 +43,10 @@ const Meteor = ({ initialDelay }: { initialDelay: number }) => {
 };
 
 export const MeteorBackground = () => {
+  const isMobile = useIsMobile();
+  
+  if (isMobile) return null;
+  
   // Renderiza múltiplos meteoros com diferentes atrasos iniciais
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">

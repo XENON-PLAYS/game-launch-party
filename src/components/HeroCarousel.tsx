@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
+import { optimizeImageUrl } from "@/lib/utils";
 
 export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFeatured?: any[], isLoadingInitial?: boolean }) {
   const [current, setCurrent] = useState(0);
@@ -90,11 +91,12 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
           {/* Background Image with optimized loading */}
           <div className="absolute inset-0">
             <img 
-              src={(game as any).hero_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
+              src={optimizeImageUrl((game as any).hero_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f", 1200)} 
               alt="" 
               className="w-full h-full object-cover brightness-[0.35] blur-[1px] opacity-80" 
               fetchPriority={current === 0 ? "high" : "auto"}
               loading={current === 0 ? "eager" : "lazy"}
+              decoding="async"
               onError={handleImageError}
             />
             {/* Elegant Gradient Overlays */}
@@ -179,13 +181,14 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
                   <div className="absolute -inset-4 bg-primary/20 rounded-[2.5rem] blur-2xl group-hover:bg-primary/30 transition-all duration-700" />
                   <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-3xl overflow-hidden border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] aspect-[3/4] relative">
                     <img 
-                      src={(game as any).vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800"} 
+                      src={optimizeImageUrl((game as any).vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f", 600)} 
                       alt={game.nome} 
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover/poster:scale-105" 
                       width={400}
                       height={533}
                       fetchPriority={current === 0 ? "high" : "auto"}
                       loading={current === 0 ? "eager" : "lazy"}
+                      decoding="async"
                       onError={handleImageError}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/poster:opacity-100 transition-opacity" />

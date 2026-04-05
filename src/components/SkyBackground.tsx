@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function SkyBackground() {
   const { theme } = useTheme();
+  const isMobile = useIsMobile();
   const isDark = theme === "dark";
   const { scrollYProgress } = useScroll();
   
@@ -28,26 +30,33 @@ export function SkyBackground() {
 
       {/* 2. Modern Mesh/Blob Gradients (Aurora Effect) */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          animate={{
-            opacity: isDark ? 0.4 : 0.2,
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, 30, 0]
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full blur-[120px] bg-primary/20"
-        />
-        <motion.div 
-          animate={{
-            opacity: isDark ? 0.3 : 0.15,
-            scale: [1, 1.1, 1],
-            x: [0, -40, 0],
-            y: [0, 20, 0]
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full blur-[100px] bg-indigo-500/10"
-        />
+        {!isMobile && (
+          <>
+            <motion.div 
+              animate={{
+                opacity: isDark ? 0.4 : 0.2,
+                scale: [1, 1.2, 1],
+                x: [0, 50, 0],
+                y: [0, 30, 0]
+              }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full blur-[120px] bg-primary/20"
+            />
+            <motion.div 
+              animate={{
+                opacity: isDark ? 0.3 : 0.15,
+                scale: [1, 1.1, 1],
+                x: [0, -40, 0],
+                y: [0, 20, 0]
+              }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full blur-[100px] bg-indigo-500/10"
+            />
+          </>
+        )}
+        {isMobile && (
+          <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full blur-[120px] bg-primary/10 opacity-30" />
+        )}
       </div>
 
       {/* 3. Subtle Grid Overlay */}
