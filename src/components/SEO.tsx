@@ -6,6 +6,8 @@ interface SEOProps {
   keywords?: string;
   image?: string;
   url?: string;
+  preloadImage?: string;
+  preloadPoster?: string;
 }
 
 export const SEO = ({ 
@@ -13,7 +15,9 @@ export const SEO = ({
   description = "A maior comunidade de compartilhamento de jogos. Descubra, jogue e compartilhe suas experiências.", 
   keywords = "jogos, games, download, grátis, download de jogos",
   image = "/logo.png",
-  url = "https://jogogratis.com"
+  url = "https://jogogratis.com",
+  preloadImage,
+  preloadPoster
 }: SEOProps) => {
   const fullTitle = title.includes("JOGOS GRÁTIS") ? title : `${title} | JOGOS GRÁTIS`;
 
@@ -22,6 +26,13 @@ export const SEO = ({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
+      
+      {preloadImage && (
+        <link rel="preload" as="image" href={preloadImage} fetchPriority="high" />
+      )}
+      {preloadPoster && (
+        <link rel="preload" as="image" href={preloadPoster} fetchPriority="high" />
+      )}
       
       {/* Structured Data */}
       <script type="application/ld+json">

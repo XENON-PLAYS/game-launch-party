@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function HeroCarousel() {
+export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFeatured?: any[], isLoadingInitial?: boolean }) {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
 
@@ -14,17 +14,16 @@ export function HeroCarousel() {
     queryKey: ["featured-games"],
     queryFn: async () => {
       const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
-      if (error) {
-        console.error("Error fetching featured games:", error);
-        throw error;
-      }
+      if (error) throw error;
       return data || [];
     },
-    staleTime: 1000 * 60 * 60, // 1 hour - critical for LCP
-    gcTime: 1000 * 60 * 60 * 24, // 24 hours
+    initialData: initialFeatured,
+    enabled: !initialFeatured, // Only run if not provided by parent
+    staleTime: 1000 * 60 * 60,
   });
 
-  const featured = featuredData || [];
+  const featured = featuredData || initialFeatured || [];
+  const isActuallyLoading = (isLoading || isLoadingInitial) && featured.length === 0;
 
   const next = useCallback(() => {
     if (featured.length === 0) return;
@@ -53,7 +52,7 @@ export function HeroCarousel() {
     e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
   };
 
-  if (isLoading || isError || featured.length === 0) {
+  if (isActuallyLoading || isError || featured.length === 0) {
     return (
       <section className="bg-background relative h-[850px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden">
         {/* Skeleton should resemble the layout to reduce shift */}
@@ -78,14 +77,14 @@ export function HeroCarousel() {
 
   return (
     <section className="relative h-[850px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
-      <AnimatePresence initial={false} custom={direction}>
+      <AnimatePresence mode="wait" initial={true} custom={direction}>
         <motion.div
           key={current}
           custom={direction}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="absolute inset-0"
         >
           {/* Background Image with optimized loading */}

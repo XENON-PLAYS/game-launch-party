@@ -42,7 +42,7 @@ const Index = () => {
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
 
-  const { data: gamesData, isLoading, isError, refetch } = useQuery({
+  const { data: gamesData, isLoading: gamesLoading, isError: gamesError, refetch } = useQuery({
     queryKey: ["games"],
     queryFn: async () => {
       const { data, error } = await supabase.from("games").select("*").order("nome");
@@ -52,9 +52,21 @@ const Index = () => {
       }
       return data || [];
     },
+    staleTime: 1000 * 60 * 5, // 5 min
+  });
+
+  const { data: featuredData, isLoading: featuredLoading } = useQuery({
+    queryKey: ["featured-games"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
+      if (error) throw error;
+      return data || [];
+    },
+    staleTime: 1000 * 60 * 60, // 1 hour
   });
 
   const games = useMemo(() => gamesData || [], [gamesData]);
+  const featured = useMemo(() => featuredData || [], [featuredData]);
 
   const allCategories = useMemo(() => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
@@ -63,6 +75,9 @@ const Index = () => {
   const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 10), [games]);
   const recomendados = useMemo(() => games.filter((g) => (g as any).rating_avg >= 4 || (g.destaques && (g.destaques as string[]).length > 0)).slice(0, 10), [games]);
   const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 10), [games]);
+
+  const isLoading = gamesLoading || featuredLoading;
+  const isError = gamesError;
 
   const isSearching = busca || categoria !== "todas";
 
@@ -119,12 +134,15 @@ const Index = () => {
     return result;
   }, [busca, categoria, ordenacao, games]);
 
+  const firstHeroImage = featured[0] ? ((featured[0] as any).hero_image || featured[0].imagem) : undefined;
+  const firstHeroPoster = featured[0] ? ((featured[0] as any).vertical_image || featured[0].imagem) : undefined;
+
   return (
     <div className="min-h-screen bg-background/20 text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
-      <SEO />
+      <SEO preloadImage={firstHeroImage} preloadPoster={firstHeroPoster} />
       <Header />
       
-      {!isSearching && <HeroCarousel />}
+      {!isSearching && <HeroCarousel initialFeatured={featured} isLoadingInitial={featuredLoading} />}
 
       <section className="bg-background/50 backdrop-blur-3xl sticky top-[60px] sm:top-20 z-30 border-b border-border/40 py-4 sm:py-6">
         <div className="container-responsive">
