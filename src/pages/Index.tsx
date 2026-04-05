@@ -136,24 +136,77 @@ const Index = () => {
       
       {!isSearching && <HeroCarousel initialFeatured={featured} isLoadingInitial={featuredLoading} />}
 
-      <section className="bg-background/50 backdrop-blur-3xl sticky top-[80px] sm:top-[96px] z-30 border-b border-border/40 py-4 sm:py-6">
-        <div className="container-responsive space-y-4">
-          <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-center justify-end">
+      <section className="bg-[#0f0f0f]/80 backdrop-blur-2xl sticky top-[60px] md:top-[72px] z-[90] border-b border-white/5 py-4 md:py-6 transition-all duration-300">
+        <div className="container mx-auto px-4 md:px-12">
+          <div className="flex flex-col md:flex-row gap-4 items-center max-w-7xl mx-auto">
+            {/* Unified Search Input */}
+            <div className="flex-1 w-full relative group">
+              <div className="absolute inset-0 bg-primary/5 rounded-2xl blur-lg opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
+              <div className="relative flex items-center">
+                <Search className="absolute left-5 w-5 h-5 text-gray-500 group-focus-within:text-primary transition-colors duration-300" />
+                <input 
+                  type="text" 
+                  placeholder="Pesquisar jogos, categorias ou desenvolvedoras..." 
+                  value={busca}
+                  onChange={(e) => setBusca(e.target.value)}
+                  className="w-full pl-14 pr-12 py-4 bg-white/5 border border-white/5 rounded-2xl text-sm md:text-base focus:outline-none focus:bg-white/[0.07] focus:border-primary/30 transition-all placeholder:text-gray-600 font-medium" 
+                />
+                <AnimatePresence>
+                  {busca && (
+                    <motion.button
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      onClick={() => setBusca("")}
+                      className="absolute right-4 p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all"
+                    >
+                      <X className="w-4 h-4" />
+                    </motion.button>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Filter Toggle Button */}
             <button 
               onClick={() => setShowFilters(!showFilters)}
-              className={`w-full md:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl border transition-all flex items-center justify-center gap-3 font-bold text-xs sm:text-sm tracking-[0.1em] uppercase group ${
-                showFilters ? "bg-primary text-primary-foreground border-primary shadow-2xl shadow-primary/20" : "bg-card border-border/50 hover:border-primary/30"
+              className={`w-full md:w-auto px-6 py-4 rounded-2xl border transition-all flex items-center justify-center gap-3 font-black text-xs tracking-widest uppercase group ${
+                showFilters 
+                ? "bg-primary text-white border-primary shadow-lg shadow-primary/20" 
+                : "bg-white/5 border-white/5 hover:bg-white/10 text-gray-400 hover:text-white"
               }`}
             >
-              <SlidersHorizontal className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 ${showFilters ? "rotate-180" : ""}`} />
-              <span>Filtros Refinados</span>
+              <SlidersHorizontal className={`w-4 h-4 transition-transform duration-500 ${showFilters ? "rotate-180" : ""}`} />
+              <span>Filtros</span>
               {(categoria !== "todas" || ordenacao !== "nome") && (
-                <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-black animate-in zoom-in duration-300 ${showFilters ? "bg-white text-primary" : "bg-primary text-white"}`}>
+                <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-black ${showFilters ? "bg-white text-primary" : "bg-primary text-white"}`}>
                   {(categoria !== "todas" ? 1 : 0) + (ordenacao !== "nome" ? 1 : 0)}
                 </span>
               )}
             </button>
           </div>
+          
+          <AnimatePresence>
+            {!busca && !showFilters && (
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="mt-3 flex flex-wrap items-center gap-3 px-2"
+              >
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-600">Buscas Populares:</span>
+                {["GTA V", "Minecraft", "Red Dead", "Elden Ring", "Marvel"].map((sug) => (
+                  <button 
+                    key={sug}
+                    onClick={() => setBusca(sug)}
+                    className="text-[9px] font-black uppercase tracking-[0.1em] text-gray-500 hover:text-primary transition-all bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 px-2 py-1 rounded-md"
+                  >
+                    {sug}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <AnimatePresence>
             {showFilters && (
@@ -253,22 +306,6 @@ const Index = () => {
       </section>
 
       <main className="container-responsive py-12 md:py-24 space-y-20 md:space-y-40">
-        <form 
-          onSubmit={(e) => {
-            e.preventDefault();
-            setBusca(busca);
-          }}
-          className="w-full relative group"
-        >
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/40 group-focus-within:text-primary transition-colors duration-300" />
-          <input 
-            type="text" 
-            placeholder="Explore o catálogo..." 
-            value={busca}
-            onChange={(e) => setBusca(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 sm:py-4 bg-card border border-border/50 rounded-xl sm:rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all placeholder:text-muted-foreground/30 font-medium" 
-          />
-        </form>
 
         {isLoading ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
@@ -302,20 +339,38 @@ const Index = () => {
             animate={{ opacity: 1 }}
             className="space-y-10 md:space-y-16"
           >
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-10 border-b-2 border-primary/20 pb-10 md:pb-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-10 pb-10 border-b border-white/5">
               <div className="space-y-4">
-                <h2 className="text-responsive-h2"><span className="text-primary">Catálogo</span> <span className="text-foreground">Filtrado</span></h2>
+                <div className="flex items-center gap-3">
+                  <div className="w-1.5 h-8 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                  <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase italic">
+                    <span className="text-white">Catálogo</span>{" "}
+                    <span className="text-primary">Filtrado</span>
+                  </h2>
+                </div>
                 <div className="flex items-center gap-4">
-                  <span className="w-16 md:w-24 h-1.5 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                  <p className="text-sm md:text-responsive-body font-medium">
-                    {filteredGames.length} jogo{filteredGames.length !== 1 ? "s" : ""} encontrado{filteredGames.length !== 1 ? "s" : ""}
+                  <p className="text-sm md:text-base font-bold text-gray-500 uppercase tracking-widest">
+                    {filteredGames.length} RESULTADO{filteredGames.length !== 1 ? "S" : ""} ENCONTRADO{filteredGames.length !== 1 ? "S" : ""}
                   </p>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-2 md:gap-3">
-                <span className="text-[10px] md:text-xs font-bold text-muted-foreground opacity-60 self-center uppercase tracking-widest">Filtros:</span>
-                {categoria !== "todas" && <span className="text-primary bg-primary/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[9px] md:text-[10px] font-black border border-primary/20 uppercase tracking-widest">{categoria}</span>}
-                {busca && <span className="text-primary bg-primary/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[9px] md:text-[10px] font-black border border-primary/20 uppercase tracking-widest">"{busca}"</span>}
+              <div className="flex flex-wrap gap-2">
+                {categoria !== "todas" && (
+                  <div className="flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-2 rounded-xl">
+                    <span className="text-[10px] font-black uppercase text-primary tracking-widest">{categoria}</span>
+                    <button onClick={() => setCategoria("todas")} className="text-primary hover:text-white transition-colors">
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
+                {busca && (
+                  <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-xl">
+                    <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest">"{busca}"</span>
+                    <button onClick={() => setBusca("")} className="text-gray-400 hover:text-white transition-colors">
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
