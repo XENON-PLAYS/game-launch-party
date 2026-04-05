@@ -192,7 +192,6 @@ export function Header() {
       <GameRequestModal 
         isOpen={isRequestModalOpen} 
         onClose={() => setIsRequestModalOpen(false)} 
-        user={user}
       />
     </header>
   );
