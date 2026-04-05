@@ -55,15 +55,19 @@ export function HeroCarousel() {
 
   if (isLoading || isError || featured.length === 0) {
     return (
-      <section className="bg-background">
-        <div className="container-responsive py-12 md:py-24">
-          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-[600px]">
+      <section className="bg-background relative h-[850px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden">
+        {/* Skeleton should resemble the layout to reduce shift */}
+        <div className="container-responsive h-full flex flex-col justify-center py-12 md:py-24">
+          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center">
             <div className="space-y-6">
-              <Skeleton className="h-6 w-32" />
-              <Skeleton className="h-20 w-3/4" />
-              <Skeleton className="h-32 w-full" />
+              <Skeleton className="h-6 w-32 bg-primary/10" />
+              <Skeleton className="h-20 w-3/4 bg-primary/5" />
+              <Skeleton className="h-32 w-full bg-white/5" />
+              <div className="flex gap-4">
+                <Skeleton className="h-16 w-48 rounded-full bg-primary/20" />
+              </div>
             </div>
-            <Skeleton className="mx-auto md:mr-0 rounded-2xl aspect-[3/4] w-full max-w-[240px] md:max-w-[380px]" />
+            <Skeleton className="mx-auto md:mr-0 rounded-3xl aspect-[3/4] w-full max-w-[240px] md:max-w-[380px] bg-white/5 shadow-2xl" />
           </div>
         </div>
       </section>
