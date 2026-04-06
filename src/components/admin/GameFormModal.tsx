@@ -468,7 +468,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-2 gap-6">
                         <div className="space-y-4">
                           <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Imagem Vertical (600x900)</Label>
                           <div className="aspect-[2/3] rounded-2xl border-2 border-dashed border-border/40 bg-muted/20 relative overflow-hidden group">
@@ -480,7 +480,10 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                               </div>
                             )}
                           </div>
-                          <Input type="text" placeholder="URL" value={formData.vertical_image || ""} onChange={(e) => handleFieldChange("vertical_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                          <div className="space-y-1">
+                            <Label className="text-[9px] font-black uppercase tracking-widest opacity-50">URL</Label>
+                            <Input type="text" placeholder="https://..." value={formData.vertical_image || ""} onChange={(e) => handleFieldChange("vertical_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                          </div>
                         </div>
                         <div className="space-y-4">
                           <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Imagem Cápsula (460x215)</Label>
@@ -493,7 +496,10 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                               </div>
                             )}
                           </div>
-                          <Input type="text" placeholder="URL" value={formData.capsule_image || ""} onChange={(e) => handleFieldChange("capsule_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                          <div className="space-y-1">
+                            <Label className="text-[9px] font-black uppercase tracking-widest opacity-50">URL</Label>
+                            <Input type="text" placeholder="https://..." value={formData.capsule_image || ""} onChange={(e) => handleFieldChange("capsule_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                          </div>
                         </div>
                       </div>
                     </div>
