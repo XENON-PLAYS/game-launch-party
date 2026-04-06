@@ -20,7 +20,7 @@ const GameRequest = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || (!profile?.is_vip && !profile?.is_admin)) return;
+    if (!user || (!profile?.is_vip && !isAdmin)) return;
 
     setIsSubmitting(true);
     try {
@@ -63,7 +63,7 @@ const GameRequest = () => {
     );
   }
 
-  const isVip = profile?.is_vip || profile?.is_admin;
+  const isVip = profile?.is_vip || isAdmin;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
