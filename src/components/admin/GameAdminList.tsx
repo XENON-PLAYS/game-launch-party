@@ -13,7 +13,8 @@ import {
   Filter,
   CheckCircle2,
   XCircle,
-  AlertCircle
+  AlertCircle,
+  Copy
 } from "lucide-react";
 import { 
   Table, 
