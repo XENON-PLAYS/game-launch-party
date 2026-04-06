@@ -22,7 +22,7 @@ export const SEO = ({
 }: SEOProps) => {
   const { pathname } = useLocation();
   const currentUrl = `${url}${pathname === "/" ? "" : pathname}`;
-  const fullTitle = title.toLowerCase().includes("jogos piratas") ? title : `${title} | Jogos Piratas`;
+  const fullTitle = title.toLowerCase().includes("jogos grátis") ? title : `${title} | Jogos Grátis`;
 
   return (
     <Helmet>
