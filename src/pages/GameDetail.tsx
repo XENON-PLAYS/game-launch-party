@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
+import { GoogleAd } from "@/components/GoogleAd";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
