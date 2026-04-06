@@ -721,6 +721,14 @@ const Perfil = () => {
                     {user?.created_at ? new Date(user.created_at).toLocaleDateString("pt-BR") : "N/A"}
                   </p>
                 </div>
+                {targetProfile?.is_vip && targetProfile?.vip_expires_at && (
+                  <div className="space-y-1">
+                    <p className="text-[9px] text-yellow-500 font-black uppercase tracking-widest ">VIP Expira em</p>
+                    <p className="text-xs font-bold text-foreground/90">
+                      {new Date(targetProfile.vip_expires_at).toLocaleDateString("pt-BR")}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           )}
