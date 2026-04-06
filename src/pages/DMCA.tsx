@@ -16,9 +16,9 @@ const DMCA = () => {
         >
           <div className="text-center space-y-4">
             <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase italic">
-              DMCA <span className="text-[#ff0000]">& TERMOS</span>
+              DMCA <span className="text-primary">& TERMOS</span>
             </h1>
-            <div className="w-24 h-1 bg-[#ff0000] mx-auto rounded-full shadow-[0_0_15px_#ff0000]" />
+            <div className="w-24 h-1 bg-primary mx-auto rounded-full shadow-[0_0_15px_#ff0000]" />
           </div>
 
           <div className="space-y-8 text-muted-foreground leading-relaxed text-sm md:text-base">
@@ -80,7 +80,7 @@ const DMCA = () => {
             <section className="space-y-4">
               <h2 className="text-xl font-bold text-foreground uppercase tracking-wider">Alterações nos Termos</h2>
               <p>
-                Reservamos o direito de modificar estes Termos de Serviço a qualquer momento, sem aviso prévio. Ao continuar utilizando o site após eventuais alterações, você concorda com os novos termos.
+                Reservamos o direito de modificar estes Termos de Serviço a qualquer momento, sem aviso prévio. Ao continuar utilizando the site após eventuais alterações, você concorda com os novos termos.
               </p>
             </section>
 
