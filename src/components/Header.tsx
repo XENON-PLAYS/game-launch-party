@@ -9,6 +9,8 @@ import {
   Crown,
   Sun,
   Moon,
+  Menu,
+  X,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -25,6 +27,7 @@ export function Header() {
   const { user, profile, logout, isAdmin } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -106,7 +109,14 @@ export function Header() {
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-3 sm:gap-6 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-6 shrink-0">
+            {/* Mobile Menu Toggle */}
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-gray-400 hover:text-white transition-all hover:bg-white/5 rounded-xl"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
             <div className="hidden sm:block">
               <OnlineUsers />
             </div>
@@ -194,6 +204,24 @@ export function Header() {
             </div>
           </div>
         </div>
+
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden bg-[#0f0f0f] border-b border-white/5 overflow-hidden"
+            >
+              <div className="container mx-auto px-4 py-6 flex flex-col gap-6">
+                {navLinks}
+                <div className="pt-4 border-t border-white/5 flex flex-col gap-4">
+                  <OnlineUsers />
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <GameRequestModal 
           isOpen={isRequestModalOpen} 

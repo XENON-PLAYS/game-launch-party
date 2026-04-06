@@ -79,6 +79,9 @@ const Index = () => {
     if (categoria !== "todas") result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
     
     result = [...result].sort((a, b) => {
+      const sizeA = a.tamanho || "0 GB";
+      const sizeB = b.tamanho || "0 GB";
+      
       if (ordenacao === "pesado") {
         const parseSize = (s: string | null, defaultValue: number) => {
           if (!s) return defaultValue;
@@ -97,7 +100,7 @@ const Index = () => {
           
           return value * (multipliers[unit] || 1);
         };
-        return parseSize(b.tamanho, 0) - parseSize(a.tamanho, 0);
+        return parseSize(sizeB, 0) - parseSize(sizeA, 0);
       }
       if (ordenacao === "leve") {
         const parseSize = (s: string | null, defaultValue: number) => {
@@ -117,17 +120,17 @@ const Index = () => {
           
           return value * (multipliers[unit] || 1);
         };
-        return parseSize(a.tamanho, Infinity) - parseSize(b.tamanho, Infinity);
+        return parseSize(sizeA, Infinity) - parseSize(sizeB, Infinity);
       }
       if (ordenacao === "popular" || ordenacao === "alta") return (b.download_count || 0) - (a.download_count || 0);
       if (ordenacao === "lancamento") return (b.lancamento || "").localeCompare(a.lancamento || "");
-      return a.nome.localeCompare(b.nome);
+      return (a.nome || "").localeCompare(b.nome || "");
     });
     return result;
   }, [busca, categoria, ordenacao, games]);
 
-  const firstHeroImage = featured[0] ? ((featured[0] as any).hero_image || featured[0].imagem) : undefined;
-  const firstHeroPoster = featured[0] ? ((featured[0] as any).vertical_image || featured[0].imagem) : undefined;
+  const firstHeroImage = featured && featured.length > 0 ? ((featured[0] as any).hero_image || featured[0].imagem) : undefined;
+  const firstHeroPoster = featured && featured.length > 0 ? ((featured[0] as any).vertical_image || featured[0].imagem) : undefined;
 
   return (
     <div className="min-h-screen bg-background/20 text-foreground antialiased selection:bg-primary selection:text-primary-foreground">

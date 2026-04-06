@@ -60,27 +60,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     let isMounted = true;
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (!isMounted) return;
-      
-      const u = session?.user ?? null;
-      
-      setUser(u);
-      
-      if (u) {
-        // For events that imply a valid session, ensure they are online immediately
-        if (event === "SIGNED_IN" || event === "INITIAL_SESSION" || event === "USER_UPDATED") {
-          try {
-            await supabase.rpc("update_online_status");
-          } catch (error) {
-            console.error("Error updating online status:", error);
+      try {
+        if (!isMounted) return;
+        
+        const u = session?.user ?? null;
+        setUser(u);
+        
+        if (u) {
+          if (event === "SIGNED_IN" || event === "INITIAL_SESSION" || event === "USER_UPDATED") {
+            try {
+              await supabase.rpc("update_online_status");
+            } catch (error) {
+              console.error("Error updating online status:", error);
+            }
           }
+          await fetchProfile(u.id);
+        } else {
+          setProfile(null);
+          setIsAdmin(false);
         }
-        await fetchProfile(u.id);
-      } else {
-        setProfile(null);
-        setIsAdmin(false);
+      } catch (error) {
+        console.error("Auth state change error:", error);
+      } finally {
+        if (isMounted) setIsLoading(false);
       }
-      setIsLoading(false);
     });
 
     return () => {
