@@ -179,7 +179,7 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
               >
                 <div className="relative group/poster w-full max-w-[180px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[400px]">
                   <div className="absolute -inset-4 bg-primary/20 rounded-[2.5rem] blur-2xl group-hover:bg-primary/30 transition-all duration-700" />
-                  <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-3xl overflow-hidden border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] aspect-[3/4] relative">
+                  <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-3xl overflow-hidden border border-border/50 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] aspect-[3/4] relative">
                     <img 
                       src={optimizeImageUrl((game as any).vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f", 600)} 
                       alt={game.nome} 
