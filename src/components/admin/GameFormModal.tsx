@@ -437,9 +437,9 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
 
                       <div className="space-y-4">
                         <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Hero Image (Banner 21:9)</Label>
-                        <div className="aspect-[21/9] rounded-2xl border-2 border-dashed border-border/40 bg-muted/20 relative overflow-hidden">
+                        <div className="aspect-[21/9] rounded-2xl border-2 border-dashed border-border/40 bg-muted/20 relative overflow-hidden group">
                           {formData.hero_image ? (
-                            <img src={formData.hero_image} className="w-full h-full object-cover" alt="" />
+                            <img src={formData.hero_image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="" />
                           ) : (
                             <div className="flex flex-col items-center justify-center h-full">
                               <ImageIcon className="h-10 w-10 text-muted-foreground/30 mb-2" />
@@ -447,7 +447,36 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                             </div>
                           )}
                         </div>
-                        <Input type="text" placeholder="URL ou deixe em branco" value={formData.hero_image || ""} onChange={(e) => handleFieldChange("hero_image", e.target.value)} className="rounded-xl h-10 text-xs" />
+                        <Input type="text" placeholder="URL da Hero Image" value={formData.hero_image || ""} onChange={(e) => handleFieldChange("hero_image", e.target.value)} className="rounded-xl h-10 text-xs bg-background/50 border-border/40" />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-4">
+                          <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Imagem Vertical (600x900)</Label>
+                          <div className="aspect-[2/3] rounded-2xl border-2 border-dashed border-border/40 bg-muted/20 relative overflow-hidden group">
+                            {formData.vertical_image ? (
+                              <img src={formData.vertical_image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="" />
+                            ) : (
+                              <div className="flex flex-col items-center justify-center h-full">
+                                <ImageIcon className="h-6 w-6 text-muted-foreground/30 mb-2" />
+                              </div>
+                            )}
+                          </div>
+                          <Input type="text" placeholder="URL" value={formData.vertical_image || ""} onChange={(e) => handleFieldChange("vertical_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                        </div>
+                        <div className="space-y-4">
+                          <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Imagem Cápsula (460x215)</Label>
+                          <div className="aspect-[460/215] rounded-2xl border-2 border-dashed border-border/40 bg-muted/20 relative overflow-hidden group">
+                            {formData.capsule_image ? (
+                              <img src={formData.capsule_image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="" />
+                            ) : (
+                              <div className="flex flex-col items-center justify-center h-full">
+                                <ImageIcon className="h-6 w-6 text-muted-foreground/30 mb-2" />
+                              </div>
+                            )}
+                          </div>
+                          <Input type="text" placeholder="URL" value={formData.capsule_image || ""} onChange={(e) => handleFieldChange("capsule_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                        </div>
                       </div>
                     </div>
                   </div>
