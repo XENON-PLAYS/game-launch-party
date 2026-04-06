@@ -38,24 +38,46 @@ const Index = () => {
   const { data: gamesData, isLoading: gamesLoading, isError: gamesError, refetch } = useQuery({
     queryKey: ["games"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("games").select("*").order("nome");
-      if (error) {
-        console.error("Error fetching games:", error);
-        throw error;
+      // Fallback to local data if Supabase is empty or has issues
+      try {
+        const { data, error } = await supabase.from("games").select("*").order("nome");
+        if (error || !data || data.length === 0) {
+          const { games: localGames } = await import("@/data/games");
+          return localGames.map(g => ({
+            ...g,
+            imagem: g.imagem,
+            hero_image: g.heroImage,
+            vertical_image: g.verticalImage,
+            capsule_image: g.capsuleImage,
+            download_count: 0,
+            lancamento: g.lancamento || "",
+          }));
+        }
+        return data;
+      } catch (err) {
+        const { games: localGames } = await import("@/data/games");
+        return localGames;
       }
-      return data || [];
     },
-    staleTime: 1000 * 60 * 5, // 5 min
+    staleTime: 1000 * 60 * 5,
   });
 
   const { data: featuredData, isLoading: featuredLoading } = useQuery({
     queryKey: ["featured-games"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
-      if (error) throw error;
-      return data || [];
+      try {
+        const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
+        if (error || !data || data.length === 0) {
+          const { games: localGames } = await import("@/data/games");
+          return localGames.slice(0, 5);
+        }
+        return data;
+      } catch (err) {
+        const { games: localGames } = await import("@/data/games");
+        localGames.slice(0, 5);
+      }
     },
-    staleTime: 1000 * 60 * 60, // 1 hour
+    staleTime: 1000 * 60 * 60,
   });
 
   const games = useMemo(() => gamesData || [], [gamesData]);
