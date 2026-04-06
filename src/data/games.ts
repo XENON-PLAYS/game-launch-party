@@ -36,10 +36,10 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/capsule_616x353.jpg",
-    categorias: ["Ação","Aventura"], "Aventura", "Mundo Aberto"],
+    categorias: ["Ação","Aventura"],
     modos: ["Singleplayer", "Multiplayer"],
     idiomas: ["Português", "Inglês"],
-    descricao: "Arthur Morgan e a gangue Van der Linde são forçados a fugir. Com agentes federais e caçadores de recompensas no seu encalço, a gangue precisa roubar, assaltar e lutar para sobreviver no impiedoso coração dos Estados Unidos.", 1899. O fim da era do velho oeste começou.",,
+    descricao: "Arthur Morgan e a gangue Van der Linde são forçados a fugir. Com agentes federais e caçadores de recompensas no seu encalço, a gangue precisa roubar, assaltar e lutar para sobreviver no impiedoso coração dos Estados Unidos.", 1899. O fim da era do velho oeste começou.",
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 - 64-bit<br></li><li><strong>Processador:</strong> Intel® Core™ i5-2500K / AMD FX-6300<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GeForce GTX 770 2GB / AMD Radeon R9 280 3GB<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 150 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Direct X Compatible</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 - 64-bit<br></li><li><strong>Processador:</strong> Intel® Core™ i7-4770K / AMD Ryzen 5 1500X<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GeForce GTX 1060 6GB / AMD Radeon RX 480 4GB<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 150 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Direct X Compatible</li></ul>"
@@ -56,10 +56,10 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/capsule_616x353.jpg",
-    categorias: ["Ação","RPG"], "Ação", "Mundo Aberto"],
+    categorias: ["Ação","RPG"],
     modos: ["Singleplayer", "Multiplayer"],
     idiomas: ["Português", "Inglês"],
-    descricao: "O NOVO RPG DE AÇÃO E FANTASIA. Levante-se, Maculado, e seja guiado pela graça para portar o poder do Anel Prístino e se tornar um Lorde Prístino nas Terras Intermédias.", Maculado, e seja guiado pela graça.",,
+    descricao: "O NOVO RPG DE AÇÃO E FANTASIA. Levante-se, Maculado, e seja guiado pela graça para portar o poder do Anel Prístino e se tornar um Lorde Prístino nas Terras Intermédias.", Maculado, e seja guiado pela graça.",
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10<br></li><li><strong>Processador:</strong> INTEL CORE I5-8400 or AMD RYZEN 3 3300X<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GEFORCE GTX 1060 3 GB or AMD RADEON RX 580 4 GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 60 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Windows Compatible Audio Device<br></li><li><strong>Outras observações:</strong> </li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10/11<br></li><li><strong>Processador:</strong> INTEL CORE I7-8700K or AMD RYZEN 5 3600X<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GEFORCE GTX 1070 8 GB or AMD RADEON RX VEGA 56 8 GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 60 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Windows Compatible Audio Device<br></li><li><strong>Outras observações:</strong> </li></ul>"
@@ -76,7 +76,7 @@ export const games: Game[] = [
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/570940/header.jpg",
     categorias: ["Ação"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Windows 7 64-bit, Service Pack 1<br></li><li><strong>Processador:</strong> Intel Core i5-2300 2.8 GHz / AMD FX-6300, 3.5 GHz<br></li><li><strong>Memória:</strong> 6 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> GeForce GTX 460, 1 GB / Radeon HD 6870, 1 GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 8 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device<br></li><li><strong>Outras observações:</strong> Low Settings, 60 FPS @ 1080p</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel Core i5-4570 3.2 GHz / AMD FX-8350 4.2 GHz<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> GeForce GTX 660, 2 GB / Radeon HD 7870, 2 GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 8 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device<br></li><li><strong>Outras observações:</strong> High Settings, 60 FPS @ 1080p</li></ul>"
@@ -94,9 +94,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/capsule_616x353.jpg",
-    categorias: ["Ação","RPG"], "Ação"],
+    categorias: ["Ação","RPG"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 SP1 64bit, Windows 8.1 64bit<br></li><li><strong>Processador:</strong> AMD® A8 3870 3,6 Ghz or Intel® Core ™ i3 2100 3.1Ghz<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce  GTX 465 / ATI Radeon TM HD 6870<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 23 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 SP1 64bit, Windows 8.1 64bit<br></li><li><strong>Processador:</strong> AMD® FX 8150 3.6 GHz or Intel® Core™ i7 2600 3.4 GHz<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 750, ATI Radeon™ HD 7850<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 23 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device</li></ul>"
@@ -116,7 +116,7 @@ export const games: Game[] = [
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/883710/capsule_616x353.jpg",
     categorias: ["Ação"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i5-4460 or AMD FX™-6300 or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 960 or AMD Radeon™ RX 460<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 26 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> This game is expected to run at 1080p/30 FPS. If you have don't have enough graphics memory to run the game at your selected texture quality, you must go to Options &gt; Graphics and lower the texture quality or shadow quality, or decrease the resolution. An internet connection is required for product activation. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i7-3770 or AMD FX™-9590 or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 1060 or AMD Radeon™ RX 480  with 3GB VRAM<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 26 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> This game is expected to run at 1080p/60 FPS. An internet connection is required for product activation. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>"
@@ -133,7 +133,7 @@ export const games: Game[] = [
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/952060/header.jpg",
     categorias: ["Ação"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i5-4460 or AMD FX™-6300 or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 960 or AMD Radeon™ RX 460<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 45 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Anticipated performance at these specifications is 1080p/30FPS for Resident Evil 3 and 720p/30FPS for Resident Evil Resistance. If you don't have enough graphics memory to run the game at your selected texture quality, you must go to Options &gt; Graphics and lower the texture quality or shadow quality, or decrease the resolution. An internet connection is required for product activation. In addition, an internet connection is required at all times when playing Resident Evil Resistance. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i7-3770 or AMD FX™-9590 or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 1060 or AMD Radeon™ RX 480 with 3GB VRAM<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 45 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Anticipated performance at these specifications is 1080p/60FPS. An internet connection is required for product activation. In addition, an internet connection is required at all times when playing Resident Evil Resistance. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>"
@@ -150,7 +150,7 @@ export const games: Game[] = [
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1196590/header.jpg",
     categorias: ["Ação"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64 bit)<br></li><li><strong>Processador:</strong> AMD Ryzen 3 1200  ／ Intel Core i5-7500<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 560 with 4GB VRAM ／ NVIDIA GeForce GTX 1050 Ti with 4GB VRAM<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Outras observações:</strong> Estimated performance (when set to Prioritize Performance): 1080p/60fps. ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2060 required to support ray tracing.</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64 bit)<br></li><li><strong>Processador:</strong> AMD Ryzen 5 3600 ／ Intel Core i7 8700<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 5700 ／ NVIDIA GeForce GTX 1070<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Outras observações:</strong> Estimated performance: 1080p/60fps ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2070 required to support ray tracing.</li></ul>"
@@ -170,7 +170,7 @@ export const games: Game[] = [
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/capsule_616x353.jpg",
     categorias: ["RPG"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Core i7-6700 or Ryzen 5 1600<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> GeForce GTX 1060 6GB or Radeon RX 580 8GB or Arc A380<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 70 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD required. Attention: In this game you will encounter a variety of visual effects that may provide seizures or loss of consciousness in a minority of people. If you or someone you know experiences any of the above symptoms while playing, stop and seek medical attention immediately.</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Core i7-12700 or Ryzen 7 7800X3D<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> GeForce RTX 2060 SUPER or Radeon RX 5700 XT or Arc A770<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 70 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD required.</li></ul>"
@@ -188,9 +188,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/capsule_616x353.jpg",
-    categorias: ["Ação","Aventura"], "Mundo Aberto"],
+    categorias: ["Ação","Aventura"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64 Bit<br></li><li><strong>Processador:</strong> Intel Core 2 Quad CPU Q6600 @ 2.40 GHz (4 CPUs) / AMD Phenom 9850 Quad-Core (4 CPUs) @ 2.5 GHz<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA 9800 GT 1 GB / AMD HD 4870 1 GB (DX 10, 10.1, 11)<br></li><li><strong>Armazenamento:</strong> 125 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> 100% compatível com DirectX 10<br></li><li><strong>Outras observações:</strong> Com o decorrer do tempo, conteúdos para download e modificações na programação poderão alterar os requisitos de sistema deste jogo. Entre em contato com o fabricante do seu equipamento e visite  para informações de compatibilidade atualizadas. Alguns componentes do sistema, como chipsets móveis, integrados e placas AGP podem ser incompatíveis. Especificações não listadas também podem não ser compatíveis.     Outros requisitos: A instalação e jogo online requerem uma conta na rede Social Club da Rockstar Games (para maiores de 13 anos); uma conexão com a internet é necessária para a ativação, jogo online e verificações de autenticidade periódicas; instalação de softwares necessários, incluindo a plataforma Social Club da Rockstar Games, DirectX , Chromium, Microsoft Visual C++ 2008 sp1 Redistributable Package, e o software de autenticação para o reconhecimento de certos atributos de hardware para verificação, gerenciamento de direitos digitais, sistema e assistência ao cliente.  É NECESSÁRIO O USO DE UM CÓDIGO DE REGISTRO DE USO ÚNICO VIA INTERNET; O REGISTRO É LIMITADO A UMA CONTA DO SOCIAL CLUB DA ROCKSTAR GAMES (MAIORES DE 13 ANOS) POR CÓDIGO DE SÉRIE; SOMENTE UMA CONTA DE PC PODE SER USADA POR CADA CONTA DO SOCIAL CLUB AO MESMO TEMPO; O(S) CÓDIGO(S) DE SÉRIE NÃO É(SÃO) TRANSFERÍVEL(IS) APÓS O USO; AS CONTAS DO SOCIAL CLUB NÃO SÃO TRANSFERÍVEIS.  Requisitos de Parceiros: Verifique os termos de serviço deste site antes da compra.</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64 Bit<br></li><li><strong>Processador:</strong> Intel Core i5 3470 @ 3.2 GHZ (4 CPUs) / AMD X8 FX-8350 @ 4 GHZ (8 CPUs)<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 660 2 GB / AMD HD7870 2 GB<br></li><li><strong>Armazenamento:</strong> 125 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> 100% compatível com DirectX 10</li></ul>"
@@ -210,7 +210,7 @@ export const games: Game[] = [
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/capsule_616x353.jpg",
     categorias: ["RPG"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> 64-bit Windows 7, 64-bit Windows 8 (8.1)<br></li><li><strong>Processador:</strong> Intel CPU Core i5-2500K 3.3GHz / AMD A10-5800K APU (3.8GHz)<br></li><li><strong>Memória:</strong> 6 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GPU GeForce GTX 660 / AMD GPU Radeon HD 7870<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> 64-bit Windows 10/11<br></li><li><strong>Processador:</strong> Intel Core i5-7400 / Ryzen 5 1600<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GTX 1070 / Radeon RX 480<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>"
@@ -227,7 +227,7 @@ export const games: Game[] = [
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/381210/header.jpg",
     categorias: ["Ação"],
     modos: ["Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit Operating System<br></li><li><strong>Processador:</strong> Intel Core i3-4170 or AMD FX-8120<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> DX11 Compatible GeForce GTX 460 1GB or AMD HD 6850 1GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DX11 compatible<br></li><li><strong>Outras observações:</strong> With these requirements, it is recommended that the game is played on Low quality settings.</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit Operating System<br></li><li><strong>Processador:</strong> Intel Core i3-4170 or AMD FX-8300 or higher<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> DX11 Compatible GeForce 760 or AMD HD 8800 or higher with 4GB of RAM<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DX11 compatible</li></ul>"
@@ -245,9 +245,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/4000/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/4000/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/4000/capsule_616x353.jpg",
-    categorias: ["Casual","Indie","Simulação"], "Indie"],
+    categorias: ["Casual","Indie","Simulação"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows® 10<br></li><li><strong>Processador:</strong> 2 GHz Processor or better<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> 1GB dedicated VRAM or better<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 10 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX® 9 compatible<br></li><li><strong>Outras observações:</strong> Mouse, Keyboard, Monitor</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows® 10/11<br></li><li><strong>Processador:</strong> 2.5 GHz Processor or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> 4GB dedicated VRAM or better<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 25 GB de espaço disponível</li></ul>"
@@ -261,7 +261,7 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/capsule_616x353.jpg",
-    categorias: ["Ação", "Aventura", "Indie", "Sobrevivência", "Multiplayer"],
+    categorias: ["Ação ", "Multiplayer"],
     modos: ["Multiplayer"],
     idiomas: ["Português", "Inglês"],
     descricao: "O único objetivo em Rust é sobreviver. Tudo te quer ver morto: a vida selvagem da ilha, outros habitantes, o ambiente e outros sobreviventes. Faz o que for preciso para aguentar outra noite.",
@@ -282,9 +282,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/capsule_616x353.jpg",
-    categorias: ["Aventura","RPG","Estratégia"], "Estratégia"],
+    categorias: ["Aventura","RPG","Estratégia"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel I5 4690 / AMD FX 8350 / Snapdragon X Elite<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GTX 970 / RX 480 / Intel Arc A380 / Qualcomm Adreno X1 (4GB+ of VRAM)<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 150 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD required</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel i7 8700K / AMD r5 3600<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia 2060 Super / RX 5700 XT / Intel Arc A580 (8GB+ of VRAM)<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 150 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD required</li></ul>"
@@ -301,7 +301,7 @@ export const games: Game[] = [
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg",
     categorias: ["Ação"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows® 10 64 Bit (atualização mais recente)<br></li><li><strong>Processador:</strong> AMD Ryzen™ 5 1400 ou Intel® Core™ i5-6600<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon™ RX 470, NVIDIA® GeForce® GTX 970 / 1060 ou Intel® Arc™ A580<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Outras observações:</strong> SSD com 161 GB de espaço disponível no lançamento</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows® 11 64 Bit (atualização mais recente)<br></li><li><strong>Processador:</strong> AMD Ryzen™ 5 1600X ou Intel® Core™ i7-6700K<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon™ RX 6600XT ou NVIDIA® GeForce® RTX 3060 ou Intel® Arc™ B580<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Outras observações:</strong> SSD com 161 GB de espaço disponível no lançamento</li></ul>"
@@ -319,9 +319,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/capsule_616x353.jpg",
-    categorias: ["Ação","Aventura","RPG"], "Mundo Aberto"],
+    categorias: ["Ação","Aventura","RPG"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i5-6600 (3.3Ghz) or AMD Ryzen 5 1400 (3.2Ghz)<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 960 4GB or AMD Radeon RX 470 4GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 85 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD (Preferred), HDD (Supported), 720p/30 fps, Low Quality Settings</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i7-8700 (3.2Ghz) or AMD Ryzen 5 3600 (3.6 Ghz)<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce 1080 Ti or AMD Radeon RX 5700 XT or INTEL Arc A770<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 85 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD, 1080p/60 fps, High Quality Settings</li></ul>"
@@ -335,9 +335,9 @@ export const games: Game[] = [
     lancamento: "3/ago./2020",
     preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1097150/header.jpg",
-    categorias: ["Ação","Casual","Indie","Multijogador Massivo","Esportes"], "Soulslike"],
+    categorias: ["Ação","Casual","Indie","Multijogador Massivo","Esportes"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64bit only<br></li><li><strong>Processador:</strong> Intel Core i5 or AMD equivalent<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 660 or AMD Radeon HD 7950<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 2 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Gamepad Recommended</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits</li></ul>"
@@ -355,9 +355,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/capsule_616x353.jpg",
-    categorias: ["Ação","Aventura"], "Soulslike"],
+    categorias: ["Ação","Aventura"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 64-bit | Windows 8 64-bit | Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel Core i3-2100 | AMD FX-6300<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 760 | AMD Radeon HD 7950<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 25 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 Compatible</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 64-bit | Windows 8 64-bit | Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel Core i5-2500K | AMD Ryzen 5 1400<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 970 | AMD Radeon RX 570<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 25 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 Compatible</li></ul>"
@@ -377,7 +377,7 @@ export const games: Game[] = [
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/capsule_616x353.jpg",
     categorias: ["Ação"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i5-4460, AMD FX™-6300, or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 760 or AMD Radeon™ R7 260x with 2GB Video RAM, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 35 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> *Xinput support Controllers recommended *Internet connection required for game activation. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i7-3770, AMD FX™-9590, or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 1060 with 6GB VRAM, AMD Radeon™ RX 480 with 8GB VRAM, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 35 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> *Xinput support Controllers recommended *Internet connection required for game activation. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>"
@@ -395,9 +395,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/620/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/620/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/620/capsule_616x353.jpg",
-    categorias: ["Ação","Aventura"], "Plataforma"],
+    categorias: ["Ação","Aventura"],
     modos: ["Singleplayer", "Co-op"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7/Vista/XP<br></li><li><strong>Processador:</strong> Pentium 4 com 3.0 GHz, Dual Core com 2.0 GHz (ou superior) ou AMD64X2 (ou superior)<br></li><li><strong>Memória:</strong> 2 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> A placa de vídeo precisa ter 128 MB ou mais de memória de vídeo e ser compatível com Pixel Shader 2.0b (ATI Radeon X800 ou superior / NVIDIA GeForce 7600 ou superior / Intel HD Graphics 2000 ou superior)<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Armazenamento:</strong> 8 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Compatibilidade com DirectX 9.0c</li></ul>",
       recomendado: ""
@@ -411,7 +411,7 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/550/capsule_616x353.jpg",
-    categorias: ["Ação", "Terror", "FPS"],
+    categorias: ["Ação ", "FPS"],
     modos: ["Singleplayer", "Multiplayer"],
     idiomas: ["Português", "Inglês"],
     descricao: "Set in the zombie apocalypse, Left 4 Dead 2 is a co-operative action horror FPS takes you and your friends through the cities, swamps and cemeteries of the Deep South, from Savannah to New Orleans across five expansive campaigns.",
@@ -432,9 +432,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/capsule_616x353.jpg",
-    categorias: ["Ação","Gratuitos para Jogar"], "Tático"],
+    categorias: ["Ação","Gratuitos para Jogar"],
     modos: ["Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows 10, Windows 11 (64-bit versions)<br></li><li><strong>Processador:</strong> AMD Ryzen 3 3100 / Intel i3-8100<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GTX 1650 4GB / AMD RX 5500XT 4GB / Intel ARC A380 6GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 65 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX® 9.0c compatible sound card with latest drivers<br></li><li><strong>Outras observações:</strong> For an up-to-date list of supported chipsets, please visit the FAQ for this game on our support website. Game contains BattleEye anti-cheat technology.</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows 11 (64-bit versions)<br></li><li><strong>Processador:</strong> AMD Ryzen5 3600 / Intel i5-10400<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA RTX 2060 6GB / AMD RX 6600 8GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 65 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX® 9.0c compatible sound card 5.1 with latest drivers<br></li><li><strong>Outras observações:</strong> For an up-to-date list of supported chipsets, please visit the FAQ for this game on our support website. Game contains BattleEye anti-cheat technology.</li></ul>"
@@ -449,9 +449,9 @@ export const games: Game[] = [
     lancamento: "4/nov./2020",
     preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/header.jpg",
-    categorias: ["Ação","Aventura","Gratuitos para Jogar"], "FPS"],
+    categorias: ["Ação","Aventura","Gratuitos para Jogar"],
     modos: ["Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> AMD FX 4350 or Equivalent, Intel Core i3 6300 or Equivalent<br></li><li><strong>Memória:</strong> 6 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon™ HD 7790 (2 GB), NVIDIA GeForce® GTX 950<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> ~3.8GB for 1 localized language</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Ryzen 5 CPU or Equivalent<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon™ R9 290, NVIDIA GeForce® GTX 970<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> ~3.8GB for 1 localized language</li></ul>"
@@ -469,9 +469,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/capsule_616x353.jpg",
-    categorias: ["Ação","Aventura","Casual"], "Mundo Aberto"],
+    categorias: ["Ação","Aventura","Casual"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel Core i3-4160, 3.6 GHz or AMD equivalent<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 950 or AMD Radeon RX 470<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel Core i5-4670, 3.4 Ghz or AMD Ryzen5 1600, 3.2 Ghz<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 1060 6GB or AMD Radeon RX 580 8GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível</li></ul>"
@@ -489,9 +489,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/capsule_616x353.jpg",
-    categorias: ["Ação","Aventura"], "Mundo Aberto"],
+    categorias: ["Ação","Aventura"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit 1909<br></li><li><strong>Processador:</strong> Intel Core i3-4160, 3.6 GHz or AMD equivalent<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 950 or AMD Radeon RX 470<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit 1909<br></li><li><strong>Processador:</strong> Intel Core i5-4670, 3.4 Ghz or AMD Ryzen 5 1600, 3.2 Ghz<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 1060 6GB or AMD Radeon RX 580 8GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> 75 GB SSD space Recommended</li></ul>"
@@ -509,9 +509,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/capsule_616x353.jpg",
-    categorias: ["Ação","Aventura"], "Ação"],
+    categorias: ["Ação","Aventura"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64 bit)<br></li><li><strong>Processador:</strong> AMD Ryzen 3 1200 / Intel Core i5-7500<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 560 with 4GB VRAM / NVIDIA GeForce GTX 1050 Ti with 4GB VRAM<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Outras observações:</strong> Estimated performance (when set to Prioritize Performance): 1080p/45fps. ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2060 required to support ray tracing.</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64 bit)/Windows 11 (64 bit)<br></li><li><strong>Processador:</strong> AMD Ryzen 5 3600 / Intel Core i7 8700<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 5700 / NVIDIA GeForce GTX 1070<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Outras observações:</strong> Desempenho aproximado: 1080p/60fps. ・A taxa de quadros pode cair em cenas que exigem recursos visuais mais pesados. ・O suporte ao traçado de raios requer uma placa AMD Radeon RX 6700 XT ou NVIDIA GeForce RTX 2070.</li></ul>"
@@ -531,7 +531,7 @@ export const games: Game[] = [
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1238810/capsule_616x353.jpg",
     categorias: ["Ação"],
     modos: ["Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> AMD FX-8350/ Core i5 6600K<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce® GTX 1050 / NVIDIA GeForce® GTX 660 2GB or AMD Radeon™ RX 560 / HD 7850 2GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10 or later<br></li><li><strong>Processador:</strong> AMD Ryzen 3 1300X/Intel Core i7 4790<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce® GTX 1060 6GB/AMD Radeon™ RX 580 8GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>"
@@ -546,9 +546,9 @@ export const games: Game[] = [
     lancamento: "19/nov./2021",
     preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1517290/header.jpg",
-    categorias: ["Ação","Aventura","Casual"], "Ação"],
+    categorias: ["Ação","Aventura","Casual"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> AMD Ryzen 5 1600, Core i5 6600K<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 560,Nvidia GeForce GTX 1050 Ti<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> No recommendation</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> AMD Ryzen 7 2700X, Intel Core i7 4790<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 6600 XT, Nvidia GeForce RTX 3060<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> No recommendation</li></ul>"
@@ -563,9 +563,9 @@ export const games: Game[] = [
     lancamento: "21/dez./2017",
     preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/578080/header.jpg",
-    categorias: ["Ação","Aventura","Multijogador Massivo","Gratuitos para Jogar"], "FPS"],
+    categorias: ["Ação","Aventura","Multijogador Massivo","Gratuitos para Jogar"],
     modos: ["Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i5-4430 / AMD FX-6300<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 960 2GB / AMD Radeon R7 370 2GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 40 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i5-6600K / AMD Ryzen 5 1600<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1060 3GB / AMD Radeon RX 580 4GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>"
@@ -582,7 +582,7 @@ export const games: Game[] = [
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/976730/header.jpg",
     categorias: ["Ação"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Windows 7<br></li><li><strong>Processador:</strong> AMD Phenom II X4 960T ; Intel i3550<br></li><li><strong>Placa de vídeo:</strong> AMD HD 6850 ; NVIDIA GeForce GTS 450<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 43 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Direct3D feature Level 11.1</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits</li></ul>"
@@ -597,9 +597,9 @@ export const games: Game[] = [
     lancamento: "15/nov./2021",
     preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1240440/header.jpg",
-    categorias: ["Ação","Gratuitos para Jogar"], "RPG"],
+    categorias: ["Ação","Gratuitos para Jogar"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 RS5 x64<br></li><li><strong>Processador:</strong> AMD Ryzen 5 1600 or Intel i5-4440<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD RX 570 or Nvidia GTX 1050 Ti<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 19H2 x64<br></li><li><strong>Processador:</strong> AMD Ryzen 7 3700X or Intel i7-9700k<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Radeon RX 5700 XT or Nvidia RTX 2070<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>"
@@ -616,7 +616,7 @@ export const games: Game[] = [
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1446780/header.jpg",
     categorias: ["Ação"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 （64-bit）<br></li><li><strong>Processador:</strong> Intel® Core™ i3-4130 or Core™ i5-3470 or AMD FX™-6100<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GT 1030 (DDR4) or AMD Radeon™ RX 550<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 36 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> 1080p/30fps when graphics settings are set to &quot;Low&quot;.</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 （64-bit）<br></li><li><strong>Processador:</strong> Intel® Core™ i5-4460 or AMD FX™-8300<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 1060 (VRAM 3GB) or AMD Radeon™ RX 570 (VRAM 4GB)<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 36 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> 1080p/30fps when graphics settings are set to &quot;Average&quot;.</li></ul>"
@@ -633,7 +633,7 @@ export const games: Game[] = [
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg",
     categorias: ["Ação"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 SP1 64bit, Windows 8.1 64bit Windows 10 64bit<br></li><li><strong>Processador:</strong> Intel Core i3-2100 / AMD® FX-6300<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce GTX 750 Ti / ATI Radeon HD 7950<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 25 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device<br></li><li><strong>Outras observações:</strong> Internet connection required for online play and product activation</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 SP1 64bit, Windows 8.1 64bit Windows 10 64bit<br></li><li><strong>Processador:</strong> Intel Core i7-3770 / AMD® FX-8350<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce GTX 970 / ATI Radeon R9 series<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 25 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device<br></li><li><strong>Outras observações:</strong> Internet connection required for online play and product activation</li></ul>"
@@ -651,9 +651,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/208650/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/208650/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/208650/capsule_616x353.jpg",
-    categorias: ["Ação","Aventura"], "Mundo Aberto"],
+    categorias: ["Ação","Aventura"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Win 7 SP1, Win 8.1 (64-bit Operating System Required)<br></li><li><strong>Processador:</strong> Intel Core i5-750, 2.67 GHz | AMD Phenom II X4 965, 3.4 GHz<br></li><li><strong>Memória:</strong> 6 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Graphics: NVIDIA GeForce GTX 660 (2 GB Memory Minimum)  | AMD Radeon HD 7870 (2 GB Memory Minimum)<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 45 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Win 7 SP1, Win 8.1 (64-bit Operating System Required)<br></li><li><strong>Processador:</strong> Intel Core i7-3770, 3.4 GHz | AMD FX-8350, 4.0 GHz<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 760 - 3 GB Memory Recommended | AMD Radeon HD 7950 - 3 GB Memory Recommended<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 55 GB de espaço disponível</li></ul>"
@@ -673,7 +673,7 @@ export const games: Game[] = [
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/782330/capsule_616x353.jpg",
     categorias: ["Ação"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> 64-bit Windows 7 / 64-Bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i5 @ 3.3 GHz or better, or AMD Ryzen 3 @ 3.1 GHz or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1050Ti (4GB), GTX 1060 (3GB), GTX 1650 (4GB) or AMD Radeon R9 280(3GB), AMD Radeon R9 290 (4GB), RX 470 (4GB)<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 80 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> ( 1080p / 60 FPS / Low Quality Settings )</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i7-6700K or better, or AMD Ryzen 7 1800X or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1060 (6GB), NVIDIA GeForce 970 (4GB), AMD RX 480 (8GB)<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 80 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> ( 1080p / 60 FPS / High Quality Settings ) - *On NVIDIA GTX 970 cards Texture Quality should be set to Medium</li></ul>"
@@ -700,9 +700,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/capsule_616x353.jpg",
-    categorias: ["Simulação","Estratégia"], "Estratégia"],
+    categorias: ["Simulação","Estratégia"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows® 10 Home 64 Bit<br></li><li><strong>Processador:</strong> Intel® Core™ I7 930  |  AMD® FX 6350<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia® GeForce™ GTS 450 (1 GB) |  AMD® R7 250 (2 GB)  |  Intel Iris Xe G7 (Tiger Lake)<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 4 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows® 10 Home 64 bit<br></li><li><strong>Processador:</strong> Intel® Core™ I7 2700K  |   AMD® Ryzen 7 2700X<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia® GeForce™ GTX 580 (1.5 GB)  |   AMD® Radeon™ RX 560 (4 GB)<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 4 GB de espaço disponível</li></ul>"
@@ -720,9 +720,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/capsule_616x353.jpg",
-    categorias: ["Indie","RPG","Simulação"], "Indie"],
+    categorias: ["Indie","RPG","Simulação"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows Vista or greater<br></li><li><strong>Processador:</strong> 2 Ghz<br></li><li><strong>Memória:</strong> 2 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> 256 mb video memory, shader model 3.0+<br></li><li><strong>DirectX:</strong> Versão 10<br></li><li><strong>Armazenamento:</strong> 500 MB de espaço disponível</li></ul>",
       recomendado: ""
@@ -740,9 +740,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/739630/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/739630/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/739630/capsule_616x353.jpg",
-    categorias: ["Ação","Indie","Acesso Antecipado"], "Multiplayer"],
+    categorias: ["Ação","Indie","Acesso Antecipado"],
     modos: ["Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64Bit<br></li><li><strong>Processador:</strong> Intel Core i5-4590 / AMD Ryzen 5 2600<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 970 / AMD Radeon R9 390<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 21 GB de espaço disponível<br></li><li><strong>Compatibilidade com RV:</strong> OpenXR<br></li><li><strong>Outras observações:</strong> Minimum Specs are for VR, lower specs may work for Non-VR.</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64Bit<br></li><li><strong>Processador:</strong> Intel Core i5-10600 / AMD Ryzen 5 3600<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA RTX 2060 / AMD Radeon RX 5700<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 21 GB de espaço disponível</li></ul>"
@@ -759,7 +759,7 @@ export const games: Game[] = [
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/945360/header.jpg",
     categorias: ["Casual"],
     modos: ["Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows 10 x32bit<br></li><li><strong>Processador:</strong> INTEL i3-4330<br></li><li><strong>Memória:</strong> 1 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> INTEL HD Graphics 4600</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows 10 x64bit<br></li><li><strong>Processador:</strong> INTEL i3-4330<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GTX 650</li></ul>"
@@ -774,9 +774,9 @@ export const games: Game[] = [
     lancamento: "11/fev./2022",
     preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1599340/header.jpg",
-    categorias: ["Ação","Aventura","Multijogador Massivo","RPG","Gratuitos para Jogar"], "Ação"],
+    categorias: ["Ação","Aventura","Multijogador Massivo","RPG","Gratuitos para Jogar"],
     modos: ["Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64-bit)<br></li><li><strong>Processador:</strong> Intel i3 ou AMD Ryzen 3<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 460 / AMD HD6850<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 110 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Necessária conexão de internet para jogar, oferece compras no jogo. Os requisitos de sistema para este jogo podem mudar ao longo do tempo.</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64-bit)<br></li><li><strong>Processador:</strong> Intel i5 ou AMD Ryzen 5<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1050 / AMD Radeon RX560 2G<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 110 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Necessária conexão de internet para jogar, oferece compras no jogo. Os requisitos de sistema para este jogo podem mudar ao longo do tempo.</li></ul>"
@@ -791,9 +791,9 @@ export const games: Game[] = [
     lancamento: "3/jun./2020",
     preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1172620/header.jpg",
-    categorias: ["Ação","Aventura"], "Multiplayer"],
+    categorias: ["Ação","Aventura"],
     modos: ["Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 version 18362.0 or higher<br></li><li><strong>Processador:</strong> Intel i3 4170 @ 3.7 GHz or AMD FX-6300 @ 3.5 GHz<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GeForce GTX 660 or AMD Radeon R9 270<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows® 10 64-bit<br></li><li><strong>Processador:</strong> Intel i7 4790 @4Ghz - AMD Ryzen 5 1600 @3.6Ghz<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia Geforce GTX 1080ti - AMD Radeon Rx Vega 64 - Intel A750<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível</li></ul>"
@@ -808,9 +808,9 @@ export const games: Game[] = [
     lancamento: "13/abr./2015",
     preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg",
-    categorias: ["Ação","Aventura"], "Mundo Aberto"],
+    categorias: ["Ação","Aventura"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64 Bit<br></li><li><strong>Processador:</strong> Intel Core 2 Quad CPU Q6600 @ 2.40 GHz (4 CPUs) / AMD Phenom 9850 Quad-Core (4 CPUs) @ 2.5 GHz<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA 9800 GT 1 GB / AMD HD 4870 1 GB (DX 10, 10.1, 11)<br></li><li><strong>Armazenamento:</strong> 125 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> 100% compatível com DirectX 10<br></li><li><strong>Outras observações:</strong> Com o decorrer do tempo, conteúdos para download e modificações na programação poderão alterar os requisitos de sistema deste jogo. Entre em contato com o fabricante do seu equipamento e visite  para informações de compatibilidade atualizadas. Alguns componentes do sistema, como chipsets móveis, integrados e placas AGP podem ser incompatíveis. Especificações não listadas também podem não ser compatíveis.     Outros requisitos: A instalação e jogo online requerem uma conta na rede Social Club da Rockstar Games (para maiores de 13 anos); uma conexão com a internet é necessária para a ativação, jogo online e verificações de autenticidade periódicas; instalação de softwares necessários, incluindo a plataforma Social Club da Rockstar Games, DirectX , Chromium, Microsoft Visual C++ 2008 sp1 Redistributable Package, e o software de autenticação para o reconhecimento de certos atributos de hardware para verificação, gerenciamento de direitos digitais, sistema e assistência ao cliente.  É NECESSÁRIO O USO DE UM CÓDIGO DE REGISTRO DE USO ÚNICO VIA INTERNET; O REGISTRO É LIMITADO A UMA CONTA DO SOCIAL CLUB DA ROCKSTAR GAMES (MAIORES DE 13 ANOS) POR CÓDIGO DE SÉRIE; SOMENTE UMA CONTA DE PC PODE SER USADA POR CADA CONTA DO SOCIAL CLUB AO MESMO TEMPO; O(S) CÓDIGO(S) DE SÉRIE NÃO É(SÃO) TRANSFERÍVEL(IS) APÓS O USO; AS CONTAS DO SOCIAL CLUB NÃO SÃO TRANSFERÍVEIS.  Requisitos de Parceiros: Verifique os termos de serviço deste site antes da compra.</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64 Bit<br></li><li><strong>Processador:</strong> Intel Core i5 3470 @ 3.2 GHZ (4 CPUs) / AMD X8 FX-8350 @ 4 GHZ (8 CPUs)<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 660 2 GB / AMD HD7870 2 GB<br></li><li><strong>Armazenamento:</strong> 125 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> 100% compatível com DirectX 10</li></ul>"
@@ -827,7 +827,7 @@ export const games: Game[] = [
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/72850/header.jpg",
     categorias: ["RPG"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Minimum:</strong><br>\t\t\t\t\t\t\t\t<ul class=\"bb_ul\"><li><strong>OS *:</strong> Windows 7/Vista/XP PC (32 or 64 bit)<br>\t\t\t\t\t\t\t\t</li><li><strong>Processor:</strong> Dual Core 2.0GHz or equivalent processor<br>\t\t\t\t\t\t\t\t</li><li><strong>Memory:</strong> 2GB System RAM<br>\t\t\t\t\t\t\t\t</li><li><strong>Hard Disk Space:</strong> 6GB free HDD Space<br>\t\t\t\t\t\t\t\t</li><li><strong>Video Card:</strong> Direct X 9.0c compliant video card with 512 MB of RAM<br>\t\t\t\t\t\t\t\t</li><li><strong>Sound:</strong> DirectX compatible sound card<br>\t\t\t\t\t\t\t\t</li></ul>",
       recomendado: "<strong>Recommended:</strong><br>\t\t\t\t\t\t\t\t<ul class=\"bb_ul\"><li><strong>Processor:</strong> Quad-core Intel or AMD CPU<br>\t\t\t\t\t\t\t\t</li><li><strong>Memory:</strong> 4GB System RAM<br>\t\t\t\t\t\t\t\t</li><li><strong>Video Card:</strong> DirectX 9.0c compatible NVIDIA or AMD ATI video card with 1GB of RAM (Nvidia GeForce GTX 260 or higher; ATI Radeon 4890 or higher)<br>\t\t\t\t\t\t\t\t</li></ul>"
@@ -847,7 +847,7 @@ export const games: Game[] = [
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/capsule_616x353.jpg",
     categorias: ["RPG"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7/8.1/10 (64-bit Version)<br></li><li><strong>Processador:</strong> Intel i5-750/AMD Phenom II X4-945<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 470 1GB /AMD HD 7870 2GB<br></li><li><strong>Armazenamento:</strong> 12 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7/8.1/10 (64-bit Version)<br></li><li><strong>Processador:</strong> Intel i5-2400/AMD FX-8320<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 780 3GB /AMD R9 290 4GB<br></li><li><strong>Armazenamento:</strong> 12 GB de espaço disponível</li></ul>"
@@ -865,9 +865,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1172380/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1172380/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1172380/capsule_616x353.jpg",
-    categorias: ["Ação","Aventura"], "Aventura"],
+    categorias: ["Ação","Aventura"],
     modos: ["Singleplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> 64-bit Windows 7/8.1/10<br></li><li><strong>Processador:</strong> AMD FX-6100/Intel i3-3220 or Equivalent<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon HD 7750, NVIDIA GeForce GTX 650 or Equivalent<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 55 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> 64-bit Windows 7/8.1/10<br></li><li><strong>Processador:</strong> AMD Ryzen 7 1700/Intel  i7-6700K or Equivalent<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD RX Vega 56, Nvidia GTX 1070/GTX1660Ti or Equivalent<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 55 GB de espaço disponível</li></ul>"
@@ -894,9 +894,9 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/capsule_616x353.jpg",
-    categorias: ["Simulação","Esportes"], "Simulação"],
+    categorias: ["Simulação","Esportes"],
     modos: ["Singleplayer", "Multiplayer"],
-    idiomas: ["Português", "Inglês"],,
+    idiomas: ["Português", "Inglês"],
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 - 64-Bit (Latest Update)<br></li><li><strong>Processador:</strong> Intel Core i5 6600k or AMD Ryzen 5 1600<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 - 64-Bit (Latest Update)<br></li><li><strong>Processador:</strong> Intel Core i7 6700 or AMD Ryzen 7 2700X<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1660 or AMD Radeon RX 5600 XT<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível</li></ul>"
@@ -910,7 +910,7 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/capsule_616x353.jpg",
-    categorias: ["Casual", "Indie", "Estratégia"],
+    categorias: ["Casual ", "Estratégia"],
     modos: ["Singleplayer"],
     idiomas: ["Português", "Inglês"],
     descricao: "O roguelike de póquer. Balatro é um jogo de construção de baralhos de cartas hipnoticamente satisfatório onde vais jogar mãos de póquer ilegais, descobrir jóqueres que vão mudar o rumo do jogo e fazer combinações empolgantes.",
@@ -927,7 +927,7 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/capsule_616x353.jpg",
-    categorias: ["Ação", "Indie", "Corridas", "Desporto"],
+    categorias: ["Ação ", "Desporto"],
     modos: ["Multiplayer"],
     idiomas: ["Português", "Inglês"],
     descricao: "Futebol e condução encontram-se uma vez mais na aguardada sequela do clássico de arena baseado na física que conquistou os jogadores, o Supersonic Acrobatic Rocket-Powered Battle-Cars!",
@@ -944,7 +944,7 @@ export const games: Game[] = [
     heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/library_hero.jpg",
     verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/library_600x900.jpg",
     capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/capsule_616x353.jpg",
-    categorias: ["Aventura", "Indie", "Simulação", "Estratégia"],
+    categorias: ["Aventura ", "Estratégia"],
     modos: ["Singleplayer", "Co-op"],
     idiomas: ["Português", "Inglês"],
     descricao: "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
