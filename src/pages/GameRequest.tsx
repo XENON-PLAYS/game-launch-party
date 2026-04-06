@@ -9,7 +9,7 @@ import { Gamepad2, Crown, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const GameRequest = () => {
-  const { user, profile, isLoading } = useAuth();
+  const { user, profile, isAdmin, isLoading } = useAuth();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
