@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { optimizeImageUrl } from "@/lib/utils";
 import React from "react";
 
-type Game = Tables<"games">;
+type Game = any;
 
 interface GameCardProps {
   game: Game;
