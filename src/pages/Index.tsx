@@ -14,7 +14,27 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
 const categoryIconMap: Record<string, any> = {
-// ... keep existing code
+  "Ação": Target,
+  "Aventura": Compass,
+  "RPG": Sword,
+  "Estratégia": Shield,
+  "Simulação": Gamepad2,
+  "Esportes": Target,
+  "Corrida": Zap,
+  "Luta": Target,
+  "Terror": Ghost,
+  "Mundo Aberto": Compass,
+  "FPS": Target,
+  "TPS": Target,
+  "Sobrevivência": Shield,
+  "Sandbox": Layers,
+  "Plataforma": Layers,
+  "Puzzle": Layers,
+  "Casual": Gamepad2,
+  "Indie": Rocket,
+  "Multijogador": Users,
+  "Cooperativo": Users,
+  "Single-player": Gamepad2,
   "MMORPG": Users,
   "Farming Sim": Gamepad2,
 };
@@ -502,6 +522,7 @@ const Index = () => {
                 <li><button onClick={() => navigate("/")} className="hover:text-primary transition-colors">Catálogo</button></li>
                 <li><button onClick={() => navigate("/novidades")} className="hover:text-primary transition-colors">Novidades</button></li>
                 <li><button onClick={() => navigate("/dmca")} className="hover:text-primary transition-colors">DMCA</button></li>
+                <li><button onClick={() => navigate("/privacidade")} className="hover:text-primary transition-colors">POLÍTICA DE PRIVACIDADE</button></li>
               </ul>
             </div>
             
@@ -509,8 +530,8 @@ const Index = () => {
               <h4 className="text-responsive-small text-foreground font-extrabold">Suporte</h4>
               <ul className="space-y-3 md:space-y-6 text-base md:text-lg font-medium">
                 <li><button className="hover:text-primary transition-colors">Central de Ajuda</button></li>
-                <li><button className="hover:text-primary transition-colors">Termos de Uso</button></li>
-                <li><button className="hover:text-primary transition-colors">Privacidade</button></li>
+                <li><button onClick={() => navigate("/dmca")} className="hover:text-primary transition-colors">Termos de Uso</button></li>
+                <li><button onClick={() => navigate("/privacidade")} className="hover:text-primary transition-colors">Privacidade</button></li>
               </ul>
             </div>
 
