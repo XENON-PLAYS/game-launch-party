@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import { Check, Shield, Zap, Star, Trophy, CreditCard, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect } from "react";
@@ -220,8 +220,15 @@ const VipPage = () => {
       </main>
 
       <footer className="border-t border-border/50 bg-card py-20 mt-32">
-        <div className="container-responsive text-center text-muted-foreground opacity-40 font-bold uppercase tracking-widest text-xs">
-          © 2025 JOGOS GRATIS — Navegue com a elite dos jogadores.
+        <div className="container-responsive text-center space-y-6">
+          <div className="flex justify-center gap-8 text-muted-foreground opacity-60 font-bold uppercase tracking-widest text-[10px] md:text-xs">
+            <Link to="/dmca" className="hover:text-primary transition-colors">DMCA</Link>
+            <Link to="/privacidade" className="hover:text-primary transition-colors">Privacidade</Link>
+            <Link to="/pedir-jogo" className="hover:text-primary transition-colors">Pedir Jogos</Link>
+          </div>
+          <div className="text-muted-foreground opacity-40 font-bold uppercase tracking-widest text-[10px] md:text-xs">
+            © 2025 JOGOS GRATIS — Navegue com a elite dos jogadores.
+          </div>
         </div>
       </footer>
     </div>
