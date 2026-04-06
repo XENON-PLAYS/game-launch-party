@@ -126,9 +126,11 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-12 flex-1 justify-start ml-4">
+          <nav className="hidden lg:flex items-center gap-12 ml-8">
             {navLinks}
           </nav>
+
+          <div className="flex-1" />
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-2 sm:gap-6 shrink-0">
