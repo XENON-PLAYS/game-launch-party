@@ -293,16 +293,53 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                   <div className="space-y-4">
                     <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Categorias</Label>
                     <div className="flex flex-wrap gap-2">
-                      {["FPS", "RPG", "Ação", "Terror", "Aventura", "Multiplayer", "Estratégia", "Simulação", "Mundo Aberto", "Indie"].map(cat => (
+                      {["FPS", "RPG", "Ação", "Terror", "Aventura", "Multiplayer", "Estratégia", "Simulação", "Mundo Aberto", "Indie", "Corrida", "Esportes", "Luta", "Sandbox", "Sobrevivência", "Stealth", "Casual", "Puzzle"].sort().map(cat => (
                         <Badge 
                           key={cat} 
                           variant={formData.categorias?.includes(cat) ? "default" : "outline"}
-                          className="cursor-pointer px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all"
+                          className="cursor-pointer px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all hover:border-primary/50"
                           onClick={() => handleArrayToggle("categorias", cat)}
                         >
                           {cat}
                         </Badge>
                       ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Recursos de Destaque (Destaques)</Label>
+                      <Button 
+                        size="sm" 
+                        variant="ghost" 
+                        className="h-6 text-[9px] font-black uppercase tracking-widest gap-1 hover:text-primary"
+                        onClick={() => {
+                          const val = prompt("Adicionar novo destaque (ex: Ray Tracing, DLSS 3):");
+                          if (val) handleFieldChange("destaques", [...(formData.destaques || []), val]);
+                        }}
+                      >
+                        <Plus className="h-3 w-3" /> Adicionar
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {formData.destaques?.map((destaque, i) => (
+                        <Badge key={i} variant="secondary" className="px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-widest flex items-center gap-2 group">
+                          {destaque}
+                          <button 
+                            onClick={() => {
+                              const newDestaques = [...(formData.destaques || [])];
+                              newDestaques.splice(i, 1);
+                              handleFieldChange("destaques", newDestaques);
+                            }}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity hover:text-destructive"
+                          >
+                            <X className="h-3 w-3" />
+                          </button>
+                        </Badge>
+                      ))}
+                      {(!formData.destaques || formData.destaques.length === 0) && (
+                        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-40 italic">Nenhum destaque adicionado</p>
+                      )}
                     </div>
                   </div>
 
