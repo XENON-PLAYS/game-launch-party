@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
+import { GoogleAd } from "@/components/GoogleAd";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
@@ -565,6 +566,15 @@ const GameDetail = () => {
                       <p className="text-muted-foreground">O guia padrão de instalação se aplica a este título.</p>
                     </div>
                   )}
+                </div>
+                
+                {/* Google Ad in Installation Section */}
+                <div className="mt-8 border-t border-border pt-8">
+                  <div className="flex items-center gap-3 text-primary mb-6">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">Conteúdo Patrocinado</h4>
+                  </div>
+                  <GoogleAd className="min-h-[100px] w-full bg-muted/20 rounded-2xl flex items-center justify-center border border-border/30 overflow-hidden" />
                 </div>
 
                 {game.observacoes && (
