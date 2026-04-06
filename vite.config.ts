@@ -25,16 +25,16 @@ export default defineConfig(({ mode }) => ({
         output: {
           manualChunks: (id) => {
             if (id.includes("node_modules")) {
-              if (id.includes("react") || id.includes("react-dom") || id.includes("react-router-dom")) {
-                return "vendor-react";
+              if (id.includes("react") || id.includes("react-dom") || id.includes("react-router-dom") || id.includes("scheduler")) {
+                return "vendor-core";
               }
-              if (id.includes("@radix-ui")) {
+              if (id.includes("@radix-ui") || id.includes("lucide-react") || id.includes("clsx") || id.includes("tailwind-merge")) {
                 return "vendor-ui";
               }
-              if (id.includes("framer-motion") || id.includes("lucide-react")) {
+              if (id.includes("framer-motion")) {
                 return "vendor-animation";
               }
-              if (id.includes("@tanstack/react-query") || id.includes("@supabase")) {
+              if (id.includes("@tanstack/react-query") || id.includes("@supabase") || id.includes("zod")) {
                 return "vendor-data";
               }
               return "vendor";
@@ -45,10 +45,13 @@ export default defineConfig(({ mode }) => ({
           assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
         },
     },
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 800,
     cssCodeSplit: true,
     minify: "esbuild",
     sourcemap: false,
     reportCompressedSize: false,
+    modulePreload: {
+      polyfill: true
+    }
   },
 }));
