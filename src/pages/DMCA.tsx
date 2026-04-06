@@ -1,18 +1,20 @@
 import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
 import { motion } from "framer-motion";
+import { MeteorBackground } from "@/components/MeteorBackground";
 
 const DMCA = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen space-background text-foreground flex flex-col">
       <SEO title="DMCA - Jogos Grátis" description="Política de DMCA e termos de uso" />
       <Header />
+      <MeteorBackground />
       
-      <main className="container mx-auto px-4 py-20">
+      <main className="container mx-auto px-4 py-20 relative z-10 flex-1">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="max-w-4xl mx-auto space-y-8 bg-card p-8 md:p-12 rounded-3xl border border-border backdrop-blur-xl shadow-2xl"
+          className="max-w-4xl mx-auto space-y-8 bg-card/80 p-8 md:p-12 rounded-3xl border border-border backdrop-blur-xl shadow-2xl"
         >
           <div className="text-center space-y-4">
             <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase italic">
