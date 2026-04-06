@@ -107,6 +107,41 @@ const Admin = () => {
     setSelectedGame(game);
     setIsModalOpen(true);
   };
+  const handleDuplicateGame = async (game: Game) => {
+    try {
+      const { id, created_at, updated_at, slug, ...duplicateData } = game;
+      const { data: newGame, error } = await supabase
+        .from("games")
+        .insert({
+          ...duplicateData,
+          nome: `${game.nome} (Cópia)`,
+          slug: `${game.slug}-copia-${Date.now()}`
+        })
+        .select()
+        .single();
+        
+      if (error) throw error;
+      
+      // Duplicar links de download
+      const { data: links } = await supabase.from("download_links").select("*").eq("game_id", id);
+      if (links && links.length > 0) {
+        const linksToInsert = links.map(l => ({
+          game_id: newGame.id,
+          label: l.label,
+          url: l.url,
+          status: l.status,
+          click_count: 0
+        }));
+        await supabase.from("download_links").insert(linksToInsert);
+      }
+      
+      queryClient.invalidateQueries({ queryKey: ["admin-games"] });
+      toast.success(`"${game.nome}" foi duplicado.`);
+    } catch (error: any) {
+      toast.error(`Erro ao duplicar: ${error.message}`);
+    }
+  };
+
 
   const handleDeleteGame = async (id: string, nome: string) => {
     if (!confirm(`Tem certeza que deseja excluir "${nome}"? Esta ação não pode ser desfeita.`)) return;
@@ -178,6 +213,7 @@ const Admin = () => {
                     onEdit={handleOpenEdit} 
                     onDelete={handleDeleteGame}
                     onAdd={handleOpenAdd}
+                    onDuplicate={handleDuplicateGame}
                   />
                 )}
                 {activeTab === "users" && (

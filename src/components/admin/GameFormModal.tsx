@@ -198,7 +198,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
             </div>
             <div>
               <DialogTitle className="text-2xl font-black uppercase tracking-tighter">
-                {mode === "add" ? "Cadastrar Novo" : "Configurar"} <span className="text-primary">Título</span>
+                {mode === "add" ? "Cadastrar Novo" : `Configurando "${formData.nome || 'Título'}"`} <span className="text-primary">Título</span>
               </DialogTitle>
               <DialogDescription className="text-xs font-bold uppercase tracking-[0.2em] opacity-60">
                 Central de gerenciamento de metadados do ELITE Studio
@@ -285,19 +285,34 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                         value={formData.tamanho || ""} 
                         onChange={(e) => handleFieldChange("tamanho", e.target.value)} 
                         placeholder="Ex: 70 GB"
-                        className="h-12 rounded-xl bg-background/50"
+                        className="h-12 rounded-xl bg-background/50 border-border/40"
                       />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Classificação Indicativa</Label>
+                      <select 
+                        value={formData.classificacao || "Livre"} 
+                        onChange={(e) => handleFieldChange("classificacao", e.target.value)}
+                        className="w-full h-12 rounded-xl bg-background/50 border-border/40 px-4 text-sm font-bold uppercase tracking-widest focus:ring-primary/20"
+                      >
+                        <option value="Livre">Livre</option>
+                        <option value="10+">10+</option>
+                        <option value="12+">12+</option>
+                        <option value="14+">14+</option>
+                        <option value="16+">16+</option>
+                        <option value="18+">18+</option>
+                      </select>
                     </div>
                   </div>
 
                   <div className="space-y-4">
                     <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Categorias</Label>
                     <div className="flex flex-wrap gap-2">
-                      {["FPS", "RPG", "Ação", "Terror", "Aventura", "Multiplayer", "Estratégia", "Simulação", "Mundo Aberto", "Indie"].map(cat => (
+                      {["FPS", "RPG", "Ação", "Terror", "Aventura", "Multiplayer", "Estratégia", "Simulação", "Mundo Aberto", "Indie", "Corrida", "Esportes", "Luta", "Sandbox", "Sobrevivência", "Stealth", "Casual", "Puzzle"].sort().map(cat => (
                         <Badge 
                           key={cat} 
                           variant={formData.categorias?.includes(cat) ? "default" : "outline"}
-                          className="cursor-pointer px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all"
+                          className="cursor-pointer px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all hover:border-primary/50"
                           onClick={() => handleArrayToggle("categorias", cat)}
                         >
                           {cat}
@@ -306,12 +321,83 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                     </div>
                   </div>
 
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Recursos de Destaque (Destaques)</Label>
+                      <Button 
+                        size="sm" 
+                        variant="ghost" 
+                        className="h-6 text-[9px] font-black uppercase tracking-widest gap-1 hover:text-primary"
+                        onClick={() => {
+                          const val = prompt("Adicionar novo destaque (ex: Ray Tracing, DLSS 3):");
+                          if (val) handleFieldChange("destaques", [...(formData.destaques || []), val]);
+                        }}
+                      >
+                        <Plus className="h-3 w-3" /> Adicionar
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {formData.destaques?.map((destaque, i) => (
+                        <Badge key={i} variant="secondary" className="px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-widest flex items-center gap-2 group">
+                          {destaque}
+                          <button 
+                            onClick={() => {
+                              const newDestaques = [...(formData.destaques || [])];
+                              newDestaques.splice(i, 1);
+                              handleFieldChange("destaques", newDestaques);
+                            }}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity hover:text-destructive"
+                          >
+                            <X className="h-3 w-3" />
+                          </button>
+                        </Badge>
+                      ))}
+                      {(!formData.destaques || formData.destaques.length === 0) && (
+                        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-40 italic">Nenhum destaque adicionado</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Modos de Jogo</Label>
+                      <div className="flex flex-wrap gap-2">
+                        {["Single-player", "Multiplayer", "Co-op Online", "Co-op Local", "Cross-Platform", "VR Suportado"].map(modo => (
+                          <Badge 
+                            key={modo} 
+                            variant={formData.modos?.includes(modo) ? "default" : "outline"}
+                            className="cursor-pointer px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all"
+                            onClick={() => handleArrayToggle("modos", modo)}
+                          >
+                            {modo}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Idiomas Suportados</Label>
+                      <div className="flex flex-wrap gap-2">
+                        {["Português", "Inglês", "Espanhol", "Francês", "Alemão", "Italiano", "Japonês", "Chinês"].map(idioma => (
+                          <Badge 
+                            key={idioma} 
+                            variant={formData.idiomas?.includes(idioma) ? "default" : "outline"}
+                            className="cursor-pointer px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all"
+                            onClick={() => handleArrayToggle("idiomas", idioma)}
+                          >
+                            {idioma}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="space-y-2">
                     <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Descrição Detalhada</Label>
                     <Textarea 
                       value={formData.descricao || ""} 
                       onChange={(e) => handleFieldChange("descricao", e.target.value)} 
-                      className="min-h-[200px] rounded-2xl bg-background/50 resize-none"
+                      className="min-h-[180px] rounded-2xl bg-background/50 resize-none border-border/40 focus:border-primary/40 transition-all p-6 text-sm leading-relaxed"
                       placeholder="Descreva a experiência épica que este jogo oferece..."
                     />
                   </div>
@@ -366,9 +452,9 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
 
                       <div className="space-y-4">
                         <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Hero Image (Banner 21:9)</Label>
-                        <div className="aspect-[21/9] rounded-2xl border-2 border-dashed border-border/40 bg-muted/20 relative overflow-hidden">
+                        <div className="aspect-[21/9] rounded-2xl border-2 border-dashed border-border/40 bg-muted/20 relative overflow-hidden group">
                           {formData.hero_image ? (
-                            <img src={formData.hero_image} className="w-full h-full object-cover" alt="" />
+                            <img src={formData.hero_image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="" />
                           ) : (
                             <div className="flex flex-col items-center justify-center h-full">
                               <ImageIcon className="h-10 w-10 text-muted-foreground/30 mb-2" />
@@ -376,7 +462,36 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                             </div>
                           )}
                         </div>
-                        <Input type="text" placeholder="URL ou deixe em branco" value={formData.hero_image || ""} onChange={(e) => handleFieldChange("hero_image", e.target.value)} className="rounded-xl h-10 text-xs" />
+                        <Input type="text" placeholder="URL da Hero Image" value={formData.hero_image || ""} onChange={(e) => handleFieldChange("hero_image", e.target.value)} className="rounded-xl h-10 text-xs bg-background/50 border-border/40" />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-4">
+                          <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Imagem Vertical (600x900)</Label>
+                          <div className="aspect-[2/3] rounded-2xl border-2 border-dashed border-border/40 bg-muted/20 relative overflow-hidden group">
+                            {formData.vertical_image ? (
+                              <img src={formData.vertical_image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="" />
+                            ) : (
+                              <div className="flex flex-col items-center justify-center h-full">
+                                <ImageIcon className="h-6 w-6 text-muted-foreground/30 mb-2" />
+                              </div>
+                            )}
+                          </div>
+                          <Input type="text" placeholder="URL" value={formData.vertical_image || ""} onChange={(e) => handleFieldChange("vertical_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                        </div>
+                        <div className="space-y-4">
+                          <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Imagem Cápsula (460x215)</Label>
+                          <div className="aspect-[460/215] rounded-2xl border-2 border-dashed border-border/40 bg-muted/20 relative overflow-hidden group">
+                            {formData.capsule_image ? (
+                              <img src={formData.capsule_image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="" />
+                            ) : (
+                              <div className="flex flex-col items-center justify-center h-full">
+                                <ImageIcon className="h-6 w-6 text-muted-foreground/30 mb-2" />
+                              </div>
+                            )}
+                          </div>
+                          <Input type="text" placeholder="URL" value={formData.capsule_image || ""} onChange={(e) => handleFieldChange("capsule_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                        </div>
                       </div>
                     </div>
                   </div>
