@@ -38,25 +38,33 @@ const Index = () => {
   const { data: gamesData, isLoading: gamesLoading, isError: gamesError, refetch } = useQuery({
     queryKey: ["games"],
     queryFn: async () => {
-      // Fallback to local data if Supabase is empty or has issues
       try {
         const { data, error } = await supabase.from("games").select("*").order("nome");
         if (error || !data || data.length === 0) {
           const { games: localGames } = await import("@/data/games");
           return localGames.map(g => ({
-            ...g,
+            id: String(g.id),
+            nome: g.nome,
             imagem: g.imagem,
             hero_image: g.heroImage,
             vertical_image: g.verticalImage,
             capsule_image: g.capsuleImage,
             download_count: 0,
             lancamento: g.lancamento || "",
-          }));
+            categorias: g.categorias || [],
+            tamanho: g.tamanho || "0 GB",
+            descricao: g.descricao || "",
+            desenvolvedor: g.desenvolvedor || "",
+            distribuidor: g.distribuidor || "",
+            preco: g.preco || 0,
+            requisitos_minimo: typeof g.requisitos?.minimo === 'object' ? g.requisitos.minimo : {},
+            requisitos_recomendado: typeof g.requisitos?.recomendado === 'object' ? g.requisitos.recomendado : {},
+          })) as any[];
         }
-        return data;
+        return data as any[];
       } catch (err) {
         const { games: localGames } = await import("@/data/games");
-        return localGames;
+        return localGames.map(g => ({ ...g, id: String(g.id) })) as any[];
       }
     },
     staleTime: 1000 * 60 * 5,
@@ -69,19 +77,19 @@ const Index = () => {
         const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
         if (error || !data || data.length === 0) {
           const { games: localGames } = await import("@/data/games");
-          return localGames.slice(0, 5);
+          return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as any[];
         }
-        return data;
+        return data as any[];
       } catch (err) {
         const { games: localGames } = await import("@/data/games");
-        localGames.slice(0, 5);
+        return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as any[];
       }
     },
     staleTime: 1000 * 60 * 60,
   });
 
-  const games = useMemo(() => gamesData || [], [gamesData]);
-  const featured = useMemo(() => featuredData || [], [featuredData]);
+  const games = useMemo(() => (gamesData || []) as any[], [gamesData]);
+  const featured = useMemo(() => (featuredData || []) as any[], [featuredData]);
 
   const allCategories = useMemo(() => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
