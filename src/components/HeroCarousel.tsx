@@ -19,7 +19,7 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
       return data || [];
     },
     initialData: initialFeatured,
-    enabled: !initialFeatured, // Only run if not provided by parent
+    enabled: !initialFeatured || initialFeatured.length === 0, 
     staleTime: 1000 * 60 * 60,
   });
 
