@@ -12,11 +12,11 @@ interface SEOProps {
 }
 
 export const SEO = ({ 
-  title = "Jogos Piratas - O Melhor Catálogo de Jogos Grátis para PC", 
+  title = "Jogos Grátis - O Melhor Catálogo de Jogos para PC", 
   description = "Baixe os melhores jogos de PC de forma rápida, segura e 100% gratuita. Catálogo atualizado diariamente com os maiores lançamentos e clássicos verificados.", 
-  keywords = "jogos grátis, download jogos pc, jogos piratas, gta v download, minecraft grátis, red dead redemption 2 pc, jogos leves pc",
+  keywords = "jogos grátis, download jogos pc, gta v download, minecraft grátis, red dead redemption 2 pc, jogos leves pc",
   image = "/logo-pirate.png",
-  url = "https://jogos-piratas.com",
+  url = "https://jogos-gratis.com",
   preloadImage,
   preloadPoster
 }: SEOProps) => {
