@@ -86,6 +86,7 @@ const App = () => {
                     <Route path="/perfil/:userId" element={<Perfil />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/dmca" element={<DMCA />} />
+                    <Route path="/privacidade" element={<PrivacyPolicy />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </Suspense>
