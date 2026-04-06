@@ -121,12 +121,12 @@ export function Header() {
             <img src={pirateLogo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
             <div className="flex flex-col items-start leading-[0.8] py-1">
               <span className="text-xl md:text-2xl font-black tracking-tighter text-white">JOGOS</span>
-              <span className="text-xl md:text-2xl font-black tracking-tighter text-[#ff0000]">GRATIS</span>
+              <span className="text-xl md:text-2xl font-black tracking-tighter text-[#ff0000]">PIRATAS</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-12 flex-1 justify-center">
+          <nav className="hidden lg:flex items-center gap-12 flex-1 justify-start ml-4">
             {navLinks}
           </nav>
 
