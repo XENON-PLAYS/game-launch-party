@@ -216,6 +216,10 @@ export function GameAdminList({ games, onEdit, onDelete, onAdd, onDuplicate }: G
                                 <Pencil className="mr-2 h-3.5 w-3.5" />
                                 <span>Editar</span>
                               </DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => onDuplicate(game)} className="text-xs font-bold uppercase tracking-widest cursor-pointer">
+                                <Copy className="mr-2 h-3.5 w-3.5" />
+                                <span>Duplicar</span>
+                              </DropdownMenuItem>
                               <DropdownMenuItem asChild className="text-xs font-bold uppercase tracking-widest cursor-pointer">
                                 <a href={`/jogo/${game.slug}`} target="_blank" rel="noreferrer" className="flex items-center">
                                   <Eye className="mr-2 h-3.5 w-3.5" />
