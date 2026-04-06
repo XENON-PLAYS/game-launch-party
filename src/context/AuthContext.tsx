@@ -11,6 +11,7 @@ interface Profile {
   avatar_url: string | null;
   bio: string | null;
   is_vip: boolean;
+  vip_expires_at: string | null;
   theme: string;
   status: string;
   last_seen_at: string;
