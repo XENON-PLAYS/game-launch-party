@@ -19,7 +19,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect, useRef } from "react";
 import { OnlineUsers } from "./OnlineUsers";
 import { NotificationBell } from "./NotificationBell";
-import { GameRequestModal } from "./GameRequestModal";
+// removed GameRequestModal import
 import { optimizeImageUrl } from "@/lib/utils";
 import pirateLogo from "@/assets/logo-pirate.png";
 
@@ -44,7 +44,7 @@ export function Header() {
   }, []);
 
 
-  const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+  // removed isRequestModalOpen state
 
   const navLinks = (
     <>
@@ -258,10 +258,7 @@ export function Header() {
           )}
         </AnimatePresence>
 
-        <GameRequestModal 
-          isOpen={isRequestModalOpen} 
-          onClose={() => setIsRequestModalOpen(false)} 
-        />
+        {/* removed GameRequestModal */}
       </header>
 
     </>
