@@ -237,7 +237,18 @@ const DownloadPage = () => {
                   )}
                 </div>
               ) : (
-                game && <InstallationWizard game={game} />
+                game && (
+                  <div className="space-y-12">
+                    <InstallationWizard game={game} />
+                    <div className="pt-8 border-t border-border/40">
+                      <div className="flex items-center gap-3 text-primary mb-6">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                        <h4 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">Anúncio Patrocinado</h4>
+                      </div>
+                      <GoogleAd className="min-h-[100px] w-full bg-muted/20 rounded-2xl flex items-center justify-center border border-border/30 overflow-hidden" />
+                    </div>
+                  </div>
+                )
               )}
             </div>
           </div>
