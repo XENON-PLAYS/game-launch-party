@@ -1106,6 +1106,74 @@ export const games: Game[] = [
       recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7 (plus Service Pack 1)</li><li>Processador: Intel Core 2 Quad CPU Q6600 / AMD Phenom X3 8750</li><li>Memória: 4 GB de RAM</li><li>Placa de vídeo: NVIDIA 8600 / ATI 3870</li></ul>"
     }
   },
+  {
+    id: 61,
+    nome: "Resident Evil HD REMASTER",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/304240/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/304240/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/304240/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/304240/capsule_616x353.jpg",
+    categorias: ["Ação", "Terror"],
+    modos: ["Singleplayer"],
+    idiomas: ["Inglês"],
+    descricao: "O jogo que definiu o gênero de terror de sobrevivência está de volta! Confira a versão HD remasterizada do Resident Evil.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 7 SP1 / Windows 8.1</li><li>Processador: Intel Core 2 Duo 2.4 GHz / AMD Athlon X2 2.8 GHz</li><li>Memória: 2 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 260 / ATI Radeon HD 6790</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7 SP1 / Windows 8.1</li><li>Processador: Intel Core 2 Quad 2.7 GHz / AMD Phenom II X4 3.0 GHz</li><li>Memória: 4 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 560 / ATI Radeon HD 6950</li></ul>"
+    }
+  },
+  {
+    id: 62,
+    nome: "Resident Evil 5",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/21690/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/21690/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/21690/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/21690/capsule_616x353.jpg",
+    categorias: ["Ação", "Terror"],
+    modos: ["Singleplayer", "Co-op"],
+    idiomas: ["Inglês"],
+    descricao: "A corporação Umbrella e seus estoques de vírus letais foram destruídos e contidos. Mas uma nova e mais perigosa ameaça surgiu.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 7</li><li>Processador: Intel Core 2 Quad 2.4 GHz / AMD Phenom II X4 3.0 GHz</li><li>Memória: 4 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce 9800 / ATI Radeon HD 4850</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7</li><li>Processador: Intel Core 2 Quad 2.4 GHz / AMD Phenom II X4 3.0 GHz</li><li>Memória: 4 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 260 / ATI Radeon HD 4850</li></ul>"
+    }
+  },
+  {
+    id: 63,
+    nome: "Resident Evil 6",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/221040/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/221040/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/221040/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/221040/capsule_616x353.jpg",
+    categorias: ["Ação", "Terror"],
+    modos: ["Singleplayer", "Co-op"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Combinando ação e terror de sobrevivência, Resident Evil 6 promete ser a experiência dramática de terror de 2013.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows Vista/XP, Windows 7, Windows 8</li><li>Processador: Intel Core 2 Duo 2.4 Ghz / AMD Athlon X2 2.8 Ghz</li><li>Memória: 2 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce 8800GTS</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows Vista/XP, Windows 7, Windows 8</li><li>Processador: Intel Core 2 Quad 2.7 Ghz / AMD Phenom II X4 3 Ghz</li><li>Memória: 4 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 560</li></ul>"
+    }
+  },
+  {
+    id: 64,
+    nome: "Far Cry Primal",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/371660/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/371660/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/371660/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/371660/capsule_616x353.jpg",
+    categorias: ["Ação", "Mundo Aberto"],
+    modos: ["Singleplayer"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "A premiada franquia Far Cry que invadiu os trópicos e os Himalaias agora entra na luta original pela sobrevivência da humanidade.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 7, Windows 8.1, Windows 10 (64-bit versions only)</li><li>Processador: Intel Core i3-550 / AMD Phenom II X4 955</li><li>Memória: 4 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 460 / AMD Radeon HD 5770</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7, Windows 8.1, Windows 10 (64-bit versions only)</li><li>Processador: Intel Core i7-2600K / AMD FX-8350</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 780 / AMD Radeon R9 280X</li></ul>"
+    }
+  },
 ];
 
 export const allCategories = Array.from(new Set(games.flatMap((g) => g.categorias))).sort();
