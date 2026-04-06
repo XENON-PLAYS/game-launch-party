@@ -645,7 +645,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                       <Textarea 
                         value={formData.passo_a_passo || ""} 
                         onChange={(e) => handleFieldChange("passo_a_passo", e.target.value)} 
-                        className="min-h-[150px] rounded-2xl bg-background/50"
+                        className="min-h-[150px] rounded-2xl bg-background/50 border-border/40 focus:border-primary/40 focus:ring-primary/10 transition-all p-4 text-sm whitespace-pre-wrap"
                         placeholder="1. Extraia o arquivo\n2. Execute o setup.exe..."
                       />
                     </div>
