@@ -23,6 +23,7 @@ const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const DMCA = lazy(() => import("./pages/DMCA"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
