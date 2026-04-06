@@ -285,8 +285,23 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                         value={formData.tamanho || ""} 
                         onChange={(e) => handleFieldChange("tamanho", e.target.value)} 
                         placeholder="Ex: 70 GB"
-                        className="h-12 rounded-xl bg-background/50"
+                        className="h-12 rounded-xl bg-background/50 border-border/40"
                       />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Classificação Indicativa</Label>
+                      <select 
+                        value={formData.classificacao || "Livre"} 
+                        onChange={(e) => handleFieldChange("classificacao", e.target.value)}
+                        className="w-full h-12 rounded-xl bg-background/50 border-border/40 px-4 text-sm font-bold uppercase tracking-widest focus:ring-primary/20"
+                      >
+                        <option value="Livre">Livre</option>
+                        <option value="10+">10+</option>
+                        <option value="12+">12+</option>
+                        <option value="14+">14+</option>
+                        <option value="16+">16+</option>
+                        <option value="18+">18+</option>
+                      </select>
                     </div>
                   </div>
 
