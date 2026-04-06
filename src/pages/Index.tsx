@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
@@ -21,6 +21,7 @@ const categoryIconMap: Record<string, any> = {
 
 const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const searchFromUrl = searchParams.get("search") || "";
   
   const [busca, setBusca] = useState(searchFromUrl);
@@ -497,9 +498,10 @@ const Index = () => {
             <div className="space-y-6 md:space-y-12">
               <h4 className="text-responsive-small text-foreground font-extrabold">Plataforma</h4>
               <ul className="space-y-3 md:space-y-6 text-base md:text-lg font-medium">
-                <li><button className="hover:text-primary transition-colors">Início</button></li>
-                <li><button className="hover:text-primary transition-colors">Catálogo</button></li>
-                <li><button className="hover:text-primary transition-colors">Novidades</button></li>
+                <li><button onClick={() => navigate("/")} className="hover:text-primary transition-colors">Início</button></li>
+                <li><button onClick={() => navigate("/")} className="hover:text-primary transition-colors">Catálogo</button></li>
+                <li><button onClick={() => navigate("/novidades")} className="hover:text-primary transition-colors">Novidades</button></li>
+                <li><button onClick={() => navigate("/dmca")} className="hover:text-primary transition-colors">DMCA</button></li>
               </ul>
             </div>
             
