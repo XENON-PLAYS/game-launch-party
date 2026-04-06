@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Gamepad2, Crown, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { MeteorBackground } from "@/components/MeteorBackground";
 
 const GameRequest = () => {
   const { user, profile, isAdmin, isLoading } = useAuth();
@@ -66,19 +67,18 @@ const GameRequest = () => {
   const isVip = profile?.is_vip || isAdmin;
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen space-background flex flex-col text-foreground">
       <SEO title="Pedir Jogos - Jogos Grátis" description="Peça seus jogos favoritos e DLCs" />
       <Header />
+      <MeteorBackground />
       
-      <main className="container mx-auto px-4 py-20">
+      <main className="flex-1 flex items-center justify-center px-4 py-12 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="max-w-2xl mx-auto space-y-8 bg-card p-8 md:p-12 rounded-3xl border border-border backdrop-blur-xl shadow-2xl relative overflow-hidden"
+          className="max-w-2xl w-full mx-auto space-y-8 bg-card p-8 md:p-12 rounded-3xl border border-border backdrop-blur-xl shadow-2xl relative overflow-hidden"
         >
-          {/* Background Decoration */}
-          <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-[100px] rounded-full" />
-          <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-primary/5 blur-[100px] rounded-full" />
+
 
           <div className="text-center space-y-4 relative">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 mb-4">
