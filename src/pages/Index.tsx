@@ -533,6 +533,7 @@ const Index = () => {
                 <li><button className="hover:text-primary transition-colors">Central de Ajuda</button></li>
                 <li><button onClick={() => navigate("/dmca")} className="hover:text-primary transition-colors">Termos de Uso</button></li>
                 <li><button onClick={() => navigate("/privacidade")} className="hover:text-primary transition-colors">Privacidade</button></li>
+                <li><button onClick={() => navigate("/pedir-jogo")} className="hover:text-primary transition-colors">Pedir Jogos</button></li>
               </ul>
             </div>
 
