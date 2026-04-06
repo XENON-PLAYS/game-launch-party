@@ -31,7 +31,7 @@ export const SEO = ({
       <meta name="title" content={fullTitle} />
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      <meta name="author" content="Jogos Piratas Team" />
+      <meta name="author" content="Jogos Grátis Team" />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={currentUrl} />
       
