@@ -93,6 +93,17 @@ export function Header() {
         }`} />
       </Link>
       <Link 
+        to="/pedir-jogo" 
+        className={`text-[13px] font-black uppercase tracking-[0.2em] transition-all duration-300 relative group py-2 ${
+          location.pathname === "/pedir-jogo" ? "text-[#ff0000]" : "text-gray-500 hover:text-white"
+        }`}
+      >
+        Pedir Jogos
+        <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#ff0000] transition-all duration-300 ${
+          location.pathname === "/pedir-jogo" ? "w-full" : "w-0 group-hover:w-full"
+        }`} />
+      </Link>
+      <Link 
         to="/vip" 
         className="flex items-center gap-2 text-[13px] font-black uppercase tracking-[0.2em] text-[#fbbf24] hover:brightness-125 transition-all relative group py-2"
       >
