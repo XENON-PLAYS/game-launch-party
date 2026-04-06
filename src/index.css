@@ -225,6 +225,9 @@
     width: 100px;
     height: 1.5px;
     background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.8));
+    .light & {
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1));
+    }
     border-radius: 999px;
     filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
     opacity: 0;
