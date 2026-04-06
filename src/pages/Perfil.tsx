@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
+import { useQueryClient } from "@tanstack/react-query";
 import { Header } from "@/components/Header";
 
 import { supabase } from "@/integrations/supabase/client";
