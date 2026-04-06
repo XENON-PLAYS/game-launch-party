@@ -293,7 +293,8 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                       <select 
                         value={formData.classificacao || "Livre"} 
                         onChange={(e) => handleFieldChange("classificacao", e.target.value)}
-                        className="w-full h-12 rounded-xl bg-background/50 border-border/40 px-4 text-sm font-bold uppercase tracking-widest focus:ring-primary/20"
+                        className="w-full h-12 rounded-xl bg-background/50 border border-border/40 px-4 text-sm font-bold uppercase tracking-widest focus:ring-primary/20 focus:border-primary/40 outline-none transition-all appearance-none cursor-pointer"
+                        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.2rem' }}
                       >
                         <option value="Livre">Livre</option>
                         <option value="10+">10+</option>
