@@ -25,6 +25,30 @@ export function NotificationBell() {
     enabled: !!user,
   });
 
+  useEffect(() => {
+    if (!user) return;
+
+    const channel = supabase
+      .channel("notifications-changes")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "notifications",
+          filter: `user_id=eq.${user.id}`,
+        },
+        () => {
+          queryClient.invalidateQueries({ queryKey: ["notifications", user.id] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [user, queryClient]);
+
   const unreadCount = notifications.filter(n => !n.read).length;
 
   const markAsRead = useMutation({
