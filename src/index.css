@@ -124,6 +124,9 @@
 
   ::-webkit-scrollbar-thumb {
     @apply bg-muted-foreground/20 rounded-full border-4 border-solid border-background hover:bg-muted-foreground/40 transition-colors;
+    .light & {
+      @apply bg-muted-foreground/10 hover:bg-muted-foreground/20;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -174,6 +177,11 @@
     background: radial-gradient(circle at 50% 50%, #1a0202 0%, #050000 100%);
     overflow: hidden;
     z-index: 0;
+    transition: background 0.5s ease-in-out;
+  }
+
+  .light .space-background {
+    background: radial-gradient(circle at 50% 50%, #f9fafb 0%, #f3f4f6 100%);
   }
 
   /* Fixed stars and Nebulae */
@@ -220,6 +228,9 @@
     width: 100px;
     height: 1.5px;
     background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.8));
+    .light & {
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1));
+    }
     border-radius: 999px;
     filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
     opacity: 0;
@@ -292,16 +303,16 @@
 
 @layer components {
   .auth-fieldset {
-    @apply p-8 bg-card/40 backdrop-blur-xl border border-white/5 shadow-2xl rounded-2xl relative overflow-hidden;
+    @apply p-8 bg-card/40 backdrop-blur-xl border border-border shadow-2xl rounded-2xl relative overflow-hidden;
   }
   .auth-title {
-    @apply text-2xl font-black uppercase tracking-tight mb-8;
+    @apply text-2xl font-black uppercase tracking-tight mb-8 text-foreground;
   }
   .auth-label {
     @apply text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground block mb-2;
   }
   .auth-input {
-    @apply w-full px-4 py-3 bg-white/[0.03] border border-white/5 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-muted-foreground/30 text-foreground;
+    @apply w-full px-4 py-3 bg-muted/30 border border-input rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-muted-foreground/30 text-foreground;
   }
   .auth-btn {
     @apply w-full py-4 bg-primary text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-50 shadow-lg shadow-primary/20;

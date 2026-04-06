@@ -190,20 +190,20 @@ const Index = () => {
       
       {!isSearching && <HeroCarousel initialFeatured={featured} isLoadingInitial={featuredLoading} />}
 
-      <section className="bg-[#0f0f0f]/80 backdrop-blur-2xl sticky top-[60px] md:top-[72px] z-[90] border-b border-white/5 py-4 md:py-6 transition-all duration-300">
+      <section className="bg-background/80 backdrop-blur-2xl sticky top-[60px] md:top-[72px] z-[90] border-b border-border py-4 md:py-6 transition-all duration-300">
         <div className="container mx-auto px-4 md:px-12">
           <div className="flex flex-col md:flex-row gap-4 items-center max-w-7xl mx-auto">
             {/* Unified Search Input */}
             <div className="flex-1 w-full relative group">
               <div className="absolute inset-0 bg-primary/5 rounded-2xl blur-lg opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
               <div className="relative flex items-center">
-                <Search className="absolute left-5 w-5 h-5 text-gray-500 group-focus-within:text-primary transition-colors duration-300" />
+                <Search className="absolute left-5 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
                 <input 
                   type="text" 
                   placeholder="Pesquisar jogos, categorias ou desenvolvedoras..." 
                   value={busca}
                   onChange={(e) => setBusca(e.target.value)}
-                  className="w-full pl-14 pr-12 py-4 bg-white/5 border border-white/5 rounded-2xl text-sm md:text-base focus:outline-none focus:bg-white/[0.07] focus:border-primary/30 transition-all placeholder:text-gray-600 font-medium" 
+                  className="w-full pl-14 pr-12 py-4 bg-muted/30 border border-border rounded-2xl text-sm md:text-base focus:outline-none focus:bg-muted/50 focus:border-primary/30 transition-all placeholder:text-muted-foreground/50 font-medium" 
                 />
                 <AnimatePresence>
                   {busca && (
@@ -212,7 +212,7 @@ const Index = () => {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
                       onClick={() => setBusca("")}
-                      className="absolute right-4 p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all"
+                      className="absolute right-4 p-1.5 rounded-lg bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
                     >
                       <X className="w-4 h-4" />
                     </motion.button>
@@ -226,8 +226,8 @@ const Index = () => {
               onClick={() => setShowFilters(!showFilters)}
               className={`w-full md:w-auto px-6 py-4 rounded-2xl border transition-all flex items-center justify-center gap-3 font-black text-xs tracking-widest uppercase group ${
                 showFilters 
-                ? "bg-primary text-white border-primary shadow-lg shadow-primary/20" 
-                : "bg-white/5 border-white/5 hover:bg-white/10 text-gray-400 hover:text-white"
+                ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" 
+                : "bg-muted/50 border-border hover:bg-muted text-muted-foreground hover:text-foreground"
               }`}
             >
               <SlidersHorizontal className={`w-4 h-4 transition-transform duration-500 ${showFilters ? "rotate-180" : ""}`} />
@@ -248,12 +248,12 @@ const Index = () => {
                 exit={{ opacity: 0, y: -10 }}
                 className="mt-3 flex flex-wrap items-center gap-3 px-2"
               >
-                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-600">Buscas Populares:</span>
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Buscas Populares:</span>
                 {["GTA V", "Minecraft", "Red Dead", "Elden Ring", "Marvel"].map((sug) => (
                   <button 
                     key={sug}
                     onClick={() => setBusca(sug)}
-                    className="text-[9px] font-black uppercase tracking-[0.1em] text-gray-500 hover:text-primary transition-all bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 px-2 py-1 rounded-md"
+                    className="text-[9px] font-black uppercase tracking-[0.1em] text-muted-foreground hover:text-primary transition-all bg-muted/20 hover:bg-muted/40 border border-border px-2 py-1 rounded-md"
                   >
                     {sug}
                   </button>

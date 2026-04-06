@@ -62,12 +62,12 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
             <div className="space-y-6">
               <Skeleton className="h-6 w-32 bg-primary/10" />
               <Skeleton className="h-20 w-3/4 bg-primary/5" />
-              <Skeleton className="h-32 w-full bg-white/5" />
+              <Skeleton className="h-32 w-full bg-muted/20" />
               <div className="flex gap-4">
                 <Skeleton className="h-16 w-48 rounded-full bg-primary/20" />
               </div>
             </div>
-            <Skeleton className="mx-auto md:mr-0 rounded-3xl aspect-[3/4] w-full max-w-[240px] md:max-w-[380px] bg-white/5 shadow-2xl" />
+            <Skeleton className="mx-auto md:mr-0 rounded-3xl aspect-[3/4] w-full max-w-[240px] md:max-w-[380px] bg-muted/20 shadow-2xl" />
           </div>
         </div>
       </section>
@@ -179,7 +179,7 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
               >
                 <div className="relative group/poster w-full max-w-[180px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[400px]">
                   <div className="absolute -inset-4 bg-primary/20 rounded-[2.5rem] blur-2xl group-hover:bg-primary/30 transition-all duration-700" />
-                  <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-3xl overflow-hidden border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] aspect-[3/4] relative">
+                  <Link to={`/jogo/${game.slug || game.id}`} className="block rounded-3xl overflow-hidden border border-border/50 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] aspect-[3/4] relative">
                     <img 
                       src={optimizeImageUrl((game as any).vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f", 600)} 
                       alt={game.nome} 
@@ -210,7 +210,7 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
                 onClick={() => goTo(i)}
                 className={`relative h-1 group focus:outline-none transition-all duration-300 ${i === current ? 'w-10 sm:w-[60px]' : 'w-5 sm:w-[30px]'}`}
               >
-                <div className="absolute inset-0 bg-white/20 rounded-full overflow-hidden">
+                <div className="absolute inset-0 bg-muted/40 rounded-full overflow-hidden">
                   <motion.div 
                     initial={false}
                     animate={{ width: i === current ? "100%" : "0%" }}
@@ -225,14 +225,14 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
           <div className="flex gap-3">
             <button 
               onClick={prev} 
-              className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all flex items-center justify-center backdrop-blur-sm group"
+              className="w-12 h-12 rounded-full bg-muted/50 hover:bg-muted border border-border text-foreground transition-all flex items-center justify-center backdrop-blur-sm group"
               aria-label="Previous slide"
             >
               <ChevronLeft className="w-6 h-6 group-active:scale-90 transition-transform" />
             </button>
             <button 
               onClick={next} 
-              className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all flex items-center justify-center backdrop-blur-sm group"
+              className="w-12 h-12 rounded-full bg-muted/50 hover:bg-muted border border-border text-foreground transition-all flex items-center justify-center backdrop-blur-sm group"
               aria-label="Next slide"
             >
               <ChevronRight className="w-6 h-6 group-active:scale-90 transition-transform" />

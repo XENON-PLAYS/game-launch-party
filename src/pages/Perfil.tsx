@@ -384,18 +384,18 @@ const Perfil = () => {
           Ambiente Visual
           <div className="h-px flex-1 bg-border/40" />
          </label>
-         <div className="flex gap-3 p-1 bg-black/20 rounded-xl border border-white/5">
+         <div className="flex gap-3 p-1 bg-muted/30 rounded-xl border border-border">
           <button
            type="button"
            onClick={() => setThemePreference("dark")}
-           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${themePreference === 'dark' ? 'border-primary/50 bg-primary/20 text-white shadow-inner' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${themePreference === 'dark' ? 'border-primary/50 bg-primary/20 text-foreground shadow-inner' : 'border-transparent text-muted-foreground hover:bg-muted/50'}`}
           >
            <Moon className="w-4 h-4" /> Escuro
           </button>
           <button
            type="button"
            onClick={() => setThemePreference("light")}
-           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${themePreference === 'light' ? 'border-primary/50 bg-primary/20 text-white shadow-inner' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${themePreference === 'light' ? 'border-primary/50 bg-primary/20 text-foreground shadow-inner' : 'border-transparent text-muted-foreground hover:bg-muted/50'}`}
           >
            <Sun className="w-4 h-4" /> Claro
           </button>
@@ -407,18 +407,18 @@ const Perfil = () => {
           Privacidade & Status
           <div className="h-px flex-1 bg-border/40" />
          </label>
-         <div className="flex gap-3 p-1 bg-black/20 rounded-xl border border-white/5">
+         <div className="flex gap-3 p-1 bg-muted/30 rounded-xl border border-border">
           <button
            type="button"
            onClick={() => setStatus("online")}
-           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${status === 'online' ? 'border-green-500/50 bg-green-500/10 text-green-400' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${status === 'online' ? 'border-green-500/50 bg-green-500/10 text-green-400' : 'border-transparent text-muted-foreground hover:bg-muted/50'}`}
           >
            <div className={`w-2 h-2 rounded-full ${status === 'online' ? 'bg-green-500 animate-pulse' : 'bg-green-900/40'}`} /> Online
           </button>
           <button
            type="button"
            onClick={() => setStatus("offline")}
-           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${status === 'offline' ? 'border-gray-500/50 bg-gray-500/10 text-gray-400' : 'border-transparent text-muted-foreground hover:bg-white/5'}`}
+           className={`flex-1 py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 border transition-all duration-300 ${status === 'offline' ? 'border-gray-500/50 bg-gray-500/10 text-gray-400' : 'border-transparent text-muted-foreground hover:bg-muted/50'}`}
           >
            <div className={`w-2 h-2 rounded-full ${status === 'offline' ? 'bg-gray-500 shadow-lg' : 'bg-gray-900/40'}`} /> Offline
           </button>
@@ -426,7 +426,7 @@ const Perfil = () => {
         </div>
        </div>
 
-       <div className="pt-8 border-t border-white/5 flex flex-wrap gap-4 justify-between items-center">
+       <div className="pt-8 border-t border-border flex flex-wrap gap-4 justify-between items-center">
         <button 
          type="button"
          onClick={async () => {
@@ -537,18 +537,18 @@ const Perfil = () => {
            <th className="px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-right text-muted-foreground">Downloads</th>
           </tr>
          </thead>
-         <tbody className="divide-y divide-white/5">
+         <tbody className="divide-y divide-border">
            {ranking.map((r, i) => (
             <tr key={i} className="group hover:bg-primary/5 transition-all duration-300">
              <td className="px-6 py-4">
-              <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg font-black text-sm ${i === 0 ? 'bg-yellow-500 text-black shadow-lg shadow-yellow-500/20' : i === 1 ? 'bg-gray-300 text-black shadow-lg shadow-gray-300/20' : i === 2 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/20' : 'bg-white/5 text-muted-foreground'}`}>
+              <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg font-black text-sm ${i === 0 ? 'bg-yellow-500 text-black shadow-lg shadow-yellow-500/20' : i === 1 ? 'bg-gray-300 text-black shadow-lg shadow-gray-300/20' : i === 2 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/20' : 'bg-muted/30 text-muted-foreground'}`}>
                #{i + 1}
               </span>
              </td>
              <td className="px-6 py-4">
               <div className="flex items-center gap-4">
                <Link to={`/perfil/${r.user_id}`} className="shrink-0 relative">
-                <img src={r.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=user"} className="w-10 h-10 rounded-full border-2 border-white/10 group-hover:border-primary/50 transition-colors object-cover" />
+                <img src={r.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=user"} className="w-10 h-10 rounded-full border-2 border-border group-hover:border-primary/50 transition-colors object-cover" />
                 {r.is_vip && <div className="absolute -top-1 -right-1 bg-yellow-500 rounded-full p-0.5"><BadgeCheck className="w-2.5 h-2.5 text-black" /></div>}
                </Link>
                <div>
@@ -611,12 +611,12 @@ const Perfil = () => {
           <div className="auth-fieldset flex flex-col items-center p-0 overflow-hidden group/sidebar">
             {/* Cover Gradient */}
             <div className="w-full h-24 bg-gradient-to-br from-primary/40 via-primary/20 to-transparent relative">
-              <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
+              <div className="absolute inset-0 bg-background/20 backdrop-blur-[2px]" />
             </div>
             
             <div className="flex flex-col items-center px-8 pb-8 -mt-12 relative z-10">
               <div className="relative group">
-                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-background bg-secondary flex items-center justify-center relative shadow-xl ring-1 ring-white/10">
+                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-background bg-secondary flex items-center justify-center relative shadow-xl ring-1 ring-border">
                   {targetProfile?.avatar_url ? (
                     <img 
                       src={targetProfile.avatar_url} 
@@ -627,7 +627,7 @@ const Perfil = () => {
                     <User className="w-16 h-16 text-muted-foreground" />
                   )}
                   {uploading && (
-                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
                       <Loader2 className="w-8 h-8 animate-spin text-white" />
                     </div>
                   )}
@@ -708,9 +708,9 @@ const Perfil = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-300 ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/25 scale-[1.02]' : 'hover:bg-primary/10 text-muted-foreground hover:text-primary hover:translate-x-1'}`}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-300 ${activeTab === tab.id ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25 scale-[1.02]' : 'hover:bg-primary/10 text-muted-foreground hover:text-primary hover:translate-x-1'}`}
               >
-                <tab.icon className={`w-4 h-4 transition-colors ${activeTab === tab.id ? 'text-white' : 'text-primary'}`} />
+                <tab.icon className={`w-4 h-4 transition-colors ${activeTab === tab.id ? 'text-primary-foreground' : 'text-primary'}`} />
                 <span className="font-semibold">{tab.label}</span>
               </button>
             ))}
@@ -718,8 +718,8 @@ const Perfil = () => {
 
           {/* Account Details */}
           {isOwnProfile && (
-            <div className="auth-fieldset p-6 space-y-5 bg-card/30 backdrop-blur-xl border-white/5 shadow-xl">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground border-b border-white/5 pb-3">Dados da Conta</h3>
+            <div className="auth-fieldset p-6 space-y-5 bg-card/30 backdrop-blur-xl border-border shadow-xl">
+              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground border-b border-border pb-3">Dados da Conta</h3>
               <div className="space-y-4">
                 <div className="space-y-1">
                   <p className="text-[9px] text-primary font-black uppercase tracking-widest ">E-mail cadastrado</p>
