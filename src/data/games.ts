@@ -39,7 +39,7 @@ export const games: Game[] = [
     categorias: ["Ação","Aventura"],
     modos: ["Singleplayer", "Multiplayer"],
     idiomas: ["Português", "Inglês"],
-    descricao: "Arthur Morgan e a gangue Van der Linde são forçados a fugir. Com agentes federais e caçadores de recompensas no seu encalço, a gangue precisa roubar, assaltar e lutar para sobreviver no impiedoso coração dos Estados Unidos.", 1899. O fim da era do velho oeste começou.",
+    descricao: "Arthur Morgan e a gangue Van der Linde são forçados a fugir. Com agentes federais e caçadores de recompensas no seu encalço, a gangue precisa roubar, assaltar e lutar para sobreviver no impiedoso coração dos Estados Unidos. 1899. O fim da era do velho oeste começou.",
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 - 64-bit<br></li><li><strong>Processador:</strong> Intel® Core™ i5-2500K / AMD FX-6300<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GeForce GTX 770 2GB / AMD Radeon R9 280 3GB<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 150 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Direct X Compatible</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 - 64-bit<br></li><li><strong>Processador:</strong> Intel® Core™ i7-4770K / AMD Ryzen 5 1500X<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GeForce GTX 1060 6GB / AMD Radeon RX 480 4GB<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 150 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Direct X Compatible</li></ul>"
@@ -59,7 +59,7 @@ export const games: Game[] = [
     categorias: ["Ação","RPG"],
     modos: ["Singleplayer", "Multiplayer"],
     idiomas: ["Português", "Inglês"],
-    descricao: "O NOVO RPG DE AÇÃO E FANTASIA. Levante-se, Maculado, e seja guiado pela graça para portar o poder do Anel Prístino e se tornar um Lorde Prístino nas Terras Intermédias.", Maculado, e seja guiado pela graça.",
+    descricao: "O NOVO RPG DE AÇÃO E FANTASIA. Levante-se, Maculado, e seja guiado pela graça para portar o poder do Anel Prístino e se tornar um Lorde Prístino nas Terras Intermédias. Maculado, e seja guiado pela graça.",
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10<br></li><li><strong>Processador:</strong> INTEL CORE I5-8400 or AMD RYZEN 3 3300X<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GEFORCE GTX 1060 3 GB or AMD RADEON RX 580 4 GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 60 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Windows Compatible Audio Device<br></li><li><strong>Outras observações:</strong> </li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10/11<br></li><li><strong>Processador:</strong> INTEL CORE I7-8700K or AMD RYZEN 5 3600X<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GEFORCE GTX 1070 8 GB or AMD RADEON RX VEGA 56 8 GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 60 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Windows Compatible Audio Device<br></li><li><strong>Outras observações:</strong> </li></ul>"
@@ -330,9 +330,9 @@ export const games: Game[] = [
   {
     id: 17,
     nome: "Sekiro", 
-    descricao: "Fall Guys é um jogo party royale gratuito, multiplataforma e multijogador. Dispute com seus amigos em pistas de obstáculos desajeitadas e absurdas ou construa seu próprio percurso caótico para compartilhar com a comunidade.", 
-    desenvolvedor: "Mediatonic", 
-    lancamento: "3/ago./2020",
+    descricao: "Trilhe seu próprio caminho de vingança nesta premiada aventura da FromSoftware, os criadores de Bloodborne e da franquia Dark Souls. Obtenha vingança. Retome sua honra. Mate astuciosamente.", 
+    desenvolvedor: "FromSoftware, Inc.", 
+    lancamento: "21/mar./2019",
     preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1097150/header.jpg",
     categorias: ["Ação","Casual","Indie","Multijogador Massivo","Esportes"],
