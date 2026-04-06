@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { Search, SlidersHorizontal, LayoutGrid, X, Target, Sword, Ghost, Shield, Compass, Users, Clock, Zap, Star, Gamepad2, Layers, Trash2 } from "lucide-react";
+import { Search, SlidersHorizontal, LayoutGrid, X, Target, Sword, Ghost, Shield, Compass, Users, Clock, Zap, Star, Gamepad2, Layers, Trash2, Flame, Rocket } from "lucide-react";
 import { GameCard } from "@/components/GameCard";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
@@ -68,7 +68,7 @@ const Index = () => {
   const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 12), [games]);
   const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 12), [games]);
 
-  const isLoading = gamesLoading || featuredLoading;
+  const isLoading = gamesLoading;
   const isError = gamesError;
 
   const isSearching = busca || categoria !== "todas";
@@ -407,9 +407,9 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-32 md:space-y-60">
-            <GameSection title="Mais Jogados" icon="flame" games={emAlta} />
-            <GameSection title="Jogos Mais Baixados" icon="star" games={emAlta} />
-            <GameSection title="Jogos da Nova Geração" icon="rocket" games={recentes} />
+            <GameSection title="Mais Jogados" icon={Flame} games={emAlta} />
+            <GameSection title="Jogos Mais Baixados" icon={Star} games={emAlta} />
+            <GameSection title="Jogos da Nova Geração" icon={Rocket} games={recentes} />
 
             <section className="space-y-12 md:space-y-16">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-10 border-b-2 border-primary/20 pb-12 md:pb-20">
