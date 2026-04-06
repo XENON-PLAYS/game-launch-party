@@ -1174,46 +1174,6 @@ export const games: Game[] = [
       recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7, Windows 8.1, Windows 10 (64-bit versions only)</li><li>Processador: Intel Core i7-2600K / AMD FX-8350</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 780 / AMD Radeon R9 280X</li></ul>"
     }
   },
-  {
-    id: 570,
-    nome: "Dota 2",
-    preco: 0,
-    imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/header.jpg?t=1769535998",
-    heroImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/header.jpg?t=1769535998",
-    verticalImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/header.jpg?t=1769535998",
-    capsuleImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/header.jpg?t=1769535998",
-    categorias: ["Ação", "Estratégia", "Grátis para Jogar", "Multijogador", "Co-op"],
-    modos: ["Multijogador", "Co-op"],
-    idiomas: ["Português", "Inglês"],
-    desenvolvedor: "Valve",
-    distribuidor: "Valve",
-    lancamento: "9 jul. 2013",
-    descricao: "Todos os dias, milhões de jogadores de todo o mundo levam um de mais de 100 heróis para a luta. Estejam a jogar há 10 ou 1000 horas, há sempre algo para descobrir. Com mecânicas, recursos e heróis sempre em evolução graças a atualizações regulares, o Dota 2 é mais do que um jogo.",
-    requisitos: {
-      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>Sistema Operativo *:</strong> Windows 7 ou mais recente<br></li><li><strong>Processador:</strong> Dual core da Intel ou da AMD com 2,8 GHz<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa gráfica:</strong> NVIDIA GeForce 8600/9600GT, ATI/AMD Radeon HD2600/3600<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Ligação à Internet de banda larga<br></li><li><strong>Espaço no disco:</strong> Requer 60 GB de espaço livre<br></li><li><strong>Placa de som:</strong> Compatível com DirectX</li></ul>",
-      recomendado: ""
-    }
-  },
-  {
-    id: 730,
-    nome: "Counter-Strike 2",
-    preco: 0,
-    imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/header.jpg?t=1749053861",
-    heroImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/header.jpg?t=1749053861",
-    verticalImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/header.jpg?t=1749053861",
-    capsuleImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/header.jpg?t=1749053861",
-    categorias: ["Ação", "Grátis para Jogar", "Multijogador", "Competitivo"],
-    modos: ["Multijogador"],
-    idiomas: ["Português", "Inglês"],
-    desenvolvedor: "Valve",
-    distribuidor: "Valve",
-    lancamento: "21 ago. 2012",
-    descricao: "Ao longo de mais de duas décadas, o Counter‑Strike ofereceu uma experiência competitiva de elite, moldada por milhões de jogadores de todo o mundo. Agora, o próximo capítulo da história do CS está prestes a começar: Counter‑Strike 2.",
-    requisitos: {
-      minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>Sistema Operativo:</strong> Windows® 10<br></li><li><strong>Processador:</strong> Processador com 4 threads - Intel® Core™ i5 750 ou superior<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa gráfica:</strong> A placa gráfica deve ter, no mínimo, 1 GB e ser compatível com DirectX 11 e Shader Model 5.0<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Espaço no disco:</strong> Requer 85 GB de espaço livre</li></ul>",
-      recomendado: ""
-    }
-  },
 ];
 
 export const allCategories = Array.from(new Set(games.flatMap((g) => g.categorias))).sort();
