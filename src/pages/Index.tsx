@@ -378,19 +378,26 @@ const Index = () => {
             </div>
 
             {filteredGames.length === 0 ? (
-              <div className="text-center py-20 md:py-40 space-y-8 md:space-y-10 max-w-2xl mx-auto">
-                <div className="inline-flex p-8 md:p-12 rounded-full bg-primary/5 border border-primary/10 mb-4 md:mb-8">
-                  <LayoutGrid className="w-16 h-16 md:w-24 md:h-24 text-primary/30" />
+              <div className="text-center py-32 space-y-8 bg-white/5 rounded-[3rem] border border-dashed border-white/10 max-w-2xl mx-auto px-10">
+                <div className="relative w-24 h-24 mx-auto">
+                  <Gamepad2 className="w-24 h-24 text-gray-800" />
+                  <motion.div 
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 border-2 border-dashed border-primary/20 rounded-full"
+                  />
                 </div>
-                <h3 className="text-xl md:text-responsive-h3 uppercase font-extrabold tracking-tight">Nenhum tesouro encontrado</h3>
-                <p className="text-sm md:text-responsive-body">
-                  Não encontramos nenhum título com esses critérios. Tente navegar pelas categorias para descobrir os melhores jogos da nova geração.
-                </p>
+                <div className="space-y-4">
+                  <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter italic">Nenhum tesouro <span className="text-primary">encontrado</span></h3>
+                  <p className="text-gray-500 font-medium italic">
+                    Nossa frota não localizou jogos com esses critérios. Tente termos menos específicos ou explore nosso catálogo completo.
+                  </p>
+                </div>
                 <button 
-                  onClick={() => { setBusca(""); setCategoria("todas"); }}
-                  className="px-8 md:px-12 py-4 md:py-6 bg-primary text-primary-foreground rounded-full font-black uppercase tracking-[0.2em] text-[10px] md:text-xs hover:scale-105 transition-all shadow-2xl shadow-primary/30"
+                  onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
+                  className="px-10 py-4 bg-primary text-white hover:bg-primary/90 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-primary/20"
                 >
-                  Catálogo Completo
+                  Limpar Busca
                 </button>
               </div>
             ) : (
