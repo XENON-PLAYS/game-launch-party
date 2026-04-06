@@ -46,9 +46,10 @@ interface GameAdminListProps {
   onEdit: (game: Game) => void;
   onDelete: (id: string, name: string) => void;
   onAdd: () => void;
+  onDuplicate: (game: Game) => void;
 }
 
-export function GameAdminList({ games, onEdit, onDelete, onAdd }: GameAdminListProps) {
+export function GameAdminList({ games, onEdit, onDelete, onAdd, onDuplicate }: GameAdminListProps) {
   const [busca, setBusca] = useState("");
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [filtroCategoria, setFiltroCategoria] = useState("todas");
