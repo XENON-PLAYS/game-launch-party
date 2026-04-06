@@ -1,0 +1,904 @@
+[
+  {
+    "nome": "Red Dead Redemption 2",
+    "desenvolvedor": "Rockstar Games",
+    "publicadora": "Rockstar Games",
+    "data_lancamento": "5/dez./2019",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 - 64-bit<br></li><li><strong>Processador:</strong> Intel® Core™ i5-2500K / AMD FX-6300<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GeForce GTX 770 2GB / AMD Radeon R9 280 3GB<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 150 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Direct X Compatible</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 - 64-bit<br></li><li><strong>Processador:</strong> Intel® Core™ i7-4770K / AMD Ryzen 5 1500X<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GeForce GTX 1060 6GB / AMD Radeon RX 480 4GB<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 150 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Direct X Compatible</li></ul>",
+    "descricao": "Arthur Morgan e a gangue Van der Linde são forçados a fugir. Com agentes federais e caçadores de recompensas no seu encalço, a gangue precisa roubar, assaltar e lutar para sobreviver no impiedoso coração dos Estados Unidos.",
+    "genero": [
+      "Ação",
+      "Aventura"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Elden Ring",
+    "desenvolvedor": "FromSoftware, Inc.",
+    "publicadora": "FromSoftware, Inc., Bandai Namco Entertainment",
+    "data_lancamento": "24/fev./2022",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10<br></li><li><strong>Processador:</strong> INTEL CORE I5-8400 or AMD RYZEN 3 3300X<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GEFORCE GTX 1060 3 GB or AMD RADEON RX 580 4 GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 60 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Windows Compatible Audio Device<br></li><li><strong>Outras observações:</strong> </li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10/11<br></li><li><strong>Processador:</strong> INTEL CORE I7-8700K or AMD RYZEN 5 3600X<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GEFORCE GTX 1070 8 GB or AMD RADEON RX VEGA 56 8 GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 60 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Windows Compatible Audio Device<br></li><li><strong>Outras observações:</strong> </li></ul>",
+    "descricao": "O NOVO RPG DE AÇÃO E FANTASIA. Levante-se, Maculado, e seja guiado pela graça para portar o poder do Anel Prístino e se tornar um Lorde Prístino nas Terras Intermédias.",
+    "genero": [
+      "Ação",
+      "RPG"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Dark Souls Remastered",
+    "desenvolvedor": "QLOC, FromSoftware, Inc.",
+    "publicadora": "FromSoftware, Inc., Bandai Namco Entertainment",
+    "data_lancamento": "23/mai./2018",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Windows 7 64-bit, Service Pack 1<br></li><li><strong>Processador:</strong> Intel Core i5-2300 2.8 GHz / AMD FX-6300, 3.5 GHz<br></li><li><strong>Memória:</strong> 6 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> GeForce GTX 460, 1 GB / Radeon HD 6870, 1 GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 8 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device<br></li><li><strong>Outras observações:</strong> Low Settings, 60 FPS @ 1080p</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel Core i5-4570 3.2 GHz / AMD FX-8350 4.2 GHz<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> GeForce GTX 660, 2 GB / Radeon HD 7870, 2 GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 8 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device<br></li><li><strong>Outras observações:</strong> High Settings, 60 FPS @ 1080p</li></ul>",
+    "descricao": "Mas então, fez-se o fogo. Experimente novamente o jogo aclamado pela crítica e definidor de gênero que foi o início tudo. Belamente remasterizado, volte a Lordran com detalhes em alta definição a 60fps.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/570940/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/570940/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/570940/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Dark Souls 3",
+    "desenvolvedor": "FromSoftware, Inc.",
+    "publicadora": "Bandai Namco Entertainment, FromSoftware, Inc.",
+    "data_lancamento": "1/abr./2015",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 SP1 64bit, Windows 8.1 64bit<br></li><li><strong>Processador:</strong> AMD® A8 3870 3,6 Ghz or Intel® Core ™ i3 2100 3.1Ghz<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce  GTX 465 / ATI Radeon TM HD 6870<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 23 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 SP1 64bit, Windows 8.1 64bit<br></li><li><strong>Processador:</strong> AMD® FX 8150 3.6 GHz or Intel® Core™ i7 2600 3.4 GHz<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 750, ATI Radeon™ HD 7850<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 23 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device</li></ul>",
+    "descricao": "DARK SOULS™ II: Scholar of the First Sin leva a renomada obscuridade e jogabilidade viciante da franquia a um novo nível. Junte-se à jornada sombria e vivencie encontros com inimigos devastadores, perigos diabólicos e o desafio implacável.",
+    "genero": [
+      "Ação",
+      "RPG"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Resident Evil 2",
+    "desenvolvedor": "CAPCOM Co., Ltd.",
+    "publicadora": "CAPCOM Co., Ltd.",
+    "data_lancamento": "24/jan./2019",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i5-4460 or AMD FX™-6300 or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 960 or AMD Radeon™ RX 460<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 26 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> This game is expected to run at 1080p/30 FPS. If you have don't have enough graphics memory to run the game at your selected texture quality, you must go to Options &gt; Graphics and lower the texture quality or shadow quality, or decrease the resolution. An internet connection is required for product activation. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i7-3770 or AMD FX™-9590 or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 1060 or AMD Radeon™ RX 480  with 3GB VRAM<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 26 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> This game is expected to run at 1080p/60 FPS. An internet connection is required for product activation. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>",
+    "descricao": "Um vírus maligno toma conta dos residentes de Raccoon City em setembro de 1998, afundando a cidade no caos enquanto zumbis comedores de carne humana vagam pelas ruas em busca de sobreviventes. Um surto de adrenalina sem comparação, uma história instigante e horrores inimagináveis o aguardam.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/883710/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/883710/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/883710/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Resident Evil 3",
+    "desenvolvedor": "CAPCOM Co., Ltd.",
+    "publicadora": "CAPCOM Co., Ltd.",
+    "data_lancamento": "2/abr./2020",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i5-4460 or AMD FX™-6300 or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 960 or AMD Radeon™ RX 460<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 45 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Anticipated performance at these specifications is 1080p/30FPS for Resident Evil 3 and 720p/30FPS for Resident Evil Resistance. If you don't have enough graphics memory to run the game at your selected texture quality, you must go to Options &gt; Graphics and lower the texture quality or shadow quality, or decrease the resolution. An internet connection is required for product activation. In addition, an internet connection is required at all times when playing Resident Evil Resistance. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i7-3770 or AMD FX™-9590 or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 1060 or AMD Radeon™ RX 480 with 3GB VRAM<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 45 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Anticipated performance at these specifications is 1080p/60FPS. An internet connection is required for product activation. In addition, an internet connection is required at all times when playing Resident Evil Resistance. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>",
+    "descricao": "Jill Valentine é uma das últimas pessoas em Raccoon City a testemunhar as atrocidades que a Umbrella cometeu. Para pará-la a Umbrella libera sua arma secreta suprema: Nemesis! Também inclui a Resident Evil Resistance, um novo modo de jogo multijogador online 4x1.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/952060/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/952060/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/952060/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Resident Evil Village",
+    "desenvolvedor": "CAPCOM Co., Ltd.",
+    "publicadora": "CAPCOM Co., Ltd.",
+    "data_lancamento": "6/mai./2021",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64 bit)<br></li><li><strong>Processador:</strong> AMD Ryzen 3 1200  ／ Intel Core i5-7500<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 560 with 4GB VRAM ／ NVIDIA GeForce GTX 1050 Ti with 4GB VRAM<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Outras observações:</strong> Estimated performance (when set to Prioritize Performance): 1080p/60fps. ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2060 required to support ray tracing.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64 bit)<br></li><li><strong>Processador:</strong> AMD Ryzen 5 3600 ／ Intel Core i7 8700<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 5700 ／ NVIDIA GeForce GTX 1070<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Outras observações:</strong> Estimated performance: 1080p/60fps ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2070 required to support ray tracing.</li></ul>",
+    "descricao": "Vivencie o horror de sobrevivência como nunca na 8ª sequência parte da franquia Resident Evil - Resident Evil Village. Com gráficos detalhados, ação intensa em primeira pessoa e uma narrativa primorosa, o terror nunca foi tão realista.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1196590/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1196590/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1196590/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Cyberpunk 2077",
+    "desenvolvedor": "CD PROJEKT RED",
+    "publicadora": "CD PROJEKT RED",
+    "data_lancamento": "9/dez./2020",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Core i7-6700 or Ryzen 5 1600<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> GeForce GTX 1060 6GB or Radeon RX 580 8GB or Arc A380<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 70 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD required. Attention: In this game you will encounter a variety of visual effects that may provide seizures or loss of consciousness in a minority of people. If you or someone you know experiences any of the above symptoms while playing, stop and seek medical attention immediately.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Core i7-12700 or Ryzen 7 7800X3D<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> GeForce RTX 2060 SUPER or Radeon RX 5700 XT or Arc A770<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 70 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD required.</li></ul>",
+    "descricao": "Cyberpunk 2077 é um RPG de ação e aventura em mundo aberto que se passa em Night City, uma megalópole perigosa onde todos são obcecados por poder, glamour e alterações corporais.",
+    "genero": [
+      "RPG"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "GTA V",
+    "desenvolvedor": "Rockstar North",
+    "publicadora": "Rockstar Games",
+    "data_lancamento": "13/abr./2015",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64 Bit<br></li><li><strong>Processador:</strong> Intel Core 2 Quad CPU Q6600 @ 2.40 GHz (4 CPUs) / AMD Phenom 9850 Quad-Core (4 CPUs) @ 2.5 GHz<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA 9800 GT 1 GB / AMD HD 4870 1 GB (DX 10, 10.1, 11)<br></li><li><strong>Armazenamento:</strong> 125 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> 100% compatível com DirectX 10<br></li><li><strong>Outras observações:</strong> Com o decorrer do tempo, conteúdos para download e modificações na programação poderão alterar os requisitos de sistema deste jogo. Entre em contato com o fabricante do seu equipamento e visite  para informações de compatibilidade atualizadas. Alguns componentes do sistema, como chipsets móveis, integrados e placas AGP podem ser incompatíveis. Especificações não listadas também podem não ser compatíveis.     Outros requisitos: A instalação e jogo online requerem uma conta na rede Social Club da Rockstar Games (para maiores de 13 anos); uma conexão com a internet é necessária para a ativação, jogo online e verificações de autenticidade periódicas; instalação de softwares necessários, incluindo a plataforma Social Club da Rockstar Games, DirectX , Chromium, Microsoft Visual C++ 2008 sp1 Redistributable Package, e o software de autenticação para o reconhecimento de certos atributos de hardware para verificação, gerenciamento de direitos digitais, sistema e assistência ao cliente.  É NECESSÁRIO O USO DE UM CÓDIGO DE REGISTRO DE USO ÚNICO VIA INTERNET; O REGISTRO É LIMITADO A UMA CONTA DO SOCIAL CLUB DA ROCKSTAR GAMES (MAIORES DE 13 ANOS) POR CÓDIGO DE SÉRIE; SOMENTE UMA CONTA DE PC PODE SER USADA POR CADA CONTA DO SOCIAL CLUB AO MESMO TEMPO; O(S) CÓDIGO(S) DE SÉRIE NÃO É(SÃO) TRANSFERÍVEL(IS) APÓS O USO; AS CONTAS DO SOCIAL CLUB NÃO SÃO TRANSFERÍVEIS.  Requisitos de Parceiros: Verifique os termos de serviço deste site antes da compra.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64 Bit<br></li><li><strong>Processador:</strong> Intel Core i5 3470 @ 3.2 GHZ (4 CPUs) / AMD X8 FX-8350 @ 4 GHZ (8 CPUs)<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 660 2 GB / AMD HD7870 2 GB<br></li><li><strong>Armazenamento:</strong> 125 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> 100% compatível com DirectX 10</li></ul>",
+    "descricao": "Grand Theft Auto V para PC oferece aos jogadores a opção de explorar o gigantesco e premiado mundo de Los Santos e Blaine County em resoluções de até 4K e além, assim como a chance de experimentar o jogo rodando a 60 FPS (quadros por segundo).",
+    "genero": [
+      "Ação",
+      "Aventura"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "The Witcher 3",
+    "desenvolvedor": "CD PROJEKT RED",
+    "publicadora": "CD PROJEKT RED",
+    "data_lancamento": "18/mai./2015",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> 64-bit Windows 7, 64-bit Windows 8 (8.1)<br></li><li><strong>Processador:</strong> Intel CPU Core i5-2500K 3.3GHz / AMD A10-5800K APU (3.8GHz)<br></li><li><strong>Memória:</strong> 6 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GPU GeForce GTX 660 / AMD GPU Radeon HD 7870<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> 64-bit Windows 10/11<br></li><li><strong>Processador:</strong> Intel Core i5-7400 / Ryzen 5 1600<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GTX 1070 / Radeon RX 480<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>",
+    "descricao": "Você é Geralt de Rívia, mercenário matador de monstros. Você está em um continente devastado pela guerra e infestado de monstros para você explorar à vontade. Sua tarefa é encontrar Ciri, a Criança da Profecia — uma arma viva que pode alterar a forma do mundo.",
+    "genero": [
+      "RPG"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Dead by Daylight",
+    "desenvolvedor": "Behaviour Interactive Inc.",
+    "publicadora": "Behaviour Interactive Inc.",
+    "data_lancamento": "14/jun./2016",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit Operating System<br></li><li><strong>Processador:</strong> Intel Core i3-4170 or AMD FX-8120<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> DX11 Compatible GeForce GTX 460 1GB or AMD HD 6850 1GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DX11 compatible<br></li><li><strong>Outras observações:</strong> With these requirements, it is recommended that the game is played on Low quality settings.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit Operating System<br></li><li><strong>Processador:</strong> Intel Core i3-4170 or AMD FX-8300 or higher<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> DX11 Compatible GeForce 760 or AMD HD 8800 or higher with 4GB of RAM<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DX11 compatible</li></ul>",
+    "descricao": "Presos para sempre em um mundo abominável onde nem a morte é uma escapatória, quatro Sobreviventes determinados enfrentam um Assassino sanguinário em um jogo perverso de coragem e astúcia. Escolha um lado e desbrave um mundo de medo e tensão com o melhor sistema assimétrico dos jogos de terror.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/381210/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/381210/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/381210/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Garry's Mod",
+    "desenvolvedor": "Facepunch Studios",
+    "publicadora": "Valve",
+    "data_lancamento": "29/nov./2006",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows® 10<br></li><li><strong>Processador:</strong> 2 GHz Processor or better<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> 1GB dedicated VRAM or better<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 10 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX® 9 compatible<br></li><li><strong>Outras observações:</strong> Mouse, Keyboard, Monitor</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows® 10/11<br></li><li><strong>Processador:</strong> 2.5 GHz Processor or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> 4GB dedicated VRAM or better<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 25 GB de espaço disponível</li></ul>",
+    "descricao": "Garry's Mod is a physics sandbox. There aren't any predefined aims or goals. We give you the tools and leave you to play.",
+    "genero": [
+      "Casual",
+      "Indie",
+      "Simulação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/4000/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/4000/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/4000/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Rust",
+    "desenvolvedor": "Facepunch Studios",
+    "publicadora": "Facepunch Studios",
+    "data_lancamento": "8/fev./2018",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 11 64bit<br></li><li><strong>Processador:</strong> AMD Ryzen 5 1400 or Intel Core i5-6600<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 470, NVIDIA GeForce GTX 1060, Intel® Arc™ A580<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 45 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD is highly recommended or expect longer than average load times.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 11 64bit<br></li><li><strong>Processador:</strong> AMD Ryzen 7 3700X or Intel® Core i7-6700K<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 6600XT, NVIDIA GeForce RTX 3060, Intel Arc B580<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 45 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD Required</li></ul>",
+    "descricao": "O único objetivo no Rust é sobreviver. Tudo contribui para sua morte: os animais selvagens da ilha, outros habitantes, o ambiente e outros sobreviventes. Faça o que for preciso para durar mais uma noite.",
+    "genero": [
+      "Ação",
+      "Aventura",
+      "Indie",
+      "Multijogador Massivo",
+      "RPG"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Baldur's Gate 3",
+    "desenvolvedor": "Larian Studios",
+    "publicadora": "Larian Studios",
+    "data_lancamento": "3/ago./2023",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel I5 4690 / AMD FX 8350 / Snapdragon X Elite<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GTX 970 / RX 480 / Intel Arc A380 / Qualcomm Adreno X1 (4GB+ of VRAM)<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 150 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD required</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel i7 8700K / AMD r5 3600<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia 2060 Super / RX 5700 XT / Intel Arc A580 (8GB+ of VRAM)<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 150 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD required</li></ul>",
+    "descricao": "Gather your party, and return to the Forgotten Realms in a tale of fellowship and betrayal, sacrifice and survival, and the lure of absolute power.",
+    "genero": [
+      "Aventura",
+      "RPG",
+      "Estratégia"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Call of Duty MW3",
+    "desenvolvedor": "Treyarch, Raven Software, Beenox, High Moon Studios, Sledgehammer Games, Infinity Ward, Activision Shanghai, Demonware",
+    "publicadora": "Activision",
+    "data_lancamento": "27/out./2022",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows® 10 64 Bit (atualização mais recente)<br></li><li><strong>Processador:</strong> AMD Ryzen™ 5 1400 ou Intel® Core™ i5-6600<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon™ RX 470, NVIDIA® GeForce® GTX 970 / 1060 ou Intel® Arc™ A580<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Outras observações:</strong> SSD com 161 GB de espaço disponível no lançamento</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows® 11 64 Bit (atualização mais recente)<br></li><li><strong>Processador:</strong> AMD Ryzen™ 5 1600X ou Intel® Core™ i7-6700K<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon™ RX 6600XT ou NVIDIA® GeForce® RTX 3060 ou Intel® Arc™ B580<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Outras observações:</strong> SSD com 161 GB de espaço disponível no lançamento</li></ul>",
+    "descricao": "A experiência Call of Duty® é compatível com Call of Duty®: Black Ops 7, Call of Duty®: Black Ops 6 e Call of Duty®: Warzone™.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Hogwarts Legacy",
+    "desenvolvedor": "Avalanche Software",
+    "publicadora": "Warner Bros. Games",
+    "data_lancamento": "10/fev./2023",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i5-6600 (3.3Ghz) or AMD Ryzen 5 1400 (3.2Ghz)<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 960 4GB or AMD Radeon RX 470 4GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 85 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD (Preferred), HDD (Supported), 720p/30 fps, Low Quality Settings</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i7-8700 (3.2Ghz) or AMD Ryzen 5 3600 (3.6 Ghz)<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce 1080 Ti or AMD Radeon RX 5700 XT or INTEL Arc A770<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 85 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> SSD, 1080p/60 fps, High Quality Settings</li></ul>",
+    "descricao": "Hogwarts Legacy é um RPG de ação imersivo de mundo aberto. Agora você pode assumir o controle da ação e estar no centro de sua própria aventura no mundo bruxo.",
+    "genero": [
+      "Ação",
+      "Aventura",
+      "RPG"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Sekiro",
+    "desenvolvedor": "Mediatonic",
+    "publicadora": "",
+    "data_lancamento": "3/ago./2020",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64bit only<br></li><li><strong>Processador:</strong> Intel Core i5 or AMD equivalent<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 660 or AMD Radeon HD 7950<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 2 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Gamepad Recommended</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits</li></ul>",
+    "descricao": "Fall Guys é um jogo party royale gratuito, multiplataforma e multijogador. Dispute com seus amigos em pistas de obstáculos desajeitadas e absurdas ou construa seu próprio percurso caótico para compartilhar com a comunidade.",
+    "genero": [
+      "Ação",
+      "Casual",
+      "Indie",
+      "Multijogador Massivo",
+      "Esportes"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1097150/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1097150/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1097150/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Sekiro Shadows Die Twice",
+    "desenvolvedor": "FromSoftware, Inc.",
+    "publicadora": "Activision (Excluding Japan and Asia), FromSoftware, Inc. (Japan), 方块游戏 (Asia)",
+    "data_lancamento": "21/mar./2019",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 64-bit | Windows 8 64-bit | Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel Core i3-2100 | AMD FX-6300<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 760 | AMD Radeon HD 7950<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 25 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 Compatible</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 64-bit | Windows 8 64-bit | Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel Core i5-2500K | AMD Ryzen 5 1400<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 970 | AMD Radeon RX 570<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 25 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 Compatible</li></ul>",
+    "descricao": "Jogo do Ano - The Game Awards 2019 Melhor Jogo de Ação de 2019 - IGN Trilhe seu próprio caminho de vingança nesta premiada aventura da FromSoftware, os criadores de Bloodborne e da franquia Dark Souls. Obtenha vingança. Retome sua honra. Mate astuciosamente.",
+    "genero": [
+      "Ação",
+      "Aventura"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Devil May Cry 5",
+    "desenvolvedor": "CAPCOM Co., Ltd.",
+    "publicadora": "CAPCOM Co., Ltd.",
+    "data_lancamento": "7/mar./2019",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i5-4460, AMD FX™-6300, or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 760 or AMD Radeon™ R7 260x with 2GB Video RAM, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 35 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> *Xinput support Controllers recommended *Internet connection required for game activation. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> WINDOWS® 10 (64-BIT Required)<br></li><li><strong>Processador:</strong> Intel® Core™ i7-3770, AMD FX™-9590, or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 1060 with 6GB VRAM, AMD Radeon™ RX 480 with 8GB VRAM, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 35 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> *Xinput support Controllers recommended *Internet connection required for game activation. (Network connectivity uses Steam® developed by Valve® Corporation.)</li></ul>",
+    "descricao": "O melhor caçador de demônios está de volta com estilo, no jogo que os fãs de ação estavam esperando.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Portal 2",
+    "desenvolvedor": "Valve",
+    "publicadora": "Valve",
+    "data_lancamento": "18/abr./2011",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7/Vista/XP<br></li><li><strong>Processador:</strong> Pentium 4 com 3.0 GHz, Dual Core com 2.0 GHz (ou superior) ou AMD64X2 (ou superior)<br></li><li><strong>Memória:</strong> 2 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> A placa de vídeo precisa ter 128 MB ou mais de memória de vídeo e ser compatível com Pixel Shader 2.0b (ATI Radeon X800 ou superior / NVIDIA GeForce 7600 ou superior / Intel HD Graphics 2000 ou superior)<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Armazenamento:</strong> 8 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> Compatibilidade com DirectX 9.0c</li></ul>",
+    "descricao": "A &quot;Iniciativa de Testes Perpétuos&quot; foi expandida: crie câmaras cooperativas para você e os seus amigos!",
+    "genero": [
+      "Ação",
+      "Aventura"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/620/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/620/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/620/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Left 4 Dead 2",
+    "desenvolvedor": "Valve",
+    "publicadora": "Valve",
+    "data_lancamento": "16/nov./2009",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows® 7 32/64-bit / Vista 32/64 / XP<br></li><li><strong>Processador:</strong> Pentium 4 3.0GHz<br></li><li><strong>Memória:</strong> 2 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Video card with 128 MB, Shader model 2.0. ATI X800, NVidia 6600 or better<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Armazenamento:</strong> 13 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 9.0c compatible sound card</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows® 7 32/64-bit / Vista 32/64 / XP<br></li><li><strong>Processador:</strong> Intel core 2 duo 2.4GHz<br></li><li><strong>Memória:</strong> 2 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Video Card Shader model 3.0. NVidia 7600, ATI X1600 or better<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Armazenamento:</strong> 13 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 9.0c compatible sound card</li></ul>",
+    "descricao": "Set in the zombie apocalypse, Left 4 Dead 2 is a co-operative action horror FPS takes you and your friends through the cities, swamps and cemeteries of the Deep South, from Savannah to New Orleans across five expansive campaigns.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/550/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/550/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/550/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Rainbow Six Siege",
+    "desenvolvedor": "Ubisoft Montreal",
+    "publicadora": "Ubisoft",
+    "data_lancamento": "1/dez./2015",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows 10, Windows 11 (64-bit versions)<br></li><li><strong>Processador:</strong> AMD Ryzen 3 3100 / Intel i3-8100<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GTX 1650 4GB / AMD RX 5500XT 4GB / Intel ARC A380 6GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 65 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX® 9.0c compatible sound card with latest drivers<br></li><li><strong>Outras observações:</strong> For an up-to-date list of supported chipsets, please visit the FAQ for this game on our support website. Game contains BattleEye anti-cheat technology.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows 11 (64-bit versions)<br></li><li><strong>Processador:</strong> AMD Ryzen5 3600 / Intel i5-10400<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA RTX 2060 6GB / AMD RX 6600 8GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 65 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX® 9.0c compatible sound card 5.1 with latest drivers<br></li><li><strong>Outras observações:</strong> For an up-to-date list of supported chipsets, please visit the FAQ for this game on our support website. Game contains BattleEye anti-cheat technology.</li></ul>",
+    "descricao": "Rainbow Six® Siege é a referência em jogos de tiro táticos. Triunfa quem planejar e executar melhor a estratégia. Aproveite o Acesso Gratuito aos modos de jogo Partida Rápida, Sem Colocação e Dual Front, com uma seleção de agentes.",
+    "genero": [
+      "Ação",
+      "Gratuitos para Jogar"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Apex Legends",
+    "desenvolvedor": "Respawn",
+    "publicadora": "Electronic Arts",
+    "data_lancamento": "4/nov./2020",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> AMD FX 4350 or Equivalent, Intel Core i3 6300 or Equivalent<br></li><li><strong>Memória:</strong> 6 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon™ HD 7790 (2 GB), NVIDIA GeForce® GTX 950<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> ~3.8GB for 1 localized language</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Ryzen 5 CPU or Equivalent<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon™ R9 290, NVIDIA GeForce® GTX 970<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> ~3.8GB for 1 localized language</li></ul>",
+    "descricao": "Apex Legends é o premiado jogo de tiro em primeira pessoa de heróis e heroínas da Respawn Entertainment. Domine um elenco cada vez mais amplo de personagens lendários com habilidades poderosas, experimente partidas estratégicas e a jogabilidade inovadora na próxima evolução do gênero battle royale.",
+    "genero": [
+      "Ação",
+      "Aventura",
+      "Gratuitos para Jogar"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Marvel Spider-Man Remastered",
+    "desenvolvedor": "Insomniac Games, Nixxes Software",
+    "publicadora": "PlayStation Publishing LLC",
+    "data_lancamento": "12/ago./2022",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel Core i3-4160, 3.6 GHz or AMD equivalent<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 950 or AMD Radeon RX 470<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit<br></li><li><strong>Processador:</strong> Intel Core i5-4670, 3.4 Ghz or AMD Ryzen5 1600, 3.2 Ghz<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 1060 6GB or AMD Radeon RX 580 8GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível</li></ul>",
+    "descricao": "Em Marvel's Spider-Man Remasterizado, os mundos de Peter Parker e Spider-Man entram em conflito em uma história original cheia de ação. Jogue como um Peter Parker experiente que combate as maiores ameaças do crime e vilões icônicos na Nova York da Marvel.",
+    "genero": [
+      "Ação",
+      "Aventura",
+      "Casual"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Spider-Man Miles Morales",
+    "desenvolvedor": "Insomniac Games, Nixxes Software",
+    "publicadora": "PlayStation Publishing LLC",
+    "data_lancamento": "18/nov./2022",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit 1909<br></li><li><strong>Processador:</strong> Intel Core i3-4160, 3.6 GHz or AMD equivalent<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 950 or AMD Radeon RX 470<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64-bit 1909<br></li><li><strong>Processador:</strong> Intel Core i5-4670, 3.4 Ghz or AMD Ryzen 5 1600, 3.2 Ghz<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 1060 6GB or AMD Radeon RX 580 8GB<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 75 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> 75 GB SSD space Recommended</li></ul>",
+    "descricao": "Após os eventos de Marvel's Spider-Man Remasterizado, o adolescente Miles Morales está se adaptando a um novo lar enquanto segue os passos do seu mentor, Peter Parker. Mas quando uma violenta disputa de forças ameaça destruir seu novo lar, Miles precisa reconhecer e assumir o título de Spider-Man.",
+    "genero": [
+      "Ação",
+      "Aventura"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Resident Evil 4 Remake",
+    "desenvolvedor": "CAPCOM Co., Ltd.",
+    "publicadora": "CAPCOM Co., Ltd.",
+    "data_lancamento": "23/mar./2023",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64 bit)<br></li><li><strong>Processador:</strong> AMD Ryzen 3 1200 / Intel Core i5-7500<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 560 with 4GB VRAM / NVIDIA GeForce GTX 1050 Ti with 4GB VRAM<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Outras observações:</strong> Estimated performance (when set to Prioritize Performance): 1080p/45fps. ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2060 required to support ray tracing.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64 bit)/Windows 11 (64 bit)<br></li><li><strong>Processador:</strong> AMD Ryzen 5 3600 / Intel Core i7 8700<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 5700 / NVIDIA GeForce GTX 1070<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Outras observações:</strong> Desempenho aproximado: 1080p/60fps. ・A taxa de quadros pode cair em cenas que exigem recursos visuais mais pesados. ・O suporte ao traçado de raios requer uma placa AMD Radeon RX 6700 XT ou NVIDIA GeForce RTX 2070.</li></ul>",
+    "descricao": "Sobrevivência é apenas o começo. Seis anos se passaram desde o desastre biológico em Raccoon City. Leon S. Kennedy, um dos sobreviventes, segue o rastro da raptada filha do presidente até uma vila europeia isolada, onde há algo terrivelmente errado com os habitantes.",
+    "genero": [
+      "Ação",
+      "Aventura"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Battlefield 2042",
+    "desenvolvedor": "DICE",
+    "publicadora": "Electronic Arts",
+    "data_lancamento": "22/out./2020",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> AMD FX-8350/ Core i5 6600K<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce® GTX 1050 / NVIDIA GeForce® GTX 660 2GB or AMD Radeon™ RX 560 / HD 7850 2GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10 or later<br></li><li><strong>Processador:</strong> AMD Ryzen 3 1300X/Intel Core i7 4790<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce® GTX 1060 6GB/AMD Radeon™ RX 580 8GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>",
+    "descricao": "Essa é a experiência definitiva de Battlefield V. Entre no maior conflito da humanidade com o arsenal completo de armas, veículos e dispositivos, além do melhor conteúdo de personalização dos Anos 1 e 2.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1238810/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1238810/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1238810/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Battlefield V",
+    "desenvolvedor": "DICE",
+    "publicadora": "Electronic Arts",
+    "data_lancamento": "19/nov./2021",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> AMD Ryzen 5 1600, Core i5 6600K<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 560,Nvidia GeForce GTX 1050 Ti<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> No recommendation</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> AMD Ryzen 7 2700X, Intel Core i7 4790<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon RX 6600 XT, Nvidia GeForce RTX 3060<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> No recommendation</li></ul>",
+    "descricao": "Battlefield™ 2042 é um jogo de tiro em primeira pessoa que marca o retorno à emblemática guerra total da franquia.",
+    "genero": [
+      "Ação",
+      "Aventura",
+      "Casual"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1517290/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1517290/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1517290/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "PUBG",
+    "desenvolvedor": "PUBG Corporation",
+    "publicadora": "KRAFTON, Inc.",
+    "data_lancamento": "21/dez./2017",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i5-4430 / AMD FX-6300<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 960 2GB / AMD Radeon R7 370 2GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 40 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i5-6600K / AMD Ryzen 5 1600<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1060 3GB / AMD Radeon RX 580 4GB<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>",
+    "descricao": "PUBG: BATTLEGROUNDS, o jogo de tiro de alto risco em que o vencedor leva tudo e que deu início ao fenômeno do Battle Royale, é gratuito! Entre em diversos mapas, saqueie armas e suprimentos exclusivos e sobreviva em uma zona cada vez menor, onde cada turno pode ser o último.",
+    "genero": [
+      "Ação",
+      "Aventura",
+      "Multijogador Massivo",
+      "Gratuitos para Jogar"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/578080/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/578080/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/578080/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Halo MCC",
+    "desenvolvedor": "343 Industries, Splash Damage, Ruffian Games, Bungie, Saber Interactive",
+    "publicadora": "Xbox Game Studios",
+    "data_lancamento": "3/dez./2019",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Windows 7<br></li><li><strong>Processador:</strong> AMD Phenom II X4 960T ; Intel i3550<br></li><li><strong>Placa de vídeo:</strong> AMD HD 6850 ; NVIDIA GeForce GTS 450<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 43 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Direct3D feature Level 11.1</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits</li></ul>",
+    "descricao": "A lendária jornada do Master Chief está incluída em seis jogos, feitos para PC e reunidos em uma única experiência. Tanto para fãs de longa data como para os que conhecerão o Spartan 117 agora, a Master Chief Collection é a experiência de jogo definitiva da série Halo.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/976730/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/976730/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/976730/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Monster Hunter Rise",
+    "desenvolvedor": "343 Industries",
+    "publicadora": "Xbox Game Studios",
+    "data_lancamento": "15/nov./2021",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 RS5 x64<br></li><li><strong>Processador:</strong> AMD Ryzen 5 1600 or Intel i5-4440<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD RX 570 or Nvidia GTX 1050 Ti<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 19H2 x64<br></li><li><strong>Processador:</strong> AMD Ryzen 7 3700X or Intel i7-9700k<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Radeon RX 5700 XT or Nvidia RTX 2070<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Armazenamento:</strong> 50 GB de espaço disponível</li></ul>",
+    "descricao": "De uma das sagas mais icônicas dos jogos, Halo está maior do que nunca. Com uma campanha expansiva de mundo aberto e uma experiência de multijogador dinâmica e gratuita. ",
+    "genero": [
+      "Ação",
+      "Gratuitos para Jogar"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1240440/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1240440/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1240440/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Monster Hunter World",
+    "desenvolvedor": "CAPCOM Co., Ltd.",
+    "publicadora": "CAPCOM Co., Ltd.",
+    "data_lancamento": "12/jan./2022",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 （64-bit）<br></li><li><strong>Processador:</strong> Intel® Core™ i3-4130 or Core™ i5-3470 or AMD FX™-6100<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GT 1030 (DDR4) or AMD Radeon™ RX 550<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 36 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> 1080p/30fps when graphics settings are set to &quot;Low&quot;.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 （64-bit）<br></li><li><strong>Processador:</strong> Intel® Core™ i5-4460 or AMD FX™-8300<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce® GTX 1060 (VRAM 3GB) or AMD Radeon™ RX 570 (VRAM 4GB)<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 36 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> 1080p/30fps when graphics settings are set to &quot;Average&quot;.</li></ul>",
+    "descricao": "Encare o desafio e junte-se à caça! Em Monster Hunter Rise, o capítulo mais recente da premiada e bem-sucedida série Monster Hunter, você vai se tornar um caçador, explorar mapas novos e usar diversas armas para derrotar monstros assustadores como parte de uma nova história.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1446780/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1446780/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1446780/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Dark Souls 3 Deluxe",
+    "desenvolvedor": "FromSoftware, Inc.",
+    "publicadora": "FromSoftware, Inc., Bandai Namco Entertainment",
+    "data_lancamento": "11/abr./2016",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 SP1 64bit, Windows 8.1 64bit Windows 10 64bit<br></li><li><strong>Processador:</strong> Intel Core i3-2100 / AMD® FX-6300<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce GTX 750 Ti / ATI Radeon HD 7950<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 25 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device<br></li><li><strong>Outras observações:</strong> Internet connection required for online play and product activation</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7 SP1 64bit, Windows 8.1 64bit Windows 10 64bit<br></li><li><strong>Processador:</strong> Intel Core i7-3770 / AMD® FX-8350<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA® GeForce GTX 970 / ATI Radeon R9 series<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 25 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> DirectX 11 sound device<br></li><li><strong>Outras observações:</strong> Internet connection required for online play and product activation</li></ul>",
+    "descricao": "DARK SOULS™ continua a ultrapassar seus próprios limites em um ambicioso novo capítulo da série que definiu um gênero e que é aclamada pela crítica. Prepare-se para abraçar a escuridão!",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/374320/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/374320/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/374320/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Batman Arkham Knight",
+    "desenvolvedor": "Rocksteady Studios",
+    "publicadora": "WB Games",
+    "data_lancamento": "23/jun./2015",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Win 7 SP1, Win 8.1 (64-bit Operating System Required)<br></li><li><strong>Processador:</strong> Intel Core i5-750, 2.67 GHz | AMD Phenom II X4 965, 3.4 GHz<br></li><li><strong>Memória:</strong> 6 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Graphics: NVIDIA GeForce GTX 660 (2 GB Memory Minimum)  | AMD Radeon HD 7870 (2 GB Memory Minimum)<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 45 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Win 7 SP1, Win 8.1 (64-bit Operating System Required)<br></li><li><strong>Processador:</strong> Intel Core i7-3770, 3.4 GHz | AMD FX-8350, 4.0 GHz<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 760 - 3 GB Memory Recommended | AMD Radeon HD 7950 - 3 GB Memory Recommended<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 55 GB de espaço disponível</li></ul>",
+    "descricao": "Batman™: Arkham Knight é a conclusão épica da trilogia Arkham da Rocksteady Studios. Desenvolvido exclusivamente para plataformas de última geração, Batman™: Arkham Knight apresenta o design exclusivo da Rocksteady para o Batmóvel.",
+    "genero": [
+      "Ação",
+      "Aventura"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/208650/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/208650/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/208650/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "DOOM Eternal",
+    "desenvolvedor": "id Software",
+    "publicadora": "Bethesda Softworks",
+    "data_lancamento": "19/mar./2020",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> 64-bit Windows 7 / 64-Bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i5 @ 3.3 GHz or better, or AMD Ryzen 3 @ 3.1 GHz or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1050Ti (4GB), GTX 1060 (3GB), GTX 1650 (4GB) or AMD Radeon R9 280(3GB), AMD Radeon R9 290 (4GB), RX 470 (4GB)<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 80 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> ( 1080p / 60 FPS / Low Quality Settings )</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> 64-bit Windows 10<br></li><li><strong>Processador:</strong> Intel Core i7-6700K or better, or AMD Ryzen 7 1800X or better<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1060 (6GB), NVIDIA GeForce 970 (4GB), AMD RX 480 (8GB)<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 80 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> ( 1080p / 60 FPS / High Quality Settings ) - *On NVIDIA GTX 970 cards Texture Quality should be set to Medium</li></ul>",
+    "descricao": "Os exércitos do Inferno invadiram a Terra. Torne-se o Slayer em uma campanha épica para um jogador e derrote demônios entre dimensões para impedir a derradeira destruição da humanidade. A única coisa que eles temem... é você.",
+    "genero": [
+      "Ação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/782330/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/782330/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/782330/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "DOOM",
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/782331/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/782331/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/782331/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Cities Skylines",
+    "desenvolvedor": "Colossal Order",
+    "publicadora": "Paradox Interactive",
+    "data_lancamento": "10/mar./2015",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows® 10 Home 64 Bit<br></li><li><strong>Processador:</strong> Intel® Core™ I7 930  |  AMD® FX 6350<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia® GeForce™ GTS 450 (1 GB) |  AMD® R7 250 (2 GB)  |  Intel Iris Xe G7 (Tiger Lake)<br></li><li><strong>DirectX:</strong> Versão 9.0c<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 4 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows® 10 Home 64 bit<br></li><li><strong>Processador:</strong> Intel® Core™ I7 2700K  |   AMD® Ryzen 7 2700X<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia® GeForce™ GTX 580 (1.5 GB)  |   AMD® Radeon™ RX 560 (4 GB)<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 4 GB de espaço disponível</li></ul>",
+    "descricao": "Cities: Skylines é uma versão moderna dos simuladores de cidade clássicos. O jogo introduz novos elementos de jogabilidade para que você sinta a emoção e a dificuldade de criar e manter uma cidade de verdade, além de aprimorar os elementos clássicos da construção de cidades. ",
+    "genero": [
+      "Simulação",
+      "Estratégia"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Stardew Valley",
+    "desenvolvedor": "ConcernedApe",
+    "publicadora": "ConcernedApe",
+    "data_lancamento": "26/fev./2016",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows Vista or greater<br></li><li><strong>Processador:</strong> 2 Ghz<br></li><li><strong>Memória:</strong> 2 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> 256 mb video memory, shader model 3.0+<br></li><li><strong>DirectX:</strong> Versão 10<br></li><li><strong>Armazenamento:</strong> 500 MB de espaço disponível</li></ul>",
+    "descricao": "Você herdou a antiga fazenda do seu avô, em Stardew Valley. Com ferramentas de segunda-mão e algumas moedas, você parte para dar início a sua nova vida. Será que você vai aprender a viver da terra, a transformar esse matagal em um próspero lar?",
+    "genero": [
+      "Indie",
+      "RPG",
+      "Simulação"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Phasmophobia",
+    "desenvolvedor": "Kinetic Games",
+    "publicadora": "Kinetic Games",
+    "data_lancamento": "18/set./2020",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64Bit<br></li><li><strong>Processador:</strong> Intel Core i5-4590 / AMD Ryzen 5 2600<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 970 / AMD Radeon R9 390<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 21 GB de espaço disponível<br></li><li><strong>Compatibilidade com RV:</strong> OpenXR<br></li><li><strong>Outras observações:</strong> Minimum Specs are for VR, lower specs may work for Non-VR.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64Bit<br></li><li><strong>Processador:</strong> Intel Core i5-10600 / AMD Ryzen 5 3600<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA RTX 2060 / AMD Radeon RX 5700<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 21 GB de espaço disponível</li></ul>",
+    "descricao": "Phasmophobia is a 4 player online co-op psychological horror. Paranormal activity is on the rise and it’s up to you and your team to use all the ghost-hunting equipment at your disposal in order to gather as much evidence as you can.",
+    "genero": [
+      "Ação",
+      "Indie",
+      "Acesso Antecipado"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/739630/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/739630/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/739630/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Among Us",
+    "desenvolvedor": "Innersloth",
+    "publicadora": "Innersloth",
+    "data_lancamento": "16/nov./2018",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows 10 x32bit<br></li><li><strong>Processador:</strong> INTEL i3-4330<br></li><li><strong>Memória:</strong> 1 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> INTEL HD Graphics 4600</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO:</strong> Windows 10 x64bit<br></li><li><strong>Processador:</strong> INTEL i3-4330<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GTX 650</li></ul>",
+    "descricao": "Um jogo de trabalho em equipe e trairagem online ou em rede local para 4 a 15 jogadores... no espaço!",
+    "genero": [
+      "Casual"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/945360/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/945360/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/945360/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Lost Ark DLC",
+    "desenvolvedor": "Smilegate RPG",
+    "publicadora": "Amazon Game Studios",
+    "data_lancamento": "11/fev./2022",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64-bit)<br></li><li><strong>Processador:</strong> Intel i3 ou AMD Ryzen 3<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 460 / AMD HD6850<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 110 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Necessária conexão de internet para jogar, oferece compras no jogo. Os requisitos de sistema para este jogo podem mudar ao longo do tempo.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 (64-bit)<br></li><li><strong>Processador:</strong> Intel i5 ou AMD Ryzen 5<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1050 / AMD Radeon RX560 2G<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 110 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Necessária conexão de internet para jogar, oferece compras no jogo. Os requisitos de sistema para este jogo podem mudar ao longo do tempo.</li></ul>",
+    "descricao": "Embarque numa odisseia pela Arca Perdida num mundo vasto e vibrante: explore novas terras, procure tesouros perdidos e teste-se num combate de ação emocionante neste RPG grátis para jogar. ",
+    "genero": [
+      "Ação",
+      "Aventura",
+      "Multijogador Massivo",
+      "RPG",
+      "Gratuitos para Jogar"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1599340/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1599340/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1599340/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Sea of Thieves",
+    "desenvolvedor": "Rare Ltd",
+    "publicadora": "Xbox Game Studios",
+    "data_lancamento": "3/jun./2020",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 version 18362.0 or higher<br></li><li><strong>Processador:</strong> Intel i3 4170 @ 3.7 GHz or AMD FX-6300 @ 3.5 GHz<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GeForce GTX 660 or AMD Radeon R9 270<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows® 10 64-bit<br></li><li><strong>Processador:</strong> Intel i7 4790 @4Ghz - AMD Ryzen 5 1600 @3.6Ghz<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia Geforce GTX 1080ti - AMD Radeon Rx Vega 64 - Intel A750<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível</li></ul>",
+    "descricao": "Sea of Thieves é um jogo de aventura pirata de sucesso, que oferece a experiência de pilhar tesouros perdidos, fazer parte de batalhas intensas, derrotar monstros marinhos e muito mais. Mergulhe nesta edição revisada do jogo, que inclui acesso a conteúdo digital bônus.",
+    "genero": [
+      "Ação",
+      "Aventura"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172620/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172620/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172620/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "GTA V Premium",
+    "desenvolvedor": "Rockstar North",
+    "publicadora": "Rockstar Games",
+    "data_lancamento": "13/abr./2015",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64 Bit<br></li><li><strong>Processador:</strong> Intel Core 2 Quad CPU Q6600 @ 2.40 GHz (4 CPUs) / AMD Phenom 9850 Quad-Core (4 CPUs) @ 2.5 GHz<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA 9800 GT 1 GB / AMD HD 4870 1 GB (DX 10, 10.1, 11)<br></li><li><strong>Armazenamento:</strong> 125 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> 100% compatível com DirectX 10<br></li><li><strong>Outras observações:</strong> Com o decorrer do tempo, conteúdos para download e modificações na programação poderão alterar os requisitos de sistema deste jogo. Entre em contato com o fabricante do seu equipamento e visite  para informações de compatibilidade atualizadas. Alguns componentes do sistema, como chipsets móveis, integrados e placas AGP podem ser incompatíveis. Especificações não listadas também podem não ser compatíveis.     Outros requisitos: A instalação e jogo online requerem uma conta na rede Social Club da Rockstar Games (para maiores de 13 anos); uma conexão com a internet é necessária para a ativação, jogo online e verificações de autenticidade periódicas; instalação de softwares necessários, incluindo a plataforma Social Club da Rockstar Games, DirectX , Chromium, Microsoft Visual C++ 2008 sp1 Redistributable Package, e o software de autenticação para o reconhecimento de certos atributos de hardware para verificação, gerenciamento de direitos digitais, sistema e assistência ao cliente.  É NECESSÁRIO O USO DE UM CÓDIGO DE REGISTRO DE USO ÚNICO VIA INTERNET; O REGISTRO É LIMITADO A UMA CONTA DO SOCIAL CLUB DA ROCKSTAR GAMES (MAIORES DE 13 ANOS) POR CÓDIGO DE SÉRIE; SOMENTE UMA CONTA DE PC PODE SER USADA POR CADA CONTA DO SOCIAL CLUB AO MESMO TEMPO; O(S) CÓDIGO(S) DE SÉRIE NÃO É(SÃO) TRANSFERÍVEL(IS) APÓS O USO; AS CONTAS DO SOCIAL CLUB NÃO SÃO TRANSFERÍVEIS.  Requisitos de Parceiros: Verifique os termos de serviço deste site antes da compra.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 64 Bit<br></li><li><strong>Processador:</strong> Intel Core i5 3470 @ 3.2 GHZ (4 CPUs) / AMD X8 FX-8350 @ 4 GHZ (8 CPUs)<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 660 2 GB / AMD HD7870 2 GB<br></li><li><strong>Armazenamento:</strong> 125 GB de espaço disponível<br></li><li><strong>Placa de som:</strong> 100% compatível com DirectX 10</li></ul>",
+    "descricao": "Grand Theft Auto V para PC oferece aos jogadores a opção de explorar o gigantesco e premiado mundo de Los Santos e Blaine County em resoluções de até 4K e além, assim como a chance de experimentar o jogo rodando a 60 FPS (quadros por segundo).",
+    "genero": [
+      "Ação",
+      "Aventura"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Skyrim",
+    "desenvolvedor": "Bethesda Game Studios",
+    "publicadora": "Bethesda Softworks",
+    "data_lancamento": "10/nov./2011",
+    "requisitos_minimos": "<strong>Minimum:</strong><br>\t\t\t\t\t\t\t\t<ul class=\"bb_ul\"><li><strong>OS *:</strong> Windows 7/Vista/XP PC (32 or 64 bit)<br>\t\t\t\t\t\t\t\t</li><li><strong>Processor:</strong> Dual Core 2.0GHz or equivalent processor<br>\t\t\t\t\t\t\t\t</li><li><strong>Memory:</strong> 2GB System RAM<br>\t\t\t\t\t\t\t\t</li><li><strong>Hard Disk Space:</strong> 6GB free HDD Space<br>\t\t\t\t\t\t\t\t</li><li><strong>Video Card:</strong> Direct X 9.0c compliant video card with 512 MB of RAM<br>\t\t\t\t\t\t\t\t</li><li><strong>Sound:</strong> DirectX compatible sound card<br>\t\t\t\t\t\t\t\t</li></ul>",
+    "requisitos_recomendados": "<strong>Recommended:</strong><br>\t\t\t\t\t\t\t\t<ul class=\"bb_ul\"><li><strong>Processor:</strong> Quad-core Intel or AMD CPU<br>\t\t\t\t\t\t\t\t</li><li><strong>Memory:</strong> 4GB System RAM<br>\t\t\t\t\t\t\t\t</li><li><strong>Video Card:</strong> DirectX 9.0c compatible NVIDIA or AMD ATI video card with 1GB of RAM (Nvidia GeForce GTX 260 or higher; ATI Radeon 4890 or higher)<br>\t\t\t\t\t\t\t\t</li></ul>",
+    "descricao": "EPIC FANTASY REBORN The next chapter in the highly anticipated Elder Scrolls saga arrives from the makers of the 2006 and 2008 Games of the Year, Bethesda Game Studios. Skyrim reimagines and revolutionizes the open-world fantasy epic, bringing to life a complete virtual world open for you to explore any way you choose.",
+    "genero": [
+      "RPG"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/72850/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/72850/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/72850/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Skyrim Special Edition",
+    "desenvolvedor": "Bethesda Game Studios",
+    "publicadora": "Bethesda Softworks",
+    "data_lancamento": "27/out./2016",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7/8.1/10 (64-bit Version)<br></li><li><strong>Processador:</strong> Intel i5-750/AMD Phenom II X4-945<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 470 1GB /AMD HD 7870 2GB<br></li><li><strong>Armazenamento:</strong> 12 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li><strong>SO *:</strong> Windows 7/8.1/10 (64-bit Version)<br></li><li><strong>Processador:</strong> Intel i5-2400/AMD FX-8320<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GTX 780 3GB /AMD R9 290 4GB<br></li><li><strong>Armazenamento:</strong> 12 GB de espaço disponível</li></ul>",
+    "descricao": "Vencedor de mais de 200 prémios de Jogo do Ano, The Elder Scrolls V: Skyrim Special Edition dá vida à fantasia épica com um nível de detalhe espantoso. A Special Edition inclui o jogo aclamado pela crítica e suplementos com novas funcionalidades.",
+    "genero": [
+      "RPG"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Star Wars Jedi Fallen Order",
+    "desenvolvedor": "Respawn Entertainment",
+    "publicadora": "Electronic Arts",
+    "data_lancamento": "14/nov./2019",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> 64-bit Windows 7/8.1/10<br></li><li><strong>Processador:</strong> AMD FX-6100/Intel i3-3220 or Equivalent<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD Radeon HD 7750, NVIDIA GeForce GTX 650 or Equivalent<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 55 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> 64-bit Windows 7/8.1/10<br></li><li><strong>Processador:</strong> AMD Ryzen 7 1700/Intel  i7-6700K or Equivalent<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> AMD RX Vega 56, Nvidia GTX 1070/GTX1660Ti or Equivalent<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Armazenamento:</strong> 55 GB de espaço disponível</li></ul>",
+    "descricao": "Prepare-se para cruzar a galáxia em STAR WARS Jedi: Fallen Order, uma aventura em terceira pessoa cheia de ação da Respawn Entertainment. Um padawan perdido precisa completar seu treinamento, desenvolver novas habilidades com a Força e dominar a arte do sabre de luz — tudo isso enquanto despista o Império.",
+    "genero": [
+      "Ação",
+      "Aventura"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172380/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172380/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172380/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Star Wars Jedi Survivor",
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172381/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172381/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172381/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "EA Sports FC 24",
+    "desenvolvedor": "EA Canada, EA Romania",
+    "publicadora": "Electronic Arts",
+    "data_lancamento": "30/set./2022",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 - 64-Bit (Latest Update)<br></li><li><strong>Processador:</strong> Intel Core i5 6600k or AMD Ryzen 5 1600<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 - 64-Bit (Latest Update)<br></li><li><strong>Processador:</strong> Intel Core i7 6700 or AMD Ryzen 7 2700X<br></li><li><strong>Memória:</strong> 12 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1660 or AMD Radeon RX 5600 XT<br></li><li><strong>DirectX:</strong> Versão 12<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 100 GB de espaço disponível</li></ul>",
+    "descricao": "O FIFA 23 leva o Jogo de Todo Mundo aos gramados com a tecnologia HyperMotion2, FIFA World Cup™ masculina e feminina, clubes femininos, recursos de crossplay** e muito mais.",
+    "genero": [
+      "Simulação",
+      "Esportes"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/library_600x900.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Balatro",
+    "desenvolvedor": "LocalThunk",
+    "publicadora": "Playstack",
+    "data_lancamento": "20/fev./2024",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Windows 7, 8, 10, 11 x64<br></li><li><strong>Processador:</strong> Intel Core i3<br></li><li><strong>Memória:</strong> 1 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> OpenGL 2.1 compatible graphics card, integrated graphics<br></li><li><strong>Armazenamento:</strong> 150 MB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits</li></ul>",
+    "descricao": "O pôquer roguelike. Balatro é um jogo de criação de baralho hipnoticamente satisfatório em que você joga mãos de pôquer ilegais, descobre curingas que mudam o jogo e aciona combos escandalosos e cheios de adrenalina.",
+    "genero": [
+      "Casual",
+      "Indie",
+      "Estratégia"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/2379780/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Rocket League®",
+    "desenvolvedor": "Psyonix LLC",
+    "publicadora": "Psyonix LLC",
+    "data_lancamento": "6/jul./2015",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Windows 7 (64 bit) or Newer (64 bit) Windows OS<br></li><li><strong>Processador:</strong> 2.5 GHz Dual core<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce 760, AMD Radeon R7 270X, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 20 GB de espaço disponível</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO *:</strong> Windows 7 (64 bit) or Newer (64 bit) Windows OS<br></li><li><strong>Processador:</strong> 3.0+ GHz Quad core<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1060, AMD Radeon RX 470, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de internet banda larga<br></li><li><strong>Armazenamento:</strong> 20 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Gamepad or Controller Recommended</li></ul>",
+    "descricao": "Futebol e pilotagem se encontram mais uma vez na aguardada sequência do jogo clássico de arena baseado em física tão amado pelos fãs, o Supersonic Acrobatic Rocket-Powered Battle-Cars!",
+    "genero": [
+      "Ação",
+      "Indie",
+      "Corrida",
+      "Esportes"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/capsule_616x353.jpg"
+    }
+  },
+  {
+    "nome": "Satisfactory",
+    "desenvolvedor": "Coffee Stain Studios",
+    "publicadora": "Coffee Stain Publishing",
+    "data_lancamento": "10/set./2024",
+    "requisitos_minimos": "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 10 or later (64-Bit)<br></li><li><strong>Processador:</strong> i5-3570 3.4 GHz 4 Core<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia GTX 1650/GTX 1050-ti, or AMD RX 470/RX 570, or equivalent performance &amp; VRAM<br></li><li><strong>Armazenamento:</strong> 20 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Internet connection required for multiplayer.</li></ul>",
+    "requisitos_recomendados": "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um processador e sistema operacional de 64 bits<br></li><li><strong>SO:</strong> Windows 11 or later (64-Bit)<br></li><li><strong>Processador:</strong> Ryzen 5 5600X﻿ or ﻿i5-12400 ﻿or equivalent performance, 6 physical cores minimum<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> Nvidia RTX 2070﻿ or RX 5700, or equivalent performance &amp; VRAM<br></li><li><strong>Armazenamento:</strong> 20 GB de espaço disponível<br></li><li><strong>Outras observações:</strong> Internet connection required for multiplayer.</li></ul>",
+    "descricao": "Satisfactory é um jogo de construção de fábricas em primeira pessoa num mundo aberto, com traços de exploração e combate. Jogue sozinho ou com amigos, explore um planeta alienígena, crie fábricas de vários andares e entre no paraíso das correias transportadoras!",
+    "genero": [
+      "Aventura",
+      "Indie",
+      "Simulação",
+      "Estratégia"
+    ],
+    "imagens": {
+      "principal": "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/header.jpg",
+      "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/library_hero.jpg",
+      "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/526870/capsule_616x353.jpg"
+    }
+  }
+]
