@@ -62,12 +62,12 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
             <div className="space-y-6">
               <Skeleton className="h-6 w-32 bg-primary/10" />
               <Skeleton className="h-20 w-3/4 bg-primary/5" />
-              <Skeleton className="h-32 w-full bg-white/5" />
+              <Skeleton className="h-32 w-full bg-muted/20" />
               <div className="flex gap-4">
                 <Skeleton className="h-16 w-48 rounded-full bg-primary/20" />
               </div>
             </div>
-            <Skeleton className="mx-auto md:mr-0 rounded-3xl aspect-[3/4] w-full max-w-[240px] md:max-w-[380px] bg-white/5 shadow-2xl" />
+            <Skeleton className="mx-auto md:mr-0 rounded-3xl aspect-[3/4] w-full max-w-[240px] md:max-w-[380px] bg-muted/20 shadow-2xl" />
           </div>
         </div>
       </section>
