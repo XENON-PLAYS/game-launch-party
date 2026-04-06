@@ -953,6 +953,159 @@ export const games: Game[] = [
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operativo e processador de 64 bits<br></li><li><strong>Sistema Operativo:</strong> Windows 11 or later (64-Bit)<br></li><li><strong>Processador:</strong> Ryzen 5 5600X﻿ or ﻿i5-12400 ﻿or equivalent performance, 6 physical cores minimum<br></li><li><strong>Memória:</strong> 16 GB de RAM<br></li><li><strong>Placa gráfica:</strong> Nvidia RTX 2070﻿ or RX 5700, or equivalent performance &amp; VRAM<br></li><li><strong>Espaço no disco:</strong> Requer 20 GB de espaço livre<br></li><li><strong>Notas adicionais:</strong> Internet connection required for multiplayer.</li></ul>"
     }
   },
+  {
+    id: 52,
+    nome: "Resident Evil 4 Remake",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/capsule_616x353.jpg",
+    categorias: ["Ação", "Terror"],
+    modos: ["Singleplayer"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Sobreviver é apenas o começo. Seis anos se passaram desde o desastre biológico em Raccoon City. Leon S. Kennedy, um dos sobreviventes, rastreou a filha raptada do presidente até uma vila europeia isolada, onde algo está terrivelmente errado com os habitantes locais.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 10 (64 bit)</li><li>Processador: AMD Ryzen 3 1200 / Intel Core i5-7500</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: AMD Radeon RX 560 / NVIDIA GeForce GTX 1050 Ti</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 10/11 (64 bit)</li><li>Processador: AMD Ryzen 5 3600 / Intel Core i7 8700</li><li>Memória: 16 GB de RAM</li><li>Placa de vídeo: AMD Radeon RX 5700 / NVIDIA GeForce GTX 1070</li></ul>"
+    }
+  },
+  {
+    id: 53,
+    nome: "Resident Evil 7 Biohazard",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/418370/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/418370/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/418370/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/418370/capsule_616x353.jpg",
+    categorias: ["Ação", "Terror"],
+    modos: ["Singleplayer"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "O perigo e o isolamento emanam das paredes apodrecidas de uma fazenda abandonada no sul dos EUA. Resident Evil 7 marca um novo início para o terror de sobrevivência, com uma mudança total de modelo para a assustadora perspectiva em primeira pessoa.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 7, 8, 8.1, 10 (64-BIT)</li><li>Processador: Intel Core i5-4460 / AMD FX-6300</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 760 / AMD Radeon R7 260x</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7, 8, 8.1, 10 (64-BIT)</li><li>Processador: Intel Core i7 3770 / AMD FX-9590</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 1060</li></ul>"
+    }
+  },
+  {
+    id: 54,
+    nome: "Dark Souls II: Scholar of the First Sin",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/capsule_616x353.jpg",
+    categorias: ["Ação", "RPG"],
+    modos: ["Singleplayer", "Multiplayer"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Prepare-se para morrer... de novo. Dark Souls II oferece a renomada obscuridade e jogabilidade viciante da franquia a um novo nível, com novos inimigos e desafios.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 7 SP1 64bit, Windows 8.1 64bit</li><li>Processador: AMD A8 3870 / Intel Core i3 2100</li><li>Memória: 4 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 465 / ATI Radeon HD 6870</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7 SP1 64bit, Windows 8.1 64bit</li><li>Processador: AMD FX 8150 / Intel Core i7 2600</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 750 / ATI Radeon HD 7850</li></ul>"
+    }
+  },
+  {
+    id: 55,
+    nome: "Lies of P",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1627720/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1627720/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1627720/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1627720/capsule_616x353.jpg",
+    categorias: ["Ação", "RPG", "Souls-like"],
+    modos: ["Singleplayer"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Lies of P é um soulslike emocionante que pega a história de Pinóquio, vira-a de cabeça para baixo e coloca-a no cenário sombrio e elegante da era Belle Époque.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 10 (64-bit)</li><li>Processador: AMD Ryzen 3 1200 / Intel Core i3-6300</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: AMD Radeon RX 560 / NVIDIA GeForce GTX 960</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 10 (64-bit)</li><li>Processador: AMD Ryzen 3 1200 / Intel Core i3-6300</li><li>Memória: 16 GB de RAM</li><li>Placa de vídeo: AMD Radeon RX 6500 XT / NVIDIA GeForce GTX 1660</li></ul>"
+    }
+  },
+  {
+    id: 56,
+    nome: "Far Cry 3",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/220240/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/220240/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/220240/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/220240/capsule_616x353.jpg",
+    categorias: ["Ação", "Mundo Aberto"],
+    modos: ["Singleplayer", "Multiplayer"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Descubra os segredos de uma ilha tropical onde a loucura reina. Far Cry 3 é um jogo de tiro em primeira pessoa de mundo aberto que não se parece com nenhum outro.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 7 SP1 / Windows 8</li><li>Processador: Intel Core 2 Duo E6700 / AMD Athlon 64 X2 6000+</li><li>Memória: 2 GB de RAM</li><li>Placa de vídeo: Nvidia 8800 GTX / AMD Radeon HD 2900</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7 SP1 / Windows 8</li><li>Processador: Intel Core i3-530 / AMD Phenom II X2 565</li><li>Memória: 4 GB de RAM</li><li>Placa de vídeo: Nvidia GTX 480 / AMD Radeon HD 5770</li></ul>"
+    }
+  },
+  {
+    id: 57,
+    nome: "Far Cry 4",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/298110/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/298110/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/298110/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/298110/capsule_616x353.jpg",
+    categorias: ["Ação", "Mundo Aberto"],
+    modos: ["Singleplayer", "Co-op"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Escondido no Himalaia encontra-se Kyrat, um país mergulhado em tradição e violência. Você é Ajay Ghale, viajando para Kyrat para cumprir o último desejo de sua mãe.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 7 SP1, Windows 8/8.1 (64bit)</li><li>Processador: Intel Core i5-750 / AMD Phenom II X4 955</li><li>Memória: 4 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 460 / AMD Radeon HD5850</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7 SP1, Windows 8/8.1 (64bit)</li><li>Processador: Intel Core i5-2400S / AMD FX-8350</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 680 / AMD Radeon R9 290X</li></ul>"
+    }
+  },
+  {
+    id: 58,
+    nome: "Far Cry 5",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/552520/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/552520/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/552520/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/552520/capsule_616x353.jpg",
+    categorias: ["Ação", "Mundo Aberto"],
+    modos: ["Singleplayer", "Co-op"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Bem-vindo a Hope County, Montana, terra dos livres e dos bravos, mas também o lar de um culto fanático do juízo final conhecido como Eden's Gate.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 7 SP1, Windows 8.1, Windows 10 (64-bit versions only)</li><li>Processador: Intel Core i5-2400 / AMD FX-6300</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 670 / AMD R9 270</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7 SP1, Windows 8.1, Windows 10 (64-bit versions only)</li><li>Processador: Intel Core i7-4770 / AMD Ryzen 5 1600</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: NVIDIA GeForce GTX 970 / AMD R9 290X</li></ul>"
+    }
+  },
+  {
+    id: 59,
+    nome: "Far Cry 6",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1966720/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1966720/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1966720/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/1966720/capsule_616x353.jpg",
+    categorias: ["Ação", "Mundo Aberto"],
+    modos: ["Singleplayer", "Co-op"],
+    idiomas: ["Português", "Inglês"],
+    descricao: "Jogue como Dani Rojas, um habitante local de Yara, enquanto luta em uma revolução de guerrilha moderna para libertar Yara!",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 10 (64-bit)</li><li>Processador: AMD Ryzen 3 1200 / Intel Core i5-4460</li><li>Memória: 8 GB de RAM</li><li>Placa de vídeo: AMD Radeon RX 460 / NVIDIA GeForce GTX 960</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 10 (64-bit)</li><li>Processador: AMD Ryzen 5 3600 / Intel Core i7-7700</li><li>Memória: 16 GB de RAM</li><li>Placa de vídeo: AMD Radeon RX 5700 / NVIDIA GeForce GTX 1080</li></ul>"
+    }
+  },
+  {
+    id: 60,
+    nome: "Grand Theft Auto IV: The Complete Edition",
+    preco: 0,
+    imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/12210/header.jpg",
+    heroImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/12210/library_hero.jpg",
+    verticalImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/12210/library_600x900.jpg",
+    capsuleImage: "https://cdn.cloudflare.steamstatic.com/steam/apps/12210/capsule_616x353.jpg",
+    categorias: ["Ação", "Mundo Aberto"],
+    modos: ["Singleplayer"],
+    idiomas: ["Inglês"],
+    descricao: "Niko Bellic, Johnny Klebitz e Luis Lopez têm uma coisa em comum: vivem na pior cidade da América. Liberty City adora dinheiro e status, e é o paraíso para quem os tem e um pesadelo vivo para quem não os tem.",
+    requisitos: {
+      minimo: "<strong>Mínimos:</strong><br><ul><li>SO: Windows 7 (plus Service Pack 1)</li><li>Processador: Intel Core 2 Quad CPU Q6600 / AMD Phenom X3 8750</li><li>Memória: 2 GB de RAM</li><li>Placa de vídeo: NVIDIA 8600 / ATI 3870</li></ul>",
+      recomendado: "<strong>Recomendados:</strong><br><ul><li>SO: Windows 7 (plus Service Pack 1)</li><li>Processador: Intel Core 2 Quad CPU Q6600 / AMD Phenom X3 8750</li><li>Memória: 4 GB de RAM</li><li>Placa de vídeo: NVIDIA 8600 / ATI 3870</li></ul>"
+    }
+  },
 ];
 
 export const allCategories = Array.from(new Set(games.flatMap((g) => g.categorias))).sort();
