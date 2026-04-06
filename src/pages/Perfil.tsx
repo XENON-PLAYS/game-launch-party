@@ -434,12 +434,16 @@ const Perfil = () => {
           try {
             const { error } = await supabase.from("notifications").insert({
               user_id: user.id,
-              title: "Sistema de Teste",
-              message: "Esta é uma notificação de teste para verificar se o sistema está funcionando 100%!",
+              title: "🚀 Teste de Voo",
+              message: "Sua frota de notificações está operando em 100%! Tudo pronto para a decolagem.",
               type: "info"
             });
             if (error) throw error;
-            toast.success("Notificação de teste enviada!");
+            
+            // Invalida o cache para mostrar a notificação na hora no sino do header
+            queryClient.invalidateQueries({ queryKey: ["notifications", user.id] });
+            
+            toast.success("Mensagem de teste enviada para seu hangar!");
           } catch (error: any) {
             toast.error("Erro ao enviar notificação: " + error.message);
           }
