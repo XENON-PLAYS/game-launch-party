@@ -264,10 +264,20 @@ export function GameAdminList({ games, onEdit, onDelete, onAdd, onDuplicate }: G
                             Editar
                           </Button>
                           <Button 
+                            variant="secondary" 
+                            size="sm" 
+                            className="h-8 w-8 p-0 rounded-lg"
+                            onClick={() => onDuplicate(game)}
+                            title="Duplicar"
+                          >
+                            <Copy className="h-3 w-3" />
+                          </Button>
+                          <Button 
                             variant="destructive" 
                             size="sm" 
                             className="h-8 w-8 p-0 rounded-lg"
                             onClick={() => onDelete(game.id, game.nome)}
+                            title="Excluir"
                           >
                             <Trash2 className="h-3 w-3" />
                           </Button>
