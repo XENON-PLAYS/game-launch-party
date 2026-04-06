@@ -67,7 +67,7 @@ export function GameCard({ game }: GameCardProps) {
         
         <div className="mt-auto pt-3 border-t border-border/30 flex items-center justify-between">
           <div className="flex flex-col">
-            <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-widest leading-none mb-1.5 opacity-60">Valor</span>
+            <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-widest leading-none mb-1.5 opacity-60">Tesouro</span>
             <span className={`font-black text-base lg:text-lg leading-none flex items-center gap-2 ${game.preco === 0 ? "text-primary" : "text-foreground"}`}>
               {game.preco === 0 && (
                 <span className="relative flex h-2 w-2">
