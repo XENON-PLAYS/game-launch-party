@@ -22,9 +22,25 @@ const DownloadPage = () => {
   const { data: game, isLoading: gameLoading } = useQuery({
     queryKey: ["game", gameId],
     queryFn: async () => {
-      const { data, error } = await supabase.from("games").select("*").eq("id", gameId!).single();
-      if (error) throw error;
-      return data;
+      try {
+        const { data, error } = await supabase.from("games").select("*").eq("id", gameId!).maybeSingle();
+        if (error || !data) {
+          const { games: localGames } = await import("@/data/games");
+          const localGame = localGames.find(g => String(g.id) === gameId);
+          if (localGame) {
+            return {
+              id: String(localGame.id),
+              nome: localGame.nome,
+              imagem: localGame.imagem,
+              categorias: localGame.categorias,
+            } as any;
+          }
+          return null;
+        }
+        return data;
+      } catch (err) {
+        return null;
+      }
     },
     enabled: !!gameId,
   });
