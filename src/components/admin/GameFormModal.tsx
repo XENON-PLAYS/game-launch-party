@@ -634,7 +634,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                       <Textarea 
                         value={formData.pre_requisitos || ""} 
                         onChange={(e) => handleFieldChange("pre_requisitos", e.target.value)} 
-                        className="min-h-[120px] rounded-2xl bg-background/50"
+                        className="min-h-[120px] rounded-2xl bg-background/50 border-border/40 focus:border-primary/40 focus:ring-primary/10 transition-all p-4 text-sm"
                         placeholder="Ex: Instalar Visual C++, DirectX, etc."
                       />
                     </div>
