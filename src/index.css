@@ -124,6 +124,9 @@
 
   ::-webkit-scrollbar-thumb {
     @apply bg-muted-foreground/20 rounded-full border-4 border-solid border-background hover:bg-muted-foreground/40 transition-colors;
+    .light & {
+      @apply bg-muted-foreground/10 hover:bg-muted-foreground/20;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
