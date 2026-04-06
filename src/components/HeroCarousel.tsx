@@ -210,7 +210,7 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
                 onClick={() => goTo(i)}
                 className={`relative h-1 group focus:outline-none transition-all duration-300 ${i === current ? 'w-10 sm:w-[60px]' : 'w-5 sm:w-[30px]'}`}
               >
-                <div className="absolute inset-0 bg-white/20 rounded-full overflow-hidden">
+                <div className="absolute inset-0 bg-muted/40 rounded-full overflow-hidden">
                   <motion.div 
                     initial={false}
                     animate={{ width: i === current ? "100%" : "0%" }}
@@ -225,14 +225,14 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
           <div className="flex gap-3">
             <button 
               onClick={prev} 
-              className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all flex items-center justify-center backdrop-blur-sm group"
+              className="w-12 h-12 rounded-full bg-muted/50 hover:bg-muted border border-border text-foreground transition-all flex items-center justify-center backdrop-blur-sm group"
               aria-label="Previous slide"
             >
               <ChevronLeft className="w-6 h-6 group-active:scale-90 transition-transform" />
             </button>
             <button 
               onClick={next} 
-              className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all flex items-center justify-center backdrop-blur-sm group"
+              className="w-12 h-12 rounded-full bg-muted/50 hover:bg-muted border border-border text-foreground transition-all flex items-center justify-center backdrop-blur-sm group"
               aria-label="Next slide"
             >
               <ChevronRight className="w-6 h-6 group-active:scale-90 transition-transform" />
