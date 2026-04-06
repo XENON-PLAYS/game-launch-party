@@ -54,7 +54,7 @@ const App = () => {
               <Sonner />
               <BrowserRouter>
                 <Suspense fallback={
-                  <div className="min-h-screen bg-[#070707] flex flex-col items-center justify-center gap-10">
+                  <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-10">
                     <div className="relative">
                       <div className="w-24 h-24 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -63,7 +63,7 @@ const App = () => {
                     </div>
                     <div className="text-center space-y-4">
                       <p className="text-primary font-black uppercase tracking-[0.4em] text-xs animate-pulse">Carregando Universo</p>
-                      <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden mx-auto">
+                      <div className="w-48 h-1 bg-muted/20 rounded-full overflow-hidden mx-auto">
                         <motion.div 
                           className="h-full bg-primary shadow-[0_0_10px_#ff0000]"
                           animate={{ width: ["0%", "100%"] }}
