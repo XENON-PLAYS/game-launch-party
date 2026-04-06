@@ -19,7 +19,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect, useRef } from "react";
 import { OnlineUsers } from "./OnlineUsers";
 import { NotificationBell } from "./NotificationBell";
-import { GameRequestModal } from "./GameRequestModal";
+// removed GameRequestModal import
 import { optimizeImageUrl } from "@/lib/utils";
 import pirateLogo from "@/assets/logo-pirate.png";
 
@@ -44,7 +44,7 @@ export function Header() {
   }, []);
 
 
-  const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+  // removed isRequestModalOpen state
 
   const navLinks = (
     <>
@@ -90,6 +90,17 @@ export function Header() {
         POLÍTICA DE PRIVACIDADE
         <span className={`absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-300 ${
           location.pathname === "/privacidade" ? "w-full" : "w-0 group-hover:w-full"
+        }`} />
+      </Link>
+      <Link 
+        to="/pedir-jogo" 
+        className={`text-[13px] font-black uppercase tracking-[0.2em] transition-all duration-300 relative group py-2 ${
+          location.pathname === "/pedir-jogo" ? "text-[#ff0000]" : "text-gray-500 hover:text-white"
+        }`}
+      >
+        Pedir Jogos
+        <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#ff0000] transition-all duration-300 ${
+          location.pathname === "/pedir-jogo" ? "w-full" : "w-0 group-hover:w-full"
         }`} />
       </Link>
       <Link 
@@ -247,10 +258,7 @@ export function Header() {
           )}
         </AnimatePresence>
 
-        <GameRequestModal 
-          isOpen={isRequestModalOpen} 
-          onClose={() => setIsRequestModalOpen(false)} 
-        />
+        {/* removed GameRequestModal */}
       </header>
 
     </>

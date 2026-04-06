@@ -523,6 +523,7 @@ const Index = () => {
                 <li><button onClick={() => navigate("/novidades")} className="hover:text-primary transition-colors">Novidades</button></li>
                 <li><button onClick={() => navigate("/dmca")} className="hover:text-primary transition-colors">DMCA</button></li>
                 <li><button onClick={() => navigate("/privacidade")} className="hover:text-primary transition-colors">POLÍTICA DE PRIVACIDADE</button></li>
+                <li><button onClick={() => navigate("/pedir-jogo")} className="hover:text-primary transition-colors uppercase">Pedir Jogos</button></li>
               </ul>
             </div>
             
@@ -532,6 +533,7 @@ const Index = () => {
                 <li><button className="hover:text-primary transition-colors">Central de Ajuda</button></li>
                 <li><button onClick={() => navigate("/dmca")} className="hover:text-primary transition-colors">Termos de Uso</button></li>
                 <li><button onClick={() => navigate("/privacidade")} className="hover:text-primary transition-colors">Privacidade</button></li>
+                <li><button onClick={() => navigate("/pedir-jogo")} className="hover:text-primary transition-colors">Pedir Jogos</button></li>
               </ul>
             </div>
 

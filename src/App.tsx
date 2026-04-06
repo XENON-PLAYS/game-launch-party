@@ -25,6 +25,7 @@ const Checkout = lazy(() => import("./pages/Checkout"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const DMCA = lazy(() => import("./pages/DMCA"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const GameRequest = lazy(() => import("./pages/GameRequest"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -88,6 +89,7 @@ const App = () => {
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/dmca" element={<DMCA />} />
                     <Route path="/privacidade" element={<PrivacyPolicy />} />
+                    <Route path="/pedir-jogo" element={<GameRequest />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </Suspense>
