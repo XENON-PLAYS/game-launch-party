@@ -198,7 +198,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
             </div>
             <div>
               <DialogTitle className="text-2xl font-black uppercase tracking-tighter">
-                {mode === "add" ? "Cadastrar Novo" : "Configurar"} <span className="text-primary">Título</span>
+                {mode === "add" ? "Cadastrar Novo" : `Configurando "${formData.nome || 'Título'}"`} <span className="text-primary">Título</span>
               </DialogTitle>
               <DialogDescription className="text-xs font-bold uppercase tracking-[0.2em] opacity-60">
                 Central de gerenciamento de metadados do ELITE Studio
