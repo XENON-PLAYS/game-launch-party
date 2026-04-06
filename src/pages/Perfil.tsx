@@ -17,6 +17,7 @@ import { GameCard } from "@/components/GameCard";
 
 const Perfil = () => {
   const { user, profile, isLoading: authLoading, refreshProfile } = useAuth();
+  const queryClient = useQueryClient();
   const { userId } = useParams();
   const { theme: currentTheme, setTheme } = useTheme();
   const navigate = useNavigate();
