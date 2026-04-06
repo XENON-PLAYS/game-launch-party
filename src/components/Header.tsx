@@ -71,6 +71,17 @@ export function Header() {
         }`} />
       </Link>
       <Link 
+        to="/dmca" 
+        className={`text-[13px] font-black uppercase tracking-[0.2em] transition-all duration-300 relative group py-2 ${
+          location.pathname === "/dmca" ? "text-white" : "text-gray-500 hover:text-white"
+        }`}
+      >
+        DMCA
+        <span className={`absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-300 ${
+          location.pathname === "/dmca" ? "w-full" : "w-0 group-hover:w-full"
+        }`} />
+      </Link>
+      <Link 
         to="/vip" 
         className="flex items-center gap-2 text-[13px] font-black uppercase tracking-[0.2em] text-[#fbbf24] hover:brightness-125 transition-all relative group py-2"
       >
