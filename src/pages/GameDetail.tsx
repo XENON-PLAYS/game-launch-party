@@ -31,20 +31,53 @@ const GameDetail = () => {
   const { data: game, isLoading } = useQuery({
     queryKey: ["game", slug],
     queryFn: async () => {
-      // Tenta buscar por slug, se não encontrar (ou se o slug parecer um UUID), tenta por ID para manter compatibilidade
-      let query = supabase.from("games").select("*");
-      
-      const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug!);
-      
-      if (isUUID) {
-        query = query.eq("id", slug!);
-      } else {
-        query = query.eq("slug", slug!);
-      }
+      try {
+        let query = supabase.from("games").select("*");
+        const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug!);
+        
+        if (isUUID) {
+          query = query.eq("id", slug!);
+        } else {
+          query = query.eq("slug", slug!);
+        }
 
-      const { data, error } = await query.maybeSingle();
-      if (error) throw error;
-      return data;
+        const { data, error } = await query.maybeSingle();
+        if (error || !data) {
+          const { games: localGames } = await import("@/data/games");
+          // Find game by slug (normalized name) or ID
+          const localGame = localGames.find(g => 
+            g.nome.toLowerCase().replace(/\s+/g, '-') === slug || String(g.id) === slug
+          );
+          
+          if (localGame) {
+            return {
+              id: String(localGame.id),
+              nome: localGame.nome,
+              imagem: localGame.imagem,
+              hero_image: localGame.heroImage,
+              vertical_image: localGame.verticalImage,
+              capsule_image: localGame.capsuleImage,
+              descricao: localGame.descricao,
+              desenvolvedor: localGame.desenvolvedor,
+              distribuidor: localGame.distribuidor,
+              lancamento: localGame.lancamento,
+              categorias: localGame.categorias,
+              preco: localGame.preco,
+              requisitos_minimo: localGame.requisitos?.minimo,
+              requisitos_recomendado: localGame.requisitos?.recomendado,
+              galeria: [], // Local data doesn't have gallery yet
+              trailer_url: localGame.trailer || null,
+              rating_avg: 0,
+              rating_count: 0,
+            } as any;
+          }
+          return null;
+        }
+        return data;
+      } catch (err) {
+        console.error("Error fetching game detail:", err);
+        return null;
+      }
     },
     enabled: !!slug,
   });
