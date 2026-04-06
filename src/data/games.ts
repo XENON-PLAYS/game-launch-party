@@ -330,9 +330,9 @@ export const games: Game[] = [
   {
     id: 17,
     nome: "Sekiro", 
-    descricao: "Fall Guys é um jogo party royale gratuito, multiplataforma e multijogador. Dispute com seus amigos em pistas de obstáculos desajeitadas e absurdas ou construa seu próprio percurso caótico para compartilhar com a comunidade.", 
-    desenvolvedor: "Mediatonic", 
-    lancamento: "3/ago./2020",
+    descricao: "Trilhe seu próprio caminho de vingança nesta premiada aventura da FromSoftware, os criadores de Bloodborne e da franquia Dark Souls. Obtenha vingança. Retome sua honra. Mate astuciosamente.", 
+    desenvolvedor: "FromSoftware, Inc.", 
+    lancamento: "21/mar./2019",
     preco: 0,
     imagem: "https://cdn.cloudflare.steamstatic.com/steam/apps/1097150/header.jpg",
     categorias: ["Ação","Casual","Indie","Multijogador Massivo","Esportes"],
