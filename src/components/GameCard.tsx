@@ -3,6 +3,7 @@ import { Info, Star } from "lucide-react";
 import { Tables } from "@/integrations/supabase/types";
 import { motion } from "framer-motion";
 import { optimizeImageUrl } from "@/lib/utils";
+import React from "react";
 
 type Game = Tables<"games">;
 
@@ -10,16 +11,19 @@ interface GameCardProps {
   game: Game;
 }
 
-export function GameCard({ game }: GameCardProps) {
+export const GameCard = React.memo(({ game }: GameCardProps) => {
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
   };
 
   return (
     <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="group bg-card/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 transition-all duration-500 relative flex flex-col h-full shadow-lg hover:shadow-primary/10 hover:-translate-y-1"
+      className="group bg-card/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 transition-all duration-500 relative flex flex-col h-full shadow-lg hover:shadow-primary/10"
     >
       <Link to={`/jogo/${game.slug || game.id}`} className="block relative aspect-[3/4] overflow-hidden shrink-0 rounded-2xl m-2">
         <img 
@@ -89,4 +93,6 @@ export function GameCard({ game }: GameCardProps) {
       </div>
     </motion.div>
   );
-}
+});
+
+GameCard.displayName = "GameCard";
