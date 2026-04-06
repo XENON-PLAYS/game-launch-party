@@ -462,7 +462,10 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                             </div>
                           )}
                         </div>
-                        <Input type="text" placeholder="URL da Hero Image" value={formData.hero_image || ""} onChange={(e) => handleFieldChange("hero_image", e.target.value)} className="rounded-xl h-10 text-xs bg-background/50 border-border/40" />
+                        <div className="space-y-2">
+                          <Label className="text-[9px] font-black uppercase tracking-widest opacity-50">URL da Imagem</Label>
+                          <Input type="text" placeholder="https://..." value={formData.hero_image || ""} onChange={(e) => handleFieldChange("hero_image", e.target.value)} className="rounded-xl h-10 text-xs bg-background/50 border-border/40" />
+                        </div>
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
