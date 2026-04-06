@@ -669,17 +669,27 @@ const Perfil = () => {
                   @{targetProfile?.username || "sem_usuario"}
                 </p>
                 
-                <div className="flex flex-wrap justify-center gap-2 mt-4">
-                  {targetProfile?.is_vip && (
-                    <span className="bg-yellow-500/10 text-yellow-500 text-[9px] font-bold px-2 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest ">
-                      VIP
-                    </span>
+                <div className="flex flex-col items-center gap-3 mt-4">
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {targetProfile?.is_vip && (
+                      <span className="bg-yellow-500/10 text-yellow-500 text-[9px] font-bold px-2 py-0.5 rounded border border-yellow-500/20 uppercase tracking-widest ">
+                        VIP
+                      </span>
+                    )}
+                    {targetProfile?.badges?.map((badge: string, idx: number) => (
+                      <span key={idx} className="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded border border-primary/20 uppercase tracking-widest ">
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
+                  {isOwnProfile && targetProfile?.is_vip && targetProfile?.vip_expires_at && (
+                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/5 border border-yellow-500/10">
+                      <div className="w-1 h-1 rounded-full bg-yellow-500 animate-pulse" />
+                      <p className="text-[10px] text-yellow-500/70 font-bold uppercase tracking-wider">
+                        VIP EXPIRA EM: {new Date(targetProfile.vip_expires_at).toLocaleDateString("pt-BR")}
+                      </p>
+                    </div>
                   )}
-                  {targetProfile?.badges?.map((badge: string, idx: number) => (
-                    <span key={idx} className="bg-primary/10 text-primary text-[9px] font-bold px-2 py-0.5 rounded border border-primary/20 uppercase tracking-widest ">
-                      {badge}
-                    </span>
-                  ))}
                 </div>
               </div>
             </div>
