@@ -306,12 +306,46 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                     </div>
                   </div>
 
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Modos de Jogo</Label>
+                      <div className="flex flex-wrap gap-2">
+                        {["Single-player", "Multiplayer", "Co-op Online", "Co-op Local", "Cross-Platform", "VR Suportado"].map(modo => (
+                          <Badge 
+                            key={modo} 
+                            variant={formData.modos?.includes(modo) ? "default" : "outline"}
+                            className="cursor-pointer px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all"
+                            onClick={() => handleArrayToggle("modos", modo)}
+                          >
+                            {modo}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Idiomas Suportados</Label>
+                      <div className="flex flex-wrap gap-2">
+                        {["Português", "Inglês", "Espanhol", "Francês", "Alemão", "Italiano", "Japonês", "Chinês"].map(idioma => (
+                          <Badge 
+                            key={idioma} 
+                            variant={formData.idiomas?.includes(idioma) ? "default" : "outline"}
+                            className="cursor-pointer px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all"
+                            onClick={() => handleArrayToggle("idiomas", idioma)}
+                          >
+                            {idioma}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="space-y-2">
                     <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Descrição Detalhada</Label>
                     <Textarea 
                       value={formData.descricao || ""} 
                       onChange={(e) => handleFieldChange("descricao", e.target.value)} 
-                      className="min-h-[200px] rounded-2xl bg-background/50 resize-none"
+                      className="min-h-[180px] rounded-2xl bg-background/50 resize-none border-border/40 focus:border-primary/40 transition-all p-6 text-sm leading-relaxed"
                       placeholder="Descreva a experiência épica que este jogo oferece..."
                     />
                   </div>
