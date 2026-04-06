@@ -64,7 +64,7 @@ export class ErrorBoundary extends Component<Props, State> {
           </div>
           
           <p className="mt-12 text-[10px] text-gray-600 uppercase tracking-[0.2em] font-black">
-            Jogos Piratas - Sistema de Recuperação Ativo
+            Jogos Grátis - Sistema de Recuperação Ativo
           </p>
         </div>
       );

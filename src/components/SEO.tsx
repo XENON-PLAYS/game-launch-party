@@ -12,17 +12,17 @@ interface SEOProps {
 }
 
 export const SEO = ({ 
-  title = "Jogos Piratas - O Melhor Catálogo de Jogos Grátis para PC", 
+  title = "Jogos Grátis - O Melhor Catálogo de Jogos para PC", 
   description = "Baixe os melhores jogos de PC de forma rápida, segura e 100% gratuita. Catálogo atualizado diariamente com os maiores lançamentos e clássicos verificados.", 
-  keywords = "jogos grátis, download jogos pc, jogos piratas, gta v download, minecraft grátis, red dead redemption 2 pc, jogos leves pc",
+  keywords = "jogos grátis, download jogos pc, gta v download, minecraft grátis, red dead redemption 2 pc, jogos leves pc",
   image = "/logo-pirate.png",
-  url = "https://jogos-piratas.com",
+  url = "https://jogos-gratis.com",
   preloadImage,
   preloadPoster
 }: SEOProps) => {
   const { pathname } = useLocation();
   const currentUrl = `${url}${pathname === "/" ? "" : pathname}`;
-  const fullTitle = title.toLowerCase().includes("jogos piratas") ? title : `${title} | Jogos Piratas`;
+  const fullTitle = title.toLowerCase().includes("jogos grátis") ? title : `${title} | Jogos Grátis`;
 
   return (
     <Helmet>
@@ -31,7 +31,7 @@ export const SEO = ({
       <meta name="title" content={fullTitle} />
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      <meta name="author" content="Jogos Piratas Team" />
+      <meta name="author" content="Jogos Grátis Team" />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={currentUrl} />
       
