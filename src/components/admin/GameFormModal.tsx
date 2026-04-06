@@ -293,7 +293,8 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                       <select 
                         value={formData.classificacao || "Livre"} 
                         onChange={(e) => handleFieldChange("classificacao", e.target.value)}
-                        className="w-full h-12 rounded-xl bg-background/50 border-border/40 px-4 text-sm font-bold uppercase tracking-widest focus:ring-primary/20"
+                        className="w-full h-12 rounded-xl bg-background/50 border border-border/40 px-4 text-sm font-bold uppercase tracking-widest focus:ring-primary/20 focus:border-primary/40 outline-none transition-all appearance-none cursor-pointer"
+                        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.2rem' }}
                       >
                         <option value="Livre">Livre</option>
                         <option value="10+">10+</option>
@@ -462,10 +463,13 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                             </div>
                           )}
                         </div>
-                        <Input type="text" placeholder="URL da Hero Image" value={formData.hero_image || ""} onChange={(e) => handleFieldChange("hero_image", e.target.value)} className="rounded-xl h-10 text-xs bg-background/50 border-border/40" />
+                        <div className="space-y-2">
+                          <Label className="text-[9px] font-black uppercase tracking-widest opacity-50">URL da Imagem</Label>
+                          <Input type="text" placeholder="https://..." value={formData.hero_image || ""} onChange={(e) => handleFieldChange("hero_image", e.target.value)} className="rounded-xl h-10 text-xs bg-background/50 border-border/40" />
+                        </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-2 gap-6">
                         <div className="space-y-4">
                           <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Imagem Vertical (600x900)</Label>
                           <div className="aspect-[2/3] rounded-2xl border-2 border-dashed border-border/40 bg-muted/20 relative overflow-hidden group">
@@ -477,7 +481,10 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                               </div>
                             )}
                           </div>
-                          <Input type="text" placeholder="URL" value={formData.vertical_image || ""} onChange={(e) => handleFieldChange("vertical_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                          <div className="space-y-1">
+                            <Label className="text-[9px] font-black uppercase tracking-widest opacity-50">URL</Label>
+                            <Input type="text" placeholder="https://..." value={formData.vertical_image || ""} onChange={(e) => handleFieldChange("vertical_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                          </div>
                         </div>
                         <div className="space-y-4">
                           <Label className="text-[10px] font-black uppercase tracking-widest opacity-60">Imagem Cápsula (460x215)</Label>
@@ -490,7 +497,10 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                               </div>
                             )}
                           </div>
-                          <Input type="text" placeholder="URL" value={formData.capsule_image || ""} onChange={(e) => handleFieldChange("capsule_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                          <div className="space-y-1">
+                            <Label className="text-[9px] font-black uppercase tracking-widest opacity-50">URL</Label>
+                            <Input type="text" placeholder="https://..." value={formData.capsule_image || ""} onChange={(e) => handleFieldChange("capsule_image", e.target.value)} className="rounded-xl h-9 text-[10px] bg-background/50 border-border/40" />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -624,7 +634,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                       <Textarea 
                         value={formData.pre_requisitos || ""} 
                         onChange={(e) => handleFieldChange("pre_requisitos", e.target.value)} 
-                        className="min-h-[120px] rounded-2xl bg-background/50"
+                        className="min-h-[120px] rounded-2xl bg-background/50 border-border/40 focus:border-primary/40 focus:ring-primary/10 transition-all p-4 text-sm"
                         placeholder="Ex: Instalar Visual C++, DirectX, etc."
                       />
                     </div>
@@ -635,7 +645,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                       <Textarea 
                         value={formData.passo_a_passo || ""} 
                         onChange={(e) => handleFieldChange("passo_a_passo", e.target.value)} 
-                        className="min-h-[150px] rounded-2xl bg-background/50"
+                        className="min-h-[150px] rounded-2xl bg-background/50 border-border/40 focus:border-primary/40 focus:ring-primary/10 transition-all p-4 text-sm whitespace-pre-wrap"
                         placeholder="1. Extraia o arquivo\n2. Execute o setup.exe..."
                       />
                     </div>
@@ -644,7 +654,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
                       <Textarea 
                         value={formData.observacoes || ""} 
                         onChange={(e) => handleFieldChange("observacoes", e.target.value)} 
-                        className="min-h-[100px] rounded-2xl bg-background/50"
+                        className="min-h-[100px] rounded-2xl bg-background/50 border-border/40 focus:border-primary/40 focus:ring-primary/10 transition-all p-4 text-sm"
                       />
                     </div>
                   </div>
