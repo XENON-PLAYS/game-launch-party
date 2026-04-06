@@ -22,18 +22,14 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    target: "esnext",
+    target: "es2020",
     minify: "esbuild",
     cssCodeSplit: true,
     sourcemap: false,
     reportCompressedSize: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          "vendor-react": ["react", "react-dom", "react-router-dom"],
-          "vendor-ui": ["lucide-react", "clsx", "tailwind-merge"],
-          "vendor-utils": ["@tanstack/react-query", "@supabase/supabase-js", "zod"],
-        },
+        manualChunks: undefined, // Let Vite handle chunking to avoid dependency issues
       },
     },
   },

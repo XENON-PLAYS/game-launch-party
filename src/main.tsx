@@ -4,9 +4,14 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
 import "./index.css";
 
+// Error reporting to server or simple log
+const reportError = (error: any, context: string) => {
+  console.error(`[Fatal Error] [${context}]:`, error);
+};
+
 // Global error handling for catastrophic failures
 window.onerror = (message, source, lineno, colno, error) => {
-  console.error("Global Error Caught:", message, error);
+  reportError(error || message, "WindowOnError");
   const root = document.getElementById("root");
   if (root && (root.innerHTML === "" || root.children.length === 0)) {
     root.innerHTML = `
@@ -20,7 +25,7 @@ window.onerror = (message, source, lineno, colno, error) => {
           Isso geralmente acontece por problemas temporários de conexão ou cache corrompido.
         </p>
         <div style="display: flex; gap: 16px;">
-          <button onclick="window.location.reload()" style="background: #ff0000; color: white; border: none; padding: 16px 32px; border-radius: 12px; cursor: pointer; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.2s; box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);">Recarregar Agora</button>
+          <button onclick="window.location.reload(true)" style="background: #ff0000; color: white; border: none; padding: 16px 32px; border-radius: 12px; cursor: pointer; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.2s; box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);">Recarregar Agora</button>
           <button onclick="window.location.href='/'" style="background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); padding: 16px 32px; border-radius: 12px; cursor: pointer; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;">Voltar ao Início</button>
         </div>
         <p style="margin-top: 48px; color: #444; font-size: 10px; font-weight: 900; letter-spacing: 0.3em; text-transform: uppercase;">Jogos Grátis - Sistema de Recuperação Ativo</p>
@@ -30,7 +35,7 @@ window.onerror = (message, source, lineno, colno, error) => {
 };
 
 window.onunhandledrejection = (event) => {
-  console.error("Unhandled Promise Rejection:", event.reason);
+  reportError(event.reason, "UnhandledPromiseRejection");
 };
 
 console.log("🚀 Iniciando aplicação Jogos Grátis...");
@@ -50,6 +55,10 @@ if (!container) {
     );
     console.log("✅ Renderização inicial concluída com sucesso.");
   } catch (error) {
-    console.error("FATAL: Erro ao renderizar a aplicação React:", error);
+    reportError(error, "RootRender");
+    // Fallback in case root.render itself fails
+    if (container.innerHTML === "") {
+        container.innerHTML = "<h1>Erro Crítico: A aplicação falhou ao renderizar.</h1>";
+    }
   }
 }

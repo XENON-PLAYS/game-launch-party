@@ -35,6 +35,18 @@
     <meta name="twitter:description" content="O melhor catálogo de jogos diretos e verificados. Downloads rápidos, seguros e atualizados de jogos famosos como Skyrim, GTA e muito mais. Tudo grátis!">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
+    <script>
+      // Global error handler at the very top
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        console.error("Critical Page Error:", msg, error);
+        var root = document.getElementById("root");
+        if (root && (root.innerHTML === "" || root.children.length === 0)) {
+          root.innerHTML = '<div style="background:#070707;color:white;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;font-family:sans-serif;text-align:center;position:fixed;inset:0;z-index:9999;"><h1 style="color:#ff0000;font-size:32px;margin-bottom:16px;">SISTEMA INDISPONÍVEL</h1><p style="color:#aaa;margin-bottom:32px;max-width:500px;line-height:1.6;">Ocorreu uma falha crítica ao carregar os módulos do sistema. Isso pode ser causado por cache corrompido no seu navegador.</p><button onclick="window.location.reload(true)" style="background:#ff0000;color:white;border:none;padding:16px 32px;border-radius:12px;cursor:pointer;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:0.1em;">Limpar Cache e Recarregar</button></div>';
+        }
+        return false;
+      };
+    </script>
+
   </head>
 
   <body>
