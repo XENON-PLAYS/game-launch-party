@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import { Check, Shield, Zap, Star, Trophy, CreditCard, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect } from "react";
