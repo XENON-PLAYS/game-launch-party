@@ -45,6 +45,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/jogo/:slug" element={<GameDetail />} />
+                <Route path="/novidades" element={<Index />} />
                 <Route path="/vip" element={<Vip />} />
                 <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
                 <Route path="/categoria/:category" element={<CategoryPage />} />
