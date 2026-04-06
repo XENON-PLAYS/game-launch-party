@@ -115,20 +115,22 @@ export function Header() {
   return (
     <>
       <header className="sticky top-0 z-[100] bg-[#0f0f0f] border-b border-white/5 py-2 px-4 md:px-12 flex items-center justify-between shadow-2xl transition-all duration-300">
-        <div className="container mx-auto flex items-center justify-between gap-4 lg:gap-6">
+        <div className="container mx-auto flex items-center justify-start gap-8 lg:gap-12">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group shrink-0">
+          <Link to="/" className="flex items-center gap-3 group shrink-0">
             <img src={pirateLogo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
-            <div className="flex flex-col items-start leading-[0.8] py-1">
+            <div className="flex items-center gap-2 py-1">
               <span className="text-xl md:text-2xl font-black tracking-tighter text-white">JOGOS</span>
-              <span className="text-xl md:text-2xl font-black tracking-tighter text-[#ff0000]">GRATIS</span>
+              <span className="text-xl md:text-2xl font-black tracking-tighter text-[#ff0000]">PIRATAS</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-12 flex-1 justify-center">
+          <nav className="hidden lg:flex items-center gap-12 ml-8">
             {navLinks}
           </nav>
+
+          <div className="flex-1" />
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-2 sm:gap-6 shrink-0">
