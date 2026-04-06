@@ -22,6 +22,7 @@ const Perfil = lazy(() => import("./pages/Perfil"));
 const CategoryPage = lazy(() => import("./pages/CategoryPage"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const DMCA = lazy(() => import("./pages/DMCA"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
