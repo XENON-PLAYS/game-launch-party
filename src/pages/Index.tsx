@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
@@ -21,6 +21,7 @@ const categoryIconMap: Record<string, any> = {
 
 const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const searchFromUrl = searchParams.get("search") || "";
   
   const [busca, setBusca] = useState(searchFromUrl);
