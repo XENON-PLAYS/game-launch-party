@@ -499,7 +499,8 @@ const Index = () => {
               <ul className="space-y-3 md:space-y-6 text-base md:text-lg font-medium">
                 <li><button className="hover:text-primary transition-colors">Início</button></li>
                 <li><button className="hover:text-primary transition-colors">Catálogo</button></li>
-                <li><button className="hover:text-primary transition-colors">Novidades</button></li>
+                <li><button onClick={() => navigate("/novidades")} className="hover:text-primary transition-colors">Novidades</button></li>
+                <li><button onClick={() => navigate("/dmca")} className="hover:text-primary transition-colors">DMCA</button></li>
               </ul>
             </div>
             
