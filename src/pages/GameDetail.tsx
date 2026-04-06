@@ -650,9 +650,9 @@ const GameDetail = () => {
           <div className="pt-16 border-t border-border flex flex-col md:flex-row justify-between items-center gap-10 text-responsive-small text-muted-foreground opacity-60">
             <p>© 2025 ELITE Studio — A melhor experiência gamer.</p>
             <div className="flex gap-8">
-              <Link to="/" className="hover:text-primary transition-colors">Termos</Link>
-              <Link to="/" className="hover:text-primary transition-colors">Privacidade</Link>
-              <Link to="/" className="hover:text-primary transition-colors">Cookies</Link>
+              <Link to="/dmca" className="hover:text-primary transition-colors">DMCA</Link>
+              <Link to="/privacidade" className="hover:text-primary transition-colors">Privacidade</Link>
+              <Link to="/pedir-jogo" className="hover:text-primary transition-colors">Pedir Jogos</Link>
             </div>
           </div>
         </div>
