@@ -6,35 +6,50 @@ import "./index.css";
 
 // Global error handling for catastrophic failures
 window.onerror = (message, source, lineno, colno, error) => {
-  console.error("Global Error:", message, error);
+  console.error("Global Error Caught:", message, error);
   const root = document.getElementById("root");
   if (root && (root.innerHTML === "" || root.children.length === 0)) {
     root.innerHTML = `
-      <div style="min-height: 100vh; background: #0f0f0f; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; font-family: sans-serif; text-align: center; position: fixed; inset: 0; z-index: 9999;">
-        <h1 style="color: #ff0000; margin-bottom: 10px; font-weight: 800; font-size: 24px;">ERRO CRÍTICO</h1>
-        <p style="color: #888; margin-bottom: 20px;">O site encontrou um erro durante a inicialização.</p>
-        <button onclick="window.location.reload()" style="background: #ff0000; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: opacity 0.2s;">Recarregar Site</button>
+      <div style="min-height: 100vh; background: #070707; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; font-family: 'Plus Jakarta Sans', sans-serif; text-align: center; position: fixed; inset: 0; z-index: 9999;">
+        <div style="width: 80px; height: 80px; background: rgba(255, 0, 0, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+          <span style="font-size: 40px;">⚠️</span>
+        </div>
+        <h1 style="color: #ff0000; margin-bottom: 16px; font-weight: 800; font-size: 32px; letter-spacing: -0.02em; text-transform: uppercase; font-style: italic;">ERRO DE INICIALIZAÇÃO</h1>
+        <p style="color: #aaa; margin-bottom: 32px; max-width: 500px; line-height: 1.6; font-size: 16px;">
+          Desculpe pelo transtorno. O site encontrou uma falha crítica ao carregar os recursos do sistema.
+          Isso geralmente acontece por problemas temporários de conexão ou cache corrompido.
+        </p>
+        <div style="display: flex; gap: 16px;">
+          <button onclick="window.location.reload()" style="background: #ff0000; color: white; border: none; padding: 16px 32px; border-radius: 12px; cursor: pointer; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.2s; box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);">Recarregar Agora</button>
+          <button onclick="window.location.href='/'" style="background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); padding: 16px 32px; border-radius: 12px; cursor: pointer; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;">Voltar ao Início</button>
+        </div>
+        <p style="margin-top: 48px; color: #444; font-size: 10px; font-weight: 900; letter-spacing: 0.3em; text-transform: uppercase;">Jogos Grátis - Sistema de Recuperação Ativo</p>
       </div>
     `;
   }
 };
 
 window.onunhandledrejection = (event) => {
-  console.error("Unhandled Rejection:", event.reason);
+  console.error("Unhandled Promise Rejection:", event.reason);
 };
 
-
-console.log("App initialization started...");
+console.log("🚀 Iniciando aplicação Jogos Grátis...");
 
 const container = document.getElementById("root");
 if (!container) {
-  throw new Error("Failed to find the root element");
+  console.error("FATAL: Elemento #root não encontrado no DOM.");
+} else {
+  try {
+    const root = createRoot(container);
+    root.render(
+      <React.StrictMode>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </React.StrictMode>
+    );
+    console.log("✅ Renderização inicial concluída com sucesso.");
+  } catch (error) {
+    console.error("FATAL: Erro ao renderizar a aplicação React:", error);
+  }
 }
-
-const root = createRoot(container);
-root.render(
-  <HelmetProvider>
-    <App />
-  </HelmetProvider>
-);
-

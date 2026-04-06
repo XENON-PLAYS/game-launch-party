@@ -12,46 +12,29 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [
+    react(),
+    mode === "development" && componentTagger(),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],
   },
   build: {
     target: "esnext",
-    rollupOptions: {
-        output: {
-          manualChunks: (id) => {
-            if (id.includes("node_modules")) {
-              if (id.includes("react") || id.includes("react-dom") || id.includes("react-router-dom") || id.includes("scheduler")) {
-                return "vendor-core";
-              }
-              if (id.includes("@radix-ui") || id.includes("lucide-react") || id.includes("clsx") || id.includes("tailwind-merge")) {
-                return "vendor-ui";
-              }
-              if (id.includes("framer-motion")) {
-                return "vendor-animation";
-              }
-              if (id.includes("@tanstack/react-query") || id.includes("@supabase") || id.includes("zod")) {
-                return "vendor-data";
-              }
-              return "vendor";
-            }
-          },
-          chunkFileNames: 'assets/js/[name]-[hash].js',
-          entryFileNames: 'assets/js/[name]-[hash].js',
-          assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
-        },
-    },
-    chunkSizeWarningLimit: 800,
-    cssCodeSplit: true,
     minify: "esbuild",
+    cssCodeSplit: true,
     sourcemap: false,
     reportCompressedSize: false,
-    modulePreload: {
-      polyfill: true
-    }
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "react-router-dom"],
+          "vendor-ui": ["lucide-react", "clsx", "tailwind-merge"],
+          "vendor-utils": ["@tanstack/react-query", "@supabase/supabase-js", "zod"],
+        },
+      },
+    },
   },
 }));
