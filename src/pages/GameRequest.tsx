@@ -167,7 +167,7 @@ const GameRequest = () => {
                 )}
               </button>
               
-              <p className="text-center text-xs text-gray-500 italic">
+              <p className="text-center text-xs text-muted-foreground italic">
                 * Os pedidos são processados por ordem de chegada e disponibilidade.
               </p>
             </form>

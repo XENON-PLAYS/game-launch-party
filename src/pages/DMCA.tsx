@@ -39,7 +39,7 @@ const DMCA = () => {
               <p>
                 Se desejar solicitar a remoção de algum jogo do nosso site por questões de direitos autorais, entre em contato pelo e-mail:
                 <br />
-                <a href="mailto:varaver90@gmail.com" className="text-[#ff0000] hover:underline font-bold">varaver90@gmail.com</a>
+                <a href="mailto:contato@jogosgratis.com" className="text-primary hover:underline font-bold">contato@jogosgratis.com</a>
               </p>
               <p>
                 Caso você acredite que algum conteúdo em nosso site infringe seus direitos autorais, envie uma notificação DMCA com as devidas informações.

@@ -105,10 +105,10 @@ const PrivacyPolicy = () => {
               <h2 className="text-xl font-bold text-foreground uppercase tracking-wider">7. Contato</h2>
               <p>Em caso de dúvidas, solicitações ou questões relacionadas à privacidade e proteção de dados, entre em contato:</p>
               <a 
-                href="mailto:varaver90@gmail.com" 
-                className="inline-flex items-center gap-2 text-[#ff0000] hover:text-[#ff3333] transition-colors font-bold text-lg"
+                href="mailto:contato@jogosgratis.com" 
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-bold text-lg"
               >
-                📧 varaver90@gmail.com
+                📧 contato@jogosgratis.com
               </a>
             </section>
           </div>
