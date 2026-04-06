@@ -213,6 +213,7 @@ const Admin = () => {
                     onEdit={handleOpenEdit} 
                     onDelete={handleDeleteGame}
                     onAdd={handleOpenAdd}
+                    onDuplicate={handleDuplicateGame}
                   />
                 )}
                 {activeTab === "users" && (
