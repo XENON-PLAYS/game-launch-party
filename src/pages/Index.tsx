@@ -10,7 +10,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
+import { Database } from "@/integrations/supabase/types";
 
+export type Game = Database["public"]["Tables"]["games"]["Row"];
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
 const categoryIconMap: Record<string, React.ComponentType<any>> = {
@@ -115,7 +117,7 @@ const Index = () => {
           const { games: localGames } = await import("@/data/games");
           return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as any[];
         }
-        return data as any[];
+        return data as Game[];
       } catch (err) {
         const { games: localGames } = await import("@/data/games");
         return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as any[];
