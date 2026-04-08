@@ -146,11 +146,11 @@ const Perfil = () => {
    try {
     const { error } = await supabase.rpc("update_own_profile", {
       _user_id: user.id,
-      _username: username || undefined,
-      _display_name: displayName || undefined,
-      _bio: bio || undefined,
-      _status: status || undefined,
-      _theme: themePreference || undefined,
+      _username: username,
+      _display_name: displayName,
+      _bio: bio,
+      _status: status,
+      _theme: themePreference,
     });
 
     if (error) throw error;

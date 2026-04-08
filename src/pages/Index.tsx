@@ -136,10 +136,10 @@ const Index = () => {
       if (ordenacao === "pesado") {
         const parseSize = (s: string | null, defaultValue: number) => {
           if (!s) return defaultValue;
-          const match = s.match(/(\d+(\.\d+)?)\s*(GB|MB|KB|TB)?/i);
+          const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
           if (!match) return defaultValue;
           
-          let value = parseFloat(match[1]);
+          let value = parseFloat(match[1].replace(',', '.'));
           const unit = (match[3] || "GB").toUpperCase();
           
           const multipliers: Record<string, number> = {
@@ -174,7 +174,26 @@ const Index = () => {
         return parseSize(sizeA, Infinity) - parseSize(sizeB, Infinity);
       }
       if (ordenacao === "popular" || ordenacao === "alta") return (b.download_count || 0) - (a.download_count || 0);
-      if (ordenacao === "lancamento") return (b.lancamento || "").localeCompare(a.lancamento || "");
+      if (ordenacao === "lancamento") {
+        const parseDate = (d: string | null) => {
+          if (!d) return 0;
+          // Handles "5/dez./2019" format
+          const months: Record<string, number> = {
+            "jan": 0, "fev": 1, "mar": 2, "abr": 3, "mai": 4, "jun": 5,
+            "jul": 6, "ago": 7, "set": 8, "out": 9, "nov": 10, "dez": 11
+          };
+          const parts = d.split("/");
+          if (parts.length === 3) {
+            const day = parseInt(parts[0]);
+            const monthStr = parts[1].replace(".", "").toLowerCase();
+            const year = parseInt(parts[2]);
+            const month = months[monthStr] || 0;
+            return new Date(year, month, day).getTime();
+          }
+          return new Date(d).getTime() || 0;
+        };
+        return parseDate(b.lancamento) - parseDate(a.lancamento);
+      }
       return (a.nome || "").localeCompare(b.nome || "");
     });
     return result;

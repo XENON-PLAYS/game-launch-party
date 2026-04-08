@@ -19,7 +19,6 @@ import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect, useRef } from "react";
 import { OnlineUsers } from "./OnlineUsers";
 import { NotificationBell } from "./NotificationBell";
-// removed GameRequestModal import
 import { optimizeImageUrl } from "@/lib/utils";
 import pirateLogo from "@/assets/logo-pirate.png";
 
@@ -43,8 +42,6 @@ export function Header() {
     return () => window.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-
-  // removed isRequestModalOpen state
 
   const navLinks = (
     <>
@@ -258,7 +255,6 @@ export function Header() {
           )}
         </AnimatePresence>
 
-        {/* removed GameRequestModal */}
       </header>
 
     </>

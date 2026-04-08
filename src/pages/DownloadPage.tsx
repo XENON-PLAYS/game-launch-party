@@ -98,8 +98,28 @@ const DownloadPage = () => {
     }
   };
 
-  const reportError = () => {
-    toast.info("Relatório enviado para a equipe técnica.");
+  const reportError = async () => {
+    if (!user) {
+      toast.error("Você precisa estar logado para reportar um erro.");
+      navigate("/login?redirect=" + encodeURIComponent(window.location.pathname));
+      return;
+    }
+
+    try {
+      const { error: reportError } = await supabase.from("bug_reports").insert({
+        user_id: user.id,
+        game_id: game?.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(game.id) ? game.id : null,
+        report_type: "link_broken",
+        description: `Link de download não funciona na página de download do jogo ${game?.nome || 'desconhecido'}. Link ID: ${linkId}`,
+        status: 'new'
+      });
+
+      if (reportError) throw reportError;
+      toast.success("Relatório enviado para a equipe técnica.");
+    } catch (error: any) {
+      console.error("Error reporting bug:", error);
+      toast.error("Erro ao enviar relatório.");
+    }
   };
 
   if (gameLoading || linkLoading) {
