@@ -127,7 +127,10 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
             <img src={pirateLogo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
-            <span className="text-xl md:text-2xl font-black uppercase tracking-tighter text-foreground group-hover:text-primary transition-colors">JOGOS <span className="text-primary group-hover:text-foreground transition-colors">GRATIS</span></span>
+            <div className="flex flex-col -space-y-1">
+              <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-foreground group-hover:text-primary transition-colors leading-none">JOGOS</span>
+              <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-primary group-hover:text-foreground transition-colors leading-none">GRATIS</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
