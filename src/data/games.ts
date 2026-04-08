@@ -885,7 +885,7 @@ export const games: Game[] = [
   {
     id: 48,
     nome: "EA Sports FC 24", 
-    descricao: "O FIFA 23 leva o Jogo de Todo Mundo aos gramados com a tecnologia HyperMotion2, FIFA World Cup™ masculina e feminina, clubes femininos, recursos de crossplay** e muito mais.", 
+    descricao: "O EA SPORTS FC 24 leva o Jogo de Todo Mundo aos gramados com a tecnologia HyperMotion2, FIFA World Cup™ masculina e feminina, clubes femininos, recursos de crossplay** e muito mais.", 
     distribuidor: "Electronic Arts", 
     desenvolvedor: "EA Canada, EA Romania", 
     lancamento: "30/set./2022",
