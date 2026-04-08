@@ -14,6 +14,7 @@ import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
 import { BugReportModal } from "@/components/BugReportModal";
 import logo from "@/assets/logo.png";
+import pirateLogo from "@/assets/logo-pirate.png";
 
 
 
