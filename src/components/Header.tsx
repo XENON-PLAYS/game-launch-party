@@ -125,11 +125,11 @@ export function Header() {
       <header className="sticky top-0 z-[100] bg-background/95 backdrop-blur-md border-b border-border py-2 px-4 md:px-12 flex items-center justify-between shadow-2xl transition-all duration-300">
         <div className="w-full flex items-center justify-start gap-8 lg:gap-12">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group shrink-0">
+          <Link to="/" className="flex items-center gap-3 group shrink-0 active:scale-95 transition-transform duration-200">
             <img src={pirateLogo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
             <div className="flex flex-col -space-y-1">
-              <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-foreground group-hover:text-primary transition-colors leading-none">JOGOS</span>
-              <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-primary group-hover:text-foreground transition-colors leading-none">GRATIS</span>
+              <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-foreground group-hover:text-primary group-active:animate-pulse transition-all leading-none">JOGOS</span>
+              <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-primary group-hover:brightness-125 group-active:animate-pulse transition-all leading-none">GRATIS</span>
             </div>
           </Link>
 
