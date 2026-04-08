@@ -14,8 +14,10 @@ import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
 import { BugReportModal } from "@/components/BugReportModal";
 import { Database } from "@/integrations/supabase/types";
+import pirateLogo from "@/assets/logo-pirate.png";
 
 type Game = Database["public"]["Tables"]["games"]["Row"];
+
 
 
 
