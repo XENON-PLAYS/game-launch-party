@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Search, Shield } from "lucide-react";
-import logo from "@/assets/logo.png";
+import pirateLogo from "@/assets/logo-pirate.png";
 
 const CategoryPage = () => {
   const { category } = useParams();
