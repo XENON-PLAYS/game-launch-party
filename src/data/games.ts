@@ -913,7 +913,7 @@ export const games: Game[] = [
     categorias: ["Casual ", "Estratégia"],
     modos: ["Singleplayer"],
     idiomas: ["Português", "Inglês"],
-    descricao: "O roguelike de póquer. Balatro é um jogo de construção de baralhos de cartas hipnoticamente satisfatório onde vais jogar mãos de póquer ilegais, descobrir jóqueres que vão mudar o rumo do jogo e fazer combinações empolgantes.",
+    descricao: "O roguelike de pôquer. Balatro é um jogo de construção de baralhos de cartas hipnoticamente satisfatório onde vais jogar mãos de pôquer ilegais, descobrir coringas que vão mudar o rumo do jogo e fazer combinações empolgantes.",
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operacional e processador de 64 bits<br></li><li><strong>Sistema Operacional *:</strong> Windows 7, 8, 10, 11 x64<br></li><li><strong>Processador:</strong> Intel Core i3<br></li><li><strong>Memória:</strong> 1 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> OpenGL 2.1 compatible graphics card, integrated graphics<br></li><li><strong>Armazenamento:</strong> Requer 150 MB de espaço livre</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operacional e processador de 64 bits</li></ul>"
@@ -930,7 +930,7 @@ export const games: Game[] = [
     categorias: ["Ação ", "Desporto"],
     modos: ["Multiplayer"],
     idiomas: ["Português", "Inglês"],
-    descricao: "Futebol e condução encontram-se uma vez mais na aguardada sequência do clássico de arena baseado na física que conquistou os jogadores, o Supersonic Acrobatic Rocket-Powered Battle-Cars!",
+    descricao: "Futebol e direção encontram-se uma vez mais na aguardada sequência do clássico de arena baseado na física que conquistou os jogadores, o Supersonic Acrobatic Rocket-Powered Battle-Cars!",
     requisitos: {
       minimo: "<strong>Mínimos:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operacional e processador de 64 bits<br></li><li><strong>Sistema Operacional *:</strong> Windows 7 (64 bit) or Newer (64 bit) Windows OS<br></li><li><strong>Processador:</strong> 2.5 GHz Dual core<br></li><li><strong>Memória:</strong> 4 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce 760, AMD Radeon R7 270X, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de Internet de banda larga<br></li><li><strong>Armazenamento:</strong> Requer 20 GB de espaço livre</li></ul>",
       recomendado: "<strong>Recomendados:</strong><br><ul class=\"bb_ul\"><li>Requer um sistema operacional e processador de 64 bits<br></li><li><strong>Sistema Operacional *:</strong> Windows 7 (64 bit) or Newer (64 bit) Windows OS<br></li><li><strong>Processador:</strong> 3.0+ GHz Quad core<br></li><li><strong>Memória:</strong> 8 GB de RAM<br></li><li><strong>Placa de vídeo:</strong> NVIDIA GeForce GTX 1060, AMD Radeon RX 470, or better<br></li><li><strong>DirectX:</strong> Versão 11<br></li><li><strong>Rede:</strong> Conexão de Internet de banda larga<br></li><li><strong>Armazenamento:</strong> Requer 20 GB de espaço livre<br></li><li><strong>Notas adicionais:</strong> Gamepad or Controller Recommended</li></ul>"
