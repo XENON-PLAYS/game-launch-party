@@ -656,7 +656,7 @@ const GameDetail = () => {
       <footer className="border-t border-border bg-card py-20 sm:py-32 lg:py-48 mt-32 sm:mt-48 lg:mt-60">
         <div className="container-responsive text-center space-y-10">
           <Link to="/" className="inline-flex items-center gap-5 group mx-auto">
-            <img src="/logo-pirate.png" alt="Logo" className="w-16 h-16 sm:w-20 sm:h-20 object-contain transition-transform group-hover:scale-110 duration-300" />
+            <img src={pirateLogo} alt="Logo" className="w-16 h-16 sm:w-20 sm:h-20 object-contain transition-transform group-hover:scale-110 duration-300" />
             <div className="flex flex-col text-left">
               <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none">JOGOS</span>
               <span className="font-black text-2xl sm:text-3xl tracking-tighter leading-none text-primary">GRATIS</span>
