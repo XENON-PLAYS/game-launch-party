@@ -118,8 +118,9 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
         handleFieldChange(field as keyof Game, publicUrl);
       }
       toast.success("Upload concluído com sucesso!");
-    } catch (error: any) {
-      toast.error(`Erro no upload: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error as Error;
+      toast.error(`Erro no upload: ${err.message}`);
     } finally {
       setUploading(false);
     }
@@ -173,8 +174,9 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
 
       toast.success(`Jogo ${mode === "add" ? "adicionado" : "atualizado"} com sucesso!`);
       onSuccess();
-    } catch (error: any) {
-      toast.error(`Erro ao salvar: ${error.message}`);
+    } catch (error: unknown) {
+      const err = error as Error;
+      toast.error(`Erro ao salvar: ${err.message}`);
     } finally {
       setSaving(false);
     }
