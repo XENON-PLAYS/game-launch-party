@@ -162,7 +162,16 @@ const Index = () => {
 
   const filteredGames = useMemo(() => {
     let result = games;
-    if (busca) result = result.filter((g) => g.nome.toLowerCase().includes(busca.toLowerCase()));
+    if (busca) {
+      const searchTerm = busca.toLowerCase();
+      result = result.filter((g) => 
+        g.nome.toLowerCase().includes(searchTerm) || 
+        g.descricao?.toLowerCase().includes(searchTerm) ||
+        g.categorias?.some(cat => cat.toLowerCase().includes(searchTerm)) ||
+        g.desenvolvedor?.toLowerCase().includes(searchTerm) ||
+        g.distribuidor?.toLowerCase().includes(searchTerm)
+      );
+    }
     if (categoria !== "todas") result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
     
     result = [...result].sort((a, b) => {
