@@ -103,14 +103,18 @@ export const InstallationWizard = ({ game }: InstallationWizardProps) => {
         <div className="space-y-6">
           <div className="space-y-4">
             {game.passo_a_passo ? (
-              game.passo_a_passo.split(';').map((step, i) => (
-                <div key={i} className="flex gap-4 p-4 rounded-2xl bg-card border border-border group hover:border-primary/30 transition-colors">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-black text-sm shrink-0">
-                    {i + 1}
+              game.passo_a_passo.split(';').map((step, i) => {
+                // Remove redundant numbering like "1. ", "2) ", etc.
+                const cleanStep = step.trim().replace(/^\d+[\.\)\-\s]+/, '');
+                return (
+                  <div key={i} className="flex gap-4 p-4 rounded-2xl bg-card border border-border group hover:border-primary/30 transition-all duration-300">
+                    <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-black text-sm shrink-0 border border-primary/20 shadow-[0_0_10px_rgba(249,115,22,0.1)]">
+                      {i + 1}
+                    </div>
+                    <p className="text-sm text-muted-foreground self-center group-hover:text-foreground transition-colors font-medium leading-relaxed">{cleanStep}</p>
                   </div>
-                  <p className="text-sm text-muted-foreground self-center group-hover:text-foreground transition-colors">{step.trim()}</p>
-                </div>
-              ))
+                );
+              })
             ) : (
               <div className="p-8 text-center border-2 border-dashed border-border rounded-3xl">
                 <p className="text-muted-foreground">O guia padrão de instalação se aplica a este título.</p>
