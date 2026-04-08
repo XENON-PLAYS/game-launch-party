@@ -62,7 +62,14 @@ export function GameAdminList({ games, onEdit, onDelete, onAdd, onDuplicate }: G
 
   const filteredGames = useMemo(() => {
     let result = [...games];
-    if (busca) result = result.filter((g) => g.nome.toLowerCase().includes(busca.toLowerCase()));
+    if (busca) {
+      const searchTerm = busca.toLowerCase();
+      result = result.filter((g) => 
+        g.nome.toLowerCase().includes(searchTerm) || 
+        g.descricao?.toLowerCase().includes(searchTerm) ||
+        g.categorias?.some(cat => cat.toLowerCase().includes(searchTerm))
+      );
+    }
     if (filtroCategoria !== "todas") result = result.filter((g) => g.categorias?.includes(filtroCategoria));
     
     result.sort((a, b) => {

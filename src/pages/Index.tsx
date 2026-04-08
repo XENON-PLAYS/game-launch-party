@@ -50,10 +50,29 @@ const Index = () => {
   const [categoria, setCategoria] = useState("todas");
 
   useEffect(() => {
-    if (searchFromUrl !== busca) {
-      setBusca(searchFromUrl);
-    }
-  }, [searchFromUrl, busca]);
+    setBusca(searchFromUrl);
+  }, [searchFromUrl]);
+
+  // Update URL when search changes (with debounce)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (busca) {
+        setSearchParams(prev => {
+          const newParams = new URLSearchParams(prev);
+          newParams.set("search", busca);
+          return newParams;
+        }, { replace: true });
+      } else {
+        setSearchParams(prev => {
+          const newParams = new URLSearchParams(prev);
+          newParams.delete("search");
+          return newParams;
+        }, { replace: true });
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [busca, setSearchParams]);
 
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
@@ -143,7 +162,16 @@ const Index = () => {
 
   const filteredGames = useMemo(() => {
     let result = games;
-    if (busca) result = result.filter((g) => g.nome.toLowerCase().includes(busca.toLowerCase()));
+    if (busca) {
+      const searchTerm = busca.toLowerCase();
+      result = result.filter((g) => 
+        g.nome.toLowerCase().includes(searchTerm) || 
+        g.descricao?.toLowerCase().includes(searchTerm) ||
+        g.categorias?.some(cat => cat.toLowerCase().includes(searchTerm)) ||
+        g.desenvolvedor?.toLowerCase().includes(searchTerm) ||
+        g.distribuidor?.toLowerCase().includes(searchTerm)
+      );
+    }
     if (categoria !== "todas") result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
     
     result = [...result].sort((a, b) => {
