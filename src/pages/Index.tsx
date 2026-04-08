@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
 
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
@@ -525,9 +525,10 @@ const Index = () => {
         <div className="container-responsive">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24 mb-16 md:mb-32">
             <div className="space-y-6 md:space-y-12">
-              <div className="flex flex-col">
-                {/* Removed site name text */}
-              </div>
+              <Link to="/" className="flex flex-col text-left group">
+                <span className="font-black text-2xl md:text-4xl tracking-tighter leading-none group-hover:text-primary transition-colors">JOGOS</span>
+                <span className="font-black text-2xl md:text-4xl tracking-tighter leading-none text-primary group-hover:text-foreground transition-colors">GRATIS</span>
+              </Link>
               <p className="text-sm md:text-responsive-body max-w-sm">
                 A maior comunidade de compartilhamento de jogos. Descubra os melhores jogos da nova geração, jogue com seus amigos e compartilhe suas experiências épicas.
               </p>
