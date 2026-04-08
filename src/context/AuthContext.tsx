@@ -39,14 +39,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { setTheme } = useTheme();
 
   const fetchProfile = useCallback(async (userId: string) => {
-    const { data } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("user_id", userId)
-      .single();
-    if (data) {
-      setProfile(data);
-      if (data.theme) setTheme(data.theme as "light" | "dark");
+    try {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("user_id", userId)
+        .maybeSingle();
+      
+      if (error) {
+        console.error("Error fetching profile:", error);
+        return;
+      }
+
+      if (data) {
+        setProfile(data);
+        if (data.theme) setTheme(data.theme as "light" | "dark");
+      }
+    } catch (err) {
+      console.error("Unexpected error fetching profile:", err);
     }
 
     const { data: roleData } = await supabase

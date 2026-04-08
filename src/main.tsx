@@ -48,9 +48,7 @@ if (!container) {
     const root = createRoot(container);
     root.render(
       <React.StrictMode>
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
+        <App />
       </React.StrictMode>
     );
     console.log("✅ Renderização inicial concluída com sucesso.");
