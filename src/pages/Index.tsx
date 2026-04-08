@@ -15,7 +15,7 @@ import { Database } from "@/integrations/supabase/types";
 export type Game = Database["public"]["Tables"]["games"]["Row"];
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
-const categoryIconMap: Record<string, React.ComponentType<any>> = {
+const categoryIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   "Ação": Target,
   "Aventura": Compass,
   "RPG": Sword,
@@ -102,7 +102,7 @@ const Index = () => {
         return data as Game[];
       } catch (err) {
         const { games: localGames } = await import("@/data/games");
-        return localGames.map(g => ({ ...g, id: String(g.id) })) as any[];
+        return localGames.map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
       }
     },
     staleTime: 1000 * 60 * 5,
@@ -115,12 +115,12 @@ const Index = () => {
         const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
         if (error || !data || data.length === 0) {
           const { games: localGames } = await import("@/data/games");
-          return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as any[];
+          return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
         }
         return data as Game[];
       } catch (err) {
         const { games: localGames } = await import("@/data/games");
-        return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as any[];
+        return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
       }
     },
     staleTime: 1000 * 60 * 60,
@@ -216,8 +216,8 @@ const Index = () => {
     return result;
   }, [busca, categoria, ordenacao, games]);
 
-  const firstHeroImage = featured && featured.length > 0 ? ((featured[0] as any).hero_image || featured[0].imagem) : undefined;
-  const firstHeroPoster = featured && featured.length > 0 ? ((featured[0] as any).vertical_image || featured[0].imagem) : undefined;
+  const firstHeroImage = featured && featured.length > 0 ? (featured[0].hero_image || featured[0].imagem) : undefined;
+  const firstHeroPoster = featured && featured.length > 0 ? (featured[0].vertical_image || featured[0].imagem) : undefined;
 
   return (
     <div className="min-h-screen bg-background/20 text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
