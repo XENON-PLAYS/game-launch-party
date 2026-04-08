@@ -50,10 +50,29 @@ const Index = () => {
   const [categoria, setCategoria] = useState("todas");
 
   useEffect(() => {
-    if (searchFromUrl !== busca) {
-      setBusca(searchFromUrl);
-    }
-  }, [searchFromUrl, busca]);
+    setBusca(searchFromUrl);
+  }, [searchFromUrl]);
+
+  // Update URL when search changes (with debounce)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (busca) {
+        setSearchParams(prev => {
+          const newParams = new URLSearchParams(prev);
+          newParams.set("search", busca);
+          return newParams;
+        }, { replace: true });
+      } else {
+        setSearchParams(prev => {
+          const newParams = new URLSearchParams(prev);
+          newParams.delete("search");
+          return newParams;
+        }, { replace: true });
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [busca, setSearchParams]);
 
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
