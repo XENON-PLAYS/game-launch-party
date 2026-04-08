@@ -566,7 +566,7 @@ const Index = () => {
           </div>
           
           <div className="pt-8 md:pt-16 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-10 text-[10px] md:text-sm font-bold opacity-40 uppercase tracking-widest text-center md:text-left">
-            <p>© 2025 JOGOS GRATIS. Navegação segura e eficiente.</p>
+            <p>© 2025. Navegação segura e eficiente.</p>
           </div>
         </div>
       </footer>
