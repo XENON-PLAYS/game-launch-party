@@ -27,7 +27,7 @@ const Perfil = () => {
   const [displayName, setDisplayName] = useState("");
   const [bio, setBio] = useState("");
   const [status, setStatus] = useState("offline");
-  const [targetProfile, setTargetProfile] = useState<any>(null);
+  const [targetProfile, setTargetProfile] = useState<any>(null); // TODO: Type this correctly based on profiles table
   const [viewLoading, setViewLoading] = useState(true);
   const [isOwnProfile, setIsOwnProfile] = useState(false);
  const [themePreference, setThemePreference] = useState<"light" | "dark">("dark");
