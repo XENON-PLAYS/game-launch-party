@@ -181,7 +181,7 @@ export function Header() {
                   </div>
                   <div className="hidden sm:flex items-center gap-2 pr-2">
                     <span className="text-[11px] font-black uppercase tracking-widest text-foreground/90 group-hover:text-foreground transition-colors">
-                      {profile?.display_name || (user?.email?.split("@")[0] || "CONVIDADO").toUpperCase()}
+                      {/* Removed user name text */}
                     </span>
                     <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-500 ${menuOpen ? "rotate-180" : ""}`} />
                   </div>
