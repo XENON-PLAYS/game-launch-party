@@ -174,48 +174,32 @@ const Index = () => {
     }
     if (categoria !== "todas") result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
     
+    const parseSize = (s: string | null, defaultValue: number) => {
+      if (!s) return defaultValue;
+      const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
+      if (!match) return defaultValue;
+      
+      const value = parseFloat(match[1].replace(',', '.'));
+      const unit = (match[3] || "GB").toUpperCase();
+      
+      const multipliers: Record<string, number> = {
+        "KB": 1 / (1024 * 1024),
+        "MB": 1 / 1024,
+        "GB": 1,
+        "TB": 1024
+      };
+      
+      return value * (multipliers[unit] || 1);
+    };
+
     result = [...result].sort((a, b) => {
       const sizeA = a.tamanho || "0 GB";
       const sizeB = b.tamanho || "0 GB";
       
       if (ordenacao === "pesado") {
-        const parseSize = (s: string | null, defaultValue: number) => {
-          if (!s) return defaultValue;
-          const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
-          if (!match) return defaultValue;
-          
-          const value = parseFloat(match[1].replace(',', '.'));
-          const unit = (match[3] || "GB").toUpperCase();
-          
-          const multipliers: Record<string, number> = {
-            "KB": 1 / (1024 * 1024),
-            "MB": 1 / 1024,
-            "GB": 1,
-            "TB": 1024
-          };
-          
-          return value * (multipliers[unit] || 1);
-        };
         return parseSize(sizeB, 0) - parseSize(sizeA, 0);
       }
       if (ordenacao === "leve") {
-        const parseSize = (s: string | null, defaultValue: number) => {
-          if (!s) return defaultValue;
-          const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
-          if (!match) return defaultValue;
-          
-          const value = parseFloat(match[1].replace(',', '.'));
-          const unit = (match[3] || "GB").toUpperCase();
-          
-          const multipliers: Record<string, number> = {
-            "KB": 1 / (1024 * 1024),
-            "MB": 1 / 1024,
-            "GB": 1,
-            "TB": 1024
-          };
-          
-          return value * (multipliers[unit] || 1);
-        };
         return parseSize(sizeA, Infinity) - parseSize(sizeB, Infinity);
       }
       if (ordenacao === "popular" || ordenacao === "alta") return (b.download_count || 0) - (a.download_count || 0);
