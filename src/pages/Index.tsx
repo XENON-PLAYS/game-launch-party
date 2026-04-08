@@ -526,8 +526,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24 mb-16 md:mb-32">
             <div className="space-y-6 md:space-y-12">
               <div className="flex flex-col">
-                <span className="font-black text-3xl md:text-4xl tracking-tighter leading-none">JOGOS</span>
-                <span className="font-black text-3xl md:text-4xl tracking-tighter leading-none text-primary">GRÁTIS</span>
+                {/* Removed site name text */}
               </div>
               <p className="text-sm md:text-responsive-body max-w-sm">
                 A maior comunidade de compartilhamento de jogos. Descubra os melhores jogos da nova geração, jogue com seus amigos e compartilhe suas experiências épicas.
@@ -567,7 +566,7 @@ const Index = () => {
           </div>
           
           <div className="pt-8 md:pt-16 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-10 text-[10px] md:text-sm font-bold opacity-40 uppercase tracking-widest text-center md:text-left">
-            <p>© 2025 JOGOS GRATIS. Navegação segura e eficiente.</p>
+            <p>© 2025. Navegação segura e eficiente.</p>
           </div>
         </div>
       </footer>

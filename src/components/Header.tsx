@@ -127,10 +127,7 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
             <img src={pirateLogo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
-            <div className="flex flex-col -space-y-2 py-1">
-              <span className="text-xl md:text-2xl font-black tracking-tighter text-foreground leading-none">JOGOS</span>
-              <span className="text-xl md:text-2xl font-black tracking-tighter text-primary leading-none">GRATIS</span>
-            </div>
+            {/* Removed site name text */}
           </Link>
 
           {/* Desktop Navigation */}
@@ -184,7 +181,7 @@ export function Header() {
                   </div>
                   <div className="hidden sm:flex items-center gap-2 pr-2">
                     <span className="text-[11px] font-black uppercase tracking-widest text-foreground/90 group-hover:text-foreground transition-colors">
-                      {profile?.display_name || (user?.email?.split("@")[0] || "CONVIDADO").toUpperCase()}
+                      {/* Removed user name text */}
                     </span>
                     <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-500 ${menuOpen ? "rotate-180" : ""}`} />
                   </div>
