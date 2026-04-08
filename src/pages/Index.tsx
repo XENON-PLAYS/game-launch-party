@@ -156,7 +156,7 @@ const Index = () => {
           const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
           if (!match) return defaultValue;
           
-          let value = parseFloat(match[1].replace(',', '.'));
+          const value = parseFloat(match[1].replace(',', '.'));
           const unit = (match[3] || "GB").toUpperCase();
           
           const multipliers: Record<string, number> = {
@@ -176,7 +176,7 @@ const Index = () => {
           const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
           if (!match) return defaultValue;
           
-          let value = parseFloat(match[1].replace(',', '.'));
+          const value = parseFloat(match[1].replace(',', '.'));
           const unit = (match[3] || "GB").toUpperCase();
           
           const multipliers: Record<string, number> = {
