@@ -526,8 +526,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24 mb-16 md:mb-32">
             <div className="space-y-6 md:space-y-12">
               <div className="flex flex-col">
-                <span className="font-black text-3xl md:text-4xl tracking-tighter leading-none">JOGOS</span>
-                <span className="font-black text-3xl md:text-4xl tracking-tighter leading-none text-primary">GRÁTIS</span>
+                {/* Removed site name text */}
               </div>
               <p className="text-sm md:text-responsive-body max-w-sm">
                 A maior comunidade de compartilhamento de jogos. Descubra os melhores jogos da nova geração, jogue com seus amigos e compartilhe suas experiências épicas.
