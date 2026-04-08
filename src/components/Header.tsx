@@ -127,10 +127,7 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
             <img src={pirateLogo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
-            <div className="flex flex-col -space-y-2 py-1">
-              <span className="text-xl md:text-2xl font-black tracking-tighter text-foreground leading-none">JOGOS</span>
-              <span className="text-xl md:text-2xl font-black tracking-tighter text-primary leading-none">GRATIS</span>
-            </div>
+            {/* Removed site name text */}
           </Link>
 
           {/* Desktop Navigation */}
