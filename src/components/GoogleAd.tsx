@@ -8,7 +8,7 @@ interface GoogleAdProps {
 export function GoogleAd({ slot, className }: GoogleAdProps) {
   useEffect(() => {
     try {
-      // @ts-ignore
+      // @ts-expect-error window.adsbygoogle is not defined in types
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
       console.error("Adsbygoogle error:", e);
