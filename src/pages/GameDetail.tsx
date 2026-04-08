@@ -421,8 +421,22 @@ const GameDetail = () => {
               </div>
             ) : (
               <div className="space-y-6">
-                <div className="p-20 text-center rounded-[3rem] bg-muted/20 border-4 border-dashed border-border">
-                  <p className="text-responsive-small text-muted-foreground opacity-60">Nenhum porto seguro disponível no momento</p>
+                <div className="p-12 sm:p-20 text-center rounded-[2.5rem] sm:rounded-[3rem] bg-muted/20 border-4 border-dashed border-border space-y-6">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-muted/50 rounded-full flex items-center justify-center mx-auto opacity-40">
+                    <Shield className="w-8 h-8 sm:w-10 sm:h-10" />
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-sm sm:text-lg font-black uppercase tracking-widest text-muted-foreground opacity-60">Nenhum porto seguro disponível no momento</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground opacity-40 uppercase tracking-widest">Nossa frota ainda não localizou um link verificado para este tesouro.</p>
+                  </div>
+                  <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <Link to="/pedir-jogo" className="w-full sm:w-auto px-8 py-3 bg-primary/10 text-primary border border-primary/20 rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-primary/20 transition-all">
+                      Pedir este Jogo
+                    </Link>
+                    <button onClick={() => user ? setIsBugReportModalOpen(true) : navigate("/login")} className="w-full sm:w-auto px-8 py-3 bg-muted border border-border text-muted-foreground rounded-xl font-bold uppercase tracking-widest text-[10px] hover:text-foreground transition-all">
+                      Informar Falha
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
