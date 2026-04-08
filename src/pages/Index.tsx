@@ -13,7 +13,7 @@ import { useSearchParams, useNavigate, Link } from "react-router-dom";
 
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
-const categoryIconMap: Record<string, any> = {
+const categoryIconMap: Record<string, React.ComponentType<any>> = {
   "Ação": Target,
   "Aventura": Compass,
   "RPG": Sword,
@@ -51,7 +51,7 @@ const Index = () => {
     if (searchFromUrl !== busca) {
       setBusca(searchFromUrl);
     }
-  }, [searchFromUrl]);
+  }, [searchFromUrl, busca]);
 
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
@@ -156,10 +156,10 @@ const Index = () => {
       if (ordenacao === "leve") {
         const parseSize = (s: string | null, defaultValue: number) => {
           if (!s) return defaultValue;
-          const match = s.match(/(\d+(\.\d+)?)\s*(GB|MB|KB|TB)?/i);
+          const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
           if (!match) return defaultValue;
           
-          let value = parseFloat(match[1]);
+          let value = parseFloat(match[1].replace(',', '.'));
           const unit = (match[3] || "GB").toUpperCase();
           
           const multipliers: Record<string, number> = {
