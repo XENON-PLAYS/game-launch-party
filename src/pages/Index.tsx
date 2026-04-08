@@ -136,10 +136,10 @@ const Index = () => {
       if (ordenacao === "pesado") {
         const parseSize = (s: string | null, defaultValue: number) => {
           if (!s) return defaultValue;
-          const match = s.match(/(\d+(\.\d+)?)\s*(GB|MB|KB|TB)?/i);
+          const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
           if (!match) return defaultValue;
           
-          let value = parseFloat(match[1]);
+          let value = parseFloat(match[1].replace(',', '.'));
           const unit = (match[3] || "GB").toUpperCase();
           
           const multipliers: Record<string, number> = {
