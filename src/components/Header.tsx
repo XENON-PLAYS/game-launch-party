@@ -129,7 +129,7 @@ export function Header() {
             <img src={pirateLogo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform group-hover:scale-110 duration-300" />
             <div className="flex flex-col -space-y-1">
               <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-foreground group-hover:text-primary group-active:animate-pulse transition-all leading-none">JOGOS</span>
-              <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-primary group-hover:brightness-125 group-active:animate-pulse transition-all leading-none">GRATIS</span>
+              <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-primary group-hover:brightness-125 group-active:animate-pulse transition-all leading-none">GRÁTIS</span>
             </div>
           </Link>
 
