@@ -13,8 +13,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
 import { BugReportModal } from "@/components/BugReportModal";
-import logo from "@/assets/logo.png";
+import { Database } from "@/integrations/supabase/types";
 import pirateLogo from "@/assets/logo-pirate.png";
+
+type Game = Database["public"]["Tables"]["games"]["Row"];
+
+
 
 
 
@@ -71,7 +75,7 @@ const GameDetail = () => {
               trailer_url: localGame.trailer || null,
               rating_avg: 0,
               rating_count: 0,
-            } as any;
+            } as Game;
           }
           return null;
         }

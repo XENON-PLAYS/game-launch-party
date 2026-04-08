@@ -10,10 +10,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
+import { Database } from "@/integrations/supabase/types";
 
+export type Game = Database["public"]["Tables"]["games"]["Row"];
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
 
-const categoryIconMap: Record<string, any> = {
+const categoryIconMap: Record<string, React.ComponentType<any>> = {
   "Ação": Target,
   "Aventura": Compass,
   "RPG": Sword,
@@ -51,7 +53,7 @@ const Index = () => {
     if (searchFromUrl !== busca) {
       setBusca(searchFromUrl);
     }
-  }, [searchFromUrl]);
+  }, [searchFromUrl, busca]);
 
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
@@ -67,9 +69,9 @@ const Index = () => {
             id: String(g.id),
             nome: g.nome,
             imagem: g.imagem,
-            hero_image: g.heroImage,
-            vertical_image: g.verticalImage,
-            capsule_image: g.capsuleImage,
+            hero_image: g.heroImage || null,
+            vertical_image: g.verticalImage || null,
+            capsule_image: g.capsuleImage || null,
             download_count: 0,
             lancamento: g.lancamento || "",
             categorias: g.categorias || [],
@@ -80,9 +82,24 @@ const Index = () => {
             preco: g.preco || 0,
             requisitos_minimo: typeof g.requisitos?.minimo === 'object' ? g.requisitos.minimo : {},
             requisitos_recomendado: typeof g.requisitos?.recomendado === 'object' ? g.requisitos.recomendado : {},
-          })) as any[];
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            classificacao: g.classificacao || null,
+            destaques: g.destaques || [],
+            galeria: [],
+            idiomas: g.idiomas || [],
+            link_demo: null,
+            modos: g.modos || [],
+            observacoes: null,
+            passo_a_passo: null,
+            pre_requisitos: null,
+            rating_avg: 0,
+            rating_count: 0,
+            slug: g.nome.toLowerCase().replace(/\s+/g, '-'),
+            trailer_url: g.trailer || null,
+          })) as Game[];
         }
-        return data as any[];
+        return data as Game[];
       } catch (err) {
         const { games: localGames } = await import("@/data/games");
         return localGames.map(g => ({ ...g, id: String(g.id) })) as any[];
@@ -100,7 +117,7 @@ const Index = () => {
           const { games: localGames } = await import("@/data/games");
           return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as any[];
         }
-        return data as any[];
+        return data as Game[];
       } catch (err) {
         const { games: localGames } = await import("@/data/games");
         return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as any[];
@@ -109,8 +126,8 @@ const Index = () => {
     staleTime: 1000 * 60 * 60,
   });
 
-  const games = useMemo(() => (gamesData || []) as any[], [gamesData]);
-  const featured = useMemo(() => (featuredData || []) as any[], [featuredData]);
+  const games = useMemo(() => (gamesData || []) as Game[], [gamesData]);
+  const featured = useMemo(() => (featuredData || []) as Game[], [featuredData]);
 
   const allCategories = useMemo(() => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
@@ -156,10 +173,10 @@ const Index = () => {
       if (ordenacao === "leve") {
         const parseSize = (s: string | null, defaultValue: number) => {
           if (!s) return defaultValue;
-          const match = s.match(/(\d+(\.\d+)?)\s*(GB|MB|KB|TB)?/i);
+          const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
           if (!match) return defaultValue;
           
-          let value = parseFloat(match[1]);
+          let value = parseFloat(match[1].replace(',', '.'));
           const unit = (match[3] || "GB").toUpperCase();
           
           const multipliers: Record<string, number> = {

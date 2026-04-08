@@ -55,7 +55,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .eq("user_id", userId);
     
     setIsAdmin(roleData?.some((r) => r.role === "admin") ?? false);
-  }, []);
+  }, [setTheme]);
 
   useEffect(() => {
     let isMounted = true;
