@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { Info, Star } from "lucide-react";
-import { Tables } from "@/integrations/supabase/types";
+import { Database } from "@/integrations/supabase/types";
 import { motion } from "framer-motion";
 import { optimizeImageUrl } from "@/lib/utils";
 import React from "react";
 
-type Game = any;
+type Game = Database["public"]["Tables"]["games"]["Row"];
+
 
 interface GameCardProps {
   game: Game;
@@ -27,7 +28,7 @@ export const GameCard = React.memo(({ game }: GameCardProps) => {
     >
       <Link to={`/jogo/${game.slug || game.id}`} className="block relative aspect-[3/4] overflow-hidden shrink-0 rounded-2xl m-2">
         <img 
-          src={optimizeImageUrl((game as any).vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f", 400)} 
+          src={optimizeImageUrl(game.vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f", 400)} 
           alt={game.nome} 
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
           loading="lazy"
@@ -53,10 +54,10 @@ export const GameCard = React.memo(({ game }: GameCardProps) => {
               {cat}
             </span>
           ))}
-          {((game as any).rating_avg > 0) && (
+          {(game.rating_avg !== null && game.rating_avg > 0) && (
             <span className="text-[10px] uppercase font-bold px-2.5 py-1 rounded bg-yellow-500/80 backdrop-blur-md text-white border border-yellow-500/20 tracking-wider flex items-center gap-1">
               <Star className="w-3 h-3 fill-white" />
-              {(game as any).rating_avg}
+              {game.rating_avg}
             </span>
           )}
         </div>
