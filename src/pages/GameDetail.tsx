@@ -390,7 +390,7 @@ const GameDetail = () => {
         )}
 
         {/* Requirements & Download Section */}
-        <section id="download-section" className="grid lg:grid-cols-2 gap-20 sm:gap-32">
+        <section id="download-section" className="grid lg:grid-cols-2 gap-12 sm:gap-24">
           {/* Download Area */}
           <div className="space-y-12 sm:space-y-16">
             <div className="flex items-center gap-6 sm:gap-8">
