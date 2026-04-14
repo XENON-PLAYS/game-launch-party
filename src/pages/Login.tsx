@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import { MeteorBackground } from "@/components/MeteorBackground";
+import { getRedirectUrl } from "@/config/auth";
 
 const Login = () => {
   const { login } = useAuth();
@@ -47,7 +48,7 @@ const Login = () => {
     setErro("");
     try {
       const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
+        redirect_uri: getRedirectUrl(),
       });
 
       if (result.error) {
