@@ -47,11 +47,16 @@ export class ErrorBoundary extends Component<Props, State> {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
-              onClick={() => window.location.reload()}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-6 rounded-xl flex items-center gap-2"
+              onClick={() => {
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.reload();
+              }}
+              variant="destructive"
+              className="font-bold px-8 py-6 rounded-xl flex items-center gap-2"
             >
               <RefreshCw className="w-4 h-4" />
-              Recarregar Página
+              Limpar Cache e Recarregar
             </Button>
             <Button 
               onClick={() => window.location.href = "/"}
@@ -62,6 +67,7 @@ export class ErrorBoundary extends Component<Props, State> {
               Voltar ao Início
             </Button>
           </div>
+
           
           <p className="mt-12 text-[10px] text-muted-foreground/60 uppercase tracking-[0.2em] font-black">
             Jogos Grátis - Sistema de Recuperação Ativo

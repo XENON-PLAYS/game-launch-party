@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { getCookie, setCookie } from "@/lib/cookie";
 
 export type Theme = "dark" | "light";
 
@@ -13,10 +14,14 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     try {
-      const saved = localStorage.getItem("theme") as Theme;
-      return saved || "dark";
+      // Prioritize cookie for "cookie system" consistency
+      const saved = getCookie("theme") as Theme;
+      if (saved) return saved;
+      
+      const legacySaved = localStorage.getItem("theme") as Theme;
+      return legacySaved || "dark";
     } catch (e) {
-      console.warn("LocalStorage access failed:", e);
+      console.warn("Theme retrieval failed:", e);
       return "dark";
     }
   });
@@ -25,11 +30,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     document.documentElement.classList.toggle("dark", theme === "dark");
     document.documentElement.classList.toggle("light", theme === "light");
     try {
-      localStorage.setItem("theme", theme);
+      setCookie("theme", theme, 365);
+      localStorage.setItem("theme", theme); // Keep localStorage for redundancy
     } catch (e) {
-      console.error("Failed to save theme to localStorage:", e);
+      console.error("Failed to save theme:", e);
     }
   }, [theme]);
+
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
