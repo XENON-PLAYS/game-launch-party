@@ -33,8 +33,16 @@ export const getAuthErrorMessage = (error: any): string => {
     return "Usuário não encontrado em nossa base de dados.";
   }
 
-  if (message.includes("Confirm your email") || message.includes("Confirmation link")) {
-    return "Por favor, confirme seu e-mail através do link enviado para sua caixa de entrada.";
+  if (message.includes("Confirm your email") || message.includes("Confirmation link") || message.includes("Email link is invalid")) {
+    return "O link de confirmação é inválido ou expirou. Por favor, solicite um novo.";
+  }
+
+  if (message.includes("You must provide an email")) {
+    return "Por favor, informe um endereço de e-mail válido.";
+  }
+
+  if (message.includes("Password is too short")) {
+    return "A senha escolhida é muito curta. Use pelo menos 6 caracteres.";
   }
 
   if (message.includes("New password should be different")) {
