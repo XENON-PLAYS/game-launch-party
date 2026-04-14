@@ -92,7 +92,7 @@ const Cadastro = () => {
       toast.success("Bem-vindo!");
       navigate(redirect);
     } catch (err) {
-      toast.error("Erro ao entrar com Google");
+      toast.error("Houve um erro técnico ao tentar cadastrar com o Google.");
     }
     setGoogleLoading(false);
   };

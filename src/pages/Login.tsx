@@ -73,7 +73,7 @@ const Login = () => {
       toast.success("Bem-vindo!");
       navigate(redirect);
     } catch (err) {
-      toast.error("Erro ao entrar com Google");
+      toast.error("Houve um erro técnico ao tentar entrar com o Google.");
     }
     setGoogleLoading(false);
   };
