@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 import { supabase } from "@/integrations/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { useTheme } from "./ThemeContext";
+import { getRedirectUrl } from "@/config/auth";
 
 interface Profile {
   id: string;
@@ -129,7 +130,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       password: data.password,
       options: {
         data: { display_name: data.displayName },
-        emailRedirectTo: window.location.origin,
+        emailRedirectTo: getRedirectUrl(),
       },
     });
     return { error: error?.message ?? null };

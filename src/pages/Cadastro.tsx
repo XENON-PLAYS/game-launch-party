@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
@@ -7,12 +7,19 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import { MeteorBackground } from "@/components/MeteorBackground";
+import { getRedirectUrl } from "@/config/auth";
 
 const Cadastro = () => {
-  const { register } = useAuth();
+  const { register, user, isLoading } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
+
+  useEffect(() => {
+    if (user && !isLoading) {
+      navigate(redirect);
+    }
+  }, [user, isLoading, navigate, redirect]);
   const [form, setForm] = useState({ nome: "", email: "", senha: "", confirma: "" });
   const [erro, setErro] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -59,7 +66,7 @@ const Cadastro = () => {
     setErro("");
     try {
       const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
+        redirect_uri: getRedirectUrl(),
       });
 
       if (result.error) {
