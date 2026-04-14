@@ -358,7 +358,7 @@ const GameDetail = () => {
         </div>
       </section>
 
-      <main className="container-responsive py-16 sm:py-32 lg:py-48 space-y-24 sm:space-y-48">
+      <main className="container-responsive py-12 sm:py-24 lg:py-32 space-y-16 sm:space-y-32">
         {/* Gallery / Trailer Section */}
         {game.trailer_url && (
           <section className="space-y-12 sm:space-y-16">
