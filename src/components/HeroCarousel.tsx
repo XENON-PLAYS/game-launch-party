@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { optimizeImageUrl } from "@/lib/utils";
+import { games as localGamesData } from "@/data/games";
 
 export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFeatured?: any[], isLoadingInitial?: boolean }) {
   const [current, setCurrent] = useState(0);
@@ -14,12 +15,15 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
   const { data: featuredData, isLoading, isError } = useQuery({
     queryKey: ["featured-games"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
-      if (error) throw error;
-      return data || [];
+      try {
+        const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
+        if (error || !data || data.length === 0) return localGamesData.slice(0, 5).map(g => ({ ...g, id: String(g.id) }));
+        return data || [];
+      } catch (e) {
+        return localGamesData.slice(0, 5).map(g => ({ ...g, id: String(g.id) }));
+      }
     },
-    initialData: initialFeatured,
-    enabled: !initialFeatured || initialFeatured.length === 0, 
+    initialData: initialFeatured || localGamesData.slice(0, 5).map(g => ({ ...g, id: String(g.id) })),
     staleTime: 1000 * 60 * 60,
   });
 
