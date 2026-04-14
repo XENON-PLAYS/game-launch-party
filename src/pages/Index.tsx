@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { Database } from "@/integrations/supabase/types";
+import { games as localGamesData } from "@/data/games";
 
 export type Game = Database["public"]["Tables"]["games"]["Row"];
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
@@ -83,8 +84,7 @@ const Index = () => {
       try {
         const { data, error } = await supabase.from("games").select("*").order("nome");
         if (error || !data || data.length === 0) {
-          const { games: localGames } = await import("@/data/games");
-          return localGames.map(g => ({
+          return localGamesData.map(g => ({
             id: String(g.id),
             nome: g.nome,
             imagem: g.imagem,
@@ -120,10 +120,10 @@ const Index = () => {
         }
         return data as Game[];
       } catch (err) {
-        const { games: localGames } = await import("@/data/games");
-        return localGames.map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
+        return localGamesData.map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
       }
     },
+    initialData: localGamesData.map(g => ({ ...g, id: String(g.id) })) as unknown as Game[],
     staleTime: 1000 * 60 * 5,
   });
 
@@ -133,15 +133,14 @@ const Index = () => {
       try {
         const { data, error } = await supabase.from("games").select("*").order("lancamento", { ascending: false }).limit(5);
         if (error || !data || data.length === 0) {
-          const { games: localGames } = await import("@/data/games");
-          return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
+          return localGamesData.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
         }
         return data as Game[];
       } catch (err) {
-        const { games: localGames } = await import("@/data/games");
-        return localGames.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
+        return localGamesData.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
       }
     },
+    initialData: localGamesData.slice(0, 5).map(g => ({ ...g, id: String(g.id) })) as unknown as Game[],
     staleTime: 1000 * 60 * 60,
   });
 

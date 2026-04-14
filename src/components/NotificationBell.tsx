@@ -76,7 +76,7 @@ export function NotificationBell() {
         onClick={() => setOpen(!open)}
         className="p-2.5 rounded-xl hover:bg-muted/50 transition-colors relative"
       >
-        <Bell className="w-5 h-5 text-muted-foreground group-hover:text-foreground" />
+        <Bell className="w-5 h-5 text-muted-foreground" />
         {unreadCount > 0 && (
           <span className="absolute top-2 right-2 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-background">
             {unreadCount}
