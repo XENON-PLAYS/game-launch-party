@@ -49,6 +49,7 @@ type Profile = {
   display_name: string | null;
   avatar_url: string | null;
   is_vip: boolean;
+  is_banned: boolean;
   created_at: string;
   role: string | null;
   status: string | null;
@@ -92,6 +93,24 @@ export function UserAdminList({ users }: UserAdminListProps) {
       if (error) throw error;
       
       toast.success(data === 'added' ? "Acesso de administrador concedido!" : "Acesso de administrador removido!");
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+    } catch (error: any) {
+      toast.error(`Erro: ${error.message}`);
+      console.error(error);
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
+  const handleToggleBan = async (userId: string, currentBanned: boolean) => {
+    if (!confirm(`Deseja realmente ${currentBanned ? 'remover o banimento' : 'banir'} este usuário?`)) return;
+    
+    setLoadingId(userId);
+    try {
+      const { data, error } = await supabase.rpc("toggle_ban_status", { target_user_id: userId });
+      if (error) throw error;
+      
+      toast.success(data ? "Usuário banido com sucesso!" : "Banimento removido com sucesso!");
       queryClient.invalidateQueries({ queryKey: ["admin-users"] });
     } catch (error: any) {
       toast.error(`Erro: ${error.message}`);
@@ -193,16 +212,23 @@ export function UserAdminList({ users }: UserAdminListProps) {
                       </div>
                     </TableCell>
                     <TableCell className="text-center">
-                      {user.is_vip ? (
-                        <Badge className="bg-primary/10 text-primary border-primary/20 text-[9px] font-black uppercase tracking-widest">
-                          <Star className="h-3 w-3 mr-1 fill-primary" />
-                          VIP
-                        </Badge>
-                      ) : (
-                        <Badge variant="secondary" className="text-[9px] font-black uppercase tracking-widest">
-                          Membro
-                        </Badge>
-                      )}
+                      <div className="flex flex-col items-center gap-2">
+                        {user.is_vip ? (
+                          <Badge className="bg-primary/10 text-primary border-primary/20 text-[9px] font-black uppercase tracking-widest">
+                            <Star className="h-3 w-3 mr-1 fill-primary" />
+                            VIP
+                          </Badge>
+                        ) : (
+                          <Badge variant="secondary" className="text-[9px] font-black uppercase tracking-widest">
+                            Membro
+                          </Badge>
+                        )}
+                        {user.is_banned && (
+                          <Badge variant="destructive" className="text-[9px] font-black uppercase tracking-widest">
+                            Banido
+                          </Badge>
+                        )}
+                      </div>
                     </TableCell>
                     <TableCell className="text-center">
                       {user.status === 'online' || (user.last_seen_at && new Date(user.last_seen_at).getTime() > Date.now() - 5 * 60 * 1000) ? (
@@ -256,13 +282,22 @@ export function UserAdminList({ users }: UserAdminListProps) {
                             )}
                           </DropdownMenuItem>
 
-                          {/* Removed toggle admin role option to ensure unique admin access */}
+                          <DropdownMenuItem 
+                            className="text-xs font-bold uppercase tracking-widest cursor-pointer py-2.5"
+                            onClick={() => handleToggleAdmin(user.user_id, user.role)}
+                          >
+                            <Shield className="mr-2 h-4 w-4" />
+                            <span>{user.role === 'admin' ? "Remover Admin" : "Tornar Admin"}</span>
+                          </DropdownMenuItem>
 
                           <DropdownMenuSeparator />
                           
-                          <DropdownMenuItem className="text-xs font-bold uppercase tracking-widest text-destructive focus:bg-destructive/10 cursor-pointer py-2.5">
+                          <DropdownMenuItem 
+                            className="text-xs font-bold uppercase tracking-widest text-destructive focus:bg-destructive/10 cursor-pointer py-2.5"
+                            onClick={() => handleToggleBan(user.user_id, user.is_banned)}
+                          >
                             <XCircle className="mr-2 h-4 w-4" />
-                            <span>Banir Usuário</span>
+                            <span>{user.is_banned ? "Remover Ban" : "Banir Usuário"}</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

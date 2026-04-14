@@ -13,6 +13,7 @@ interface Profile {
   bio: string | null;
   is_vip: boolean;
   vip_expires_at: string | null;
+  is_banned: boolean;
   theme: string;
   status: string;
   last_seen_at: string;
@@ -55,6 +56,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (data) {
         setProfile(data);
         if (data.theme) setTheme(data.theme as "light" | "dark");
+        if (data.is_banned) {
+          await logout();
+          window.location.href = "/login?error=account_suspended";
+        }
       }
     } catch (err) {
       console.error("Unexpected error fetching profile:", err);
