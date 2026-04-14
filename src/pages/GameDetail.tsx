@@ -8,13 +8,14 @@ import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { Download, ArrowLeft, Monitor, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Play, CheckCircle, Info, ExternalLink, Bug } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GameComments } from "@/components/GameComments";
 import { StarRating } from "@/components/StarRating";
 import { BugReportModal } from "@/components/BugReportModal";
 import { Database } from "@/integrations/supabase/types";
 import pirateLogo from "@/assets/logo-pirate.png";
+import { games as localGamesData } from "@/data/games";
 
 type Game = Database["public"]["Tables"]["games"]["Row"];
 
@@ -39,7 +40,7 @@ const GameDetail = () => {
     queryFn: async () => {
       try {
         let query = supabase.from("games").select("*");
-        const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug!);
+        const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug!);
         
         if (isUUID) {
           query = query.eq("id", slug!);
@@ -49,9 +50,7 @@ const GameDetail = () => {
 
         const { data, error } = await query.maybeSingle();
         if (error || !data) {
-          const { games: localGames } = await import("@/data/games");
-          // Find game by slug (normalized name) or ID
-          const localGame = localGames.find(g => 
+          const localGame = localGamesData.find(g => 
             g.nome.toLowerCase().replace(/\s+/g, '-') === slug || String(g.id) === slug
           );
           
@@ -71,7 +70,7 @@ const GameDetail = () => {
               preco: localGame.preco,
               requisitos_minimo: localGame.requisitos?.minimo,
               requisitos_recomendado: localGame.requisitos?.recomendado,
-              galeria: [], // Local data doesn't have gallery yet
+              galeria: [],
               trailer_url: localGame.trailer || null,
               rating_avg: 0,
               rating_count: 0,
@@ -84,6 +83,34 @@ const GameDetail = () => {
         console.error("Error fetching game detail:", err);
         return null;
       }
+    },
+    initialData: () => {
+      const localGame = localGamesData.find(g => 
+        g.nome.toLowerCase().replace(/\s+/g, '-') === slug || String(g.id) === slug
+      );
+      if (localGame) {
+        return {
+          id: String(localGame.id),
+          nome: localGame.nome,
+          imagem: localGame.imagem,
+          hero_image: localGame.heroImage,
+          vertical_image: localGame.verticalImage,
+          capsule_image: localGame.capsuleImage,
+          descricao: localGame.descricao,
+          desenvolvedor: localGame.desenvolvedor,
+          distribuidor: localGame.distribuidor,
+          lancamento: localGame.lancamento,
+          categorias: localGame.categorias,
+          preco: localGame.preco,
+          requisitos_minimo: localGame.requisitos?.minimo,
+          requisitos_recomendado: localGame.requisitos?.recomendado,
+          galeria: [],
+          trailer_url: localGame.trailer || null,
+          rating_avg: 0,
+          rating_count: 0,
+        } as Game;
+      }
+      return undefined;
     },
     enabled: !!slug,
   });
