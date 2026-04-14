@@ -81,7 +81,7 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
   const game = featured[current];
 
   return (
-    <section className="relative h-[850px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
+    <section className="relative h-[650px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
       <AnimatePresence mode="wait" initial={true} custom={direction}>
         <motion.div
           key={current}
