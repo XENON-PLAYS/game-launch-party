@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import { MeteorBackground } from "@/components/MeteorBackground";
 import { getRedirectUrl } from "@/config/auth";
+import { getAuthErrorMessage } from "@/lib/auth-errors";
 
 const Login = () => {
   const { login, user, isLoading } = useAuth();
@@ -58,7 +59,7 @@ const Login = () => {
       });
 
       if (result.error) {
-        const errorMsg = result.error instanceof Error ? result.error.message : "Erro ao entrar com Google";
+        const errorMsg = getAuthErrorMessage(result.error);
         setErro(errorMsg);
         toast.error(errorMsg);
         setGoogleLoading(false);
@@ -72,7 +73,7 @@ const Login = () => {
       toast.success("Bem-vindo!");
       navigate(redirect);
     } catch (err) {
-      toast.error("Erro ao entrar com Google");
+      toast.error("Houve um erro técnico ao tentar entrar com o Google.");
     }
     setGoogleLoading(false);
   };
