@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
 import { MeteorBackground } from "@/components/MeteorBackground";
 import { getRedirectUrl } from "@/config/auth";
+import { getAuthErrorMessage } from "@/lib/auth-errors";
 
 const Cadastro = () => {
   const { register, user, isLoading } = useAuth();
@@ -77,7 +78,7 @@ const Cadastro = () => {
       });
 
       if (result.error) {
-        const errorMsg = result.error instanceof Error ? result.error.message : "Erro ao entrar com Google";
+        const errorMsg = getAuthErrorMessage(result.error);
         setErro(errorMsg);
         toast.error(errorMsg);
         setGoogleLoading(false);

@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { useTheme } from "./ThemeContext";
 import { getRedirectUrl } from "@/config/auth";
+import { getAuthErrorMessage } from "@/lib/auth-errors";
 
 interface Profile {
   id: string;
@@ -130,7 +131,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = useCallback(async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error: error?.message ?? null };
+    return { error: error ? getAuthErrorMessage(error) : null };
   }, []);
 
   const register = useCallback(async (data: { email: string; password: string; displayName: string }) => {
@@ -142,7 +143,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         emailRedirectTo: getRedirectUrl(),
       },
     });
-    return { error: error?.message ?? null };
+    return { error: error ? getAuthErrorMessage(error) : null };
   }, []);
 
   const logout = useCallback(async () => {
