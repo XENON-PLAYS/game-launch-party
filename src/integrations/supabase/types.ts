@@ -470,6 +470,7 @@ export type Database = {
           created_at: string
           display_name: string | null
           id: string
+          is_banned: boolean | null
           is_vip: boolean
           last_seen_at: string | null
           status: string | null
@@ -486,6 +487,7 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           id?: string
+          is_banned?: boolean | null
           is_vip?: boolean
           last_seen_at?: string | null
           status?: string | null
@@ -502,6 +504,7 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           id?: string
+          is_banned?: boolean | null
           is_vip?: boolean
           last_seen_at?: string | null
           status?: string | null
@@ -585,6 +588,9 @@ export type Database = {
         Returns: undefined
       }
       slugify: { Args: { text: string }; Returns: string }
+      toggle_admin_role: { Args: { target_user_id: string }; Returns: string }
+      toggle_ban_status: { Args: { target_user_id: string }; Returns: boolean }
+      toggle_vip_status: { Args: { target_user_id: string }; Returns: boolean }
       update_online_status: { Args: never; Returns: undefined }
       update_own_profile: {
         Args: {
