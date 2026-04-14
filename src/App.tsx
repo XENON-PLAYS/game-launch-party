@@ -16,7 +16,20 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { CookieConsent } from "@/components/CookieConsent";
 import Index from "./pages/Index";
 
-// ... (keep imports)
+const GameDetail = lazy(() => import("./pages/GameDetail"));
+const Vip = lazy(() => import("./pages/Vip"));
+const Login = lazy(() => import("./pages/Login"));
+const Cadastro = lazy(() => import("./pages/Cadastro"));
+const Admin = lazy(() => import("./pages/Admin"));
+const DownloadPage = lazy(() => import("./pages/DownloadPage"));
+const Perfil = lazy(() => import("./pages/Perfil"));
+const CategoryPage = lazy(() => import("./pages/CategoryPage"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const DMCA = lazy(() => import("./pages/DMCA"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const GameRequest = lazy(() => import("./pages/GameRequest"));
+
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -62,8 +75,10 @@ const App = () => {
             <ThemeProvider>
               <AuthProvider>
                 <SkyBackground />
+                <CookieConsent />
                 <Toaster />
                 <Sonner />
+
                 <BrowserRouter>
                   <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-primary font-black uppercase tracking-[0.4em] text-xs animate-pulse">Carregando...</div>}>
                     <Routes>
