@@ -408,7 +408,7 @@ const Index = () => {
         </div>
       </section>
 
-      <main className="container-responsive py-12 md:py-24 space-y-20 md:space-y-40">
+      <main className="container-responsive py-8 md:py-20 space-y-12 md:space-y-24">
 
         {isLoading ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">
@@ -516,13 +516,13 @@ const Index = () => {
             )}
           </motion.div>
         ) : (
-          <div className="space-y-32 md:space-y-60">
+          <div className="space-y-16 md:space-y-32">
             <GameSection title="Mais Jogados" icon={Flame} games={emAlta} />
             <GameSection title="Jogos Mais Baixados" icon={Star} games={emAlta} />
             <GameSection title="Jogos da Nova Geração" icon={Rocket} games={recentes} />
 
             <section className="space-y-12 md:space-y-16">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-10 border-b-2 border-primary/20 pb-12 md:pb-20">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-10 border-b-2 border-primary/20 pb-8 md:pb-16">
                 <div className="space-y-4">
                   <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Explore</span> <span className="text-foreground">o Catálogo</span></h2>
                   <div className="flex items-center gap-4 md:gap-8">
@@ -543,7 +543,7 @@ const Index = () => {
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
                 {games.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             </section>
@@ -551,7 +551,7 @@ const Index = () => {
         )}
       </main>
 
-      <footer className="border-t border-border/50 bg-card py-16 md:py-48 mt-20 md:mt-60">
+      <footer className="border-t border-border/50 bg-card py-12 md:py-24 mt-12 md:mt-24">
         <div className="container-responsive">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-24 mb-16 md:mb-32">
             <div className="space-y-6 md:space-y-12">
