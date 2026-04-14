@@ -133,8 +133,8 @@ const DownloadPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
       <Header />
-      <main className="container-responsive py-12 sm:py-24 lg:py-32">
-        <div className="max-w-5xl mx-auto space-y-20 lg:space-y-32">
+      <main className="container-responsive py-8 sm:py-16 lg:py-24">
+        <div className="max-w-5xl mx-auto space-y-12 lg:space-y-24">
           
           {/* Status Header */}
           <div className="text-center space-y-8 animate-in fade-in slide-in-from-top-4 duration-1000">
@@ -191,7 +191,7 @@ const DownloadPage = () => {
             {/* Main Content */}
             <div className="lg:col-span-8 order-1 lg:order-2">
               {!downloadStarted ? (
-                <div className="bg-card border-2 border-border rounded-[3rem] p-10 sm:p-20 space-y-12 sm:space-y-16 shadow-3xl relative overflow-hidden">
+                <div className="bg-card border-2 border-border rounded-[2.5rem] sm:rounded-[3rem] p-6 sm:p-12 md:p-20 space-y-10 sm:space-y-16 shadow-3xl relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-8">
                     {isVip ? (
                       <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-yellow-500 text-black font-black uppercase tracking-widest text-xs shadow-xl shadow-yellow-500/20">

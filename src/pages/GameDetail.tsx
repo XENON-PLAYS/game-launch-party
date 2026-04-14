@@ -233,7 +233,7 @@ const GameDetail = () => {
       
 
       {/* Hero Section */}
-      <section className="bg-card border-b border-border py-8 sm:py-20 lg:py-32">
+      <section className="bg-card border-b border-border py-8 sm:py-16 lg:py-24">
         <div className="container-responsive">
           <div className="mb-6 sm:mb-16">
             <Breadcrumbs 
@@ -358,7 +358,7 @@ const GameDetail = () => {
         </div>
       </section>
 
-      <main className="container-responsive py-16 sm:py-32 lg:py-48 space-y-24 sm:space-y-48">
+      <main className="container-responsive py-12 sm:py-24 lg:py-32 space-y-16 sm:space-y-32">
         {/* Gallery / Trailer Section */}
         {game.trailer_url && (
           <section className="space-y-12 sm:space-y-16">
@@ -390,7 +390,7 @@ const GameDetail = () => {
         )}
 
         {/* Requirements & Download Section */}
-        <section id="download-section" className="grid lg:grid-cols-2 gap-20 sm:gap-32">
+        <section id="download-section" className="grid lg:grid-cols-2 gap-12 sm:gap-24">
           {/* Download Area */}
           <div className="space-y-12 sm:space-y-16">
             <div className="flex items-center gap-6 sm:gap-8">

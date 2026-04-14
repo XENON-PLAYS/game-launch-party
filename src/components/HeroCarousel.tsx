@@ -59,7 +59,7 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
 
   if (isActuallyLoading || isError || featured.length === 0) {
     return (
-      <section className="bg-background relative h-[850px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden">
+      <section className="bg-background relative h-[650px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden">
         {/* Skeleton should resemble the layout to reduce shift */}
         <div className="container-responsive h-full flex flex-col justify-center py-12 md:py-24">
           <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center">
@@ -81,7 +81,7 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
   const game = featured[current];
 
   return (
-    <section className="relative h-[850px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
+    <section className="relative h-[650px] sm:h-[650px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
       <AnimatePresence mode="wait" initial={true} custom={direction}>
         <motion.div
           key={current}
