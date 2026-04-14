@@ -57,8 +57,15 @@ const Cadastro = () => {
       return;
     }
     
-    toast.success("Conta criada com sucesso! Você já pode entrar.");
-    navigate(`/login${redirect !== "/" ? `?redirect=${redirect}` : ""}`);
+    toast.success("Conta criada com sucesso! Redirecionando...");
+    // With auto_confirm_email enabled, the user is logged in automatically.
+    // The useEffect at the top of the component will handle the redirection.
+    // If not logged in immediately, we fall back to manual navigation to login.
+    setTimeout(() => {
+      if (!user) {
+        navigate(`/login${redirect !== "/" ? `?redirect=${redirect}` : ""}`);
+      }
+    }, 2000);
   };
 
   const handleGoogleSignIn = async () => {

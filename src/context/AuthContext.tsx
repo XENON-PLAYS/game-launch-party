@@ -40,7 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const { setTheme } = useTheme();
 
-  const fetchProfile = useCallback(async (userId: string) => {
+  const fetchProfile = useCallback(async (userId: string, retryCount = 0) => {
     try {
       const { data, error } = await supabase
         .from("profiles")
@@ -60,6 +60,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           await logout();
           window.location.href = "/login?error=account_suspended";
         }
+      } else if (retryCount < 3) {
+        // If profile not found, retry a few times (trigger might be slow)
+        console.log(`Profile not found, retrying... (${retryCount + 1})`);
+        setTimeout(() => fetchProfile(userId, retryCount + 1), 1000);
       }
     } catch (err) {
       console.error("Unexpected error fetching profile:", err);
