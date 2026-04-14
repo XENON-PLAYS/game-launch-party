@@ -233,7 +233,7 @@ const GameDetail = () => {
       
 
       {/* Hero Section */}
-      <section className="bg-card border-b border-border py-8 sm:py-20 lg:py-32">
+      <section className="bg-card border-b border-border py-8 sm:py-16 lg:py-24">
         <div className="container-responsive">
           <div className="mb-6 sm:mb-16">
             <Breadcrumbs 
