@@ -10,10 +10,16 @@ import { MeteorBackground } from "@/components/MeteorBackground";
 import { getRedirectUrl } from "@/config/auth";
 
 const Login = () => {
-  const { login } = useAuth();
+  const { login, user, isLoading } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
+
+  useEffect(() => {
+    if (user && !isLoading) {
+      navigate(redirect);
+    }
+  }, [user, isLoading, navigate, redirect]);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [showPass, setShowPass] = useState(false);
