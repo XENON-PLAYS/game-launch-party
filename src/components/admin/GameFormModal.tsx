@@ -134,10 +134,12 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
 
     setSaving(true);
     try {
-      // Generate slug if missing
-      const finalData = { ...formData };
-      if (!finalData.slug && finalData.nome) {
-        finalData.slug = finalData.nome
+      // Strip read-only / system fields before sending to Supabase
+      const { id, created_at, updated_at, rating_avg, rating_count, ...cleanData } = formData as any;
+
+      // Generate slug if missing or name changed
+      if (!cleanData.slug && cleanData.nome) {
+        cleanData.slug = cleanData.nome
           .toLowerCase()
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "")
@@ -145,20 +147,44 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
           .replace(/\s+/g, "-");
       }
 
-      let gameId = finalData.id;
+      let gameId = id;
 
       if (mode === "add") {
-        const { data, error } = await supabase.from("games").insert(finalData as any).select().single();
-        if (error) throw error;
+        const { data, error } = await supabase
+          .from("games")
+          .insert(cleanData)
+          .select()
+          .single();
+        if (error) {
+          console.error("Insert error:", error);
+          throw error;
+        }
         gameId = data.id;
+        toast.success(`"${cleanData.nome}" adicionado com sucesso!`);
       } else {
-        const { error } = await supabase.from("games").update(finalData as any).eq("id", finalData.id!);
-        if (error) throw error;
+        if (!gameId) {
+          toast.error("ID do jogo não encontrado para atualização.");
+          setSaving(false);
+          return;
+        }
+        const { error } = await supabase
+          .from("games")
+          .update(cleanData)
+          .eq("id", gameId);
+        if (error) {
+          console.error("Update error:", error);
+          throw error;
+        }
+        toast.success(`"${cleanData.nome}" atualizado com sucesso!`);
       }
 
-      // Sync links
+      // Sync download links
       if (gameId) {
-        await supabase.from("download_links").delete().eq("game_id", gameId);
+        const { error: deleteError } = await supabase.from("download_links").delete().eq("game_id", gameId);
+        if (deleteError) {
+          console.error("Error deleting old links:", deleteError);
+        }
+        
         if (links.length > 0) {
           const linksToInsert = links.map(l => ({
             game_id: gameId,
@@ -168,14 +194,17 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
             click_count: l.click_count || 0
           }));
           const { error: linksError } = await supabase.from("download_links").insert(linksToInsert);
-          if (linksError) throw linksError;
+          if (linksError) {
+            console.error("Error inserting links:", linksError);
+            throw linksError;
+          }
         }
       }
 
-      toast.success(`Jogo ${mode === "add" ? "adicionado" : "atualizado"} com sucesso!`);
       onSuccess();
     } catch (error: unknown) {
       const err = error as Error;
+      console.error("Save failed:", err);
       toast.error(`Erro ao salvar: ${err.message}`);
     } finally {
       setSaving(false);
