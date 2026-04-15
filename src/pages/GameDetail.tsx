@@ -165,12 +165,19 @@ const GameDetail = () => {
     if (!user) return navigate("/login");
     if (!gameId) return;
 
-    if (isFavorited) {
-      await supabase.from("favorites").delete().eq("user_id", user.id).eq("game_id", gameId);
-    } else {
-      await supabase.from("favorites").insert({ user_id: user.id, game_id: gameId });
+    try {
+      if (isFavorited) {
+        const { error } = await supabase.from("favorites").delete().eq("user_id", user.id).eq("game_id", gameId);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from("favorites").insert({ user_id: user.id, game_id: gameId });
+        if (error) throw error;
+      }
+      refetchFav();
+    } catch (error: any) {
+      console.error("Favorites error:", error);
+      toast.error("Erro ao atualizar favoritos: " + error.message);
     }
-    refetchFav();
   };
 
   const handleDownload = (linkId: string, url: string) => {
