@@ -41,14 +41,23 @@ export function GameRequestList() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("game_requests")
-        .select(`
-          *,
-          profiles:user_id (display_name, avatar_url)
-        `)
+        .select("*")
         .order("created_at", { ascending: false });
       
       if (error) throw error;
-      return data;
+      if (!data || data.length === 0) return [];
+
+      // Fetch profiles separately (no direct FK from game_requests to profiles)
+      const userIds = [...new Set(data.map(r => r.user_id))];
+      const { data: profiles } = await supabase
+        .from("profiles")
+        .select("user_id, display_name, avatar_url")
+        .in("user_id", userIds);
+
+      return data.map(request => ({
+        ...request,
+        profiles: profiles?.find(p => p.user_id === request.user_id) || null
+      }));
     },
   });
 
