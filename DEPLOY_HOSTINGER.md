@@ -4,65 +4,43 @@ Este guia explica como colocar seu projeto Lovable em produção na Hostinger de
 
 ## 1. O Banco de Dados
 O projeto utiliza **Supabase** (PostgreSQL) como banco de dados e autenticação.
-* **Não é necessário migrar para MySQL.** O Supabase é um serviço externo e seu site na Hostinger se conectará a ele via API.
-* Seus dados e usuários continuarão seguros no Supabase.
+* **Compatibilidade:** O Supabase é um banco de dados externo. Seu site na Hostinger se conectará a ele via API (HTTP/HTTPS). 
+* **MySQL:** Não recomendamos a migração para MySQL, pois isso exigiria a reescrita de todo o sistema de Autenticação, Segurança (RLS) e Sincronização em tempo real. O Supabase funciona perfeitamente em qualquer servidor Hostinger.
 
-## 2. Configuração das Variáveis de Ambiente
-As variáveis de ambiente no Vite são "congeladas" no momento do build. Você tem duas opções:
+## 2. Configuração das Variáveis de Ambiente (.env)
+As variáveis de ambiente no Vite são "congeladas" no momento do build.
 
-### Opção A: Build Local (Recomendado se não tiver GitHub Actions)
-1. Crie ou edite o arquivo `.env` na raiz do seu projeto localmente com suas chaves:
+1. **Localmente:** Crie um arquivo `.env` na raiz com:
    ```env
-   VITE_SUPABASE_URL=SUA_URL_DO_SUPABASE
-   VITE_SUPABASE_ANON_KEY=SUA_ANON_KEY_DO_SUPABASE
+   VITE_SUPABASE_URL=SUA_URL_AQUI
+   VITE_SUPABASE_ANON_KEY=SUA_KEY_AQUI
    ```
-2. Execute o comando: `npm run build`
-3. A pasta `dist` será gerada com as chaves já inseridas no código.
-4. Suba o conteúdo da pasta `dist` para o `public_html` da Hostinger.
-
-### Opção B: Deploy via GitHub (Recomendado para automação)
-Se você conectou o GitHub à Hostinger:
-1. Vá no seu repositório no GitHub -> **Settings** -> **Secrets and variables** -> **Actions**.
-2. Adicione as variáveis `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`.
-3. Configure sua Action de build para usar essas variáveis.
+2. **Importante:** Essas variáveis **precisam** estar presentes no momento em que você rodar o comando `npm run build`. Se você buildar no computador e subir a pasta `dist`, o código já terá os links corretos.
 
 ## 3. Configuração do Servidor (Hostinger)
-Para que as rotas do React (React Router) funcionem corretamente na Hostinger (Apache/Litespeed), é necessário um arquivo `.htaccess`.
+Já incluímos um arquivo `.htaccess` na pasta `public/`. Ele é essencial para:
+* **React Router:** Garante que ao atualizar a página (F5) em sub-rotas como `/dashboard`, o servidor não retorne erro 404.
+* **HTTPS Forçado:** Redireciona automaticamente para navegação segura.
+* **Performance:** Ativa compressão Gzip e cache de arquivos estáticos.
 
-**Este arquivo já foi criado na pasta `public/` deste repositório.** 
-Quando você rodar `npm run build`, ele será copiado automaticamente para a pasta `dist`.
-
-Conteúdo do `.htaccess`:
-```apache
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-y
-  RewriteRule . /index.html [L]
-</IfModule>
-```
-
-## 4. Backend e Serverless (Edge Functions)
-As funções de backend (como `create-checkout` e `stripe-webhook`) estão localizadas na pasta `supabase/functions`.
-* Elas **não rodam na Hostinger**. Elas devem ser publicadas no Supabase.
-* Certifique-se de que as Edge Functions estão deployadas:
+## 4. Backend e APIs Internas (Edge Functions)
+As funcionalidades de checkout e webhooks (pasta `supabase/functions`) são **Serverless**.
+* Elas continuam rodando no **Supabase**.
+* Para que funcionem, você deve fazer o deploy das funções usando a CLI do Supabase:
   ```bash
   supabase functions deploy create-checkout
   supabase functions deploy stripe-webhook
   ```
-* Seu frontend na Hostinger fará chamadas HTTP para essas funções no domínio do Supabase.
+* Seu site na Hostinger chamará automaticamente essas URLs do Supabase.
 
-## 5. Passo a Passo do Deploy Final
-1. **Prepare o código**: Certifique-se de que o `.htaccess` está em `public/`.
-2. **Gere o build**: `npm run build`.
-3. **Acesse o Gerenciador de Arquivos da Hostinger**:
-   * Vá em `public_html`.
-   * Limpe arquivos antigos.
-   * Faça o upload de **todo o conteúdo** da pasta `dist`.
-4. **Verifique o SSL**: Certifique-se de que o HTTPS está ativo na Hostinger para evitar erros de segurança com a API do Supabase.
+## 5. Passo a Passo do Deploy (Hostinger Business)
+1. **Gere o Build:** No seu terminal local, rode `npm run build`.
+2. **Pasta Dist:** Será criada a pasta `dist`. Ela contém tudo o que o site precisa.
+3. **Gerenciador de Arquivos:** No Painel da Hostinger, vá em **Gerenciador de Arquivos** -> `public_html`.
+4. **Upload:** Limpe o que houver lá e suba todo o conteúdo **de dentro** da pasta `dist`.
+5. **Teste:** Acesse seu domínio. Se o site carregar mas não mostrar dados, verifique se as chaves no seu `.env` local estavam corretas durante o build.
 
----
-Se precisar de ajuda com erros específicos, verifique o Console do Navegador (F12) para ver se há erros de conexão com o Supabase.
+## Solução de Erros Comuns
+* **404 ao atualizar página:** Verifique se o arquivo `.htaccess` foi enviado para o servidor.
+* **Erro de conexão API:** Verifique se o `VITE_SUPABASE_URL` está correto e começa com `https://`.
+* **CORS Error:** No painel do Supabase, em **API Settings**, adicione seu domínio da Hostinger à lista de "Allowed Origins".
