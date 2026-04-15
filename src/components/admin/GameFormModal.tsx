@@ -132,12 +132,18 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
       return;
     }
 
+      const handleSave = async () => {
+    if (!formData.nome) {
+      toast.error("O nome do jogo é obrigatório.");
+      return;
+    }
+
     setSaving(true);
     try {
-      // Strip read-only / system fields before sending to Supabase
+      // Remove campos de sistema
       const { id, created_at, updated_at, rating_avg, rating_count, ...cleanData } = formData as any;
 
-      // Generate slug if missing or name changed
+      // Gera slug automaticamente
       if (!cleanData.slug && cleanData.nome) {
         cleanData.slug = cleanData.nome
           .toLowerCase()
@@ -155,36 +161,24 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
           .insert(cleanData)
           .select()
           .single();
-        if (error) {
-          console.error("Insert error:", error);
-          throw error;
-        }
+        if (error) throw error;
         gameId = data.id;
-        toast.success(`"${cleanData.nome}" adicionado com sucesso!`);
       } else {
         if (!gameId) {
           toast.error("ID do jogo não encontrado para atualização.");
-          setSaving(false);
           return;
         }
         const { error } = await supabase
           .from("games")
           .update(cleanData)
           .eq("id", gameId);
-        if (error) {
-          console.error("Update error:", error);
-          throw error;
-        }
-        toast.success(`"${cleanData.nome}" atualizado com sucesso!`);
+        if (error) throw error;
       }
 
-      // Sync download links
+      // Sincroniza links de download
       if (gameId) {
-        const { error: deleteError } = await supabase.from("download_links").delete().eq("game_id", gameId);
-        if (deleteError) {
-          console.error("Error deleting old links:", deleteError);
-        }
-        
+        await supabase.from("download_links").delete().eq("game_id", gameId);
+
         if (links.length > 0) {
           const linksToInsert = links.map(l => ({
             game_id: gameId,
@@ -193,15 +187,30 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
             status: l.status === "Ativo" || !l.status ? "online" : l.status,
             click_count: l.click_count || 0
           }));
+
           const { error: linksError } = await supabase.from("download_links").insert(linksToInsert);
-          if (linksError) {
-            console.error("Error inserting links:", linksError);
-            throw linksError;
-          }
+          if (linksError) throw linksError;
         }
       }
 
-      onSuccess();
+      // === ATUALIZAÇÃO DO CACHE (isso resolve o problema principal) ===
+      onSuccess?.();
+
+      if (typeof window !== "undefined" && (window as any).queryClient) {
+        const qc = (window as any).queryClient;
+        await Promise.all([
+          qc.invalidateQueries({ queryKey: ['games'] }),
+          qc.invalidateQueries({ queryKey: ['game-stats'] }),
+          qc.invalidateQueries({ queryKey: ['featured-games'] }),
+          qc.invalidateQueries({ queryKey: ['all-games'] }),
+        ]);
+      }
+
+      toast.success(mode === "add" 
+        ? `"${cleanData.nome}" cadastrado com sucesso!` 
+        : `"${cleanData.nome}" atualizado com sucesso!`
+      );
+
     } catch (error: unknown) {
       const err = error as Error;
       console.error("Save failed:", err);
