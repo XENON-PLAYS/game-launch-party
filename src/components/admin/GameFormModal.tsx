@@ -126,7 +126,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
     }
   };
 
-      const handleSave = async () => {
+       const handleSave = async () => {
     if (!formData.nome) {
       toast.error("O nome do jogo é obrigatório.");
       return;
@@ -187,7 +187,7 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
         }
       }
 
-      // === ATUALIZAÇÃO DO CACHE (isso resolve o problema principal) ===
+      // === ATUALIZAÇÃO DO CACHE ===
       onSuccess?.();
 
       if (typeof window !== "undefined" && (window as any).queryClient) {
@@ -196,7 +196,6 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
           qc.invalidateQueries({ queryKey: ['games'] }),
           qc.invalidateQueries({ queryKey: ['game-stats'] }),
           qc.invalidateQueries({ queryKey: ['featured-games'] }),
-          qc.invalidateQueries({ queryKey: ['all-games'] }),
         ]);
       }
 
