@@ -126,12 +126,6 @@ export function GameFormModal({ isOpen, onClose, mode, game, onSuccess }: GameFo
     }
   };
 
-  const handleSave = async () => {
-    if (!formData.nome) {
-      toast.error("O nome do jogo é obrigatório.");
-      return;
-    }
-
       const handleSave = async () => {
     if (!formData.nome) {
       toast.error("O nome do jogo é obrigatório.");
