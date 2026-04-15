@@ -34,7 +34,7 @@ export function StarRating({ gameId }: StarRatingProps) {
 
   const mutation = useMutation({
     mutationFn: async (rating: number) => {
-      if (!user) return;
+      if (!user) throw new Error("Você precisa estar logado para avaliar.");
       const { data: existing } = await supabase
         .from("game_ratings")
         .select("id")
@@ -43,9 +43,11 @@ export function StarRating({ gameId }: StarRatingProps) {
         .maybeSingle();
 
       if (existing) {
-        await supabase.from("game_ratings").update({ rating }).eq("id", existing.id);
+        const { error } = await supabase.from("game_ratings").update({ rating }).eq("id", existing.id);
+        if (error) throw error;
       } else {
-        await supabase.from("game_ratings").insert({ user_id: user.id, game_id: gameId, rating });
+        const { error } = await supabase.from("game_ratings").insert({ user_id: user.id, game_id: gameId, rating });
+        if (error) throw error;
       }
     },
     onSuccess: () => {

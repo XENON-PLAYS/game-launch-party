@@ -109,7 +109,7 @@ const Admin = () => {
   };
   const handleDuplicateGame = async (game: Game) => {
     try {
-      const { id, created_at, updated_at, slug, ...duplicateData } = game;
+      const { id, created_at, updated_at, slug, rating_avg, rating_count, ...duplicateData } = game;
       const { data: newGame, error } = await supabase
         .from("games")
         .insert({

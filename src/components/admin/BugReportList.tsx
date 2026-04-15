@@ -45,15 +45,28 @@ export function BugReportList() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("bug_reports")
-        .select(`
-          *,
-          profiles:user_id (display_name),
-          games:game_id (nome)
-        `)
+        .select("*")
         .order("created_at", { ascending: false });
       
       if (error) throw error;
-      return data;
+      if (!data || data.length === 0) return [];
+
+      // Fetch profiles and games separately (no direct FK from bug_reports to profiles)
+      const userIds = [...new Set(data.map(r => r.user_id))];
+      const gameIds = [...new Set(data.map(r => r.game_id).filter(Boolean))] as string[];
+
+      const [profilesRes, gamesRes] = await Promise.all([
+        supabase.from("profiles").select("user_id, display_name").in("user_id", userIds),
+        gameIds.length > 0 
+          ? supabase.from("games").select("id, nome").in("id", gameIds)
+          : Promise.resolve({ data: [] })
+      ]);
+
+      return data.map(report => ({
+        ...report,
+        profiles: profilesRes.data?.find(p => p.user_id === report.user_id) || null,
+        games: gamesRes.data?.find(g => g.id === report.game_id) || null
+      }));
     },
   });
 
