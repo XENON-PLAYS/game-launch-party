@@ -1,5 +1,6 @@
 
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -103,6 +104,10 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Checkout VIP - Finalize sua assinatura"
+        description="Finalize com segurança a contratação do seu plano VIP no Jogos Grátis e libere downloads diretos sem espera."
+      />
       <Header />
       
       <main className="container-responsive py-24 flex flex-col items-center">
