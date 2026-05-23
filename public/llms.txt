@@ -1,0 +1,17 @@
+# Jogos Grátis
+
+> Catálogo gratuito de jogos para PC com downloads rápidos, seguros e verificados. Atualizado diariamente com lançamentos e clássicos.
+
+Jogos Grátis é uma plataforma em português (PT-BR) que reúne jogos para PC com guias de instalação, requisitos técnicos, avaliações e comentários da comunidade. Usuários VIP recebem downloads diretos sem espera e navegação sem anúncios.
+
+## Pages
+
+- [Página inicial](/): Catálogo completo de jogos com busca, filtros e seções de mais baixados e novidades.
+- [Plano VIP](/vip): Benefícios e planos de assinatura VIP (downloads instantâneos, sem anúncios).
+- [Pedir Jogo](/pedir-jogo): Formulário para solicitar novos jogos ao catálogo.
+- [DMCA](/dmca): Política de DMCA e termos de uso.
+- [Política de Privacidade](/privacidade): Como tratamos dados pessoais.
+
+## Optional
+
+- [Categorias](/categoria/acao): Exemplo de página de categoria de jogos.
