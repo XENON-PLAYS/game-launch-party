@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
@@ -80,6 +81,11 @@ const Login = () => {
 
   return (
     <div className="min-h-screen space-background flex flex-col">
+      <SEO
+        title="Login - Acesse sua conta"
+        description="Entre na sua conta Jogos Grátis para baixar jogos, salvar favoritos e acompanhar seu histórico de downloads."
+        keywords="login jogos grátis, entrar conta, acessar jogos pc"
+      />
       <Header />
       <MeteorBackground />
 

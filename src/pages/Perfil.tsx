@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 
 import { supabase } from "@/integrations/supabase/client";
 import { 
@@ -594,6 +595,10 @@ const Perfil = () => {
 
   return (
   <div className="min-h-screen bg-background flex flex-col relative overflow-hidden">
+   <SEO
+     title={targetProfile?.display_name ? `Perfil de ${targetProfile.display_name}` : "Meu Perfil"}
+     description="Gerencie seu perfil, avatar, histórico de downloads e configurações da sua conta Jogos Grátis."
+   />
    {/* Professional Background Elements */}
    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
     <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full animate-pulse" />

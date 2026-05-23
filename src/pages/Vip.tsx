@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Check, Shield, Zap, Star, Trophy, CreditCard, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
@@ -87,6 +88,11 @@ const VipPage = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+      <SEO
+        title="Plano VIP - Downloads Instantâneos e Sem Anúncios"
+        description="Assine o plano VIP do Jogos Grátis e tenha downloads diretos sem espera, sem anúncios e com suporte prioritário. A partir de R$ 5/mês."
+        keywords="vip jogos grátis, assinatura jogos pc, download direto sem espera, sem anúncios"
+      />
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />

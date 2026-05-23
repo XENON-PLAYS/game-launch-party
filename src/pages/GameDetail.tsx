@@ -231,11 +231,18 @@ const GameDetail = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
-      <SEO 
-        title={game.nome}
-        description={game.descricao?.substring(0, 160) + (game.descricao?.length > 160 ? "..." : "")}
+      <SEO
+        title={`Baixar ${game.nome}`}
+        description={
+          game.descricao && game.descricao.length > 157
+            ? `${game.descricao.substring(0, 157)}...`
+            : (game.descricao || `Baixe ${game.nome} grátis para PC. Download rápido, seguro e verificado.`)
+        }
         image={game.imagem}
         keywords={`${game.nome}, download ${game.nome}, baixar ${game.nome}, ${(game.categorias || []).join(", ")}, pc games`}
+        schemaType="SoftwareApplication"
+        ratingValue={game.rating_avg || undefined}
+        ratingCount={game.rating_count || undefined}
       />
       <Header />
       

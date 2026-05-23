@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { lovable } from "@/integrations/lovable/index";
@@ -99,6 +100,11 @@ const Cadastro = () => {
 
   return (
     <div className="min-h-screen space-background flex flex-col">
+      <SEO
+        title="Cadastro - Crie sua conta grátis"
+        description="Crie uma conta gratuita no Jogos Grátis e tenha acesso ao maior catálogo de jogos para PC com downloads rápidos e seguros."
+        keywords="cadastro jogos grátis, criar conta, registrar jogos pc"
+      />
       <Header />
       <MeteorBackground />
 
