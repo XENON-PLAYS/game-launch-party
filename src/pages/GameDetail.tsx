@@ -522,7 +522,7 @@ const GameDetail = () => {
                       {typeof data === 'string' ? (
                         <div 
                           className="prose prose-invert max-w-none text-muted-foreground prose-strong:text-primary prose-ul:list-disc prose-li:mb-2 [&_ul]:pl-5"
-                          dangerouslySetInnerHTML={{ __html: data }} 
+                          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data, { USE_PROFILES: { html: true } }) }} 
                         />
                       ) : (
                         Object.entries(data as Record<string, any>).map(([key, val]) => (
