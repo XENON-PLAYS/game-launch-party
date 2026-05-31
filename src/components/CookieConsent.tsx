@@ -65,9 +65,10 @@ export const CookieConsent = () => {
                 </Button>
                 <button 
                   onClick={() => setShowConsent(false)}
-                  className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors p-1"
+                  aria-label="Fechar"
+                  className="absolute top-3 right-3 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-colors p-2"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-6 h-6" />
                 </button>
               </div>
             </div>
