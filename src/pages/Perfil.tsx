@@ -427,33 +427,8 @@ const Perfil = () => {
         </div>
        </div>
 
-       <div className="pt-8 border-t border-border flex flex-wrap gap-4 justify-between items-center">
-        <button 
-         type="button"
-         onClick={async () => {
-          if (!user) return;
-          try {
-            const { error } = await supabase.from("notifications").insert({
-              user_id: user.id,
-              title: "🚀 Teste de Voo",
-              message: "Sua frota de notificações está operando em 100%! Tudo pronto para a decolagem.",
-              type: "info"
-            });
-            if (error) throw error;
-            
-            // Invalida o cache para mostrar a notificação na hora no sino do header
-            queryClient.invalidateQueries({ queryKey: ["notifications", user.id] });
-            
-            toast.success("Mensagem de teste enviada para seu hangar!");
-          } catch (error: any) {
-            toast.error("Erro ao enviar notificação: " + error.message);
-          }
-         }}
-         className="px-6 py-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2"
-        >
-         <Sparkles className="w-4 h-4 text-primary" />
-         Testar Notificação
-        </button>
+       <div className="pt-8 border-t border-border flex flex-wrap gap-4 justify-end items-center">
+
 
         <button 
          type="submit" 
