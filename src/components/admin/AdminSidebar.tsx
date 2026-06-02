@@ -45,11 +45,8 @@ export function AdminSidebar() {
     { icon: LayoutDashboard, label: "Dashboard", href: "/admin" },
     { icon: Gamepad2, label: "Catálogo", href: "/admin?tab=games" },
     { icon: Users, label: "Usuários", href: "/admin?tab=users" },
-    { icon: MessageSquare, label: "Comentários", href: "/admin?tab=comments" },
     { icon: PlusCircle, label: "Pedidos", href: "/admin?tab=requests" },
     { icon: AlertTriangle, label: "Reportes", href: "/admin?tab=reports" },
-    { icon: Download, label: "Downloads", href: "/admin?tab=downloads" },
-    { icon: Star, label: "Avaliações", href: "/admin?tab=ratings" },
   ];
 
   const isActive = (href: string) => {
