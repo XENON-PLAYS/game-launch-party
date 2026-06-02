@@ -70,7 +70,7 @@ export function AdminSidebar() {
 
       <nav className="flex-1 px-4 space-y-2 py-4 overflow-y-auto">
         <p className="px-3 mb-4 text-[10px] font-black text-muted-foreground/50 uppercase tracking-[0.2em]">Principal</p>
-        {menuItems.slice(0, 2).map((item) => (
+        {menuItems.slice(0, 3).map((item) => (
           <SidebarItem 
             key={item.href} 
             {...item} 
@@ -79,16 +79,7 @@ export function AdminSidebar() {
         ))}
 
         <p className="px-3 mt-8 mb-4 text-[10px] font-black text-muted-foreground/50 uppercase tracking-[0.2em]">Comunidade</p>
-        {menuItems.slice(2, 6).map((item) => (
-          <SidebarItem 
-            key={item.href} 
-            {...item} 
-            active={isActive(item.href)} 
-          />
-        ))}
-
-        <p className="px-3 mt-8 mb-4 text-[10px] font-black text-muted-foreground/50 uppercase tracking-[0.2em]">Analytics</p>
-        {menuItems.slice(6).map((item) => (
+        {menuItems.slice(3).map((item) => (
           <SidebarItem 
             key={item.href} 
             {...item} 
@@ -96,6 +87,7 @@ export function AdminSidebar() {
           />
         ))}
       </nav>
+
 
       <div className="p-4 border-t border-border/40">
         <Link 
