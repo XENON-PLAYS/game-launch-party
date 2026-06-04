@@ -67,7 +67,17 @@ serve(async (req) => {
     };
 
     const config = planConfig[planName];
-    const origin = req.headers.get("origin") || "http://localhost:3000";
+
+    // Allowlist of trusted origins to prevent open-redirect via the Origin header
+    const ALLOWED_ORIGINS = [
+      "https://game-launch-party.lovable.app",
+      "https://id-preview--53a1dd10-71d2-4025-ab86-b9048968f97f.lovable.app",
+      "http://localhost:3000",
+    ];
+    const requestOrigin = req.headers.get("origin") || "";
+    const origin = ALLOWED_ORIGINS.includes(requestOrigin)
+      ? requestOrigin
+      : ALLOWED_ORIGINS[0];
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
