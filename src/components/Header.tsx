@@ -203,7 +203,7 @@ export function Header() {
                         <div className="space-y-1">
                           <div className="px-4 py-4 border-b border-border mb-1 bg-muted/20">
                             <p className="text-[10px] text-muted-foreground uppercase font-black tracking-widest mb-1">Minha Conta</p>
-                            <p className="text-sm font-bold text-foreground truncate">{profile?.display_name || user.email}</p>
+                            <p className="text-sm font-bold text-foreground truncate">{profile?.display_name || profile?.username || "Conta"}</p>
                           </div>
                           <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-muted text-muted-foreground hover:text-foreground rounded-xl text-xs font-black uppercase tracking-wider transition-all">
                             <User className="w-4 h-4" /> Perfil
