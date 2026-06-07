@@ -89,10 +89,11 @@ const VipPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       <SEO
-        title="Plano VIP - Downloads Instantâneos e Sem Anúncios"
+        title="Plano VIP - Download Instantâneo"
         description="Assine o plano VIP do Jogos Grátis e tenha downloads diretos sem espera, sem anúncios e com suporte prioritário. A partir de R$ 5/mês."
         keywords="vip jogos grátis, assinatura jogos pc, download direto sem espera, sem anúncios"
       />
+
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
@@ -114,12 +115,13 @@ const VipPage = () => {
             <Trophy className="w-16 h-16 text-primary drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]" />
           </motion.div>
           <motion.h1 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ y: 20 }}
+            animate={{ y: 0 }}
             className="text-responsive-h1 leading-none uppercase font-black"
           >
             Sua Experiência <span className="text-primary">VIP de Elite</span>
           </motion.h1>
+
           <motion.p 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

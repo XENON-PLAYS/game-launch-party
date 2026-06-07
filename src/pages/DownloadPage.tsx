@@ -134,9 +134,10 @@ const DownloadPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
       <SEO
-        title={game?.nome ? `Baixar ${game.nome}` : "Download seguro"}
+        title={game?.nome ? `Download ${game.nome}` : "Download seguro"}
         description={game?.nome ? `Download direto e verificado de ${game.nome} para PC. Aguarde a verificação e inicie o download.` : "Página de download seguro de jogos para PC verificados pela equipe Jogos Grátis."}
       />
+
       <Header />
       <main className="container-responsive py-8 sm:py-16 lg:py-24">
         <div className="max-w-5xl mx-auto space-y-12 lg:space-y-24">
@@ -148,8 +149,13 @@ const DownloadPage = () => {
               Conexão Segura e Criptografada
             </div>
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
-              Portal de <span className="text-primary italic">Download</span>
+              {game?.nome ? (
+                <>Download Seguro de <span className="text-primary italic">{game.nome}</span></>
+              ) : (
+                <>Portal de <span className="text-primary italic">Download</span></>
+              )}
             </h1>
+
           </div>
 
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">

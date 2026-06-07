@@ -409,6 +409,9 @@ const Index = () => {
       </section>
 
       <main className="container-responsive py-8 md:py-20 space-y-12 md:space-y-24">
+        <h1 className="sr-only">Catálogo de Jogos PC Grátis para Download</h1>
+
+
 
         {isLoading ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-8">

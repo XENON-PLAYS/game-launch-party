@@ -212,8 +212,11 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
               <button 
                 key={i} 
                 onClick={() => goTo(i)}
+                aria-label={`Ir para o slide ${i + 1}`}
+                aria-current={i === current}
                 className={`relative h-1 group focus:outline-none transition-all duration-300 ${i === current ? 'w-10 sm:w-[60px]' : 'w-5 sm:w-[30px]'}`}
               >
+
                 <div className="absolute inset-0 bg-muted/40 rounded-full overflow-hidden">
                   <motion.div 
                     initial={false}
@@ -230,17 +233,18 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
             <button 
               onClick={prev} 
               className="w-12 h-12 rounded-full bg-muted/50 hover:bg-muted border border-border text-foreground transition-all flex items-center justify-center backdrop-blur-sm group"
-              aria-label="Previous slide"
+              aria-label="Slide anterior"
             >
               <ChevronLeft className="w-6 h-6 group-active:scale-90 transition-transform" />
             </button>
             <button 
               onClick={next} 
               className="w-12 h-12 rounded-full bg-muted/50 hover:bg-muted border border-border text-foreground transition-all flex items-center justify-center backdrop-blur-sm group"
-              aria-label="Next slide"
+              aria-label="Próximo slide"
             >
               <ChevronRight className="w-6 h-6 group-active:scale-90 transition-transform" />
             </button>
+
           </div>
         </div>
       </div>
