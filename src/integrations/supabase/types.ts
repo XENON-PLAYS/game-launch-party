@@ -249,13 +249,6 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
           },
-          {
-            foreignKeyName: "game_comments_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "public_profiles"
-            referencedColumns: ["user_id"]
-          },
         ]
       }
       game_ratings: {
@@ -550,45 +543,6 @@ export type Database = {
         }
         Relationships: []
       }
-      public_profiles: {
-        Row: {
-          avatar_url: string | null
-          badges: string[] | null
-          bio: string | null
-          created_at: string | null
-          display_name: string | null
-          is_vip: boolean | null
-          last_seen_at: string | null
-          status: string | null
-          user_id: string | null
-          username: string | null
-        }
-        Insert: {
-          avatar_url?: string | null
-          badges?: string[] | null
-          bio?: string | null
-          created_at?: string | null
-          display_name?: string | null
-          is_vip?: boolean | null
-          last_seen_at?: string | null
-          status?: string | null
-          user_id?: string | null
-          username?: string | null
-        }
-        Update: {
-          avatar_url?: string | null
-          badges?: string[] | null
-          bio?: string | null
-          created_at?: string | null
-          display_name?: string | null
-          is_vip?: boolean | null
-          last_seen_at?: string | null
-          status?: string | null
-          user_id?: string | null
-          username?: string | null
-        }
-        Relationships: []
-      }
     }
     Functions: {
       get_admin_users_list: {
@@ -602,6 +556,21 @@ export type Database = {
           is_vip: boolean
           last_seen_at: string
           role: string
+          status: string
+          user_id: string
+          username: string
+        }[]
+      }
+      get_public_profiles: {
+        Args: { _user_ids: string[] }
+        Returns: {
+          avatar_url: string
+          badges: string[]
+          bio: string
+          created_at: string
+          display_name: string
+          is_vip: boolean
+          last_seen_at: string
           status: string
           user_id: string
           username: string
