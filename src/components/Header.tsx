@@ -177,8 +177,11 @@ export function Header() {
               <div className="relative" ref={menuRef}>
                 <button
                   onClick={() => setMenuOpen(!menuOpen)}
+                  aria-label="Menu da conta"
+                  aria-expanded={menuOpen}
                   className="flex items-center gap-3 p-1 rounded-full bg-muted/50 border border-border hover:bg-muted transition-all group"
                 >
+
                   <div className="w-9 h-9 rounded-full overflow-hidden border border-border group-hover:border-primary/30 transition-all">
                     {profile?.avatar_url ? (
                       <img src={optimizeImageUrl(profile.avatar_url, 80)} alt="" className="w-full h-full object-cover" />
