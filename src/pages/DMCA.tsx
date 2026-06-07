@@ -6,7 +6,7 @@ import { MeteorBackground } from "@/components/MeteorBackground";
 const DMCA = () => {
   return (
     <div className="min-h-screen space-background text-foreground flex flex-col">
-      <SEO title="DMCA - Jogos Grátis" description="Política de DMCA e termos de uso" />
+      <SEO title="DMCA - Jogos Grátis" description="Política de DMCA do Jogos Grátis: saiba como solicitar a remoção de conteúdo protegido por direitos autorais e conheça nossos termos de uso." />
       <Header />
       <MeteorBackground />
       
