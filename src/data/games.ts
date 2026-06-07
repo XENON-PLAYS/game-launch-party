@@ -624,7 +624,7 @@ export const games: Game[] = [
   },
   {
     id: 33,
-    nome: "Dark Souls 3 Deluxe", 
+    nome: "Dark Souls 2 Deluxe", 
     descricao: "DARK SOULS™ continua a ultrapassar seus próprios limites em um ambicioso novo capítulo da série que definiu um gênero e que é aclamada pela crítica. Prepare-se para abraçar a escuridão!", 
     distribuidor: "FromSoftware, Inc., Bandai Namco Entertainment", 
     desenvolvedor: "FromSoftware, Inc.", 
