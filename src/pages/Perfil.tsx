@@ -65,17 +65,15 @@ const Perfil = () => {
         setActiveTab("profile");
         setViewLoading(true);
         const { data, error } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("user_id", userId)
-          .single();
-        
-        if (error || !data) {
+          .rpc("get_public_profiles", { _user_ids: [userId] });
+
+        const profileRow = data?.[0];
+        if (error || !profileRow) {
           toast.error("Usuário não encontrado");
           navigate("/");
           return;
         }
-        setTargetProfile(data);
+        setTargetProfile(profileRow);
         setViewLoading(false);
       }
     };
