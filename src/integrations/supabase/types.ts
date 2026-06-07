@@ -249,6 +249,13 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
           },
+          {
+            foreignKeyName: "game_comments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["user_id"]
+          },
         ]
       }
       game_ratings: {
@@ -540,6 +547,45 @@ export type Database = {
         Row: {
           online_count: number | null
           total_users: number | null
+        }
+        Relationships: []
+      }
+      public_profiles: {
+        Row: {
+          avatar_url: string | null
+          badges: string[] | null
+          bio: string | null
+          created_at: string | null
+          display_name: string | null
+          is_vip: boolean | null
+          last_seen_at: string | null
+          status: string | null
+          user_id: string | null
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          badges?: string[] | null
+          bio?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          is_vip?: boolean | null
+          last_seen_at?: string | null
+          status?: string | null
+          user_id?: string | null
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          badges?: string[] | null
+          bio?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          is_vip?: boolean | null
+          last_seen_at?: string | null
+          status?: string | null
+          user_id?: string | null
+          username?: string | null
         }
         Relationships: []
       }
