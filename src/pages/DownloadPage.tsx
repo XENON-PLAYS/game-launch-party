@@ -149,8 +149,13 @@ const DownloadPage = () => {
               Conexão Segura e Criptografada
             </div>
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
-              Portal de <span className="text-primary italic">Download</span>
+              {game?.nome ? (
+                <>Download Seguro de <span className="text-primary italic">{game.nome}</span></>
+              ) : (
+                <>Portal de <span className="text-primary italic">Download</span></>
+              )}
             </h1>
+
           </div>
 
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
