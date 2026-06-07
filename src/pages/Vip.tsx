@@ -115,12 +115,13 @@ const VipPage = () => {
             <Trophy className="w-16 h-16 text-primary drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]" />
           </motion.div>
           <motion.h1 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ y: 20 }}
+            animate={{ y: 0 }}
             className="text-responsive-h1 leading-none uppercase font-black"
           >
             Sua Experiência <span className="text-primary">VIP de Elite</span>
           </motion.h1>
+
           <motion.p 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
