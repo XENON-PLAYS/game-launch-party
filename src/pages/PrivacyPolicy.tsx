@@ -6,7 +6,7 @@ import { MeteorBackground } from "@/components/MeteorBackground";
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen space-background text-foreground flex flex-col">
-      <SEO title="Política de Privacidade - Jogos Grátis" description="Nossa política de privacidade e proteção de dados" />
+      <SEO title="Política de Privacidade - Jogos Grátis" description="Saiba como o Jogos Grátis coleta, usa e protege seus dados pessoais. Conheça nossa política de privacidade e seus direitos de proteção de dados." />
       <Header />
       <MeteorBackground />
       
