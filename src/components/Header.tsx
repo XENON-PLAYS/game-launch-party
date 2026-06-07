@@ -162,9 +162,11 @@ export function Header() {
               
               <button 
                 onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
                 className="p-2 text-muted-foreground hover:text-foreground transition-all hover:bg-muted/50 rounded-xl group"
                 title={theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
               >
+
                 {theme === "dark" ? (
                   <Sun className="w-5 h-5 group-hover:rotate-45 transition-transform" />
                 ) : (
