@@ -212,8 +212,11 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
               <button 
                 key={i} 
                 onClick={() => goTo(i)}
+                aria-label={`Ir para o slide ${i + 1}`}
+                aria-current={i === current}
                 className={`relative h-1 group focus:outline-none transition-all duration-300 ${i === current ? 'w-10 sm:w-[60px]' : 'w-5 sm:w-[30px]'}`}
               >
+
                 <div className="absolute inset-0 bg-muted/40 rounded-full overflow-hidden">
                   <motion.div 
                     initial={false}
