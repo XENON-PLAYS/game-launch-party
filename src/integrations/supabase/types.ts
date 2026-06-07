@@ -561,6 +561,21 @@ export type Database = {
           username: string
         }[]
       }
+      get_public_profiles: {
+        Args: { _user_ids: string[] }
+        Returns: {
+          avatar_url: string
+          badges: string[]
+          bio: string
+          created_at: string
+          display_name: string
+          is_vip: boolean
+          last_seen_at: string
+          status: string
+          user_id: string
+          username: string
+        }[]
+      }
       get_user_ranking: {
         Args: never
         Returns: {

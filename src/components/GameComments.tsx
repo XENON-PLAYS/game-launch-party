@@ -39,9 +39,7 @@ export function GameComments({ gameId }: GameCommentsProps) {
       // Depois busca os perfis relacionados separadamente (abordagem alternativa sem join)
       const userIds = [...new Set(comments.map(c => c.user_id))];
       const { data: profiles, error: profilesError } = await supabase
-        .from("profiles")
-        .select("user_id, display_name, avatar_url, is_vip, badges, status")
-        .in("user_id", userIds);
+        .rpc("get_public_profiles", { _user_ids: userIds });
 
       if (profilesError) {
         console.error("Erro ao carregar perfis:", profilesError);
