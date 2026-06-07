@@ -184,8 +184,9 @@ export function Header() {
                   </div>
                   <div className="hidden sm:flex items-center gap-2 pr-2">
                     <span className="text-[11px] font-black uppercase tracking-widest text-foreground/90 group-hover:text-foreground transition-colors max-w-[100px] truncate">
-                      {user ? (profile?.display_name || user.email?.split('@')[0]) : "Entrar"}
+                      {user ? (profile?.display_name || profile?.username || "Conta") : "Entrar"}
                     </span>
+
                     <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-500 ${menuOpen ? "rotate-180" : ""}`} />
                   </div>
                 </button>
@@ -202,7 +203,7 @@ export function Header() {
                         <div className="space-y-1">
                           <div className="px-4 py-4 border-b border-border mb-1 bg-muted/20">
                             <p className="text-[10px] text-muted-foreground uppercase font-black tracking-widest mb-1">Minha Conta</p>
-                            <p className="text-sm font-bold text-foreground truncate">{profile?.display_name || user.email}</p>
+                            <p className="text-sm font-bold text-foreground truncate">{profile?.display_name || profile?.username || "Conta"}</p>
                           </div>
                           <Link to="/perfil" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-muted text-muted-foreground hover:text-foreground rounded-xl text-xs font-black uppercase tracking-wider transition-all">
                             <User className="w-4 h-4" /> Perfil
