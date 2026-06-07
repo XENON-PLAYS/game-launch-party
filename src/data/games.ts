@@ -84,7 +84,7 @@ export const games: Game[] = [
   },
   {
     id: 4,
-    nome: "Dark Souls 3", 
+    nome: "Dark Souls 2", 
     descricao: "DARK SOULS™ II: Scholar of the First Sin leva a renomada obscuridade e jogabilidade viciante da franquia a um novo nível. Junte-se à jornada sombria e vivencie encontros com inimigos devastadores, perigos diabólicos e o desafio implacável.", 
     distribuidor: "Bandai Namco Entertainment, FromSoftware, Inc.", 
     desenvolvedor: "FromSoftware, Inc.", 
@@ -624,7 +624,7 @@ export const games: Game[] = [
   },
   {
     id: 33,
-    nome: "Dark Souls 3 Deluxe", 
+    nome: "Dark Souls 2 Deluxe", 
     descricao: "DARK SOULS™ continua a ultrapassar seus próprios limites em um ambicioso novo capítulo da série que definiu um gênero e que é aclamada pela crítica. Prepare-se para abraçar a escuridão!", 
     distribuidor: "FromSoftware, Inc., Bandai Namco Entertainment", 
     desenvolvedor: "FromSoftware, Inc.", 
