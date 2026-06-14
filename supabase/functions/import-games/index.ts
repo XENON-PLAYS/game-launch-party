@@ -234,7 +234,7 @@ Deno.serve(async (req) => {
             gameRow.descricao = stripHtml(details.short_description || details.detailed_description || "");
             gameRow.desenvolvedor = (details.developers || []).join(", ") || null;
             gameRow.distribuidor = (details.publishers || []).join(", ") || null;
-            gameRow.lancamento = details.release_date?.date || null;
+            gameRow.lancamento = parseSteamDate(details.release_date?.date);
             gameRow.categorias = (details.genres || []).map((g: any) => g.description).slice(0, 6);
             gameRow.galeria = (details.screenshots || []).slice(0, 6).map((s: any) => s.path_full);
             if (details.movies?.length) {
