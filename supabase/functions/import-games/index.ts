@@ -65,6 +65,26 @@ function stripHtml(html: string): string {
   return (html || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 }
 
+// Converte a data textual da Steam (ex.: "4 set. 2025", "24 fev. 2022") para "YYYY-MM-DD"
+function parseSteamDate(raw?: string): string | null {
+  if (!raw) return null;
+  const months: Record<string, string> = {
+    jan: "01", fev: "02", mar: "03", abr: "04", mai: "05", jun: "06",
+    jul: "07", ago: "08", set: "09", out: "10", nov: "11", dez: "12",
+  };
+  const m = raw.toLowerCase().match(/(\d{1,2})\s*(?:de\s*)?([a-zç]+)\.?\s*(?:de\s*)?(\d{4})/);
+  if (m) {
+    const day = m[1].padStart(2, "0");
+    const mon = months[m[2].slice(0, 3)];
+    if (mon) return `${m[3]}-${mon}-${day}`;
+  }
+  // Apenas o ano (ex.: "2025")
+  const y = raw.match(/\b(\d{4})\b/);
+  if (y) return `${y[1]}-01-01`;
+  return null;
+}
+
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
