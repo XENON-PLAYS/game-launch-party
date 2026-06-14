@@ -5,7 +5,8 @@ import {
   Shield,
   ExternalLink,
   PlusCircle,
-  AlertTriangle
+  AlertTriangle,
+  DownloadCloud
 } from "lucide-react";
 
 import { Link, useLocation } from "react-router-dom";
