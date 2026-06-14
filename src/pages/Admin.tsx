@@ -232,6 +232,9 @@ const Admin = () => {
                 {activeTab === "reports" && (
                   <BugReportList />
                 )}
+                {activeTab === "import" && (
+                  <ImportGames />
+                )}
               </>
             )}
           </main>
