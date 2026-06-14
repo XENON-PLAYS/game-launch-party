@@ -105,46 +105,56 @@ Deno.serve(async (req) => {
     // ---- Parâmetros ----
     let limit = 50;
     let withMetadata = true;
+    let providedItems: SourceDownload[] | null = null;
     try {
       const body = await req.json();
       if (typeof body?.limit === "number") limit = Math.min(Math.max(body.limit, 1), 300);
       if (typeof body?.withMetadata === "boolean") withMetadata = body.withMetadata;
+      // O painel envia os itens já lidos do arquivo (a fonte é bloqueada por Cloudflare no servidor)
+      if (Array.isArray(body?.items)) providedItems = body.items as SourceDownload[];
+      else if (Array.isArray(body?.downloads)) providedItems = body.downloads as SourceDownload[];
     } catch (_) { /* sem body */ }
 
-    // ---- Baixar a fonte (tentando contornar proteções básicas) ----
-    const srcRes = await fetch(SOURCE_URL, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
-        "Accept": "application/json,text/plain,*/*",
-        "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8",
-      },
-    });
+    let downloads: SourceDownload[];
 
-    if (!srcRes.ok) {
-      return json(
-        { error: `Falha ao baixar a fonte (HTTP ${srcRes.status}). A fonte pode estar protegida por Cloudflare.` },
-        502,
-      );
+    if (providedItems) {
+      downloads = providedItems.filter((d) => d.title && d.uris?.length);
+    } else {
+      // ---- Tentar baixar a fonte direto (geralmente bloqueado por Cloudflare) ----
+      const srcRes = await fetch(SOURCE_URL, {
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+          "Accept": "application/json,text/plain,*/*",
+          "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8",
+        },
+      });
+
+      if (!srcRes.ok) {
+        return json(
+          { error: `Falha ao baixar a fonte (HTTP ${srcRes.status}). Envie o arquivo fitgirl.json pelo painel.` },
+          502,
+        );
+      }
+
+      const contentType = srcRes.headers.get("content-type") || "";
+      const rawText = await srcRes.text();
+      if (contentType.includes("text/html") || rawText.trim().startsWith("<")) {
+        return json(
+          { error: "A fonte respondeu com uma página de verificação (Cloudflare). Envie o arquivo fitgirl.json pelo painel." },
+          502,
+        );
+      }
+
+      let source: { downloads?: SourceDownload[] };
+      try {
+        source = JSON.parse(rawText);
+      } catch (_) {
+        return json({ error: "Não foi possível ler o JSON da fonte." }, 502);
+      }
+      downloads = (source.downloads || []).filter((d) => d.title && d.uris?.length);
     }
 
-    const contentType = srcRes.headers.get("content-type") || "";
-    const rawText = await srcRes.text();
-    if (contentType.includes("text/html") || rawText.trim().startsWith("<")) {
-      return json(
-        { error: "A fonte respondeu com uma página de verificação (Cloudflare), não com o JSON. Tente o envio manual do arquivo." },
-        502,
-      );
-    }
-
-    let source: { downloads?: SourceDownload[] };
-    try {
-      source = JSON.parse(rawText);
-    } catch (_) {
-      return json({ error: "Não foi possível ler o JSON da fonte." }, 502);
-    }
-
-    const downloads = (source.downloads || []).filter((d) => d.title && d.uris?.length);
     // Mais recentes primeiro
     downloads.sort(
       (a, b) => new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime(),
