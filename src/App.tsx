@@ -29,6 +29,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const DMCA = lazy(() => import("./pages/DMCA"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const GameRequest = lazy(() => import("./pages/GameRequest"));
+const Repacks = lazy(() => import("./pages/Repacks"));
 
 
 const queryClient = new QueryClient({
@@ -85,6 +86,7 @@ const App = () => {
                       <Route path="/" element={<Index />} />
                       <Route path="/jogo/:slug" element={<GameDetail />} />
                       <Route path="/novidades" element={<Index />} />
+                      <Route path="/repacks" element={<Repacks />} />
                       <Route path="/vip" element={<Vip />} />
                       <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
                       <Route path="/categoria/:category" element={<CategoryPage />} />
