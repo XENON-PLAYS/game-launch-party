@@ -42,6 +42,7 @@ export function AdminSidebar() {
     { icon: LayoutDashboard, label: "Dashboard", href: "/admin" },
     { icon: Gamepad2, label: "Catálogo", href: "/admin?tab=games" },
     { icon: DownloadCloud, label: "Importar", href: "/admin?tab=import" },
+    { icon: Zap, label: "Repacks", href: "/admin?tab=repacks" },
     { icon: Users, label: "Usuários", href: "/admin?tab=users" },
     { icon: PlusCircle, label: "Pedidos", href: "/admin?tab=requests" },
     { icon: AlertTriangle, label: "Reportes", href: "/admin?tab=reports" },
