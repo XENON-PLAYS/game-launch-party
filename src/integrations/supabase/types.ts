@@ -516,6 +516,39 @@ export type Database = {
         }
         Relationships: []
       }
+      source_repacks: {
+        Row: {
+          created_at: string
+          file_size: string | null
+          id: string
+          source: string
+          title: string
+          updated_at: string
+          upload_date: string | null
+          uris: string[]
+        }
+        Insert: {
+          created_at?: string
+          file_size?: string | null
+          id?: string
+          source?: string
+          title: string
+          updated_at?: string
+          upload_date?: string | null
+          uris?: string[]
+        }
+        Update: {
+          created_at?: string
+          file_size?: string | null
+          id?: string
+          source?: string
+          title?: string
+          updated_at?: string
+          upload_date?: string | null
+          uris?: string[]
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
