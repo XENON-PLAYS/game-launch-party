@@ -29,6 +29,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const DMCA = lazy(() => import("./pages/DMCA"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const GameRequest = lazy(() => import("./pages/GameRequest"));
+const Repacks = lazy(() => import("./pages/Repacks"));
 
 
 const queryClient = new QueryClient({
