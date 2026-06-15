@@ -14,6 +14,7 @@ import { UserAdminList } from "@/components/admin/UserAdminList";
 import { GameRequestList } from "@/components/admin/GameRequestList";
 import { BugReportList } from "@/components/admin/BugReportList";
 import { ImportGames } from "@/components/admin/ImportGames";
+import { SyncRepacks } from "@/components/admin/SyncRepacks";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
