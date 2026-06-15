@@ -237,6 +237,9 @@ const Admin = () => {
                 {activeTab === "import" && (
                   <ImportGames />
                 )}
+                {activeTab === "repacks" && (
+                  <SyncRepacks />
+                )}
               </>
             )}
           </main>
