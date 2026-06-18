@@ -153,7 +153,7 @@ const Index = () => {
         .from("source_repacks")
         .select("id, title, uris, file_size, upload_date")
         .order("upload_date", { ascending: false, nullsFirst: false })
-        .limit(18);
+        .limit(48);
       if (error) throw error;
       return (data ?? []) as Repack[];
     },
