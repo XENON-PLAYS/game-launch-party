@@ -42,7 +42,7 @@ export function GameSection({ title, icon: Icon, games, repacks = [] }: GameSect
             <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">{title}</h2>
             <div className="flex items-center gap-2 md:gap-3">
               <span className="w-8 md:w-12 h-1 bg-primary/40 rounded-full" />
-              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-50">{games.length} Títulos</span>
+              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-50">{total} Títulos</span>
             </div>
           </div>
         </div>
