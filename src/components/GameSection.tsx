@@ -1,5 +1,6 @@
 import { Tables } from "@/integrations/supabase/types";
 import { GameCard } from "./GameCard";
+import { RepackCard, Repack } from "./RepackCard";
 import { ChevronRight, LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -9,10 +10,13 @@ interface GameSectionProps {
   title: string;
   icon: LucideIcon;
   games: Game[];
+  repacks?: Repack[];
 }
 
-export function GameSection({ title, icon: Icon, games }: GameSectionProps) {
-  if (games.length === 0) return null;
+export function GameSection({ title, icon: Icon, games, repacks = [] }: GameSectionProps) {
+  const total = games.length + repacks.length;
+  if (total === 0) return null;
+
 
   const config = { 
     color: "text-primary", 
