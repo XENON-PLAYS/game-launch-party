@@ -1,5 +1,6 @@
 import { Tables } from "@/integrations/supabase/types";
 import { GameCard } from "./GameCard";
+import { RepackCard, Repack } from "./RepackCard";
 import { ChevronRight, LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -9,10 +10,13 @@ interface GameSectionProps {
   title: string;
   icon: LucideIcon;
   games: Game[];
+  repacks?: Repack[];
 }
 
-export function GameSection({ title, icon: Icon, games }: GameSectionProps) {
-  if (games.length === 0) return null;
+export function GameSection({ title, icon: Icon, games, repacks = [] }: GameSectionProps) {
+  const total = games.length + repacks.length;
+  if (total === 0) return null;
+
 
   const config = { 
     color: "text-primary", 
@@ -38,7 +42,7 @@ export function GameSection({ title, icon: Icon, games }: GameSectionProps) {
             <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">{title}</h2>
             <div className="flex items-center gap-2 md:gap-3">
               <span className="w-8 md:w-12 h-1 bg-primary/40 rounded-full" />
-              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-50">{games.length} Títulos</span>
+              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-50">{total} Títulos</span>
             </div>
           </div>
         </div>
@@ -59,6 +63,17 @@ export function GameSection({ title, icon: Icon, games }: GameSectionProps) {
             transition={{ duration: 0.35, delay: Math.min(index * 0.04, 0.25), ease: "easeOut" }}
           >
             <GameCard game={game} />
+          </motion.div>
+        ))}
+        {repacks.map((repack, index) => (
+          <motion.div
+            key={repack.id}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: 0.35, delay: Math.min((games.length + index) * 0.04, 0.25), ease: "easeOut" }}
+          >
+            <RepackCard repack={repack} />
           </motion.div>
         ))}
       </div>

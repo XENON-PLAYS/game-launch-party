@@ -153,7 +153,7 @@ const Index = () => {
         .from("source_repacks")
         .select("id, title, uris, file_size, upload_date")
         .order("upload_date", { ascending: false, nullsFirst: false })
-        .limit(18);
+        .limit(48);
       if (error) throw error;
       return (data ?? []) as Repack[];
     },
@@ -183,6 +183,12 @@ const Index = () => {
   const featured = useMemo(() => (featuredData || []) as Game[], [featuredData]);
   const homeRepacks = useMemo(() => (recentRepacks || []) as Repack[], [recentRepacks]);
   const matchedRepacks = useMemo(() => (searchedRepacks || []) as Repack[], [searchedRepacks]);
+
+  // Distribui os repacks entre as seções do catálogo
+  const repacksMaisJogados = useMemo(() => homeRepacks.slice(0, 6), [homeRepacks]);
+  const repacksMaisBaixados = useMemo(() => homeRepacks.slice(6, 12), [homeRepacks]);
+  const repacksNovaGeracao = useMemo(() => homeRepacks.slice(12, 18), [homeRepacks]);
+  const repacksCatalogo = useMemo(() => homeRepacks.slice(18), [homeRepacks]);
 
   const allCategories = useMemo(() => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
@@ -577,9 +583,9 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-16 md:space-y-32">
-            <GameSection title="Mais Jogados" icon={Flame} games={emAlta} />
-            <GameSection title="Jogos Mais Baixados" icon={Star} games={emAlta} />
-            <GameSection title="Jogos da Nova Geração" icon={Rocket} games={recentes} />
+            <GameSection title="Mais Jogados" icon={Flame} games={emAlta} repacks={repacksMaisJogados} />
+            <GameSection title="Jogos Mais Baixados" icon={Star} games={emAlta} repacks={repacksMaisBaixados} />
+            <GameSection title="Jogos da Nova Geração" icon={Rocket} games={recentes} repacks={repacksNovaGeracao} />
 
             <section className="space-y-12 md:space-y-16">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-10 border-b-2 border-primary/20 pb-8 md:pb-16">
@@ -605,31 +611,19 @@ const Index = () => {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
                 {games.map((game) => <GameCard key={game.id} game={game} />)}
+                {repacksCatalogo.map((r) => <RepackCard key={r.id} repack={r} />)}
               </div>
             </section>
 
             {homeRepacks.length > 0 && (
-              <section className="space-y-12 md:space-y-16">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-10 border-b-2 border-primary/20 pb-8 md:pb-16">
-                  <div className="space-y-4">
-                    <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Repacks</span> <span className="text-foreground">FitGirl</span></h2>
-                    <div className="flex items-center gap-4 md:gap-8">
-                      <span className="w-20 md:w-32 h-1.5 md:h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
-                      <span className="text-sm md:text-responsive-body font-medium">Os repacks mais recentes para download</span>
-                    </div>
-                  </div>
-                  <Link
-                    to="/repacks"
-                    className="bg-card border border-border/50 rounded-xl sm:rounded-2xl px-6 md:px-8 py-3.5 md:py-5 text-xs md:text-sm font-bold uppercase tracking-widest hover:border-primary/30 transition-all shadow-xl shadow-black/10"
-                  >
-                    Ver lista completa
-                  </Link>
-                </div>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                  {homeRepacks.map((r) => <RepackCard key={r.id} repack={r} />)}
-                </div>
-              </section>
+              <div className="flex justify-center">
+                <Link
+                  to="/repacks"
+                  className="bg-card border border-border/50 rounded-xl sm:rounded-2xl px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-widest hover:border-primary/30 transition-all shadow-xl shadow-black/10"
+                >
+                  Ver lista completa de repacks
+                </Link>
+              </div>
             )}
           </div>
         )}
