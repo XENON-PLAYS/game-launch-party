@@ -145,8 +145,44 @@ const Index = () => {
     staleTime: 1000 * 60 * 60,
   });
 
+  // Repacks recentes para a home (catálogo)
+  const { data: recentRepacks } = useQuery({
+    queryKey: ["repacks-home"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("source_repacks")
+        .select("id, title, uris, file_size, upload_date")
+        .order("upload_date", { ascending: false, nullsFirst: false })
+        .limit(18);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    staleTime: 1000 * 60 * 5,
+  });
+
+  // Repacks que batem com a busca atual
+  const { data: searchedRepacks } = useQuery({
+    queryKey: ["repacks-search", busca],
+    queryFn: async () => {
+      const term = busca.trim();
+      if (!term) return [] as Repack[];
+      const { data, error } = await supabase
+        .from("source_repacks")
+        .select("id, title, uris, file_size, upload_date")
+        .ilike("title", `%${term}%`)
+        .order("upload_date", { ascending: false, nullsFirst: false })
+        .limit(24);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: !!busca.trim(),
+    staleTime: 1000 * 60 * 5,
+  });
+
   const games = useMemo(() => (gamesData || []) as Game[], [gamesData]);
   const featured = useMemo(() => (featuredData || []) as Game[], [featuredData]);
+  const homeRepacks = useMemo(() => (recentRepacks || []) as Repack[], [recentRepacks]);
+  const matchedRepacks = useMemo(() => (searchedRepacks || []) as Repack[], [searchedRepacks]);
 
   const allCategories = useMemo(() => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
