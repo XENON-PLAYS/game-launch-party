@@ -1,0 +1,122 @@
+import { Download, Copy, HardDrive } from "lucide-react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import React from "react";
+
+export interface Repack {
+  id: string;
+  title: string;
+  uris: string[];
+  file_size: string | null;
+  upload_date: string | null;
+}
+
+// Pool de capas genéricas usado enquanto não há imagem real do jogo.
+// A escolha é determinística (baseada no id) para a capa não mudar a cada render.
+const COVER_POOL = [
+  "photo-1542751371-adc38448a05e",
+  "photo-1538481199705-c710c4e965fc",
+  "photo-1511512578047-dfb367046420",
+  "photo-1493711662062-fa541adb3fc8",
+  "photo-1550745165-9bc0b252726f",
+  "photo-1552820728-8b83bb6b773f",
+  "photo-1556438064-2d7646166914",
+  "photo-1493858340000-c1d4d2e1a85d",
+  "photo-1535223289827-42f1e9919769",
+  "photo-1542753938-8f4520f3a0e0",
+  "photo-1605901309584-818e25960a8f",
+  "photo-1614680376573-df3480f0c6ff",
+];
+
+function hashString(str: string): number {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = (h << 5) - h + str.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+}
+
+export function randomCover(id: string): string {
+  const photo = COVER_POOL[hashString(id) % COVER_POOL.length];
+  return `https://images.unsplash.com/${photo}?auto=format&fit=crop&q=80&w=400`;
+}
+
+interface RepackCardProps {
+  repack: Repack;
+}
+
+export const RepackCard = React.memo(({ repack }: RepackCardProps) => {
+  const cover = randomCover(repack.id);
+
+  const copyMagnet = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(repack.uris[0]);
+      toast.success("Link magnet copiado!");
+    } catch {
+      toast.error("Não foi possível copiar.");
+    }
+  };
+
+  return (
+    <motion.div
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="group bg-card/80 rounded-2xl overflow-hidden border border-border hover:border-primary/40 transition-all duration-500 relative flex flex-col h-full shadow-lg hover:shadow-primary/10"
+    >
+      <div className="block relative aspect-[3/4] overflow-hidden shrink-0 rounded-2xl m-2">
+        <img
+          src={cover}
+          alt={repack.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+          loading="lazy"
+          decoding="async"
+          width={300}
+          height={400}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+          <span className="text-[10px] uppercase font-black px-2.5 py-1 rounded bg-primary text-primary-foreground border border-primary/20 tracking-wider shadow-lg shadow-primary/40">
+            GRÁTIS
+          </span>
+          <span className="text-[9px] uppercase font-black px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white border border-white/10 tracking-widest">
+            Repack
+          </span>
+        </div>
+      </div>
+
+      <div className="p-4 flex flex-col flex-grow">
+        <h3 className="font-bold text-sm lg:text-base line-clamp-2 leading-tight mb-2">
+          {repack.title}
+        </h3>
+
+        {repack.file_size && (
+          <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground mb-3">
+            <HardDrive className="w-3.5 h-3.5" /> {repack.file_size}
+          </span>
+        )}
+
+        <div className="mt-auto pt-3 border-t border-border/30 flex items-center gap-2">
+          <a href={repack.uris[0]} className="flex-1">
+            <Button size="sm" className="w-full rounded-xl gap-2 font-black uppercase tracking-wider text-[11px]">
+              <Download className="w-4 h-4" /> Baixar
+            </Button>
+          </a>
+          <Button
+            variant="outline"
+            size="sm"
+            className="rounded-xl shrink-0"
+            onClick={copyMagnet}
+            aria-label="Copiar link magnet"
+          >
+            <Copy className="w-4 h-4" />
+          </Button>
+        </div>
+      </div>
+    </motion.div>
+  );
+});
+
+RepackCard.displayName = "RepackCard";

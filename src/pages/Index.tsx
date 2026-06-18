@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { Database } from "@/integrations/supabase/types";
 import { games as localGamesData } from "@/data/games";
+import { RepackCard, Repack } from "@/components/RepackCard";
 
 export type Game = Database["public"]["Tables"]["games"]["Row"];
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
@@ -144,8 +145,44 @@ const Index = () => {
     staleTime: 1000 * 60 * 60,
   });
 
+  // Repacks recentes para a home (catálogo)
+  const { data: recentRepacks } = useQuery({
+    queryKey: ["repacks-home"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("source_repacks")
+        .select("id, title, uris, file_size, upload_date")
+        .order("upload_date", { ascending: false, nullsFirst: false })
+        .limit(18);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    staleTime: 1000 * 60 * 5,
+  });
+
+  // Repacks que batem com a busca atual
+  const { data: searchedRepacks } = useQuery({
+    queryKey: ["repacks-search", busca],
+    queryFn: async () => {
+      const term = busca.trim();
+      if (!term) return [] as Repack[];
+      const { data, error } = await supabase
+        .from("source_repacks")
+        .select("id, title, uris, file_size, upload_date")
+        .ilike("title", `%${term}%`)
+        .order("upload_date", { ascending: false, nullsFirst: false })
+        .limit(24);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: !!busca.trim(),
+    staleTime: 1000 * 60 * 5,
+  });
+
   const games = useMemo(() => (gamesData || []) as Game[], [gamesData]);
   const featured = useMemo(() => (featuredData || []) as Game[], [featuredData]);
+  const homeRepacks = useMemo(() => (recentRepacks || []) as Repack[], [recentRepacks]);
+  const matchedRepacks = useMemo(() => (searchedRepacks || []) as Repack[], [searchedRepacks]);
 
   const allCategories = useMemo(() => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
@@ -480,7 +517,7 @@ const Index = () => {
               </div>
             </div>
 
-            {filteredGames.length === 0 ? (
+            {filteredGames.length === 0 && matchedRepacks.length === 0 ? (
               <div className="text-center py-32 space-y-8 bg-white/5 rounded-[3rem] border border-dashed border-white/10 max-w-2xl mx-auto px-10">
                 <div className="relative w-24 h-24 mx-auto">
                   <Gamepad2 className="w-24 h-24 text-gray-800" />
@@ -504,17 +541,37 @@ const Index = () => {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                {filteredGames.map((game, i) => (
-                  <motion.div 
-                    key={game.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.03 }}
-                  >
-                    <GameCard game={game} />
-                  </motion.div>
-                ))}
+              <div className="space-y-12">
+                {filteredGames.length > 0 && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
+                    {filteredGames.map((game, i) => (
+                      <motion.div 
+                        key={game.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.03 }}
+                      >
+                        <GameCard game={game} />
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+
+                {matchedRepacks.length > 0 && (
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-1.5 h-6 bg-primary rounded-full" />
+                      <h3 className="text-sm font-black uppercase tracking-widest text-foreground/80">
+                        Repacks ({matchedRepacks.length})
+                      </h3>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
+                      {matchedRepacks.map((r) => (
+                        <RepackCard key={r.id} repack={r} />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </motion.div>
@@ -550,6 +607,30 @@ const Index = () => {
                 {games.map((game) => <GameCard key={game.id} game={game} />)}
               </div>
             </section>
+
+            {homeRepacks.length > 0 && (
+              <section className="space-y-12 md:space-y-16">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-10 border-b-2 border-primary/20 pb-8 md:pb-16">
+                  <div className="space-y-4">
+                    <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Repacks</span> <span className="text-foreground">FitGirl</span></h2>
+                    <div className="flex items-center gap-4 md:gap-8">
+                      <span className="w-20 md:w-32 h-1.5 md:h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
+                      <span className="text-sm md:text-responsive-body font-medium">Os repacks mais recentes para download</span>
+                    </div>
+                  </div>
+                  <Link
+                    to="/repacks"
+                    className="bg-card border border-border/50 rounded-xl sm:rounded-2xl px-6 md:px-8 py-3.5 md:py-5 text-xs md:text-sm font-bold uppercase tracking-widest hover:border-primary/30 transition-all shadow-xl shadow-black/10"
+                  >
+                    Ver lista completa
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
+                  {homeRepacks.map((r) => <RepackCard key={r.id} repack={r} />)}
+                </div>
+              </section>
+            )}
           </div>
         )}
       </main>
