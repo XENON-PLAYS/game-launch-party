@@ -65,6 +65,17 @@ export function GameSection({ title, icon: Icon, games, repacks = [] }: GameSect
             <GameCard game={game} />
           </motion.div>
         ))}
+        {repacks.map((repack, index) => (
+          <motion.div
+            key={repack.id}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: 0.35, delay: Math.min((games.length + index) * 0.04, 0.25), ease: "easeOut" }}
+          >
+            <RepackCard repack={repack} />
+          </motion.div>
+        ))}
       </div>
     </motion.section>
   );
