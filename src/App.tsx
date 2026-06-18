@@ -8,6 +8,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { motion } from "framer-motion";
 import { HelmetProvider } from "react-helmet-async";
 import { toast } from "sonner";
+import { Analytics } from "@vercel/analytics/react";
 
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -79,6 +80,7 @@ const App = () => {
                 <CookieConsent />
                 <Toaster />
                 <Sonner />
+                <Analytics />
 
                 <BrowserRouter>
                   <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-primary font-black uppercase tracking-[0.4em] text-xs animate-pulse">Carregando...</div>}>
