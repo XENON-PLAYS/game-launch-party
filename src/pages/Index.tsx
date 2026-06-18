@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { Database } from "@/integrations/supabase/types";
 import { games as localGamesData } from "@/data/games";
+import { RepackCard, Repack } from "@/components/RepackCard";
 
 export type Game = Database["public"]["Tables"]["games"]["Row"];
 type SortOption = "nome" | "pesado" | "leve" | "popular" | "alta" | "lancamento";
