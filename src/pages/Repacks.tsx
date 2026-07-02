@@ -143,11 +143,11 @@ const Repacks = () => {
                   >
                     <Copy className="h-4 w-4" /> Copiar
                   </Button>
-                  <a href={r.uris[0]}>
+                  <Link to={`/repack/${r.id}`}>
                     <Button size="sm" className="rounded-xl gap-2 font-black uppercase tracking-wider">
                       <Download className="h-4 w-4" /> Baixar
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))
