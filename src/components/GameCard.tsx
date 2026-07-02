@@ -28,7 +28,8 @@ export const GameCard = React.memo(({ game, repack }: GameCardProps) => {
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="group bg-card/80 rounded-2xl overflow-hidden border border-border hover:border-primary/40 transition-all duration-500 relative flex flex-col h-full shadow-lg hover:shadow-primary/10"
     >
-      <Link to={`/jogo/${game.slug || game.id}`} className="block relative aspect-[3/4] overflow-hidden shrink-0 rounded-2xl m-2">
+      <Link to={target} className="block relative aspect-[3/4] overflow-hidden shrink-0 rounded-2xl m-2">
+
         <img 
           src={optimizeImageUrl(game.vertical_image || game.imagem || "https://images.unsplash.com/photo-1550745165-9bc0b252726f", 400)} 
           alt={game.nome} 
