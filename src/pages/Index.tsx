@@ -98,7 +98,9 @@ const Index = () => {
     queryKey: ["games"],
     queryFn: async () => {
       try {
-        const { data, error } = await supabase.from("games").select("*").order("nome");
+        // Só precisamos de id/nome aqui (os cards do catálogo usam repacks),
+        // então evitamos baixar todas as colunas/linhas pesadas da tabela games.
+        const { data, error } = await supabase.from("games").select("id, nome").order("nome");
         if (error || !data || data.length === 0) {
           return localGamesData.map(g => ({
             id: String(g.id),
