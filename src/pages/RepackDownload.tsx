@@ -332,8 +332,8 @@ const RepackDownload = () => {
                   <p className="text-lg font-black uppercase tracking-widest text-emerald-400">Download iniciado</p>
                   <p className="text-sm text-muted-foreground">Abra seu cliente de torrent para acompanhar o progresso. Siga o guia abaixo para instalar.</p>
                 </div>
-                <button onClick={copyMagnet} className="inline-flex items-center gap-2 px-8 py-3 bg-muted border border-border text-muted-foreground rounded-xl font-bold uppercase tracking-widest text-[10px] hover:text-foreground transition-all">
-                  Copiar link Magnet <Copy className="w-4 h-4" />
+                <button onClick={() => copyLink()} className="inline-flex items-center gap-2 px-8 py-3 bg-muted border border-border text-muted-foreground rounded-xl font-bold uppercase tracking-widest text-[10px] hover:text-foreground transition-all">
+                  Copiar link <Copy className="w-4 h-4" />
                 </button>
               </div>
             )}
