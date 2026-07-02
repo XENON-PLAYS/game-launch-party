@@ -180,7 +180,9 @@ Deno.serve(async (req) => {
 
     for (const r of rows ?? []) {
       const hasData = r.description || r.trailer_url || (r.screenshots && r.screenshots.length > 0);
-      if (hasData && !force) {
+      // Se já temos o appid mas ainda falta o trailer, revalidamos para buscar o vídeo
+      const missingTrailer = !r.trailer_url && r.steam_appid != null;
+      if (hasData && !missingTrailer && !force) {
         details[r.id] = {
           steam_appid: r.steam_appid,
           description: r.description,
