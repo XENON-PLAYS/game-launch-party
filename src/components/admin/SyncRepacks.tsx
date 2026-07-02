@@ -45,23 +45,49 @@ export function SyncRepacks() {
       return;
     }
 
-    if (!items.length) {
+    const valid = items.filter(
+      (d) => d?.title && Array.isArray(d.uris) && d.uris.length > 0,
+    );
+    if (!valid.length) {
       toast.error("Nenhum jogo encontrado no arquivo.");
       return;
     }
 
+    // Envia em lotes no cliente para não estourar o tempo/limite da função
+    // com listas grandes (10k+ jogos). O primeiro lote respeita "substituir";
+    // os seguintes sempre acrescentam.
+    const BATCH_SIZE = 1000;
+    const totalBatches = Math.ceil(valid.length / BATCH_SIZE);
+
     setIsLoading(true);
-    const toastId = toast.loading(`Salvando ${items.length} jogos na lista...`);
+    const toastId = toast.loading(`Salvando lote 1/${totalBatches}...`);
+    let saved = 0;
+    let total = 0;
     try {
-      const { data, error } = await supabase.functions.invoke("sync-repacks", {
-        body: { items, replace, source },
-      });
-      if (error) throw error;
-      if (data?.error) throw new Error(data.error);
-      setSavedCount(data.total ?? data.salvos);
-      toast.success(`Lista atualizada! ${data.salvos} jogos salvos.`, { id: toastId });
+      for (let i = 0; i < totalBatches; i++) {
+        const chunk = valid.slice(i * BATCH_SIZE, (i + 1) * BATCH_SIZE);
+        toast.loading(
+          `Salvando lote ${i + 1}/${totalBatches} (${saved.toLocaleString("pt-BR")} salvos)...`,
+          { id: toastId },
+        );
+        const { data, error } = await supabase.functions.invoke("sync-repacks", {
+          body: { items: chunk, replace: replace && i === 0, source },
+        });
+        if (error) throw error;
+        if (data?.error) throw new Error(data.error);
+        saved += data.salvos ?? chunk.length;
+        total = data.total ?? saved;
+      }
+      setSavedCount(total || saved);
+      toast.success(
+        `Lista atualizada! ${(total || saved).toLocaleString("pt-BR")} jogos de ${source} salvos.`,
+        { id: toastId },
+      );
     } catch (e: any) {
-      toast.error(`Falha ao salvar: ${e.message}`, { id: toastId });
+      toast.error(
+        `Falha ao salvar (${saved.toLocaleString("pt-BR")} salvos antes do erro): ${e.message}`,
+        { id: toastId },
+      );
     } finally {
       setIsLoading(false);
     }
