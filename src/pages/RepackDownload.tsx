@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
-import { Download, Loader2, Shield, CheckCircle, CheckCircle2, RefreshCw, HardDrive, Copy, ChevronRight } from "lucide-react";
+import { Download, Loader2, Shield, CheckCircle, CheckCircle2, RefreshCw, HardDrive, Copy, ChevronRight, Monitor } from "lucide-react";
 import { toast } from "sonner";
 import { GoogleAd } from "@/components/GoogleAd";
 import { randomCover } from "@/components/RepackCard";
