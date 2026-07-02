@@ -577,7 +577,7 @@ const Index = () => {
               </div>
             </div>
 
-            {filteredRepacks.length === 0 ? (
+            {filteredItems.length === 0 ? (
               <div className="text-center py-32 space-y-8 bg-white/5 rounded-[3rem] border border-dashed border-white/10 max-w-2xl mx-auto px-10">
                 <div className="relative w-24 h-24 mx-auto">
                   <Gamepad2 className="w-24 h-24 text-gray-800" />
@@ -602,9 +602,13 @@ const Index = () => {
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                {filteredRepacks.map((r) => (
-                  <RepackCard key={r.id} repack={r} />
-                ))}
+                {filteredItems.map((item) =>
+                  item.type === "game" ? (
+                    <GameCard key={`g-${item.id}`} game={item.data} />
+                  ) : (
+                    <RepackCard key={`r-${item.id}`} repack={item.data} />
+                  )
+                )}
               </div>
             )}
           </motion.div>
