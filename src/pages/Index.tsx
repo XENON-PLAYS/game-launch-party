@@ -631,6 +631,27 @@ const Index = () => {
               Tentar Novamente
             </button>
           </div>
+        ) : isNovidades ? (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-10 md:space-y-16">
+            <div className="flex items-center gap-3 pb-8 border-b border-white/5">
+              <div className="w-1.5 h-8 bg-primary rounded-full shadow-lg shadow-primary/20" />
+              <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase italic">
+                <span className="text-white">Novidades</span>{" "}
+                <span className="text-primary">2026</span>
+              </h2>
+            </div>
+            {novidades2026.length === 0 ? (
+              <div className="text-center py-32 text-gray-500 font-medium italic">
+                Nenhum jogo lançado em 2026 por enquanto. Volte em breve.
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
+                {novidades2026.map((item) => (
+                  <RepackCard key={`n-${item.id}`} repack={item} />
+                ))}
+              </div>
+            )}
+          </motion.div>
         ) : isSearching ? (
           <motion.div 
             initial={{ opacity: 0 }}
