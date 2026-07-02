@@ -63,6 +63,7 @@ export function Header() {
         }`}
       >
         Novidades
+        <span className="ml-1.5 text-primary">Denuvo</span>
         <span className={`absolute -bottom-1 left-0 h-0.5 bg-foreground transition-all duration-300 ${
           location.pathname === "/novidades" ? "w-full" : "w-0 group-hover:w-full"
         }`} />
