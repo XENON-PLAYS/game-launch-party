@@ -23,7 +23,7 @@ const Repacks = () => {
     queryFn: async () => {
       let q = supabase
         .from("source_repacks")
-        .select("id, title, uris, file_size, upload_date", { count: "exact" });
+        .select("id, title, uris, file_size, upload_date, cover_url", { count: "exact" });
 
       if (query.trim()) {
         q = q.ilike("title", `%${query.trim()}%`);
