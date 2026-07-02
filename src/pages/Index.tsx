@@ -188,6 +188,29 @@ const Index = () => {
   const homeRepacks = useMemo(() => (recentRepacks || []) as Repack[], [recentRepacks]);
   const matchedRepacks = useMemo(() => (searchedRepacks || []) as Repack[], [searchedRepacks]);
 
+  // Normaliza títulos para casar jogo tradicional <-> repack
+  const normalizeTitle = (t: string) =>
+    (t || "")
+      .toLowerCase()
+      .replace(/['’`]/g, "")
+      .replace(/\b(free download|digital deluxe edition|deluxe edition|ultimate edition|gold edition|complete edition|goty edition|game of the year edition|definitive edition|premium edition|standard edition|digital edition|enhanced edition|anniversary edition|collectors edition|special edition|edition|crack only|bonus content|all dlcs|dlcs|dlc)\b.*$/g, "")
+      .replace(/[^a-z0-9]+/g, "");
+
+  // Mapa game.id -> repack correspondente (traz dados/download do repack)
+  const gameRepackMap = useMemo(() => {
+    const byNorm = new Map<string, Repack>();
+    homeRepacks.forEach((r) => {
+      const key = normalizeTitle(r.title);
+      if (key && !byNorm.has(key)) byNorm.set(key, r);
+    });
+    const map: Record<string, Repack> = {};
+    games.forEach((g) => {
+      const match = byNorm.get(normalizeTitle(g.nome));
+      if (match) map[g.id] = match;
+    });
+    return map;
+  }, [games, homeRepacks]);
+
   const denuvoKeywords = [
     "black myth", "wukong", "hogwarts", "star wars jedi", "resident evil",
     "assassin's creed", "assassins creed", "mortal kombat", "tekken",
@@ -604,7 +627,8 @@ const Index = () => {
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
                 {filteredItems.map((item) =>
                   item.type === "game" ? (
-                    <GameCard key={`g-${item.id}`} game={item.data} />
+                    <GameCard key={`g-${item.id}`} game={item.data} repack={gameRepackMap[item.id]} />
+
                   ) : (
                     <RepackCard key={`r-${item.id}`} repack={item.data} />
                   )
@@ -614,9 +638,9 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-16 md:space-y-32">
-            <GameSection title="JOGOS COM DENUVO" games={denuvoGames} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
-            <GameSection title="Jogos Mais Baixados" games={maisBaixadosGames} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
-            <GameSection title="Jogos da Nova Geração" games={novaGeracaoGames} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="JOGOS COM DENUVO" games={denuvoGames} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="Jogos Mais Baixados" games={maisBaixadosGames} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="Jogos da Nova Geração" games={novaGeracaoGames} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
 
             {(() => {
               const sectionsTotalPages = Math.max(
@@ -676,7 +700,8 @@ const Index = () => {
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
                 {catalogPageItems.map((item) =>
                   item.type === "game" ? (
-                    <GameCard key={`g-${item.id}`} game={item.data} />
+                    <GameCard key={`g-${item.id}`} game={item.data} repack={gameRepackMap[item.id]} />
+
                   ) : (
                     <RepackCard key={`r-${item.id}`} repack={item.data} />
                   )
