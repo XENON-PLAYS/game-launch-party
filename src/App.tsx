@@ -89,6 +89,7 @@ const App = () => {
                       <Route path="/" element={<Index />} />
                       <Route path="/jogo/:slug" element={<GameDetail />} />
                       <Route path="/novidades" element={<Index />} />
+                      <Route path="/denuvo" element={<Index />} />
                       <Route path="/repacks" element={<Repacks />} />
                       <Route path="/repack/:id" element={<RepackDownload />} />
                       <Route path="/vip" element={<Vip />} />
