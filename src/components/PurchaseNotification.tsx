@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Download } from "lucide-react";
+import { Download, Crown } from "lucide-react";
 
 const NAMES = [
   "Pedro H.",
@@ -42,8 +42,9 @@ const random = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
 
 interface Notification {
   id: number;
+  type: "download" | "vip";
   name: string;
-  game: string;
+  detail: string;
 }
 
 export const PurchaseNotification = () => {
@@ -53,10 +54,13 @@ export const PurchaseNotification = () => {
     let timeoutId: ReturnType<typeof setTimeout>;
 
     const showNext = () => {
+      // ~30% das notificações são de compra de VIP
+      const isVip = Math.random() < 0.3;
       setCurrent({
         id: Date.now(),
+        type: isVip ? "vip" : "download",
         name: random(NAMES),
-        game: random(GAMES),
+        detail: isVip ? "" : random(GAMES),
       });
 
       // Esconde depois de 5s e agenda a próxima
@@ -84,15 +88,29 @@ export const PurchaseNotification = () => {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="flex items-center gap-3 rounded-2xl border border-white/10 bg-[#141414]/95 backdrop-blur-md px-4 py-3 shadow-2xl"
           >
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary ring-1 ring-primary/30">
-              <Download className="h-5 w-5" />
-            </div>
+            {current.type === "vip" ? (
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-yellow-400/15 text-yellow-400 ring-1 ring-yellow-400/30">
+                <Crown className="h-5 w-5" />
+              </div>
+            ) : (
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary ring-1 ring-primary/30">
+                <Download className="h-5 w-5" />
+              </div>
+            )}
             <div className="min-w-0 leading-tight">
               <p className="text-sm font-bold text-white">
                 {current.name}{" "}
-                <span className="font-normal text-muted-foreground">acabou de baixar</span>
+                <span className="font-normal text-muted-foreground">
+                  {current.type === "vip" ? "assinou o" : "acabou de baixar"}
+                </span>
               </p>
-              <p className="truncate text-sm font-semibold text-primary">{current.game}</p>
+              <p
+                className={`truncate text-sm font-semibold ${
+                  current.type === "vip" ? "text-yellow-400" : "text-primary"
+                }`}
+              >
+                {current.type === "vip" ? "Plano VIP" : current.detail}
+              </p>
             </div>
           </motion.div>
         )}
