@@ -10,6 +10,7 @@ import { Download, Loader2, Shield, CheckCircle, CheckCircle2, RefreshCw, HardDr
 import { toast } from "sonner";
 import { GoogleAd } from "@/components/GoogleAd";
 import { randomCover } from "@/components/RepackCard";
+import { getDownloadOptions } from "@/lib/downloadLinks";
 
 const TORRENT_STEPS = [
   {
