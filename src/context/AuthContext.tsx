@@ -146,6 +146,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error: error ? getAuthErrorMessage(error) : null };
   }, []);
 
+  const signInWithGoogle = useCallback(async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: getRedirectUrl(),
+        queryParams: { prompt: "select_account" },
+      },
+    });
+    return { error: error ? getAuthErrorMessage(error) : null };
+  }, []);
+
   const logout = useCallback(async () => {
     // Marca como offline sem bloquear o logout (best-effort)
     if (user) {
