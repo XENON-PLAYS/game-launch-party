@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS idx_merged_repacks_sources_gin ON public.merged_repacks USING gin (sources);
