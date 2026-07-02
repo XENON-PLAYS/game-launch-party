@@ -184,11 +184,8 @@ const Index = () => {
   const homeRepacks = useMemo(() => (recentRepacks || []) as Repack[], [recentRepacks]);
   const matchedRepacks = useMemo(() => (searchedRepacks || []) as Repack[], [searchedRepacks]);
 
-  // Distribui os repacks entre as seções do catálogo
-  const repacksMaisJogados = useMemo(() => homeRepacks.slice(0, 6), [homeRepacks]);
-  const repacksMaisBaixados = useMemo(() => homeRepacks.slice(6, 12), [homeRepacks]);
-  const repacksNovaGeracao = useMemo(() => homeRepacks.slice(12, 18), [homeRepacks]);
-  const repacksCatalogo = useMemo(() => homeRepacks.slice(18), [homeRepacks]);
+  // Todos os repacks ficam somente no catálogo "Explore o Catálogo"
+  const repacksCatalogo = useMemo(() => homeRepacks, [homeRepacks]);
 
   const allCategories = useMemo(() => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
