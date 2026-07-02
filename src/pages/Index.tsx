@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSearchParams, useNavigate, Link } from "react-router-dom";
+import { useSearchParams, useNavigate, Link, useLocation } from "react-router-dom";
 import { Database } from "@/integrations/supabase/types";
 import { games as localGamesData } from "@/data/games";
 import { RepackCard, Repack } from "@/components/RepackCard";
@@ -55,11 +55,18 @@ const sourceOptions: { id: string; label: string }[] = [
 const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isNovidades = location.pathname === "/novidades";
   const searchFromUrl = searchParams.get("search") || "";
   
   const [busca, setBusca] = useState(searchFromUrl);
-  const [categoria, setCategoria] = useState("todas");
+  const [categoria, setCategoria] = useState(isNovidades ? "Denuvo" : "todas");
   const [fonte, setFonte] = useState("todas");
+
+  // Na página "Novidades" mostramos apenas jogos com Denuvo
+  useEffect(() => {
+    setCategoria(isNovidades ? "Denuvo" : "todas");
+  }, [isNovidades]);
 
   useEffect(() => {
     setBusca(searchFromUrl);
