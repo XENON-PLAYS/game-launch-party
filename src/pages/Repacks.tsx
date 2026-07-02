@@ -8,18 +8,10 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Search, Download, Copy, HardDrive, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
-import { toast } from "sonner";
+import { Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { RepackCard, type Repack } from "@/components/RepackCard";
 
 const PAGE_SIZE = 30;
-
-interface Repack {
-  id: string;
-  title: string;
-  uris: string[];
-  file_size: string | null;
-  upload_date: string | null;
-}
 
 const Repacks = () => {
   const [search, setSearch] = useState("");
