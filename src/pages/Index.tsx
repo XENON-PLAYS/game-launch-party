@@ -211,7 +211,7 @@ const Index = () => {
   }, [catalogTotalPages, catalogPage]);
 
   const allCategories = useMemo(() => {
-    return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
+    return ["Denuvo", ...Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort()];
   }, [games]);
 
   const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 48), [games]);
