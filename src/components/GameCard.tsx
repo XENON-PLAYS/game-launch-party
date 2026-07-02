@@ -44,19 +44,23 @@ export const GameCard = React.memo(({ game, repack }: GameCardProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
         
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-          {game.preco === 0 && (
-            <span className="text-[10px] uppercase font-black px-2.5 py-1 rounded bg-primary text-primary-foreground border border-primary/20 tracking-wider shadow-lg shadow-primary/40 animate-pulse">
-              GRÁTIS
+          <span className="text-[10px] uppercase font-black px-2.5 py-1 rounded bg-primary text-primary-foreground border border-primary/20 tracking-wider shadow-lg shadow-primary/40 animate-pulse">
+            GRÁTIS
+          </span>
+          {repack ? (
+            <span className="text-[9px] uppercase font-black px-2.5 py-1 rounded-lg bg-black/60 dark:bg-black/40 backdrop-blur-md text-white border border-white/10 tracking-widest">
+              Repack
             </span>
+          ) : (
+            (game.categorias || []).slice(0, 1).map((cat) => (
+              <span 
+                key={cat} 
+                className="text-[9px] uppercase font-black px-2.5 py-1 rounded-lg bg-black/60 dark:bg-black/40 backdrop-blur-md text-white border border-white/10 tracking-widest"
+              >
+                {cat}
+              </span>
+            ))
           )}
-          {(game.categorias || []).slice(0, 1).map((cat) => (
-            <span 
-              key={cat} 
-              className="text-[9px] uppercase font-black px-2.5 py-1 rounded-lg bg-black/60 dark:bg-black/40 backdrop-blur-md text-white border border-white/10 tracking-widest"
-            >
-              {cat}
-            </span>
-          ))}
           {(game.rating_avg !== null && game.rating_avg > 0) && (
             <span className="text-[10px] uppercase font-bold px-2.5 py-1 rounded bg-yellow-500/80 backdrop-blur-md text-white border border-yellow-500/20 tracking-wider flex items-center gap-1">
               <Star className="w-3 h-3 fill-white" />
