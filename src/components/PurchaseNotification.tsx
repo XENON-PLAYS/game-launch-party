@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Download } from "lucide-react";
+import { Download, Crown } from "lucide-react";
 
 const NAMES = [
   "Pedro H.",
