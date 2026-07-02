@@ -11,6 +11,7 @@ export interface Repack {
   file_size: string | null;
   upload_date: string | null;
   cover_url?: string | null;
+  sources?: string[] | null;
 }
 
 export { randomCover };
