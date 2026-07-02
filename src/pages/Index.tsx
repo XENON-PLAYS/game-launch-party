@@ -221,6 +221,28 @@ const Index = () => {
     "wo long", "street fighter", "tales of", "monster hunter",
   ];
 
+  // Palavras-chave por categoria para filtrar os repacks (que não possuem categorias próprias)
+  const categoryKeywords: Record<string, string[]> = {
+    "Ação": ["god of war", "devil may cry", "assassin", "batman", "spider-man", "spiderman", "max payne", "just cause", "sleeping dogs", "metal gear", "ninja gaiden", "dmc"],
+    "Aventura": ["tomb raider", "uncharted", "indiana", "zelda", "life is strange", "detroit", "heavy rain", "a way out", "brothers"],
+    "RPG": ["elden ring", "witcher", "dark souls", "skyrim", "elder scrolls", "fallout", "dragon age", "mass effect", "final fantasy", "persona", "cyberpunk", "baldur", "diablo", "dragon's dogma", "dragons dogma", "kingdom come", "divinity"],
+    "Estratégia": ["civilization", "total war", "age of empires", "xcom", "company of heroes", "anno", "crusader kings", "stellaris", "starcraft", "warcraft"],
+    "Simulação": ["the sims", "cities skylines", "planet", "farming simulator", "flight simulator", "truck simulator", "house flipper"],
+    "Esportes": ["fifa", "ea sports fc", "nba", "pes", "efootball", "madden", "wwe", "tony hawk"],
+    "Corrida": ["need for speed", "forza", "dirt", "f1", "gran turismo", "wreckfest", "the crew", "grid", "assetto"],
+    "Luta": ["mortal kombat", "tekken", "street fighter", "injustice", "guilty gear", "dragon ball", "naruto", "for honor"],
+    "Terror": ["resident evil", "silent hill", "outlast", "dead space", "amnesia", "the evil within", "phasmophobia", "dead by daylight", "alien isolation", "layers of fear"],
+    "Mundo Aberto": ["grand theft auto", "gta", "red dead", "far cry", "watch dogs", "saints row", "horizon", "ghost of", "days gone"],
+    "FPS": ["call of duty", "battlefield", "doom", "counter-strike", "counter strike", "halo", "wolfenstein", "rainbow six", "borderlands", "titanfall", "metro"],
+    "Sobrevivência": ["the forest", "raft", "subnautica", "green hell", "valheim", "rust", "dayz", "grounded", "conan exiles", "state of decay"],
+    "Sandbox": ["minecraft", "terraria", "garry", "teardown"],
+    "Plataforma": ["mario", "sonic", "crash", "spyro", "ori", "hollow knight", "celeste", "rayman", "little nightmares"],
+    "Puzzle": ["portal", "the witness", "talos", "baba is you", "tetris", "limbo", "inside"],
+    "Indie": ["hades", "stardew", "cuphead", "undertale", "dead cells"],
+    "Multijogador": ["among us", "fall guys", "gang beasts", "overcooked", "it takes two"],
+    "MMORPG": ["world of warcraft", "final fantasy xiv", "guild wars", "new world", "black desert", "lost ark"],
+  };
+
   const parseRepackSize = (s: string | null) => {
     if (!s) return 0;
     const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
