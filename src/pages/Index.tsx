@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSearchParams, useNavigate, Link } from "react-router-dom";
+import { useSearchParams, useNavigate, Link, useLocation } from "react-router-dom";
 import { Database } from "@/integrations/supabase/types";
 import { games as localGamesData } from "@/data/games";
 import { RepackCard, Repack } from "@/components/RepackCard";
