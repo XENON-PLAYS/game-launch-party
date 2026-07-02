@@ -40,6 +40,20 @@ const TORRENT_STEPS = [
   },
 ];
 
+// Limpa títulos muito longos removendo versões, DLCs e edições verbosas
+function cleanRepackTitle(raw?: string | null): string {
+  if (!raw) return "";
+  let t = raw
+    .split(/\s*[–-]\s*(?:atlus|deluxe|gold|ultimate|complete|digital|anniversary|goty|game of the year)/i)[0]
+    .split(/,?\s*v\d/i)[0]
+    .split(/\s*\+\s*/i)[0]
+    .split(/\s*\(/)[0]
+    .replace(/\s*[–-]\s*$/, "")
+    .trim();
+  return t || raw;
+}
+
+
 interface RepackDetail {
   id: string;
   title: string;
@@ -217,8 +231,8 @@ const RepackDownload = () => {
                   )}
                 </div>
 
-                <h1 className="text-3xl sm:text-responsive-h1 leading-none uppercase">
-                  {repack?.title}
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black leading-tight uppercase break-words hyphens-auto line-clamp-3" title={repack?.title}>
+                  {cleanRepackTitle(repack?.title)}
                 </h1>
 
                 {repack?.description && (
