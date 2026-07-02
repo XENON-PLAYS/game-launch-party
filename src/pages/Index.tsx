@@ -622,7 +622,7 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-16 md:space-y-32">
-            <GameSection title="Mais Jogados" icon={Flame} games={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="Mais Jogados" icon={Flame} games={denuvoGames} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
             <GameSection title="Jogos Mais Baixados" icon={Star} games={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
             <GameSection title="Jogos da Nova Geração" icon={Rocket} games={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
 
