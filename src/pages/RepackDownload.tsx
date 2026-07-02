@@ -52,16 +52,18 @@ const RepackDownload = () => {
   const { data: repack, isLoading } = useQuery({
     queryKey: ["repack", id],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("source_repacks")
+      const { data, error } = await (supabase as any)
+        .from("merged_repacks")
         .select("id, title, uris, file_size, upload_date")
         .eq("id", id!)
         .maybeSingle();
       if (error) throw error;
-      return data;
+      return data as { id: string; title: string; uris: string[]; file_size: string | null; upload_date: string | null } | null;
     },
     enabled: !!id,
   });
+
+  const downloadOptions = getDownloadOptions(repack?.uris);
 
   useEffect(() => {
     if (isVip) {
