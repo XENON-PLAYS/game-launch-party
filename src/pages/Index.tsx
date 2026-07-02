@@ -212,8 +212,8 @@ const Index = () => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
   }, [games]);
 
-  const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 12), [games]);
-  const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 12), [games]);
+  const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 48), [games]);
+  const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 48), [games]);
 
   const isLoading = gamesLoading;
   const isError = gamesError;
