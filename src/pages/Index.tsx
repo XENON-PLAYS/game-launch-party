@@ -174,6 +174,23 @@ const Index = () => {
     staleTime: 1000 * 60 * 30,
   });
 
+  // ---- Novidades: apenas jogos lançados em 2026 ----
+  const { data: novidadesData, isLoading: novidadesLoading } = useQuery({
+    queryKey: ["novidades-2026"],
+    queryFn: async () => {
+      const { data, error } = await (supabase as any)
+        .from("merged_repacks").select(SELECT_FIELDS)
+        .gte("upload_date", "2026-01-01")
+        .lt("upload_date", "2027-01-01")
+        .order("upload_date", { ascending: false, nullsFirst: false })
+        .limit(120);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: isNovidades,
+    staleTime: 1000 * 60 * 30,
+  });
+
   // ---- Catálogo "Explore": paginado no servidor (50 por página) ----
   const { data: catalogCount } = useQuery({
     queryKey: ["catalog-count"],
