@@ -45,7 +45,7 @@ export const GameCard = React.memo(({ game, repack }: GameCardProps) => {
         
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
           <span className="text-[10px] uppercase font-black px-2.5 py-1 rounded bg-primary text-primary-foreground border border-primary/20 tracking-wider shadow-lg shadow-primary/40">
-            GRÁTIS
+            ABAIXAR
           </span>
           {repack ? (
             <span className="text-[9px] uppercase font-black px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white border border-white/10 tracking-widest">
