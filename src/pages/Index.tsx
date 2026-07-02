@@ -179,14 +179,24 @@ const Index = () => {
     staleTime: 1000 * 60 * 10,
   });
 
+  const catalogCursor = catalogCursors[catalogPage] ?? null;
   const { data: catalogData, isLoading: catalogLoading, isError: catalogError, refetch: refetchCatalog } = useQuery({
-    queryKey: ["catalog-page", catalogPage],
+    queryKey: ["catalog-page", catalogPage, catalogCursor],
     queryFn: async () => {
-      const from = catalogPage * CATALOG_PAGE_SIZE;
-      const { data, error } = await (supabase as any)
-        .from("merged_repacks").select(SELECT_FIELDS)
+      let q = (supabase as any).from("merged_repacks").select(SELECT_FIELDS);
+      if (catalogCursor) {
+        if (catalogCursor.d === null) {
+          // Já estamos na faixa de datas nulas: pagina apenas por id
+          q = q.is("upload_date", null).lt("id", catalogCursor.id);
+        } else {
+          const iso = new Date(catalogCursor.d).toISOString();
+          q = q.or(`upload_date.lt.${iso},and(upload_date.eq.${iso},id.lt.${catalogCursor.id}),upload_date.is.null`);
+        }
+      }
+      const { data, error } = await q
         .order("upload_date", { ascending: false, nullsFirst: false })
-        .range(from, from + CATALOG_PAGE_SIZE - 1);
+        .order("id", { ascending: false })
+        .limit(CATALOG_PAGE_SIZE);
       if (error) throw error;
       return (data ?? []) as Repack[];
     },
@@ -194,6 +204,20 @@ const Index = () => {
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 5,
   });
+
+  // Guarda o cursor da próxima página assim que a página atual carrega
+  useEffect(() => {
+    if (catalogData && catalogData.length === CATALOG_PAGE_SIZE) {
+      const last = catalogData[catalogData.length - 1] as Repack;
+      setCatalogCursors((prev) => {
+        if (prev[catalogPage + 1] !== undefined) return prev;
+        const next = prev.slice();
+        next[catalogPage + 1] = { d: (last as any).upload_date ?? null, id: last.id };
+        return next;
+      });
+    }
+  }, [catalogData, catalogPage]);
+
 
   // ---- Busca / filtro: consulta única server-side (máx. 120 resultados) ----
   const { data: browseData, isLoading: browseLoading, isError: browseError, refetch: refetchBrowse } = useQuery({
