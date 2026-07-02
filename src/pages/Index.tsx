@@ -768,7 +768,7 @@ const Index = () => {
                       setCatalogPage((p) => Math.min(catalogTotalPages - 1, p + 1));
                       window.scrollTo({ top: window.scrollY - 200, behavior: "smooth" });
                     }}
-                    disabled={catalogPage >= catalogTotalPages - 1}
+                    disabled={catalogPage >= catalogTotalPages - 1 || catalogCursors[catalogPage + 1] === undefined}
                     aria-label="Próxima página"
                     className="p-3 md:p-4 rounded-xl md:rounded-2xl bg-card border border-border/50 hover:border-primary/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xl shadow-black/10"
                   >
