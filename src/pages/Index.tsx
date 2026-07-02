@@ -249,17 +249,13 @@ const Index = () => {
     return value * (multipliers[unit] || 1);
   };
 
-  // Catálogo composto apenas por repacks
-  const catalogItems = useMemo(
-    () => homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
-    [homeRepacks]
-  );
-
-  const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
+  // Catálogo "Explore" — página atual vinda do servidor
   const catalogPageItems = useMemo(
-    () => catalogItems.slice(catalogPage * CATALOG_PAGE_SIZE, catalogPage * CATALOG_PAGE_SIZE + CATALOG_PAGE_SIZE),
-    [catalogItems, catalogPage]
+    () => ((catalogData || []) as Repack[]).map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    [catalogData]
   );
+  const catalogTotal = catalogCount ?? 0;
+  const catalogTotalPages = Math.max(1, Math.ceil(catalogTotal / CATALOG_PAGE_SIZE));
 
   useEffect(() => {
     if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
@@ -271,39 +267,14 @@ const Index = () => {
     []
   );
 
-  // ------- Seções da Home (somente repacks) -------
-  const denuvoRepacks = useMemo(() => {
-    const matches = homeRepacks.filter(isDenuvoRepack);
-    return matches.slice(0, 48);
-  }, [homeRepacks, isDenuvoRepack]);
-  // Mais Baixados: repacks maiores primeiro
-  const emAlta = useMemo(
-    () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
-    [homeRepacks]
-  );
-  // Nova Geração: apenas jogos lançados entre 2025 e 2026
-  const recentes = useMemo(
-    () =>
-      homeRepacks
-        .filter((r) => {
-          const year = r.upload_date ? new Date(r.upload_date).getFullYear() : NaN;
-          return year >= 2025 && year <= 2026;
-        })
-        .sort((a, b) => {
-          const da = a.upload_date ? new Date(a.upload_date).getTime() : 0;
-          const db = b.upload_date ? new Date(b.upload_date).getTime() : 0;
-          if (db !== da) return db - da; // mais recente primeiro
-          return parseRepackSize(b.file_size) - parseRepackSize(a.file_size); // relevância (tamanho)
-        })
-        .slice(0, 48),
-    [homeRepacks]
-  );
+  // ------- Seções da Home (dados server-side, prontos para exibir) -------
+  const denuvoRepacks = useMemo(() => (denuvoData || []) as Repack[], [denuvoData]);
+  const emAlta = useMemo(() => (emAltaData || []) as Repack[], [emAltaData]);
+  const recentes = useMemo(() => (recentesData || []) as Repack[], [recentesData]);
 
-
-  const isLoading = gamesLoading;
-  const isError = gamesError;
-
-  const isSearching = busca || categoria !== "todas" || fonte !== "todas";
+  const isLoading = isSearching ? (browseLoading && !browseData) : (catalogLoading && !catalogData);
+  const isError = isSearching ? browseError : catalogError;
+  const refetch = () => { if (isSearching) refetchBrowse(); else refetchCatalog(); };
 
   // Jogos populares/mais jogados da Steam (para ranquear a busca por relevância)
   const popularKeywords = useMemo(
@@ -334,22 +305,9 @@ const Index = () => {
     return score;
   };
 
+  // Busca/filtro: server já aplicou os filtros; aqui só ordenamos os ≤120 resultados.
   const filteredRepacks = useMemo(() => {
-    let result = busca.trim() ? matchedRepacks : homeRepacks;
-    if (busca) {
-      const term = busca.toLowerCase();
-      result = result.filter((r) => (r.title || "").toLowerCase().includes(term));
-    }
-    if (fonte !== "todas") {
-      result = result.filter((r) => (r.sources || []).includes(fonte));
-    }
-    if (categoria === "Denuvo") {
-      result = result.filter(isDenuvoRepack);
-    } else if (categoria !== "todas") {
-      const kws = categoryKeywords[categoria] || [];
-      result = result.filter((r) => kws.some((k) => (r.title || "").toLowerCase().includes(k)));
-    }
-    const sorted = [...result];
+    const sorted = [...((browseData || []) as Repack[])];
     if (ordenacao === "pesado") {
       sorted.sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size));
     } else if (ordenacao === "leve") {
@@ -357,14 +315,13 @@ const Index = () => {
     } else if (ordenacao === "lancamento") {
       sorted.sort((a, b) => (b.upload_date || "").localeCompare(a.upload_date || ""));
     } else if (busca.trim()) {
-      // Busca ativa sem ordenação explícita: ranquear por relevância + popularidade
       const term = busca.toLowerCase();
       sorted.sort((a, b) => relevanceScore(b, term) - relevanceScore(a, term));
     } else if (ordenacao === "nome") {
       sorted.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     }
     return sorted;
-  }, [busca, categoria, fonte, ordenacao, homeRepacks, matchedRepacks, popularKeywords, isDenuvoRepack]);
+  }, [browseData, busca, ordenacao, popularKeywords]);
 
 
   // Resultados (somente repacks) para a busca/filtro
