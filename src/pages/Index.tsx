@@ -153,7 +153,7 @@ const Index = () => {
         .from("source_repacks")
         .select("id, title, uris, file_size, upload_date")
         .order("upload_date", { ascending: false, nullsFirst: false })
-        .limit(48);
+        .limit(1000);
       if (error) throw error;
       return (data ?? []) as Repack[];
     },
@@ -611,17 +611,6 @@ const Index = () => {
                 {repacksCatalogo.map((r) => <RepackCard key={r.id} repack={r} />)}
               </div>
             </section>
-
-            {homeRepacks.length > 0 && (
-              <div className="flex justify-center">
-                <Link
-                  to="/repacks"
-                  className="bg-card border border-border/50 rounded-xl sm:rounded-2xl px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-widest hover:border-primary/30 transition-all shadow-xl shadow-black/10"
-                >
-                  Ver lista completa de repacks
-                </Link>
-              </div>
-            )}
           </div>
         )}
       </main>
