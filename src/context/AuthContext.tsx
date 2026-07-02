@@ -191,7 +191,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [user, fetchProfile]);
 
   return (
-    <AuthContext.Provider value={{ user, profile, isAdmin, isLoading, login, register, logout, refreshProfile }}>
+    <AuthContext.Provider value={{ user, profile, isAdmin, isLoading, login, register, signInWithGoogle, logout, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   );
