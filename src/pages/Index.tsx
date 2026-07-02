@@ -94,57 +94,12 @@ const Index = () => {
   const [sectionsPage, setSectionsPage] = useState(0);
   const SECTIONS_PAGE_SIZE = 12;
 
-  const { data: gamesData, isLoading: gamesLoading, isError: gamesError, refetch } = useQuery({
-    queryKey: ["games"],
-    queryFn: async () => {
-      try {
-        // Só precisamos de id/nome aqui (os cards do catálogo usam repacks),
-        // então evitamos baixar todas as colunas/linhas pesadas da tabela games.
-        const { data, error } = await supabase.from("games").select("id, nome").order("nome");
-        if (error || !data || data.length === 0) {
-          return localGamesData.map(g => ({
-            id: String(g.id),
-            nome: g.nome,
-            imagem: g.imagem,
-            hero_image: g.heroImage || null,
-            vertical_image: g.verticalImage || null,
-            capsule_image: g.capsuleImage || null,
-            download_count: 0,
-            lancamento: g.lancamento || "",
-            categorias: g.categorias || [],
-            tamanho: g.tamanho || "0 GB",
-            descricao: g.descricao || "",
-            desenvolvedor: g.desenvolvedor || "",
-            distribuidor: g.distribuidor || "",
-            preco: g.preco || 0,
-            requisitos_minimo: typeof g.requisitos?.minimo === 'object' ? g.requisitos.minimo : {},
-            requisitos_recomendado: typeof g.requisitos?.recomendado === 'object' ? g.requisitos.recomendado : {},
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-            classificacao: g.classificacao || null,
-            destaques: g.destaques || [],
-            galeria: [],
-            idiomas: g.idiomas || [],
-            link_demo: null,
-            modos: g.modos || [],
-            observacoes: null,
-            passo_a_passo: null,
-            pre_requisitos: null,
-            rating_avg: 0,
-            rating_count: 0,
-            slug: g.nome.toLowerCase().replace(/\s+/g, '-'),
-            trailer_url: g.trailer || null,
-          })) as Game[];
-        }
-        return data as Game[];
-      } catch (err) {
-        return localGamesData.map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
-      }
-    },
-    initialData: localGamesData.map(g => ({ ...g, id: String(g.id) })) as unknown as Game[],
-    staleTime: 1000 * 60 * 5,
-  });
+  const SELECT_FIELDS = "id, title, file_size, upload_date, cover_url, sources";
 
+  // Está em modo de busca/filtro? Define quais consultas server-side rodam.
+  const isSearching = !!busca || categoria !== "todas" || fonte !== "todas";
+
+  // Destaques do herói (poucas linhas)
   const { data: featuredData, isLoading: featuredLoading } = useQuery({
     queryKey: ["featured-games"],
     queryFn: async () => {
@@ -162,63 +117,100 @@ const Index = () => {
     staleTime: 1000 * 60 * 60,
   });
 
-  // Repacks para a home (catálogo) — carrega em lotes, mas publica o progresso
-  // apenas UMA vez após o 1º lote (cards aparecem quase instantaneamente) e
-  // depois o dataset completo no retorno. Publicar a cada lote fazia a página
-  // re-renderizar e recalcular todos os memos (~11k itens) dezenas de vezes,
-  // travando o site durante o carregamento.
-  const { data: recentRepacks } = useQuery({
-    queryKey: ["repacks-home"],
+  // ---- Seções da Home: consultas leves e diretas ao servidor (48 itens cada) ----
+  const { data: denuvoData } = useQuery({
+    queryKey: ["sec-denuvo"],
     queryFn: async () => {
-      const all: Repack[] = [];
-      let from = 0;
-      // 1º lote pequeno para os primeiros cards aparecerem quase instantaneamente,
-      // depois lotes grandes para completar o catálogo/seções em segundo plano.
-      let size = 60;
-      let publishedFirst = false;
-      for (;;) {
-        const { data, error } = await (supabase as any)
-          .from("merged_repacks")
-          .select("id, title, file_size, upload_date, cover_url, sources")
-          .order("upload_date", { ascending: false, nullsFirst: false })
-          .range(from, from + size - 1);
-        if (error) {
-          if (all.length > 0) break; // já temos algo para exibir
-          throw error;
-        }
-        const batch = (data ?? []) as Repack[];
-        all.push(...batch);
-        // Publica só o 1º lote para render imediato; o restante entra no retorno.
-        if (!publishedFirst) {
-          queryClient.setQueryData(["repacks-home"], [...all]);
-          publishedFirst = true;
-        }
-        if (batch.length < size) break;
-        from += size;
-        size = 1000; // lotes maiores para o restante
-      }
-      return all;
-    },
-    staleTime: 1000 * 60 * 5,
-  });
-
-
-  // Repacks que batem com a busca atual
-  const { data: searchedRepacks } = useQuery({
-    queryKey: ["repacks-search", busca],
-    queryFn: async () => {
-      const term = busca.trim();
-      if (!term) return [] as Repack[];
       const { data, error } = await (supabase as any)
-        .from("merged_repacks")
-        .select("id, title, file_size, upload_date, cover_url, sources")
-        .ilike("title", `%${term}%`)
+        .from("merged_repacks").select(SELECT_FIELDS)
+        .eq("is_denuvo", true)
         .order("upload_date", { ascending: false, nullsFirst: false })
-        .limit(24);
+        .limit(48);
       if (error) throw error;
       return (data ?? []) as Repack[];
     },
-    enabled: !!busca.trim(),
+    enabled: !isSearching,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const { data: emAltaData } = useQuery({
+    queryKey: ["sec-emalta"],
+    queryFn: async () => {
+      const { data, error } = await (supabase as any)
+        .from("merged_repacks").select(SELECT_FIELDS)
+        .order("size_gb", { ascending: false, nullsFirst: false })
+        .limit(48);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: !isSearching,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const { data: recentesData } = useQuery({
+    queryKey: ["sec-recentes"],
+    queryFn: async () => {
+      const { data, error } = await (supabase as any)
+        .from("merged_repacks").select(SELECT_FIELDS)
+        .gte("upload_date", "2025-01-01")
+        .lt("upload_date", "2027-01-01")
+        .order("upload_date", { ascending: false, nullsFirst: false })
+        .limit(48);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: !isSearching,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  // ---- Catálogo "Explore": paginado no servidor (50 por página) ----
+  const { data: catalogCount } = useQuery({
+    queryKey: ["catalog-count"],
+    queryFn: async () => {
+      const { count, error } = await (supabase as any)
+        .from("merged_repacks").select("id", { count: "exact", head: true });
+      if (error) throw error;
+      return count ?? 0;
+    },
+    enabled: !isSearching,
+    staleTime: 1000 * 60 * 10,
+  });
+
+  const { data: catalogData, isLoading: catalogLoading, isError: catalogError, refetch: refetchCatalog } = useQuery({
+    queryKey: ["catalog-page", catalogPage],
+    queryFn: async () => {
+      const from = catalogPage * CATALOG_PAGE_SIZE;
+      const { data, error } = await (supabase as any)
+        .from("merged_repacks").select(SELECT_FIELDS)
+        .order("upload_date", { ascending: false, nullsFirst: false })
+        .range(from, from + CATALOG_PAGE_SIZE - 1);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: !isSearching,
+    placeholderData: keepPreviousData,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  // ---- Busca / filtro: consulta única server-side (máx. 120 resultados) ----
+  const { data: browseData, isLoading: browseLoading, isError: browseError, refetch: refetchBrowse } = useQuery({
+    queryKey: ["browse", busca, categoria, fonte],
+    queryFn: async () => {
+      let q = (supabase as any).from("merged_repacks").select(SELECT_FIELDS);
+      const term = busca.trim();
+      if (term) q = q.ilike("title", `%${term}%`);
+      if (fonte !== "todas") q = q.contains("sources", [fonte]);
+      if (categoria === "Denuvo") q = q.eq("is_denuvo", true);
+      else if (categoria !== "todas") {
+        const kws = categoryKeywords[categoria] || [];
+        if (kws.length) q = q.or(kws.map((k) => `title.ilike.%${k}%`).join(","));
+      }
+      q = q.order("upload_date", { ascending: false, nullsFirst: false }).limit(120);
+      const { data, error } = await q;
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: isSearching,
     staleTime: 1000 * 60 * 5,
   });
 
