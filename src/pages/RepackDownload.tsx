@@ -190,6 +190,7 @@ const RepackDownload = () => {
               src={banner}
               alt=""
               className="w-full h-full object-cover opacity-25 scale-105 blur-[2px]"
+              onError={(e) => { if (repack) e.currentTarget.src = randomCover(repack.id); }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-card via-card/85 to-card/60" />
           </div>
@@ -213,6 +214,7 @@ const RepackDownload = () => {
                   alt={repack?.title || "Repack"}
                   className="w-full h-full object-cover transition-all duration-700 group-hover/hero-image:scale-110"
                   fetchPriority="high"
+                  onError={(e) => { if (repack) e.currentTarget.src = randomCover(repack.id); }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/hero-image:opacity-100 transition-opacity duration-500" />
               </div>
