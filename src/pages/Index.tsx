@@ -617,6 +617,43 @@ const Index = () => {
                       </div>
                     </div>
 
+                    {/* Fontes Section */}
+                    <div className="lg:w-80 space-y-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-1.5 h-6 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                        <h3 className="text-sm font-black uppercase tracking-widest text-foreground/80">Filtrar por Fonte</h3>
+                      </div>
+                      <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
+                        <button
+                          onClick={() => setFonte("todas")}
+                          className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-black transition-all border ${
+                            fonte === "todas"
+                            ? "bg-primary text-primary-foreground border-primary shadow-xl shadow-primary/20 scale-105"
+                            : "bg-card/50 border-border/50 hover:border-primary/30 hover:bg-card/80 text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          <LayoutGrid className="w-4 h-4" />
+                          <span className="uppercase">Todas</span>
+                        </button>
+                        {sourceOptions.map((src) => (
+                          <button
+                            key={src.id}
+                            onClick={() => setFonte(src.id)}
+                            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all border ${
+                              fonte === src.id
+                              ? "bg-primary text-primary-foreground border-primary shadow-xl shadow-primary/20 scale-105"
+                              : "bg-card/50 border-border/50 hover:border-primary/30 hover:bg-card/80 text-muted-foreground hover:text-foreground"
+                            }`}
+                          >
+                            <Layers className="w-4 h-4" />
+                            <span className="uppercase">{src.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+
+
                     {/* Ordenação Section */}
                     <div className="lg:w-80 space-y-6">
                       <div className="flex items-center gap-3">
