@@ -121,6 +121,25 @@ export const InstallationWizard = ({ game }: InstallationWizardProps) => {
               </div>
             )}
           </div>
+
+          {/* Guia genérico de instalação via Torrent (todos os jogos) */}
+          <div className="p-6 rounded-2xl bg-primary/5 border border-primary/15 space-y-4">
+            <p className="text-sm font-black uppercase tracking-widest text-primary">Como instalar via Torrent</p>
+            <ul className="space-y-3">
+              {[
+                "Instale um cliente de torrent como qBittorrent ou uTorrent.",
+                "Abra o link magnet baixado no cliente de torrent e aguarde o download completar 100%.",
+                "Extraia os arquivos (se estiverem compactados) e execute o instalador (setup.exe).",
+                "Siga os passos do instalador e aguarde a conclusão (repacks podem demorar mais).",
+                "Abra o jogo pelo atalho criado. Se o antivírus bloquear, adicione uma exceção."
+              ].map((step, i) => (
+                <li key={i} className="flex gap-3 text-sm text-muted-foreground">
+                  <span className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center font-black text-xs shrink-0 border border-primary/20">{i + 1}</span>
+                  <span className="self-center leading-relaxed">{step}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
           
           <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/10 flex gap-3">
             <Shield className="w-5 h-5 text-amber-500 shrink-0" />
