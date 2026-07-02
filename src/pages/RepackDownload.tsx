@@ -260,8 +260,8 @@ const RepackDownload = () => {
       </section>
 
       <main className="container-responsive py-12 sm:py-24 lg:py-32 space-y-16 sm:space-y-32">
-        {/* Trailer & Screenshots (estilo cloud) */}
-        {(repack?.trailer_url || screenshots.length > 0) && (
+        {/* Trailer & Screenshots (slider: trailer primeiro, setas para imagens) */}
+        {media.length > 0 && (
           <section className="space-y-10 sm:space-y-14">
             <div className="flex items-center gap-6 sm:gap-8">
               <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
@@ -276,42 +276,61 @@ const RepackDownload = () => {
               </div>
             </div>
 
-            {repack?.trailer_url && (
-              <div className="rounded-2xl sm:rounded-[2rem] overflow-hidden border-2 border-border shadow-2xl bg-black aspect-video">
+            <div className="relative rounded-2xl sm:rounded-[2rem] overflow-hidden border-2 border-border shadow-2xl bg-black aspect-video">
+              {currentMedia?.type === "video" ? (
                 <video
-                  src={repack.trailer_url}
+                  key={currentMedia.src}
+                  src={currentMedia.src}
                   poster={banner}
                   controls
                   playsInline
                   preload="metadata"
                   className="w-full h-full object-cover"
                 />
-              </div>
-            )}
+              ) : (
+                <img
+                  key={currentMedia?.src}
+                  src={currentMedia?.src}
+                  alt={`${repack?.title || "Jogo"} - captura ${mediaIndex}`}
+                  className="w-full h-full object-cover"
+                />
+              )}
 
-            {screenshots.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-5">
-                {screenshots.map((src, i) => (
-                  <a
-                    key={src}
-                    href={src}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative rounded-xl sm:rounded-2xl overflow-hidden border border-border bg-muted aspect-video"
+              {media.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    aria-label="Anterior"
+                    onClick={() => setMediaIndex((i) => (i - 1 + media.length) % media.length)}
+                    className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-10 p-2.5 sm:p-3 rounded-full bg-black/60 text-white backdrop-blur-sm border border-white/10 hover:bg-primary transition-colors active:scale-90"
                   >
-                    <img
-                      src={src}
-                      alt={`${repack?.title || "Jogo"} - captura ${i + 1}`}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </a>
-                ))}
-              </div>
-            )}
+                    <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Próximo"
+                    onClick={() => setMediaIndex((i) => (i + 1) % media.length)}
+                    className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-10 p-2.5 sm:p-3 rounded-full bg-black/60 text-white backdrop-blur-sm border border-white/10 hover:bg-primary transition-colors active:scale-90"
+                  >
+                    <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
+                  </button>
+                  <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
+                    {media.map((m, i) => (
+                      <button
+                        key={m.src}
+                        type="button"
+                        aria-label={`Ir para item ${i + 1}`}
+                        onClick={() => setMediaIndex(i)}
+                        className={`h-2 rounded-full transition-all ${i === mediaIndex ? "w-6 bg-primary" : "w-2 bg-white/40 hover:bg-white/70"}`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           </section>
         )}
+
 
         {/* Download & Requirements Section */}
         <section id="download-section" className="grid lg:grid-cols-2 gap-12 sm:gap-24">
