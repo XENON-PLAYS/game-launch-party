@@ -56,11 +56,14 @@ export function GameSection({ title, icon: Icon, games, repacks = [], page = 0, 
               <Icon className={`w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 ${config.color}`} />
             </div>
           )}
-          <div className="space-y-1">
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-none bg-gradient-to-br from-foreground via-foreground to-primary bg-clip-text text-transparent drop-shadow-sm">{title}</h2>
-            <div className="flex items-center gap-2 md:gap-3">
-              <span className="w-8 md:w-12 h-1 bg-primary/40 rounded-full" />
-              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-50">{items.length} Títulos</span>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="hidden sm:block w-1.5 h-7 lg:h-9 bg-primary rounded-full" />
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter leading-none text-foreground">{title}</h2>
+            </div>
+            <div className="flex items-center gap-2 md:gap-3 pl-0 sm:pl-4">
+              <span className="w-8 md:w-12 h-0.5 bg-primary rounded-full" />
+              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.25em] text-muted-foreground">{items.length} Títulos</span>
             </div>
           </div>
         </div>
