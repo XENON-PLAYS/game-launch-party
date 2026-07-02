@@ -360,6 +360,7 @@ const RepackDownload = () => {
               </div>
             ))}
           </div>
+          </div>
         </section>
 
         {/* Installation Section */}
