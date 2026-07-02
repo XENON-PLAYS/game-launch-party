@@ -14,6 +14,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { SkyBackground } from "@/components/SkyBackground";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { CookieConsent } from "@/components/CookieConsent";
+import { PurchaseNotification } from "@/components/PurchaseNotification";
 import Index from "./pages/Index";
 
 const GameDetail = lazy(() => import("./pages/GameDetail"));
@@ -78,6 +79,7 @@ const App = () => {
               <AuthProvider>
                 <SkyBackground />
                 <CookieConsent />
+                <PurchaseNotification />
                 <Toaster />
                 <Sonner />
 
