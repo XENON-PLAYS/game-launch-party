@@ -638,9 +638,9 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-16 md:space-y-32">
-            <GameSection title="JOGOS COM DENUVO" games={denuvoGames} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
-            <GameSection title="Jogos Mais Baixados" games={maisBaixadosGames} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
-            <GameSection title="Jogos da Nova Geração" games={novaGeracaoGames} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="JOGOS COM DENUVO" games={denuvoGames} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="Jogos Mais Baixados" games={maisBaixadosGames} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="Jogos da Nova Geração" games={novaGeracaoGames} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
 
             {(() => {
               const sectionsTotalPages = Math.max(
