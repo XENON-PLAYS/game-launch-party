@@ -452,6 +452,9 @@ const Index = () => {
       const term = busca.toLowerCase();
       result = result.filter((r) => (r.title || "").toLowerCase().includes(term));
     }
+    if (fonte !== "todas") {
+      result = result.filter((r) => (r.sources || []).includes(fonte));
+    }
     if (categoria === "Denuvo") {
       result = result.filter(isDenuvoRepack);
     } else if (categoria !== "todas") {
