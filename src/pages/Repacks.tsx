@@ -50,14 +50,7 @@ const Repacks = () => {
     setQuery(search);
   };
 
-  const copyMagnet = async (uri: string) => {
-    try {
-      await navigator.clipboard.writeText(uri);
-      toast.success("Link magnet copiado!");
-    } catch {
-      toast.error("Não foi possível copiar.");
-    }
-  };
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
