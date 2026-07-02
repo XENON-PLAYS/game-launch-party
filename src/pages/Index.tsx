@@ -42,6 +42,16 @@ const categoryIconMap: Record<string, React.ComponentType<{ className?: string }
   "Farming Sim": Gamepad2,
 };
 
+// Fontes (repackers) disponíveis para filtrar o catálogo
+const sourceOptions: { id: string; label: string }[] = [
+  { id: "fitgirl", label: "FitGirl" },
+  { id: "dodi", label: "DODI" },
+  { id: "steamrip", label: "SteamRIP" },
+  { id: "gog", label: "GOG" },
+];
+
+
+
 const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
