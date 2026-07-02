@@ -68,17 +68,6 @@ export function Header() {
         }`} />
       </Link>
       <Link 
-        to="/repacks" 
-        className={`text-[13px] font-black uppercase tracking-[0.2em] transition-all duration-300 relative group py-2 ${
-          location.pathname === "/repacks" ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        Repacks
-        <span className={`absolute -bottom-1 left-0 h-0.5 bg-foreground transition-all duration-300 ${
-          location.pathname === "/repacks" ? "w-full" : "w-0 group-hover:w-full"
-        }`} />
-      </Link>
-      <Link 
         to="/dmca" 
         className={`text-[13px] font-black uppercase tracking-[0.2em] transition-all duration-300 relative group py-2 ${
           location.pathname === "/dmca" ? "text-foreground" : "text-muted-foreground hover:text-foreground"
