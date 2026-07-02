@@ -572,6 +572,19 @@ export type Database = {
       }
     }
     Views: {
+      merged_repacks: {
+        Row: {
+          base_key: string | null
+          cover_url: string | null
+          file_size: string | null
+          id: string | null
+          sources: string[] | null
+          title: string | null
+          upload_date: string | null
+          uris: string[] | null
+        }
+        Relationships: []
+      }
       online_users_stats: {
         Row: {
           online_count: number | null
@@ -639,6 +652,7 @@ export type Database = {
         Args: { p_role: string; p_user_id: string }
         Returns: undefined
       }
+      repack_base_title: { Args: { t: string }; Returns: string }
       slugify: { Args: { text: string }; Returns: string }
       toggle_admin_role: { Args: { target_user_id: string }; Returns: string }
       toggle_ban_status: { Args: { target_user_id: string }; Returns: boolean }
