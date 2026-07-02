@@ -217,27 +217,86 @@ const Index = () => {
     return map;
   }, [games, homeRepacks]);
 
-  // Lista curada de jogos que REALMENTE possuem Denuvo (verificados).
-  // Termos específicos evitam falsos positivos (ex.: Resident Evil clássicos sem Denuvo).
-  const denuvoKeywords = [
-    "black myth", "wukong", "hogwarts legacy", "star wars jedi", "jedi survivor", "jedi fallen order",
-    "resident evil 2", "resident evil 3", "resident evil 4", "resident evil 7", "resident evil village",
-    "assassin's creed origins", "assassins creed origins", "assassin's creed odyssey", "assassins creed odyssey",
-    "assassin's creed valhalla", "assassins creed valhalla", "assassin's creed mirage", "assassins creed mirage",
-    "assassin's creed shadows", "assassins creed shadows",
-    "mortal kombat 1", "mortal kombat 11", "tekken 8", "tekken 7",
-    "dragon's dogma 2", "dragons dogma 2", "final fantasy vii remake", "final fantasy vii rebirth",
-    "final fantasy xvi", "final fantasy xv", "sonic frontiers", "sonic superstars", "sonic x shadow",
-    "like a dragon", "yakuza: like a dragon", "dead space", "hitman 3", "hitman world of assassination",
-    "football manager", "ea sports fc", "fc 24", "fc 25", "fifa 21", "fifa 22", "fifa 23",
-    "f1 23", "f1 24", "f1 25", "need for speed unbound", "lords of the fallen",
-    "the callisto protocol", "atomic heart", "returnal", "forspoken",
-    "wo long", "street fighter 6", "tales of arise", "monster hunter rise", "monster hunter wilds",
-    "silent hill 2", "dragon age: the veilguard", "dragon age the veilguard",
-    "star wars outlaws", "alan wake 2", "avatar: frontiers of pandora", "avatar frontiers of pandora",
-    "prince of persia: the lost crown", "prince of persia the lost crown", "space marine 2",
-    "metaphor: refantazio", "metaphor refantazio", "persona 3 reload", "persona 5 tactica",
-  ];
+  // Lista curada de jogos que REALMENTE possuem Denuvo.
+  // A comparação é feita por título normalizado/exato para evitar falsos positivos
+  // causados por palavras soltas como "wukong", "dead space", "football manager" etc.
+  const denuvoGameTitles = useMemo(
+    () => [
+      "Black Myth: Wukong",
+      "Hogwarts Legacy",
+      "Star Wars Jedi: Fallen Order",
+      "Star Wars Jedi: Survivor",
+      "Star Wars Outlaws",
+      "Resident Evil 2 Remake",
+      "Resident Evil 3 Remake",
+      "Resident Evil 4 Remake",
+      "Resident Evil 7 Biohazard",
+      "Resident Evil Village",
+      "Assassin's Creed Origins",
+      "Assassin's Creed Odyssey",
+      "Assassin's Creed Valhalla",
+      "Assassin's Creed Mirage",
+      "Assassin's Creed Shadows",
+      "Mortal Kombat 1",
+      "Mortal Kombat 11",
+      "Tekken 7",
+      "Tekken 8",
+      "Dragon's Dogma 2",
+      "Final Fantasy VII Remake",
+      "Final Fantasy VII Rebirth",
+      "Final Fantasy XV",
+      "Final Fantasy XVI",
+      "Sonic Frontiers",
+      "Sonic Superstars",
+      "Sonic X Shadow Generations",
+      "Yakuza: Like a Dragon",
+      "Like a Dragon: Infinite Wealth",
+      "Like a Dragon: Ishin",
+      "Like a Dragon Gaiden: The Man Who Erased His Name",
+      "Dead Space Remake",
+      "Hitman 3",
+      "Hitman World of Assassination",
+      "EA Sports FC 24",
+      "EA Sports FC 25",
+      "FIFA 21",
+      "FIFA 22",
+      "FIFA 23",
+      "F1 23",
+      "F1 24",
+      "F1 25",
+      "Need for Speed Unbound",
+      "Lords of the Fallen",
+      "The Callisto Protocol",
+      "Atomic Heart",
+      "Returnal",
+      "Forspoken",
+      "Wo Long: Fallen Dynasty",
+      "Street Fighter 6",
+      "Tales of Arise",
+      "Monster Hunter Rise",
+      "Monster Hunter Wilds",
+      "Silent Hill 2 Remake",
+      "Dragon Age: The Veilguard",
+      "Avatar: Frontiers of Pandora",
+      "Prince of Persia: The Lost Crown",
+      "Warhammer 40000: Space Marine 2",
+      "Warhammer 40,000: Space Marine 2",
+      "Metaphor: ReFantazio",
+      "Persona 3 Reload",
+      "Persona 5 Tactica",
+    ],
+    []
+  );
+
+  const denuvoTitleKeys = useMemo(
+    () => new Set(denuvoGameTitles.map((title) => normalizeTitle(title))),
+    [denuvoGameTitles]
+  );
+
+  const isDenuvoRepack = (r: Repack) => {
+    const key = normalizeTitle(r.title || "");
+    return denuvoTitleKeys.has(key);
+  };
 
 
   // Palavras-chave por categoria para filtrar os repacks (que não possuem categorias próprias)
@@ -296,11 +355,9 @@ const Index = () => {
 
   // ------- Seções da Home (somente repacks) -------
   const denuvoRepacks = useMemo(() => {
-    const matches = homeRepacks.filter((r) =>
-      denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k))
-    );
+    const matches = homeRepacks.filter(isDenuvoRepack);
     return matches.slice(0, 48);
-  }, [homeRepacks]);
+  }, [homeRepacks, denuvoTitleKeys]);
   // Mais Baixados: repacks maiores primeiro
   const emAlta = useMemo(
     () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
@@ -366,7 +423,7 @@ const Index = () => {
       result = result.filter((r) => (r.title || "").toLowerCase().includes(term));
     }
     if (categoria === "Denuvo") {
-      result = result.filter((r) => denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k)));
+      result = result.filter(isDenuvoRepack);
     } else if (categoria !== "todas") {
       const kws = categoryKeywords[categoria] || [];
       result = result.filter((r) => kws.some((k) => (r.title || "").toLowerCase().includes(k)));
@@ -386,7 +443,7 @@ const Index = () => {
       sorted.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     }
     return sorted;
-  }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks, popularKeywords]);
+  }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks, popularKeywords, denuvoTitleKeys]);
 
 
   // Resultados (somente repacks) para a busca/filtro
