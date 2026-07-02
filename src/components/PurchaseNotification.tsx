@@ -63,15 +63,15 @@ export const PurchaseNotification = () => {
         detail: isVip ? "" : random(GAMES),
       });
 
-      // Esconde depois de 5s e agenda a próxima
+      // Esconde depois de 5s e agenda a próxima (~30s de intervalo)
       timeoutId = setTimeout(() => {
         setCurrent(null);
-        timeoutId = setTimeout(showNext, 4000 + Math.random() * 4000);
+        timeoutId = setTimeout(showNext, 30000);
       }, 5000);
     };
 
     // Primeira notificação após um pequeno atraso
-    timeoutId = setTimeout(showNext, 4000);
+    timeoutId = setTimeout(showNext, 8000);
 
     return () => clearTimeout(timeoutId);
   }, []);
