@@ -188,16 +188,10 @@ const Index = () => {
   const homeRepacks = useMemo(() => (recentRepacks || []) as Repack[], [recentRepacks]);
   const matchedRepacks = useMemo(() => (searchedRepacks || []) as Repack[], [searchedRepacks]);
 
-  // Todos os repacks ficam somente no catálogo "Explore o Catálogo"
-  const repacksCatalogo = useMemo(() => homeRepacks, [homeRepacks]);
-
-  // Catálogo combinado (jogos + repacks) para paginação otimizada
+  // Catálogo composto apenas por repacks
   const catalogItems = useMemo(
-    () => [
-      ...games.map((g) => ({ type: "game" as const, id: g.id, data: g })),
-      ...repacksCatalogo.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
-    ],
-    [games, repacksCatalogo]
+    () => homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    [homeRepacks]
   );
 
   const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
@@ -210,13 +204,9 @@ const Index = () => {
     if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
   }, [catalogTotalPages, catalogPage]);
 
-  const allCategories = useMemo(() => {
-    return ["Denuvo", ...Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort()];
-  }, [games]);
+  // Repacks não possuem categorias; mantemos apenas o filtro "Denuvo"
+  const allCategories = useMemo(() => ["Denuvo"], []);
 
-  const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 48), [games]);
-
-  // "Mais Jogados": prioriza jogos AAA com Denuvo
   const denuvoKeywords = [
     "black myth", "wukong", "hogwarts", "star wars jedi", "resident evil",
     "assassin's creed", "assassins creed", "mortal kombat", "tekken",
@@ -226,15 +216,32 @@ const Index = () => {
     "the callisto protocol", "atomic heart", "returnal", "forspoken",
     "wo long", "street fighter", "tales of", "monster hunter",
   ];
-  const denuvoGames = useMemo(() => {
-    const matches = games.filter((g) =>
-      denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k))
+
+  const parseRepackSize = (s: string | null) => {
+    if (!s) return 0;
+    const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
+    if (!match) return 0;
+    const value = parseFloat(match[1].replace(",", "."));
+    const unit = (match[3] || "GB").toUpperCase();
+    const multipliers: Record<string, number> = { KB: 1 / (1024 * 1024), MB: 1 / 1024, GB: 1, TB: 1024 };
+    return value * (multipliers[unit] || 1);
+  };
+
+  // Nova Geração: repacks mais recentes (já ordenados por data)
+  const recentes = useMemo(() => homeRepacks.slice(0, 48), [homeRepacks]);
+  // Mais Baixados: proxy pelos maiores títulos
+  const emAlta = useMemo(
+    () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
+    [homeRepacks]
+  );
+  // Denuvo: repacks cujo título bate com jogos AAA protegidos
+  const denuvoRepacks = useMemo(() => {
+    const matches = homeRepacks.filter((r) =>
+      denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k))
     );
-    return matches.length > 0
-      ? [...matches].sort((a, b) => b.download_count - a.download_count).slice(0, 48)
-      : emAlta;
-  }, [games, emAlta]);
-  const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 48), [games]);
+    return (matches.length > 0 ? matches : homeRepacks).slice(0, 48);
+  }, [homeRepacks]);
+
 
   const isLoading = gamesLoading;
   const isError = gamesError;
