@@ -611,16 +611,16 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-16 md:space-y-32">
-            <GameSection title="JOGOS COM DENUVO" games={denuvoGames} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
-            <GameSection title="Jogos Mais Baixados" games={maisBaixadosGames} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
-            <GameSection title="Jogos da Nova Geração" games={novaGeracaoGames} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="JOGOS COM DENUVO" games={[]} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="Jogos Mais Baixados" games={[]} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="Jogos da Nova Geração" games={[]} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
 
             {(() => {
               const sectionsTotalPages = Math.max(
                 1,
-                Math.ceil((denuvoGames.length + denuvoRepacks.length) / SECTIONS_PAGE_SIZE),
-                Math.ceil((maisBaixadosGames.length + emAlta.length) / SECTIONS_PAGE_SIZE),
-                Math.ceil((novaGeracaoGames.length + recentes.length) / SECTIONS_PAGE_SIZE)
+                Math.ceil(denuvoRepacks.length / SECTIONS_PAGE_SIZE),
+                Math.ceil(emAlta.length / SECTIONS_PAGE_SIZE),
+                Math.ceil(recentes.length / SECTIONS_PAGE_SIZE)
               );
               if (sectionsTotalPages <= 1) return null;
               return (
