@@ -148,17 +148,24 @@ const Index = () => {
     staleTime: 1000 * 60 * 60,
   });
 
-  // Repacks recentes para a home (catálogo)
+  // Repacks para a home (catálogo) — busca completa em lotes (a API limita 1000 por requisição)
   const { data: recentRepacks } = useQuery({
     queryKey: ["repacks-home"],
     queryFn: async () => {
-      const { data, error } = await (supabase as any)
-        .from("merged_repacks")
-        .select("id, title, uris, file_size, upload_date, cover_url")
-        .order("upload_date", { ascending: false, nullsFirst: false })
-        .limit(1000);
-      if (error) throw error;
-      return (data ?? []) as Repack[];
+      const PAGE = 1000;
+      const all: Repack[] = [];
+      for (let from = 0; ; from += PAGE) {
+        const { data, error } = await (supabase as any)
+          .from("merged_repacks")
+          .select("id, title, uris, file_size, upload_date, cover_url")
+          .order("upload_date", { ascending: false, nullsFirst: false })
+          .range(from, from + PAGE - 1);
+        if (error) throw error;
+        const batch = (data ?? []) as Repack[];
+        all.push(...batch);
+        if (batch.length < PAGE) break;
+      }
+      return all;
     },
     staleTime: 1000 * 60 * 5,
   });
