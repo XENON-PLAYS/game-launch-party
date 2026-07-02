@@ -51,9 +51,11 @@ export function GameSection({ title, icon: Icon, games, repacks = [], page = 0, 
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 border-b border-border/30 pb-6 md:pb-10">
         <div className="flex items-center gap-4 md:gap-5 group">
-          <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl ${config.bg} ${config.border} border group-hover:scale-105 transition-transform duration-500 shadow-sm`}>
-            <Icon className={`w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 ${config.color}`} />
-          </div>
+          {Icon && (
+            <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl ${config.bg} ${config.border} border group-hover:scale-105 transition-transform duration-500 shadow-sm`}>
+              <Icon className={`w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 ${config.color}`} />
+            </div>
+          )}
           <div className="space-y-1">
             <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">{title}</h2>
             <div className="flex items-center gap-2 md:gap-3">
