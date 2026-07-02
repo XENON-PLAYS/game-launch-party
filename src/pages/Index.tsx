@@ -233,7 +233,7 @@ const Index = () => {
     "f1 23", "f1 24", "f1 25", "need for speed unbound", "lords of the fallen",
     "the callisto protocol", "atomic heart", "returnal", "forspoken",
     "wo long", "street fighter 6", "tales of arise", "monster hunter rise", "monster hunter wilds",
-    "elden ring", "silent hill 2", "dragon age: the veilguard", "dragon age the veilguard",
+    "silent hill 2", "dragon age: the veilguard", "dragon age the veilguard",
     "star wars outlaws", "alan wake 2", "avatar: frontiers of pandora", "avatar frontiers of pandora",
     "prince of persia: the lost crown", "prince of persia the lost crown", "space marine 2",
     "metaphor: refantazio", "metaphor refantazio", "persona 3 reload", "persona 5 tactica",
