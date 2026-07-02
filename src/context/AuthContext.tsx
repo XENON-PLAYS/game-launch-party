@@ -147,13 +147,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const logout = useCallback(async () => {
+    // Marca como offline sem bloquear o logout (best-effort)
     if (user) {
-      await supabase
-        .from("profiles")
-        .update({ status: "offline" })
-        .eq("user_id", user.id);
+      try {
+        await supabase
+          .from("profiles")
+          .update({ status: "offline" })
+          .eq("user_id", user.id);
+      } catch (error) {
+        console.error("Error setting offline status:", error);
+      }
     }
-    await supabase.auth.signOut();
+
+    // Limpa o estado local imediatamente para a UI reagir na hora
+    setUser(null);
+    setProfile(null);
+    setIsAdmin(false);
+
+    // Encerra a sessão local (não falha se o token já estiver inválido)
+    try {
+      await supabase.auth.signOut({ scope: "local" });
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+
+    // Garante que qualquer cache de sessão seja descartado
+    window.location.href = "/";
   }, [user]);
 
   const refreshProfile = useCallback(async () => {
