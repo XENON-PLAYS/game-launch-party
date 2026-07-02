@@ -253,13 +253,10 @@ const Index = () => {
     return value * (multipliers[unit] || 1);
   };
 
-  // Catálogo composto por jogos tradicionais + repacks
+  // Catálogo composto apenas por repacks
   const catalogItems = useMemo(
-    () => [
-      ...games.map((g) => ({ type: "game" as const, id: g.id, data: g })),
-      ...homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
-    ],
-    [games, homeRepacks]
+    () => homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    [homeRepacks]
   );
 
   const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
@@ -272,39 +269,25 @@ const Index = () => {
     if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
   }, [catalogTotalPages, catalogPage]);
 
-  // Categorias vindas dos jogos + filtro "Denuvo"
-  const allCategories = useMemo(() => {
-    const set = new Set<string>();
-    games.forEach((g) => (g.categorias || []).forEach((c) => c && set.add(c)));
-    return ["Denuvo", ...Array.from(set).sort()];
-  }, [games]);
-
-  // ------- Seções da Home -------
-  // Denuvo: jogos AAA protegidos + repacks correspondentes
-  const denuvoGames = useMemo(
-    () => games.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k))),
-    [games]
+  // Categorias (fixas) + filtro "Denuvo", agora funcionais sobre repacks
+  const allCategories = useMemo(
+    () => ["Denuvo", ...Object.keys(categoryKeywords).sort((a, b) => a.localeCompare(b))],
+    []
   );
+
+  // ------- Seções da Home (somente repacks) -------
   const denuvoRepacks = useMemo(() => {
     const matches = homeRepacks.filter((r) =>
       denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k))
     );
     return matches.slice(0, 48);
   }, [homeRepacks]);
-  // Mais Baixados: jogos por download_count + repacks maiores
-  const maisBaixadosGames = useMemo(
-    () => [...games].sort((a, b) => (b.download_count || 0) - (a.download_count || 0)).slice(0, 24),
-    [games]
-  );
+  // Mais Baixados: repacks maiores primeiro
   const emAlta = useMemo(
     () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
     [homeRepacks]
   );
-  // Nova Geração: lançamentos recentes + repacks recentes
-  const novaGeracaoGames = useMemo(
-    () => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 24),
-    [games]
-  );
+  // Nova Geração: repacks mais recentes
   const recentes = useMemo(() => homeRepacks.slice(0, 48), [homeRepacks]);
 
   const isLoading = gamesLoading;
@@ -312,35 +295,7 @@ const Index = () => {
 
   const isSearching = busca || categoria !== "todas";
 
-  // Jogos tradicionais filtrados pela busca/categoria/ordenação
-  const filteredGames = useMemo(() => {
-    let result = [...games];
-    if (busca) {
-      const term = busca.toLowerCase();
-      result = result.filter((g) =>
-        (g.nome || "").toLowerCase().includes(term) ||
-        (g.desenvolvedor || "").toLowerCase().includes(term) ||
-        (g.categorias || []).some((c) => c.toLowerCase().includes(term))
-      );
-    }
-    if (categoria === "Denuvo") {
-      result = result.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k)));
-    } else if (categoria !== "todas") {
-      result = result.filter((g) => (g.categorias || []).includes(categoria));
-    }
-    if (ordenacao === "nome") {
-      result.sort((a, b) => (a.nome || "").localeCompare(b.nome || ""));
-    } else if (ordenacao === "popular") {
-      result.sort((a, b) => (b.download_count || 0) - (a.download_count || 0));
-    } else if (ordenacao === "lancamento") {
-      result.sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || ""));
-    }
-    return result;
-  }, [games, busca, categoria, ordenacao]);
-
   const filteredRepacks = useMemo(() => {
-    // Repacks não possuem categorias; ignora-os em filtros de categoria específicos
-    if (categoria !== "todas" && categoria !== "Denuvo") return [] as Repack[];
     let result = busca.trim() ? matchedRepacks : homeRepacks;
     if (busca) {
       const term = busca.toLowerCase();
@@ -348,6 +303,9 @@ const Index = () => {
     }
     if (categoria === "Denuvo") {
       result = result.filter((r) => denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k)));
+    } else if (categoria !== "todas") {
+      const kws = categoryKeywords[categoria] || [];
+      result = result.filter((r) => kws.some((k) => (r.title || "").toLowerCase().includes(k)));
     }
     const sorted = [...result];
     if (ordenacao === "pesado") {
@@ -362,14 +320,12 @@ const Index = () => {
     return sorted;
   }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks]);
 
-  // Resultados combinados (jogos + repacks) para a busca/filtro
+  // Resultados (somente repacks) para a busca/filtro
   const filteredItems = useMemo(
-    () => [
-      ...filteredGames.map((g) => ({ type: "game" as const, id: g.id, data: g })),
-      ...filteredRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
-    ],
-    [filteredGames, filteredRepacks]
+    () => filteredRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    [filteredRepacks]
   );
+
 
   const firstHeroImage = featured && featured.length > 0 ? (featured[0].hero_image || featured[0].imagem) : undefined;
   const firstHeroPoster = featured && featured.length > 0 ? (featured[0].vertical_image || featured[0].imagem) : undefined;
