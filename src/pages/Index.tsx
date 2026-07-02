@@ -188,25 +188,6 @@ const Index = () => {
   const homeRepacks = useMemo(() => (recentRepacks || []) as Repack[], [recentRepacks]);
   const matchedRepacks = useMemo(() => (searchedRepacks || []) as Repack[], [searchedRepacks]);
 
-  // Catálogo composto apenas por repacks
-  const catalogItems = useMemo(
-    () => homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
-    [homeRepacks]
-  );
-
-  const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
-  const catalogPageItems = useMemo(
-    () => catalogItems.slice(catalogPage * CATALOG_PAGE_SIZE, catalogPage * CATALOG_PAGE_SIZE + CATALOG_PAGE_SIZE),
-    [catalogItems, catalogPage]
-  );
-
-  useEffect(() => {
-    if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
-  }, [catalogTotalPages, catalogPage]);
-
-  // Repacks não possuem categorias; mantemos apenas o filtro "Denuvo"
-  const allCategories = useMemo(() => ["Denuvo"], []);
-
   const denuvoKeywords = [
     "black myth", "wukong", "hogwarts", "star wars jedi", "resident evil",
     "assassin's creed", "assassins creed", "mortal kombat", "tekken",
@@ -227,28 +208,94 @@ const Index = () => {
     return value * (multipliers[unit] || 1);
   };
 
-  // Nova Geração: repacks mais recentes (já ordenados por data)
-  const recentes = useMemo(() => homeRepacks.slice(0, 48), [homeRepacks]);
-  // Mais Baixados: proxy pelos maiores títulos
-  const emAlta = useMemo(
-    () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
-    [homeRepacks]
+  // Catálogo composto por jogos tradicionais + repacks
+  const catalogItems = useMemo(
+    () => [
+      ...games.map((g) => ({ type: "game" as const, id: g.id, data: g })),
+      ...homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    ],
+    [games, homeRepacks]
   );
-  // Denuvo: repacks cujo título bate com jogos AAA protegidos
+
+  const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
+  const catalogPageItems = useMemo(
+    () => catalogItems.slice(catalogPage * CATALOG_PAGE_SIZE, catalogPage * CATALOG_PAGE_SIZE + CATALOG_PAGE_SIZE),
+    [catalogItems, catalogPage]
+  );
+
+  useEffect(() => {
+    if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
+  }, [catalogTotalPages, catalogPage]);
+
+  // Categorias vindas dos jogos + filtro "Denuvo"
+  const allCategories = useMemo(() => {
+    const set = new Set<string>();
+    games.forEach((g) => (g.categorias || []).forEach((c) => c && set.add(c)));
+    return ["Denuvo", ...Array.from(set).sort()];
+  }, [games]);
+
+  // ------- Seções da Home -------
+  // Denuvo: jogos AAA protegidos + repacks correspondentes
+  const denuvoGames = useMemo(
+    () => games.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k))),
+    [games]
+  );
   const denuvoRepacks = useMemo(() => {
     const matches = homeRepacks.filter((r) =>
       denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k))
     );
-    return (matches.length > 0 ? matches : homeRepacks).slice(0, 48);
+    return matches.slice(0, 48);
   }, [homeRepacks]);
-
+  // Mais Baixados: jogos por download_count + repacks maiores
+  const maisBaixadosGames = useMemo(
+    () => [...games].sort((a, b) => (b.download_count || 0) - (a.download_count || 0)).slice(0, 24),
+    [games]
+  );
+  const emAlta = useMemo(
+    () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
+    [homeRepacks]
+  );
+  // Nova Geração: lançamentos recentes + repacks recentes
+  const novaGeracaoGames = useMemo(
+    () => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 24),
+    [games]
+  );
+  const recentes = useMemo(() => homeRepacks.slice(0, 48), [homeRepacks]);
 
   const isLoading = gamesLoading;
   const isError = gamesError;
 
   const isSearching = busca || categoria !== "todas";
 
+  // Jogos tradicionais filtrados pela busca/categoria/ordenação
+  const filteredGames = useMemo(() => {
+    let result = [...games];
+    if (busca) {
+      const term = busca.toLowerCase();
+      result = result.filter((g) =>
+        (g.nome || "").toLowerCase().includes(term) ||
+        (g.desenvolvedor || "").toLowerCase().includes(term) ||
+        (g.categorias || []).some((c) => c.toLowerCase().includes(term))
+      );
+    }
+    if (categoria === "Denuvo") {
+      result = result.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k)));
+    } else if (categoria !== "todas") {
+      result = result.filter((g) => (g.categorias || []).includes(categoria));
+    }
+    if (ordenacao === "nome") {
+      result.sort((a, b) => (a.nome || "").localeCompare(b.nome || ""));
+    } else if (ordenacao === "popular") {
+      result.sort((a, b) => (b.download_count || 0) - (a.download_count || 0));
+    } else if (ordenacao === "lancamento") {
+      result.sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || ""));
+    }
+    return result;
+  }, [games, busca, categoria, ordenacao]);
+
   const filteredRepacks = useMemo(() => {
+    // Repacks não possuem categorias; ignora-os em filtros de categoria específicos
+    if (categoria !== "todas" && categoria !== "Denuvo") return [] as Repack[];
     let result = busca.trim() ? matchedRepacks : homeRepacks;
     if (busca) {
       const term = busca.toLowerCase();
@@ -269,6 +316,15 @@ const Index = () => {
     }
     return sorted;
   }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks]);
+
+  // Resultados combinados (jogos + repacks) para a busca/filtro
+  const filteredItems = useMemo(
+    () => [
+      ...filteredGames.map((g) => ({ type: "game" as const, id: g.id, data: g })),
+      ...filteredRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    ],
+    [filteredGames, filteredRepacks]
+  );
 
   const firstHeroImage = featured && featured.length > 0 ? (featured[0].hero_image || featured[0].imagem) : undefined;
   const firstHeroPoster = featured && featured.length > 0 ? (featured[0].vertical_image || featured[0].imagem) : undefined;
@@ -497,7 +553,7 @@ const Index = () => {
                 </div>
                 <div className="flex items-center gap-4">
                   <p className="text-sm md:text-base font-bold text-gray-500 uppercase tracking-widest">
-                    {filteredRepacks.length} RESULTADO{filteredRepacks.length !== 1 ? "S" : ""} ENCONTRADO{filteredRepacks.length !== 1 ? "S" : ""}
+                    {filteredItems.length} RESULTADO{filteredItems.length !== 1 ? "S" : ""} ENCONTRADO{filteredItems.length !== 1 ? "S" : ""}
                   </p>
                 </div>
               </div>
@@ -521,7 +577,7 @@ const Index = () => {
               </div>
             </div>
 
-            {filteredRepacks.length === 0 ? (
+            {filteredItems.length === 0 ? (
               <div className="text-center py-32 space-y-8 bg-white/5 rounded-[3rem] border border-dashed border-white/10 max-w-2xl mx-auto px-10">
                 <div className="relative w-24 h-24 mx-auto">
                   <Gamepad2 className="w-24 h-24 text-gray-800" />
@@ -546,24 +602,28 @@ const Index = () => {
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                {filteredRepacks.map((r) => (
-                  <RepackCard key={r.id} repack={r} />
-                ))}
+                {filteredItems.map((item) =>
+                  item.type === "game" ? (
+                    <GameCard key={`g-${item.id}`} game={item.data} />
+                  ) : (
+                    <RepackCard key={`r-${item.id}`} repack={item.data} />
+                  )
+                )}
               </div>
             )}
           </motion.div>
         ) : (
           <div className="space-y-16 md:space-y-32">
-            <GameSection title="JOGOS COM DENUVO" games={[]} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
-            <GameSection title="Jogos Mais Baixados" games={[]} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
-            <GameSection title="Jogos da Nova Geração" games={[]} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="JOGOS COM DENUVO" games={denuvoGames} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="Jogos Mais Baixados" games={maisBaixadosGames} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="Jogos da Nova Geração" games={novaGeracaoGames} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
 
             {(() => {
               const sectionsTotalPages = Math.max(
                 1,
-                Math.ceil(denuvoRepacks.length / SECTIONS_PAGE_SIZE),
-                Math.ceil(emAlta.length / SECTIONS_PAGE_SIZE),
-                Math.ceil(recentes.length / SECTIONS_PAGE_SIZE)
+                Math.ceil((denuvoGames.length + denuvoRepacks.length) / SECTIONS_PAGE_SIZE),
+                Math.ceil((maisBaixadosGames.length + emAlta.length) / SECTIONS_PAGE_SIZE),
+                Math.ceil((novaGeracaoGames.length + recentes.length) / SECTIONS_PAGE_SIZE)
               );
               if (sectionsTotalPages <= 1) return null;
               return (
@@ -614,9 +674,13 @@ const Index = () => {
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                {catalogPageItems.map((item) => (
-                  <RepackCard key={`r-${item.id}`} repack={item.data} />
-                ))}
+                {catalogPageItems.map((item) =>
+                  item.type === "game" ? (
+                    <GameCard key={`g-${item.id}`} game={item.data} />
+                  ) : (
+                    <RepackCard key={`r-${item.id}`} repack={item.data} />
+                  )
+                )}
               </div>
 
               {catalogTotalPages > 1 && (
