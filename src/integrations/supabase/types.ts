@@ -595,7 +595,9 @@ export type Database = {
           description: string | null
           file_size: string | null
           id: string | null
+          is_denuvo: boolean | null
           screenshots: string[] | null
+          size_gb: number | null
           sources: string[] | null
           steam_appid: number | null
           title: string | null
