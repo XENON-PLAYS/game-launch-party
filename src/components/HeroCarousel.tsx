@@ -109,7 +109,7 @@ export function HeroCarousel({ initialFeatured, isLoadingInitial }: { initialFea
           </div>
 
 
-          <div className="container-responsive h-full flex flex-col justify-center relative z-10 pt-12 sm:pt-16 md:pt-0">
+          <div className="container-responsive h-full flex flex-col justify-center relative z-10 pt-12 sm:pt-16 md:pt-0 pb-20 sm:pb-24 md:pb-28">
             <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 sm:gap-8 md:gap-12 items-center">
               <div className="space-y-3 sm:space-y-4 md:space-y-6 max-w-2xl">
                 <motion.div
