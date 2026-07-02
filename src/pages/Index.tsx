@@ -392,7 +392,7 @@ const Index = () => {
       <SEO preloadImage={firstHeroImage} preloadPoster={firstHeroPoster} />
       <Header />
       
-      {!isSearching && <HeroCarousel initialFeatured={featured} isLoadingInitial={featuredLoading} />}
+      {!isSearching && !isNovidades && <HeroCarousel initialFeatured={featured} isLoadingInitial={featuredLoading} />}
 
       <section className="bg-background/80 backdrop-blur-2xl sticky top-[60px] md:top-[72px] z-[90] border-b border-border py-4 md:py-6 transition-all duration-300">
         <div className="container mx-auto px-4 md:px-12">
