@@ -91,6 +91,9 @@ const Index = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [catalogPage, setCatalogPage] = useState(0);
   const CATALOG_PAGE_SIZE = 50;
+  // Paginação por cursor (keyset): evita OFFSET profundo (que fica lento em páginas altas)
+  type CatalogCursor = { d: string | null; id: string } | null;
+  const [catalogCursors, setCatalogCursors] = useState<CatalogCursor[]>([null]);
   const [sectionsPage, setSectionsPage] = useState(0);
   const SECTIONS_PAGE_SIZE = 12;
 
