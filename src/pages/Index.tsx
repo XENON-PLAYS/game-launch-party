@@ -80,6 +80,8 @@ const Index = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [catalogPage, setCatalogPage] = useState(0);
   const CATALOG_PAGE_SIZE = 18;
+  const [sectionsPage, setSectionsPage] = useState(0);
+  const SECTIONS_PAGE_SIZE = 12;
 
   const { data: gamesData, isLoading: gamesLoading, isError: gamesError, refetch } = useQuery({
     queryKey: ["games"],
@@ -601,9 +603,40 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-16 md:space-y-32">
-            <GameSection title="Mais Jogados" icon={Flame} games={emAlta} />
-            <GameSection title="Jogos Mais Baixados" icon={Star} games={emAlta} />
-            <GameSection title="Jogos da Nova Geração" icon={Rocket} games={recentes} />
+            {(() => {
+              const sectionsTotalPages = Math.max(
+                1,
+                Math.ceil(emAlta.length / SECTIONS_PAGE_SIZE),
+                Math.ceil(recentes.length / SECTIONS_PAGE_SIZE)
+              );
+              if (sectionsTotalPages <= 1) return null;
+              return (
+                <div className="flex items-center justify-center gap-4 md:gap-6">
+                  <button
+                    onClick={() => setSectionsPage((p) => Math.max(0, p - 1))}
+                    disabled={sectionsPage === 0}
+                    aria-label="Página anterior das seções"
+                    className="p-3 md:p-4 rounded-xl md:rounded-2xl bg-card border border-border/50 hover:border-primary/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xl shadow-black/10"
+                  >
+                    <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+                  </button>
+                  <span className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground min-w-[80px] text-center">
+                    {sectionsPage + 1} / {sectionsTotalPages}
+                  </span>
+                  <button
+                    onClick={() => setSectionsPage((p) => Math.min(sectionsTotalPages - 1, p + 1))}
+                    disabled={sectionsPage >= sectionsTotalPages - 1}
+                    aria-label="Próxima página das seções"
+                    className="p-3 md:p-4 rounded-xl md:rounded-2xl bg-card border border-border/50 hover:border-primary/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xl shadow-black/10"
+                  >
+                    <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+                  </button>
+                </div>
+              );
+            })()}
+            <GameSection title="Mais Jogados" icon={Flame} games={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="Jogos Mais Baixados" icon={Star} games={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="Jogos da Nova Geração" icon={Rocket} games={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
 
             <section className="space-y-12 md:space-y-16">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-10 border-b-2 border-primary/20 pb-8 md:pb-16">
