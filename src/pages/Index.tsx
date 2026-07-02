@@ -188,25 +188,6 @@ const Index = () => {
   const homeRepacks = useMemo(() => (recentRepacks || []) as Repack[], [recentRepacks]);
   const matchedRepacks = useMemo(() => (searchedRepacks || []) as Repack[], [searchedRepacks]);
 
-  // Catálogo composto apenas por repacks
-  const catalogItems = useMemo(
-    () => homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
-    [homeRepacks]
-  );
-
-  const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
-  const catalogPageItems = useMemo(
-    () => catalogItems.slice(catalogPage * CATALOG_PAGE_SIZE, catalogPage * CATALOG_PAGE_SIZE + CATALOG_PAGE_SIZE),
-    [catalogItems, catalogPage]
-  );
-
-  useEffect(() => {
-    if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
-  }, [catalogTotalPages, catalogPage]);
-
-  // Repacks não possuem categorias; mantemos apenas o filtro "Denuvo"
-  const allCategories = useMemo(() => ["Denuvo"], []);
-
   const denuvoKeywords = [
     "black myth", "wukong", "hogwarts", "star wars jedi", "resident evil",
     "assassin's creed", "assassins creed", "mortal kombat", "tekken",
@@ -227,28 +208,94 @@ const Index = () => {
     return value * (multipliers[unit] || 1);
   };
 
-  // Nova Geração: repacks mais recentes (já ordenados por data)
-  const recentes = useMemo(() => homeRepacks.slice(0, 48), [homeRepacks]);
-  // Mais Baixados: proxy pelos maiores títulos
-  const emAlta = useMemo(
-    () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
-    [homeRepacks]
+  // Catálogo composto por jogos tradicionais + repacks
+  const catalogItems = useMemo(
+    () => [
+      ...games.map((g) => ({ type: "game" as const, id: g.id, data: g })),
+      ...homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    ],
+    [games, homeRepacks]
   );
-  // Denuvo: repacks cujo título bate com jogos AAA protegidos
+
+  const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
+  const catalogPageItems = useMemo(
+    () => catalogItems.slice(catalogPage * CATALOG_PAGE_SIZE, catalogPage * CATALOG_PAGE_SIZE + CATALOG_PAGE_SIZE),
+    [catalogItems, catalogPage]
+  );
+
+  useEffect(() => {
+    if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
+  }, [catalogTotalPages, catalogPage]);
+
+  // Categorias vindas dos jogos + filtro "Denuvo"
+  const allCategories = useMemo(() => {
+    const set = new Set<string>();
+    games.forEach((g) => (g.categorias || []).forEach((c) => c && set.add(c)));
+    return ["Denuvo", ...Array.from(set).sort()];
+  }, [games]);
+
+  // ------- Seções da Home -------
+  // Denuvo: jogos AAA protegidos + repacks correspondentes
+  const denuvoGames = useMemo(
+    () => games.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k))),
+    [games]
+  );
   const denuvoRepacks = useMemo(() => {
     const matches = homeRepacks.filter((r) =>
       denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k))
     );
-    return (matches.length > 0 ? matches : homeRepacks).slice(0, 48);
+    return matches.slice(0, 48);
   }, [homeRepacks]);
-
+  // Mais Baixados: jogos por download_count + repacks maiores
+  const maisBaixadosGames = useMemo(
+    () => [...games].sort((a, b) => (b.download_count || 0) - (a.download_count || 0)).slice(0, 24),
+    [games]
+  );
+  const emAlta = useMemo(
+    () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
+    [homeRepacks]
+  );
+  // Nova Geração: lançamentos recentes + repacks recentes
+  const novaGeracaoGames = useMemo(
+    () => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 24),
+    [games]
+  );
+  const recentes = useMemo(() => homeRepacks.slice(0, 48), [homeRepacks]);
 
   const isLoading = gamesLoading;
   const isError = gamesError;
 
   const isSearching = busca || categoria !== "todas";
 
+  // Jogos tradicionais filtrados pela busca/categoria/ordenação
+  const filteredGames = useMemo(() => {
+    let result = [...games];
+    if (busca) {
+      const term = busca.toLowerCase();
+      result = result.filter((g) =>
+        (g.nome || "").toLowerCase().includes(term) ||
+        (g.desenvolvedor || "").toLowerCase().includes(term) ||
+        (g.categorias || []).some((c) => c.toLowerCase().includes(term))
+      );
+    }
+    if (categoria === "Denuvo") {
+      result = result.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k)));
+    } else if (categoria !== "todas") {
+      result = result.filter((g) => (g.categorias || []).includes(categoria));
+    }
+    if (ordenacao === "nome") {
+      result.sort((a, b) => (a.nome || "").localeCompare(b.nome || ""));
+    } else if (ordenacao === "popular") {
+      result.sort((a, b) => (b.download_count || 0) - (a.download_count || 0));
+    } else if (ordenacao === "lancamento") {
+      result.sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || ""));
+    }
+    return result;
+  }, [games, busca, categoria, ordenacao]);
+
   const filteredRepacks = useMemo(() => {
+    // Repacks não possuem categorias; ignora-os em filtros de categoria específicos
+    if (categoria !== "todas" && categoria !== "Denuvo") return [] as Repack[];
     let result = busca.trim() ? matchedRepacks : homeRepacks;
     if (busca) {
       const term = busca.toLowerCase();
@@ -269,6 +316,15 @@ const Index = () => {
     }
     return sorted;
   }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks]);
+
+  // Resultados combinados (jogos + repacks) para a busca/filtro
+  const filteredItems = useMemo(
+    () => [
+      ...filteredGames.map((g) => ({ type: "game" as const, id: g.id, data: g })),
+      ...filteredRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    ],
+    [filteredGames, filteredRepacks]
+  );
 
   const firstHeroImage = featured && featured.length > 0 ? (featured[0].hero_image || featured[0].imagem) : undefined;
   const firstHeroPoster = featured && featured.length > 0 ? (featured[0].vertical_image || featured[0].imagem) : undefined;
