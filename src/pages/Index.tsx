@@ -75,6 +75,7 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, [busca, setSearchParams]);
 
+  const queryClient = useQueryClient();
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
   const [catalogPage, setCatalogPage] = useState(0);
