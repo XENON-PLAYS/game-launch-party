@@ -1,7 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { Search, SlidersHorizontal, LayoutGrid, X, Target, Sword, Ghost, Shield, Compass, Users, Clock, Zap, Star, Gamepad2, Layers, Trash2, Flame, Rocket, ChevronLeft, ChevronRight } from "lucide-react";
 import { GameSection } from "@/components/GameSection";
-import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
 import { HeroCarousel } from "@/components/HeroCarousel";
