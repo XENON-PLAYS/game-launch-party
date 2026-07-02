@@ -435,7 +435,10 @@ const GameDetail = () => {
 
             {downloadLinks && downloadLinks.length > 0 ? (
               <div className="grid gap-6">
-                {downloadLinks.map((link) => (
+                {downloadLinks.map((link) => {
+                  const detected = classifyLink(link.url || "");
+                  const typeLabel = detected.kind === "torrent" ? "Torrent" : detected.label;
+                  return (
                   <button
                     key={link.id}
                     onClick={() => handleDownload(link.id, link.url)}
@@ -451,11 +454,16 @@ const GameDetail = () => {
                         <Download className="w-6 h-6 sm:w-8 sm:h-8" />
                       </div>
                       <div className="text-left space-y-1">
-                        <p className="font-black text-lg sm:text-xl lg:text-2xl uppercase tracking-widest leading-none">{link.label}</p>
-                        <p className="text-responsive-small text-muted-foreground opacity-70 group-hover:text-primary transition-colors">Servidor Dedicado de Alta Performance</p>
+                        <p className="font-black text-lg sm:text-xl lg:text-2xl uppercase tracking-widest leading-none">{link.label || typeLabel}</p>
+                        <p className="text-responsive-small text-muted-foreground opacity-70 group-hover:text-primary transition-colors">
+                          {detected.kind === "torrent" ? "Download via Torrent / Magnet" : `Download Direto via ${typeLabel}`}
+                        </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4 sm:gap-6">
+                      <span className="hidden sm:inline-flex px-4 py-2 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest bg-primary/10 text-primary border border-primary/20">
+                        {typeLabel}
+                      </span>
                       <div className={`flex items-center gap-3 px-6 py-2 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest ${
                         link.status === "online" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-red-500/10 text-red-400 border border-red-500/20"
                       }`}>
@@ -465,7 +473,8 @@ const GameDetail = () => {
                       <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:translate-x-2 transition-transform" />
                     </div>
                   </button>
-                ))}
+                  );
+                })}
                 
               </div>
             ) : (
