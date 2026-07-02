@@ -217,8 +217,8 @@ const RepackDownload = () => {
                   )}
                 </div>
 
-                <h1 className="text-3xl sm:text-responsive-h1 leading-none uppercase">
-                  {repack?.title}
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black leading-tight uppercase break-words hyphens-auto line-clamp-3" title={repack?.title}>
+                  {cleanRepackTitle(repack?.title)}
                 </h1>
 
                 {repack?.description && (
