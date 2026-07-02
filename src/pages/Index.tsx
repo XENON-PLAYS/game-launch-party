@@ -80,6 +80,8 @@ const Index = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [catalogPage, setCatalogPage] = useState(0);
   const CATALOG_PAGE_SIZE = 18;
+  const [sectionsPage, setSectionsPage] = useState(0);
+  const SECTIONS_PAGE_SIZE = 12;
 
   const { data: gamesData, isLoading: gamesLoading, isError: gamesError, refetch } = useQuery({
     queryKey: ["games"],
