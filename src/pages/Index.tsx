@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
 import { Search, SlidersHorizontal, LayoutGrid, X, Target, Sword, Ghost, Shield, Compass, Users, Clock, Zap, Star, Gamepad2, Layers, Trash2, Flame, Rocket, ChevronLeft, ChevronRight } from "lucide-react";
-import { GameCard } from "@/components/GameCard";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
@@ -221,6 +220,28 @@ const Index = () => {
     "wo long", "street fighter", "tales of", "monster hunter",
   ];
 
+  // Palavras-chave por categoria para filtrar os repacks (que não possuem categorias próprias)
+  const categoryKeywords: Record<string, string[]> = {
+    "Ação": ["god of war", "devil may cry", "assassin", "batman", "spider-man", "spiderman", "max payne", "just cause", "sleeping dogs", "metal gear", "ninja gaiden", "dmc"],
+    "Aventura": ["tomb raider", "uncharted", "indiana", "zelda", "life is strange", "detroit", "heavy rain", "a way out", "brothers"],
+    "RPG": ["elden ring", "witcher", "dark souls", "skyrim", "elder scrolls", "fallout", "dragon age", "mass effect", "final fantasy", "persona", "cyberpunk", "baldur", "diablo", "dragon's dogma", "dragons dogma", "kingdom come", "divinity"],
+    "Estratégia": ["civilization", "total war", "age of empires", "xcom", "company of heroes", "anno", "crusader kings", "stellaris", "starcraft", "warcraft"],
+    "Simulação": ["the sims", "cities skylines", "planet", "farming simulator", "flight simulator", "truck simulator", "house flipper"],
+    "Esportes": ["fifa", "ea sports fc", "nba", "pes", "efootball", "madden", "wwe", "tony hawk"],
+    "Corrida": ["need for speed", "forza", "dirt", "f1", "gran turismo", "wreckfest", "the crew", "grid", "assetto"],
+    "Luta": ["mortal kombat", "tekken", "street fighter", "injustice", "guilty gear", "dragon ball", "naruto", "for honor"],
+    "Terror": ["resident evil", "silent hill", "outlast", "dead space", "amnesia", "the evil within", "phasmophobia", "dead by daylight", "alien isolation", "layers of fear"],
+    "Mundo Aberto": ["grand theft auto", "gta", "red dead", "far cry", "watch dogs", "saints row", "horizon", "ghost of", "days gone"],
+    "FPS": ["call of duty", "battlefield", "doom", "counter-strike", "counter strike", "halo", "wolfenstein", "rainbow six", "borderlands", "titanfall", "metro"],
+    "Sobrevivência": ["the forest", "raft", "subnautica", "green hell", "valheim", "rust", "dayz", "grounded", "conan exiles", "state of decay"],
+    "Sandbox": ["minecraft", "terraria", "garry", "teardown"],
+    "Plataforma": ["mario", "sonic", "crash", "spyro", "ori", "hollow knight", "celeste", "rayman", "little nightmares"],
+    "Puzzle": ["portal", "the witness", "talos", "baba is you", "tetris", "limbo", "inside"],
+    "Indie": ["hades", "stardew", "cuphead", "undertale", "dead cells"],
+    "Multijogador": ["among us", "fall guys", "gang beasts", "overcooked", "it takes two"],
+    "MMORPG": ["world of warcraft", "final fantasy xiv", "guild wars", "new world", "black desert", "lost ark"],
+  };
+
   const parseRepackSize = (s: string | null) => {
     if (!s) return 0;
     const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
@@ -231,13 +252,10 @@ const Index = () => {
     return value * (multipliers[unit] || 1);
   };
 
-  // Catálogo composto por jogos tradicionais + repacks
+  // Catálogo composto apenas por repacks
   const catalogItems = useMemo(
-    () => [
-      ...games.map((g) => ({ type: "game" as const, id: g.id, data: g })),
-      ...homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
-    ],
-    [games, homeRepacks]
+    () => homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    [homeRepacks]
   );
 
   const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
@@ -250,39 +268,25 @@ const Index = () => {
     if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
   }, [catalogTotalPages, catalogPage]);
 
-  // Categorias vindas dos jogos + filtro "Denuvo"
-  const allCategories = useMemo(() => {
-    const set = new Set<string>();
-    games.forEach((g) => (g.categorias || []).forEach((c) => c && set.add(c)));
-    return ["Denuvo", ...Array.from(set).sort()];
-  }, [games]);
-
-  // ------- Seções da Home -------
-  // Denuvo: jogos AAA protegidos + repacks correspondentes
-  const denuvoGames = useMemo(
-    () => games.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k))),
-    [games]
+  // Categorias (fixas) + filtro "Denuvo", agora funcionais sobre repacks
+  const allCategories = useMemo(
+    () => ["Denuvo", ...Object.keys(categoryKeywords).sort((a, b) => a.localeCompare(b))],
+    []
   );
+
+  // ------- Seções da Home (somente repacks) -------
   const denuvoRepacks = useMemo(() => {
     const matches = homeRepacks.filter((r) =>
       denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k))
     );
     return matches.slice(0, 48);
   }, [homeRepacks]);
-  // Mais Baixados: jogos por download_count + repacks maiores
-  const maisBaixadosGames = useMemo(
-    () => [...games].sort((a, b) => (b.download_count || 0) - (a.download_count || 0)).slice(0, 24),
-    [games]
-  );
+  // Mais Baixados: repacks maiores primeiro
   const emAlta = useMemo(
     () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
     [homeRepacks]
   );
-  // Nova Geração: lançamentos recentes + repacks recentes
-  const novaGeracaoGames = useMemo(
-    () => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 24),
-    [games]
-  );
+  // Nova Geração: repacks mais recentes
   const recentes = useMemo(() => homeRepacks.slice(0, 48), [homeRepacks]);
 
   const isLoading = gamesLoading;
@@ -290,35 +294,7 @@ const Index = () => {
 
   const isSearching = busca || categoria !== "todas";
 
-  // Jogos tradicionais filtrados pela busca/categoria/ordenação
-  const filteredGames = useMemo(() => {
-    let result = [...games];
-    if (busca) {
-      const term = busca.toLowerCase();
-      result = result.filter((g) =>
-        (g.nome || "").toLowerCase().includes(term) ||
-        (g.desenvolvedor || "").toLowerCase().includes(term) ||
-        (g.categorias || []).some((c) => c.toLowerCase().includes(term))
-      );
-    }
-    if (categoria === "Denuvo") {
-      result = result.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k)));
-    } else if (categoria !== "todas") {
-      result = result.filter((g) => (g.categorias || []).includes(categoria));
-    }
-    if (ordenacao === "nome") {
-      result.sort((a, b) => (a.nome || "").localeCompare(b.nome || ""));
-    } else if (ordenacao === "popular") {
-      result.sort((a, b) => (b.download_count || 0) - (a.download_count || 0));
-    } else if (ordenacao === "lancamento") {
-      result.sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || ""));
-    }
-    return result;
-  }, [games, busca, categoria, ordenacao]);
-
   const filteredRepacks = useMemo(() => {
-    // Repacks não possuem categorias; ignora-os em filtros de categoria específicos
-    if (categoria !== "todas" && categoria !== "Denuvo") return [] as Repack[];
     let result = busca.trim() ? matchedRepacks : homeRepacks;
     if (busca) {
       const term = busca.toLowerCase();
@@ -326,6 +302,9 @@ const Index = () => {
     }
     if (categoria === "Denuvo") {
       result = result.filter((r) => denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k)));
+    } else if (categoria !== "todas") {
+      const kws = categoryKeywords[categoria] || [];
+      result = result.filter((r) => kws.some((k) => (r.title || "").toLowerCase().includes(k)));
     }
     const sorted = [...result];
     if (ordenacao === "pesado") {
@@ -340,14 +319,12 @@ const Index = () => {
     return sorted;
   }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks]);
 
-  // Resultados combinados (jogos + repacks) para a busca/filtro
+  // Resultados (somente repacks) para a busca/filtro
   const filteredItems = useMemo(
-    () => [
-      ...filteredGames.map((g) => ({ type: "game" as const, id: g.id, data: g })),
-      ...filteredRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
-    ],
-    [filteredGames, filteredRepacks]
+    () => filteredRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    [filteredRepacks]
   );
+
 
   const firstHeroImage = featured && featured.length > 0 ? (featured[0].hero_image || featured[0].imagem) : undefined;
   const firstHeroPoster = featured && featured.length > 0 ? (featured[0].vertical_image || featured[0].imagem) : undefined;
@@ -625,29 +602,24 @@ const Index = () => {
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                {filteredItems.map((item) =>
-                  item.type === "game" ? (
-                    <GameCard key={`g-${item.id}`} game={item.data} repack={gameRepackMap[item.id]} />
-
-                  ) : (
-                    <RepackCard key={`r-${item.id}`} repack={item.data} />
-                  )
-                )}
+                {filteredItems.map((item) => (
+                  <RepackCard key={`r-${item.id}`} repack={item.data} />
+                ))}
               </div>
             )}
           </motion.div>
         ) : (
           <div className="space-y-16 md:space-y-32">
-            <GameSection title="JOGOS COM DENUVO" games={denuvoGames} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
-            <GameSection title="Jogos Mais Baixados" games={maisBaixadosGames} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
-            <GameSection title="Jogos da Nova Geração" games={novaGeracaoGames} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="JOGOS COM DENUVO" games={[]} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="Jogos Mais Baixados" games={[]} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="Jogos da Nova Geração" games={[]} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
 
             {(() => {
               const sectionsTotalPages = Math.max(
                 1,
-                Math.ceil((denuvoGames.length + denuvoRepacks.length) / SECTIONS_PAGE_SIZE),
-                Math.ceil((maisBaixadosGames.length + emAlta.length) / SECTIONS_PAGE_SIZE),
-                Math.ceil((novaGeracaoGames.length + recentes.length) / SECTIONS_PAGE_SIZE)
+                Math.ceil(denuvoRepacks.length / SECTIONS_PAGE_SIZE),
+                Math.ceil(emAlta.length / SECTIONS_PAGE_SIZE),
+                Math.ceil(recentes.length / SECTIONS_PAGE_SIZE)
               );
               if (sectionsTotalPages <= 1) return null;
               return (
@@ -698,14 +670,9 @@ const Index = () => {
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                {catalogPageItems.map((item) =>
-                  item.type === "game" ? (
-                    <GameCard key={`g-${item.id}`} game={item.data} repack={gameRepackMap[item.id]} />
-
-                  ) : (
-                    <RepackCard key={`r-${item.id}`} repack={item.data} />
-                  )
-                )}
+                {catalogPageItems.map((item) => (
+                  <RepackCard key={`r-${item.id}`} repack={item.data} />
+                ))}
               </div>
 
               {catalogTotalPages > 1 && (
