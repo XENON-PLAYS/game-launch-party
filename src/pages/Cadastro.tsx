@@ -6,13 +6,10 @@ import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { lovable } from "@/integrations/lovable/index";
 import { MeteorBackground } from "@/components/MeteorBackground";
-import { getRedirectUrl } from "@/config/auth";
-import { getAuthErrorMessage } from "@/lib/auth-errors";
 
 const Cadastro = () => {
-  const { register, user, isLoading } = useAuth();
+  const { register, signInWithGoogle, user, isLoading } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
@@ -74,28 +71,17 @@ const Cadastro = () => {
     setGoogleLoading(true);
     setErro("");
     try {
-      const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: getRedirectUrl(),
-      });
-
-      if (result.error) {
-        const errorMsg = getAuthErrorMessage(result.error);
-        setErro(errorMsg);
-        toast.error(errorMsg);
+      const { error } = await signInWithGoogle();
+      if (error) {
+        setErro(error);
+        toast.error(error);
         setGoogleLoading(false);
-        return;
       }
-
-      if (result.redirected) {
-        return;
-      }
-
-      toast.success("Bem-vindo!");
-      navigate(redirect);
+      // On success the browser redirects to Google; no further action needed.
     } catch (err) {
       toast.error("Houve um erro técnico ao tentar cadastrar com o Google.");
+      setGoogleLoading(false);
     }
-    setGoogleLoading(false);
   };
 
   return (

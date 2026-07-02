@@ -28,6 +28,7 @@ interface AuthContextType {
   isLoading: boolean;
   login: (email: string, password: string) => Promise<{ error: string | null }>;
   register: (data: { email: string; password: string; displayName: string }) => Promise<{ error: string | null }>;
+  signInWithGoogle: () => Promise<{ error: string | null }>;
   logout: () => Promise<void>;
   refreshProfile: () => Promise<void>;
 }
@@ -145,6 +146,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error: error ? getAuthErrorMessage(error) : null };
   }, []);
 
+  const signInWithGoogle = useCallback(async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: getRedirectUrl(),
+        queryParams: { prompt: "select_account" },
+      },
+    });
+    return { error: error ? getAuthErrorMessage(error) : null };
+  }, []);
+
   const logout = useCallback(async () => {
     // Marca como offline sem bloquear o logout (best-effort)
     if (user) {
@@ -179,7 +191,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [user, fetchProfile]);
 
   return (
-    <AuthContext.Provider value={{ user, profile, isAdmin, isLoading, login, register, logout, refreshProfile }}>
+    <AuthContext.Provider value={{ user, profile, isAdmin, isLoading, login, register, signInWithGoogle, logout, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   );
