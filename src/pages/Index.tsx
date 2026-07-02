@@ -686,7 +686,7 @@ const Index = () => {
 
                       <div className="pt-6 border-t border-border/20">
                         <button 
-                          onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
+                          onClick={() => { setBusca(""); setCategoria("todas"); setFonte("todas"); setOrdenacao("nome"); }}
                           className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-xs font-black text-muted-foreground hover:text-destructive hover:bg-destructive/5 transition-all border border-dashed border-border/50 hover:border-destructive/30 uppercase tracking-widest"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -791,7 +791,7 @@ const Index = () => {
                   </p>
                 </div>
                 <button 
-                  onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
+                  onClick={() => { setBusca(""); setCategoria("todas"); setFonte("todas"); setOrdenacao("nome"); }}
                   className="px-10 py-4 bg-primary text-white hover:bg-primary/90 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-primary/20"
                 >
                   Limpar Busca
