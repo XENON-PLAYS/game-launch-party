@@ -492,8 +492,8 @@ const Index = () => {
                             : "bg-card/50 border-border/50 hover:border-primary/30 hover:bg-card/80 text-muted-foreground hover:text-foreground"
                           }`}
                         >
-                          <LayoutGrid className="w-4 h-4" />
-                          <span>TODAS</span>
+                          <LayoutGrid className="w-4 h-4 shrink-0" />
+                          <span className="whitespace-nowrap">TODAS</span>
                         </button>
                         {allCategories.map((cat) => {
                           const Icon = categoryIconMap[cat] || Gamepad2;
@@ -507,8 +507,8 @@ const Index = () => {
                                 : "bg-card/50 border-border/50 hover:border-primary/30 hover:bg-card/80 text-muted-foreground hover:text-foreground"
                               }`}
                             >
-                              <Icon className="w-4 h-4" />
-                              <span className="uppercase">{cat}</span>
+                              <Icon className="w-4 h-4 shrink-0" />
+                              <span className="uppercase whitespace-nowrap truncate">{cat}</span>
                             </button>
                           );
                         })}
