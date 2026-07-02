@@ -189,8 +189,10 @@ const RepackDownload = () => {
       </section>
 
       <main className="container-responsive py-12 sm:py-24 lg:py-32 space-y-16 sm:space-y-32">
-        {/* Download Section */}
-        <section id="download-section" className="space-y-12 sm:space-y-16">
+        {/* Download & Requirements Section */}
+        <section id="download-section" className="grid lg:grid-cols-2 gap-12 sm:gap-24">
+          {/* Download Area */}
+          <div className="space-y-12 sm:space-y-16">
           <div className="flex items-center gap-6 sm:gap-8">
             <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
               <Download className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
@@ -204,7 +206,7 @@ const RepackDownload = () => {
             </div>
           </div>
 
-          <div className="max-w-3xl mx-auto w-full">
+          <div className="w-full">
             {!downloadStarted ? (
               <div className="bg-card border-2 border-border rounded-[2.5rem] sm:rounded-[3rem] p-6 sm:p-12 md:p-16 space-y-10 sm:space-y-14 shadow-2xl shadow-black/5 relative overflow-hidden">
                 <div className="flex justify-end">
