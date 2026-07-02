@@ -17,7 +17,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect, useRef } from "react";
-import { OnlineUsers } from "./OnlineUsers";
+
 import { NotificationBell } from "./NotificationBell";
 import { optimizeImageUrl } from "@/lib/utils";
 import pirateLogo from "@/assets/logo-pirate.png";
