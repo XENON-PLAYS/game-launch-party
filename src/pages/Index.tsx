@@ -189,6 +189,25 @@ const Index = () => {
   // Todos os repacks ficam somente no catálogo "Explore o Catálogo"
   const repacksCatalogo = useMemo(() => homeRepacks, [homeRepacks]);
 
+  // Catálogo combinado (jogos + repacks) para paginação otimizada
+  const catalogItems = useMemo(
+    () => [
+      ...games.map((g) => ({ type: "game" as const, id: g.id, data: g })),
+      ...repacksCatalogo.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    ],
+    [games, repacksCatalogo]
+  );
+
+  const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
+  const catalogPageItems = useMemo(
+    () => catalogItems.slice(catalogPage * CATALOG_PAGE_SIZE, catalogPage * CATALOG_PAGE_SIZE + CATALOG_PAGE_SIZE),
+    [catalogItems, catalogPage]
+  );
+
+  useEffect(() => {
+    if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
+  }, [catalogTotalPages, catalogPage]);
+
   const allCategories = useMemo(() => {
     return Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort();
   }, [games]);
