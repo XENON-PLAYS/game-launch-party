@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Info, Star } from "lucide-react";
+import { Info, Star, Download } from "lucide-react";
 import { Database } from "@/integrations/supabase/types";
 import { motion } from "framer-motion";
 import { optimizeImageUrl } from "@/lib/utils";
