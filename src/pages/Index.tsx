@@ -538,9 +538,9 @@ const Index = () => {
             >
               <SlidersHorizontal className={`w-4 h-4 transition-transform duration-500 ${showFilters ? "rotate-180" : ""}`} />
               <span>Filtros</span>
-              {(categoria !== "todas" || ordenacao !== "nome") && (
+              {(categoria !== "todas" || fonte !== "todas" || ordenacao !== "nome") && (
                 <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-black ${showFilters ? "bg-white text-primary" : "bg-primary text-white"}`}>
-                  {(categoria !== "todas" ? 1 : 0) + (ordenacao !== "nome" ? 1 : 0)}
+                  {(categoria !== "todas" ? 1 : 0) + (fonte !== "todas" ? 1 : 0) + (ordenacao !== "nome" ? 1 : 0)}
                 </span>
               )}
             </button>
