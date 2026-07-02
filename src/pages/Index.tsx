@@ -228,8 +228,11 @@ const Index = () => {
       "Star Wars Jedi: Survivor",
       "Star Wars Outlaws",
       "Resident Evil 2 Remake",
+      "Resident Evil 2 2019",
       "Resident Evil 3 Remake",
+      "Resident Evil 3 2020",
       "Resident Evil 4 Remake",
+      "Resident Evil 4 2023",
       "Resident Evil 7 Biohazard",
       "Resident Evil Village",
       "Assassin's Creed Origins",
@@ -254,6 +257,8 @@ const Index = () => {
       "Like a Dragon: Ishin",
       "Like a Dragon Gaiden: The Man Who Erased His Name",
       "Dead Space Remake",
+      "Dead Space Remake 2023",
+      "Dead Space 2023",
       "Hitman 3",
       "Hitman World of Assassination",
       "EA Sports FC 24",
@@ -295,7 +300,7 @@ const Index = () => {
 
   const isDenuvoRepack = useCallback((r: Repack) => {
     const key = normalizeTitle(r.title || "");
-    return denuvoTitleKeys.has(key);
+    return [...denuvoTitleKeys].some((denuvoKey) => key === denuvoKey || key.startsWith(denuvoKey));
   }, [denuvoTitleKeys]);
 
 
