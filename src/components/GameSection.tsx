@@ -9,7 +9,7 @@ type Game = Tables<"games">;
 
 interface GameSectionProps {
   title: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
   games: Game[];
   repacks?: Repack[];
   page?: number;
