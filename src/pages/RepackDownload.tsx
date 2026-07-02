@@ -152,6 +152,11 @@ const RepackDownload = () => {
   const cover = repack?.cover_url || (repack ? randomCover(repack.id) : "");
   const banner = repack?.banner_url || cover;
   const screenshots = repack?.screenshots ?? [];
+  const media: { type: "video" | "image"; src: string }[] = [
+    ...(repack?.trailer_url ? [{ type: "video" as const, src: repack.trailer_url }] : []),
+    ...screenshots.map((src) => ({ type: "image" as const, src })),
+  ];
+  const currentMedia = media[Math.min(mediaIndex, media.length - 1)];
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
