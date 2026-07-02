@@ -1,6 +1,16 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
+// Normaliza texto para comparação (sem acentos, símbolos, minúsculo)
+function normalize(s: string): string {
+  return s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
 // Limpa o título do repack para melhorar a busca na Steam
 function cleanTitle(raw: string): string {
   let s = raw;
@@ -16,24 +26,92 @@ function cleanTitle(raw: string): string {
   return s || raw.trim();
 }
 
-async function resolveCover(title: string): Promise<string | null> {
-  const term = cleanTitle(title);
+// Similaridade simples baseada em tokens compartilhados (Jaccard-ish)
+function similarity(a: string, b: string): number {
+  const ta = new Set(normalize(a).split(" ").filter(Boolean));
+  const tb = new Set(normalize(b).split(" ").filter(Boolean));
+  if (ta.size === 0 || tb.size === 0) return 0;
+  let inter = 0;
+  for (const t of ta) if (tb.has(t)) inter++;
+  const union = new Set([...ta, ...tb]).size;
+  return inter / union;
+}
+
+async function exists(url: string): Promise<boolean> {
+  try {
+    const res = await fetch(url, { method: "GET", headers: { "User-Agent": "Mozilla/5.0" } });
+    if (!res.ok) return false;
+    const type = res.headers.get("content-type") || "";
+    const len = Number(res.headers.get("content-length") || "0");
+    // imagens de placeholder da Steam costumam ser muito pequenas
+    return type.startsWith("image/") && (len === 0 || len > 1500);
+  } catch {
+    return false;
+  }
+}
+
+// Retorna a melhor URL de arte que exista de fato para um appid
+async function bestArt(appid: number): Promise<string | null> {
+  const candidates = [
+    `https://cdn.cloudflare.steamstatic.com/steam/apps/${appid}/library_600x900.jpg`,
+    `https://cdn.cloudflare.steamstatic.com/steam/apps/${appid}/library_600x900_2x.jpg`,
+    `https://cdn.cloudflare.steamstatic.com/steam/apps/${appid}/header.jpg`,
+    `https://cdn.cloudflare.steamstatic.com/steam/apps/${appid}/capsule_616x353.jpg`,
+  ];
+  for (const url of candidates) {
+    if (await exists(url)) return url;
+  }
+  return null;
+}
+
+async function searchSteam(term: string): Promise<Array<{ id: number; name: string }>> {
   try {
     const url = `https://store.steampowered.com/api/storesearch/?term=${encodeURIComponent(term)}&cc=us&l=en`;
     const res = await fetch(url, {
       headers: { "Accept": "application/json", "User-Agent": "Mozilla/5.0" },
     });
-    if (!res.ok) return null;
-    const json = await res.json();
-    const items = Array.isArray(json?.items) ? json.items : [];
-    if (items.length === 0) return null;
-    const appid = items[0]?.id;
-    if (!appid) return null;
-    // capa vertical estilo Steam (600x900)
-    return `https://cdn.cloudflare.steamstatic.com/steam/apps/${appid}/library_600x900.jpg`;
+    if (!res.ok) return [];
+    const j = await res.json();
+    const items = Array.isArray(j?.items) ? j.items : [];
+    return items
+      .filter((it: unknown) => it && typeof (it as { id: unknown }).id === "number")
+      .map((it: { id: number; name: string }) => ({ id: it.id, name: it.name ?? "" }));
   } catch {
-    return null;
+    return [];
   }
+}
+
+async function resolveCover(title: string): Promise<string | null> {
+  const cleaned = cleanTitle(title);
+  // Tenta o título limpo e, se falhar, uma versão ainda mais curta (primeiras palavras)
+  const words = cleaned.split(" ");
+  const attempts = Array.from(
+    new Set([
+      cleaned,
+      words.slice(0, 4).join(" "),
+      words.slice(0, 2).join(" "),
+    ].filter((t) => t.length >= 2)),
+  );
+
+  let bestId: number | null = null;
+  let bestScore = 0;
+
+  for (const term of attempts) {
+    const items = await searchSteam(term);
+    for (const it of items.slice(0, 8)) {
+      const score = similarity(cleaned, it.name);
+      if (score > bestScore) {
+        bestScore = score;
+        bestId = it.id;
+      }
+    }
+    // match forte encontrado, não precisa continuar tentando
+    if (bestScore >= 0.6) break;
+  }
+
+  // aceita apenas matches razoáveis para evitar capa de jogo errado
+  if (bestId == null || bestScore < 0.34) return null;
+  return await bestArt(bestId);
 }
 
 Deno.serve(async (req) => {
@@ -56,6 +134,8 @@ Deno.serve(async (req) => {
     const ids: string[] = Array.isArray(body?.ids)
       ? body.ids.filter((x: unknown) => typeof x === "string").slice(0, 60)
       : [];
+    // Permite reprocessar capas já salvas (para corrigir capas genéricas/erradas)
+    const force = body?.force === true;
 
     if (ids.length === 0) return json({ covers: {} });
 
@@ -69,7 +149,7 @@ Deno.serve(async (req) => {
     const toResolve: { id: string; title: string }[] = [];
 
     for (const r of rows ?? []) {
-      if (r.cover_url) {
+      if (r.cover_url && !force) {
         covers[r.id] = r.cover_url;
       } else {
         toResolve.push({ id: r.id, title: r.title });
@@ -77,7 +157,7 @@ Deno.serve(async (req) => {
     }
 
     // Resolve em pequenos lotes para não sobrecarregar
-    const batchSize = 6;
+    const batchSize = 5;
     for (let i = 0; i < toResolve.length; i += batchSize) {
       const batch = toResolve.slice(i, i + batchSize);
       const results = await Promise.all(
