@@ -521,7 +521,7 @@ const Index = () => {
               </div>
             </div>
 
-            {filteredGames.length === 0 && matchedRepacks.length === 0 ? (
+            {filteredRepacks.length === 0 ? (
               <div className="text-center py-32 space-y-8 bg-white/5 rounded-[3rem] border border-dashed border-white/10 max-w-2xl mx-auto px-10">
                 <div className="relative w-24 h-24 mx-auto">
                   <Gamepad2 className="w-24 h-24 text-gray-800" />
@@ -545,37 +545,10 @@ const Index = () => {
                 </button>
               </div>
             ) : (
-              <div className="space-y-12">
-                {filteredGames.length > 0 && (
-                  <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                    {filteredGames.map((game, i) => (
-                      <motion.div 
-                        key={game.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.03 }}
-                      >
-                        <GameCard game={game} />
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
-
-                {matchedRepacks.length > 0 && (
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-1.5 h-6 bg-primary rounded-full" />
-                      <h3 className="text-sm font-black uppercase tracking-widest text-foreground/80">
-                        Repacks ({matchedRepacks.length})
-                      </h3>
-                    </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                      {matchedRepacks.map((r) => (
-                        <RepackCard key={r.id} repack={r} />
-                      ))}
-                    </div>
-                  </div>
-                )}
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
+                {filteredRepacks.map((r) => (
+                  <RepackCard key={r.id} repack={r} />
+                ))}
               </div>
             )}
           </motion.div>
