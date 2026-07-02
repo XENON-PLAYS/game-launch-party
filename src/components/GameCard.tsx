@@ -4,18 +4,23 @@ import { Database } from "@/integrations/supabase/types";
 import { motion } from "framer-motion";
 import { optimizeImageUrl } from "@/lib/utils";
 import React from "react";
+import type { Repack } from "./RepackCard";
 
 type Game = Database["public"]["Tables"]["games"]["Row"];
 
 
 interface GameCardProps {
   game: Game;
+  /** Repack correspondente: quando presente, o card usa os dados/download do repack. */
+  repack?: Repack | null;
 }
 
-export const GameCard = React.memo(({ game }: GameCardProps) => {
+export const GameCard = React.memo(({ game, repack }: GameCardProps) => {
+  const target = repack ? `/repack/${repack.id}` : `/jogo/${game.slug || game.id}`;
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.src = "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800";
   };
+
 
   return (
     <motion.div 
