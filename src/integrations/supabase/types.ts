@@ -595,7 +595,7 @@ export type Database = {
           description: string | null
           file_size: string | null
           id: string | null
-          screenshots: string | null
+          screenshots: string[] | null
           sources: string[] | null
           steam_appid: number | null
           title: string | null
