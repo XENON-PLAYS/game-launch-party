@@ -217,15 +217,28 @@ const Index = () => {
     return map;
   }, [games, homeRepacks]);
 
+  // Lista curada de jogos que REALMENTE possuem Denuvo (verificados).
+  // Termos específicos evitam falsos positivos (ex.: Resident Evil clássicos sem Denuvo).
   const denuvoKeywords = [
-    "black myth", "wukong", "hogwarts", "star wars jedi", "resident evil",
-    "assassin's creed", "assassins creed", "mortal kombat", "tekken",
-    "dragon's dogma", "dragons dogma", "final fantasy", "sonic",
-    "like a dragon", "yakuza", "dead space", "hitman", "football manager",
-    "ea sports fc", "fifa", "f1", "need for speed", "lords of the fallen",
+    "black myth", "wukong", "hogwarts legacy", "star wars jedi", "jedi survivor", "jedi fallen order",
+    "resident evil 2", "resident evil 3", "resident evil 4", "resident evil 7", "resident evil village",
+    "assassin's creed origins", "assassins creed origins", "assassin's creed odyssey", "assassins creed odyssey",
+    "assassin's creed valhalla", "assassins creed valhalla", "assassin's creed mirage", "assassins creed mirage",
+    "assassin's creed shadows", "assassins creed shadows",
+    "mortal kombat 1", "mortal kombat 11", "tekken 8", "tekken 7",
+    "dragon's dogma 2", "dragons dogma 2", "final fantasy vii remake", "final fantasy vii rebirth",
+    "final fantasy xvi", "final fantasy xv", "sonic frontiers", "sonic superstars", "sonic x shadow",
+    "like a dragon", "yakuza: like a dragon", "dead space", "hitman 3", "hitman world of assassination",
+    "football manager", "ea sports fc", "fc 24", "fc 25", "fifa 21", "fifa 22", "fifa 23",
+    "f1 23", "f1 24", "f1 25", "need for speed unbound", "lords of the fallen",
     "the callisto protocol", "atomic heart", "returnal", "forspoken",
-    "wo long", "street fighter", "tales of", "monster hunter",
+    "wo long", "street fighter 6", "tales of arise", "monster hunter rise", "monster hunter wilds",
+    "elden ring", "silent hill 2", "dragon age: the veilguard", "dragon age the veilguard",
+    "star wars outlaws", "alan wake 2", "avatar: frontiers of pandora", "avatar frontiers of pandora",
+    "prince of persia: the lost crown", "prince of persia the lost crown", "space marine 2",
+    "metaphor: refantazio", "metaphor refantazio", "persona 3 reload", "persona 5 tactica",
   ];
+
 
   // Palavras-chave por categoria para filtrar os repacks (que não possuem categorias próprias)
   const categoryKeywords: Record<string, string[]> = {
