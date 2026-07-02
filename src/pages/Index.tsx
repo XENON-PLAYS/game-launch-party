@@ -330,6 +330,35 @@ const Index = () => {
 
   const isSearching = busca || categoria !== "todas";
 
+  // Jogos populares/mais jogados da Steam (para ranquear a busca por relevância)
+  const popularKeywords = useMemo(
+    () => [
+      "counter-strike", "cs2", "dota", "pubg", "gta", "grand theft auto", "red dead",
+      "elden ring", "cyberpunk", "the witcher", "baldur", "hogwarts", "black myth", "wukong",
+      "god of war", "spider-man", "spiderman", "call of duty", "battlefield", "far cry",
+      "assassin", "resident evil", "monster hunter", "fifa", "ea sports fc", "minecraft",
+      "terraria", "stardew", "rust", "ark", "palworld", "helldivers", "hades", "dark souls",
+      "sekiro", "hollow knight", "forza", "need for speed", "mortal kombat", "tekken",
+      "street fighter", "dragon ball", "naruto", "silent hill", "dead space", "starfield",
+      "diablo", "path of exile", "the sims", "cities skylines", "valheim", "dave the diver",
+    ],
+    []
+  );
+
+  // Pontua a relevância de um repack em relação ao termo buscado
+  const relevanceScore = (r: Repack, term: string) => {
+    const title = (r.title || "").toLowerCase();
+    let score = 0;
+    if (title === term) score += 1000; // título exato
+    else if (title.startsWith(term)) score += 500; // começa com o termo
+    else if (title.includes(` ${term}`)) score += 250; // termo como palavra
+    else if (title.includes(term)) score += 100; // contém o termo
+    if (popularKeywords.some((k) => title.includes(k))) score += 300; // jogo popular/Steam
+    // Quanto mais curto o título em relação ao termo, mais provável ser o jogo base
+    score += Math.max(0, 60 - Math.abs(title.length - term.length));
+    return score;
+  };
+
   const filteredRepacks = useMemo(() => {
     let result = busca.trim() ? matchedRepacks : homeRepacks;
     if (busca) {
@@ -349,11 +378,16 @@ const Index = () => {
       sorted.sort((a, b) => parseRepackSize(a.file_size) - parseRepackSize(b.file_size));
     } else if (ordenacao === "lancamento") {
       sorted.sort((a, b) => (b.upload_date || "").localeCompare(a.upload_date || ""));
+    } else if (busca.trim()) {
+      // Busca ativa sem ordenação explícita: ranquear por relevância + popularidade
+      const term = busca.toLowerCase();
+      sorted.sort((a, b) => relevanceScore(b, term) - relevanceScore(a, term));
     } else if (ordenacao === "nome") {
       sorted.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     }
     return sorted;
-  }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks]);
+  }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks, popularKeywords]);
+
 
   // Resultados (somente repacks) para a busca/filtro
   const filteredItems = useMemo(
