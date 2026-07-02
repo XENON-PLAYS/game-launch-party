@@ -162,9 +162,11 @@ const Index = () => {
     staleTime: 1000 * 60 * 60,
   });
 
-  // Repacks para a home (catálogo) — carrega em lotes e vai preenchendo o cache
-  // a cada lote para que os cards apareçam imediatamente após a 1ª requisição,
-  // em vez de esperar todo o dataset (10k+) terminar de carregar.
+  // Repacks para a home (catálogo) — carrega em lotes, mas publica o progresso
+  // apenas UMA vez após o 1º lote (cards aparecem quase instantaneamente) e
+  // depois o dataset completo no retorno. Publicar a cada lote fazia a página
+  // re-renderizar e recalcular todos os memos (~11k itens) dezenas de vezes,
+  // travando o site durante o carregamento.
   const { data: recentRepacks } = useQuery({
     queryKey: ["repacks-home"],
     queryFn: async () => {
@@ -173,6 +175,7 @@ const Index = () => {
       // 1º lote pequeno para os primeiros cards aparecerem quase instantaneamente,
       // depois lotes grandes para completar o catálogo/seções em segundo plano.
       let size = 60;
+      let publishedFirst = false;
       for (;;) {
         const { data, error } = await (supabase as any)
           .from("merged_repacks")
@@ -185,8 +188,11 @@ const Index = () => {
         }
         const batch = (data ?? []) as Repack[];
         all.push(...batch);
-        // Publica o progresso parcial: assinantes re-renderizam com os cards já disponíveis.
-        queryClient.setQueryData(["repacks-home"], [...all]);
+        // Publica só o 1º lote para render imediato; o restante entra no retorno.
+        if (!publishedFirst) {
+          queryClient.setQueryData(["repacks-home"], [...all]);
+          publishedFirst = true;
+        }
         if (batch.length < size) break;
         from += size;
         size = 1000; // lotes maiores para o restante
