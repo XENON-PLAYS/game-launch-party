@@ -254,9 +254,6 @@ export function Header() {
             >
               <div className="container mx-auto px-4 py-6 flex flex-col gap-6">
                 {navLinks}
-                <div className="pt-4 border-t border-border flex flex-col gap-4">
-                  <OnlineUsers />
-                </div>
               </div>
             </motion.div>
           )}
