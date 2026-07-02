@@ -476,7 +476,7 @@ const Index = () => {
       sorted.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     }
     return sorted;
-  }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks, popularKeywords, isDenuvoRepack]);
+  }, [busca, categoria, fonte, ordenacao, homeRepacks, matchedRepacks, popularKeywords, isDenuvoRepack]);
 
 
   // Resultados (somente repacks) para a busca/filtro
