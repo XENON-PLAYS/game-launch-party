@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Download, Crown } from "lucide-react";
+import { Download, Crown, X, CheckCircle2 } from "lucide-react";
 
 const NAMES = [
   "Pedro H.",
@@ -45,6 +45,7 @@ interface Notification {
   type: "download" | "vip";
   name: string;
   detail: string;
+  minutes: number;
 }
 
 export const PurchaseNotification = () => {
@@ -60,14 +61,15 @@ export const PurchaseNotification = () => {
         id: Date.now(),
         type: isVip ? "vip" : "download",
         name: random(NAMES),
-        detail: isVip ? "" : random(GAMES),
+        detail: isVip ? "Plano VIP" : random(GAMES),
+        minutes: 1 + Math.floor(Math.random() * 9),
       });
 
-      // Esconde depois de 5s e agenda a próxima (~30s de intervalo)
+      // Esconde depois de 6s e agenda a próxima (~30s de intervalo)
       timeoutId = setTimeout(() => {
         setCurrent(null);
         timeoutId = setTimeout(showNext, 30000);
-      }, 5000);
+      }, 6000);
     };
 
     // Primeira notificação após um pequeno atraso
@@ -76,8 +78,10 @@ export const PurchaseNotification = () => {
     return () => clearTimeout(timeoutId);
   }, []);
 
+  const isVip = current?.type === "vip";
+
   return (
-    <div className="fixed bottom-4 left-4 z-40 pointer-events-none max-w-[calc(100vw-2rem)]">
+    <div className="fixed bottom-4 left-4 z-40 max-w-[calc(100vw-2rem)]">
       <AnimatePresence mode="wait">
         {current && (
           <motion.div
@@ -86,32 +90,58 @@ export const PurchaseNotification = () => {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: -40, scale: 0.95 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="flex items-center gap-3 rounded-2xl border border-white/10 bg-[#141414]/95 backdrop-blur-md px-4 py-3 shadow-2xl"
+            className="relative flex w-[300px] items-center gap-3 overflow-hidden rounded-2xl border border-primary/25 bg-[#141414]/95 p-2.5 pr-8 shadow-2xl backdrop-blur-md"
           >
-            {current.type === "vip" ? (
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-yellow-400/15 text-yellow-400 ring-1 ring-yellow-400/30">
-                <Crown className="h-5 w-5" />
-              </div>
-            ) : (
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary ring-1 ring-primary/30">
-                <Download className="h-5 w-5" />
-              </div>
-            )}
-            <div className="min-w-0 leading-tight">
-              <p className="text-sm font-bold text-white">
-                {current.name}{" "}
-                <span className="font-normal text-muted-foreground">
-                  {current.type === "vip" ? "assinou o" : "acabou de baixar"}
-                </span>
+            {/* brilho lateral */}
+            <span className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-primary to-primary/40" />
+
+            {/* thumbnail */}
+            <div
+              className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${
+                isVip
+                  ? "from-yellow-500/30 to-yellow-600/10 text-yellow-400 ring-1 ring-yellow-400/30"
+                  : "from-primary/30 to-primary/5 text-primary ring-1 ring-primary/30"
+              }`}
+            >
+              {isVip ? (
+                <Crown className="h-6 w-6" />
+              ) : (
+                <Download className="h-6 w-6" />
+              )}
+            </div>
+
+            {/* conteúdo */}
+            <div className="min-w-0 flex-1 leading-tight">
+              <p className="text-xs text-muted-foreground">
+                <span className="font-semibold text-white">{current.name}</span>{" "}
+                {isVip ? "assinou" : "baixou"}
               </p>
               <p
-                className={`truncate text-sm font-semibold ${
-                  current.type === "vip" ? "text-yellow-400" : "text-primary"
+                className={`mt-0.5 truncate text-sm font-bold ${
+                  isVip ? "text-yellow-400" : "text-white"
                 }`}
               >
-                {current.type === "vip" ? "Plano VIP" : current.detail}
+                {current.detail}
+              </p>
+              <p className="mt-1 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                <span>há {current.minutes} min</span>
+                <span className="text-primary">•</span>
+                <span className="inline-flex items-center gap-1 text-primary">
+                  <CheckCircle2 className="h-3 w-3" />
+                  {isVip ? "Assinatura ativa" : "Download verificado"}
+                </span>
               </p>
             </div>
+
+            {/* fechar */}
+            <button
+              type="button"
+              aria-label="Fechar"
+              onClick={() => setCurrent(null)}
+              className="absolute right-2 top-2 text-muted-foreground transition-colors hover:text-white"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
