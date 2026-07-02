@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { supabase } from "@/integrations/supabase/client";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
@@ -94,57 +94,12 @@ const Index = () => {
   const [sectionsPage, setSectionsPage] = useState(0);
   const SECTIONS_PAGE_SIZE = 12;
 
-  const { data: gamesData, isLoading: gamesLoading, isError: gamesError, refetch } = useQuery({
-    queryKey: ["games"],
-    queryFn: async () => {
-      try {
-        // Só precisamos de id/nome aqui (os cards do catálogo usam repacks),
-        // então evitamos baixar todas as colunas/linhas pesadas da tabela games.
-        const { data, error } = await supabase.from("games").select("id, nome").order("nome");
-        if (error || !data || data.length === 0) {
-          return localGamesData.map(g => ({
-            id: String(g.id),
-            nome: g.nome,
-            imagem: g.imagem,
-            hero_image: g.heroImage || null,
-            vertical_image: g.verticalImage || null,
-            capsule_image: g.capsuleImage || null,
-            download_count: 0,
-            lancamento: g.lancamento || "",
-            categorias: g.categorias || [],
-            tamanho: g.tamanho || "0 GB",
-            descricao: g.descricao || "",
-            desenvolvedor: g.desenvolvedor || "",
-            distribuidor: g.distribuidor || "",
-            preco: g.preco || 0,
-            requisitos_minimo: typeof g.requisitos?.minimo === 'object' ? g.requisitos.minimo : {},
-            requisitos_recomendado: typeof g.requisitos?.recomendado === 'object' ? g.requisitos.recomendado : {},
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-            classificacao: g.classificacao || null,
-            destaques: g.destaques || [],
-            galeria: [],
-            idiomas: g.idiomas || [],
-            link_demo: null,
-            modos: g.modos || [],
-            observacoes: null,
-            passo_a_passo: null,
-            pre_requisitos: null,
-            rating_avg: 0,
-            rating_count: 0,
-            slug: g.nome.toLowerCase().replace(/\s+/g, '-'),
-            trailer_url: g.trailer || null,
-          })) as Game[];
-        }
-        return data as Game[];
-      } catch (err) {
-        return localGamesData.map(g => ({ ...g, id: String(g.id) })) as unknown as Game[];
-      }
-    },
-    initialData: localGamesData.map(g => ({ ...g, id: String(g.id) })) as unknown as Game[],
-    staleTime: 1000 * 60 * 5,
-  });
+  const SELECT_FIELDS = "id, title, file_size, upload_date, cover_url, sources";
 
+  // Está em modo de busca/filtro? Define quais consultas server-side rodam.
+  const isSearching = !!busca || categoria !== "todas" || fonte !== "todas";
+
+  // Destaques do herói (poucas linhas)
   const { data: featuredData, isLoading: featuredLoading } = useQuery({
     queryKey: ["featured-games"],
     queryFn: async () => {
@@ -162,179 +117,104 @@ const Index = () => {
     staleTime: 1000 * 60 * 60,
   });
 
-  // Repacks para a home (catálogo) — carrega em lotes, mas publica o progresso
-  // apenas UMA vez após o 1º lote (cards aparecem quase instantaneamente) e
-  // depois o dataset completo no retorno. Publicar a cada lote fazia a página
-  // re-renderizar e recalcular todos os memos (~11k itens) dezenas de vezes,
-  // travando o site durante o carregamento.
-  const { data: recentRepacks } = useQuery({
-    queryKey: ["repacks-home"],
+  // ---- Seções da Home: consultas leves e diretas ao servidor (48 itens cada) ----
+  const { data: denuvoData } = useQuery({
+    queryKey: ["sec-denuvo"],
     queryFn: async () => {
-      const all: Repack[] = [];
-      let from = 0;
-      // 1º lote pequeno para os primeiros cards aparecerem quase instantaneamente,
-      // depois lotes grandes para completar o catálogo/seções em segundo plano.
-      let size = 60;
-      let publishedFirst = false;
-      for (;;) {
-        const { data, error } = await (supabase as any)
-          .from("merged_repacks")
-          .select("id, title, file_size, upload_date, cover_url, sources")
-          .order("upload_date", { ascending: false, nullsFirst: false })
-          .range(from, from + size - 1);
-        if (error) {
-          if (all.length > 0) break; // já temos algo para exibir
-          throw error;
-        }
-        const batch = (data ?? []) as Repack[];
-        all.push(...batch);
-        // Publica só o 1º lote para render imediato; o restante entra no retorno.
-        if (!publishedFirst) {
-          queryClient.setQueryData(["repacks-home"], [...all]);
-          publishedFirst = true;
-        }
-        if (batch.length < size) break;
-        from += size;
-        size = 1000; // lotes maiores para o restante
-      }
-      return all;
-    },
-    staleTime: 1000 * 60 * 5,
-  });
-
-
-  // Repacks que batem com a busca atual
-  const { data: searchedRepacks } = useQuery({
-    queryKey: ["repacks-search", busca],
-    queryFn: async () => {
-      const term = busca.trim();
-      if (!term) return [] as Repack[];
       const { data, error } = await (supabase as any)
-        .from("merged_repacks")
-        .select("id, title, file_size, upload_date, cover_url, sources")
-        .ilike("title", `%${term}%`)
+        .from("merged_repacks").select(SELECT_FIELDS)
+        .eq("is_denuvo", true)
         .order("upload_date", { ascending: false, nullsFirst: false })
-        .limit(24);
+        .limit(48);
       if (error) throw error;
       return (data ?? []) as Repack[];
     },
-    enabled: !!busca.trim(),
+    enabled: !isSearching,
     staleTime: 1000 * 60 * 5,
   });
 
-  const games = useMemo(() => (gamesData || []) as Game[], [gamesData]);
+  const { data: emAltaData } = useQuery({
+    queryKey: ["sec-emalta"],
+    queryFn: async () => {
+      const { data, error } = await (supabase as any)
+        .from("merged_repacks").select(SELECT_FIELDS)
+        .order("size_gb", { ascending: false, nullsFirst: false })
+        .limit(48);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: !isSearching,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const { data: recentesData } = useQuery({
+    queryKey: ["sec-recentes"],
+    queryFn: async () => {
+      const { data, error } = await (supabase as any)
+        .from("merged_repacks").select(SELECT_FIELDS)
+        .gte("upload_date", "2025-01-01")
+        .lt("upload_date", "2027-01-01")
+        .order("upload_date", { ascending: false, nullsFirst: false })
+        .limit(48);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: !isSearching,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  // ---- Catálogo "Explore": paginado no servidor (50 por página) ----
+  const { data: catalogCount } = useQuery({
+    queryKey: ["catalog-count"],
+    queryFn: async () => {
+      const { count, error } = await (supabase as any)
+        .from("merged_repacks").select("id", { count: "exact", head: true });
+      if (error) throw error;
+      return count ?? 0;
+    },
+    enabled: !isSearching,
+    staleTime: 1000 * 60 * 10,
+  });
+
+  const { data: catalogData, isLoading: catalogLoading, isError: catalogError, refetch: refetchCatalog } = useQuery({
+    queryKey: ["catalog-page", catalogPage],
+    queryFn: async () => {
+      const from = catalogPage * CATALOG_PAGE_SIZE;
+      const { data, error } = await (supabase as any)
+        .from("merged_repacks").select(SELECT_FIELDS)
+        .order("upload_date", { ascending: false, nullsFirst: false })
+        .range(from, from + CATALOG_PAGE_SIZE - 1);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: !isSearching,
+    placeholderData: keepPreviousData,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  // ---- Busca / filtro: consulta única server-side (máx. 120 resultados) ----
+  const { data: browseData, isLoading: browseLoading, isError: browseError, refetch: refetchBrowse } = useQuery({
+    queryKey: ["browse", busca, categoria, fonte],
+    queryFn: async () => {
+      let q = (supabase as any).from("merged_repacks").select(SELECT_FIELDS);
+      const term = busca.trim();
+      if (term) q = q.ilike("title", `%${term}%`);
+      if (fonte !== "todas") q = q.contains("sources", [fonte]);
+      if (categoria === "Denuvo") q = q.eq("is_denuvo", true);
+      else if (categoria !== "todas") {
+        const kws = categoryKeywords[categoria] || [];
+        if (kws.length) q = q.or(kws.map((k) => `title.ilike.%${k}%`).join(","));
+      }
+      q = q.order("upload_date", { ascending: false, nullsFirst: false }).limit(120);
+      const { data, error } = await q;
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: isSearching,
+    staleTime: 1000 * 60 * 5,
+  });
+
   const featured = useMemo(() => (featuredData || []) as Game[], [featuredData]);
-  const homeRepacks = useMemo(() => (recentRepacks || []) as Repack[], [recentRepacks]);
-  const matchedRepacks = useMemo(() => (searchedRepacks || []) as Repack[], [searchedRepacks]);
-
-  // Normaliza títulos para casar jogo tradicional <-> repack
-  const normalizeTitle = (t: string) =>
-    (t || "")
-      .toLowerCase()
-      .replace(/['’`]/g, "")
-      .replace(/\b(free download|digital deluxe edition|deluxe edition|ultimate edition|gold edition|complete edition|goty edition|game of the year edition|definitive edition|premium edition|standard edition|digital edition|enhanced edition|anniversary edition|collectors edition|special edition|edition|crack only|bonus content|all dlcs|dlcs|dlc)\b.*$/g, "")
-      .replace(/[^a-z0-9]+/g, "");
-
-  // Mapa game.id -> repack correspondente (traz dados/download do repack)
-  const gameRepackMap = useMemo(() => {
-    const byNorm = new Map<string, Repack>();
-    homeRepacks.forEach((r) => {
-      const key = normalizeTitle(r.title);
-      if (key && !byNorm.has(key)) byNorm.set(key, r);
-    });
-    const map: Record<string, Repack> = {};
-    games.forEach((g) => {
-      const match = byNorm.get(normalizeTitle(g.nome));
-      if (match) map[g.id] = match;
-    });
-    return map;
-  }, [games, homeRepacks]);
-
-  // Lista curada de jogos que REALMENTE possuem Denuvo.
-  // A comparação é feita por título normalizado/exato para evitar falsos positivos
-  // causados por palavras soltas como "wukong", "dead space", "football manager" etc.
-  const denuvoGameTitles = useMemo(
-    () => [
-      "Black Myth: Wukong",
-      "Hogwarts Legacy",
-      "Star Wars Jedi: Fallen Order",
-      "Star Wars Jedi: Survivor",
-      "Star Wars Outlaws",
-      "Resident Evil 2 Remake",
-      "Resident Evil 2 2019",
-      "Resident Evil 3 Remake",
-      "Resident Evil 3 2020",
-      "Resident Evil 4 Remake",
-      "Resident Evil 4 2023",
-      "Resident Evil 7 Biohazard",
-      "Resident Evil Village",
-      "Assassin's Creed Origins",
-      "Assassin's Creed Odyssey",
-      "Assassin's Creed Valhalla",
-      "Assassin's Creed Mirage",
-      "Assassin's Creed Shadows",
-      "Mortal Kombat 1",
-      "Mortal Kombat 11",
-      "Tekken 7",
-      "Tekken 8",
-      "Dragon's Dogma 2",
-      "Final Fantasy VII Remake",
-      "Final Fantasy VII Rebirth",
-      "Final Fantasy XV",
-      "Final Fantasy XVI",
-      "Sonic Frontiers",
-      "Sonic Superstars",
-      "Sonic X Shadow Generations",
-      "Yakuza: Like a Dragon",
-      "Like a Dragon: Infinite Wealth",
-      "Like a Dragon: Ishin",
-      "Like a Dragon Gaiden: The Man Who Erased His Name",
-      "Dead Space Remake",
-      "Dead Space Remake 2023",
-      "Dead Space 2023",
-      "Hitman 3",
-      "Hitman World of Assassination",
-      "EA Sports FC 24",
-      "EA Sports FC 25",
-      "FIFA 21",
-      "FIFA 22",
-      "FIFA 23",
-      "F1 23",
-      "F1 24",
-      "F1 25",
-      "Need for Speed Unbound",
-      "Lords of the Fallen",
-      "The Callisto Protocol",
-      "Atomic Heart",
-      "Returnal",
-      "Forspoken",
-      "Wo Long: Fallen Dynasty",
-      "Street Fighter 6",
-      "Tales of Arise",
-      "Monster Hunter Rise",
-      "Monster Hunter Wilds",
-      "Silent Hill 2 Remake",
-      "Dragon Age: The Veilguard",
-      "Avatar: Frontiers of Pandora",
-      "Prince of Persia: The Lost Crown",
-      "Warhammer 40000: Space Marine 2",
-      "Warhammer 40,000: Space Marine 2",
-      "Metaphor: ReFantazio",
-      "Persona 3 Reload",
-      "Persona 5 Tactica",
-    ],
-    []
-  );
-
-  const denuvoTitleKeys = useMemo(
-    () => new Set(denuvoGameTitles.map((title) => normalizeTitle(title))),
-    [denuvoGameTitles]
-  );
-
-  const isDenuvoRepack = useCallback((r: Repack) => {
-    const key = normalizeTitle(r.title || "");
-    return [...denuvoTitleKeys].some((denuvoKey) => key === denuvoKey || key.startsWith(denuvoKey));
-  }, [denuvoTitleKeys]);
 
 
   // Palavras-chave por categoria para filtrar os repacks (que não possuem categorias próprias)
@@ -369,17 +249,13 @@ const Index = () => {
     return value * (multipliers[unit] || 1);
   };
 
-  // Catálogo composto apenas por repacks
-  const catalogItems = useMemo(
-    () => homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
-    [homeRepacks]
-  );
-
-  const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
+  // Catálogo "Explore" — página atual vinda do servidor
   const catalogPageItems = useMemo(
-    () => catalogItems.slice(catalogPage * CATALOG_PAGE_SIZE, catalogPage * CATALOG_PAGE_SIZE + CATALOG_PAGE_SIZE),
-    [catalogItems, catalogPage]
+    () => ((catalogData || []) as Repack[]).map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    [catalogData]
   );
+  const catalogTotal = catalogCount ?? 0;
+  const catalogTotalPages = Math.max(1, Math.ceil(catalogTotal / CATALOG_PAGE_SIZE));
 
   useEffect(() => {
     if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
@@ -391,39 +267,14 @@ const Index = () => {
     []
   );
 
-  // ------- Seções da Home (somente repacks) -------
-  const denuvoRepacks = useMemo(() => {
-    const matches = homeRepacks.filter(isDenuvoRepack);
-    return matches.slice(0, 48);
-  }, [homeRepacks, isDenuvoRepack]);
-  // Mais Baixados: repacks maiores primeiro
-  const emAlta = useMemo(
-    () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
-    [homeRepacks]
-  );
-  // Nova Geração: apenas jogos lançados entre 2025 e 2026
-  const recentes = useMemo(
-    () =>
-      homeRepacks
-        .filter((r) => {
-          const year = r.upload_date ? new Date(r.upload_date).getFullYear() : NaN;
-          return year >= 2025 && year <= 2026;
-        })
-        .sort((a, b) => {
-          const da = a.upload_date ? new Date(a.upload_date).getTime() : 0;
-          const db = b.upload_date ? new Date(b.upload_date).getTime() : 0;
-          if (db !== da) return db - da; // mais recente primeiro
-          return parseRepackSize(b.file_size) - parseRepackSize(a.file_size); // relevância (tamanho)
-        })
-        .slice(0, 48),
-    [homeRepacks]
-  );
+  // ------- Seções da Home (dados server-side, prontos para exibir) -------
+  const denuvoRepacks = useMemo(() => (denuvoData || []) as Repack[], [denuvoData]);
+  const emAlta = useMemo(() => (emAltaData || []) as Repack[], [emAltaData]);
+  const recentes = useMemo(() => (recentesData || []) as Repack[], [recentesData]);
 
-
-  const isLoading = gamesLoading;
-  const isError = gamesError;
-
-  const isSearching = busca || categoria !== "todas" || fonte !== "todas";
+  const isLoading = isSearching ? (browseLoading && !browseData) : (catalogLoading && !catalogData);
+  const isError = isSearching ? browseError : catalogError;
+  const refetch = () => { if (isSearching) refetchBrowse(); else refetchCatalog(); };
 
   // Jogos populares/mais jogados da Steam (para ranquear a busca por relevância)
   const popularKeywords = useMemo(
@@ -454,22 +305,9 @@ const Index = () => {
     return score;
   };
 
+  // Busca/filtro: server já aplicou os filtros; aqui só ordenamos os ≤120 resultados.
   const filteredRepacks = useMemo(() => {
-    let result = busca.trim() ? matchedRepacks : homeRepacks;
-    if (busca) {
-      const term = busca.toLowerCase();
-      result = result.filter((r) => (r.title || "").toLowerCase().includes(term));
-    }
-    if (fonte !== "todas") {
-      result = result.filter((r) => (r.sources || []).includes(fonte));
-    }
-    if (categoria === "Denuvo") {
-      result = result.filter(isDenuvoRepack);
-    } else if (categoria !== "todas") {
-      const kws = categoryKeywords[categoria] || [];
-      result = result.filter((r) => kws.some((k) => (r.title || "").toLowerCase().includes(k)));
-    }
-    const sorted = [...result];
+    const sorted = [...((browseData || []) as Repack[])];
     if (ordenacao === "pesado") {
       sorted.sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size));
     } else if (ordenacao === "leve") {
@@ -477,14 +315,13 @@ const Index = () => {
     } else if (ordenacao === "lancamento") {
       sorted.sort((a, b) => (b.upload_date || "").localeCompare(a.upload_date || ""));
     } else if (busca.trim()) {
-      // Busca ativa sem ordenação explícita: ranquear por relevância + popularidade
       const term = busca.toLowerCase();
       sorted.sort((a, b) => relevanceScore(b, term) - relevanceScore(a, term));
     } else if (ordenacao === "nome") {
       sorted.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     }
     return sorted;
-  }, [busca, categoria, fonte, ordenacao, homeRepacks, matchedRepacks, popularKeywords, isDenuvoRepack]);
+  }, [browseData, busca, ordenacao, popularKeywords]);
 
 
   // Resultados (somente repacks) para a busca/filtro
@@ -815,9 +652,10 @@ const Index = () => {
           </motion.div>
         ) : (
           <div className="space-y-16 md:space-y-32">
-            <GameSection title="JOGOS COM DENUVO" games={[]} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
-            <GameSection title="Jogos Mais Baixados" games={[]} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
-            <GameSection title="Jogos da Nova Geração" games={[]} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} repackMap={gameRepackMap} />
+            <GameSection title="JOGOS COM DENUVO" games={[]} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="Jogos Mais Baixados" games={[]} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="Jogos da Nova Geração" games={[]} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+
 
             {(() => {
               const sectionsTotalPages = Math.max(
@@ -858,7 +696,7 @@ const Index = () => {
                   <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Explore</span> <span className="text-foreground">o Catálogo</span></h2>
                   <div className="flex items-center gap-4 md:gap-8">
                     <span className="w-20 md:w-32 h-1.5 md:h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
-                    <span className="text-sm md:text-responsive-body font-medium">{catalogItems.length} experiências de alto nível</span>
+                    <span className="text-sm md:text-responsive-body font-medium">{catalogTotal} experiências de alto nível</span>
                   </div>
                 </div>
                 
