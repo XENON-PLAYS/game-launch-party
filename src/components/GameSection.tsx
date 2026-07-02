@@ -14,9 +14,11 @@ interface GameSectionProps {
   repacks?: Repack[];
   page?: number;
   pageSize?: number;
+  /** Mapa game.id -> repack correspondente, para os cards usarem dados do repack. */
+  repackMap?: Record<string, Repack>;
 }
 
-export function GameSection({ title, icon: Icon, games, repacks = [], page = 0, pageSize = 12 }: GameSectionProps) {
+export function GameSection({ title, icon: Icon, games, repacks = [], page = 0, pageSize = 12, repackMap }: GameSectionProps) {
   const items = useMemo(
     () => [
       ...games.map((g) => ({ type: "game" as const, id: g.id, data: g })),
