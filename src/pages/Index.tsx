@@ -553,7 +553,7 @@ const Index = () => {
                 </div>
                 <div className="flex items-center gap-4">
                   <p className="text-sm md:text-base font-bold text-gray-500 uppercase tracking-widest">
-                    {filteredRepacks.length} RESULTADO{filteredRepacks.length !== 1 ? "S" : ""} ENCONTRADO{filteredRepacks.length !== 1 ? "S" : ""}
+                    {filteredItems.length} RESULTADO{filteredItems.length !== 1 ? "S" : ""} ENCONTRADO{filteredItems.length !== 1 ? "S" : ""}
                   </p>
                 </div>
               </div>
