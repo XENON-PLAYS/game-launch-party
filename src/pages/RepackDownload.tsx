@@ -61,6 +61,7 @@ const RepackDownload = () => {
   const [countdown, setCountdown] = useState(10);
   const [ready, setReady] = useState(false);
   const [downloadStarted, setDownloadStarted] = useState(false);
+  const [mediaIndex, setMediaIndex] = useState(0);
 
   const isVip = profile?.is_vip ?? false;
 
