@@ -133,7 +133,7 @@ const Index = () => {
       return (data ?? []) as Repack[];
     },
     enabled: !isSearching,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 30,
   });
 
   const { data: emAltaData } = useQuery({
