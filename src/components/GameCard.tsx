@@ -45,7 +45,7 @@ export const GameCard = React.memo(({ game, repack }: GameCardProps) => {
         
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
           <span className="text-[10px] uppercase font-black px-2.5 py-1 rounded bg-primary text-primary-foreground border border-primary/20 tracking-wider shadow-lg shadow-primary/40">
-            GRÁTIS
+            ABAIXAR
           </span>
           {repack ? (
             <span className="text-[9px] uppercase font-black px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white border border-white/10 tracking-widest">
@@ -75,11 +75,6 @@ export const GameCard = React.memo(({ game, repack }: GameCardProps) => {
           </span>
         )}
 
-        <div className="absolute inset-x-0 bottom-0 p-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-          <div className="flex items-center justify-center gap-2 w-full text-[11px] font-black uppercase tracking-widest py-2.5 rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/40">
-            <Download className="w-3.5 h-3.5" /> Baixar
-          </div>
-        </div>
       </Link>
       
       <div className="p-4 flex flex-col flex-grow">
