@@ -415,7 +415,7 @@ const Index = () => {
   const isLoading = gamesLoading;
   const isError = gamesError;
 
-  const isSearching = busca || categoria !== "todas";
+  const isSearching = busca || categoria !== "todas" || fonte !== "todas";
 
   // Jogos populares/mais jogados da Steam (para ranquear a busca por relevância)
   const popularKeywords = useMemo(
