@@ -1,8 +1,8 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo } from "react";
 import { Tables } from "@/integrations/supabase/types";
 import { GameCard } from "./GameCard";
 import { RepackCard, Repack } from "./RepackCard";
-import { ChevronLeft, ChevronRight, LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 type Game = Tables<"games">;
@@ -12,12 +12,11 @@ interface GameSectionProps {
   icon: LucideIcon;
   games: Game[];
   repacks?: Repack[];
+  page?: number;
   pageSize?: number;
 }
 
-export function GameSection({ title, icon: Icon, games, repacks = [], pageSize = 12 }: GameSectionProps) {
-  const [page, setPage] = useState(0);
-
+export function GameSection({ title, icon: Icon, games, repacks = [], page = 0, pageSize = 12 }: GameSectionProps) {
   const items = useMemo(
     () => [
       ...games.map((g) => ({ type: "game" as const, id: g.id, data: g })),
@@ -27,14 +26,11 @@ export function GameSection({ title, icon: Icon, games, repacks = [], pageSize =
   );
 
   const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
-
-  useEffect(() => {
-    if (page > totalPages - 1) setPage(0);
-  }, [totalPages, page]);
+  const safePage = Math.min(page, totalPages - 1);
 
   const pageItems = useMemo(
-    () => items.slice(page * pageSize, page * pageSize + pageSize),
-    [items, page, pageSize]
+    () => items.slice(safePage * pageSize, safePage * pageSize + pageSize),
+    [items, safePage, pageSize]
   );
 
   if (items.length === 0) return null;
@@ -66,30 +62,6 @@ export function GameSection({ title, icon: Icon, games, repacks = [], pageSize =
             </div>
           </div>
         </div>
-
-        {totalPages > 1 && (
-          <div className="flex items-center gap-3 md:gap-4">
-            <button
-              onClick={() => setPage((p) => Math.max(0, p - 1))}
-              disabled={page === 0}
-              aria-label={`Página anterior de ${title}`}
-              className="p-2.5 md:p-3 rounded-xl md:rounded-2xl bg-card border border-border/50 hover:border-primary/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-lg shadow-black/10"
-            >
-              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
-            </button>
-            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-muted-foreground min-w-[60px] text-center">
-              {page + 1} / {totalPages}
-            </span>
-            <button
-              onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
-              disabled={page >= totalPages - 1}
-              aria-label={`Próxima página de ${title}`}
-              className="p-2.5 md:p-3 rounded-xl md:rounded-2xl bg-card border border-border/50 hover:border-primary/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-lg shadow-black/10"
-            >
-              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
-            </button>
-          </div>
-        )}
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
