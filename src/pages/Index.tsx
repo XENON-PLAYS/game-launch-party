@@ -324,9 +324,10 @@ const Index = () => {
   const emAlta = useMemo(() => (emAltaData || []) as Repack[], [emAltaData]);
   const recentes = useMemo(() => (recentesData || []) as Repack[], [recentesData]);
 
-  const isLoading = isSearching ? (browseLoading && !browseData) : (catalogLoading && !catalogData);
-  const isError = isSearching ? browseError : catalogError;
+  const isLoading = isNovidades ? (novidadesLoading && !novidadesData) : isSearching ? (browseLoading && !browseData) : (catalogLoading && !catalogData);
+  const isError = isNovidades ? false : isSearching ? browseError : catalogError;
   const refetch = () => { if (isSearching) refetchBrowse(); else refetchCatalog(); };
+  const novidades2026 = useMemo(() => (novidadesData || []) as Repack[], [novidadesData]);
 
   // Jogos populares/mais jogados da Steam (para ranquear a busca por relevância)
   const popularKeywords = useMemo(
