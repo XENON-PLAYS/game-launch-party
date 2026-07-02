@@ -518,34 +518,49 @@ export type Database = {
       }
       source_repacks: {
         Row: {
+          banner_url: string | null
           cover_url: string | null
           created_at: string
+          description: string | null
           file_size: string | null
           id: string
+          screenshots: string[] | null
           source: string
+          steam_appid: number | null
           title: string
+          trailer_url: string | null
           updated_at: string
           upload_date: string | null
           uris: string[]
         }
         Insert: {
+          banner_url?: string | null
           cover_url?: string | null
           created_at?: string
+          description?: string | null
           file_size?: string | null
           id?: string
+          screenshots?: string[] | null
           source?: string
+          steam_appid?: number | null
           title: string
+          trailer_url?: string | null
           updated_at?: string
           upload_date?: string | null
           uris?: string[]
         }
         Update: {
+          banner_url?: string | null
           cover_url?: string | null
           created_at?: string
+          description?: string | null
           file_size?: string | null
           id?: string
+          screenshots?: string[] | null
           source?: string
+          steam_appid?: number | null
           title?: string
+          trailer_url?: string | null
           updated_at?: string
           upload_date?: string | null
           uris?: string[]
@@ -574,12 +589,17 @@ export type Database = {
     Views: {
       merged_repacks: {
         Row: {
+          banner_url: string | null
           base_key: string | null
           cover_url: string | null
+          description: string | null
           file_size: string | null
           id: string | null
+          screenshots: string[] | null
           sources: string[] | null
+          steam_appid: number | null
           title: string | null
+          trailer_url: string | null
           upload_date: string | null
           uris: string[] | null
         }

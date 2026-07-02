@@ -1,0 +1,1 @@
+ALTER VIEW public.merged_repacks SET (security_invoker = on);

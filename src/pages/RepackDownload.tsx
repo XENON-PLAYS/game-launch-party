@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
-import { Download, Loader2, Shield, CheckCircle, CheckCircle2, RefreshCw, HardDrive, Copy, ChevronRight, Monitor } from "lucide-react";
+import { Download, Loader2, Shield, CheckCircle, CheckCircle2, RefreshCw, HardDrive, Copy, ChevronRight, Monitor, PlayCircle } from "lucide-react";
 import { toast } from "sonner";
 import { GoogleAd } from "@/components/GoogleAd";
 import { randomCover } from "@/components/RepackCard";
@@ -40,6 +40,20 @@ const TORRENT_STEPS = [
   },
 ];
 
+interface RepackDetail {
+  id: string;
+  title: string;
+  uris: string[];
+  file_size: string | null;
+  upload_date: string | null;
+  cover_url: string | null;
+  banner_url: string | null;
+  description: string | null;
+  trailer_url: string | null;
+  screenshots: string[] | null;
+  steam_appid: number | null;
+}
+
 const RepackDownload = () => {
   const { id } = useParams();
   const { profile } = useAuth();
@@ -50,19 +64,36 @@ const RepackDownload = () => {
 
   const isVip = profile?.is_vip ?? false;
 
-  const { data: repack, isLoading } = useQuery({
+  const { data: repack, isLoading, refetch } = useQuery({
     queryKey: ["repack", id],
     queryFn: async () => {
       const { data, error } = await (supabase as any)
         .from("merged_repacks")
-        .select("id, title, uris, file_size, upload_date")
+        .select("id, title, uris, file_size, upload_date, cover_url, banner_url, description, trailer_url, screenshots, steam_appid")
         .eq("id", id!)
         .maybeSingle();
       if (error) throw error;
-      return data as { id: string; title: string; uris: string[]; file_size: string | null; upload_date: string | null } | null;
+      return data as RepackDetail | null;
     },
     enabled: !!id,
   });
+
+  // Busca automaticamente trailer/descrição/screenshots na Steam quando ainda não existem
+  useEffect(() => {
+    if (!repack?.id) return;
+    const missing = !repack.description && !repack.trailer_url && !(repack.screenshots?.length);
+    if (!missing) return;
+    let active = true;
+    (async () => {
+      try {
+        await (supabase as any).functions.invoke("repack-details", { body: { ids: [repack.id] } });
+        if (active) refetch();
+      } catch {
+        // silencioso: mantém a página funcional mesmo sem metadados extras
+      }
+    })();
+    return () => { active = false; };
+  }, [repack?.id, repack?.description, repack?.trailer_url, repack?.screenshots, refetch]);
 
   const downloadOptions = getDownloadOptions(repack?.uris);
 
@@ -115,7 +146,9 @@ const RepackDownload = () => {
     );
   }
 
-  const cover = repack ? randomCover(repack.id) : "";
+  const cover = repack?.cover_url || (repack ? randomCover(repack.id) : "");
+  const banner = repack?.banner_url || cover;
+  const screenshots = repack?.screenshots ?? [];
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
@@ -127,8 +160,19 @@ const RepackDownload = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="bg-card border-b border-border py-8 sm:py-16 lg:py-24">
-        <div className="container-responsive">
+      <section className="relative bg-card border-b border-border py-8 sm:py-16 lg:py-24 overflow-hidden">
+        {/* Banner de fundo estilo cloud */}
+        {banner && (
+          <div className="absolute inset-0 -z-0" aria-hidden>
+            <img
+              src={banner}
+              alt=""
+              className="w-full h-full object-cover opacity-25 scale-105 blur-[2px]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-card via-card/85 to-card/60" />
+          </div>
+        )}
+        <div className="container-responsive relative z-10">
           <div className="mb-6 sm:mb-16">
             <Breadcrumbs
               items={[
@@ -168,6 +212,12 @@ const RepackDownload = () => {
                 <h1 className="text-3xl sm:text-responsive-h1 leading-none uppercase">
                   {repack?.title}
                 </h1>
+
+                {repack?.description && (
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl">
+                    {repack.description}
+                  </p>
+                )}
               </div>
 
               {/* Quick Actions Bar */}
@@ -202,6 +252,59 @@ const RepackDownload = () => {
       </section>
 
       <main className="container-responsive py-12 sm:py-24 lg:py-32 space-y-16 sm:space-y-32">
+        {/* Trailer & Screenshots (estilo cloud) */}
+        {(repack?.trailer_url || screenshots.length > 0) && (
+          <section className="space-y-10 sm:space-y-14">
+            <div className="flex items-center gap-6 sm:gap-8">
+              <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
+                <PlayCircle className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
+              </div>
+              <div className="space-y-3">
+                <h2 className="text-responsive-h2 leading-none uppercase">Prévia do Jogo</h2>
+                <div className="flex items-center gap-6">
+                  <span className="w-16 sm:w-24 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                  <span className="text-responsive-small text-muted-foreground opacity-80">Trailer & Capturas</span>
+                </div>
+              </div>
+            </div>
+
+            {repack?.trailer_url && (
+              <div className="rounded-2xl sm:rounded-[2rem] overflow-hidden border-2 border-border shadow-2xl bg-black aspect-video">
+                <video
+                  src={repack.trailer_url}
+                  poster={banner}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+
+            {screenshots.length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-5">
+                {screenshots.map((src, i) => (
+                  <a
+                    key={src}
+                    href={src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative rounded-xl sm:rounded-2xl overflow-hidden border border-border bg-muted aspect-video"
+                  >
+                    <img
+                      src={src}
+                      alt={`${repack?.title || "Jogo"} - captura ${i + 1}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </a>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
         {/* Download & Requirements Section */}
         <section id="download-section" className="grid lg:grid-cols-2 gap-12 sm:gap-24">
           {/* Download Area */}
