@@ -1,7 +1,8 @@
 import { Info } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
+import { randomCover, useRepackCover } from "@/lib/repackCovers";
 
 export interface Repack {
   id: string;
@@ -9,45 +10,23 @@ export interface Repack {
   uris: string[];
   file_size: string | null;
   upload_date: string | null;
+  cover_url?: string | null;
 }
 
-// Pool de capas genéricas usado enquanto não há imagem real do jogo.
-// A escolha é determinística (baseada no id) para a capa não mudar a cada render.
-const COVER_POOL = [
-  "photo-1542751371-adc38448a05e",
-  "photo-1538481199705-c710c4e965fc",
-  "photo-1511512578047-dfb367046420",
-  "photo-1493711662062-fa541adb3fc8",
-  "photo-1550745165-9bc0b252726f",
-  "photo-1552820728-8b83bb6b773f",
-  "photo-1556438064-2d7646166914",
-  "photo-1493858340000-c1d4d2e1a85d",
-  "photo-1535223289827-42f1e9919769",
-  "photo-1542753938-8f4520f3a0e0",
-  "photo-1605901309584-818e25960a8f",
-  "photo-1614680376573-df3480f0c6ff",
-];
-
-function hashString(str: string): number {
-  let h = 0;
-  for (let i = 0; i < str.length; i++) {
-    h = (h << 5) - h + str.charCodeAt(i);
-    h |= 0;
-  }
-  return Math.abs(h);
-}
-
-export function randomCover(id: string): string {
-  const photo = COVER_POOL[hashString(id) % COVER_POOL.length];
-  return `https://images.unsplash.com/${photo}?auto=format&fit=crop&q=80&w=400`;
-}
+export { randomCover };
 
 interface RepackCardProps {
   repack: Repack;
 }
 
 export const RepackCard = React.memo(({ repack }: RepackCardProps) => {
-  const cover = randomCover(repack.id);
+  const resolved = useRepackCover(repack);
+  const [cover, setCover] = useState(resolved);
+
+  // Mantém a capa sincronizada quando a resolução chega depois do primeiro render.
+  React.useEffect(() => {
+    setCover(resolved);
+  }, [resolved]);
 
   return (
     <motion.div
@@ -59,6 +38,7 @@ export const RepackCard = React.memo(({ repack }: RepackCardProps) => {
         <img
           src={cover}
           alt={repack.title}
+          onError={() => setCover(randomCover(repack.id))}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           loading="lazy"
           decoding="async"
