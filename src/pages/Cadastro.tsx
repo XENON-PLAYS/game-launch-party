@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { MeteorBackground } from "@/components/MeteorBackground";
 
 const Cadastro = () => {
-  const { register, user, isLoading } = useAuth();
+  const { register, signInWithGoogle, user, isLoading } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
