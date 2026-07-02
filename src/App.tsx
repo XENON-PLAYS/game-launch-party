@@ -88,6 +88,7 @@ const App = () => {
                       <Route path="/jogo/:slug" element={<GameDetail />} />
                       <Route path="/novidades" element={<Index />} />
                       <Route path="/repacks" element={<Repacks />} />
+                      <Route path="/repack/:id" element={<RepackDownload />} />
                       <Route path="/vip" element={<Vip />} />
                       <Route path="/download/:gameId/:linkId" element={<DownloadPage />} />
                       <Route path="/categoria/:category" element={<CategoryPage />} />
