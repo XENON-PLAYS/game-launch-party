@@ -6,10 +6,7 @@ import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { lovable } from "@/integrations/lovable/index";
 import { MeteorBackground } from "@/components/MeteorBackground";
-import { getRedirectUrl } from "@/config/auth";
-import { getAuthErrorMessage } from "@/lib/auth-errors";
 
 const Login = () => {
   const { login, signInWithGoogle, user, isLoading } = useAuth();
