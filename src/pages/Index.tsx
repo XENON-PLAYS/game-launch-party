@@ -155,7 +155,7 @@ const Index = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("source_repacks")
-        .select("id, title, uris, file_size, upload_date")
+        .select("id, title, uris, file_size, upload_date, cover_url")
         .order("upload_date", { ascending: false, nullsFirst: false })
         .limit(1000);
       if (error) throw error;
@@ -172,7 +172,7 @@ const Index = () => {
       if (!term) return [] as Repack[];
       const { data, error } = await supabase
         .from("source_repacks")
-        .select("id, title, uris, file_size, upload_date")
+        .select("id, title, uris, file_size, upload_date, cover_url")
         .ilike("title", `%${term}%`)
         .order("upload_date", { ascending: false, nullsFirst: false })
         .limit(24);

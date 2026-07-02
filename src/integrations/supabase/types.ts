@@ -518,6 +518,7 @@ export type Database = {
       }
       source_repacks: {
         Row: {
+          cover_url: string | null
           created_at: string
           file_size: string | null
           id: string
@@ -528,6 +529,7 @@ export type Database = {
           uris: string[]
         }
         Insert: {
+          cover_url?: string | null
           created_at?: string
           file_size?: string | null
           id?: string
@@ -538,6 +540,7 @@ export type Database = {
           uris?: string[]
         }
         Update: {
+          cover_url?: string | null
           created_at?: string
           file_size?: string | null
           id?: string

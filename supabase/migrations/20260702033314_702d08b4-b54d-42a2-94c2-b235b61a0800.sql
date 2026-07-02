@@ -1,0 +1,1 @@
+ALTER TABLE public.source_repacks ADD COLUMN IF NOT EXISTS cover_url text;
