@@ -248,79 +248,27 @@ const Index = () => {
 
   const isSearching = busca || categoria !== "todas";
 
-  const filteredGames = useMemo(() => {
-    let result = games;
+  const filteredRepacks = useMemo(() => {
+    let result = busca.trim() ? matchedRepacks : homeRepacks;
     if (busca) {
-      const searchTerm = busca.toLowerCase();
-      result = result.filter((g) => 
-        g.nome.toLowerCase().includes(searchTerm) || 
-        g.descricao?.toLowerCase().includes(searchTerm) ||
-        g.categorias?.some(cat => cat.toLowerCase().includes(searchTerm)) ||
-        g.desenvolvedor?.toLowerCase().includes(searchTerm) ||
-        g.distribuidor?.toLowerCase().includes(searchTerm)
-      );
+      const term = busca.toLowerCase();
+      result = result.filter((r) => (r.title || "").toLowerCase().includes(term));
     }
     if (categoria === "Denuvo") {
-      result = result.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k)));
-    } else if (categoria !== "todas") {
-      result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
+      result = result.filter((r) => denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k)));
     }
-    
-    const parseSize = (s: string | null, defaultValue: number) => {
-      if (!s) return defaultValue;
-      const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
-      if (!match) return defaultValue;
-      
-      const value = parseFloat(match[1].replace(',', '.'));
-      const unit = (match[3] || "GB").toUpperCase();
-      
-      const multipliers: Record<string, number> = {
-        "KB": 1 / (1024 * 1024),
-        "MB": 1 / 1024,
-        "GB": 1,
-        "TB": 1024
-      };
-      
-      return value * (multipliers[unit] || 1);
-    };
-
-    result = [...result].sort((a, b) => {
-      const sizeA = a.tamanho || "0 GB";
-      const sizeB = b.tamanho || "0 GB";
-      
-      if (ordenacao === "pesado") {
-        return parseSize(sizeB, 0) - parseSize(sizeA, 0);
-      }
-      if (ordenacao === "leve") {
-        return parseSize(sizeA, Infinity) - parseSize(sizeB, Infinity);
-      }
-      if (ordenacao === "popular" || ordenacao === "alta") return (b.download_count || 0) - (a.download_count || 0);
-      if (ordenacao === "lancamento") {
-        const parseDate = (d: string | null) => {
-          if (!d) return 0;
-          // Handles "5/dez./2019" format from local data
-          const months: Record<string, number> = {
-            "jan": 0, "fev": 1, "mar": 2, "abr": 3, "mai": 4, "jun": 5,
-            "jul": 6, "ago": 7, "set": 8, "out": 9, "nov": 10, "dez": 11
-          };
-          const parts = d.split("/");
-          if (parts.length === 3) {
-            const day = parseInt(parts[0]);
-            const monthStr = parts[1].replace(".", "").toLowerCase();
-            const year = parseInt(parts[2]);
-            const month = months[monthStr] ?? 0;
-            return new Date(year, month, day).getTime();
-          }
-          // Handles ISO "YYYY-MM-DD" from database
-          const isoDate = new Date(d);
-          return isNaN(isoDate.getTime()) ? 0 : isoDate.getTime();
-        };
-        return parseDate(b.lancamento) - parseDate(a.lancamento);
-      }
-      return (a.nome || "").localeCompare(b.nome || "");
-    });
-    return result;
-  }, [busca, categoria, ordenacao, games]);
+    const sorted = [...result];
+    if (ordenacao === "pesado") {
+      sorted.sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size));
+    } else if (ordenacao === "leve") {
+      sorted.sort((a, b) => parseRepackSize(a.file_size) - parseRepackSize(b.file_size));
+    } else if (ordenacao === "lancamento") {
+      sorted.sort((a, b) => (b.upload_date || "").localeCompare(a.upload_date || ""));
+    } else if (ordenacao === "nome") {
+      sorted.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+    }
+    return sorted;
+  }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks]);
 
   const firstHeroImage = featured && featured.length > 0 ? (featured[0].hero_image || featured[0].imagem) : undefined;
   const firstHeroPoster = featured && featured.length > 0 ? (featured[0].vertical_image || featured[0].imagem) : undefined;
