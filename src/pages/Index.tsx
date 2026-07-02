@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { supabase } from "@/integrations/supabase/client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
@@ -75,6 +75,7 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, [busca, setSearchParams]);
 
+  const queryClient = useQueryClient();
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
   const [catalogPage, setCatalogPage] = useState(0);
@@ -148,7 +149,9 @@ const Index = () => {
     staleTime: 1000 * 60 * 60,
   });
 
-  // Repacks para a home (catálogo) — busca completa em lotes (a API limita 1000 por requisição)
+  // Repacks para a home (catálogo) — carrega em lotes e vai preenchendo o cache
+  // a cada lote para que os cards apareçam imediatamente após a 1ª requisição,
+  // em vez de esperar todo o dataset (10k+) terminar de carregar.
   const { data: recentRepacks } = useQuery({
     queryKey: ["repacks-home"],
     queryFn: async () => {
@@ -160,9 +163,14 @@ const Index = () => {
           .select("id, title, file_size, upload_date, cover_url")
           .order("upload_date", { ascending: false, nullsFirst: false })
           .range(from, from + PAGE - 1);
-        if (error) throw error;
+        if (error) {
+          if (all.length > 0) break; // já temos algo para exibir
+          throw error;
+        }
         const batch = (data ?? []) as Repack[];
         all.push(...batch);
+        // Publica o progresso parcial: assinantes re-renderizam com os cards já disponíveis.
+        queryClient.setQueryData(["repacks-home"], [...all]);
         if (batch.length < PAGE) break;
       }
       return all;
