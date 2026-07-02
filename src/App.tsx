@@ -30,6 +30,7 @@ const DMCA = lazy(() => import("./pages/DMCA"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const GameRequest = lazy(() => import("./pages/GameRequest"));
 const Repacks = lazy(() => import("./pages/Repacks"));
+const RepackDownload = lazy(() => import("./pages/RepackDownload"));
 
 
 const queryClient = new QueryClient({
