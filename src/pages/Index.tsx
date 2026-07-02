@@ -671,14 +671,9 @@ const Index = () => {
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                {catalogPageItems.map((item) =>
-                  item.type === "game" ? (
-                    <GameCard key={`g-${item.id}`} game={item.data} repack={gameRepackMap[item.id]} />
-
-                  ) : (
-                    <RepackCard key={`r-${item.id}`} repack={item.data} />
-                  )
-                )}
+                {catalogPageItems.map((item) => (
+                  <RepackCard key={`r-${item.id}`} repack={item.data} />
+                ))}
               </div>
 
               {catalogTotalPages > 1 && (
