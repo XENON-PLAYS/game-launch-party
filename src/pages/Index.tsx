@@ -163,7 +163,7 @@ const Index = () => {
       for (;;) {
         const { data, error } = await (supabase as any)
           .from("merged_repacks")
-          .select("id, title, file_size, upload_date, cover_url")
+          .select("id, title, file_size, upload_date, cover_url, sources")
           .order("upload_date", { ascending: false, nullsFirst: false })
           .range(from, from + size - 1);
         if (error) {
