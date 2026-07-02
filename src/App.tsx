@@ -53,7 +53,7 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: 1000 * 60 * 2, // Reduzido para 2 minutos para evitar dados muito antigos
       gcTime: 1000 * 60 * 30, // Reduzido para 30 minutos (24h era excessivo para memória)
-      refetchOnWindowFocus: true, // Reativado para manter dados frescos ao voltar ao site
+      refetchOnWindowFocus: false, // Evita refetch pesado (catálogo ~11k) ao voltar à aba
       retry: (failureCount, error: any) => {
         // Não tenta novamente em erros 404 ou 403
         if (error?.status === 404 || error?.status === 403) return false;
