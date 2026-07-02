@@ -188,16 +188,10 @@ const Index = () => {
   const homeRepacks = useMemo(() => (recentRepacks || []) as Repack[], [recentRepacks]);
   const matchedRepacks = useMemo(() => (searchedRepacks || []) as Repack[], [searchedRepacks]);
 
-  // Todos os repacks ficam somente no catálogo "Explore o Catálogo"
-  const repacksCatalogo = useMemo(() => homeRepacks, [homeRepacks]);
-
-  // Catálogo combinado (jogos + repacks) para paginação otimizada
+  // Catálogo composto apenas por repacks
   const catalogItems = useMemo(
-    () => [
-      ...games.map((g) => ({ type: "game" as const, id: g.id, data: g })),
-      ...repacksCatalogo.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
-    ],
-    [games, repacksCatalogo]
+    () => homeRepacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    [homeRepacks]
   );
 
   const catalogTotalPages = Math.max(1, Math.ceil(catalogItems.length / CATALOG_PAGE_SIZE));
@@ -210,13 +204,9 @@ const Index = () => {
     if (catalogPage > catalogTotalPages - 1) setCatalogPage(0);
   }, [catalogTotalPages, catalogPage]);
 
-  const allCategories = useMemo(() => {
-    return ["Denuvo", ...Array.from(new Set(games.flatMap((g) => g.categorias || []))).sort()];
-  }, [games]);
+  // Repacks não possuem categorias; mantemos apenas o filtro "Denuvo"
+  const allCategories = useMemo(() => ["Denuvo"], []);
 
-  const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 48), [games]);
-
-  // "Mais Jogados": prioriza jogos AAA com Denuvo
   const denuvoKeywords = [
     "black myth", "wukong", "hogwarts", "star wars jedi", "resident evil",
     "assassin's creed", "assassins creed", "mortal kombat", "tekken",
@@ -226,94 +216,59 @@ const Index = () => {
     "the callisto protocol", "atomic heart", "returnal", "forspoken",
     "wo long", "street fighter", "tales of", "monster hunter",
   ];
-  const denuvoGames = useMemo(() => {
-    const matches = games.filter((g) =>
-      denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k))
+
+  const parseRepackSize = (s: string | null) => {
+    if (!s) return 0;
+    const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
+    if (!match) return 0;
+    const value = parseFloat(match[1].replace(",", "."));
+    const unit = (match[3] || "GB").toUpperCase();
+    const multipliers: Record<string, number> = { KB: 1 / (1024 * 1024), MB: 1 / 1024, GB: 1, TB: 1024 };
+    return value * (multipliers[unit] || 1);
+  };
+
+  // Nova Geração: repacks mais recentes (já ordenados por data)
+  const recentes = useMemo(() => homeRepacks.slice(0, 48), [homeRepacks]);
+  // Mais Baixados: proxy pelos maiores títulos
+  const emAlta = useMemo(
+    () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
+    [homeRepacks]
+  );
+  // Denuvo: repacks cujo título bate com jogos AAA protegidos
+  const denuvoRepacks = useMemo(() => {
+    const matches = homeRepacks.filter((r) =>
+      denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k))
     );
-    return matches.length > 0
-      ? [...matches].sort((a, b) => b.download_count - a.download_count).slice(0, 48)
-      : emAlta;
-  }, [games, emAlta]);
-  const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 48), [games]);
+    return (matches.length > 0 ? matches : homeRepacks).slice(0, 48);
+  }, [homeRepacks]);
+
 
   const isLoading = gamesLoading;
   const isError = gamesError;
 
   const isSearching = busca || categoria !== "todas";
 
-  const filteredGames = useMemo(() => {
-    let result = games;
+  const filteredRepacks = useMemo(() => {
+    let result = busca.trim() ? matchedRepacks : homeRepacks;
     if (busca) {
-      const searchTerm = busca.toLowerCase();
-      result = result.filter((g) => 
-        g.nome.toLowerCase().includes(searchTerm) || 
-        g.descricao?.toLowerCase().includes(searchTerm) ||
-        g.categorias?.some(cat => cat.toLowerCase().includes(searchTerm)) ||
-        g.desenvolvedor?.toLowerCase().includes(searchTerm) ||
-        g.distribuidor?.toLowerCase().includes(searchTerm)
-      );
+      const term = busca.toLowerCase();
+      result = result.filter((r) => (r.title || "").toLowerCase().includes(term));
     }
     if (categoria === "Denuvo") {
-      result = result.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k)));
-    } else if (categoria !== "todas") {
-      result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
+      result = result.filter((r) => denuvoKeywords.some((k) => (r.title || "").toLowerCase().includes(k)));
     }
-    
-    const parseSize = (s: string | null, defaultValue: number) => {
-      if (!s) return defaultValue;
-      const match = s.match(/(\d+([.,]\d+)?)\s*(GB|MB|KB|TB)?/i);
-      if (!match) return defaultValue;
-      
-      const value = parseFloat(match[1].replace(',', '.'));
-      const unit = (match[3] || "GB").toUpperCase();
-      
-      const multipliers: Record<string, number> = {
-        "KB": 1 / (1024 * 1024),
-        "MB": 1 / 1024,
-        "GB": 1,
-        "TB": 1024
-      };
-      
-      return value * (multipliers[unit] || 1);
-    };
-
-    result = [...result].sort((a, b) => {
-      const sizeA = a.tamanho || "0 GB";
-      const sizeB = b.tamanho || "0 GB";
-      
-      if (ordenacao === "pesado") {
-        return parseSize(sizeB, 0) - parseSize(sizeA, 0);
-      }
-      if (ordenacao === "leve") {
-        return parseSize(sizeA, Infinity) - parseSize(sizeB, Infinity);
-      }
-      if (ordenacao === "popular" || ordenacao === "alta") return (b.download_count || 0) - (a.download_count || 0);
-      if (ordenacao === "lancamento") {
-        const parseDate = (d: string | null) => {
-          if (!d) return 0;
-          // Handles "5/dez./2019" format from local data
-          const months: Record<string, number> = {
-            "jan": 0, "fev": 1, "mar": 2, "abr": 3, "mai": 4, "jun": 5,
-            "jul": 6, "ago": 7, "set": 8, "out": 9, "nov": 10, "dez": 11
-          };
-          const parts = d.split("/");
-          if (parts.length === 3) {
-            const day = parseInt(parts[0]);
-            const monthStr = parts[1].replace(".", "").toLowerCase();
-            const year = parseInt(parts[2]);
-            const month = months[monthStr] ?? 0;
-            return new Date(year, month, day).getTime();
-          }
-          // Handles ISO "YYYY-MM-DD" from database
-          const isoDate = new Date(d);
-          return isNaN(isoDate.getTime()) ? 0 : isoDate.getTime();
-        };
-        return parseDate(b.lancamento) - parseDate(a.lancamento);
-      }
-      return (a.nome || "").localeCompare(b.nome || "");
-    });
-    return result;
-  }, [busca, categoria, ordenacao, games]);
+    const sorted = [...result];
+    if (ordenacao === "pesado") {
+      sorted.sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size));
+    } else if (ordenacao === "leve") {
+      sorted.sort((a, b) => parseRepackSize(a.file_size) - parseRepackSize(b.file_size));
+    } else if (ordenacao === "lancamento") {
+      sorted.sort((a, b) => (b.upload_date || "").localeCompare(a.upload_date || ""));
+    } else if (ordenacao === "nome") {
+      sorted.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+    }
+    return sorted;
+  }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks]);
 
   const firstHeroImage = featured && featured.length > 0 ? (featured[0].hero_image || featured[0].imagem) : undefined;
   const firstHeroPoster = featured && featured.length > 0 ? (featured[0].vertical_image || featured[0].imagem) : undefined;
@@ -542,7 +497,7 @@ const Index = () => {
                 </div>
                 <div className="flex items-center gap-4">
                   <p className="text-sm md:text-base font-bold text-gray-500 uppercase tracking-widest">
-                    {filteredGames.length} RESULTADO{filteredGames.length !== 1 ? "S" : ""} ENCONTRADO{filteredGames.length !== 1 ? "S" : ""}
+                    {filteredRepacks.length} RESULTADO{filteredRepacks.length !== 1 ? "S" : ""} ENCONTRADO{filteredRepacks.length !== 1 ? "S" : ""}
                   </p>
                 </div>
               </div>
@@ -566,7 +521,7 @@ const Index = () => {
               </div>
             </div>
 
-            {filteredGames.length === 0 && matchedRepacks.length === 0 ? (
+            {filteredRepacks.length === 0 ? (
               <div className="text-center py-32 space-y-8 bg-white/5 rounded-[3rem] border border-dashed border-white/10 max-w-2xl mx-auto px-10">
                 <div className="relative w-24 h-24 mx-auto">
                   <Gamepad2 className="w-24 h-24 text-gray-800" />
@@ -590,50 +545,23 @@ const Index = () => {
                 </button>
               </div>
             ) : (
-              <div className="space-y-12">
-                {filteredGames.length > 0 && (
-                  <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                    {filteredGames.map((game, i) => (
-                      <motion.div 
-                        key={game.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.03 }}
-                      >
-                        <GameCard game={game} />
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
-
-                {matchedRepacks.length > 0 && (
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-1.5 h-6 bg-primary rounded-full" />
-                      <h3 className="text-sm font-black uppercase tracking-widest text-foreground/80">
-                        Repacks ({matchedRepacks.length})
-                      </h3>
-                    </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                      {matchedRepacks.map((r) => (
-                        <RepackCard key={r.id} repack={r} />
-                      ))}
-                    </div>
-                  </div>
-                )}
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
+                {filteredRepacks.map((r) => (
+                  <RepackCard key={r.id} repack={r} />
+                ))}
               </div>
             )}
           </motion.div>
         ) : (
           <div className="space-y-16 md:space-y-32">
-            <GameSection title="JOGOS COM DENUVO" games={denuvoGames} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
-            <GameSection title="Jogos Mais Baixados" games={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
-            <GameSection title="Jogos da Nova Geração" games={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="JOGOS COM DENUVO" games={[]} repacks={denuvoRepacks} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="Jogos Mais Baixados" games={[]} repacks={emAlta} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
+            <GameSection title="Jogos da Nova Geração" games={[]} repacks={recentes} page={sectionsPage} pageSize={SECTIONS_PAGE_SIZE} />
 
             {(() => {
               const sectionsTotalPages = Math.max(
                 1,
-                Math.ceil(denuvoGames.length / SECTIONS_PAGE_SIZE),
+                Math.ceil(denuvoRepacks.length / SECTIONS_PAGE_SIZE),
                 Math.ceil(emAlta.length / SECTIONS_PAGE_SIZE),
                 Math.ceil(recentes.length / SECTIONS_PAGE_SIZE)
               );
@@ -686,13 +614,9 @@ const Index = () => {
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                {catalogPageItems.map((item) =>
-                  item.type === "game" ? (
-                    <GameCard key={`g-${item.id}`} game={item.data} />
-                  ) : (
-                    <RepackCard key={`r-${item.id}`} repack={item.data} />
-                  )
-                )}
+                {catalogPageItems.map((item) => (
+                  <RepackCard key={`r-${item.id}`} repack={item.data} />
+                ))}
               </div>
 
               {catalogTotalPages > 1 && (
