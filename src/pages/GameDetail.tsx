@@ -9,11 +9,9 @@ import { GoogleAd } from "@/components/GoogleAd";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
-import { Download, ArrowLeft, Monitor, Globe, Shield, Star, Heart, MessageSquare, ChevronRight, Play, CheckCircle, Info, ExternalLink, Bug } from "lucide-react";
+import { Download, ArrowLeft, Monitor, Globe, Shield, Star, Heart, ChevronRight, Play, CheckCircle, Info, ExternalLink, Bug } from "lucide-react";
 import React, { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { GameComments } from "@/components/GameComments";
-import { StarRating } from "@/components/StarRating";
 import { BugReportModal } from "@/components/BugReportModal";
 import { Database } from "@/integrations/supabase/types";
 import pirateLogo from "@/assets/logo-pirate.png";
@@ -669,46 +667,8 @@ const GameDetail = () => {
             </div>
           </div>
         </section>
-
-        {/* Social / Community Section */}
-        <section className="grid lg:grid-cols-2 gap-20 sm:gap-32">
-          <div className="space-y-12 sm:space-y-16">
-            <div className="flex items-center gap-6 sm:gap-8">
-              <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
-                <Star className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
-              </div>
-              <div className="space-y-3">
-                <h2 className="text-responsive-h2 leading-none uppercase">Avaliar</h2>
-                <div className="flex items-center gap-6">
-                  <span className="w-16 sm:w-24 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                  <span className="text-responsive-small text-muted-foreground opacity-80">Seu Voto de Jogador</span>
-                </div>
-              </div>
-            </div>
-            <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 shadow-2xl shadow-black/5">
-              <StarRating gameId={game.id} />
-            </div>
-          </div>
-
-          <div className="space-y-12 sm:space-y-16">
-            <div className="flex items-center gap-6 sm:gap-8">
-              <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
-                <MessageSquare className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
-              </div>
-              <div className="space-y-3">
-                <h2 className="text-responsive-h2 leading-none uppercase">Chat</h2>
-                <div className="flex items-center gap-6">
-                  <span className="w-16 sm:w-24 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
-                  <span className="text-responsive-small text-muted-foreground opacity-80">Conversa da Tripulação</span>
-                </div>
-              </div>
-            </div>
-            <div className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 shadow-2xl shadow-black/5">
-              <GameComments gameId={game.id} />
-            </div>
-          </div>
-        </section>
       </main>
+
 
       <footer className="border-t border-border bg-card py-20 sm:py-32 lg:py-48 mt-32 sm:mt-48 lg:mt-60">
         <div className="container-responsive text-center space-y-10">
