@@ -57,6 +57,7 @@ const Index = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isDenuvo = location.pathname === "/denuvo";
+  const isNovidades = location.pathname === "/novidades";
   const searchFromUrl = searchParams.get("search") || "";
   
   const [busca, setBusca] = useState(searchFromUrl);
