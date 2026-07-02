@@ -56,17 +56,17 @@ const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const isNovidades = location.pathname === "/novidades";
+  const isDenuvo = location.pathname === "/denuvo";
   const searchFromUrl = searchParams.get("search") || "";
   
   const [busca, setBusca] = useState(searchFromUrl);
-  const [categoria, setCategoria] = useState(isNovidades ? "Denuvo" : "todas");
+  const [categoria, setCategoria] = useState(isDenuvo ? "Denuvo" : "todas");
   const [fonte, setFonte] = useState("todas");
 
-  // Na página "Novidades" mostramos apenas jogos com Denuvo
+  // Na página "Denuvo" mostramos apenas jogos com Denuvo
   useEffect(() => {
-    setCategoria(isNovidades ? "Denuvo" : "todas");
-  }, [isNovidades]);
+    setCategoria(isDenuvo ? "Denuvo" : "todas");
+  }, [isDenuvo]);
 
   useEffect(() => {
     setBusca(searchFromUrl);
