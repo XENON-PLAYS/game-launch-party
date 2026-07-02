@@ -71,7 +71,7 @@ export const GameCard = React.memo(({ game, repack }: GameCardProps) => {
       </Link>
       
       <div className="p-4 flex flex-col flex-grow">
-        <Link to={`/jogo/${game.slug || game.id}`} className="block group/title mb-2">
+        <Link to={target} className="block group/title mb-2">
           <h3 className="font-bold text-sm lg:text-base line-clamp-2 group-hover/title:text-primary transition-colors duration-200 leading-tight">
             {game.nome}
           </h3>
@@ -79,20 +79,18 @@ export const GameCard = React.memo(({ game, repack }: GameCardProps) => {
         
         <div className="mt-auto pt-3 border-t border-border/30 flex items-center justify-between">
           <div className="flex flex-col">
-            <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-widest leading-none mb-1.5 opacity-60">Tesouro</span>
-            <span className={`font-black text-base lg:text-lg leading-none flex items-center gap-2 ${game.preco === 0 ? "text-primary" : "text-foreground"}`}>
-              {game.preco === 0 && (
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                </span>
-              )}
-              {game.preco === 0 ? "GRÁTIS" : `R$ ${Number(game.preco).toFixed(2).replace(".", ",")}`}
+            <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-widest leading-none mb-1.5 opacity-60">{repack?.file_size ? "Tamanho" : "Tesouro"}</span>
+            <span className="font-black text-base lg:text-lg leading-none flex items-center gap-2 text-primary">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              {repack?.file_size ? repack.file_size : "GRÁTIS"}
             </span>
           </div>
           
           <Link 
-            to={`/jogo/${game.slug || game.id}`} 
+            to={target} 
             className="p-2.5 rounded-lg bg-secondary/80 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
           >
             <Info className="w-4 h-4" />
