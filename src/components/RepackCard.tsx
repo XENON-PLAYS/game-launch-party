@@ -7,7 +7,7 @@ import { randomCover, useRepackCover } from "@/lib/repackCovers";
 export interface Repack {
   id: string;
   title: string;
-  uris: string[];
+  uris?: string[];
   file_size: string | null;
   upload_date: string | null;
   cover_url?: string | null;
