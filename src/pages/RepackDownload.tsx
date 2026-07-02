@@ -191,7 +191,7 @@ const RepackDownload = () => {
               alt=""
               className="w-full h-full object-cover opacity-25 scale-105 blur-[2px]"
               onError={(e) => { if (repack) e.currentTarget.src = randomCover(repack.id); }}
-            />>
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-card via-card/85 to-card/60" />
           </div>
         )}
