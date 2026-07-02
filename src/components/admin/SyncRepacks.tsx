@@ -79,6 +79,10 @@ export function SyncRepacks() {
         total = data.total ?? saved;
       }
       setSavedCount(total || saved);
+      // Atualiza a lista consolidada (materialized view) para os novos jogos aparecerem no catálogo
+      toast.loading("Atualizando catálogo...", { id: toastId });
+      const { error: refreshError } = await supabase.rpc("refresh_merged_repacks");
+      if (refreshError) throw refreshError;
       toast.success(
         `Lista atualizada! ${(total || saved).toLocaleString("pt-BR")} jogos de ${source} salvos.`,
         { id: toastId },
