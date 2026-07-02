@@ -79,7 +79,7 @@ const Index = () => {
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
   const [catalogPage, setCatalogPage] = useState(0);
-  const CATALOG_PAGE_SIZE = 20;
+  const CATALOG_PAGE_SIZE = 50;
   const [sectionsPage, setSectionsPage] = useState(0);
   const SECTIONS_PAGE_SIZE = 12;
 
