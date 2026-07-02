@@ -18,6 +18,7 @@ import { BugReportModal } from "@/components/BugReportModal";
 import { Database } from "@/integrations/supabase/types";
 import pirateLogo from "@/assets/logo-pirate.png";
 import { games as localGamesData } from "@/data/games";
+import { classifyLink } from "@/lib/downloadLinks";
 
 type Game = Database["public"]["Tables"]["games"]["Row"];
 
