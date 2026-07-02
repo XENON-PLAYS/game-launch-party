@@ -42,8 +42,9 @@ const random = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)];
 
 interface Notification {
   id: number;
+  type: "download" | "vip";
   name: string;
-  game: string;
+  detail: string;
 }
 
 export const PurchaseNotification = () => {
@@ -53,10 +54,13 @@ export const PurchaseNotification = () => {
     let timeoutId: ReturnType<typeof setTimeout>;
 
     const showNext = () => {
+      // ~30% das notificações são de compra de VIP
+      const isVip = Math.random() < 0.3;
       setCurrent({
         id: Date.now(),
+        type: isVip ? "vip" : "download",
         name: random(NAMES),
-        game: random(GAMES),
+        detail: isVip ? "" : random(GAMES),
       });
 
       // Esconde depois de 5s e agenda a próxima
