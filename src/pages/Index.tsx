@@ -78,6 +78,8 @@ const Index = () => {
 
   const [ordenacao, setOrdenacao] = useState<SortOption>("nome");
   const [showFilters, setShowFilters] = useState(false);
+  const [catalogPage, setCatalogPage] = useState(0);
+  const CATALOG_PAGE_SIZE = 18;
 
   const { data: gamesData, isLoading: gamesLoading, isError: gamesError, refetch } = useQuery({
     queryKey: ["games"],
