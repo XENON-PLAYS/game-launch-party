@@ -91,6 +91,9 @@ const Index = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [catalogPage, setCatalogPage] = useState(0);
   const CATALOG_PAGE_SIZE = 50;
+  // Paginação por cursor (keyset): evita OFFSET profundo (que fica lento em páginas altas)
+  type CatalogCursor = { d: string | null; id: string } | null;
+  const [catalogCursors, setCatalogCursors] = useState<CatalogCursor[]>([null]);
   const [sectionsPage, setSectionsPage] = useState(0);
   const SECTIONS_PAGE_SIZE = 12;
 
@@ -130,7 +133,7 @@ const Index = () => {
       return (data ?? []) as Repack[];
     },
     enabled: !isSearching,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 30,
   });
 
   const { data: emAltaData } = useQuery({
@@ -144,7 +147,7 @@ const Index = () => {
       return (data ?? []) as Repack[];
     },
     enabled: !isSearching,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 30,
   });
 
   const { data: recentesData } = useQuery({
@@ -160,7 +163,7 @@ const Index = () => {
       return (data ?? []) as Repack[];
     },
     enabled: !isSearching,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 30,
   });
 
   // ---- Catálogo "Explore": paginado no servidor (50 por página) ----
@@ -173,17 +176,27 @@ const Index = () => {
       return count ?? 0;
     },
     enabled: !isSearching,
-    staleTime: 1000 * 60 * 10,
+    staleTime: 1000 * 60 * 30,
   });
 
+  const catalogCursor = catalogCursors[catalogPage] ?? null;
   const { data: catalogData, isLoading: catalogLoading, isError: catalogError, refetch: refetchCatalog } = useQuery({
-    queryKey: ["catalog-page", catalogPage],
+    queryKey: ["catalog-page", catalogPage, catalogCursor],
     queryFn: async () => {
-      const from = catalogPage * CATALOG_PAGE_SIZE;
-      const { data, error } = await (supabase as any)
-        .from("merged_repacks").select(SELECT_FIELDS)
+      let q = (supabase as any).from("merged_repacks").select(SELECT_FIELDS);
+      if (catalogCursor) {
+        if (catalogCursor.d === null) {
+          // Já estamos na faixa de datas nulas: pagina apenas por id
+          q = q.is("upload_date", null).lt("id", catalogCursor.id);
+        } else {
+          const iso = new Date(catalogCursor.d).toISOString();
+          q = q.or(`upload_date.lt.${iso},and(upload_date.eq.${iso},id.lt.${catalogCursor.id}),upload_date.is.null`);
+        }
+      }
+      const { data, error } = await q
         .order("upload_date", { ascending: false, nullsFirst: false })
-        .range(from, from + CATALOG_PAGE_SIZE - 1);
+        .order("id", { ascending: false })
+        .limit(CATALOG_PAGE_SIZE);
       if (error) throw error;
       return (data ?? []) as Repack[];
     },
@@ -191,6 +204,20 @@ const Index = () => {
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 5,
   });
+
+  // Guarda o cursor da próxima página assim que a página atual carrega
+  useEffect(() => {
+    if (catalogData && catalogData.length === CATALOG_PAGE_SIZE) {
+      const last = catalogData[catalogData.length - 1] as Repack;
+      setCatalogCursors((prev) => {
+        if (prev[catalogPage + 1] !== undefined) return prev;
+        const next = prev.slice();
+        next[catalogPage + 1] = { d: (last as any).upload_date ?? null, id: last.id };
+        return next;
+      });
+    }
+  }, [catalogData, catalogPage]);
+
 
   // ---- Busca / filtro: consulta única server-side (máx. 120 resultados) ----
   const { data: browseData, isLoading: browseLoading, isError: browseError, refetch: refetchBrowse } = useQuery({
@@ -741,7 +768,7 @@ const Index = () => {
                       setCatalogPage((p) => Math.min(catalogTotalPages - 1, p + 1));
                       window.scrollTo({ top: window.scrollY - 200, behavior: "smooth" });
                     }}
-                    disabled={catalogPage >= catalogTotalPages - 1}
+                    disabled={catalogPage >= catalogTotalPages - 1 || catalogCursors[catalogPage + 1] === undefined}
                     aria-label="Próxima página"
                     className="p-3 md:p-4 rounded-xl md:rounded-2xl bg-card border border-border/50 hover:border-primary/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xl shadow-black/10"
                   >
