@@ -640,7 +640,7 @@ const Index = () => {
             {(() => {
               const sectionsTotalPages = Math.max(
                 1,
-                Math.ceil(denuvoGames.length / SECTIONS_PAGE_SIZE),
+                Math.ceil(denuvoRepacks.length / SECTIONS_PAGE_SIZE),
                 Math.ceil(emAlta.length / SECTIONS_PAGE_SIZE),
                 Math.ceil(recentes.length / SECTIONS_PAGE_SIZE)
               );
