@@ -672,6 +672,7 @@ export type Database = {
         Args: { p_role: string; p_user_id: string }
         Returns: undefined
       }
+      refresh_merged_repacks: { Args: never; Returns: undefined }
       repack_base_title: { Args: { t: string }; Returns: string }
       slugify: { Args: { text: string }; Returns: string }
       toggle_admin_role: { Args: { target_user_id: string }; Returns: string }
