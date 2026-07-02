@@ -55,28 +55,17 @@ const Login = () => {
     setGoogleLoading(true);
     setErro("");
     try {
-      const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: getRedirectUrl(),
-      });
-
-      if (result.error) {
-        const errorMsg = getAuthErrorMessage(result.error);
-        setErro(errorMsg);
-        toast.error(errorMsg);
+      const { error } = await signInWithGoogle();
+      if (error) {
+        setErro(error);
+        toast.error(error);
         setGoogleLoading(false);
-        return;
       }
-
-      if (result.redirected) {
-        return;
-      }
-
-      toast.success("Bem-vindo!");
-      navigate(redirect);
+      // On success the browser redirects to Google; no further action needed.
     } catch (err) {
       toast.error("Houve um erro técnico ao tentar entrar com o Google.");
+      setGoogleLoading(false);
     }
-    setGoogleLoading(false);
   };
 
   return (
