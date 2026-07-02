@@ -157,7 +157,7 @@ const Index = () => {
       for (let from = 0; ; from += PAGE) {
         const { data, error } = await (supabase as any)
           .from("merged_repacks")
-          .select("id, title, uris, file_size, upload_date, cover_url")
+          .select("id, title, file_size, upload_date, cover_url")
           .order("upload_date", { ascending: false, nullsFirst: false })
           .range(from, from + PAGE - 1);
         if (error) throw error;
@@ -178,7 +178,7 @@ const Index = () => {
       if (!term) return [] as Repack[];
       const { data, error } = await (supabase as any)
         .from("merged_repacks")
-        .select("id, title, uris, file_size, upload_date, cover_url")
+        .select("id, title, file_size, upload_date, cover_url")
         .ilike("title", `%${term}%`)
         .order("upload_date", { ascending: false, nullsFirst: false })
         .limit(24);
