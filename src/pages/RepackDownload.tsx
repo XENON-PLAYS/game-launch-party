@@ -80,18 +80,28 @@ const RepackDownload = () => {
     return () => clearTimeout(timer);
   }, [countdown, isVip]);
 
-  const handleDownload = () => {
-    if (!repack?.uris?.[0]) return;
+  const handleDownload = (option?: { url: string; kind: string }) => {
+    const target = option ?? downloadOptions[0];
+    if (!target?.url) return;
     setDownloadStarted(true);
-    toast.success("Download iniciado! Abrindo no seu cliente de torrent.");
-    window.location.href = repack.uris[0];
+    toast.success(
+      target.kind === "torrent"
+        ? "Download iniciado! Abrindo no seu cliente de torrent."
+        : "Download iniciado! Abrindo o link em uma nova aba.",
+    );
+    if (target.kind === "torrent") {
+      window.location.href = target.url;
+    } else {
+      window.open(target.url, "_blank", "noopener,noreferrer");
+    }
   };
 
-  const copyMagnet = async () => {
-    if (!repack?.uris?.[0]) return;
+  const copyLink = async (url?: string) => {
+    const target = url ?? downloadOptions[0]?.url;
+    if (!target) return;
     try {
-      await navigator.clipboard.writeText(repack.uris[0]);
-      toast.success("Link magnet copiado!");
+      await navigator.clipboard.writeText(target);
+      toast.success("Link copiado!");
     } catch {
       toast.error("Não foi possível copiar.");
     }
