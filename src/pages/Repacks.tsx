@@ -89,56 +89,20 @@ const Repacks = () => {
           </Button>
         </form>
 
-        <div className="mt-8 space-y-3">
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
           {isLoading ? (
-            Array.from({ length: 8 }).map((_, i) => (
-              <Skeleton key={i} className="h-20 rounded-2xl" />
+            Array.from({ length: 10 }).map((_, i) => (
+              <Skeleton key={i} className="aspect-[3/4] rounded-2xl" />
             ))
           ) : rows.length === 0 ? (
-            <div className="text-center py-20 text-muted-foreground">
+            <div className="col-span-full text-center py-20 text-muted-foreground">
               {query ? "Nenhum jogo encontrado para a sua busca." : "Nenhum repack cadastrado ainda."}
             </div>
           ) : (
-            rows.map((r) => (
-              <div
-                key={r.id}
-                className="rounded-2xl border border-border bg-card/40 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-4"
-              >
-                <div className="flex-1 min-w-0">
-                  <h2 className="font-bold truncate text-sm sm:text-base">{r.title}</h2>
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5 text-[11px] text-muted-foreground">
-                    {r.file_size && (
-                      <span className="flex items-center gap-1.5">
-                        <HardDrive className="h-3.5 w-3.5" /> {r.file_size}
-                      </span>
-                    )}
-                    {r.upload_date && (
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="h-3.5 w-3.5" />
-                        {new Date(r.upload_date).toLocaleDateString("pt-BR")}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="rounded-xl gap-2"
-                    onClick={() => copyMagnet(r.uris[0])}
-                  >
-                    <Copy className="h-4 w-4" /> Copiar
-                  </Button>
-                  <Link to={`/repack/${r.id}`}>
-                    <Button size="sm" className="rounded-xl gap-2 font-black uppercase tracking-wider">
-                      <Download className="h-4 w-4" /> Baixar
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            ))
+            rows.map((r) => <RepackCard key={r.id} repack={r} />)
           )}
         </div>
+
 
         {totalPages > 1 && (
           <div className="mt-10 flex items-center justify-center gap-4">
