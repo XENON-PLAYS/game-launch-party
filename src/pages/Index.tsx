@@ -628,9 +628,46 @@ const Index = () => {
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
-                {games.map((game) => <GameCard key={game.id} game={game} />)}
-                {repacksCatalogo.map((r) => <RepackCard key={r.id} repack={r} />)}
+                {catalogPageItems.map((item) =>
+                  item.type === "game" ? (
+                    <GameCard key={`g-${item.id}`} game={item.data} />
+                  ) : (
+                    <RepackCard key={`r-${item.id}`} repack={item.data} />
+                  )
+                )}
               </div>
+
+              {catalogTotalPages > 1 && (
+                <div className="flex items-center justify-center gap-4 md:gap-6 pt-4">
+                  <button
+                    onClick={() => {
+                      setCatalogPage((p) => Math.max(0, p - 1));
+                      window.scrollTo({ top: window.scrollY - 200, behavior: "smooth" });
+                    }}
+                    disabled={catalogPage === 0}
+                    aria-label="Página anterior"
+                    className="p-3 md:p-4 rounded-xl md:rounded-2xl bg-card border border-border/50 hover:border-primary/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xl shadow-black/10"
+                  >
+                    <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+                  </button>
+
+                  <span className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground min-w-[80px] text-center">
+                    {catalogPage + 1} / {catalogTotalPages}
+                  </span>
+
+                  <button
+                    onClick={() => {
+                      setCatalogPage((p) => Math.min(catalogTotalPages - 1, p + 1));
+                      window.scrollTo({ top: window.scrollY - 200, behavior: "smooth" });
+                    }}
+                    disabled={catalogPage >= catalogTotalPages - 1}
+                    aria-label="Próxima página"
+                    className="p-3 md:p-4 rounded-xl md:rounded-2xl bg-card border border-border/50 hover:border-primary/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xl shadow-black/10"
+                  >
+                    <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+                  </button>
+                </div>
+              )}
             </section>
           </div>
         )}
