@@ -215,6 +215,25 @@ const Index = () => {
   }, [games]);
 
   const emAlta = useMemo(() => [...games].sort((a, b) => b.download_count - a.download_count).slice(0, 48), [games]);
+
+  // "Mais Jogados": prioriza jogos AAA com Denuvo
+  const denuvoKeywords = [
+    "black myth", "wukong", "hogwarts", "star wars jedi", "resident evil",
+    "assassin's creed", "assassins creed", "mortal kombat", "tekken",
+    "dragon's dogma", "dragons dogma", "final fantasy", "sonic",
+    "like a dragon", "yakuza", "dead space", "hitman", "football manager",
+    "ea sports fc", "fifa", "f1", "need for speed", "lords of the fallen",
+    "the callisto protocol", "atomic heart", "returnal", "forspoken",
+    "wo long", "street fighter", "tales of", "monster hunter",
+  ];
+  const denuvoGames = useMemo(() => {
+    const matches = games.filter((g) =>
+      denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k))
+    );
+    return matches.length > 0
+      ? [...matches].sort((a, b) => b.download_count - a.download_count).slice(0, 48)
+      : emAlta;
+  }, [games, emAlta]);
   const recentes = useMemo(() => [...games].sort((a, b) => (b.lancamento || "").localeCompare(a.lancamento || "")).slice(0, 48), [games]);
 
   const isLoading = gamesLoading;
