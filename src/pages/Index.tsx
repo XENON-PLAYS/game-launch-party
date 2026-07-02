@@ -696,7 +696,7 @@ const Index = () => {
                   <h2 className="text-responsive-h2 leading-none font-extrabold"><span className="text-primary">Explore</span> <span className="text-foreground">o Catálogo</span></h2>
                   <div className="flex items-center gap-4 md:gap-8">
                     <span className="w-20 md:w-32 h-1.5 md:h-2 bg-primary rounded-full shadow-2xl shadow-primary/30" />
-                    <span className="text-sm md:text-responsive-body font-medium">{catalogItems.length} experiências de alto nível</span>
+                    <span className="text-sm md:text-responsive-body font-medium">{catalogTotal} experiências de alto nível</span>
                   </div>
                 </div>
                 
