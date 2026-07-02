@@ -176,7 +176,7 @@ const Index = () => {
       return count ?? 0;
     },
     enabled: !isSearching,
-    staleTime: 1000 * 60 * 10,
+    staleTime: 1000 * 60 * 30,
   });
 
   const catalogCursor = catalogCursors[catalogPage] ?? null;
