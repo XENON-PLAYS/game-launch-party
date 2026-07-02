@@ -100,11 +100,11 @@ export const RepackCard = React.memo(({ repack }: RepackCardProps) => {
         )}
 
         <div className="mt-auto pt-3 border-t border-border/30 flex items-center gap-2">
-          <a href={repack.uris[0]} className="flex-1">
+          <Link to={`/repack/${repack.id}`} className="flex-1">
             <Button size="sm" className="w-full rounded-xl gap-2 font-black uppercase tracking-wider text-[11px]">
               <Download className="w-4 h-4" /> Baixar
             </Button>
-          </a>
+          </Link>
           <Button
             variant="outline"
             size="sm"
