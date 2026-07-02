@@ -314,9 +314,16 @@ const Index = () => {
           const year = r.upload_date ? new Date(r.upload_date).getFullYear() : NaN;
           return year >= 2025 && year <= 2026;
         })
+        .sort((a, b) => {
+          const da = a.upload_date ? new Date(a.upload_date).getTime() : 0;
+          const db = b.upload_date ? new Date(b.upload_date).getTime() : 0;
+          if (db !== da) return db - da; // mais recente primeiro
+          return parseRepackSize(b.file_size) - parseRepackSize(a.file_size); // relevância (tamanho)
+        })
         .slice(0, 48),
     [homeRepacks]
   );
+
 
   const isLoading = gamesLoading;
   const isError = gamesError;
