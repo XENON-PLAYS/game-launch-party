@@ -97,6 +97,28 @@ async function searchSteam(term: string): Promise<Array<{ id: number; name: stri
   }
 }
 
+// Endpoint de sugestões da loja: cobre jogos removidos/novos que a storesearch não retorna.
+async function suggestSteam(term: string): Promise<Array<{ id: number; name: string }>> {
+  try {
+    const url =
+      `https://store.steampowered.com/search/suggest?term=${encodeURIComponent(term)}&f=games&cc=us&l=english&use_store_query=1`;
+    const res = await fetch(url, {
+      headers: { "Accept": "text/html", "User-Agent": "Mozilla/5.0" },
+    });
+    if (!res.ok) return [];
+    const html = await res.text();
+    const results: Array<{ id: number; name: string }> = [];
+    const re = /data-ds-appid="(\d+)"[^>]*>[\s\S]*?<div class="match_name[^"]*">([^<]*)<\/div>/g;
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(html)) !== null) {
+      results.push({ id: Number(m[1]), name: m[2].trim() });
+    }
+    return results;
+  } catch {
+    return [];
+  }
+}
+
 async function resolveCover(title: string): Promise<string | null> {
   const cleaned = cleanTitle(title);
   // Tenta o título limpo e, se falhar, uma versão ainda mais curta (primeiras palavras)
@@ -113,8 +135,10 @@ async function resolveCover(title: string): Promise<string | null> {
   let bestScore = 0;
 
   for (const term of attempts) {
-    const items = await searchSteam(term);
-    for (const it of items.slice(0, 8)) {
+    // Combina os dois endpoints: storesearch (jogos à venda) + suggest (inclui removidos/novos)
+    const [a, b] = await Promise.all([searchSteam(term), suggestSteam(term)]);
+    const items = [...a, ...b];
+    for (const it of items.slice(0, 16)) {
       const score = similarity(cleaned, it.name);
       if (score > bestScore) {
         bestScore = score;
