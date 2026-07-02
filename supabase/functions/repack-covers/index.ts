@@ -61,6 +61,22 @@ async function bestArt(appid: number): Promise<string | null> {
   for (const url of candidates) {
     if (await exists(url)) return url;
   }
+  // Fallback para jogos novos: caminhos fixos falham porque a Steam usa
+  // URLs com hash. Buscamos a arte real via appdetails.
+  try {
+    const res = await fetch(
+      `https://store.steampowered.com/api/appdetails?appids=${appid}&cc=us&l=en`,
+      { headers: { "Accept": "application/json", "User-Agent": "Mozilla/5.0" } },
+    );
+    if (res.ok) {
+      const j = await res.json();
+      const d = j?.[String(appid)]?.data;
+      const art = d?.header_image || d?.capsule_image;
+      if (typeof art === "string" && art.length > 0) return art;
+    }
+  } catch {
+    // ignora
+  }
   return null;
 }
 
