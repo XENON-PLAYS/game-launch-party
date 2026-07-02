@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS idx_merged_repacks_keyset ON public.merged_repacks (upload_date DESC NULLS LAST, id DESC);
