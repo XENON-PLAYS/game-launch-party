@@ -21,8 +21,8 @@ const Repacks = () => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ["repacks", query, page],
     queryFn: async () => {
-      let q = supabase
-        .from("source_repacks")
+      let q = (supabase as any)
+        .from("merged_repacks")
         .select("id, title, uris, file_size, upload_date, cover_url", { count: "exact" });
 
       if (query.trim()) {
