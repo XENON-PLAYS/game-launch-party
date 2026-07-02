@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
-import { Download, Loader2, Shield, CheckCircle, CheckCircle2, RefreshCw, HardDrive, Copy, ChevronRight } from "lucide-react";
+import { Download, Loader2, Shield, CheckCircle, CheckCircle2, RefreshCw, HardDrive, Copy, ChevronRight, Monitor } from "lucide-react";
 import { toast } from "sonner";
 import { GoogleAd } from "@/components/GoogleAd";
 import { randomCover } from "@/components/RepackCard";
@@ -299,6 +299,64 @@ const RepackDownload = () => {
                 </button>
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Requirements Section */}
+        <section className="space-y-12 sm:space-y-16">
+          <div className="flex items-center gap-6 sm:gap-10">
+            <div className="p-4 sm:p-6 rounded-3xl bg-primary/10 border border-primary/20 shadow-2xl shadow-primary/5">
+              <Monitor className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
+            </div>
+            <div className="space-y-3">
+              <h2 className="text-responsive-h2 leading-none uppercase">Requisitos</h2>
+              <div className="flex items-center gap-6">
+                <span className="w-16 sm:w-32 h-2 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                <span className="text-responsive-small text-muted-foreground opacity-80">Especificações da Frota</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid gap-10 sm:gap-12">
+            {[
+              {
+                label: "Mínimos",
+                data: {
+                  processador: "Intel Core i3 / AMD Ryzen 3",
+                  memoria: "8 GB de RAM",
+                  placa: "NVIDIA GTX 750 Ti / AMD equivalente",
+                  armazenamento: repack?.file_size || "Espaço livre suficiente para o repack",
+                },
+              },
+              {
+                label: "Recomendados",
+                data: {
+                  processador: "Intel Core i5 / AMD Ryzen 5",
+                  memoria: "16 GB de RAM",
+                  placa: "NVIDIA GTX 1060 / AMD equivalente",
+                  armazenamento: "SSD para melhor desempenho",
+                },
+              },
+            ].map(({ label, data }) => (
+              <div key={label} className="bg-card border-2 border-border rounded-[2.5rem] p-10 sm:p-14 space-y-10 shadow-2xl shadow-black/5 hover:border-primary/20 transition-all duration-500">
+                <div className="flex items-center justify-between border-b border-border pb-8">
+                  <h3 className="text-responsive-h3 text-primary uppercase leading-none">{label}</h3>
+                  <div className={`px-6 py-2 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest ${label === "Mínimos" ? "bg-orange-500/10 text-orange-400 border border-orange-500/20" : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"}`}>
+                    {label === "Mínimos" ? "Essencial" : "Optimizado"}
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-x-12 gap-y-8">
+                  {Object.entries(data).map(([key, val]) => (
+                    <div key={key} className="space-y-2 group">
+                      <span className="text-responsive-small text-muted-foreground opacity-60 group-hover:text-primary transition-all duration-300">
+                        {key === "placa" ? "GPU / Placa de Vídeo" : key === "armazenamento" ? "Espaço em Disco" : key === "memoria" ? "Memória RAM" : key === "processador" ? "Processador CPU" : key}
+                      </span>
+                      <p className="text-sm sm:text-base lg:text-lg font-black group-hover:text-foreground transition-all duration-300 leading-snug">{String(val)}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
