@@ -17,7 +17,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { useState, useEffect, useRef } from "react";
-import { OnlineUsers } from "./OnlineUsers";
+
 import { NotificationBell } from "./NotificationBell";
 import { optimizeImageUrl } from "@/lib/utils";
 import pirateLogo from "@/assets/logo-pirate.png";
@@ -153,9 +153,6 @@ export function Header() {
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
 
-            <div className="hidden sm:block">
-              <OnlineUsers />
-            </div>
 
             <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 border-l border-border pl-3 sm:pl-6">
               <NotificationBell />
@@ -257,9 +254,6 @@ export function Header() {
             >
               <div className="container mx-auto px-4 py-6 flex flex-col gap-6">
                 {navLinks}
-                <div className="pt-4 border-t border-border flex flex-col gap-4">
-                  <OnlineUsers />
-                </div>
               </div>
             </motion.div>
           )}
