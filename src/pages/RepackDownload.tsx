@@ -81,8 +81,10 @@ const RepackDownload = () => {
   // Busca automaticamente trailer/descrição/screenshots na Steam quando ainda não existem
   useEffect(() => {
     if (!repack?.id) return;
-    const missing = !repack.description && !repack.trailer_url && !(repack.screenshots?.length);
-    if (!missing) return;
+    const noBaseData = !repack.description && !repack.trailer_url && !(repack.screenshots?.length);
+    // Busca também quando só falta o trailer mas já temos appid resolvido
+    const missingTrailer = !repack.trailer_url && repack.steam_appid != null;
+    if (!noBaseData && !missingTrailer) return;
     let active = true;
     (async () => {
       try {

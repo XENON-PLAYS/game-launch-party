@@ -116,11 +116,14 @@ async function fetchDetails(appid: number): Promise<Details | null> {
     if (!entry?.success || !entry.data) return null;
     const d = entry.data;
 
-    // Trailer: prioriza mp4 (melhor compatibilidade), depois webm
+    // Trailer: prioriza mp4/webm; se a Steam só devolver dash/hls, monta o mp4 pelo id do vídeo
     let trailer: string | null = null;
     if (Array.isArray(d.movies) && d.movies.length > 0) {
       const mv = d.movies[0];
       trailer = httpsify(mv?.mp4?.max || mv?.mp4?.["480"] || mv?.webm?.max || mv?.webm?.["480"]);
+      if (!trailer && mv?.id) {
+        trailer = `https://video.akamai.steamstatic.com/store_trailers/${mv.id}/movie480.mp4`;
+      }
     }
 
     const screenshots: string[] = Array.isArray(d.screenshots)
@@ -177,7 +180,9 @@ Deno.serve(async (req) => {
 
     for (const r of rows ?? []) {
       const hasData = r.description || r.trailer_url || (r.screenshots && r.screenshots.length > 0);
-      if (hasData && !force) {
+      // Se já temos o appid mas ainda falta o trailer, revalidamos para buscar o vídeo
+      const missingTrailer = !r.trailer_url && r.steam_appid != null;
+      if (hasData && !missingTrailer && !force) {
         details[r.id] = {
           steam_appid: r.steam_appid,
           description: r.description,
