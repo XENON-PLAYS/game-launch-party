@@ -57,6 +57,7 @@ const Index = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isDenuvo = location.pathname === "/denuvo";
+  const isNovidades = location.pathname === "/novidades";
   const searchFromUrl = searchParams.get("search") || "";
   
   const [busca, setBusca] = useState(searchFromUrl);
@@ -170,6 +171,23 @@ const Index = () => {
       return (data ?? []) as Repack[];
     },
     enabled: !isSearching,
+    staleTime: 1000 * 60 * 30,
+  });
+
+  // ---- Novidades: apenas jogos lançados em 2026 ----
+  const { data: novidadesData, isLoading: novidadesLoading } = useQuery({
+    queryKey: ["novidades-2026"],
+    queryFn: async () => {
+      const { data, error } = await (supabase as any)
+        .from("merged_repacks").select(SELECT_FIELDS)
+        .gte("upload_date", "2026-01-01")
+        .lt("upload_date", "2027-01-01")
+        .order("upload_date", { ascending: false, nullsFirst: false })
+        .limit(120);
+      if (error) throw error;
+      return (data ?? []) as Repack[];
+    },
+    enabled: isNovidades,
     staleTime: 1000 * 60 * 30,
   });
 
@@ -306,9 +324,10 @@ const Index = () => {
   const emAlta = useMemo(() => (emAltaData || []) as Repack[], [emAltaData]);
   const recentes = useMemo(() => (recentesData || []) as Repack[], [recentesData]);
 
-  const isLoading = isSearching ? (browseLoading && !browseData) : (catalogLoading && !catalogData);
-  const isError = isSearching ? browseError : catalogError;
+  const isLoading = isNovidades ? (novidadesLoading && !novidadesData) : isSearching ? (browseLoading && !browseData) : (catalogLoading && !catalogData);
+  const isError = isNovidades ? false : isSearching ? browseError : catalogError;
   const refetch = () => { if (isSearching) refetchBrowse(); else refetchCatalog(); };
+  const novidades2026 = useMemo(() => (novidadesData || []) as Repack[], [novidadesData]);
 
   // Jogos populares/mais jogados da Steam (para ranquear a busca por relevância)
   const popularKeywords = useMemo(
@@ -373,7 +392,7 @@ const Index = () => {
       <SEO preloadImage={firstHeroImage} preloadPoster={firstHeroPoster} />
       <Header />
       
-      {!isSearching && <HeroCarousel initialFeatured={featured} isLoadingInitial={featuredLoading} />}
+      {!isSearching && !isNovidades && <HeroCarousel initialFeatured={featured} isLoadingInitial={featuredLoading} />}
 
       <section className="bg-background/80 backdrop-blur-2xl sticky top-[60px] md:top-[72px] z-[90] border-b border-border py-4 md:py-6 transition-all duration-300">
         <div className="container mx-auto px-4 md:px-12">
@@ -612,6 +631,27 @@ const Index = () => {
               Tentar Novamente
             </button>
           </div>
+        ) : isNovidades ? (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-10 md:space-y-16">
+            <div className="flex items-center gap-3 pb-8 border-b border-white/5">
+              <div className="w-1.5 h-8 bg-primary rounded-full shadow-lg shadow-primary/20" />
+              <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase italic">
+                <span className="text-white">Novidades</span>{" "}
+                <span className="text-primary">2026</span>
+              </h2>
+            </div>
+            {novidades2026.length === 0 ? (
+              <div className="text-center py-32 text-gray-500 font-medium italic">
+                Nenhum jogo lançado em 2026 por enquanto. Volte em breve.
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
+                {novidades2026.map((item) => (
+                  <RepackCard key={`n-${item.id}`} repack={item} />
+                ))}
+              </div>
+            )}
+          </motion.div>
         ) : isSearching ? (
           <motion.div 
             initial={{ opacity: 0 }}
