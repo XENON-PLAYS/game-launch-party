@@ -155,14 +155,17 @@ const Index = () => {
   const { data: recentRepacks } = useQuery({
     queryKey: ["repacks-home"],
     queryFn: async () => {
-      const PAGE = 1000;
       const all: Repack[] = [];
-      for (let from = 0; ; from += PAGE) {
+      let from = 0;
+      // 1º lote pequeno para os primeiros cards aparecerem quase instantaneamente,
+      // depois lotes grandes para completar o catálogo/seções em segundo plano.
+      let size = 60;
+      for (;;) {
         const { data, error } = await (supabase as any)
           .from("merged_repacks")
           .select("id, title, file_size, upload_date, cover_url")
           .order("upload_date", { ascending: false, nullsFirst: false })
-          .range(from, from + PAGE - 1);
+          .range(from, from + size - 1);
         if (error) {
           if (all.length > 0) break; // já temos algo para exibir
           throw error;
@@ -171,12 +174,15 @@ const Index = () => {
         all.push(...batch);
         // Publica o progresso parcial: assinantes re-renderizam com os cards já disponíveis.
         queryClient.setQueryData(["repacks-home"], [...all]);
-        if (batch.length < PAGE) break;
+        if (batch.length < size) break;
+        from += size;
+        size = 1000; // lotes maiores para o restante
       }
       return all;
     },
     staleTime: 1000 * 60 * 5,
   });
+
 
   // Repacks que batem com a busca atual
   const { data: searchedRepacks } = useQuery({
