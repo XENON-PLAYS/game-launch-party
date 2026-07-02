@@ -81,30 +81,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     let isMounted = true;
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      try {
-        if (!isMounted) return;
-        
-        const u = session?.user ?? null;
-        setUser(u);
-        
-        if (u) {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!isMounted) return;
+
+      const u = session?.user ?? null;
+      setUser(u);
+
+      if (u) {
+        // Defer Supabase calls to avoid deadlocks / stale session cache inside the callback
+        setTimeout(() => {
+          if (!isMounted) return;
           if (event === "SIGNED_IN" || event === "INITIAL_SESSION" || event === "USER_UPDATED") {
-            try {
-              await supabase.rpc("update_online_status");
-            } catch (error) {
-              console.error("Error updating online status:", error);
-            }
+            supabase.rpc("update_online_status").then(({ error }) => {
+              if (error) console.error("Error updating online status:", error);
+            });
           }
-          await fetchProfile(u.id);
-        } else {
-          setProfile(null);
-          setIsAdmin(false);
-        }
-      } catch (error) {
-        console.error("Auth state change error:", error);
-      } finally {
-        if (isMounted) setIsLoading(false);
+          fetchProfile(u.id).finally(() => {
+            if (isMounted) setIsLoading(false);
+          });
+        }, 0);
+      } else {
+        setProfile(null);
+        setIsAdmin(false);
+        setIsLoading(false);
       }
     });
 
