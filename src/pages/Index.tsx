@@ -49,6 +49,7 @@ const Index = () => {
   
   const [busca, setBusca] = useState(searchFromUrl);
   const [categoria, setCategoria] = useState("todas");
+  const [fonte, setFonte] = useState("todas");
 
   useEffect(() => {
     setBusca(searchFromUrl);
