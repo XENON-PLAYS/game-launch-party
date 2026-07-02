@@ -253,7 +253,11 @@ const Index = () => {
         g.distribuidor?.toLowerCase().includes(searchTerm)
       );
     }
-    if (categoria !== "todas") result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
+    if (categoria === "Denuvo") {
+      result = result.filter((g) => denuvoKeywords.some((k) => (g.nome || "").toLowerCase().includes(k)));
+    } else if (categoria !== "todas") {
+      result = result.filter((g) => g.categorias && g.categorias.includes(categoria));
+    }
     
     const parseSize = (s: string | null, defaultValue: number) => {
       if (!s) return defaultValue;
