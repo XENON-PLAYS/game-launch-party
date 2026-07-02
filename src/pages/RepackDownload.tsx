@@ -10,6 +10,7 @@ import { Download, Loader2, Shield, CheckCircle, CheckCircle2, RefreshCw, HardDr
 import { toast } from "sonner";
 import { GoogleAd } from "@/components/GoogleAd";
 import { randomCover } from "@/components/RepackCard";
+import { getDownloadOptions } from "@/lib/downloadLinks";
 
 const TORRENT_STEPS = [
   {
@@ -52,16 +53,18 @@ const RepackDownload = () => {
   const { data: repack, isLoading } = useQuery({
     queryKey: ["repack", id],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("source_repacks")
+      const { data, error } = await (supabase as any)
+        .from("merged_repacks")
         .select("id, title, uris, file_size, upload_date")
         .eq("id", id!)
         .maybeSingle();
       if (error) throw error;
-      return data;
+      return data as { id: string; title: string; uris: string[]; file_size: string | null; upload_date: string | null } | null;
     },
     enabled: !!id,
   });
+
+  const downloadOptions = getDownloadOptions(repack?.uris);
 
   useEffect(() => {
     if (isVip) {
@@ -77,18 +80,28 @@ const RepackDownload = () => {
     return () => clearTimeout(timer);
   }, [countdown, isVip]);
 
-  const handleDownload = () => {
-    if (!repack?.uris?.[0]) return;
+  const handleDownload = (option?: { url: string; kind: string }) => {
+    const target = option ?? downloadOptions[0];
+    if (!target?.url) return;
     setDownloadStarted(true);
-    toast.success("Download iniciado! Abrindo no seu cliente de torrent.");
-    window.location.href = repack.uris[0];
+    toast.success(
+      target.kind === "torrent"
+        ? "Download iniciado! Abrindo no seu cliente de torrent."
+        : "Download iniciado! Abrindo o link em uma nova aba.",
+    );
+    if (target.kind === "torrent") {
+      window.location.href = target.url;
+    } else {
+      window.open(target.url, "_blank", "noopener,noreferrer");
+    }
   };
 
-  const copyMagnet = async () => {
-    if (!repack?.uris?.[0]) return;
+  const copyLink = async (url?: string) => {
+    const target = url ?? downloadOptions[0]?.url;
+    if (!target) return;
     try {
-      await navigator.clipboard.writeText(repack.uris[0]);
-      toast.success("Link magnet copiado!");
+      await navigator.clipboard.writeText(target);
+      toast.success("Link copiado!");
     } catch {
       toast.error("Não foi possível copiar.");
     }
@@ -260,29 +273,52 @@ const RepackDownload = () => {
                       </div>
                       <div className="space-y-2">
                         <h3 className="text-3xl font-black uppercase tracking-tighter text-emerald-400">PRONTO PARA DOWNLOAD</h3>
-                        <p className="text-muted-foreground">O link foi verificado e está pronto para transferência.</p>
+                        <p className="text-muted-foreground">
+                          {downloadOptions.length > 1
+                            ? "Escolha o servidor de sua preferência para baixar."
+                            : "O link foi verificado e está pronto para transferência."}
+                        </p>
                       </div>
                     </div>
 
-                    <button
-                      onClick={handleDownload}
-                      className="w-full py-8 sm:py-10 rounded-[2.5rem] bg-primary text-primary-foreground font-black text-2xl sm:text-4xl uppercase tracking-[0.2em] hover:bg-primary/90 hover:scale-[1.02] active:scale-95 transition-all shadow-[0_30px_90px_-20px_rgba(249,115,22,0.6)] flex items-center justify-center gap-8 group"
-                    >
-                      <Download className="w-10 h-10 group-hover:animate-bounce" />
-                      Baixar Agora
-                    </button>
+                    {downloadOptions.length === 0 ? (
+                      <p className="text-center text-sm text-muted-foreground uppercase tracking-widest font-bold">
+                        Nenhum link de download disponível.
+                      </p>
+                    ) : (
+                      <div className="space-y-4">
+                        {downloadOptions.map((opt, i) => (
+                          <div key={opt.url} className="flex flex-col sm:flex-row items-stretch gap-3">
+                            <button
+                              onClick={() => handleDownload(opt)}
+                              className={`flex-1 py-6 sm:py-7 px-8 rounded-2xl font-black text-lg sm:text-2xl uppercase tracking-[0.15em] transition-all active:scale-95 flex items-center justify-center gap-4 group ${
+                                i === 0
+                                  ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.01] shadow-[0_30px_90px_-20px_rgba(249,115,22,0.6)]"
+                                  : "bg-card border-2 border-border text-foreground hover:border-primary/40"
+                              }`}
+                            >
+                              <Download className="w-6 h-6 sm:w-8 sm:h-8 group-hover:animate-bounce" />
+                              {opt.label}
+                            </button>
+                            <button
+                              onClick={() => copyLink(opt.url)}
+                              className="sm:w-auto flex items-center justify-center gap-2 px-6 py-4 bg-muted border border-border text-muted-foreground rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:text-foreground transition-all"
+                            >
+                              Copiar <Copy className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                      <button onClick={copyMagnet} className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 bg-muted border border-border text-muted-foreground rounded-xl font-bold uppercase tracking-widest text-[10px] hover:text-foreground transition-all">
-                        Copiar link Magnet <Copy className="w-4 h-4" />
-                      </button>
+                    <div className="flex justify-center">
                       <button onClick={() => { setCountdown(10); setReady(false); }} className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 bg-muted border border-border text-muted-foreground rounded-xl font-bold uppercase tracking-widest text-[10px] hover:text-foreground transition-all">
                         Reiniciar Contagem <RefreshCw className="w-4 h-4" />
                       </button>
                     </div>
 
                     <p className="text-center text-xs text-muted-foreground uppercase tracking-widest font-bold opacity-60">
-                      Fonte: FitGirl Repack • Download via Torrent Magnet
+                      {downloadOptions.length} opção(ões) de download disponível(is)
                     </p>
                   </div>
                 )}
@@ -296,8 +332,8 @@ const RepackDownload = () => {
                   <p className="text-lg font-black uppercase tracking-widest text-emerald-400">Download iniciado</p>
                   <p className="text-sm text-muted-foreground">Abra seu cliente de torrent para acompanhar o progresso. Siga o guia abaixo para instalar.</p>
                 </div>
-                <button onClick={copyMagnet} className="inline-flex items-center gap-2 px-8 py-3 bg-muted border border-border text-muted-foreground rounded-xl font-bold uppercase tracking-widest text-[10px] hover:text-foreground transition-all">
-                  Copiar link Magnet <Copy className="w-4 h-4" />
+                <button onClick={() => copyLink()} className="inline-flex items-center gap-2 px-8 py-3 bg-muted border border-border text-muted-foreground rounded-xl font-bold uppercase tracking-widest text-[10px] hover:text-foreground transition-all">
+                  Copiar link <Copy className="w-4 h-4" />
                 </button>
               </div>
             )}
