@@ -1,7 +1,8 @@
+import { useMemo, useState, useEffect } from "react";
 import { Tables } from "@/integrations/supabase/types";
 import { GameCard } from "./GameCard";
 import { RepackCard, Repack } from "./RepackCard";
-import { ChevronRight, LucideIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 type Game = Tables<"games">;
@@ -11,22 +12,41 @@ interface GameSectionProps {
   icon: LucideIcon;
   games: Game[];
   repacks?: Repack[];
+  pageSize?: number;
 }
 
-export function GameSection({ title, icon: Icon, games, repacks = [] }: GameSectionProps) {
-  const total = games.length + repacks.length;
-  if (total === 0) return null;
+export function GameSection({ title, icon: Icon, games, repacks = [], pageSize = 12 }: GameSectionProps) {
+  const [page, setPage] = useState(0);
 
+  const items = useMemo(
+    () => [
+      ...games.map((g) => ({ type: "game" as const, id: g.id, data: g })),
+      ...repacks.map((r) => ({ type: "repack" as const, id: r.id, data: r })),
+    ],
+    [games, repacks]
+  );
 
-  const config = { 
-    color: "text-primary", 
-    bg: "bg-primary/10", 
-    border: "border-primary/20" 
+  const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+
+  useEffect(() => {
+    if (page > totalPages - 1) setPage(0);
+  }, [totalPages, page]);
+
+  const pageItems = useMemo(
+    () => items.slice(page * pageSize, page * pageSize + pageSize),
+    [items, page, pageSize]
+  );
+
+  if (items.length === 0) return null;
+
+  const config = {
+    color: "text-primary",
+    bg: "bg-primary/10",
+    border: "border-primary/20",
   };
 
-
   return (
-    <motion.section 
+    <motion.section
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "100px" }}
@@ -42,38 +62,50 @@ export function GameSection({ title, icon: Icon, games, repacks = [] }: GameSect
             <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">{title}</h2>
             <div className="flex items-center gap-2 md:gap-3">
               <span className="w-8 md:w-12 h-1 bg-primary/40 rounded-full" />
-              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-50">{total} Títulos</span>
+              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.2em] opacity-50">{items.length} Títulos</span>
             </div>
           </div>
         </div>
-        
-        <button className="flex items-center gap-2 text-[9px] sm:text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-all duration-300 group">
-          <span>VER TUDO</span>
-          <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-        </button>
+
+        {totalPages > 1 && (
+          <div className="flex items-center gap-3 md:gap-4">
+            <button
+              onClick={() => setPage((p) => Math.max(0, p - 1))}
+              disabled={page === 0}
+              aria-label={`Página anterior de ${title}`}
+              className="p-2.5 md:p-3 rounded-xl md:rounded-2xl bg-card border border-border/50 hover:border-primary/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-lg shadow-black/10"
+            >
+              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+            </button>
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-muted-foreground min-w-[60px] text-center">
+              {page + 1} / {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+              disabled={page >= totalPages - 1}
+              aria-label={`Próxima página de ${title}`}
+              className="p-2.5 md:p-3 rounded-xl md:rounded-2xl bg-card border border-border/50 hover:border-primary/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-lg shadow-black/10"
+            >
+              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+            </button>
+          </div>
+        )}
       </div>
-      
+
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
-        {games.map((game, index) => (
+        {pageItems.map((item, index) => (
           <motion.div
-            key={game.id}
+            key={`${item.type}-${item.id}`}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-30px" }}
             transition={{ duration: 0.35, delay: Math.min(index * 0.04, 0.25), ease: "easeOut" }}
           >
-            <GameCard game={game} />
-          </motion.div>
-        ))}
-        {repacks.map((repack, index) => (
-          <motion.div
-            key={repack.id}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-30px" }}
-            transition={{ duration: 0.35, delay: Math.min((games.length + index) * 0.04, 0.25), ease: "easeOut" }}
-          >
-            <RepackCard repack={repack} />
+            {item.type === "game" ? (
+              <GameCard game={item.data} />
+            ) : (
+              <RepackCard repack={item.data} />
+            )}
           </motion.div>
         ))}
       </div>
