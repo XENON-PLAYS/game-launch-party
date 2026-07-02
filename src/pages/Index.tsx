@@ -306,8 +306,17 @@ const Index = () => {
     () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
     [homeRepacks]
   );
-  // Nova Geração: repacks mais recentes
-  const recentes = useMemo(() => homeRepacks.slice(0, 48), [homeRepacks]);
+  // Nova Geração: apenas jogos lançados entre 2025 e 2026
+  const recentes = useMemo(
+    () =>
+      homeRepacks
+        .filter((r) => {
+          const year = r.upload_date ? new Date(r.upload_date).getFullYear() : NaN;
+          return year >= 2025 && year <= 2026;
+        })
+        .slice(0, 48),
+    [homeRepacks]
+  );
 
   const isLoading = gamesLoading;
   const isError = gamesError;
