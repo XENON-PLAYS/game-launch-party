@@ -12,7 +12,7 @@ import { getRedirectUrl } from "@/config/auth";
 import { getAuthErrorMessage } from "@/lib/auth-errors";
 
 const Login = () => {
-  const { login, user, isLoading } = useAuth();
+  const { login, signInWithGoogle, user, isLoading } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
