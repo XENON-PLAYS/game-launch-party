@@ -42,6 +42,16 @@ const categoryIconMap: Record<string, React.ComponentType<{ className?: string }
   "Farming Sim": Gamepad2,
 };
 
+// Fontes (repackers) disponíveis para filtrar o catálogo
+const sourceOptions: { id: string; label: string }[] = [
+  { id: "fitgirl", label: "FitGirl" },
+  { id: "dodi", label: "DODI" },
+  { id: "steamrip", label: "SteamRIP" },
+  { id: "gog", label: "GOG" },
+];
+
+
+
 const Index = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -49,6 +59,7 @@ const Index = () => {
   
   const [busca, setBusca] = useState(searchFromUrl);
   const [categoria, setCategoria] = useState("todas");
+  const [fonte, setFonte] = useState("todas");
 
   useEffect(() => {
     setBusca(searchFromUrl);
@@ -163,7 +174,7 @@ const Index = () => {
       for (;;) {
         const { data, error } = await (supabase as any)
           .from("merged_repacks")
-          .select("id, title, file_size, upload_date, cover_url")
+          .select("id, title, file_size, upload_date, cover_url, sources")
           .order("upload_date", { ascending: false, nullsFirst: false })
           .range(from, from + size - 1);
         if (error) {
@@ -192,7 +203,7 @@ const Index = () => {
       if (!term) return [] as Repack[];
       const { data, error } = await (supabase as any)
         .from("merged_repacks")
-        .select("id, title, file_size, upload_date, cover_url")
+        .select("id, title, file_size, upload_date, cover_url, sources")
         .ilike("title", `%${term}%`)
         .order("upload_date", { ascending: false, nullsFirst: false })
         .limit(24);
@@ -404,7 +415,7 @@ const Index = () => {
   const isLoading = gamesLoading;
   const isError = gamesError;
 
-  const isSearching = busca || categoria !== "todas";
+  const isSearching = busca || categoria !== "todas" || fonte !== "todas";
 
   // Jogos populares/mais jogados da Steam (para ranquear a busca por relevância)
   const popularKeywords = useMemo(
@@ -441,6 +452,9 @@ const Index = () => {
       const term = busca.toLowerCase();
       result = result.filter((r) => (r.title || "").toLowerCase().includes(term));
     }
+    if (fonte !== "todas") {
+      result = result.filter((r) => (r.sources || []).includes(fonte));
+    }
     if (categoria === "Denuvo") {
       result = result.filter(isDenuvoRepack);
     } else if (categoria !== "todas") {
@@ -462,7 +476,7 @@ const Index = () => {
       sorted.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     }
     return sorted;
-  }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks, popularKeywords, isDenuvoRepack]);
+  }, [busca, categoria, fonte, ordenacao, homeRepacks, matchedRepacks, popularKeywords, isDenuvoRepack]);
 
 
   // Resultados (somente repacks) para a busca/filtro
@@ -524,9 +538,9 @@ const Index = () => {
             >
               <SlidersHorizontal className={`w-4 h-4 transition-transform duration-500 ${showFilters ? "rotate-180" : ""}`} />
               <span>Filtros</span>
-              {(categoria !== "todas" || ordenacao !== "nome") && (
+              {(categoria !== "todas" || fonte !== "todas" || ordenacao !== "nome") && (
                 <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-black ${showFilters ? "bg-white text-primary" : "bg-primary text-white"}`}>
-                  {(categoria !== "todas" ? 1 : 0) + (ordenacao !== "nome" ? 1 : 0)}
+                  {(categoria !== "todas" ? 1 : 0) + (fonte !== "todas" ? 1 : 0) + (ordenacao !== "nome" ? 1 : 0)}
                 </span>
               )}
             </button>
@@ -603,6 +617,43 @@ const Index = () => {
                       </div>
                     </div>
 
+                    {/* Fontes Section */}
+                    <div className="lg:w-80 space-y-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-1.5 h-6 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                        <h3 className="text-sm font-black uppercase tracking-widest text-foreground/80">Filtrar por Fonte</h3>
+                      </div>
+                      <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
+                        <button
+                          onClick={() => setFonte("todas")}
+                          className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-black transition-all border ${
+                            fonte === "todas"
+                            ? "bg-primary text-primary-foreground border-primary shadow-xl shadow-primary/20 scale-105"
+                            : "bg-card/50 border-border/50 hover:border-primary/30 hover:bg-card/80 text-muted-foreground hover:text-foreground"
+                          }`}
+                        >
+                          <LayoutGrid className="w-4 h-4" />
+                          <span className="uppercase">Todas</span>
+                        </button>
+                        {sourceOptions.map((src) => (
+                          <button
+                            key={src.id}
+                            onClick={() => setFonte(src.id)}
+                            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all border ${
+                              fonte === src.id
+                              ? "bg-primary text-primary-foreground border-primary shadow-xl shadow-primary/20 scale-105"
+                              : "bg-card/50 border-border/50 hover:border-primary/30 hover:bg-card/80 text-muted-foreground hover:text-foreground"
+                            }`}
+                          >
+                            <Layers className="w-4 h-4" />
+                            <span className="uppercase">{src.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+
+
                     {/* Ordenação Section */}
                     <div className="lg:w-80 space-y-6">
                       <div className="flex items-center gap-3">
@@ -635,7 +686,7 @@ const Index = () => {
 
                       <div className="pt-6 border-t border-border/20">
                         <button 
-                          onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
+                          onClick={() => { setBusca(""); setCategoria("todas"); setFonte("todas"); setOrdenacao("nome"); }}
                           className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-xs font-black text-muted-foreground hover:text-destructive hover:bg-destructive/5 transition-all border border-dashed border-border/50 hover:border-destructive/30 uppercase tracking-widest"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -740,7 +791,7 @@ const Index = () => {
                   </p>
                 </div>
                 <button 
-                  onClick={() => { setBusca(""); setCategoria("todas"); setOrdenacao("nome"); }}
+                  onClick={() => { setBusca(""); setCategoria("todas"); setFonte("todas"); setOrdenacao("nome"); }}
                   className="px-10 py-4 bg-primary text-white hover:bg-primary/90 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-primary/20"
                 >
                   Limpar Busca
