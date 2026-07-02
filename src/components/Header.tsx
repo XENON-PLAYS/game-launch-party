@@ -153,9 +153,6 @@ export function Header() {
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
 
-            <div className="hidden sm:block">
-              <OnlineUsers />
-            </div>
 
             <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 border-l border-border pl-3 sm:pl-6">
               <NotificationBell />
