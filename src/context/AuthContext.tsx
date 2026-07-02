@@ -92,8 +92,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setTimeout(() => {
           if (!isMounted) return;
           if (event === "SIGNED_IN" || event === "INITIAL_SESSION" || event === "USER_UPDATED") {
-            supabase.rpc("update_online_status").catch((error) => {
-              console.error("Error updating online status:", error);
+            supabase.rpc("update_online_status").then(({ error }) => {
+              if (error) console.error("Error updating online status:", error);
             });
           }
           fetchProfile(u.id).finally(() => {
