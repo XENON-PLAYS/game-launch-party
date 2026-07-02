@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { Search, SlidersHorizontal, LayoutGrid, X, Target, Sword, Ghost, Shield, Compass, Users, Clock, Zap, Star, Gamepad2, Layers, Trash2, Flame, Rocket, ChevronLeft, ChevronRight } from "lucide-react";
 import { GameSection } from "@/components/GameSection";
 import { Header } from "@/components/Header";
@@ -293,10 +293,10 @@ const Index = () => {
     [denuvoGameTitles]
   );
 
-  const isDenuvoRepack = (r: Repack) => {
+  const isDenuvoRepack = useCallback((r: Repack) => {
     const key = normalizeTitle(r.title || "");
     return denuvoTitleKeys.has(key);
-  };
+  }, [denuvoTitleKeys]);
 
 
   // Palavras-chave por categoria para filtrar os repacks (que não possuem categorias próprias)
@@ -357,7 +357,7 @@ const Index = () => {
   const denuvoRepacks = useMemo(() => {
     const matches = homeRepacks.filter(isDenuvoRepack);
     return matches.slice(0, 48);
-  }, [homeRepacks, denuvoTitleKeys]);
+  }, [homeRepacks, isDenuvoRepack]);
   // Mais Baixados: repacks maiores primeiro
   const emAlta = useMemo(
     () => [...homeRepacks].sort((a, b) => parseRepackSize(b.file_size) - parseRepackSize(a.file_size)).slice(0, 48),
@@ -443,7 +443,7 @@ const Index = () => {
       sorted.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
     }
     return sorted;
-  }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks, popularKeywords, denuvoTitleKeys]);
+  }, [busca, categoria, ordenacao, homeRepacks, matchedRepacks, popularKeywords, isDenuvoRepack]);
 
 
   // Resultados (somente repacks) para a busca/filtro
