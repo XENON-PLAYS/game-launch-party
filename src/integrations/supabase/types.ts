@@ -607,26 +607,6 @@ export type Database = {
         }
         Relationships: []
       }
-      merged_repacks_mv: {
-        Row: {
-          banner_url: string | null
-          base_key: string | null
-          cover_url: string | null
-          description: string | null
-          file_size: string | null
-          id: string | null
-          is_denuvo: boolean | null
-          screenshots: string[] | null
-          size_gb: number | null
-          sources: string[] | null
-          steam_appid: number | null
-          title: string | null
-          trailer_url: string | null
-          upload_date: string | null
-          uris: string[] | null
-        }
-        Relationships: []
-      }
       online_users_stats: {
         Row: {
           online_count: number | null
